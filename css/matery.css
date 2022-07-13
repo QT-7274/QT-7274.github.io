@@ -597,45 +597,45 @@ header .go-back i {
 
     0%,
     100% {
-        background: rgba(64,169,255, 0.75);
-        background: linear-gradient(45deg, rgba(64,169,255, 0.75) 0%, rgba(64,169,255, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(64,169,255, 0.75) 0%, rgba(64,169,255, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(64,169,255, 0.75) 0%, rgba(64,169,255, 0.65) 100%);
+        background: rgba(64,169,255, 0.35);
+        background: linear-gradient(45deg, rgba(64,169,255, 0.35) 0%, rgba(64,169,255, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(64,169,255, 0.35) 0%, rgba(64,169,255, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(64,169,255, 0.35) 0%, rgba(64,169,255, 0.25) 100%);
     }
 
     16% {
-        background: rgba(54,207,201, 0.75);
-        background: linear-gradient(45deg, rgba(54,207,201, 0.75) 0%, rgba(54,207,201, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(54,207,201, 0.75) 0%, rgba(54,207,201, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(54,207,201, 0.75) 0%, rgba(54,207,201, 0.65) 100%);
+        background: rgba(54,207,201, 0.35);
+        background: linear-gradient(45deg, rgba(54,207,201, 0.35) 0%, rgba(54,207,201, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(54,207,201, 0.35) 0%, rgba(54,207,201, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(54,207,201, 0.35) 0%, rgba(54,207,201, 0.25) 100%);
     }
 
     32% {
-        background: rgba(239, 83, 80, 0.75);
-        background: linear-gradient(45deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
+        background: rgba(239, 83, 80, 0.35);
+        background: linear-gradient(45deg, rgba(239, 83, 80, 0.35) 0%, rgba(239, 83, 80, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(239, 83, 80, 0.35) 0%, rgba(239, 83, 80, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(239, 83, 80, 0.35) 0%, rgba(239, 83, 80, 0.25) 100%);
     }
 
     48% {
-        background: rgba(255, 87, 34, 0.75);
-        background: linear-gradient(45deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
+        background: rgba(255, 87, 34, 0.35);
+        background: linear-gradient(45deg, rgba(255, 87, 34, 0.35) 0%, rgba(255, 87, 34, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(255, 87, 34, 0.35) 0%, rgba(255, 87, 34, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(255, 87, 34, 0.35) 0%, rgba(255, 87, 34, 0.25) 100%);
     }
 
     64% {
-        background: rgba(255, 160, 0, 0.75);
-        background: linear-gradient(45deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 112, 66, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
+        background: rgba(255, 160, 0, 0.35);
+        background: linear-gradient(45deg, rgba(255, 160, 0, 0.35) 0%, rgba(255, 160, 0, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(255, 160, 0, 0.35) 0%, rgba(255, 112, 66, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(255, 160, 0, 0.35) 0%, rgba(255, 160, 0, 0.25) 100%);
     }
 
     80% {
-        background: rgba(233, 30, 99, 0.75);
-        background: linear-gradient(45deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
+        background: rgba(233, 30, 99, 0.35);
+        background: linear-gradient(45deg, rgba(233, 30, 99, 0.35) 0%, rgba(233, 30, 99, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(233, 30, 99, 0.35) 0%, rgba(233, 30, 99, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.35) 0%, rgba(233, 30, 99, 0.25) 100%);
     }
 }
 
@@ -643,45 +643,45 @@ header .go-back i {
 
     0%,
     100% {
-        background: rgba(64,169,255, 0.75);
-        background: linear-gradient(45deg, rgba(64,169,255, 0.75) 0%, rgba(64,169,255, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(64,169,255, 0.75) 0%, rgba(64,169,255, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(64,169,255, 0.75) 0%, rgba(64,169,255, 0.65) 100%);
+        background: rgba(64,169,255, 0.35);
+        background: linear-gradient(45deg, rgba(64,169,255, 0.35) 0%, rgba(64,169,255, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(64,169,255, 0.35) 0%, rgba(64,169,255, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(64,169,255, 0.35) 0%, rgba(64,169,255, 0.25) 100%);
     }
 
     16% {
-        background: rgba(54,207,201, 0.75);
-        background: linear-gradient(45deg, rgba(54,207,201, 0.75) 0%, rgba(54,207,201, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(54,207,201, 0.75) 0%, rgba(54,207,201, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(54,207,201, 0.75) 0%, rgba(54,207,201, 0.65) 100%);
+        background: rgba(54,207,201, 0.35);
+        background: linear-gradient(45deg, rgba(54,207,201, 0.35) 0%, rgba(54,207,201, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(54,207,201, 0.35) 0%, rgba(54,207,201, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(54,207,201, 0.35) 0%, rgba(54,207,201, 0.25) 100%);
     }
 
     32% {
-        background: rgba(239, 83, 80, 0.75);
-        background: linear-gradient(45deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(239, 83, 80, 0.75) 0%, rgba(239, 83, 80, 0.65) 100%);
+        background: rgba(239, 83, 80, 0.35);
+        background: linear-gradient(45deg, rgba(239, 83, 80, 0.35) 0%, rgba(239, 83, 80, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(239, 83, 80, 0.35) 0%, rgba(239, 83, 80, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(239, 83, 80, 0.35) 0%, rgba(239, 83, 80, 0.25) 100%);
     }
 
     48% {
-        background: rgba(255, 87, 34, 0.75);
-        background: linear-gradient(45deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(255, 87, 34, 0.75) 0%, rgba(255, 87, 34, 0.65) 100%);
+        background: rgba(255, 87, 34, 0.35);
+        background: linear-gradient(45deg, rgba(255, 87, 34, 0.35) 0%, rgba(255, 87, 34, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(255, 87, 34, 0.35) 0%, rgba(255, 87, 34, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(255, 87, 34, 0.35) 0%, rgba(255, 87, 34, 0.25) 100%);
     }
 
     64% {
-        background: rgba(255, 160, 0, 0.75);
-        background: linear-gradient(45deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 112, 66, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(255, 160, 0, 0.75) 0%, rgba(255, 160, 0, 0.65) 100%);
+        background: rgba(255, 160, 0, 0.35);
+        background: linear-gradient(45deg, rgba(255, 160, 0, 0.35) 0%, rgba(255, 160, 0, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(255, 160, 0, 0.35) 0%, rgba(255, 112, 66, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(255, 160, 0, 0.35) 0%, rgba(255, 160, 0, 0.25) 100%);
     }
 
     80% {
-        background: rgba(233, 30, 99, 0.75);
-        background: linear-gradient(45deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
-        background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
+        background: rgba(233, 30, 99, 0.35);
+        background: linear-gradient(45deg, rgba(233, 30, 99, 0.35) 0%, rgba(233, 30, 99, 0.25) 100%);
+        background: -moz-linear-gradient(135deg, rgba(233, 30, 99, 0.35) 0%, rgba(233, 30, 99, 0.25) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.35) 0%, rgba(233, 30, 99, 0.25) 100%);
     }
 }
 
@@ -735,7 +735,7 @@ header .go-back i {
 @media only screen and (min-width: 1418px) {
     .recommend {
         margin-top: 20px;
-        padding: 0 0.75rem;
+        padding: 0 0.35rem;
     }
 }
 
@@ -947,7 +947,7 @@ article .article-tags .chip {
 }
 
 .prev-next {
-    margin-left: -0.75rem;
+    margin-left: -0.35rem;
 }
 
 .prev-next .article-badge {
@@ -1015,7 +1015,7 @@ article .article-tags .chip {
 @media only screen and (min-width: 1418px) {
     #artDetail {
         margin-top: -60px;
-        padding: 0 0.75rem;
+        padding: 0 0.35rem;
     }
 }
 
