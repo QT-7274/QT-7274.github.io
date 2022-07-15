@@ -42,7 +42,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/images/loading.gif" data-original="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">QT-7274</span>
                 </a>
@@ -130,7 +130,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/images/loading.gif" data-original="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">QT-7274</div>
         <div class="logo-desc">
@@ -540,11 +540,60 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2022/07/15/zui-jian-dan-de-ti-sheng-wang-zhan-de-xing-neng-de-fang-fa/">
+                        <div class="card-image">
+                            
+                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/R-C.webp" class="responsive-img" alt="最简单的提升网站的性能的方法">
+                            
+                            <span class="card-title">最简单的提升网站的性能的方法</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.CDN加速
+什么是CDN？
+CDN英文全称content delivery network，翻译过来就是内容分发网络，是一种在地理位置上分散的服务器组，这些服务器组一起工作来加速互联网内容快速传播，这些内容包括HTML页面，css、ja
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-15
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    计算机技巧
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%95%88%E7%8E%87/">
+                            <span class="chip bg-color">效率</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/">
                         <div class="card-image">
                             
-                            
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="使用yolo5进行数据训练">
+                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/splash.webp" class="responsive-img" alt="使用yolo5进行数据训练">
                             
                             <span class="card-title">使用yolo5进行数据训练</span>
                         </div>
@@ -599,8 +648,7 @@ pip install -r requirements.txt
                     <a href="/2022/07/13/webgl-zhao-se-qi-ru-men/">
                         <div class="card-image">
                             
-                            
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="WebGL着色器入门">
+                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/WebGL%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97.webp" class="responsive-img" alt="WebGL着色器入门">
                             
                             <span class="card-title">WebGL着色器入门</span>
                         </div>
@@ -958,6 +1006,12 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-</body>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 
 </html>
