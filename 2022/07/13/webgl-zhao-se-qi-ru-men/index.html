@@ -5,8 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="WebGL,shader">
-    <meta name="description" content="1.着色器是什么？WebGL需要两种着色器：顶点着色器(Vertex shader):顶点着色器是用来描述顶点特性（如位置、颜色等)的程序。顶点(vertex)是指二维或三维空间中的一个点，比如二维或三维图形的端点或交点。
-片元着色器(Ve">
+    <meta name="description" content="着色器永远是WebGL的核心知识，了解其基本工作原理是必不可少的基本功。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -37,6 +36,7 @@
 
 
 <body>
+    
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
@@ -441,7 +441,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-15
+                    2022-07-16
                 </div>
                 
 
@@ -742,7 +742,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            图像识别的数据集准备工作是非常重要与繁琐的，如何利用谷歌的数据集实现用yolov5进行图像识别？本篇文章给出答案。
                         
                     </div>
                     <div class="publish-info">
@@ -794,7 +794,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            着色器永远是WebGL的核心知识，了解其基本工作原理是必不可少的基本功。
                         
                     </div>
                     <div class="publish-info">
@@ -1255,7 +1255,7 @@ $(function () {
 <script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
-                preloadRatio: 1,
+                preloadRatio: 3,
                 processImages: null,
             };
         </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>

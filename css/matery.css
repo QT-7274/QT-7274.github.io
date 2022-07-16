@@ -5,6 +5,30 @@
         width: 95%;
     }
 }
+/* 滚动条 */
+::-webkit-scrollbar-thumb {
+    background-color: 
+    #003a8c;
+    background-image: -webkit-linear-gradient(45deg,
+rgba(255,255,255,.4) 25%,
+transparent 25%,
+transparent 50%,
+rgba(255,255,255,.4) 50%,
+rgba(255,255,255,.4) 75%,
+transparent 75%,
+transparent);
+    border-radius: 3em;
+}
+::-webkit-scrollbar-track {
+    background-color: 
+#ffcacaff;
+    border-radius: 3em;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 15px;
+}
+
 
 /*中等屏幕下(平板类)的样式*/
 @media only screen and (min-width: 600px) and (max-width: 992px) {
@@ -30,10 +54,15 @@
         width: 90%;
         margin: 0 auto;
         max-width: 1250px;
+        
     }
 }
 
 body {
+    background-image: url(https://roseblog.oss-cn-beijing.aliyuncs.com/windows-11-material-style-dark-8k-03-2560x1440.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
     background-color: #eaeaea;
     margin: 0;
     color: #34495e;

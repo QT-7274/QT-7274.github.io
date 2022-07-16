@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Python,training">
-    <meta name="description" content="图像识别的数据集准备工作是非常重要与繁琐的，如何利用谷歌的数据集实现用yolov5进行图像识别？本篇文章给出答案。">
+    <meta name="keywords" content="基于Node.js实现图像识别接口调用, QT-7274">
+    <meta name="description" content="对于其他热门编程语言，百度图像识别接口有详细的实例，然而对于Node.js却缺乏实例，本篇可完善这一点。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +19,7 @@
 
     
 
-    <title>使用yolo5进行数据训练 | QT-7274</title>
+    <title>基于Node.js实现图像识别接口调用 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -288,12 +288,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/splash.webp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/1502178281486445.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">使用yolo5进行数据训练</h1>
+                    <h1 class="description center-align post-title">基于Node.js实现图像识别接口调用</h1>
                 </div>
             </div>
         </div>
@@ -409,12 +409,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                <span class="chip bg-color">前端</span>
                             </a>
                         
                             <a href="/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/">
                                 <span class="chip bg-color">图像识别</span>
+                            </a>
+                        
+                            <a href="/tags/Node-js/">
+                                <span class="chip bg-color">Node.js</span>
                             </a>
                         
                     </div>
@@ -425,8 +429,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                计算机视觉
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                前端开发
                             </a>
                         
                     </div>
@@ -438,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-13
+                    2022-07-16
                 </div>
                 
 
@@ -452,14 +456,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    781
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    3 分
                 </div>
                 
 
@@ -482,157 +486,70 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-下载数据集并进行本地训练的标准流程"><a href="#1-下载数据集并进行本地训练的标准流程" class="headerlink" title="1.下载数据集并进行本地训练的标准流程"></a>1.下载数据集并进行本地训练的标准流程</h3><ol>
-<li><p>克隆github项目</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/theAIGuysCode/OIDv4_ToolKit 
-pip <span class="token function">install</span> -r requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><p>下载数据集</p>
-<p>数据集网站为<a target="_blank" rel="noopener" href="https://storage.googleapis.com/openimages/web/index.html">https://storage.googleapis.com/openimages/web/index.html</a></p>
-<p>搜索对应的类别，这里以Lion为例，下载训练集200张：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Lion --type_csv train --limit <span class="token number">200</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h3 id="1-比较各类商业图像识别接口："><a href="#1-比较各类商业图像识别接口：" class="headerlink" title="1.比较各类商业图像识别接口："></a>1.比较各类商业图像识别接口：</h3><p>1.火山引擎：对于人体、人像的识别功能较多，对于动物几乎没有，分类较少只有两三个，而且识别精度较差，往往识别不出图像中的实体。</p>
+<p>2.谷歌引擎：识别精度、细节相当高，但没有分类，识别元素过多，且在国外，调试和支付不太方便。</p>
+<p>3.百度引擎：识别精度优秀，分类较多，有明确的动物识别分类，且能衍生出百科知识，返回的标签为中文标签。</p>
+<p>4.阿里云引擎：识别分类没有动物分类，但是在阿里云市场有其他公司的接口，相当于外包。</p>
+<h3 id="2-选用接口："><a href="#2-选用接口：" class="headerlink" title="2.选用接口："></a>2.选用接口：</h3><p>综合考虑使用百度动物识别，使用语言为node.js。但其官方示例没有node.js的语言示例，需要自己琢磨开发。</p>
+<h4 id="1-调用百度获取token的接口："><a href="#1-调用百度获取token的接口：" class="headerlink" title="1.调用百度获取token的接口："></a>1.调用百度获取token的接口：</h4><p>一开始的想法是将这个过程作为中间件，但发现作为中间件使用后，原接口就不能再发起请求了，原因不得而知，只能将其封装在方法中：</p>
+<pre class="line-numbers language-JS" data-language="JS"><code class="language-JS">async function getToken() &#123;
+  const param &#x3D; qs.stringify(&#123;
+    grant_type: &quot;client_credentials&quot;,
+    client_id: &quot;your client_id&quot;,
+    client_secret: &quot;your client_secret&quot;,
+  &#125;);
+  &#x2F;&#x2F;通过秘钥获取token相关属性
+  try &#123;
+    &#x2F;&#x2F;但这个方法需要考虑到异步问题
+    &#x2F;&#x2F; axios(&#123;
+    &#x2F;&#x2F;   method: &quot;get&quot;,
+    &#x2F;&#x2F;   baseURL: &quot;https:&#x2F;&#x2F;aip.baidubce.com&#x2F;&quot;,
+    &#x2F;&#x2F;   &#x2F;&#x2F;两种url写法均可以请求到
+    &#x2F;&#x2F;   &#x2F;&#x2F; url: &#96;oauth&#x2F;2.0&#x2F;token?grant_type&#x3D;client_credentials&amp;client_id&#x3D;$&#123;client_id&#125;&amp;client_secret&#x3D;$&#123;client_secret&#125;&#96;,
+    &#x2F;&#x2F;   url: &quot;oauth&#x2F;2.0&#x2F;token?&quot; + param,
+    &#x2F;&#x2F; &#125;).then((res) &#x3D;&gt; &#123;
+    &#x2F;&#x2F;   &#x2F;&#x2F; var stream &#x3D; res.data.pipe(fs.createWriteStream(&quot;.&#x2F;baidu-token.json&quot;));
+    &#x2F;&#x2F;   &#x2F;&#x2F; stream.on(&quot;finish&quot;, () &#x3D;&gt; &#123;
+    &#x2F;&#x2F;   &#x2F;&#x2F;   console.log(&quot;传输完成！&quot;);
+    &#x2F;&#x2F;   &#x2F;&#x2F; &#125;);
+    &#x2F;&#x2F;   return axios.get(&quot;https:&#x2F;&#x2F;aip.baidubce.com&#x2F;oauth&#x2F;2.0&#x2F;token?&quot; + param);
+    &#x2F;&#x2F; &#125;);
+    return axios.get(&quot;https:&#x2F;&#x2F;aip.baidubce.com&#x2F;oauth&#x2F;2.0&#x2F;token?&quot; + param);
+  &#125; catch (error) &#123;
+    console.log(error);
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ul>
-<li><p>注意：若某个类别有两个单词组成，单词间使用下划线代替：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Bell_pepper --type_csv train --limit <span class="token number">400</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>注意：若想同时训练多个类别，可通过如下代码将多个类别移动至同一类别：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Aircraft Weapon --type_csv <span class="token builtin class-name">test</span> --limit <span class="token number">100</span> --multiclasses <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p>数据预处理</p>
-<p>下载后的数据存储在OID&#x2F;Dataset&#x2F;train&#x2F;，每个类别的文件包括对应的image和label，对应的label为txt文件，打开后为：</p>
-<pre class="line-numbers language-none"><code class="language-none">Lion 48.0 268.23846499999996 972.8 561.4438100000001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>之前考虑过将获取到的token存放在文件中，这样不太会占用内存，但使用fs.createWriteStream(“.&#x2F;baidu-token.json”)浏览器会报同源跨域错误，虽然没什么影响，但如果不想看见报错还是不要使用这种优雅的写法了。</p>
+<h4 id="2-将图像转换为base64格式："><a href="#2-将图像转换为base64格式：" class="headerlink" title="2.将图像转换为base64格式："></a>2.将图像转换为base64格式：</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> image2base64 <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"image-to-base64"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> imageBase64 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">image2base64</span><span class="token punctuation">(</span>
+      <span class="token comment">// "http://localhost:4000/" + req.file.filename</span>
+      imageUrl
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//这里的imageUrl直接使用的是阿里云存储OSS返回的url，比较方便</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>的label为txt文件，打开后为：</p>
-<pre class="line-numbers language-none"><code class="language-none">Lion 48.0 268.23846499999996 972.8 561.4438100000001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="3-调用动物识别接口："><a href="#3-调用动物识别接口：" class="headerlink" title="3.调用动物识别接口："></a>3.调用动物识别接口：</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getAnimal</span><span class="token punctuation">(</span><span class="token parameter">imageUrl<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> token <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> imageBase64 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">image2base64</span><span class="token punctuation">(</span>
+      <span class="token comment">// "http://localhost:4000/" + req.file.filename</span>
+      imageUrl
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> bodyFormData <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FormData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bodyFormData<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"image"</span><span class="token punctuation">,</span> imageBase64<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">await</span> <span class="token function">axios</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">"post"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://aip.baidubce.com/rest/2.0/image-classify/v1/animal?access_token=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>token<span class="token punctuation">.</span>data<span class="token punctuation">.</span>access_token<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+      <span class="token literal-property property">headers</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token string-property property">"content-type"</span><span class="token operator">:</span> <span class="token string">"application/x-www-form-urlencoded"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">data</span><span class="token operator">:</span> bodyFormData<span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    response<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>但目前的label格式并不能直接拿来放在yolov5中训练，需要转换成yolov5接受的格式</p>
-<ol>
-<li><p>打开classes.txt，将里面的内容改为需要转换的类别：</p>
-<p>在本例中，修改为：Lion</p>
-</li>
-<li><p>运行指令<code>python convert_annotations.py</code>,转换label格式。<br>代码如下：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
-<span class="token keyword">import</span> cv2
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-<span class="token keyword">from</span> tqdm <span class="token keyword">import</span> tqdm
-<span class="token keyword">import</span> argparse
-<span class="token keyword">import</span> fileinput
-
-<span class="token comment"># function that turns XMin, YMin, XMax, YMax coordinates to normalized yolo format</span>
-<span class="token keyword">def</span> <span class="token function">convert</span><span class="token punctuation">(</span>filename_str<span class="token punctuation">,</span> coords<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-    image <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>filename_str <span class="token operator">+</span> <span class="token string">".jpg"</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-=</span> coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-    coords<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-=</span> coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-    x_diff <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>coords<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>
-    y_diff <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>coords<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">+</span>x_diff
-    coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span>y_diff
-    coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">"Label"</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> coords
-
-ROOT_DIR <span class="token operator">=</span> os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment"># create dict to map class names to numbers for yolo</span>
-classes <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"classes.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> myFile<span class="token punctuation">:</span>
-    <span class="token keyword">for</span> num<span class="token punctuation">,</span> line <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>myFile<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        line <span class="token operator">=</span> line<span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span>
-        classes<span class="token punctuation">[</span>line<span class="token punctuation">]</span> <span class="token operator">=</span> num
-    myFile<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token comment"># step into dataset directory</span>
-os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string">"OID"</span><span class="token punctuation">,</span> <span class="token string">"Dataset"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-DIRS <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token comment"># for all train, validation and test folders</span>
-<span class="token keyword">for</span> DIR <span class="token keyword">in</span> DIRS<span class="token punctuation">:</span>
-    <span class="token keyword">if</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isdir<span class="token punctuation">(</span>DIR<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>DIR<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Currently in subdirectory:"</span><span class="token punctuation">,</span> DIR<span class="token punctuation">)</span>
-        
-        CLASS_DIRS <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token comment"># for all class folders step into directory to change annotations</span>
-        <span class="token keyword">for</span> CLASS_DIR <span class="token keyword">in</span> CLASS_DIRS<span class="token punctuation">:</span>
-            <span class="token keyword">if</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isdir<span class="token punctuation">(</span>CLASS_DIR<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>CLASS_DIR<span class="token punctuation">)</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Converting annotations for class: "</span><span class="token punctuation">,</span> CLASS_DIR<span class="token punctuation">)</span>
-                
-                <span class="token comment"># Step into Label folder where annotations are generated</span>
-                os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">"Label"</span><span class="token punctuation">)</span>
-
-                <span class="token keyword">for</span> filename <span class="token keyword">in</span> tqdm<span class="token punctuation">(</span>os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                    filename_str <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-                    <span class="token keyword">if</span> filename<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span><span class="token string">".txt"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                        annotations <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-                        <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-                            <span class="token keyword">for</span> line <span class="token keyword">in</span> f<span class="token punctuation">:</span>
-                                <span class="token keyword">for</span> class_type <span class="token keyword">in</span> classes<span class="token punctuation">:</span>
-                                    line <span class="token operator">=</span> line<span class="token punctuation">.</span>replace<span class="token punctuation">(</span>class_type<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">(</span>classes<span class="token punctuation">.</span>get<span class="token punctuation">(</span>class_type<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                                labels <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                                coords <span class="token operator">=</span> np<span class="token punctuation">.</span>asarray<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">float</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">float</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">float</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">float</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-                                coords <span class="token operator">=</span> convert<span class="token punctuation">(</span>filename_str<span class="token punctuation">,</span> coords<span class="token punctuation">)</span>
-                                labels<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> labels<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> labels<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> labels<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coords<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coords<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
-                                newline <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-                                line <span class="token operator">=</span> line<span class="token punctuation">.</span>replace<span class="token punctuation">(</span>line<span class="token punctuation">,</span> newline<span class="token punctuation">)</span>
-                                annotations<span class="token punctuation">.</span>append<span class="token punctuation">(</span>line<span class="token punctuation">)</span>
-                            f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-                        <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> outfile<span class="token punctuation">:</span>
-                            <span class="token keyword">for</span> line <span class="token keyword">in</span> annotations<span class="token punctuation">:</span>
-                                outfile<span class="token punctuation">.</span>write<span class="token punctuation">(</span>line<span class="token punctuation">)</span>
-                                outfile<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span>
-                            outfile<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">"Label"</span><span class="token punctuation">)</span>
-                os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-                os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-</li>
-<li><p>移动标签位置</p>
-<p>数据预处理后，txt和jpg文件是放在一个文件夹下的，仍然不是yolov5要求的文件格式，即label，image文件夹分开存放。首先删除Label文件夹中的文件，但不要删除Label文件夹；</p>
-<p>运行代码：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
-<span class="token keyword">import</span> glob
-<span class="token keyword">import</span> shutil
-<span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path
-
-p <span class="token operator">=</span> Path<span class="token punctuation">(</span><span class="token string">r"E:\opencv_learning\OIDv4_ToolKit-master\OID\Dataset\validation\Lion"</span><span class="token punctuation">)</span>  <span class="token comment">#  需要统计的文件夹路径，这里我们统计的是桌面上的test文件夹，可以随便改名</span>
-q <span class="token operator">=</span> Path<span class="token punctuation">(</span><span class="token string">r"E:\opencv_learning\Lion\valid\Label"</span><span class="token punctuation">)</span> <span class="token comment">#  将提取出的所有txt放到test2文件夹下，如果没有需要先创建一个，可以随便改名</span>
-FileList <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>glob<span class="token punctuation">(</span><span class="token string">"**/*.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 找出这个文件夹下的所有txt格式的文件，可以自行换成flac、mp4、mp3，全都可以！</span>
-
-<span class="token keyword">for</span> <span class="token builtin">file</span> <span class="token keyword">in</span> FileList<span class="token punctuation">:</span>       <span class="token comment"># 这个的意思是，遍历所有找出的txt文件，并复制到另一个文件夹中</span>
-    shutil<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span>q<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>此时将Lion文件夹下的txt文件复制到Label文件夹下，将Label文件夹重命名为label，复制出来到与yolov5项目同一目录级别的文件夹下；接着同上处理img文件，复制出来放在与label文件夹同一级别的目录中，最终目录格式：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105312819.webp"></p>
-<ul>
-<li><p>注意：如果使用shutil的move()剪切方法会报错，具体原因据说是shutil的源码bug，目前仍然没有修复，所以只能用这种比较麻烦的方法构成所需目录。</p>
-</li>
-<li><p>注意，要在train同一目录下创建data.yaml文件，内容参考其他data.yaml文件。</p>
-</li>
-<li><p>注意：如果要得到正确的训练结果，还需要下载同类别的validation文件，张数约为训练集的百分之20，用以上方法整理到与train文件夹同一目录下，test文件同理，最终目录结构：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105701317.webp"></p>
-</li>
-</ul>
-<p>lion_detect是我自己创建放几张网上找的图片用来测试的。</p>
-</li>
-<li><p>开始训练</p>
-<p>打开yolov5 6.1项目，设置训练参数：</p>
-</li>
-</ol>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105912373.webp"></p>
-<p>​		点击train.py文件运行，开始训练，训练完成后打开detect.py文件，设置参数：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110031198.webp"></p>
-<p>​		其中best.pt是训练后最好的权重，用以检测。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110313235.webp"></p>
-<p>​		我们对比一下官方自带的训练集的检测结果：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110334725.webp"></p>
+<p>注意这里一定要将imageBase64添加到bodyFormData，官方文档中没有说，是一个坑。</p>
+<h3 id="3-识别结果："><a href="#3-识别结果：" class="headerlink" title="3.识别结果："></a>3.识别结果：</h3><p><img src="/medias/images/loading.gif" data-original="/2022/07/16/ji-yu-node-js-shi-xian-tu-xiang-shi-bie-jie-kou-diao-yong/image-20220716192722021.png" alt="image-20220716192722021"></p>
 
                 
             </div>
@@ -659,7 +576,7 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/">https://qt-7274.github.io/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/</a>
+                    <a href="https://qt-7274.github.io/2022/07/16/ji-yu-node-js-shi-xian-tu-xiang-shi-bie-jie-kou-diao-yong/">https://qt-7274.github.io/2022/07/16/ji-yu-node-js-shi-xian-tu-xiang-shi-bie-jie-kou-diao-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -697,12 +614,16 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                    <span class="chip bg-color">前端</span>
                                 </a>
                             
                                 <a href="/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/">
                                     <span class="chip bg-color">图像识别</span>
+                                </a>
+                            
+                                <a href="/tags/Node-js/">
+                                    <span class="chip bg-color">Node.js</span>
                                 </a>
                             
                         </div>
@@ -876,45 +797,55 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/07/15/zui-jian-dan-de-ti-sheng-wang-zhan-de-xing-neng-de-fang-fa/">
+                <a href="/2022/07/16/ji-yu-node-js-shi-xian-tu-xiang-shi-bie-jie-kou-diao-yong/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/R-C.webp" class="responsive-img" alt="最简单的提升网站的性能的方法">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/1502178281486445.png" class="responsive-img" alt="基于Node.js实现图像识别接口调用">
                         
-                        <span class="card-title">最简单的提升网站的性能的方法</span>
+                        <span class="card-title">基于Node.js实现图像识别接口调用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            个人网站的性能与访客的体验有着直接的关系，如何以最简单的方法大幅提高网站性能呢？本篇介绍两种方法。
+                            对于其他热门编程语言，百度图像识别接口有详细的实例，然而对于Node.js却缺乏实例，本篇可完善这一点。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    计算机技巧
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87/">
-                        <span class="chip bg-color">效率</span>
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/">
+                        <span class="chip bg-color">图像识别</span>
+                    </a>
+                    
+                    <a href="/tags/Node-js/">
+                        <span class="chip bg-color">Node.js</span>
                     </a>
                     
                 </div>
@@ -928,30 +859,30 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/13/webgl-zhao-se-qi-ru-men/">
+                <a href="/2022/07/16/qian-duan-bi-kan-de-shu-ji-ru-men/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/WebGL%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97.webp" class="responsive-img" alt="WebGL着色器入门">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/R-C%20%281%29.png" class="responsive-img" alt="前端必看的书籍【入门】">
                         
-                        <span class="card-title">WebGL着色器入门</span>
+                        <span class="card-title">前端必看的书籍【入门】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            着色器永远是WebGL的核心知识，了解其基本工作原理是必不可少的基本功。
+                            前端应当如何入门？本文章会推荐一些前端入门书籍，帮助你在学习前端的道路上少走弯路。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-16
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" class="post-category">
-                                    计算机图形学
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
                                 </a>
                             
                             
@@ -961,8 +892,12 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/WebGL/">
-                        <span class="chip bg-color">WebGL</span>
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B9%A6%E7%B1%8D/">
+                        <span class="chip bg-color">书籍</span>
                     </a>
                     
                 </div>
