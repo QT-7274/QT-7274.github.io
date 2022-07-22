@@ -290,6 +290,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -1043,42 +1056,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/">
+                <a href="/2022/07/22/quan-su-xia-zai-bai-du-wang-pan-de-jiao-cheng/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/619udA%2BLRvL.jpg" class="responsive-img" alt="计算机图形学入门--光">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/images.png" class="responsive-img" alt="全速下载百度网盘的教程">
                         
-                        <span class="card-title">计算机图形学入门--光</span>
+                        <span class="card-title">全速下载百度网盘的教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在计算机的眼中，颜色是如何被定义的？大型游戏中的光线追踪又是如何实现的？本篇带你入门神秘的计算机图形学。
+                            保姆级全速下载百度网盘资源教程，再也不用充svip啦！文章密码请联系作者获得！
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-22
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" class="post-category">
-                                    计算机图形学
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    计算机技巧
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%88%E7%8E%87/">
+                        <span class="chip bg-color">效率</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
