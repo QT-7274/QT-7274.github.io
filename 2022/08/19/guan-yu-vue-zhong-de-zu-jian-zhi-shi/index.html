@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-08-19
+                    2022-08-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    3.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    17 分
                 </div>
                 
 
@@ -504,7 +504,7 @@
 <p>在HTML模板中使用组件时，首字母大写的形式只能在template配置项中的HTML代码中使用，或者在单文件组件的HTML中使用。</p>
 <p>如果在像index.html这种纯html文件中使用组件时，必须使用<strong>小写单词+短横线</strong>的形式。</p>
 <p>定义名字的时候尽量使用两个或以上的单词，避免和原生的HTML标签名冲突。</p>
-<p>组件数据的流向设计：<strong>属性向下，事件向上</strong></p>
+<p>组件数据的流向设计：<strong>属性向下，事件向上</strong>，即父组件只能向子组件传递数据，子组件不能修改父组件的属性，父组件也不能访问子组件中的属性，子组件可通过事件触发父组件中的事件。</p>
 </blockquote>
 <h3 id="props："><a href="#props：" class="headerlink" title="props："></a>props：</h3><blockquote>
 <p>组件实例的作用域是孤立的。这意味着不能 (也不应该) 在子组件的模板内直接引用父组件的数据。父组件的数据需要通过 prop 才能下发到子组件中。也就是<code>props</code>是<strong>子组件访问父组件数据的唯一接口</strong>。</p>
@@ -674,6 +674,498 @@ export default &#123;
 <blockquote>
 <p>注意：<code>provide</code> 和 <code>inject</code> 绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的。</p>
 </blockquote>
+<ul>
+<li><p>示例：</p>
+<p>MovieCard.vue文件：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;MovieItem
+      :title&#x3D;&quot;movie.title&quot;
+      :description&#x3D;&quot;movie.description&quot;
+    &#x2F;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+import MovieItem from &quot;.&#x2F;MovieItem.vue&quot;;
+export default &#123;
+  components: &#123;
+    MovieItem,
+  &#125;,
+  data() &#123;
+    return &#123;
+      movie: &#123;
+        title: &quot;电影&quot;,
+        description: &quot;这是一段电影的描述&quot;,
+      &#125;,
+    &#125;;
+  &#125;,
+&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+.card &#123;
+  padding: 12px;
+  border: 1px solid hsl(240deg, 100%, 80%);
+  border-radius: 4px;
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>MovieItem.vue文件：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;MovieTitle :title&#x3D;&quot;title&quot; &#x2F;&gt;
+  &lt;div class&#x3D;&quot;description&quot;&gt;
+    &#123;&#123; description &#125;&#125;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+import MovieTitle from &quot;.&#x2F;MovieTitle.vue&quot;;
+export default &#123;
+  components: &#123; MovieTitle &#125;,
+  props: [&quot;title&quot;, &quot;description&quot;],
+&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+.description &#123;
+  margin-top: 12px;
+  color: hsl(240deg, 10%, 88%);
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>MovieTitle.vue文件：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;h2&gt;&#123;&#123; title &#125;&#125;&lt;&#x2F;h2&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+export default &#123;
+  props: [&quot;title&quot;],
+&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+h2 &#123;
+  color: hsl(240deg, 100%, 80%);
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看出组件的层级关系，中间组件尽管没有使用到title属性，但仍需要将其加入到props配置项中，向下传递到MovieTitle.vue文件中。若使用<code>provide</code>和<code>inject</code>配置项，则简洁很多：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;!-- &lt;MovieItem :title&#x3D;&quot;movie.title&quot; :description&#x3D;&quot;movie.description&quot; &#x2F;&gt; --&gt;
+    &lt;MovieItem :description&#x3D;&quot;movie.description&quot; &#x2F;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+import MovieItem from &quot;.&#x2F;MovieItem.vue&quot;;
+export default &#123;
+  components: &#123;
+    MovieItem,
+  &#125;,
+  data() &#123;
+    return &#123;
+      movie: &#123;
+        title: &quot;电影&quot;,
+        description: &quot;这是一段电影的描述&quot;,
+      &#125;,
+    &#125;;
+  &#125;,
+  provide: &#123;
+    title: &quot;测试电影&quot;,
+  &#125;,
+&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+.card &#123;
+  padding: 12px;
+  border: 1px solid hsl(240deg, 100%, 80%);
+  border-radius: 4px;
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;!-- &lt;MovieTitle :title&#x3D;&quot;title&quot; &#x2F;&gt; --&gt;
+  &lt;MovieTitle &#x2F;&gt;
+  &lt;div class&#x3D;&quot;description&quot;&gt;
+    &#123;&#123; description &#125;&#125;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+import MovieTitle from &quot;.&#x2F;MovieTitle.vue&quot;;
+export default &#123;
+  components: &#123; MovieTitle &#125;,
+  &#x2F;&#x2F; props: [&quot;title&quot;, &quot;description&quot;],
+  props: [&quot;description&quot;],
+&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+.description &#123;
+  margin-top: 12px;
+  color: hsl(240deg, 10%, 88%);
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;h2&gt;&#123;&#123; title &#125;&#125;&lt;&#x2F;h2&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+export default &#123;
+  &#x2F;&#x2F; props: [&quot;title&quot;],
+  inject: [&quot;title&quot;],
+&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+h2 &#123;
+  color: hsl(240deg, 100%, 80%);
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但如此做<code>provide</code>中的title属性没有与data中的title属性相对应，若修改为以下代码：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">provide</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+ <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>movie<span class="token punctuation">.</span>title
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>则会报错：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/08/19/guan-yu-vue-zhong-de-zu-jian-zhi-shi/image-20220819210345147.png" alt="image-20220819210345147"></p>
+<p>原因是如果需要<code>provide</code>提供data中的属性，则需要将<code>provide</code>写为一个函数，类似data中的形式：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">provide</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>movie<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="如何修改子组件中的样式："><a href="#如何修改子组件中的样式：" class="headerlink" title="如何修改子组件中的样式："></a>如何修改子组件中的样式：</h3><p>对于子组件中的根元素，可通过普通CSS样式书写格式进行修改，若想为子组件中除根元素以外的元素，则需要使用<code>deep</code>选择器：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.text :deep(a)</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+  <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span>0deg<span class="token punctuation">,</span> 80%<span class="token punctuation">,</span> 70%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="ref："><a href="#ref：" class="headerlink" title="ref："></a>ref：</h3><p>Vue提供了一种机制，可以获取到组件的实例并访问其中的属性，即为<code>ref</code>。使用<code>ref</code>可以访问到原生的HTML的DOM实例，也可以获取Vue组件的实例，但会破坏数据的流向，所以万不得已的时候最好不要使用。</p>
+<p>在子组件中：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;inputText&quot; ref&#x3D;&quot;inputControl&quot; &#x2F;&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  data() &#123;
+    return &#123;
+      inputText: &quot;&quot;,
+    &#125;;
+  &#125;,
+  mounted() &#123;
+    this.$refs.inputControl.focus();
+  &#125;,
+  methods: &#123;
+    blur() &#123;
+      this.$refs.inputControl.blur();
+    &#125;,
+  &#125;,
+&#125;;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+input &#123;
+  padding: 8px 14px;
+  border: 1px solid hsl(280deg, 50%, 50%);
+  border-radius: 4px;
+  outline: none;
+  background: hsl(280deg, 50%, 30%, 0.2);
+  color: white;
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在父组件中：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;main&gt;
+    &lt;div&gt;
+      &lt;AutoFocus ref&#x3D;&quot;autofocus&quot; &#x2F;&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;main&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import AutoFocus from &quot;.&#x2F;components&#x2F;AutoFocus.vue&quot;;
+export default &#123;
+  components: &#123;
+    AutoFocus,
+  &#125;,
+  mounted() &#123;
+    setTimeout(() &#x3D;&gt; &#123;
+      console.log(this.$refs.autofocus.inputText);
+      this.$refs.autofocus.blur();
+    &#125;, 5000);
+  &#125;,
+&#125;;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+* &#123;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, &quot;PingFang SC&quot;, &quot;Microsoft Yahei&quot;, sans-serif;
+&#125;
+
+body &#123;
+  background-color: #0f141c;
+  opacity: 1;
+  background-image: radial-gradient(
+    #212943 0.6000000000000001px,
+    #0f141c 0.6000000000000001px
+  );
+  background-size: 12px 12px;
+  color: white;
+&#125;
+
+#app &#123;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  display: grid;
+  place-items: center;
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="让组件支持v-model指令："><a href="#让组件支持v-model指令：" class="headerlink" title="让组件支持v-model指令："></a>让组件支持v-model指令：</h3><p>示例：</p>
+<p>子组件SearchInput.vue文件：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;label&gt;
+    &lt;span&gt;搜索：&lt;&#x2F;span&gt;
+    &lt;input type&#x3D;&quot;text&quot; &#x2F;&gt;
+  &lt;&#x2F;label&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+export default &#123;&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+input &#123;
+  padding: 8px 14px;
+  border: 1px solid hsl(280deg, 50%, 50%);
+  border-radius: 4px;
+  outline: none;
+  background: hsl(280deg, 50%, 30%, 0.2);
+  color: white;
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>父组件App.vue文件：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;main&gt;
+    &lt;div&gt;
+      &lt;SearchInput v-model&#x3D;&quot;searchTerm&quot;&#x2F;&gt;
+        &lt;p&gt;&#123;&#123;searchTerm&#125;&#125;&lt;&#x2F;p&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;main&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import SearchInput from &quot;.&#x2F;components&#x2F;SearchInput.vue&quot;;
+
+export default &#123;
+  components: &#123;
+    SearchInput,
+  &#125;,
+  data()&#123;
+  	return&#123;
+  		SearchTerm: &quot;&quot;
+  	&#125;
+  &#125;
+&#125;;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+* &#123;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, &quot;PingFang SC&quot;, &quot;Microsoft Yahei&quot;, sans-serif;
+&#125;
+
+body &#123;
+  background-color: #0f141c;
+  opacity: 1;
+  background-image: radial-gradient(
+    #212943 0.6000000000000001px,
+    #0f141c 0.6000000000000001px
+  );
+  background-size: 12px 12px;
+  color: white;
+&#125;
+
+#app &#123;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  display: grid;
+  place-items: center;
+&#125;
+
+p &#123;
+  margin-top: 12px;
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>此时v-model并不能生效，需要在子组件中添加属性：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;label
+    &gt;&lt;span&gt;搜索：&lt;&#x2F;span
+    &gt;&lt;input
+      type&#x3D;&quot;text&quot;
+      :value&#x3D;&quot;modelValue&quot;
+      @input&#x3D;&quot;$emit(&#39;update:modelValue&#39;, $event.target.value)&quot;
+    &#x2F;&gt;
+  &lt;&#x2F;label&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+export default &#123;
+  props: [&quot;modelValue&quot;],
+  emits: [&quot;update:modelValue&quot;],
+&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+input &#123;
+  padding: 8px 14px;
+  border: 1px solid hsl(280deg, 50%, 50%);
+  border-radius: 4px;
+  outline: none;
+  background: hsl(280deg, 50%, 30%, 0.2);
+  color: white;
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>若需要多个v-model，添加更多属性，并加以区分：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;label
+    &gt;&lt;span&gt;搜索：&lt;&#x2F;span
+    &gt;&lt;input
+      type&#x3D;&quot;text&quot;
+      :value&#x3D;&quot;searchTerm&quot;
+      @input&#x3D;&quot;$emit(&#39;update:searchTerm&#39;, $event.target.value)&quot;
+    &#x2F;&gt;
+  &lt;&#x2F;label&gt;
+  &lt;label&gt;
+    &lt;span&gt;类别：&lt;&#x2F;span&gt;
+    &lt;select
+      :value&#x3D;&quot;category&quot;
+      @change&#x3D;&quot;$emit(&#39;update:category&#39;, $event.target.value)&quot;
+    &gt;
+      &lt;option value&#x3D;&quot;default&quot;&gt;默认&lt;&#x2F;option&gt;
+      &lt;option value&#x3D;&quot;fontend&quot;&gt;前端&lt;&#x2F;option&gt;
+      &lt;option value&#x3D;&quot;backend&quot;&gt;后端&lt;&#x2F;option&gt;
+      &lt;option value&#x3D;&quot;fullstack&quot;&gt;全栈&lt;&#x2F;option&gt;
+    &lt;&#x2F;select&gt;
+  &lt;&#x2F;label&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+export default &#123;
+  props: [&quot;searchTerm&quot;, &quot;category&quot;],
+  emits: [&quot;update:searchTerm&quot;, &quot;update:category&quot;],
+&#125;;
+&lt;&#x2F;script&gt;
+&lt;style scoped&gt;
+label &#123;
+  display: block;
+  margin-bottom: 20px;
+&#125;
+
+input &#123;
+  padding: 8px 14px;
+  border: 1px solid hsl(280deg, 50%, 50%);
+  border-radius: 4px;
+  outline: none;
+  background: hsl(280deg, 50%, 30%, 0.2);
+  color: white;
+&#125;
+
+select &#123;
+  border: 1px solid hsl(280deg, 50%, 50%);
+  background: none;
+  color: white;
+  padding: 6px;
+  border-radius: 4px;
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;main&gt;
+    &lt;div&gt;
+      &lt;!-- v-model 后面的参数必须和子组件接收的属性名相同，例如 searchTerm --&gt;
+      &lt;SearchInput
+        v-model:searchTerm&#x3D;&quot;searchTerm&quot;
+        v-model:category&#x3D;&quot;category&quot;
+      &#x2F;&gt;
+      &lt;div class&#x3D;&quot;splitLine&quot;&gt;&lt;&#x2F;div&gt;
+      &lt;p&gt;搜索词：&#123;&#123; searchTerm &#125;&#125;&lt;&#x2F;p&gt;
+      &lt;p&gt;类别：&#123;&#123; category &#125;&#125;&lt;&#x2F;p&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;main&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import SearchInput from &quot;.&#x2F;components&#x2F;SearchInput.vue&quot;;
+
+export default &#123;
+  components: &#123;
+    SearchInput,
+  &#125;,
+  data() &#123;
+    return &#123;
+      &#x2F;&#x2F; 名字无需和 SearchInput 中的属性名相同
+      &#x2F;&#x2F; 例如这里可以叫 searchQuery，
+      searchTerm: &quot;&quot;,
+      category: &quot;default&quot;,
+    &#125;;
+  &#125;,
+&#125;;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+* &#123;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, &quot;PingFang SC&quot;, &quot;Microsoft Yahei&quot;, sans-serif;
+&#125;
+
+body &#123;
+  background-color: #0f141c;
+  opacity: 1;
+  background-image: radial-gradient(
+    #212943 0.6000000000000001px,
+    #0f141c 0.6000000000000001px
+  );
+  background-size: 12px 12px;
+  color: white;
+&#125;
+
+#app &#123;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  display: grid;
+  place-items: center;
+&#125;
+
+.splitLine &#123;
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed hsl(280deg, 50%, 50%);
+&#125;
+
+p &#123;
+  margin-top: 12px;
+  color: hsl(50deg, 100%, 80%);
+&#125;
+&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>

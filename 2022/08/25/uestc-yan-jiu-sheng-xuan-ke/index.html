@@ -5,8 +5,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Python,training">
-    <meta name="description" content="图像识别的数据集准备工作是非常重要与繁琐的，如何利用谷歌的数据集实现用yolov5进行图像识别？本篇文章给出答案。">
+    <meta name="keywords" content="UESTC研究生选课, QT-7274">
+    <meta name="description" content="关于选课">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +20,7 @@
 
     
 
-    <title>使用yolo5进行数据训练 | QT-7274</title>
+    <title>UESTC研究生选课 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -293,7 +293,7 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = '';
+        let pwd = 'dfd05b7529ba2dbad65d37799bd06e1517040887d766d1b7ebd197683e09e1ce';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
                 alert('密码错误，将返回主页！');
@@ -306,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/splash.webp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">使用yolo5进行数据训练</h1>
+                    <h1 class="description center-align post-title">UESTC研究生选课</h1>
                 </div>
             </div>
         </div>
@@ -427,12 +427,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/">
-                                <span class="chip bg-color">图像识别</span>
-                            </a>
-                        
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/%E7%A1%95%E5%A3%AB%E7%94%9F%E6%B6%AF/">
+                                <span class="chip bg-color">硕士生涯</span>
                             </a>
                         
                     </div>
@@ -443,8 +439,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                计算机视觉
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                生活
                             </a>
                         
                     </div>
@@ -456,28 +452,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-13
+                    2022-08-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-16
+                    2022-08-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    233
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    1 分
                 </div>
                 
 
@@ -500,157 +496,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-下载数据集并进行本地训练的标准流程"><a href="#1-下载数据集并进行本地训练的标准流程" class="headerlink" title="1.下载数据集并进行本地训练的标准流程"></a>1.下载数据集并进行本地训练的标准流程</h3><ol>
-<li><p>克隆github项目</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/theAIGuysCode/OIDv4_ToolKit 
-pip <span class="token function">install</span> -r requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><p>下载数据集</p>
-<p>数据集网站为<a target="_blank" rel="noopener" href="https://storage.googleapis.com/openimages/web/index.html">https://storage.googleapis.com/openimages/web/index.html</a></p>
-<p>搜索对应的类别，这里以Lion为例，下载训练集200张：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Lion --type_csv train --limit <span class="token number">200</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><p>注意：若某个类别有两个单词组成，单词间使用下划线代替：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Bell_pepper --type_csv train --limit <span class="token number">400</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>注意：若想同时训练多个类别，可通过如下代码将多个类别移动至同一类别：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Aircraft Weapon --type_csv <span class="token builtin class-name">test</span> --limit <span class="token number">100</span> --multiclasses <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p>数据预处理</p>
-<p>下载后的数据存储在OID&#x2F;Dataset&#x2F;train&#x2F;，每个类别的文件包括对应的image和label，对应的label为txt文件，打开后为：</p>
-<pre class="line-numbers language-none"><code class="language-none">Lion 48.0 268.23846499999996 972.8 561.4438100000001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>的label为txt文件，打开后为：</p>
-<pre class="line-numbers language-none"><code class="language-none">Lion 48.0 268.23846499999996 972.8 561.4438100000001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>但目前的label格式并不能直接拿来放在yolov5中训练，需要转换成yolov5接受的格式</p>
-<ol>
-<li><p>打开classes.txt，将里面的内容改为需要转换的类别：</p>
-<p>在本例中，修改为：Lion</p>
-</li>
-<li><p>运行指令<code>python convert_annotations.py</code>,转换label格式。<br>代码如下：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
-<span class="token keyword">import</span> cv2
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-<span class="token keyword">from</span> tqdm <span class="token keyword">import</span> tqdm
-<span class="token keyword">import</span> argparse
-<span class="token keyword">import</span> fileinput
-
-<span class="token comment"># function that turns XMin, YMin, XMax, YMax coordinates to normalized yolo format</span>
-<span class="token keyword">def</span> <span class="token function">convert</span><span class="token punctuation">(</span>filename_str<span class="token punctuation">,</span> coords<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-    image <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>filename_str <span class="token operator">+</span> <span class="token string">".jpg"</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-=</span> coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-    coords<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">-=</span> coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-    x_diff <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>coords<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>
-    y_diff <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>coords<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">+</span>x_diff
-    coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span>y_diff
-    coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    coords<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">/=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">"Label"</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> coords
-
-ROOT_DIR <span class="token operator">=</span> os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment"># create dict to map class names to numbers for yolo</span>
-classes <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"classes.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> myFile<span class="token punctuation">:</span>
-    <span class="token keyword">for</span> num<span class="token punctuation">,</span> line <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>myFile<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        line <span class="token operator">=</span> line<span class="token punctuation">.</span>rstrip<span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span>
-        classes<span class="token punctuation">[</span>line<span class="token punctuation">]</span> <span class="token operator">=</span> num
-    myFile<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token comment"># step into dataset directory</span>
-os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string">"OID"</span><span class="token punctuation">,</span> <span class="token string">"Dataset"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-DIRS <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token comment"># for all train, validation and test folders</span>
-<span class="token keyword">for</span> DIR <span class="token keyword">in</span> DIRS<span class="token punctuation">:</span>
-    <span class="token keyword">if</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isdir<span class="token punctuation">(</span>DIR<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>DIR<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Currently in subdirectory:"</span><span class="token punctuation">,</span> DIR<span class="token punctuation">)</span>
-        
-        CLASS_DIRS <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token comment"># for all class folders step into directory to change annotations</span>
-        <span class="token keyword">for</span> CLASS_DIR <span class="token keyword">in</span> CLASS_DIRS<span class="token punctuation">:</span>
-            <span class="token keyword">if</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>isdir<span class="token punctuation">(</span>CLASS_DIR<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>CLASS_DIR<span class="token punctuation">)</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Converting annotations for class: "</span><span class="token punctuation">,</span> CLASS_DIR<span class="token punctuation">)</span>
-                
-                <span class="token comment"># Step into Label folder where annotations are generated</span>
-                os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">"Label"</span><span class="token punctuation">)</span>
-
-                <span class="token keyword">for</span> filename <span class="token keyword">in</span> tqdm<span class="token punctuation">(</span>os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                    filename_str <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-                    <span class="token keyword">if</span> filename<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span><span class="token string">".txt"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                        annotations <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-                        <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-                            <span class="token keyword">for</span> line <span class="token keyword">in</span> f<span class="token punctuation">:</span>
-                                <span class="token keyword">for</span> class_type <span class="token keyword">in</span> classes<span class="token punctuation">:</span>
-                                    line <span class="token operator">=</span> line<span class="token punctuation">.</span>replace<span class="token punctuation">(</span>class_type<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">(</span>classes<span class="token punctuation">.</span>get<span class="token punctuation">(</span>class_type<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                                labels <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                                coords <span class="token operator">=</span> np<span class="token punctuation">.</span>asarray<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">float</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">float</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">float</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">float</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-                                coords <span class="token operator">=</span> convert<span class="token punctuation">(</span>filename_str<span class="token punctuation">,</span> coords<span class="token punctuation">)</span>
-                                labels<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> labels<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> labels<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> labels<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> coords<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coords<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coords<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coords<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
-                                newline <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>labels<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-                                line <span class="token operator">=</span> line<span class="token punctuation">.</span>replace<span class="token punctuation">(</span>line<span class="token punctuation">,</span> newline<span class="token punctuation">)</span>
-                                annotations<span class="token punctuation">.</span>append<span class="token punctuation">(</span>line<span class="token punctuation">)</span>
-                            f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-                        <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> outfile<span class="token punctuation">:</span>
-                            <span class="token keyword">for</span> line <span class="token keyword">in</span> annotations<span class="token punctuation">:</span>
-                                outfile<span class="token punctuation">.</span>write<span class="token punctuation">(</span>line<span class="token punctuation">)</span>
-                                outfile<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span>
-                            outfile<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">"Label"</span><span class="token punctuation">)</span>
-                os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-                os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-</li>
-<li><p>移动标签位置</p>
-<p>数据预处理后，txt和jpg文件是放在一个文件夹下的，仍然不是yolov5要求的文件格式，即label，image文件夹分开存放。首先删除Label文件夹中的文件，但不要删除Label文件夹；</p>
-<p>运行代码：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
-<span class="token keyword">import</span> glob
-<span class="token keyword">import</span> shutil
-<span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path
-
-p <span class="token operator">=</span> Path<span class="token punctuation">(</span><span class="token string">r"E:\opencv_learning\OIDv4_ToolKit-master\OID\Dataset\validation\Lion"</span><span class="token punctuation">)</span>  <span class="token comment">#  需要统计的文件夹路径，这里我们统计的是桌面上的test文件夹，可以随便改名</span>
-q <span class="token operator">=</span> Path<span class="token punctuation">(</span><span class="token string">r"E:\opencv_learning\Lion\valid\Label"</span><span class="token punctuation">)</span> <span class="token comment">#  将提取出的所有txt放到test2文件夹下，如果没有需要先创建一个，可以随便改名</span>
-FileList <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>glob<span class="token punctuation">(</span><span class="token string">"**/*.txt"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 找出这个文件夹下的所有txt格式的文件，可以自行换成flac、mp4、mp3，全都可以！</span>
-
-<span class="token keyword">for</span> <span class="token builtin">file</span> <span class="token keyword">in</span> FileList<span class="token punctuation">:</span>       <span class="token comment"># 这个的意思是，遍历所有找出的txt文件，并复制到另一个文件夹中</span>
-    shutil<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span>q<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>此时将Lion文件夹下的txt文件复制到Label文件夹下，将Label文件夹重命名为label，复制出来到与yolov5项目同一目录级别的文件夹下；接着同上处理img文件，复制出来放在与label文件夹同一级别的目录中，最终目录格式：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105312819.webp"></p>
-<ul>
-<li><p>注意：如果使用shutil的move()剪切方法会报错，具体原因据说是shutil的源码bug，目前仍然没有修复，所以只能用这种比较麻烦的方法构成所需目录。</p>
-</li>
-<li><p>注意，要在train同一目录下创建data.yaml文件，内容参考其他data.yaml文件。</p>
-</li>
-<li><p>注意：如果要得到正确的训练结果，还需要下载同类别的validation文件，张数约为训练集的百分之20，用以上方法整理到与train文件夹同一目录下，test文件同理，最终目录结构：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105701317.webp"></p>
-</li>
-</ul>
-<p>lion_detect是我自己创建放几张网上找的图片用来测试的。</p>
-</li>
-<li><p>开始训练</p>
-<p>打开yolov5 6.1项目，设置训练参数：</p>
-</li>
-</ol>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105912373.webp"></p>
-<p>​		点击train.py文件运行，开始训练，训练完成后打开detect.py文件，设置参数：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110031198.webp"></p>
-<p>​		其中best.pt是训练后最好的权重，用以检测。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110313235.webp"></p>
-<p>​		我们对比一下官方自带的训练集的检测结果：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110334725.webp"></p>
+                <h2 id="选课"><a href="#选课" class="headerlink" title="选课"></a>选课</h2><h3 id="学位课"><a href="#学位课" class="headerlink" title="学位课"></a>学位课</h3><p>算法设计与分析–陈佳</p>
+<p>随机过程与排队论（小班研讨）–顾小丰</p>
+<p>工程伦理与学术道德–谢小东</p>
+<p>新时代中国特色社会主义理论与实践（沙河二班）–曹银忠</p>
+<p>图论及应用（15班）–王也洲</p>
+<p>网络计算模式（1班）–丁熠</p>
+<p>高级计算机结构（不要选吴晓华的）或选其他学位课</p>
+<h3 id="非学位课"><a href="#非学位课" class="headerlink" title="非学位课"></a>非学位课</h3><p>Unix&#x2F;Linux操作系统内核结构–刘玓</p>
+<p>网络安全理论与技术–李树全</p>
+<p>网络编程–任立勇</p>
+<p>高级数字图像处理–甘涛</p>
+<p>研究生论文写作指导课程（2班）–李晓瑜</p>
+<p>自然辩证法概论（沙河4班）–郭芙蕊</p>
+<h3 id="教学实践环节"><a href="#教学实践环节" class="headerlink" title="教学实践环节"></a>教学实践环节</h3><p>逆向工程–何兴高</p>
+<p>基地实践2学分</p>
+<p>多媒体应用编程实践</p>
+<h3 id="必修环节"><a href="#必修环节" class="headerlink" title="必修环节"></a>必修环节</h3><p>电影音乐鉴赏–周长征</p>
+<p>上学期的课：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/08/25/uestc-yan-jiu-sheng-xuan-ke/image-20220825220711481.png" alt="image-20220825220711481"></p>
+<p>下学期的课：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/08/25/uestc-yan-jiu-sheng-xuan-ke/image-20220825220804082.png" alt="image-20220825220804082"></p>
 
                 
             </div>
@@ -677,7 +543,7 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/">https://qt-7274.github.io/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/</a>
+                    <a href="https://qt-7274.github.io/2022/08/25/uestc-yan-jiu-sheng-xuan-ke/">https://qt-7274.github.io/2022/08/25/uestc-yan-jiu-sheng-xuan-ke/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -715,12 +581,8 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/">
-                                    <span class="chip bg-color">图像识别</span>
-                                </a>
-                            
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/%E7%A1%95%E5%A3%AB%E7%94%9F%E6%B6%AF/">
+                                    <span class="chip bg-color">硕士生涯</span>
                                 </a>
                             
                         </div>
@@ -1165,45 +1027,48 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/07/15/zui-jian-dan-de-ti-sheng-wang-zhan-de-xing-neng-de-fang-fa/">
+                <a href="/2022/08/25/uestc-yan-jiu-sheng-xuan-ke/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/R-C.webp" class="responsive-img" alt="最简单的提升网站的性能的方法">
                         
-                        <span class="card-title">最简单的提升网站的性能的方法</span>
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/0.jpg" class="responsive-img" alt="UESTC研究生选课">
+                        
+                        <span class="card-title">UESTC研究生选课</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            个人网站的性能与访客的体验有着直接的关系，如何以最简单的方法大幅提高网站性能呢？本篇介绍两种方法。
+                            关于选课
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    计算机技巧
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                    生活
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%88%E7%8E%87/">
-                        <span class="chip bg-color">效率</span>
+                    <a href="/tags/%E7%A1%95%E5%A3%AB%E7%94%9F%E6%B6%AF/">
+                        <span class="chip bg-color">硕士生涯</span>
                     </a>
                     
                 </div>
@@ -1217,30 +1082,30 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/13/webgl-zhao-se-qi-ru-men/">
+                <a href="/2022/08/19/shi-yong-vite-kuai-su-jian-li-yi-ge-vue-xiang-mu/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/WebGL%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97.webp" class="responsive-img" alt="WebGL着色器入门">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/uTools_1660904601566.png" class="responsive-img" alt="使用Vite快速建立一个Vue项目">
                         
-                        <span class="card-title">WebGL着色器入门</span>
+                        <span class="card-title">使用Vite快速建立一个Vue项目</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            着色器永远是WebGL的核心知识，了解其基本工作原理是必不可少的基本功。
+                            使用前端开发工具Vite快速建立一个Vue项目，并了解Vite3.0的一些新特性。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-19
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" class="post-category">
-                                    计算机图形学
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
                                 </a>
                             
                             
@@ -1250,8 +1115,12 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/WebGL/">
-                        <span class="chip bg-color">WebGL</span>
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
                     </a>
                     
                 </div>
