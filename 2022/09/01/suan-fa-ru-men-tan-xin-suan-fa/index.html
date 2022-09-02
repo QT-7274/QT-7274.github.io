@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-01
+                    2022-09-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.7k
+                    14.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    35 分
+                    60 分
                 </div>
                 
 
@@ -1137,6 +1137,552 @@
 </ul>
 </li>
 </ol>
+<h2 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><p>通常的编码方法有固定长度编码和不等长度编码两种。这是一个设计最优编码方案的问题，目的是使总码长度最短。这个问题利用字符的<strong>使用频率</strong>来编码，是不等长编码方法，使得经常使用的字符编码较短，不常使用的字符编码较长。如果采用等长的编码方案，假设所有字符的编码都等长，则表示 n 个不同的字符需要[log n]位。例如，3 个不同的字符 a、b、c，至少需要 2 位二进制数表示，a 为 00，b 为 01，c 为 10。如果每个字符的使用频率相等，固定长度编码是空间效率最高的方法。</p>
+<ol>
+<li><p>编码尽可能短</p>
+<p>我们可以让使用频率高的字符编码较短，使用频率低的编码较长，这种方法可以提高压缩率，节省空间，也能提高运算和通信速度。即<strong>频率越高，编码越短</strong>。</p>
+</li>
+<li><p>不能有二义性</p>
+<p>例如，ABCD 四个字符如果编码如下。<br>A：0。B：1。C：01。D：10。<br>那么现在有一列数 0110，该怎样翻译呢？是翻译为 ABBA，ABD，CBA，还是 CD？那么如何消除二义性呢？解决的办法是：任何一个字符的编码不能是另一个字符编码的前缀，即<strong>前缀码特性</strong>。</p>
+</li>
+</ol>
+<h3 id="算法设计：-4"><a href="#算法设计：-4" class="headerlink" title="算法设计："></a>算法设计：</h3><p>哈夫曼算法采取的<strong>贪心策略是每次从树的集合中取出没有双亲且权值最小的两棵树作为左右子树</strong>，构造一棵新树，新树根节点的权值为其左右孩子结点权值之和，将新树插入到树的集合中，求解步骤如下。</p>
+<ol>
+<li>确定合适的数据结构。编写程序前需要考虑的情况有：<ul>
+<li>哈夫曼树中没有度为 1 的结点，则一棵有 n 个叶子结点的哈夫曼树共有 2n−1 个结点（n−1 次的“合并”，每次产生一个新结点），</li>
+<li>构成哈夫曼树后，为求编码，需从叶子结点出发走一条从叶子到根的路径。</li>
+<li>译码需要从根出发走一条从根到叶子的路径，那么我们需要知道每个结点的权值、双亲、左孩子、右孩子和结点的信息。</li>
+</ul>
+</li>
+<li>初始化。构造 n 棵结点为 n 个字符的单结点树集合 T&#x3D;{t1，t2，t3，…，t n}，每棵树只有一个带权的根结点，权值为该字符的使用频率。</li>
+<li>如果 T 中只剩下一棵树，则哈夫曼树构造成功，跳到步骤（6）。否则，从集合 T中取出没有双亲且权值最小的两棵树 t i 和 t j，将它们合并成一棵新树 zk，新树的左孩子为 t i，右孩子为 t j，zk 的权值为 t i 和 t j 的权值之和。</li>
+<li>从集合 T 中删去 t i，t j，加入 zk。</li>
+<li>重复以上（3）～（4）步。</li>
+<li>约定左分支上的编码为“0”，右分支上的编码为“1”。从叶子结点到根结点逆向求出每个字符的哈夫曼编码，从根结点到叶子结点路径上的字符组成的字符串为该叶子结点的哈夫曼编码。算法结束。</li>
+</ol>
+<p>下图是一些字符和它们的使用频率：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902100212471.png" alt="image-20220902100212471"></p>
+<p>我们可以把每一个字符作为叶子，它们对应的频率作为其权值，为了比较大小方便，可以对其同时扩大 100 倍，得到 a～f 分别对应 5、32、18、7、25、13。</p>
+<ol>
+<li><p>初始化。构造 n 棵结点为 n 个字符的单结点树集合 T&#x3D;{a，b，c，d，e，f}，如图 2-33 所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902100356328.png" alt="image-20220902100356328"></p>
+</li>
+<li><p>从集合 T 中取出没有双亲的且权值最小的两棵树a 和 d，将它们合并成一棵新树 t1，新树的左孩子为 a，右孩子为 d，新树的权值为 a 和 d 的权值之和为 12。新树的树根 t1 加入集合 T，a 和 d 从集合T中删除，如图 2-34 所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902100406071.png" alt="image-20220902100406071"></p>
+</li>
+<li><p>从集合 T 中取出没有双亲的且权值最小的两棵树 t1 和 f，将它们合并成一棵新树 t2，新树的左孩子为 t1，右孩子为 f，新树的权值为 t1 和 f 的权值之和为 25。新树的树根 t2 加入集合 T，将 t1 和 f 从集合 T 中删除，如图 2-35 所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902100415960.png" alt="image-20220902100415960"></p>
+</li>
+<li><p>从集合 T 中取出没有双亲且权值最小的两棵树 c 和 e，将它们合并成一棵新树 t3，新树的左孩子为 c，右孩子为 e，新树的权值为 c 和 e 的权值之和为 43。新树的树根 t3 加入集合 T，将 c 和 e 从集合 T 中删除，如图 2-36 所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902100425130.png" alt="image-20220902100425130"></p>
+</li>
+<li><p>从集合 T 中取出没有双亲且权值最小的两棵树 t2和 b，将它们合并成一棵新树 t4，新树的左孩子为 t2，右孩子为 b，新树的权值为 t2 和 b 的权值之和为 57。新树的树根t4 加入集合 T，将 t2 和 b 从集合 T 中删除，如图 2-37 所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902100437842.png" alt="image-20220902100437842"></p>
+</li>
+<li><p>从集合 T 中取出没有双亲且权值最小的两棵树 t3和 t4，将它们合并成一棵新树 t5，新树的左孩子为 t4，右孩子为 t3，新树的权值为 t3 和 t4的权值之和为 100。新树的树根 t5 加入集合 T，将 t3 和 t4 从集合 T 中删除，如图 2-38所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902100446844.png" alt="image-20220902100446844"></p>
+</li>
+<li><p>T 中只剩下一棵树，哈夫曼树构造成功。</p>
+</li>
+<li><p>约定左分支上的编码为“0”，右分支上的编码为“1”。从叶子结点到根结点逆向求出每个字符的哈夫曼编码，从根结点到叶子结点路径上的字符组成的字符串为该叶子结点的哈夫曼编码，如图 2-39 所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902100458042.png" alt="image-20220902100458042"></p>
+</li>
+</ol>
+<h3 id="运行代码：-4"><a href="#运行代码：-4" class="headerlink" title="运行代码："></a>运行代码：</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 2-5</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;algorithm></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;cstring></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MAXBIT</span>    <span class="token expression"><span class="token number">100</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MAXVALUE</span>  <span class="token expression"><span class="token number">10000</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MAXLEAF</span>   <span class="token expression"><span class="token number">30</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MAXNODE</span>   <span class="token expression">MAXLEAF<span class="token operator">*</span><span class="token number">2</span> <span class="token operator">-</span><span class="token number">1</span></span></span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">double</span> weight<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> parent<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> lchild<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rchild<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> HNodeType<span class="token punctuation">;</span>        <span class="token comment">/* 结点结构体 */</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> bit<span class="token punctuation">[</span>MAXBIT<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> start<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> HCodeType<span class="token punctuation">;</span>        <span class="token comment">/* 编码结构体 */</span>
+HNodeType HuffNode<span class="token punctuation">[</span>MAXNODE<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">/* 定义一个结点结构体数组 */</span>
+HCodeType HuffCode<span class="token punctuation">[</span>MAXLEAF<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">/* 定义一个编码结构体数组*/</span>
+<span class="token comment">/* 构造哈夫曼树 */</span>
+<span class="token keyword">void</span> <span class="token function">HuffmanTree</span> <span class="token punctuation">(</span>HNodeType HuffNode<span class="token punctuation">[</span>MAXNODE<span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">/* i、j： 循环变量，m1、m2：构造哈夫曼树不同过程中两个最小权值结点的权值，
+       x1、x2：构造哈夫曼树不同过程中两个最小权值结点在数组中的序号。*/</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> x1<span class="token punctuation">,</span> x2<span class="token punctuation">;</span>
+    <span class="token keyword">double</span> m1<span class="token punctuation">,</span>m2<span class="token punctuation">;</span>
+    <span class="token comment">/* 初始化存放哈夫曼树数组 HuffNode[] 中的结点 */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">2</span><span class="token operator">*</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        HuffNode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">//权值</span>
+        HuffNode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>parent<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        HuffNode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>lchild<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        HuffNode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>rchild<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">/* 输入 n 个叶子结点的权值 */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        cout<span class="token operator">&lt;&lt;</span><span class="token string">"Please input value and weight of leaf node "</span><span class="token operator">&lt;&lt;</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        cin<span class="token operator">>></span>HuffNode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token operator">>></span>HuffNode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">/* 构造 Huffman 树 */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span><span class="token comment">//执行n-1次合并</span>
+         m1<span class="token operator">=</span>m2<span class="token operator">=</span>MAXVALUE<span class="token punctuation">;</span>
+         <span class="token comment">/* m1、m2中存放两个无父结点且结点权值最小的两个结点 */</span>
+        x1<span class="token operator">=</span>x2<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment">/* 找出所有结点中权值最小、无父结点的两个结点，并合并之为一棵二叉树 */</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span>n<span class="token operator">+</span>i<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>HuffNode<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token operator">&lt;</span>m1<span class="token operator">&amp;&amp;</span>HuffNode<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>parent<span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                m2 <span class="token operator">=</span> m1<span class="token punctuation">;</span>
+                x2 <span class="token operator">=</span> x1<span class="token punctuation">;</span>
+                m1 <span class="token operator">=</span> HuffNode<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token punctuation">;</span>
+                x1 <span class="token operator">=</span> j<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>HuffNode<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>weight <span class="token operator">&lt;</span> m2 <span class="token operator">&amp;&amp;</span> HuffNode<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>parent<span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                m2<span class="token operator">=</span>HuffNode<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token punctuation">;</span>
+                x2<span class="token operator">=</span>j<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">/* 设置找到的两个子结点 x1、x2 的父结点信息 */</span>
+        HuffNode<span class="token punctuation">[</span>x1<span class="token punctuation">]</span><span class="token punctuation">.</span>parent  <span class="token operator">=</span> n<span class="token operator">+</span>i<span class="token punctuation">;</span>
+        HuffNode<span class="token punctuation">[</span>x2<span class="token punctuation">]</span><span class="token punctuation">.</span>parent  <span class="token operator">=</span> n<span class="token operator">+</span>i<span class="token punctuation">;</span>
+        HuffNode<span class="token punctuation">[</span>n<span class="token operator">+</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>weight <span class="token operator">=</span> m1<span class="token operator">+</span>m2<span class="token punctuation">;</span>
+        HuffNode<span class="token punctuation">[</span>n<span class="token operator">+</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>lchild <span class="token operator">=</span> x1<span class="token punctuation">;</span>
+        HuffNode<span class="token punctuation">[</span>n<span class="token operator">+</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>rchild <span class="token operator">=</span> x2<span class="token punctuation">;</span>
+        cout<span class="token operator">&lt;&lt;</span><span class="token string">"x1.weight and x2.weight in round "</span><span class="token operator">&lt;&lt;</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token string">"\t"</span><span class="token operator">&lt;&lt;</span>HuffNode<span class="token punctuation">[</span>x1<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token operator">&lt;&lt;</span><span class="token string">"\t"</span><span class="token operator">&lt;&lt;</span>HuffNode<span class="token punctuation">[</span>x2<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span> <span class="token comment">/* 用于测试 */</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/* 哈夫曼树编码 */</span>
+<span class="token keyword">void</span> <span class="token function">HuffmanCode</span><span class="token punctuation">(</span>HCodeType HuffCode<span class="token punctuation">[</span>MAXLEAF<span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    HCodeType cd<span class="token punctuation">;</span>       <span class="token comment">/* 定义一个临时变量来存放求解编码时的信息 */</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">,</span>j<span class="token punctuation">,</span>c<span class="token punctuation">,</span>p<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        cd<span class="token punctuation">.</span>start<span class="token operator">=</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        c<span class="token operator">=</span>i<span class="token punctuation">;</span>
+        p<span class="token operator">=</span>HuffNode<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">.</span>parent<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>HuffNode<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">.</span>lchild<span class="token operator">==</span>c<span class="token punctuation">)</span>
+                cd<span class="token punctuation">.</span>bit<span class="token punctuation">[</span>cd<span class="token punctuation">.</span>start<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                cd<span class="token punctuation">.</span>bit<span class="token punctuation">[</span>cd<span class="token punctuation">.</span>start<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+            cd<span class="token punctuation">.</span>start<span class="token operator">--</span><span class="token punctuation">;</span>        <span class="token comment">/*前移一位 */</span>
+            c<span class="token operator">=</span>p<span class="token punctuation">;</span>
+            p<span class="token operator">=</span>HuffNode<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">.</span>parent<span class="token punctuation">;</span>    <span class="token comment">/* 设置下一循环条件 */</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">/* 把叶子结点的编码信息从临时编码cd中复制出来，放入编码结构体数组 */</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>j<span class="token operator">=</span>cd<span class="token punctuation">.</span>start<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+           HuffCode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>bit<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span>cd<span class="token punctuation">.</span>bit<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        HuffCode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>start<span class="token operator">=</span>cd<span class="token punctuation">.</span>start<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">,</span>j<span class="token punctuation">,</span>n<span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"Please input n:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    cin<span class="token operator">>></span>n<span class="token punctuation">;</span>
+    <span class="token function">HuffmanTree</span><span class="token punctuation">(</span>HuffNode<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//构造哈夫曼树</span>
+    <span class="token function">HuffmanCode</span><span class="token punctuation">(</span>HuffCode<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 哈夫曼树编码</span>
+    <span class="token comment">//输出已保存好的所有存在编码的哈夫曼编码</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        cout<span class="token operator">&lt;&lt;</span>HuffNode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token operator">&lt;&lt;</span><span class="token string">": Huffman code is: "</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span>HuffCode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>start<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+            cout<span class="token operator">&lt;&lt;</span>HuffCode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>bit<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//输入</span>
+<span class="token comment">/*
+Please input n：
+6
+Please input value and weight of leaf node 1
+a 0.05
+Please input value and weight of leaf node 2
+b 0.32
+Please input value and weight of leaf node 3
+c 0.18
+Please input value and weight of leaf node 4
+d 0.07
+Please input value and weight of leaf node 5
+e 0.25
+Please input value and weight of leaf node 6
+f 0.13
+*/</span>
+<span class="token comment">//输出</span>
+<span class="token comment">/*
+x1.weight and x2.weight in round 1 0.05 0.07
+x1.weight and x2.weight in round 2 0.12 0.13
+x1.weight and x2.weight in round 3 0.18 0.25
+x1.weight and x2.weight in round 4 0.25 0.32
+x1.weight and x2.weight in round 5 0.43 0.57
+a: Huffman code is: 1000
+b: Huffman code is: 11
+c: Huffman code is: 00
+d: Huffman code is: 1001
+e: Huffman code is: 01
+f: Huffman code is: 101
+*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="算法解析：-4"><a href="#算法解析：-4" class="headerlink" title="算法解析："></a>算法解析：</h3><ol>
+<li><p>算法复杂度分析：</p>
+<ul>
+<li><p>时间复杂度：由程序可以看出，在函数 HuffmanTree()中，if (HuffNode[j].weight&lt;m1&amp;&amp;HuffNode[j].parent&#x3D;&#x3D;−1)为基本语句，外层 i 与 j 组成双层循环：</p>
+<p>i&#x3D;0 时，该语句执行 n 次；<br>i&#x3D;1 时，该语句执行 n+1 次；<br>i&#x3D;2 时，该语句执行 n+2 次；<br>……<br>i&#x3D;n−2 时，该语句执行 n+n−2 次；<br>则基本语句共执行 n+（n+1）+（n+2）+…+（n+（n−2））&#x3D;（n−1）*（3n−2）&#x2F;2 次（等<br>差数列）；在函数 HuffmanCode()中，编码和输出编码时间复杂度都接近 n2；则该算法时间复<br>杂度为 <strong>O(n2)</strong></p>
+</li>
+<li><p>空间复杂度：所需存储空间为结点结构体数组与编码结构体数组，哈夫曼树数组HuffNode[]中的结点为 n 个，每个结点包含 bit[MAXBIT]和 start 两个域，则该算法空间复杂度为 <strong>O(n*MAXBIT)</strong></p>
+</li>
+</ul>
+</li>
+<li><p>优化拓展：</p>
+<ol>
+<li>函数 HuffmanTree()中找两个权值最小结点时使用优先队列，时间复杂度为 logn，执行 n−1 次，总时间复杂度为 <strong>O( n logn)</strong></li>
+<li>函数 HuffmanCode()中，哈夫曼编码数组 HuffNode[]中可以定义一个动态分配空间的线性表来存储编码，每个线性表的长度为实际的编码长度，这样可以大大节省空间。</li>
+</ol>
+</li>
+</ol>
+<h2 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h2><h3 id="Prim算法："><a href="#Prim算法：" class="headerlink" title="Prim算法："></a>Prim算法：</h3><p>某学校下设 10 个学院，3 个研究所，1 个大型图书馆，4 个实验室。其中，1～10 号节点代表 10 个学院，11～13 号节点代表 3 个研究所，14 号节点代表图书馆，15～18 号节点代表 4 个实验室。该问题用无向连通图 G &#x3D;（V，E）来表示通信网络，V 表示顶点集，E 表示边集。把各个单位抽象为图中的顶点，顶点与顶点之间的边表示单位之间的通信网络，边的权值表示布线的费用。如果两个节点之间没有连线，代表这两个单位之间不能布线，费用为无穷大。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902104007203.png" alt="image-20220902104007203"></p>
+<p>那么我们如何设计网络电缆布线，将各个单位连通起来，并且费用最少呢？</p>
+<p>对于 n 个顶点的连通图，只需 n−1 条边就可以使这个图连通，n−1 条边要想保证图连通，就必须不含回路，所以我们只需要找出 n−1 条<strong>权值最小且无回路的边</strong>即可。</p>
+<h4 id="算法设计：-5"><a href="#算法设计：-5" class="headerlink" title="算法设计："></a>算法设计：</h4><p>如果在一个图中深度搜索或广度搜索有没有回路，是一件繁重的工作。有一个很好的办法—<strong>避圈法</strong>。</p>
+<p>在生成树的过程中，我们把已经在生成树中的结点看作一个集合，把剩下的结点看作另一个集合，从连接两个集合的边中选择一条权值最小的边即可。</p>
+<p>首先任选一个结点，例如 1 号结点，把它放在集合 U 中，U&#x3D;{1}，那么剩下的结点即V−U&#x3D;{2，3，4，5，6，7}，V 是图的所有顶点集合。如图 2-60 所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902104202251.png" alt="image-20220902104202251"></p>
+<p>现在只需在连接两个集合（V 和 V−U）的边中看哪一条边权值最小，把权值最小的边关联的结点加入到集合 U。从图 2-60 可以看出，连接两个集合的 3 条边中，结点 1 到结点 2的边权值最小，选中此条边，把 2 号结点加入 U 集合 U&#x3D;{1，2}，V−U&#x3D;{3，4，5，6，7}。</p>
+<p>再从连接两个集合（V 和 V−U）的边中选择一条权值最小的边。从图 2-61 可以看出，连接两个集合的 4 条边中，结点 2 到结点 7 的边权值最小，选中此条边，把 7 号结点加入 U集合 U&#x3D;{1，2，7}，V−U&#x3D;{3，4，5，6}。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902104251672.png" alt="image-20220902104251672"></p>
+<p>如此下去，直到 U&#x3D;V 结束，选中的边和所有的结点组成的图就是最小生成树。这就是Prim算法。</p>
+<ul>
+<li><p>确定合适的数据结构。设置带权邻接矩阵 C 存储图 G，如果图 G 中存在边（u，x），令 C[u][x]等于边（u，x）上的权值，否则，C[u][x]&#x3D;∞ ；bool 数组 s[]，如果 s[i]&#x3D;true，说明顶点 i 已加入集合 U。可以通过设置两个数组来找到集合中最短的边，closest[j]表示 V−U 中的顶点 j 到集合 U 中的最邻近点，lowcost[j]表示 V−U中的顶点 j 到集合 U 中的最邻近点的边值，即边（j,closest[j]）的权值。</p>
+<p>例如，在图 2-62 中，7 号结点到 U 集合中的最邻近点是 2，closest[7]&#x3D;2，如图 2-63 所示。7 号结点到最邻近点 2 的边值为 1，即边（2，7）的权值，记为 lowcost[7]&#x3D;1，如图 2-64所示。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/01/suan-fa-ru-men-tan-xin-suan-fa/image-20220902104743734.png" alt="image-20220902104743734"></p>
+<p>只需要在 V−U 集合中找 lowcost[]值最小的顶点即可。</p>
+</li>
+<li><p>初始化。令集合 U&#x3D;{u0 }，u0∈V，并初始化数组 closest[]、lowcost[]和 s[]。</p>
+</li>
+<li><p>在 V−U 集合中找 lowcost 值最小的顶点 t，即 lowcost[t]&#x3D;min{lowcost[j]|j∈V−U}，满足该公式的顶点 t 就是集合 V−U 中连接集合 U 的最邻近点。</p>
+</li>
+<li><p>将顶点 t 加入集合 U。</p>
+</li>
+<li><p>如果集合 V−U，算法结束，否则，转步骤 6。</p>
+</li>
+<li><p>对集合 V−U 中的所有顶点 j，更新其 lowcost[]和 closest[]。更新公式：if（C[t][j]&lt;lowcost [j] ) { lowcost [j]&#x3D; C [t] [j]; closest [j] &#x3D; t; }，转步骤 3。</p>
+</li>
+</ul>
+<h4 id="运行代码：-5"><a href="#运行代码：-5" class="headerlink" title="运行代码："></a>运行代码：</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 2-6</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> INF <span class="token operator">=</span> <span class="token number">0x3fffffff</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+<span class="token keyword">bool</span> s<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> closest<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> lowcost<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">Prim</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> u0<span class="token punctuation">,</span> <span class="token keyword">int</span> c<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>    <span class="token comment">//顶点个数n、开始顶点u0、带权邻接矩阵C[n][n]</span>
+    <span class="token comment">//如果s[i]=true,说明顶点i已加入最小生成树</span>
+    <span class="token comment">//的顶点集合U；否则顶点i属于集合V-U</span>
+    <span class="token comment">//将最后的相关的最小权值传递到数组lowcost</span>
+    s<span class="token punctuation">[</span>u0<span class="token punctuation">]</span><span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">//初始时，集合中U只有一个元素，即顶点u0</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> j<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">!=</span>u0<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            lowcost<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>c<span class="token punctuation">[</span>u0<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            closest<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>u0<span class="token punctuation">;</span>
+            s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+            lowcost<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token comment">//在集合中V-u中寻找距离集合U最近的顶点t</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> temp<span class="token operator">=</span>INF<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> t<span class="token operator">=</span>u0<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>j<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span><span class="token punctuation">(</span>lowcost<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">&lt;</span>temp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                t<span class="token operator">=</span>j<span class="token punctuation">;</span>
+                temp<span class="token operator">=</span>lowcost<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>t<span class="token operator">==</span>u0<span class="token punctuation">)</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>       <span class="token comment">//找不到t，跳出循环</span>
+
+        s<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span>     <span class="token comment">//否则，讲t加入集合U</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token comment">//更新lowcost和closest</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span><span class="token punctuation">(</span>c<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">&lt;</span>lowcost<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                lowcost<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span>c<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                closest<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span>t<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+
+        <span class="token keyword">int</span> n<span class="token punctuation">,</span> c<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> m<span class="token punctuation">,</span> u<span class="token punctuation">,</span> v<span class="token punctuation">,</span> w<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> u0<span class="token punctuation">;</span>
+        cout<span class="token operator">&lt;&lt;</span><span class="token string">"输入结点数n和边数m:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        cin<span class="token operator">>></span>n<span class="token operator">>></span>m<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> sumcost<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+                c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span>INF<span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span><span class="token string">"输入结点数u,v和边值w:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span>m<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            cin<span class="token operator">>></span>u<span class="token operator">>></span>v<span class="token operator">>></span>w<span class="token punctuation">;</span>
+            c<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>c<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token operator">=</span>w<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        cout <span class="token operator">&lt;&lt;</span><span class="token string">"输入任一结点u0:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        cin <span class="token operator">>></span> u0 <span class="token punctuation">;</span>
+        <span class="token comment">//计算最后的lowcos的总和，即为最后要求的最小的费用之和</span>
+        <span class="token function">Prim</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> u0<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span><span class="token string">"数组lowcost的内容为"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            cout <span class="token operator">&lt;&lt;</span> lowcost<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+           sumcost <span class="token operator">+=</span> lowcost<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"最小的花费是："</span><span class="token operator">&lt;&lt;</span>sumcost<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//输入</span>
+<span class="token comment">/*
+输入结点数 n 和边数 m：
+7 12
+输入结点数 u，v 和边值 w：
+1 2 23
+1 6 28
+1 7 36
+2 3 20
+2 7 1
+3 4 15
+3 7 4
+4 5 3
+4 7 9
+5 6 17
+5 7 16
+6 7 25
+输入任一结点 u0：
+1
+*/</span>
+<span class="token comment">//输出</span>
+<span class="token comment">/*
+数组 lowcost 的内容为：
+0 23 4 9 3 17 1
+最小的花费是：57
+*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="算法解析：-5"><a href="#算法解析：-5" class="headerlink" title="算法解析："></a>算法解析：</h4><ol>
+<li><p>算法复杂度分析：</p>
+<ul>
+<li>时间复杂度：在 Prim（int n，int u0，int c[N][N]）算法中，一共有 4 个 for 语句，第①个 for 语句的执行次数为 n，第②个 for 语句里面嵌套了两个 for 语句③、④，它们的执行次数均为 n，对算法的运行时间贡献最大。当外层循环标号为 1 时，③、④语句在内层循环的控制下均执行 n 次，外层循环②从 1～n。因此，该语句的执行次数为 n*n&#x3D;n²，算法的时间复杂度为 <strong>O(n²)</strong></li>
+<li>空间复杂度：算法所需要的辅助空间包含 i、j、lowcost 和 closest，则算法的空间复杂度是 <strong>O(n)</strong></li>
+</ul>
+</li>
+<li><p>优化拓展：</p>
+<ol>
+<li>for 语句③找 lowcost 最小值时使用优先队列，每次出队一个最小值，时间复杂度为logn，执行 n 次，总时间复杂度为 <strong>O( n logn)</strong></li>
+<li>for 语句④更新 lowcost 和 closest 数据时，如果图采用邻接表存储，每次只检查t的邻接边，不用从 1～n 检查，检查更新的次数为 E（边数），每次更新数据入队，入队的时间复杂度为 logn，这样更新的时间复杂度为 <strong>O( Elogn)</strong></li>
+</ol>
+</li>
+</ol>
+<h3 id="Kurskal算法："><a href="#Kurskal算法：" class="headerlink" title="Kurskal算法："></a>Kurskal算法：</h3><h4 id="算法设计：-6"><a href="#算法设计：-6" class="headerlink" title="算法设计："></a>算法设计：</h4><p>构造最小生成树还有一种算法，Kurskal 算法：设 G&#x3D;（V，E）是无向连通带权图，V&#x3D;{1，2，…，n}；设最小生成树 T&#x3D;（V，TE），该树的初始状态为只有 n 个顶点而无边的非连通图T&#x3D;（V，{}），Kruskal 算法将这 n 个顶点看成是 n 个孤立的连通分支。它首先将所有的边按权值从小到大排序，然后只要 T 中选中的边数不到 n−1，就做如下的贪心选择：在边集 E 中选取权值最小的边（i，j），如果将边（i，j）加入集合 TE 中不产生回路（圈），则将边（i，j）加入边集 TE 中，即用边（i，j）将这两个连通分支合并连接成一个连通分支；否则继续选择下一条最短边。把边（i，j）从集合 E 中删去。继续上面的贪心选择，直到 T 中所有顶点都在同一个连通分支上为止。此时，选取到的 n−1 条边恰好构成 G 的一棵最小生成树 T。</p>
+<p>怎样判断加入某条边后图 T 会不会出现回路呢？</p>
+<p>Kruskal 算法用了一个非常聪明的方法，就是运用<strong>集合避圈</strong>：<strong>如果所选择加入的边的起点和终点都在 T 的集合中，那么就可以断定一定会形成回路（圈）。</strong></p>
+<h4 id="运行代码：-6"><a href="#运行代码：-6" class="headerlink" title="运行代码："></a>运行代码：</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 2-7</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> nodeset<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Edge</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> u<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> v<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> w<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>e<span class="token punctuation">[</span>N<span class="token operator">*</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">bool</span> <span class="token function">comp</span><span class="token punctuation">(</span>Edge x<span class="token punctuation">,</span> Edge y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">.</span>w <span class="token operator">&lt;</span> y<span class="token punctuation">.</span>w<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        nodeset<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">Merge</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> p <span class="token operator">=</span> nodeset<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> q <span class="token operator">=</span> nodeset<span class="token punctuation">[</span>b<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">==</span>q<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+   <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token comment">//检查所有结点，把集合号是 q 的改为 p</span>
+	<span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>nodeset<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>q<span class="token punctuation">)</span>
+        	nodeset<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">;</span><span class="token comment">//a 的集合号赋值给 b 集合号</span>
+	<span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">Kruskal</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">Merge</span><span class="token punctuation">(</span>e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>u<span class="token punctuation">,</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            ans <span class="token operator">+=</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>w<span class="token punctuation">;</span>
+            n<span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span><span class="token string">"输入结点数n和边数m:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        cin <span class="token operator">>></span> n <span class="token operator">>></span> m<span class="token punctuation">;</span>
+        <span class="token function">Init</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span><span class="token string">"输入结点数u,v和边值w:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>m<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+            cin<span class="token operator">>></span>e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>u<span class="token operator">>></span>e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token operator">>></span>e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>w<span class="token punctuation">;</span>
+        <span class="token function">sort</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> e<span class="token operator">+</span>m<span class="token punctuation">,</span> comp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token function">Kruskal</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"最小的花费是："</span> <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="算法解析：-6"><a href="#算法解析：-6" class="headerlink" title="算法解析："></a>算法解析：</h4><ol>
+<li><p>算法复杂度分析：</p>
+<ul>
+<li>时间复杂度：算法中，需要对边进行排序，若使用快速排序，执行次数为 e<em>loge，算法的时间复杂度为 O(e</em>loge)。而合并集合需要 n−1 次合并，每次为 O(n)，合并集合的时间复杂度为 <strong>O(n^2)</strong></li>
+<li>空间复杂度：算法所需要的辅助空间包含集合号数组 nodeset[n]，则算法的空间复杂度是 <strong>O(n)</strong></li>
+</ul>
+</li>
+<li><p>优化拓展：</p>
+<ol>
+<li><p>该算法合并集合的时间复杂度为 O(n2 )，我们可以用并查集的思想优化，使合并集合的时间复杂度降为 *<em>O(e</em>logn)**，优化后的程序如下:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 2-7-1</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> father<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Edge</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> u<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> v<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> w<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>e<span class="token punctuation">[</span>N<span class="token operator">*</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">bool</span> <span class="token function">comp</span><span class="token punctuation">(</span>Edge x<span class="token punctuation">,</span> Edge y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">.</span>w <span class="token operator">&lt;</span> y<span class="token punctuation">.</span>w<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        father<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">Find</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">!=</span> father<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        father<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">Find</span><span class="token punctuation">(</span>father<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> father<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">Merge</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token function">Find</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> q <span class="token operator">=</span> <span class="token function">Find</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">==</span>q<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p <span class="token operator">></span> q<span class="token punctuation">)</span>
+        father<span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">=</span> q<span class="token punctuation">;</span><span class="token comment">//小的赋值给大的集合号</span>
+    <span class="token keyword">else</span>
+        father<span class="token punctuation">[</span>q<span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">Kruskal</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">Merge</span><span class="token punctuation">(</span>e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>u<span class="token punctuation">,</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            ans <span class="token operator">+=</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>w<span class="token punctuation">;</span>
+            n<span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span><span class="token string">"输入结点数n和边数m:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        cin <span class="token operator">>></span> n <span class="token operator">>></span> m<span class="token punctuation">;</span>
+        <span class="token function">Init</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span><span class="token string">"输入结点数u,v和边值w:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>m<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+            cin<span class="token operator">>></span>e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>u<span class="token operator">>></span>e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token operator">>></span>e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>w<span class="token punctuation">;</span>
+        <span class="token function">sort</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> e<span class="token operator">+</span>m<span class="token punctuation">,</span> comp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token function">Kruskal</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"最小的花费是："</span> <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//输入</span>
+<span class="token comment">/*
+输入结点数 n 和边数 m：
+7 12
+输入结点数 u，v 和边值 w：
+1 2 23
+1 6 28
+1 7 36
+2 3 20
+2 7 1
+3 4 15
+3 7 4
+4 5 3
+4 7 9
+5 6 17
+5 7 16
+6 7 25
+*/</span>
+<span class="token comment">//输出</span>
+<span class="token comment">//最小的花费:57</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+</li>
+</ol>
+<p><strong>本文摘录于《趣学算法》一书，欲学习其他算法请购买正版书籍！</strong></p>
 
                 
             </div>
