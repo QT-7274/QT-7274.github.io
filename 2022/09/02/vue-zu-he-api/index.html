@@ -470,14 +470,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    12 分
                 </div>
                 
 
@@ -509,7 +509,7 @@
 </blockquote>
 <h2 id="为什么要使用Composition-API？"><a href="#为什么要使用Composition-API？" class="headerlink" title="为什么要使用Composition API？"></a>为什么要使用Composition API？</h2><p>在使用<code>Options API</code>时，我们必须反复在不同的配置项中跳跃进行代码阅读。</p>
 <p>而使用<code>Composition API</code>后，我们可以将组件的所有代码写在一个<code>setup()</code>函数中，在其中我们可以自由地调整代码位置，让同一功能的代码放在一起。同时我们也可以抽离其中的函数放置在单独的文件中，让组件直接使用抽离出的函数，让组件代码更加简洁。</p>
-<h2 id="Composition-API的入口——setup-函数："><a href="#Composition-API的入口——setup-函数：" class="headerlink" title="Composition API的入口——setup()函数："></a>Composition API的入口——setup()函数：</h2><blockquote>
+<h2 id="Composition-API的入口——setup-函数："><a href="#Composition-API的入口——setup-函数：" class="headerlink" title="Composition API的入口——setup()函数："></a>Composition API的入口——<code>setup()</code>函数：</h2><blockquote>
 <p>注意：<code>setup()</code>函数只是提供了响应式组件的<strong>替代</strong>方式，例如<code>data()</code>，<code>computed()</code>，<code>methods()</code>等。像静态的components，props，emits等组件配置项，还是使用原来的方式，不过之后还是会有替代的方式。</p>
 </blockquote>
 <p>示例：</p>
@@ -648,6 +648,265 @@
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h4 id="computed-函数："><a href="#computed-函数：" class="headerlink" title="computed()函数："></a><code>computed()</code>函数：</h4><p>示例：</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!-- v-model 可以直接绑定 ref，与 data 配置项等效 --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>搜索消息<span class="token punctuation">"</span></span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>searchTerm<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>msg in searchedMessages<span class="token punctuation">"</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>msg.id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&#123;&#123; msg.content &#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> ref<span class="token punctuation">,</span> computed <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> messages <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒1"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒2"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒3"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒4"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> searchTerm <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> searchedMessages <span class="token operator">=</span> <span class="token function">computed</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>searchTerm<span class="token punctuation">.</span>value <span class="token operator">===</span> <span class="token string">""</span><span class="token punctuation">)</span> <span class="token keyword">return</span> messages<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+      <span class="token keyword">return</span> messages<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">msg</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> msg<span class="token punctuation">.</span>content<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>searchTerm<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>searchedMessages<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span> searchTerm<span class="token punctuation">,</span> searchedMessages <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="watch-函数："><a href="#watch-函数：" class="headerlink" title="watch()函数："></a><code>watch()</code>函数：</h4><h5 id="监听响应式数据的变化："><a href="#监听响应式数据的变化：" class="headerlink" title="监听响应式数据的变化："></a>监听响应式数据的变化：</h5><ol>
+<li><p>直接监听响应式数据：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">watch</span><span class="token punctuation">(</span>searchTerm<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>messages<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"搜索词："</span><span class="token punctuation">,</span> newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>监听解剖后的响应式数据：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 直接监听 searchTerm 不可以</span>
+    <span class="token function">watch</span><span class="token punctuation">(</span>searchTerm<span class="token punctuation">.</span>value<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"搜索词："</span><span class="token punctuation">,</span> newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 需要使用一个函数</span>
+    <span class="token function">watch</span><span class="token punctuation">(</span>
+      <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> searchTerm<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+      <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"搜索词："</span><span class="token punctuation">,</span> newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h5 id="监听对象中基本类型的响应式属性："><a href="#监听对象中基本类型的响应式属性：" class="headerlink" title="监听对象中基本类型的响应式属性："></a>监听对象中基本类型的响应式属性：</h5><p>示例：</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>&#123;&#123; options.title &#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+      用户：&#123;&#123; options.user.name &#125;&#125;，活跃：&#123;&#123;
+        options.user.active ? "是" : "否"
+      &#125;&#125;
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>msg in messages<span class="token punctuation">"</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>msg.id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&#123;&#123; msg.content &#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>options.title = <span class="token punctuation">'</span>这是标题<span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>修改标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>options.user.name = <span class="token punctuation">'</span>李四<span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>修改用户<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> ref<span class="token punctuation">,</span> reactive<span class="token punctuation">,</span> computed<span class="token punctuation">,</span> watch <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> messages <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒1"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒2"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒3"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒4"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token comment">// const options = reactive(&#123;</span>
+      <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"消息列表"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">user</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"张三"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">active</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 监听浅层 Object 属性</span>
+    <span class="token function">watch</span><span class="token punctuation">(</span>
+      <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+      <span class="token comment">// () => options.title, // reactive</span>
+      <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 监听深层 Object 属性</span>
+    <span class="token function">watch</span><span class="token punctuation">(</span>
+      <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>user<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+      <span class="token comment">// () => options.user.name, // reactive</span>
+      <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span> messages<span class="token punctuation">,</span> options <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="监听对象类型的响应式属性："><a href="#监听对象类型的响应式属性：" class="headerlink" title="监听对象类型的响应式属性："></a>监听对象类型的响应式属性：</h5><blockquote>
+<p>注意：直接监听value属性，<code>watch()</code>函数不会监听到变化。因为在监听整个对象的时候，<code>watch()</code>比较的是<strong>对象的引用</strong>，每次修改对象的属性都不会创建新的对象，而是在原对象中进行修改，所以<code>watch()</code>函数监听不到。</p>
+</blockquote>
+<ol>
+<li><p>配置<code>deep: true</code>：</p>
+<blockquote>
+<p>缺点：不能访问修改前的值</p>
+</blockquote>
+<p>示例：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// with deep true，可以比对对象的属性</span>
+    <span class="token function">watch</span><span class="token punctuation">(</span>
+      <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> options<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+      <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">,</span> newVal <span class="token operator">===</span> oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 相同的引用</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">deep</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>使用扩展运算符<code>...</code>：</p>
+<p>示例：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"> <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> messages <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒1"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒2"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒3"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒4"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token comment">// const options = reactive(&#123;</span>
+      <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"消息列表"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">user</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"张三"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">active</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">watch</span><span class="token punctuation">(</span>
+      <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token operator">...</span>options<span class="token punctuation">.</span>value <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">,</span> newVal <span class="token operator">===</span> oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 相同的引用</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">deep</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span> messages<span class="token punctuation">,</span> options <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>只使用扩展运算符，并不会监听到子对象的值，如<code>user.name</code>。即使设置了<code>deep: true</code>，监听到的对象也是相同的引用。</p>
+<blockquote>
+<p>因为<code>...</code>语法创建的对象是<strong>浅拷贝</strong>，只会复制顶层的属性，子对象会原封不动的把引用传给新的对象。</p>
+</blockquote>
+<p>可使用JSON相关的方法进行深拷贝：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 对象转为字符串再转为对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h5 id="同时监听多个响应性数据："><a href="#同时监听多个响应性数据：" class="headerlink" title="同时监听多个响应性数据："></a>同时监听多个响应性数据：</h5><p><code>watch()</code>函数支持使用数组进行监听：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 同时监听多个响应性数据</span>
+   <span class="token function">watch</span><span class="token punctuation">(</span>
+     <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>title<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>user<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token punctuation">,</span>
+     <span class="token punctuation">(</span><span class="token parameter">newVals<span class="token punctuation">,</span> oldVals</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+       console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newVals<span class="token punctuation">,</span> oldVals<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 其中的数据也是数组形式</span>
+     <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="watchEffect-函数："><a href="#watchEffect-函数：" class="headerlink" title="watchEffect()函数："></a><code>watchEffect()</code>函数：</h4><p><code>watchEffect()</code>和 <code>watch()</code>的作用基本一样，用于监听响应式数据的变化，并根据变化做一些业务逻辑，例如请求远程服务数据。</p>
+<p>区别：</p>
+<ol>
+<li><code>watchEffect()</code>函数不用明确指定标签中的响应式数据，而是会根据回调函数中的代码<strong>自动</strong>判断。如果代码中用到了响应式数据，无论多少个，<strong>只要其中的一个发生了变化，<code>watchEffect()</code>函数就会重新执行一次。</strong></li>
+<li><code>watchEffect()</code>函数无论数据是否发生了变化，<strong>都会先执行一次回调函数</strong>。</li>
+<li><code>watchEffect()</code><strong>不能访问修改前的值，回调函数中的响应式的值都是修改后的</strong>。</li>
+</ol>
+<p>示例：</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>&#123;&#123; options.title &#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+      用户：&#123;&#123; options.user.name &#125;&#125;，活跃：&#123;&#123;
+        options.user.active ? "是" : "否"
+      &#125;&#125;
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>msg in messages<span class="token punctuation">"</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>msg.id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&#123;&#123; msg.content &#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>options.title = <span class="token punctuation">'</span>这是标题<span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>修改标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>options.user.name = <span class="token punctuation">'</span>李四<span class="token punctuation">'</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>修改用户<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> ref<span class="token punctuation">,</span> watchEffect <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> messages <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒1"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒2"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒3"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">"这是一条消息提醒4"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token comment">// const options = reactive(&#123;</span>
+      <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"消息列表"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">user</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"张三"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">active</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">watchEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>user<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span> messages<span class="token punctuation">,</span> options <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="watch-amp-watchEffect-清理收尾工作："><a href="#watch-amp-watchEffect-清理收尾工作：" class="headerlink" title="watch()&amp;watchEffect() 清理收尾工作："></a><code>watch()</code>&amp;<code>watchEffect()</code> 清理收尾工作：</h4><h5 id="watchEffect-函数：-1"><a href="#watchEffect-函数：-1" class="headerlink" title="watchEffect()函数："></a><code>watchEffect()</code>函数：</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">watchEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">onInvalidate</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>user<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token function">onInvalidate</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"做一些清理操作..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="watch-函数：-1"><a href="#watch-函数：-1" class="headerlink" title="watch()函数："></a><code>watch()</code>函数：</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">watch</span><span class="token punctuation">(</span>
+     <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> options<span class="token punctuation">.</span>value<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+     <span class="token punctuation">(</span><span class="token parameter">newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">,</span> onInvalidate</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+       console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newVal<span class="token punctuation">,</span> oldVal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">onInvalidate</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"做一些清理操作..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：<code>onInvalidate()</code>函数会在<strong>下次</strong>监听代码执行前执行</p>
+</blockquote>
 
                 
             </div>
@@ -1320,7 +1579,7 @@
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
             collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
+            headingSelector: 'h2, h3, h4, h5'
         });
 
         // Set scroll toc fixed.
