@@ -450,21 +450,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-06
+                    2022-09-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.3k
+                    6.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    17 分
+                    24 分
                 </div>
                 
 
@@ -855,6 +855,183 @@
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="双向链表："><a href="#双向链表：" class="headerlink" title="双向链表："></a>双向链表：</h3><p>单链表只能向后操作，不可以向前操作。为了向前、向后操作方便，可以给每个元素附加两个指针域，一个存储前一个元素的地址，另一个存储下一个元素的地址。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909215632955.png" alt="image-20220909215632955"></p>
+<h4 id="初始化：-2"><a href="#初始化：-2" class="headerlink" title="初始化："></a>初始化：</h4><ol>
+<li>创建头节点，不存储数据。</li>
+<li>令头节点前后两个指针域均为空。</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">DuLNode</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> data<span class="token punctuation">;</span> <span class="token comment">//结点的数据域</span>
+	<span class="token keyword">struct</span> <span class="token class-name">DuLNode</span> <span class="token operator">*</span>prior<span class="token punctuation">,</span><span class="token operator">*</span>next<span class="token punctuation">;</span> <span class="token comment">//结点的指针域</span>
+<span class="token punctuation">&#125;</span>DuLNode<span class="token punctuation">,</span><span class="token operator">*</span>DuLinkList<span class="token punctuation">;</span> <span class="token comment">//LinkList为指向结构体LNode的指针类型</span>
+
+<span class="token keyword">bool</span> <span class="token function">InitDuList_L</span><span class="token punctuation">(</span>DuLinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token comment">//构造一个空的双向链表L</span>
+<span class="token punctuation">&#123;</span>
+    L<span class="token operator">=</span><span class="token keyword">new</span> DuLNode<span class="token punctuation">;</span>     <span class="token comment">//生成新结点作为头结点，用头指针L指向头结点</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>L<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>     <span class="token comment">//生成结点失败</span>
+	L<span class="token operator">-></span>prior<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>   <span class="token comment">//头结点的两个指针域置空</span>
+	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="创建：-2"><a href="#创建：-2" class="headerlink" title="创建："></a>创建：</h4><h5 id="头插法：-1"><a href="#头插法：-1" class="headerlink" title="头插法："></a>头插法：</h5><ol>
+<li><p>将新节点插入到头节点的后面：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909220959282.png" alt="image-20220909220959282"></p>
+</li>
+<li><p>创建新节点并继续插入到头节点的后面：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909221129893.png" alt="image-20220909221129893"></p>
+<ol>
+<li><p>s-&gt;next&#x3D;L-&gt;next：将 L 节点后面的节点（后继）地址赋值给 s 节点的指针域，即 s 节点的 next 指针指向 L 的后继节点。</p>
+</li>
+<li><p>L-&gt;next-&gt;prior&#x3D;s：将 s 节点的地址赋值给 L 的后继节点的 prior 指针域，即 L 的后继节点的 prior 指针指向 s 节点。<br><strong>注意这一步要先判断L-next是否为null。</strong></p>
+</li>
+<li><p>s-&gt;prior&#x3D;L：将 L 节点的地址赋值给 s 节点的 prior 指针域，即 s 节点的 prior 指针指向 L 节点。</p>
+</li>
+<li><p>L-&gt;next&#x3D;s：将 s 节点的地址赋值给 L 节点的指针域，即 L 节点的 next 指针指向 s 节点。</p>
+<blockquote>
+<p><strong>实际上，只需要将④语句放在最后修改即可，①②③语句顺序无要求。</strong></p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">CreateDuList_H</span><span class="token punctuation">(</span>DuLinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token comment">//前插法创建双向链表</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token comment">//输入n个元素的值，建立到头结点的单链表L</span>
+	<span class="token keyword">int</span> n<span class="token punctuation">;</span>
+	DuLinkList s<span class="token punctuation">;</span> <span class="token comment">//定义一个指针变量</span>
+	L<span class="token operator">=</span><span class="token keyword">new</span> DuLNode<span class="token punctuation">;</span>
+	L<span class="token operator">-></span>prior<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span> <span class="token comment">//先建立一个带头结点的空链表</span>
+	cout<span class="token operator">&lt;&lt;</span><span class="token string">"请输入元素个数n："</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+	cin<span class="token operator">>></span>n<span class="token punctuation">;</span>
+	cout<span class="token operator">&lt;&lt;</span><span class="token string">"请依次输入n个元素："</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+	cout<span class="token operator">&lt;&lt;</span><span class="token string">"前插法创建单链表..."</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>n<span class="token operator">--</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+		s<span class="token operator">=</span><span class="token keyword">new</span> DuLNode<span class="token punctuation">;</span> <span class="token comment">//生成新结点s</span>
+		cin<span class="token operator">>></span>s<span class="token operator">-></span>data<span class="token punctuation">;</span> <span class="token comment">//输入元素值赋给新结点的数据域</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>L<span class="token operator">-></span>next<span class="token punctuation">)</span>
+            L<span class="token operator">-></span>next<span class="token operator">-></span>prior<span class="token operator">=</span>s<span class="token punctuation">;</span>
+        s<span class="token operator">-></span>next<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        s<span class="token operator">-></span>prior<span class="token operator">=</span>L<span class="token punctuation">;</span>
+        L<span class="token operator">-></span>next<span class="token operator">=</span>s<span class="token punctuation">;</span> <span class="token comment">//将新结点s插入到头结点之后</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="尾插法：-1"><a href="#尾插法：-1" class="headerlink" title="尾插法："></a>尾插法：</h5><p>尾插法建双向链表和尾插法建单链表类似，需要有一个尾指针，不再赘述。</p>
+<h4 id="取值：-2"><a href="#取值：-2" class="headerlink" title="取值："></a>取值：</h4><p>双向链表的取值、查找和单链表的一样，此处不再赘述。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">GetElem_L</span><span class="token punctuation">(</span>DuLinkList L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>e<span class="token punctuation">)</span><span class="token comment">//双向链表的取值</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token comment">//在带头结点的双向链表L中查找第i个元素</span>
+	<span class="token comment">//用e记录L中第i个数据元素的值</span>
+	<span class="token keyword">int</span> j<span class="token punctuation">;</span>
+	DuLinkList p<span class="token punctuation">;</span>
+	p<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment">//p指向第一个结点，</span>
+	j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">//j为计数器</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>j<span class="token operator">&lt;</span>i<span class="token operator">&amp;&amp;</span>p<span class="token punctuation">)</span> <span class="token comment">//顺链域向后扫描，直到p指向第i个元素或p为空</span>
+    <span class="token punctuation">&#123;</span>
+		p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//p指向下一个结点</span>
+		j<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">//计数器j相应加1</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token operator">||</span>j<span class="token operator">></span>i<span class="token punctuation">)</span>
+		<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">//i值不合法i＞n或i&lt;=0</span>
+	e<span class="token operator">=</span>p<span class="token operator">-></span>data<span class="token punctuation">;</span> <span class="token comment">//取第i个结点的数据域</span>
+	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="查找：-2"><a href="#查找：-2" class="headerlink" title="查找："></a>查找：</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">LocateElem_L</span><span class="token punctuation">(</span>DuLinkList L<span class="token punctuation">,</span><span class="token keyword">int</span> e<span class="token punctuation">)</span> <span class="token comment">//按值查找</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token comment">//在带头结点的双向链表L中查找值为e的元素</span>
+	DuLinkList p<span class="token punctuation">;</span>
+	p<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">&amp;&amp;</span>p<span class="token operator">-></span>data<span class="token operator">!=</span>e<span class="token punctuation">)</span><span class="token comment">//顺链域向后扫描，直到p为空或p所指结点的数据域等于e</span>
+		p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//p指向下一个结点</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">//查找失败p为NULL</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="插入：-2"><a href="#插入：-2" class="headerlink" title="插入："></a>插入：</h4><p>双向链表因为有两个指针，可以向前后两个方向操作，<strong>直接找到第 i 个节点，就可以把新节点插入第 i 个节点之前。</strong></p>
+<blockquote>
+<p>注意：这里假设第 i 个节点是存在的，如果第 i 个节点不存在，而第 i−1 个节点存在，还是需要找到第 i−1 个节点，将新节点插入第 i−1 个节点之后，</p>
+</blockquote>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909223237857.png" alt="image-20220909223237857"></p>
+<ol>
+<li>p-&gt;prior-&gt;next&#x3D;s：s 节点的地址赋值给 p 的前驱节点的 next 指针域，即 p 的前驱的next 指针指向 s。</li>
+<li>s-&gt;prior&#x3D;p-&gt;prior：p 的前驱的地址赋值给 s 节点的 prior 指针域，即 s 节点的 prior 指针指向 p 的前驱。</li>
+<li>s-&gt;next&#x3D;p：p 节点的地址赋值给 s 节点的 next 指针域，即 s 节点的 next 指针指向 p 节点。</li>
+<li>p-&gt;prior&#x3D;s：s 节点的地址赋值给 p 节点的 prior 指针域，即 p 节点的 prior 指针指向 s 节点。</li>
+</ol>
+<p>因为 p 的前驱无标记，<strong>一旦修改了 p 节点的 prior 指针，p 的前驱就找不到了</strong>，因此，最后修改这个指针。只需要将④语句放在最后修改即可，①②③语句顺序无要求。</p>
+<blockquote>
+<p><strong>原则：先修改没有指针标记的那一端。</strong></p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">ListInsert_L</span><span class="token punctuation">(</span>DuLinkList <span class="token operator">&amp;</span>L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>e<span class="token punctuation">)</span><span class="token comment">//双向链表的插入</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token comment">//在带头结点的单链表L中第i个位置之前插入值为e的新结点</span>
+	<span class="token keyword">int</span> j<span class="token punctuation">;</span>
+	DuLinkList p<span class="token punctuation">,</span> s<span class="token punctuation">;</span>
+	p<span class="token operator">=</span>L<span class="token punctuation">;</span>
+	j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>i<span class="token punctuation">)</span> <span class="token comment">//查找第i个结点，p指向该结点</span>
+    <span class="token punctuation">&#123;</span>
+		p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+		j<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token operator">||</span>j<span class="token operator">></span>i<span class="token punctuation">)</span><span class="token comment">//i＞n+1或者i＜1</span>
+		<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+	s<span class="token operator">=</span><span class="token keyword">new</span> DuLNode<span class="token punctuation">;</span>     <span class="token comment">//生成新结点</span>
+	s<span class="token operator">-></span>data<span class="token operator">=</span>e<span class="token punctuation">;</span>       <span class="token comment">//将新结点的数据域置为e</span>
+	p<span class="token operator">-></span>prior<span class="token operator">-></span>next<span class="token operator">=</span>s<span class="token punctuation">;</span>
+	s<span class="token operator">-></span>prior<span class="token operator">=</span>p<span class="token operator">-></span>prior<span class="token punctuation">;</span>
+	s<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span>
+	p<span class="token operator">-></span>prior<span class="token operator">=</span>s<span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="删除：-2"><a href="#删除：-2" class="headerlink" title="删除："></a>删除：</h4><p>双向链表只要直接找到第 i 个节点，然后修改指针即可：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909224117840.png" alt="image-20220909224117840"></p>
+<ol>
+<li><p>p-&gt;prior-&gt;next&#x3D;p-&gt;next：将 p 的后继节点的地址赋值给 p 的前驱节点的 next 指针域。即 p 的前驱节点的 next 指针指向 p 的后继节点。</p>
+</li>
+<li><p>p-&gt;next-&gt;prior &#x3D;p-&gt;prior：将 p 的前驱节点的地址赋值给 p 的后继节点的 prior 指针域，即 p 的后继节点的 prior 指针指向 p 的前驱节点。此项修改的前提是 p 的后继节点存在，如果不存在，则不需要此项修改。</p>
+<blockquote>
+<p>删除节点修改指针没有顺序，先修改哪个都可以。</p>
+</blockquote>
+</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">ListDelete_L</span><span class="token punctuation">(</span>DuLinkList <span class="token operator">&amp;</span>L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token comment">//双向链表的删除</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token comment">//在带头结点的双向链表L中，删除第i个位置</span>
+	DuLinkList p<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> j<span class="token punctuation">;</span>
+	p<span class="token operator">=</span>L<span class="token punctuation">;</span>
+	j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">&amp;&amp;</span><span class="token punctuation">(</span>j<span class="token operator">&lt;</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//查找第i个结点，p指向该结点</span>
+	<span class="token punctuation">&#123;</span>
+		p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+		j<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token operator">||</span><span class="token punctuation">(</span>j<span class="token operator">></span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//当i>n或i&lt;1时，删除位置不合理</span>
+		<span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token punctuation">)</span> <span class="token comment">//如果p的直接后继结点存在</span>
+        p<span class="token operator">-></span>next<span class="token operator">-></span>prior<span class="token operator">=</span>p<span class="token operator">-></span>prior<span class="token punctuation">;</span>
+	p<span class="token operator">-></span>prior<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+	<span class="token keyword">delete</span> p<span class="token punctuation">;</span>        <span class="token comment">//释放被删除结点的空间</span>
+	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="循环链表："><a href="#循环链表：" class="headerlink" title="循环链表："></a>循环链表：</h3><p>如果从当前节点开始，无法访问该节点前面的节点，而最后一个节点的指针指向头节点，形成一个环，就可以从任何一个节点出发，访问所有的节点，这就是循环链表。</p>
+<blockquote>
+<p>循环链表和普通链表的区别就是最后一个节点的后继指向了头节点，还要让头节点的前驱指向最后一个节点。</p>
+</blockquote>
+<h3 id="顺序表的优点和缺点：-1"><a href="#顺序表的优点和缺点：-1" class="headerlink" title="顺序表的优点和缺点："></a>顺序表的优点和缺点：</h3><h4 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h4><p>链表是动态存储，不需要预先分配最大空间；<strong>插入删除不需要移动元素</strong>。</p>
+<h4 id="缺点：-1"><a href="#缺点：-1" class="headerlink" title="缺点："></a>缺点：</h4><p>每次动态分配一个节点，每个节点的地址是不连续的，需要有指针域记录下一个节点的地址，指针域需要占用一个 int 的空间，因此<strong>存储密度低</strong>（数据所占空间&#x2F;节点所占总空间）。</p>
+<p><strong>存取元素必须从头到尾按顺序查找，属于顺序存取。</strong></p>
 
                 
             </div>
