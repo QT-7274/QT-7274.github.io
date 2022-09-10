@@ -450,21 +450,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-09
+                    2022-09-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.3k
+                    9.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    24 分
+                    36 分
                 </div>
                 
 
@@ -1029,9 +1029,217 @@
 <blockquote>
 <p>循环链表和普通链表的区别就是最后一个节点的后继指向了头节点，还要让头节点的前驱指向最后一个节点。</p>
 </blockquote>
-<h3 id="顺序表的优点和缺点：-1"><a href="#顺序表的优点和缺点：-1" class="headerlink" title="顺序表的优点和缺点："></a>顺序表的优点和缺点：</h3><h4 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h4><p>链表是动态存储，不需要预先分配最大空间；<strong>插入删除不需要移动元素</strong>。</p>
+<h3 id="链表的优点和缺点："><a href="#链表的优点和缺点：" class="headerlink" title="链表的优点和缺点："></a>链表的优点和缺点：</h3><h4 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h4><p>链表是动态存储，不需要预先分配最大空间；<strong>插入删除不需要移动元素</strong>。</p>
 <h4 id="缺点：-1"><a href="#缺点：-1" class="headerlink" title="缺点："></a>缺点：</h4><p>每次动态分配一个节点，每个节点的地址是不连续的，需要有指针域记录下一个节点的地址，指针域需要占用一个 int 的空间，因此<strong>存储密度低</strong>（数据所占空间&#x2F;节点所占总空间）。</p>
 <p><strong>存取元素必须从头到尾按顺序查找，属于顺序存取。</strong></p>
+<h2 id="线性表的应用"><a href="#线性表的应用" class="headerlink" title="线性表的应用"></a>线性表的应用</h2><h3 id="合并有序顺序表："><a href="#合并有序顺序表：" class="headerlink" title="合并有序顺序表："></a>合并有序顺序表：</h3><p><strong>题目：</strong>将两个有序（非递减）顺序表 La 和 Lb 合并为一个新的有序（非递减）顺序表。</p>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><ol>
+<li>首先创建一个顺序表 Lc，其长度为 La 和 Lb 的长度之和。</li>
+<li>然后从 La 和 Lb 中分别取数，比较其大小，将较小者放入 Lc 中，一直进行下去，直到其中一个顺序表 La 或 Lb 中的数取完为止。</li>
+<li>把未取完的数再依次取出放入 Lc 中即可。</li>
+</ol>
+<h4 id="解题："><a href="#解题：" class="headerlink" title="解题："></a>解题：</h4><ol>
+<li><p>设置 3 个工作指针：i、j、k（其实是整型数）。其中，i 和 j 分别指向 La 和 Lb 中当前待比较的元素，k 指向 Lc 中待放置元素的位置</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220910095920854.png" alt="image-20220910095920854"></p>
+</li>
+<li><p>比较 La.elem[i]和 Lb.elem[j]，将较小的赋值给 Lc.elem[k]，同时相应指针向后移动。如此反复，直到顺序表 La 或 Lb 中的数取完为止。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220910100100150.png" alt="image-20220910100100150"></p>
+</li>
+<li><p>把 La 或 Lb中未取完的数依次取出，放入 Lc 中即可</p>
+</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">"sqlist.h"</span><span class="token comment">//引入自定义头文件,源码目录下名为sqlist.h的文件 </span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">MergeSqlist</span><span class="token punctuation">(</span>SqList La<span class="token punctuation">,</span>SqList Lb<span class="token punctuation">,</span>SqList <span class="token operator">&amp;</span>Lc<span class="token punctuation">)</span><span class="token comment">//顺序有序表的合并</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token comment">//已知顺序有序表La和Lb的元素按值非递减排列</span>
+	<span class="token comment">//La和Lb合并得到新的顺序有序表Lc，Lc的元素也按值非递减排列</span>
+	<span class="token keyword">int</span> i<span class="token punctuation">,</span>j<span class="token punctuation">,</span>k<span class="token punctuation">;</span>
+	i<span class="token operator">=</span>j<span class="token operator">=</span>k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+	Lc<span class="token punctuation">.</span>length<span class="token operator">=</span>La<span class="token punctuation">.</span>length<span class="token operator">+</span>Lb<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token comment">//新表长度为待合并两表的长度之和</span>
+	Lc<span class="token punctuation">.</span>elem<span class="token operator">=</span><span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>Lc<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//为合并后的新表分配一段空间</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>i<span class="token operator">&lt;</span>La<span class="token punctuation">.</span>length<span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>Lb<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token comment">//两个表都非空</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>La<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">&lt;=</span>Lb<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">//依次取出两表中值较小放入到Lc表中</span>
+			Lc<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>La<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+		<span class="token keyword">else</span>
+			Lc<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>Lb<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>i<span class="token operator">&lt;</span>La<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token comment">//La有剩余，依次将La的剩余元素插入Lc表的最后</span>
+		Lc<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>La<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>j<span class="token operator">&lt;</span>Lb<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token comment">//Lb有剩余，依次将Lb的剩余元素插入Lc表的最后</span>
+		Lc<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>Lb<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="算法复杂度分析：-3"><a href="#算法复杂度分析：-3" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>合并操作需要将 La 和 Lb 中的每一个元素取出放入 Lc 中，如果 La 和 Lb 的长度分别为 m、n，那么合并操作时间复杂度为 O(m+n) 空间复杂度也为 O(m+n)</p>
+<h3 id="合并有序链表："><a href="#合并有序链表：" class="headerlink" title="合并有序链表："></a>合并有序链表：</h3><p><strong>题目：</strong>将两个有序（非递减）单链表 La 和 Lb 合并为一个新的有序（非递减）单链表。</p>
+<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><p>链表合并不需要再创建空间，只需要“穿针引线”，把两个单链表中的节点按非递减的顺序串联起来即可。</p>
+<blockquote>
+<p>注意：单链表的头指针不可以移动，一旦头指针丢失，就找不到该单链表了，因此需要辅助指针。</p>
+</blockquote>
+<h4 id="解题：-1"><a href="#解题：-1" class="headerlink" title="解题："></a>解题：</h4><ol>
+<li><p>设置 3 个辅助指针 p、q、r，p 和 q 分别指向 La 和 Lb 链表的当前比较位置，新链表头指针 Lc 指向 La，当作合并后的头节点。r 指向 Lc 的当前最后一个节点，利用 r 指针“穿针引线”：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220910102955699.png" alt="image-20220910102955699"></p>
+</li>
+<li><p>穿针引线。比较元素大小，将较小元素用 r 指针串起来。</p>
+</li>
+<li><p>第 1 次比较，p-&gt;data&#x3D;4 &gt; q-&gt;data&#x3D;2，用 r 指针将 q 节点串起来。串联剩余部分，直到其中一个指针为空。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">r<span class="token operator">-></span>next<span class="token operator">=</span>q<span class="token punctuation">;</span> <span class="token comment">//把 q 节点的地址赋值给 r 的 next 指针域，即 r 的 next 指针指向 q</span>
+r<span class="token operator">=</span>q<span class="token punctuation">;</span> <span class="token comment">//r 指针指向 Lc 的当前尾节点</span>
+q<span class="token operator">=</span>q<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//q 指针向后移动，等待处理下一个节点</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>若 p 指针不为空，用 r 指针将 p 串连起来，即 r-&gt;next&#x3D;p;。注意这里只是把这个指针连上即可，剩余的节点不需要再处理。释放 Lb 节点空间，即 delete Lb。</p>
+</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">mergelinklist</span><span class="token punctuation">(</span>LinkList La<span class="token punctuation">,</span>LinkList Lb<span class="token punctuation">,</span>LinkList <span class="token operator">&amp;</span>Lc<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    LinkList p<span class="token punctuation">,</span>q<span class="token punctuation">,</span>r<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>La<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//p指向La的第一个元素</span>
+    q<span class="token operator">=</span>Lb<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//q指向Lb的第一个元素</span>
+    Lc<span class="token operator">=</span>La<span class="token punctuation">;</span>      <span class="token comment">//Lc指向La的头结点</span>
+    r<span class="token operator">=</span>Lc<span class="token punctuation">;</span>       <span class="token comment">//r指向Lc的尾部</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">&amp;&amp;</span>q<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>data<span class="token operator">&lt;=</span>q<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token comment">//把p指向的结点串起来</span>
+        <span class="token punctuation">&#123;</span>
+            r<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span>
+            r<span class="token operator">=</span>p<span class="token punctuation">;</span>
+            p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>             <span class="token comment">//把q指向的结点串起来</span>
+        <span class="token punctuation">&#123;</span>
+            r<span class="token operator">-></span>next<span class="token operator">=</span>q<span class="token punctuation">;</span>
+            r<span class="token operator">=</span>q<span class="token punctuation">;</span>
+            q<span class="token operator">=</span>q<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    r<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token operator">?</span>p<span class="token operator">:</span>q<span class="token punctuation">;</span><span class="token comment">//相当于if(p) r->next=p; else r->next=q;</span>
+    <span class="token keyword">delete</span> Lb<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="算法复杂度分析：-4"><a href="#算法复杂度分析：-4" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>链表合并不需要再创建空间，只需要穿针引线，把两个单链表中的节点按非递减的顺序串联起来即可。因此在最坏的情况下，需要串联每一个节点，如果 La 和 Lb 的长度分别为 m、n 时间复杂度为 O(m+n) 空间复杂度为 O(1)</p>
+<h3 id="就地逆置单链表："><a href="#就地逆置单链表：" class="headerlink" title="就地逆置单链表："></a>就地逆置单链表：</h3><p><strong>题目：</strong>将带有头节点的单链表就地逆置。即元素的顺序逆转，而辅助空间复杂度为 O(1)。</p>
+<h4 id="思路：-2"><a href="#思路：-2" class="headerlink" title="思路："></a>思路：</h4><p>头插法创建单链表得到的序列正好是逆序，那么我们就利用<strong>头插法建表</strong>的思路，实现就地逆置。</p>
+<blockquote>
+<p>注意：在修改指针之前，一定要用一个辅助指针记录断点，否则后面这一部分就会遗失，再也找不到了。</p>
+</blockquote>
+<h4 id="解题：-2"><a href="#解题：-2" class="headerlink" title="解题："></a>解题：</h4><ol>
+<li><p>首先用 p 指针指向第一个元素节点，然后将头节点的 next 域置空。</p>
+</li>
+<li><p>将 p 节点用头插法插入链表 L 中，插入之前用 q 指针记录断点。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">q<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">// q 指向 p 的下一个节点，记录断点</span>
+p<span class="token operator">-></span>next<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//将 L 的下一个节点地址赋值给 p 的 next 域</span>
+L<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span> <span class="token comment">//将 p 节点地址赋值给 L 的 next 域</span>
+p<span class="token operator">=</span>q<span class="token punctuation">;</span> <span class="token comment">//p 指向 q</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>p 指针为空，算法停止，单链表就地逆置完毕。</p>
+</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">reverselinklist</span><span class="token punctuation">(</span>LinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    LinkList p<span class="token punctuation">,</span>q<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//p指向L的第一个元素</span>
+    L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span> <span class="token comment">//头结点的next域置空：</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        q<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment">//q指向p的下一个结点，记录断点；</span>
+        p<span class="token operator">-></span>next<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//头插法，将L的下一个结点地址赋值给p的next域</span>
+        L<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span> <span class="token comment">//将p结点地址赋值给L的next域</span>
+        p<span class="token operator">=</span>q<span class="token punctuation">;</span><span class="token comment">//指针后移，p指向q；</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="算法复杂度分析：-5"><a href="#算法复杂度分析：-5" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
+<h3 id="查找链表的中间节点："><a href="#查找链表的中间节点：" class="headerlink" title="查找链表的中间节点："></a>查找链表的中间节点：</h3><p><strong>题目：</strong>带有头节点的单链表 L，设计一个尽可能高效的算法求 L 中的中间节点。</p>
+<h4 id="思路：-3"><a href="#思路：-3" class="headerlink" title="思路："></a>思路：</h4><p>此类题型可以使用快慢指针来解决。一个快指针，一个慢指针，快指针走两步，慢指针走一步。当快指针指向结尾的时候，慢指针刚好指向中间节点。</p>
+<h4 id="解题：-3"><a href="#解题：-3" class="headerlink" title="解题："></a>解题：</h4><p>放置两个小青蛙，一个跳得远，一次走两块石头；一个跳得近，一次走一块石头。当快青蛙走到终点时，慢青蛙正好走到中间。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">LinkList <span class="token function">findmiddle</span><span class="token punctuation">(</span>LinkList L<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    LinkList p<span class="token punctuation">,</span>q<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token punctuation">;</span> <span class="token comment">//p为快指针，初始时指向L</span>
+    q<span class="token operator">=</span>L<span class="token punctuation">;</span> <span class="token comment">//q为慢指针，初始时指向L</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token operator">&amp;&amp;</span>p<span class="token operator">-></span>next<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment">//p为快指针一次走两步；</span>
+        q<span class="token operator">=</span>q<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//q为慢指针一次走一步</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> q<span class="token punctuation">;</span><span class="token comment">//返回中间结点指针</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="算法复杂度分析：-6"><a href="#算法复杂度分析：-6" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
+<h4 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h4><p>如何在单链表中查找倒数第 k 个节点？</p>
+<p>仍然可以使用快慢指针，慢指针不要动，快指针先走 <strong>k−1</strong> 步，然后<strong>两个指针一起以同样的速度走</strong>。当快指针走到终点时，慢指针正好停留在倒数第 k 个节点，为什么呢？<br><strong>因为它们之间的距离始终保持 k−1。</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">LinkList <span class="token function">findk</span><span class="token punctuation">(</span>LinkList L<span class="token punctuation">,</span><span class="token keyword">int</span> k<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    LinkList p<span class="token punctuation">,</span>q<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//p为快指针，初始时指向第一个数据结点</span>
+    q<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//q为慢指针，初始时指向第一个数据结点</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">--</span>k<span class="token operator">&lt;=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">//k减到0时，慢指针开始走</span>
+            q<span class="token operator">=</span>q<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment">//q为慢指针</span>
+        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//p为快指针，先走 k - 1步；</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">return</span> q<span class="token punctuation">;</span><span class="token comment">//返回中间结点指针</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="算法复杂度分析：-7"><a href="#算法复杂度分析：-7" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
+<p>用快慢指针还可以解决很多问题，例如判断链表是否有环，判断两个链表是否相交等。</p>
+<h3 id="删除链表中的重复元素："><a href="#删除链表中的重复元素：" class="headerlink" title="删除链表中的重复元素："></a>删除链表中的重复元素：</h3><p><strong>题目：</strong>用单链表保存 m 个整数，节点的结构为(data,next)，且|data|≤n(n 为正整数)。现要求设计一个时间复杂度尽可能高效的算法，对于链表中 data 的绝对值相等的节点，仅保留第一次出现的节点而删除其余绝对值相等的节点。</p>
+<h4 id="思路：-4"><a href="#思路：-4" class="headerlink" title="思路："></a>思路：</h4><p>本题数据大小有范围限制，因此可以设置一个辅助数组记录该数据是否已出现，如果已出现，则删除；如果未出现，则标记。一趟扫描即可完成。</p>
+<h4 id="解题：-4"><a href="#解题：-4" class="headerlink" title="解题："></a>解题：</h4><ol>
+<li>设置一个辅助数组 flag[]，因为 n 为正整数，不包括 0，所以 0 空间不用。需要分配 n+1 个辅助空间，初始化时都为 0，表示这些数还未出现过，</li>
+<li>设置 p 指针指向头节点，检查第一个数据元素是否已出现过。令 x&#x3D;abs(p-&gt;next-&gt;data)，如果已出现过（flag[x]&#x3D;1），则删除该节点；如果该节点数据元素未出现过，则标记 flag[x]&#x3D;1，p 指针向后移动，直到处理完毕。</li>
+<li>abs(p-&gt;next-&gt;data)&#x3D;5，读取 flag[5]&#x3D;0，说明该节点数据元素未出现过，标记 flag[5]&#x3D;1，p 指针向后移动。</li>
+<li>p-&gt;next 为空，算法停止。对于链表中 data 的绝对值相等的节点，仅保留第一次出现的节点而删除其余绝对值相等的节点。</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">Deleterep</span><span class="token punctuation">(</span>LinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token comment">//删除重复元素</span>
+<span class="token punctuation">&#123;</span>
+    LinkList p<span class="token punctuation">,</span>q<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>flag<span class="token operator">=</span><span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//定义flag数组，分配n+1个空间</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token comment">//初始化</span>
+        flag<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token punctuation">;</span> <span class="token comment">//指向头结点</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        x<span class="token operator">=</span><span class="token function">abs</span><span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>flag<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token comment">//未出现过</span>
+        <span class="token punctuation">&#123;</span>
+            flag<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">//标记出现</span>
+            p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>           <span class="token comment">//指针后移</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">&#123;</span>
+            q<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+            p<span class="token operator">-></span>next<span class="token operator">=</span>q<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment">//删除重复元素</span>
+            <span class="token keyword">delete</span> q<span class="token punctuation">;</span>
+
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">delete</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>flag<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="算法复杂度分析：-8"><a href="#算法复杂度分析：-8" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>根据题意，单链表中保存 m 个绝对值小于等于 n 的整数，因此链表元素个数为 m，算法从头到尾扫描了一遍链表，时间复杂度为 O(m) 采用了辅助数组 flag[]，因为 n 为正整数，不包括 0，所以 0 空间不用，需要分配 n+1 个辅助空间，因此空间时间复杂度为 O(n)</p>
+<h2 id="线性表学习技巧"><a href="#线性表学习技巧" class="headerlink" title="线性表学习技巧"></a>线性表学习技巧</h2><h3 id="顺序表和链表的比较："><a href="#顺序表和链表的比较：" class="headerlink" title="顺序表和链表的比较："></a>顺序表和链表的比较：</h3><p><img src="/medias/images/loading.gif" data-original="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-%E7%BA%BF%E6%80%A7%E8%A1%A8/image-20220910113841323.png" alt="image-20220910113841323"></p>
+<h3 id="顺序表解题技巧："><a href="#顺序表解题技巧：" class="headerlink" title="顺序表解题技巧："></a>顺序表解题技巧：</h3><ul>
+<li><strong>位序和下标差 1，第 i 个元素的下标为 i−1。</strong></li>
+<li><strong>交换元素、有序合并需要借助辅助空间。</strong></li>
+<li><strong>交换元素、有序合并需要借助辅助空间。</strong></li>
+</ul>
+<h3 id="链表解题技巧："><a href="#链表解题技巧：" class="headerlink" title="链表解题技巧："></a>链表解题技巧：</h3><ul>
+<li>赋值语句两端的含义：<strong>等号的右侧是节点的地址，等号的左侧是节点的指针域</strong></li>
+<li>修改指针的顺序：<strong>先修改没有指针标记的那一端</strong></li>
+<li>建立链表的两种方法：<strong>头插法、尾插法。头插法是逆序建表，尾插法是正序建表</strong></li>
+<li>链表逆置、归并不需要额外空间，<strong>属于就地操作</strong>。</li>
+<li><strong>快慢指针法</strong>：快慢指针可以解决很多问题，如链表中间节点、倒数第 k 个节点、判断链表是否有环、环的起点、公共部分的起点等。</li>
+</ul>
 
                 
             </div>
