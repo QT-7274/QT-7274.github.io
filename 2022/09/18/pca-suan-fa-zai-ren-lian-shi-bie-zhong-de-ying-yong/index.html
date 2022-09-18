@@ -5,8 +5,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="数据结构入门--数组与广义表, QT-7274">
-    <meta name="description" content="数组是由相同类型的数据元素构成的有限集合。广义表是线性表的推广，也称为列表。">
+    <meta name="keywords" content="PCA算法在人脸识别中的应用, QT-7274">
+    <meta name="description" content="PCA是最简单的以特征量分析多元统计分布的方法。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +20,7 @@
 
     
 
-    <title>数据结构入门--数组与广义表 | QT-7274</title>
+    <title>PCA算法在人脸识别中的应用 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -306,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/data-structures.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/2019-12-principal-components-analysis.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">数据结构入门--数组与广义表</h1>
+                    <h1 class="description center-align post-title">PCA算法在人脸识别中的应用</h1>
                 </div>
             </div>
         </div>
@@ -427,23 +427,18 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                                <span class="chip bg-color">数据结构</span>
+                            <a href="/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/">
+                                <span class="chip bg-color">图像识别</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%AE%97%E6%B3%95/">
+                                <span class="chip bg-color">算法</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
-                                数据结构
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -452,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-09-16
+                    2022-09-18
                 </div>
                 
 
@@ -466,14 +461,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    3.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    12 分
                 </div>
                 
 
@@ -496,151 +491,213 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="数组的顺序存储"><a href="#数组的顺序存储" class="headerlink" title="数组的顺序存储"></a>数组的顺序存储</h2><p>数组是由相同类型的数据元素构成的有限集合。</p>
-<p>数组一般采用顺序存储结构，因为存储单元是一维的，而数组可以是多维的，如何用一组连续的存储单元来存储多维数组呢？</p>
-<p>以二维数组为例，可以按行序存储，即先存第一行，再存第二行……也可以按列序存储，先存第一列，再存第二列……</p>
-<ol>
-<li><p>按行序存储</p>
-<p><strong>如果按行序存储，怎么找到 a ij 的存储位置呢？</strong></p>
-<p>先看看存储 a ij 之前，前面已经存储了多少个元素：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916163751007.png" alt="image-20220916163751007"></p>
-<p>在 a ij 之前一共有 i×n+j 个元素，如果每个元素占用 L 字节，那么共需要 (i×n+j)×L 字节，只需要用基地址加上这些字节就可以得到 a ij 的存储地址了。</p>
-<p>按行序存储，a ij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916164635719.png" alt="image-20220916164635719"></p>
-<p>LOC(a 00 )表示第一个元素的存储地址，即基地址，LOC(a ij)表示 a ij 的存储地址。</p>
-</li>
-<li><p>按列序存储</p>
-<p><strong>如果按列序存储，怎么找到 a ij 的存储位置呢？</strong></p>
-<p>先看看存储 a ij 之前，前面已经存储了多少个元素：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916164855734.png" alt="image-20220916164855734"></p>
-<p>在 a ij 之前一共有 j×m+i 个元素，如果每个元素占用 L 字节，那么共需要(j×m+i)×L 字节，只需要用基地址加上这些字节就可以得到 a ij 的存储地址了。</p>
-<p>按列序存储，a ij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916164922583.png" alt="image-20220916164922583"></p>
-<p>LOC(a00 )表示第一个元素的存储地址，即基地址，LOC(a ij)表示 a ij 的存储地址。</p>
+                <h2 id="PCA（主成分分析）算法介绍"><a href="#PCA（主成分分析）算法介绍" class="headerlink" title="PCA（主成分分析）算法介绍"></a>PCA（主成分分析）算法介绍</h2><p>PCA是多元统计同用来分析数据的一种方法。通过<strong>正交变换</strong>将一组可能存在相关性的变量转换为一组线性不相关的向量，转换后的这组变量叫做主成分。</p>
+<p>而这个转换的过程中，可以<strong>丢弃</strong>很多相关的成分或者对描述这个物体不重要的成分。<strong>从而达到对原始数据降维，提取重要特征的目的。</strong></p>
+<p><strong>为什么要降维？</strong></p>
 <blockquote>
-<p><strong>注意：如果二维数组的下标是从 1 开始的，那么情形就变了。</strong></p>
+<ol>
+<li>简化计算，便于分析</li>
+<li>去掉冗余，显现特征</li>
+</ol>
 </blockquote>
-<p>先看看存储 a ij 之前，前面已经存储了多少个元素：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916165028591.png" alt="image-20220916165028591"></p>
-<p>行数和个数都少 1，在 a ij 之前一共有 <strong>(i−1)×n+j−1</strong> 个元素，如果每个元素占用 L 字节，那么共需要 <strong>((i−1)×n+j−1)×L</strong> 字节，只需要用基地址加上这些字节就可以得到 a ij 的存储地址了。</p>
-<p>如果二维数组下标从 1 开始，按行序存储，a ij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916165312801.png" alt="image-20220916165312801"></p>
-<p>LOC(a11 )表示第一个元素的存储地址，即基地址，LOC(a ij)表示 a ij 的存储地址。</p>
-<p>如果二维数组下标从 1 开始，按列序存储，a ij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916165344784.png" alt="image-20220916165344784"></p>
-<p>也就是说，如果下标是从 1 开始的，相应的公式需要行减 1，列减 1。</p>
+<h3 id="基本知识："><a href="#基本知识：" class="headerlink" title="基本知识："></a>基本知识：</h3><p>首先需要知道几个相关的数学概念，这是我们进行PCA分析的基础：标准差（Standard Deviation）、方差（Variance）、协方差（Covariance）、特征向量（eigenvectors）、特征值（eigenvalues）</p>
+<ol>
+<li><h3 id="Standard-Deviation（标准差）"><a href="#Standard-Deviation（标准差）" class="headerlink" title="Standard Deviation（标准差）"></a>Standard Deviation（标准差）</h3><p>标准差就是用来描述<strong>一组数据与平均值的偏离程度</strong>，反映了一组数据的<strong>波动情况</strong>，平均值数学表达公式如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181158607.png" alt="image-20220918181158607"></p>
+<p>标准差的表达公式如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181218236.png" alt="image-20220918181218236"></p>
+<p>需要注意的是分母是选择<code>n</code>还是<code>n-1</code>，取决于你选取的数据是整个完整数据还是数据中的一部分。</p>
+</li>
+<li><h3 id="Variance（方差）"><a href="#Variance（方差）" class="headerlink" title="Variance（方差）"></a>Variance（方差）</h3><p>方差是数据集中数据分布的另一种度量。实际上，它几乎与标准差相同。</p>
+<p>方差的数学表达公式如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181303373.png" alt="image-20220918181303373"></p>
+</li>
+<li><h3 id="Covariance（协方差）"><a href="#Covariance（协方差）" class="headerlink" title="Covariance（协方差）"></a>Covariance（协方差）</h3><p>标准差与方差只针对一维数据进行衡量的指标，协方差是<strong>针对二维数据或者是更高维的数据</strong>进行的衡量指标，主要用来表示<strong>多维度与平均值的偏离程度</strong>。</p>
+<p>协方差的数学表达公式如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181435902.png" alt="image-20220918181435902"></p>
+</li>
+<li><h3 id="The-covariance-Matrix（协方差矩阵）"><a href="#The-covariance-Matrix（协方差矩阵）" class="headerlink" title="The covariance Matrix（协方差矩阵）"></a>The covariance Matrix（协方差矩阵）</h3><p>协方差矩阵主要是用于当数据的维度超过3或者更多的时候，我们可以通过<strong>一个矩阵来存储各个维度的协方差</strong>，这个矩阵就被称为“协方差矩阵”。</p>
+<p>用数学方法来表示一个N为数据的协方差矩阵可以表示为：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181804542.png" alt="image-20220918181804542"></p>
+<p>现在假设我们有一个三个维度的数据，使用一个协方差矩阵将这三维数据的协方差表示如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181822893.png" alt="image-20220918181822893"></p>
+</li>
+<li><h3 id="Eigenvectors（特征向量）"><a href="#Eigenvectors（特征向量）" class="headerlink" title="Eigenvectors（特征向量）"></a>Eigenvectors（特征向量）</h3><p>在矩阵论中，我们可以这样去理解特征值和特征向量，一个矩阵由一个变换到另一个矩阵，Aα&#x3D;λα，其中α称为矩阵A 的一个特征向量，λ称为矩阵A的一个特征值。</p>
+<blockquote>
+<p><strong>特征向量确定了矩阵变换的方向，特征值确定了矩阵变换的比例。</strong></p>
+</blockquote>
+<p>在协方差矩阵中，协方差矩阵的特征向量又反应了什么物理意义呢？</p>
+<p>协方差矩阵的特征向量代表的意思是<strong>方差最大的数据所在的方向</strong>。</p>
+<p>在n维数据空间中，第一特征向量指向的是<strong>数据方差最大的方向</strong>，第二特征向量是与第一特征向量垂直的数据方差最大的方向，第三特征向量是与第二特征向量垂直的数据方差最大的方向，以此类推。</p>
+</li>
+<li><h3 id="Choosing-components-and-forming-a-feature-vector（选择主成分并生成特征向量）"><a href="#Choosing-components-and-forming-a-feature-vector（选择主成分并生成特征向量）" class="headerlink" title="Choosing components and forming a feature vector（选择主成分并生成特征向量）"></a>Choosing components and forming a feature vector（选择主成分并生成特征向量）</h3><blockquote>
+<p>一个协方差矩阵有着不同的特征值与特征向量，事实上<strong>最高特征值的对应的特征向量就是这个数据集的主成分</strong>。</p>
+</blockquote>
+<p>通常来说，一旦协方差矩阵的特征值和特征向量被计算出来了之后，就是按照特征值的大小从高到低依次排列。特征值的大小确定了主成分的重要性。</p>
 </li>
 </ol>
+<h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><p>PCA原理就是将一个高维向量<em><strong>x</strong></em>,通过一个特殊的特征向量矩阵<em><strong>U</strong></em>，投影到一个低维的向量空间中，表征为一个低维向量<em><strong>y</strong></em>，并且仅仅损失了一些次要信息。</p>
 <blockquote>
-<p>存储地址计算秘籍：<strong>a ij 的存储地址等于第一个元素的存储地址，加上前面的元素个数乘以每个元素占用的字节数。</strong></p>
-<p>LOC(aij) &#x3D; LOC(第一个元素) +(aij 前面的元素个数) × 每个元素占的字节</p>
+<p>也就是说，<strong>通过低维表征的向量和特征向量矩阵，可以基本重构出所对应的原始高维向量。</strong></p>
+<p>即<strong>选择特征值较大的作为主成分，从而进行降维。</strong></p>
 </blockquote>
-<h2 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h2><ul>
-<li><strong>什么是压缩存储？</strong>给多个相同的元素分配一个存储空间，元素为 0 的不分配空间。</li>
-<li><strong>什么样的矩阵能够压缩？</strong>一些特殊矩阵，如对称矩阵、三角矩阵、对角矩阵、稀疏矩阵等。</li>
-<li><strong>什么叫稀疏矩阵？</strong>矩阵中非零元素的个数较少，怎样才算是较少呢？一般认为非零元素个数小于 5%的矩阵为稀疏矩阵。</li>
-</ul>
-<h3 id="对称矩阵："><a href="#对称矩阵：" class="headerlink" title="对称矩阵："></a>对称矩阵：</h3><p>对称矩阵比较特殊，其数据元素沿着对角线对称，即：aij &#x3D; aji</p>
-<p>那么，因为上三角和下三角是一样的，因此只存储其中的一个就可以了。如果用一维数组存储下三角，则只需要 <strong>n(n+1)&#x2F;2</strong> 个空间，比全部存储需要 n^2 个空间少了很多。</p>
-<p><strong>如果按行序存储下三角，那么怎么找到 a ij 的存储位置呢？</strong></p>
-<p>先看看存储下三角中的 a ij 之前，前面已经存储了多少个元素:</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916171702433.png" alt="image-20220916171702433"></p>
-<p>如果将对称矩阵的下三角（i≥j）存储在一维数组 s[]中，那么下三角中 a ij 的下标就是 <strong>i(i−1)&#x2F;2+j−1</strong></p>
-<p>而上三角的元素（i&lt;j），根据对称性，a ij &#x3D; a ji，可以直接读取下三角中的 a ji，因此按行序存储下三角时，a ij 的下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916172113874.png" alt="image-20220916172113874"></p>
-<p><strong>存储下标计算秘籍：</strong>如果用一维数组 s[]存储（下标从 0 开始），则 a ij 的存储下标 k 等于a ij 前面的元素个数。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916174820163.png" alt="image-20220916174820163"></p>
-<p>如果一维数组的下标从 1 开始呢？——公式后面再加 1 就行了。</p>
-<p>上面的公式是计算一维数组存储的下标，如果给了基地址（a11 的存储地址），那么 aij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916175406759.png" alt="image-20220916175406759"></p>
-<p>即 LOC(a ij)&#x3D;LOC(第一个元素)+(a ij 前面的元素个数)×每个元素占用的字节。</p>
-<h3 id="三角矩阵："><a href="#三角矩阵：" class="headerlink" title="三角矩阵："></a>三角矩阵：</h3><p>三角矩阵比较特殊，分为下三角矩阵和上三角矩阵，下三角矩阵是指矩阵的下三角有数据，而其余的都是常数 c 或者为 0：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916180925565.png" alt="image-20220916180925565"></p>
-<p>在下三角矩阵存储时，<strong>只需要存储其下三角中的元素，最后一个空间存储常数 c 即可。如果上面全为 0，则不需要存储</strong>；下三角也是如此。</p>
-<p>例如下三角矩阵按行存储在一维数组 s[]中：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917122504003.png" alt="image-20220917122504003"></p>
-<p><strong>下三角矩阵如果按行序存储，怎么找到 a ij 的存储位置呢？</strong></p>
-<p>先看看存储 a ij 之前，前面已经存储了多少个元素：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917164303544.png" alt="image-20220917164303544"></p>
-<p>如果一维数组的下标从零开始，那么下三角中 a ij 的下标就是 i(i−1)&#x2F;2+j−1。而上三角的元素因为全是常数 c 或者为 0，最后一个空间（下标为 n(n+1)&#x2F;2）存储常数 c 即可，如果是 0，则不需要存储。</p>
-<p>因此下三角矩阵按行序存储时，a ij 的下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917164625796.png" alt="image-20220917164625796"></p>
-<p><strong>上三角矩阵如果按行序存储，怎么找到 a ij 的存储位置呢？</strong></p>
-<p>先看看存储 a ij 之前，前面已经存储了多少个元素（梯形公式）：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917164934887.png" alt="image-20220917164934887"></p>
-<p>如果一维数组的下标从 0 开始，那么上三角中 aij 的下标就是(i−1)(2n−i+2)&#x2F;2+j−i。而下三角的元素全是常数 c 或者为 0，最后一个空间（下标为 n(n+1)&#x2F;2）存储常数 c 即可。</p>
-<p>因此上三角矩阵按行序存储时，a ij 的下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917165936889.png" alt="image-20220917165936889"></p>
-<h3 id="对角矩阵："><a href="#对角矩阵：" class="headerlink" title="对角矩阵："></a>对角矩阵：</h3><p>对角矩阵又称为带状矩阵，是指在 n×n 的矩阵中非零元素集中在主对角线及其两侧，共 L（奇数）条对角线的带状区域内，称为 L 对角矩阵：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917170215104.png" alt="image-20220917170215104"></p>
+<p>比如：一开始你的数据集是N维的，在进行了协方差矩阵的特征值计算后， 你得到了N个特征值和与这些特征值相对应的特征向量。然后在主成分分析时，你选取了前P个较大的特征值，如此一来，就将原来N维的数据降维到只有P维。这样就起到了降维的效果了。</p>
+<h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><p>其方法主要是通过<strong>对协方差矩阵进行特征分解</strong>，以得出数据的主成分（即<strong>特征向量</strong>）与它们的权值（即<strong>特征值</strong>）。</p>
+<p>计算新生成的数据集的公式如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918182958926.png" alt="image-20220918182958926"></p>
+<p>其中rowFeatureVector是由<strong>模式矢量作为列组成的矩阵</strong>的<strong>转置</strong>，因此它的行就是原来的模式矢量，而且对应<strong>最大特征值的特征矢量在该矩阵的最上一行</strong>。rowdataAdjust是<strong>每一维数据减去均值后，所组成矩阵的转置</strong>，即数据项目在每一列中，每一行是一维，对我们的样本来说即是，第一行为x维上数据，第二行为y维上的数据。</p>
+<p>正是由于特征向量是两两正交的，那么我们就可以使用任何的特征向量来<strong>将原始数据变换到正交的这些坐标轴</strong>上。</p>
+<p>在计算出协方差矩阵的特征值及特征向量后，接下来，我们<strong>选取一个较大的特征值对应的特征向量将原始数据降到一维</strong>：</p>
+<blockquote>
+<p><strong>将较大的特征值对应的特征向量转置然后乘以原始数据集，这样就得到新的降维后的一维数据。</strong></p>
+</blockquote>
+<p>换而言之，PCA提供了一种降低数据维度的有效办法；如果分析者在原数据中除掉最小的特征值所对应的成分，那么所得的低维度数据必定是最优化的（也即，这样降低维度必定是失去讯息最少的方法）。主成分分析在分析复杂数据时尤为有用，比如人脸识别。</p>
+<h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><p>设有m条n维数据（训练集）：</p>
 <ol>
-<li><p><strong>L 对角矩阵非零元素个数</strong></p>
-<p>首先将每一行以对角线为中心进行补零，让每一行都达到带宽 L 个元素。一共补了多少个零呢？第一行补 d 个 0，第二行补 d−1 个 0 左上角补零个数为 d (d+1)&#x2F;2。同理，右下角补零个数也为 d(d+1)&#x2F;2，总的补零个数为 d(d+1)。那么每行按 L 个元素计算，再减去补零元素个数即可，即带状区域元素个数为 L×n−d(d+1)。因为 d&#x3D;(L−1)&#x2F;2，即 L&#x3D;2d+1，所以带状区域元素个数也可以表达为(2d+1)×n−d(d+1)。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917171101974.png" alt="image-20220917171101974"></p>
-</li>
-<li><p><strong>按行序存储</strong></p>
-<p>补零后每行都有 L 个元素，需要 L×n 个空间。为了节省空间，第一行前面和最后一行后面的 d 个 0 可以不存储，“<strong>掐头去尾</strong>”，需要 L×n−2d 个空间。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917172219604.png" alt="image-20220917172219604"></p>
-<p><strong>怎么找到 a ij 的存储位置呢？</strong></p>
-<p>首先找到 aii 的存储位置，因为 aii 是对角线上的元素，以对角线为中心，左右两侧都是d 个元素。a ii 之前有 i−1 行，每行 L 个元素，a ii 所在行左侧有 d 个元素，因此 a ii 之前有(i−1)×L+d 个元素。</p>
-<p>因为第一行前面的 d 个 0“<strong>掐头去尾</strong>”没有存储，所以 a ii 之前有(i−1)×L 个元素。aii 的存储位置为：(i−1)×L。而 aij 和 aii 相差 j−i 个元素，也就是说，aij的存储位置为：(i−1)×L+j−i：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917175712065.png" alt="image-20220917175712065"></p>
-<p>如果 a ij 在 a ii 的左侧（i&gt;j）呢？它们之间相差 i−j 个元素。只需要计算出 a ii 的存储位置，减去它们之间的差值就可以了。<br>即 aij 的存储位置为(i−1)×L−(i−j)&#x3D;(i−1)×L+j−i。</p>
-<p><strong>公式总结：</strong></p>
-<p>按行序，用一维数组（下标从 0 开始）存储 L 对角矩阵，a ij 的存储位置为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180013907.png" alt="image-20220917180013907"></p>
-<p>例如3对角矩阵中 a ij 的存储位置为 k&#x3D;3(i−1)+j−i&#x3D;2i+j−3，如果一维数组的下标从 1 开始，公式后面再加 1 即可。</p>
-</li>
-<li><p><strong>按对角线存储</strong></p>
-<p>对角矩阵还有一种按对角线的顺序存储方式：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180434868.png" alt="image-20220917180434868"></p>
-<p>即对角线作为 0 行，左侧分别为 1, 2, …, d行，右侧分别为−1, −2, …, −d 行。相当于行转换为 i′&#x3D;i−j，列值 j 不变，把 n×n 的 L 对角矩阵转换为 L×n 的矩阵：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180505020.png" alt="image-20220917180505020"></p>
-<p>将其他位置补零：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180540927.png" alt="image-20220917180540927"></p>
-<p>用一维数组 s[]（下标从 0 开始）按行序存储，仍然采用“掐头去尾”，第一行前面和最后一行后面的 d 个 0 不存储：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180602358.png" alt="image-20220917180602358"></p>
-<p><strong>怎么找到 a ij 的存储位置呢？</strong></p>
-<p>a i′j 之前有 i′+d行，每行有 n 个元素，a i′j 所在行左侧有 j−1 个元素，因此 ai′j 之前有(i′+d)×n+j−1 个元素。</p>
-<p>因为第一行前面的 d 个 0“掐头去尾”没有存储，所以 a i′j 之前有(i′+d)×n+j−1−d 个元素。a i′j的存储位置为：(i′+d)×n+j−1−d。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917181451463.png" alt="image-20220917181451463"></p>
-<p>如果用一维数组（下标从 0 开始）按行序存储，a i′j 的下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917181526649.png" alt="image-20220917181526649"></p>
-<p>又因为 i′&#x3D;i−j，因此对角矩阵中的 a ij 下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917181539937.png" alt="image-20220917181539937"></p>
-<p><strong>公式总结：</strong></p>
-<p>按对角线存储，对角矩阵中的 a ij 下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917181629298.png" alt="image-20220917181629298"></p>
-</li>
+<li>将原始数据按列组成n行m列矩阵X</li>
+<li>将X的每一行（代表一个属性字段）进行零均值化，即减去这一行的均值</li>
+<li>求出协方差矩阵C&#x3D;(1&#x2F;m)XX^T（实对称矩阵）</li>
+<li>求出协方差矩阵的特征值及对应的特征向量</li>
+<li>将特征向量按对应特征值大小从上到下按行排列成矩阵，取前k行组成矩阵P</li>
+<li>Y&#x3D;PX 即为降维到k维后的数据</li>
 </ol>
-<h3 id="稀疏矩阵："><a href="#稀疏矩阵：" class="headerlink" title="稀疏矩阵："></a>稀疏矩阵：</h3><p>稀疏矩阵是指非零元素个数较少，且分布没有规律可言，那么少到什么程度才算稀疏呢？一般认为非零元素小于 5%时，属于稀疏矩阵。</p>
-<p>当然也没那么绝对，只要非零元素个数远远小于矩阵元素个数，就可以认为是稀疏矩阵。</p>
-<blockquote>
-<p><strong>为了节省空间，只需要记录每个非零元素的行、列和数值即可，这就是三元组存储法</strong></p>
-</blockquote>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917183620395.png" alt="image-20220917183620395"></p>
-<h2 id="广义表"><a href="#广义表" class="headerlink" title="广义表"></a>广义表</h2><p>广义表是线性表的推广，也称为列表。</p>
-<blockquote>
-<p>它是 n(n≥0)个表元素组成的有限序列，记作 **LS&#x3D; (a0 , a1, a2 , …, a n−1 )**。LS 是表名，a i 是表元素，它可以是表（称为子表），也可以是数据元素(称为原子)。</p>
-<p>n 为表的长度，n&#x3D;0 的广义表为空表。</p>
-</blockquote>
-<p>广义表最常见的操作就是求表头和表尾。</p>
+<h2 id="PCA应用–人脸识别"><a href="#PCA应用–人脸识别" class="headerlink" title="PCA应用–人脸识别"></a>PCA应用–人脸识别</h2><p>主要思想就是用主成分分析的思想将图像从欧氏空间降维映射到特征空间中，根据<strong>不同人脸图像在特征空间中的度量距离来判断其相似度</strong>，从而实现人脸识别。</p>
+<h3 id="主要流程："><a href="#主要流程：" class="headerlink" title="主要流程："></a>主要流程：</h3><p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184204177.png" alt="image-20220918184204177"></p>
+<p>通过上图的PCA人脸识别流程可以看出，PCA方法可以总结为以下几个阶段：训练样本、特征提取、构造特征空间、投影计算。</p>
+<h3 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h3><ol>
+<li><p>使用ORL数据库。人脸图像总样本为（Q&#x3D;400），共有P（P&#x3D;40）个人，每人人均L（L&#x3D;10）幅图像，每张图像大小为 112 x 92 &#x3D; 10304。</p>
+</li>
+<li><p>对每张图片进行矢量化处理。其中Xi为由第i个人的图像的每一列向量堆叠而成的一列M*N维列向量，即把矩阵向量化。需要注意的是，由于每个人都有L张图像，所以Xi对应的是每个人的平均脸，其中Xij为第i个人第j个样本：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184801736.png" alt="image-20220918184801736"></p>
+</li>
+<li><p>计算所有训练图像的平均脸：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184914111.png" alt="image-20220918184914111"></p>
+</li>
+<li><p>计算每张人脸与平均脸的差值（去均值）：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184940831.png" alt="image-20220918184940831"></p>
+</li>
+<li><p>构造协方差矩阵：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184952241.png" alt="image-20220918184952241"></p>
+</li>
+<li><p>是求解协方差矩阵的特征值和特征向量，构造特征脸：</p>
 <ul>
-<li><p>表头 GetHead(L)：</p>
-<p>非空广义表的第一个元素，可以是一个单元素，也可以是一个子表。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220918093948840.png" alt="image-20220918093948840"></p>
-</li>
-<li><p>表尾 GetTail(L)：</p>
-<p>删除表头元素后余下的元素所构成的表。表尾一定是一个表。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220918094015252.png" alt="image-20220918094015252"></p>
-</li>
+<li>求出协方差矩阵的特征向量<em><strong>ui</strong></em>和对应的特征值<em><strong>λi</strong></em>，这些特征向量组成的矩阵<em><strong>U</strong></em>就是人脸空间的正交基底，用它们的线性组合可以重构出样本中任意的人脸图像。<strong>并且图像信息集中在特征值大的特征向量中，即使丢弃特征值小的向量也不会影响图像质量</strong>：</li>
 </ul>
-<h2 id="数组与广义表学习技巧"><a href="#数组与广义表学习技巧" class="headerlink" title="数组与广义表学习技巧"></a>数组与广义表学习技巧</h2><p><strong>存储地址计算秘籍：</strong>a ij 的存储地址等于第一个元素的存储地址，加上前面的元素个数乘以每个元素占用的字节数。计算公式为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220918105951420.png" alt="image-20220918105951420"></p>
-<p>LOC(第一个元素)表示第一个元素的存储地址，即基地址，LOC(a ij)表示 aij 的存储地址。</p>
-<p><strong>存储下标计算秘籍：</strong>如果用一维数组 s[]存储（下标从 0 开始），则 aij 的存储下标 k 等于a ij 前面的元素个数。计算公式为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220918110119654.png" alt="image-20220918110119654"></p>
-<p>如果一维数组的下标从 1 开始，公式后面再加 1 就行了。</p>
+<blockquote>
+<p>为什么用特征向量和特征值的线性组合可以重构出样本中任意的人脸图像？</p>
+</blockquote>
+<ol>
+<li><p>在人脸识别过程中，对输入的一个测试样本x，求出它与平均脸的偏差，则这个偏差在特征脸空间U的投影，可以表示为系数向量y：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918191044392.png" alt="image-20220918191044392"></p>
+<p>U的维数为M×d（d为特征值个数），偏差的维数为M×1，y的维数为d×1。若<strong>M</strong>为200*200&#x3D;40000维，取200个主成分，即200个特征向量，则最后投影的系数向量y维数降维200维。</p>
+</li>
+<li><p>根据上述式子，可以得出：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918191404110.png" alt="image-20220918191404110"></p>
+<p>这里的x就是根据投影系数向量y重构出的人脸图像，丢失了部分图像信息，但不会影响图像质量。</p>
+</li>
+</ol>
+<ul>
+<li>将协方差矩阵的<strong>特征值按大到小排序</strong>，λ 1 &gt; λ 2 . . . &gt; λ t &gt; λ P。根据特征值的贡献率选取前t个<strong>最大</strong>的特征值及其对应的特征向量v i 。</li>
+<li>按列取前r个特征向量，r为想降低到r维度。将r个特征向量向每一维数据减去均值后，所组成矩阵的转置矩阵的特征向量过渡。</li>
+<li>特征向量归一化后，得到测试脸在特征向量下的数据。</li>
+<li>获取训练数据与测试脸之间的距离，其中最小的数据对应的类别就是该类别人脸。</li>
+</ul>
+</li>
+</ol>
+<h3 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h3><p>首先定义一个函数用于将人脸图像矢量化为一个向量，向量的大小与图片的像素有关，代码如下：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 图片矢量化</span>
+<span class="token keyword">def</span> <span class="token function">img2vector</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>image<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># 读取图片</span>
+    rows<span class="token punctuation">,</span> cols <span class="token operator">=</span> img<span class="token punctuation">.</span>shape  <span class="token comment">#获取图片的像素</span>
+    imgVector <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> rows <span class="token operator">*</span> cols<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#初始值均设置为0，大小就是图片像素的大小</span>
+    imgVector <span class="token operator">=</span> np<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> rows <span class="token operator">*</span> cols<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#使用imgVector变量作为一个向量存储图片矢量化信息</span>
+    <span class="token keyword">return</span> imgVector<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接下来定义一个函数用来选取训练图片，并对每张图片进行前面定义过的矢量化处理：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">load_orl</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token comment">#参数K代表选择K张图片作为训练图片使用</span>
+    <span class="token triple-quoted-string string">'''
+    对训练数据集进行数组初始化，用0填充，每张图片尺寸都定为112*92,
+    现在共有40个人，每个人都选择k张，则整个训练集大小为40*k,112*92
+    '''</span>
+    train_face <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">40</span> <span class="token operator">*</span> k<span class="token punctuation">,</span> <span class="token number">112</span> <span class="token operator">*</span> <span class="token number">92</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    train_label <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">40</span> <span class="token operator">*</span> k<span class="token punctuation">)</span>  <span class="token comment"># [0,0,.....0](共40*k个0)</span>
+    test_face <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">40</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">10</span> <span class="token operator">-</span> k<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">112</span> <span class="token operator">*</span> <span class="token number">92</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    test_label <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">40</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">10</span> <span class="token operator">-</span> k<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment"># sample=random.sample(range(10),k)#每个人都有的10张照片中，随机选取k张作为训练样本(10个里面随机选取K个成为一个列表)</span>
+    sample <span class="token operator">=</span> random<span class="token punctuation">.</span>permutation<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span>  <span class="token comment"># 随机排序1-10 (0-9）+1</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 共有40个人</span>
+        people_num <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 每个人都有10张照片</span>
+            image <span class="token operator">=</span> orlpath <span class="token operator">+</span> <span class="token string">'/s'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>people_num<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'/'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>sample<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'.jpg'</span>
+            <span class="token comment"># 读取图片并进行矢量化</span>
+            img <span class="token operator">=</span> img2vector<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> j <span class="token operator">&lt;</span> k<span class="token punctuation">:</span>
+                <span class="token comment"># 构成训练集</span>
+                train_face<span class="token punctuation">[</span>i <span class="token operator">*</span> k <span class="token operator">+</span> j<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> img
+                train_label<span class="token punctuation">[</span>i <span class="token operator">*</span> k <span class="token operator">+</span> j<span class="token punctuation">]</span> <span class="token operator">=</span> people_num
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token comment"># 构成测试集</span>
+                test_face<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">10</span> <span class="token operator">-</span> k<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>j <span class="token operator">-</span> k<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> img
+                test_label<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">10</span> <span class="token operator">-</span> k<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>j <span class="token operator">-</span> k<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> people_num
+
+    <span class="token keyword">return</span> train_face<span class="token punctuation">,</span> train_label<span class="token punctuation">,</span> test_face<span class="token punctuation">,</span> test_label<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>前期将所有训练图片矢量化之后，开始进行PCA算法的降维操作：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">PCA</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token comment">#参数r代表降低到r维</span>
+    data <span class="token operator">=</span> np<span class="token punctuation">.</span>float32<span class="token punctuation">(</span>np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    rows<span class="token punctuation">,</span> cols <span class="token operator">=</span> np<span class="token punctuation">.</span>shape<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+    data_mean <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># 对列求平均值</span>
+    A <span class="token operator">=</span> data <span class="token operator">-</span> np<span class="token punctuation">.</span>tile<span class="token punctuation">(</span>data_mean<span class="token punctuation">,</span> <span class="token punctuation">(</span>rows<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 将所有样例减去对应均值得到A</span>
+    C <span class="token operator">=</span> A <span class="token operator">*</span> A<span class="token punctuation">.</span>T  <span class="token comment"># 得到协方差矩阵</span>
+    D<span class="token punctuation">,</span> V <span class="token operator">=</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>eig<span class="token punctuation">(</span>C<span class="token punctuation">)</span>  <span class="token comment"># 求协方差矩阵的特征值和特征向量</span>
+    V_r <span class="token operator">=</span> V<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">:</span>r<span class="token punctuation">]</span>  <span class="token comment"># 按列取前r个特征向量</span>
+    V_r <span class="token operator">=</span> A<span class="token punctuation">.</span>T <span class="token operator">*</span> V_r  <span class="token comment"># 小矩阵特征向量向大矩阵特征向量过渡</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        V_r<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> i<span class="token punctuation">]</span> <span class="token operator">=</span> V_r<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> i<span class="token punctuation">]</span> <span class="token operator">/</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>norm<span class="token punctuation">(</span>V_r<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> i<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 特征向量归一化</span>
+
+    final_data <span class="token operator">=</span> A <span class="token operator">*</span> V_r
+    <span class="token keyword">return</span> final_data<span class="token punctuation">,</span> data_mean<span class="token punctuation">,</span> V_r<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后我们进行初次训练，随机选取每个人物的五张图片作为训练图片使用。将降低的维数设定为10维，查看一下训练效果如何：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">face_recongize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token comment">#对每一个人随机选取5张照片作为训练数据</span>
+  train_face<span class="token punctuation">,</span> train_label<span class="token punctuation">,</span> test_face<span class="token punctuation">,</span> test_label <span class="token operator">=</span> load_orl<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token comment">#随机选择每个人物的5张图片作为训练数据</span>
+
+  x_value <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  y_value <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token comment">#将图片降维到10维</span>
+  data_train_new<span class="token punctuation">,</span> data_mean<span class="token punctuation">,</span> V_r <span class="token operator">=</span> PCA<span class="token punctuation">(</span>train_face<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+  num_train <span class="token operator">=</span> data_train_new<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment"># 训练脸总数</span>
+  num_test <span class="token operator">=</span> test_face<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment"># 测试脸总数</span>
+  temp_face <span class="token operator">=</span> test_face <span class="token operator">-</span> np<span class="token punctuation">.</span>tile<span class="token punctuation">(</span>data_mean<span class="token punctuation">,</span> <span class="token punctuation">(</span>num_test<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  data_test_new <span class="token operator">=</span> temp_face <span class="token operator">*</span> V_r  <span class="token comment"># 得到测试脸在特征向量下的数据</span>
+  data_test_new <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>data_test_new<span class="token punctuation">)</span>  <span class="token comment"># mat change to array</span>
+  data_train_new <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>data_train_new<span class="token punctuation">)</span>
+
+  true_num <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_test<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      testFace <span class="token operator">=</span> data_test_new<span class="token punctuation">[</span>i<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span>
+      diffMat <span class="token operator">=</span> data_train_new <span class="token operator">-</span> np<span class="token punctuation">.</span>tile<span class="token punctuation">(</span>testFace<span class="token punctuation">,</span> <span class="token punctuation">(</span>num_train<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 训练数据与测试脸之间距离</span>
+      sqDiffMat <span class="token operator">=</span> diffMat <span class="token operator">**</span> <span class="token number">2</span>
+      sqDistances <span class="token operator">=</span> sqDiffMat<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment"># 按行求和</span>
+      sortedDistIndicies <span class="token operator">=</span> sqDistances<span class="token punctuation">.</span>argsort<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 对向量从小到大排序，使用的是索引值,得到一个向量</span>
+      indexMin <span class="token operator">=</span> sortedDistIndicies<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment"># 距离最近的索引</span>
+      <span class="token keyword">if</span> train_label<span class="token punctuation">[</span>indexMin<span class="token punctuation">]</span> <span class="token operator">==</span> test_label<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+          true_num <span class="token operator">+=</span> <span class="token number">1</span>
+      <span class="token keyword">else</span><span class="token punctuation">:</span>
+          <span class="token keyword">pass</span>
+
+  accuracy <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span>true_num<span class="token punctuation">)</span> <span class="token operator">/</span> num_test
+  x_value<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+  y_value<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">round</span><span class="token punctuation">(</span>accuracy<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'当对每个人随机选择%d张照片降低至%d维进行训练时，The classify accuracy is: %.2f%%'</span> <span class="token operator">%</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span> accuracy <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最终训练得到的结果如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918193440884.png" alt="image-20220918193440884"></p>
+<p>为了对比实验，我们分别选取5张、7张、9张，还是降低到10维进行对比实验：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918193452524.png" alt="image-20220918193452524"></p>
 
                 
             </div>
@@ -667,7 +724,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/">https://qt-7274.github.io/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/</a>
+                    <a href="https://qt-7274.github.io/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/">https://qt-7274.github.io/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -705,8 +762,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                                    <span class="chip bg-color">数据结构</span>
+                                <a href="/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/">
+                                    <span class="chip bg-color">图像识别</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%AE%97%E6%B3%95/">
+                                    <span class="chip bg-color">算法</span>
                                 </a>
                             
                         </div>
@@ -1151,9 +1212,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/">
                     <div class="card-image">
@@ -1170,9 +1232,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1181,6 +1243,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1203,23 +1266,23 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/">
+                <a href="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/data-structures.png" class="responsive-img" alt="数据结构入门-字符串">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/data-structures.png" class="responsive-img" alt="数据结构入门--数组与广义表">
                         
-                        <span class="card-title">数据结构入门-字符串</span>
+                        <span class="card-title">数据结构入门--数组与广义表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            字符串的相关操作也是数据结构中的重要一环。
+                            数组是由相同类型的数据元素构成的有限集合。广义表是线性表的推广，也称为列表。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-16
                             </span>
                         <span class="publish-author">
                             
