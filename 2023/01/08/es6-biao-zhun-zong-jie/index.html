@@ -466,14 +466,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    10 分
                 </div>
                 
 
@@ -646,6 +646,15 @@
 <ol>
 <li>有一个解决方法是放松对标签模板里面的字符串转义的限制。如果遇到不合法的字符串转义，就返回undefined，而不是报错，且从raw属性上可以得到原始字符串（只在标签模板解析字符串时生效，非标签模板场合依然会报错。）。</li>
 </ol>
+<h2 id="正则表达式的扩展"><a href="#正则表达式的扩展" class="headerlink" title="正则表达式的扩展"></a>正则表达式的扩展</h2><h3 id="RegExp构造函数"><a href="#RegExp构造函数" class="headerlink" title="RegExp构造函数"></a>RegExp构造函数</h3><p>在ES5中，RegExp构造函数的参数有两种情况：</p>
+<ol>
+<li>第一种情况：参数是字符串，这时第二个参数表示正则表达式的修饰符。</li>
+<li>第二种情况：参数是一个正则表达式，这时会返回一个原有正则表达式的拷贝。但是，此时ES5不允许使用第二个参数添加修饰符，否则会报错。</li>
+</ol>
+<p>ES6改变了这种行为。如果RegExp构造函数第一个参数是一个正则对象，那么可以使用第二个参数指定修饰符。而且，返回的正则表达式会忽略原有正则表达式的修饰符，只使用新指定的修饰符。</p>
+<h3 id="U修饰符"><a href="#U修饰符" class="headerlink" title="U修饰符"></a>U修饰符</h3><p>ES6对正则表达式添加了u修饰符，含义为“Unicode 模式”，用来正确处理大于\uFFFF的Unicode字符。也就是说，可以正确处理4个字节的UTF-16编码。</p>
+<h4 id="点字符"><a href="#点字符" class="headerlink" title="点字符"></a>点字符</h4><p><code>.</code>字符在正则表达式中的含义是除换行符以外的任意单个字符，对于码点大于0xFFFF的Unicode字符，<code>.</code>字符不能识别，必须加上u修饰符。</p>
+<p>后面的以后再写，懒得写了。</p>
 
                 
             </div>
