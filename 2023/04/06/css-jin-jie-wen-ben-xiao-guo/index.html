@@ -5,8 +5,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CSS进阶--负margin技术, QT-7274">
-    <meta name="description" content="负margin技术应用也非常广泛，例如图片与文本进行对齐、自适应两列布局等。">
+    <meta name="keywords" content="CSS进阶--文本效果, QT-7274">
+    <meta name="description" content="本文主要深入学习以下4个文字属性：text-indent、text-align、line-height、vertical-align">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +20,7 @@
 
     
 
-    <title>CSS进阶--负margin技术 | QT-7274</title>
+    <title>CSS进阶--文本效果 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -306,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E8%B4%9Fmargin%E6%8A%80%E6%9C%AF.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CSS%E8%BF%9B%E9%98%B6--%E6%96%87%E6%9C%AC%E6%95%88%E6%9E%9C.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CSS进阶--负margin技术</h1>
+                    <h1 class="description center-align post-title">CSS进阶--文本效果</h1>
                 </div>
             </div>
         </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-03-19
+                    2023-04-06
                 </div>
                 
 
@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    691
+                    722
                 </div>
                 
 
@@ -500,77 +500,38 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="负margin技术"><a href="#负margin技术" class="headerlink" title="负margin技术"></a>负margin技术</h1><p>当margin取值为负数时，margin对普通文档流元素和对浮动元素的影响是不一样的。其中，margin对普通文档流元素的影响，可以分为以下两种情况：</p>
-<ul>
-<li>当元素的margin-top或者margin-left为负数时，“<strong>当前元素</strong>”会被拉向指定方向。</li>
-<li>当元素的margin-bottom或者margin-right为负数时，“<strong>后续元素</strong>”会被拉向指定方向。</li>
+                <h1 id="文本效果"><a href="#文本效果" class="headerlink" title="文本效果"></a>文本效果</h1><h2 id="深入text-indent"><a href="#深入text-indent" class="headerlink" title="深入text-indent"></a>深入text-indent</h2><ol>
+<li>实现首行缩进2字符：<code>text-indent:2em</code></li>
+<li>在引擎优化中，h1是非常重要的标签，一般情况下，我们都是把网站的LOGO图片放在h1标签中。但是搜索引擎只能识别文字，不能识别图片。为了更好地进行搜索引擎优化，一个很好的解决方案是：<ul>
+<li>指定h1元素的长宽和LOGO图片的长宽一样</li>
+<li>定义h1的背景图片为LOGO图片</li>
+<li>使用<code>text-indent:-9999px</code>来隐藏h1的文字内容</li>
 </ul>
-<p>对于浮动元素，我们只需要比普通文档流元素多考虑一点，那就是浮动元素的“流动方向”。</p>
-<h2 id="负margin技巧"><a href="#负margin技巧" class="headerlink" title="负margin技巧"></a>负margin技巧</h2><h3 id="图片与文本对齐"><a href="#图片与文本对齐" class="headerlink" title="图片与文本对齐"></a>图片与文本对齐</h3><p>当图片与文本放到一起的时候，它们在底部水平方向上往往都是不对齐的。这是因为在默认情况下，图片与周围的文本是基线对齐，也就是vertical-align:baseline。如果想让它们在底部水平方向上对齐，有两种方法：一种是使用vertical-align:text-bottom；另一种是使用负margin技术。</p>
-<p><img src="/medias/images/loading.gif" data-original="C:/Users/qsq/AppData/Roaming/Typora/typora-user-images/image-20230319234230998.png" alt="image-20230319234230998"></p>
-<p>默认情况下，图片与文字在底部水平方向上是不对齐的。我们在CSS中添加：</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">img</span><span class="token punctuation">&#123;</span>
-	<span class="token property">margin</span><span class="token punctuation">:</span>0 3px -3px 0<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>得到效果如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="C:/Users/qsq/AppData/Roaming/Typora/typora-user-images/image-20230319234504244.png" alt="image-20230319234504244"></p>
-<h3 id="自适应两列布局"><a href="#自适应两列布局" class="headerlink" title="自适应两列布局"></a>自适应两列布局</h3><p>自适应两列布局，指的是在两列布局中，其中一列的宽度是固定的，而另外一列宽度自适应。如果使用浮动来做的话，只能实现固定的左右两列布局，并不能实现其中一列为自适应的布局。</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=edge<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
-        <span class="token selector">#main,#sidebar</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
-            <span class="token property">color</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token selector">#main</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
-            <span class="token property">background-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
-            <span class="token property">margin-right</span><span class="token punctuation">:</span> -200px<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token selector">#sidebar</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-            <span class="token property">background-color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
-           
-        <span class="token punctuation">&#125;</span>
-        <span class="token comment">/* 防止浏览器可视区域宽度不足时发生文本重叠 */</span>
-        <span class="token selector">#main p</span> <span class="token punctuation">&#123;</span><span class="token property">margin-right</span><span class="token punctuation">:</span> 210px<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
-    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-       
-    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>main<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>这是主体部分，自适应宽度<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sidebar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>这是侧边栏部分，固定宽度<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="C:/Users/qsq/AppData/Roaming/Typora/typora-user-images/image-20230319235048025.png" alt="image-20230319235048025"></p>
-<h3 id="元素垂直居中"><a href="#元素垂直居中" class="headerlink" title="元素垂直居中"></a>元素垂直居中</h3><p>想要实现块元素的垂直居中，一般来说比较麻烦，不过有一个经典的方法就是使用position结合负margin来实现：首先，给父元素写上position:relative，这样做是为了给子元素添加position:absolute的时候不会定位到外太空去；然后给子元素添加如下属性：</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">父元素</span><span class="token punctuation">&#123;</span>
-        <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span>
-<span class="token selector">子元素</span><span class="token punctuation">&#123;</span>
-        <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
-        <span class="token property">top</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
-        <span class="token property">left</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
-        <span class="token property">margin-top</span><span class="token punctuation">:</span> “height值一半的负值”<span class="token punctuation">;</span>
-        <span class="token property">margin-left</span><span class="token punctuation">:</span> “width值一般的负值”<span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="tab选项卡"><a href="#tab选项卡" class="headerlink" title="tab选项卡"></a>tab选项卡</h3><p>具体技巧就是使用margin-top:-1px消除tab选项卡的下边框。</p>
+</li>
+</ol>
+<h2 id="深入text-align"><a href="#深入text-align" class="headerlink" title="深入text-align"></a>深入text-align</h2><p>text-align属性用来定义文本或图片的对齐方式，常用取值为left、right、center。</p>
+<p>text-align属性对文本、inline元素以及inline-block元素都会起作用，但对block元素不起作用。</p>
+<h3 id="关于页面居中"><a href="#关于页面居中" class="headerlink" title="关于页面居中"></a>关于页面居中</h3><p>在实现页面居中的方式中，<code>text-align:center</code>和<code>margin:0 auto</code>是最常见的两种居中方式，不过这两者也有着本质的区别。</p>
+<ul>
+<li><code>text-align:center</code> 实现的是文本、inline元素以及inline-block元素的水平居中。</li>
+<li><code>margin:0 auto</code>实现的是block元素的水平居中。</li>
+<li><code>text-align:center</code> 在<strong>父元素</strong>中定义，<code>margin:0 auto</code>在<strong>当前元素</strong>中定义。</li>
+</ul>
+<h2 id="深入line-height"><a href="#深入line-height" class="headerlink" title="深入line-height"></a>深入line-height</h2><p>line-height的准确定义：两行文字<strong>基线</strong>之间的距离。关于顶线、中线、基线、底线的内容本文不再赘述。</p>
+<h3 id="height和line-height"><a href="#height和line-height" class="headerlink" title="height和line-height"></a>height和line-height</h3><p>line-height是有默认值的，当没有定义line-height属性时，浏览器就会采用默认的line-height值。</p>
+<p>一行文字的高度是由line-height决定，而不是由height决定。例如在p标签中，一个p标签的文字可以有很多行，其中line-height定义的是一行文字的高度，而height定义的才是整个段落的高度（即p标签的高度）。</p>
+<p>我们可以定义height和line-height这<strong>两个属性值相等</strong>，从而实现<strong>单行文字的垂直居中</strong>。</p>
+<h3 id="line-height的取值"><a href="#line-height的取值" class="headerlink" title="line-height的取值"></a>line-height的取值</h3><p>当line-height的取值为百分比或者em值时，元素的行高是相对于“当前元素”的font-size值来计算的。计算公式如下：</p>
+<p><code>line-height = （当前元素font-size）×（百分比）</code> </p>
+<p><code>line-height =（当前元素font-size）×（em值）</code></p>
+<h2 id="深入vertical-align"><a href="#深入vertical-align" class="headerlink" title="深入vertical-align"></a>深入vertical-align</h2><p>W3C官方对vertical-align属性的定义有以下4个方面的解释。</p>
+<ul>
+<li>vertical-align属性用于定义<strong>周围的文字、inline元素以及inline-block元素相对于该元素基线的垂直对齐方式</strong>。</li>
+<li>在表格单元格中，vertical-align属性可以定义单元格td元素中内容的对齐方式。td元素是table-cell元素，也就是说vertical-align属性对table-cell类型元素有效（<strong>针对自身而言</strong>）。</li>
+<li>vertical-align属性对inline元素、inline-block元素和table-cell元素有效，对block元素无效。</li>
+<li>vertical-align属性允许制定负长度值（如-2px）和百分比值（如50%）。</li>
+</ul>
+<p>vertical-align属性中最常见的属性值有4个：top、middle、baseline、bottom</p>
 
                 
             </div>
@@ -597,7 +558,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2023/03/19/css-jin-jie-fu-margin-ji-zhu/">https://qt-7274.github.io/2023/03/19/css-jin-jie-fu-margin-ji-zhu/</a>
+                    <a href="https://qt-7274.github.io/2023/04/06/css-jin-jie-wen-ben-xiao-guo/">https://qt-7274.github.io/2023/04/06/css-jin-jie-wen-ben-xiao-guo/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1085,28 +1046,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/03/22/css-jin-jie-display-jian-jie/">
+                <a href="/2023/04/06/css-jin-jie-wen-ben-xiao-guo/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/display%E7%AE%80%E4%BB%8B.jpg" class="responsive-img" alt="CSS进阶--display简介">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CSS%E8%BF%9B%E9%98%B6--%E6%96%87%E6%9C%AC%E6%95%88%E6%9E%9C.png" class="responsive-img" alt="CSS进阶--文本效果">
                         
-                        <span class="card-title">CSS进阶--display简介</span>
+                        <span class="card-title">CSS进阶--文本效果</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            display属性是前端开发中非常常见的，用好display属性能节约很多开发时间。
+                            本文主要深入学习以下4个文字属性：text-indent、text-align、line-height、vertical-align
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1119,6 +1081,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1141,23 +1104,23 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/19/css-jin-jie-wai-bian-ju-die-jia/">
+                <a href="/2023/03/30/liu-lan-qi-zhong-de-chong-hui-he-chong-pai/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%A4%96%E8%BE%B9%E8%B7%9D%E5%8F%A0%E5%8A%A0.png" class="responsive-img" alt="CSS进阶--外边距叠加">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E7%BB%98%E5%92%8C%E9%87%8D%E6%8E%92.png" class="responsive-img" alt="浏览器中的重绘和重排">
                         
-                        <span class="card-title">CSS进阶--外边距叠加</span>
+                        <span class="card-title">浏览器中的重绘和重排</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            外边距叠加是前端开发中非常重要的知识，同时它的用途也非常广泛。
+                            重绘和重排是浏览器性能优化中非常重要的一部分，因为它们直接影响到网页的渲染速度和用户体验。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-30
                             </span>
                         <span class="publish-author">
                             
@@ -1176,10 +1139,6 @@
                     
                     <a href="/tags/%E5%89%8D%E7%AB%AF/">
                         <span class="chip bg-color">前端</span>
-                    </a>
-                    
-                    <a href="/tags/CSS/">
-                        <span class="chip bg-color">CSS</span>
                     </a>
                     
                 </div>
