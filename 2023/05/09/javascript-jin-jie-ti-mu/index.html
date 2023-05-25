@@ -621,7 +621,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 <p>在JavaScript中，当将一个对象赋值给另一个对象时，它们之间是通过引用进行交互的。这意味着，当我们将一个对象赋值给另一个变量时，实际上是将该对象的引用复制到了新变量中，而不是将对象本身复制到新变量中。</p>
 <p>在这个例子中，变量<code>c</code>保存了一个对象的值。稍后，我们将<code>d</code>赋值为与<code>c</code>具有相同引用的对象。这意味着，<code>c</code>和<code>d</code>现在都引用同一个对象，因此对该对象的任何更改都会反映在c和d中。这种交互方式可以节省内存，因为它避免了在内存中复制大量的对象。但需要注意的是，如果我们想要复制一个对象而不是引用它，我们需要使用深拷贝（deep copy）或浅拷贝（shallow copy）的技术。</p>
-<p><img src="/medias/images/loading.gif" data-original="C:/Users/qsq/AppData/Roaming/Typora/typora-user-images/image-20230511170713933.png" alt="image-20230511170713933"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/05/09/javascript-jin-jie-ti-mu/image-20230525174921080.png" alt="image-20230525174921080"></p>
 <p>当你改变一个对象时，所有引用该对象的变量都会改变。</p>
 </li>
 <li><h3 id="对象比较"><a href="#对象比较" class="headerlink" title="对象比较"></a>对象比较</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let a &#x3D; 3;
@@ -776,7 +776,6 @@ console.log(sarah);<span aria-hidden="true" class="line-numbers-rows"><span></sp
 
 <p><strong>Answer: D</strong></p>
 <p>在捕获阶段中，事件从祖先元素开始向下传播到目标元素。然后，事件到达目标元素并触发。接着，冒泡阶段开始，事件从目标元素开始向上冒泡到最外层的元素。因此，在事件传播的过程中，捕获阶段和冒泡阶段都是必要的，它们共同构成了事件传播的完整过程。</p>
-<p><img src="/medias/images/loading.gif" data-original="/image-20230525170205089.png" alt="image-20230525170205089"></p>
 </li>
 <li><h3 id="所有对象都有原型？"><a href="#所有对象都有原型？" class="headerlink" title="所有对象都有原型？"></a>所有对象都有原型？</h3><ul>
 <li>A: 正确</li>
