@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-05-25
+                    2023-06-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.1k
+                    5.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    22 分
                 </div>
                 
 
@@ -787,8 +787,7 @@ console.log(sarah);<span aria-hidden="true" class="line-numbers-rows"><span></sp
 <p><strong>Answer: B</strong></p>
 <p>所有对象都有原型，除了<strong>基础对象</strong>。基础对象是由用户创建的对象，或使用<code>new</code>关键字创建的对象。基础对象可以访问一些方法和属性，例如<code>.toString</code>方法。这就是为什么可以使用内置的JavaScript方法的原因！所有类似的方法都在原型上可用。虽然JavaScript无法直接在对象上找到它，但它会沿着原型链向下查找并在那里找到它，这使得它对您可用。</p>
 </li>
-<li><p>上的</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sum(a, b) &#123;
+<li><h3 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sum(a, b) &#123;
   return a + b;
 &#125;
 
@@ -802,12 +801,312 @@ sum(1, &#39;2&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></s
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 
-<p><strong>Answer: C</strong></p>
 <p>JavaScript是一种<strong>动态类型语言</strong>：不指定某些变量的类型。值可以自动转换为另一种类型，这被称为隐式类型转换。转换是从一种类型转换为另一种类型。</p>
 <p>在这个例子中，JavaScript将数字<code>1</code>转换为字符串，以便函数有意义并返回一个值。在数字类型（<code>1</code>）和字符串类型（<code>&#39;2&#39;</code>）相加时，数字被视为字符串。我们可以像<code>&quot;Hello&quot;+&quot;World&quot;</code>一样连接字符串，所以这里发生的是<code>&quot;1&quot;+&quot;2&quot;</code>，返回<code>&quot;12&quot;</code>。</p>
 </li>
-<li><p>是多少</p>
+<li><h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let number &#x3D; 0;
+console.log(number++);
+console.log(++number);
+console.log(number);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>1</code> <code>1</code> <code>2</code></li>
+<li>B: <code>1</code> <code>2</code> <code>2</code></li>
+<li>C: <code>0</code> <code>2</code> <code>2</code></li>
+<li>D: <code>0</code> <code>1</code> <code>2</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>后缀一元运算符<code>++</code>：</p>
+<p>返回值（此处返回<code>0</code>）<br>增加值（数字现在为<code>1</code>）<br>前缀一元运算符 <code>++</code>：</p>
+<p>增加值（数字现在为<code>2</code>）<br>返回值（此处返回<code>2</code>）<br>这将返回<code>0 2 2</code>。</p>
+</li>
+<li><h3 id="标记模板字面量"><a href="#标记模板字面量" class="headerlink" title="标记模板字面量"></a>标记模板字面量</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getPersonInfo(one, two, three) &#123;
+  console.log(one);
+  console.log(two);
+  console.log(three);
+&#125;
+
+const person &#x3D; &#39;Lydia&#39;;
+const age &#x3D; 21;
+
+getPersonInfo&#96;$&#123;person&#125; is $&#123;age&#125; years old&#96;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lydia&quot;</code> <code>21</code> <code>[&quot;&quot;, &quot; is &quot;, &quot; years old&quot;]</code></li>
+<li>B: <code>[&quot;&quot;, &quot; is &quot;, &quot; years old&quot;]</code> <code>&quot;Lydia&quot;</code> <code>21</code></li>
+<li>C: <code>&quot;Lydia&quot;</code> <code>[&quot;&quot;, &quot; is &quot;, &quot; years old&quot;]</code> <code>21</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>如果你使用标记模板字面量，第一个参数的值总是一个字符串值的数组。其余的参数获取传递的表达式的值！</p>
+</li>
+<li><h3 id="对象比较-1"><a href="#对象比较-1" class="headerlink" title="对象比较"></a>对象比较</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function checkAge(data) &#123;
+  if (data &#x3D;&#x3D;&#x3D; &#123; age: 18 &#125;) &#123;
+    console.log(&#39;You are an adult!&#39;);
+  &#125; else if (data &#x3D;&#x3D; &#123; age: 18 &#125;) &#123;
+    console.log(&#39;You are still an adult.&#39;);
+  &#125; else &#123;
+    console.log(&#96;Hmm.. You don&#39;t have an age I guess&#96;);
+  &#125;
+&#125;
+
+checkAge(&#123; age: 18 &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>You are an adult!</code></li>
+<li>B: <code>You are still an adult.</code></li>
+<li>C: <code>Hmm.. You don&#39;t have an age I guess</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>JavaScript中比较相等性时，原始值是按照它们的值进行比较的，而对象是按照它们的引用进行比较的。JavaScript会检查这些对象是否具有指向内存中相同位置的引用。</p>
+<p>我们比较的两个对象没有这个引用：我们作为参数传递的对象与我们用来检查相等性的对象在内存中引用的位置不同。因此，它们被认为是不相等的。</p>
+<blockquote>
+<p>在JavaScript中，&#x3D;&#x3D;和&#x3D;&#x3D;&#x3D;都用于比较两个值的相等性。&#x3D;&#x3D;运算符比较两个值是否相等，但它会进行类型转换。如果两个值的类型不同，&#x3D;&#x3D;运算符会尝试将它们转换为相同的类型，然后再进行比较。例如，如果我们比较数字1和字符串”1”，&#x3D;&#x3D;运算符会将字符串”1”转换为数字1，然后再进行比较。如果两个值的类型相同，&#x3D;&#x3D;运算符会直接比较它们的值。</p>
+</blockquote>
+<p>这就是为什么 <code>&#123; age: 18 &#125; === &#123; age: 18 &#125;</code> 和 <code>&#123; age: 18 &#125; == &#123; age: 18 &#125;</code> 返回 <code>false</code>.</p>
+</li>
+<li><h3 id="rest参数"><a href="#rest参数" class="headerlink" title="rest参数"></a>rest参数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getAge(...args) &#123;
+  console.log(typeof args);
+&#125;
+
+getAge(21);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;number&quot;</code></li>
+<li>B: <code>&quot;array&quot;</code></li>
+<li>C: <code>&quot;object&quot;</code></li>
+<li>D: <code>&quot;NaN&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>rest参数（…args）允许我们将所有剩余的参数“收集”到一个数组中。数组是一个对象，因此typeof args返回”object”。这意味着我们可以使用数组的方法来操作这些参数。例如，我们可以使用args.length来获取传递的参数的数量，或者使用args.forEach来遍历这些参数。使用rest参数可以使函数更加灵活，因为它允许我们接受任意数量的参数。</p>
+</li>
+<li><h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getAge() &#123;
+  &#39;use strict&#39;;
+  age &#x3D; 21;
+  console.log(age);
+&#125;
+
+getAge();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>21</code></li>
+<li>B: <code>undefined</code></li>
+<li>C: <code>ReferenceError</code></li>
+<li>D: <code>TypeError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: C**
+
+<p>使用”use strict”可以确保不会意外地声明全局变量。在上面的代码中，我们没有声明变量age，但由于我们使用了”use strict”，它会抛出一个引用错误。如果我们没有使用”use strict”，它仍然可以工作，因为属性age会被添加到全局对象中。使用”use strict”可以帮助我们避免一些常见的错误，例如意外地声明全局变量或使用未声明的变量。它还可以使代码更加严格，从而提高代码的可读性和可维护性。</p>
+</li>
+<li><h3 id="计算函数"><a href="#计算函数" class="headerlink" title="计算函数"></a>计算函数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const sum &#x3D; eval(&#39;10*10+5&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>105</code></li>
+<li>B: <code>&quot;105&quot;</code></li>
+<li>C: <code>TypeError</code></li>
+<li>D: <code>&quot;10*10+5&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p><code>eval</code>函数评估作为字符串传递的代码。如果它是一个表达式，就像这个例子一样，它会评估这个表达式。这个表达式是<code>10 * 10 + 5</code>。这将返回数字<code>105</code>。</p>
+</li>
+<li><h3 id="cool-secret-可以访问多长时间？"><a href="#cool-secret-可以访问多长时间？" class="headerlink" title="cool_secret 可以访问多长时间？"></a>cool_secret 可以访问多长时间？</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">sessionStorage.setItem(&#39;cool_secret&#39;, 123);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: 永远，数据不会丢失。</li>
+<li>B: 当用户关闭选项卡时。</li>
+<li>C: 当用户关闭整个浏览器时，不仅仅是选项卡。</li>
+<li>D: 当用户关闭他们的计算机时。</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>存储在<code>sessionStorage</code>中的数据在关闭选项卡后会被删除。</p>
+<p>如果您使用了<code>localStorage</code>，除非例如调用<code>localStorage.clear()</code>，否则数据将永久存在。</p>
+</li>
+<li><h3 id="var关键字"><a href="#var关键字" class="headerlink" title="var关键字"></a>var关键字</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var num &#x3D; 8;
+var num &#x3D; 10;
+
+console.log(num);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>8</code></li>
+<li>B: <code>10</code></li>
+<li>C: <code>SyntaxError</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>使用<code>var</code>关键字，您可以声明多个具有相同名称的变量。变量将保存最新的值。</p>
+<p>使用<code>let</code>或<code>const</code>无法这样做，因为它们是块作用域的。</p>
+</li>
+<li><h3 id="对象与集合的键"><a href="#对象与集合的键" class="headerlink" title="对象与集合的键"></a>对象与集合的键</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const obj &#x3D; &#123; 1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39; &#125;;
+const set &#x3D; new Set([1, 2, 3, 4, 5]);
+
+obj.hasOwnProperty(&#39;1&#39;);
+obj.hasOwnProperty(1);
+set.has(&#39;1&#39;);
+set.has(1);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>false</code> <code>true</code> <code>false</code> <code>true</code></li>
+<li>B: <code>false</code> <code>true</code> <code>true</code> <code>true</code></li>
+<li>C: <code>true</code> <code>true</code> <code>false</code> <code>true</code></li>
+<li>D: <code>true</code> <code>true</code> <code>true</code> <code>true</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>所有对象的键（不包括 Symbols）在底层都是字符串，即使您没有将其键入为字符串。这就是为什么<code>obj.hasOwnProperty(&#39;1&#39;)</code>也返回<code>true</code>的原因。</p>
+<p>但是对于集合来说，情况并非如此。我们的集合中没有<code>&#39;1&#39;</code>，所有<code>set.has(&#39;1&#39;)</code>返回<code>false</code>。它具有数字类型<code>1</code>，<code>set.has(1)</code>返回<code>true</code>。</p>
+</li>
+<li><h3 id="重复的键"><a href="#重复的键" class="headerlink" title="重复的键"></a>重复的键</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const obj &#x3D; &#123; a: &#39;one&#39;, b: &#39;two&#39;, a: &#39;three&#39; &#125;;
+console.log(obj);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; a: &quot;one&quot;, b: &quot;two&quot; &#125;</code></li>
+<li>B: <code>&#123; b: &quot;two&quot;, a: &quot;three&quot; &#125;</code></li>
+<li>C: <code>&#123; a: &quot;three&quot;, b: &quot;two&quot; &#125;</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: B**
+
+<p>如果您有两个具有相同名称的键，则该键将被替换。它仍将位于其第一个位置，但具有最后指定的值。</p>
+</li>
+<li><p>全局执行上下文</p>
+<blockquote>
+<p>JavaScript全局执行上下文为您创建了两个东西：全局对象和“this”关键字。</p>
+</blockquote>
+<ul>
+<li>A: 正确</li>
+<li>B: 错误</li>
+<li>C: 取决于环境</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>基本执行上下文是全局执行上下文：它是您代码中任何地方都可以访问的内容。</p>
+</li>
+<li><p>循环迭代</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">for (let i &#x3D; 1; i &lt; 5; i++) &#123;
+  if (i &#x3D;&#x3D;&#x3D; 3) continue;
+  console.log(i);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>1</code> <code>2</code></li>
+<li>B: <code>1</code> <code>2</code> <code>3</code></li>
+<li>C: <code>1</code> <code>2</code> <code>4</code></li>
+<li>D: <code>1</code> <code>3</code> <code>4</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p><code>continue</code>语句在某个条件返回<code>true</code>时跳过当前迭代。</p>
+</li>
+<li><p>原型方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">String.prototype.giveLydiaPizza &#x3D; () &#x3D;&gt; &#123;
+  return &#39;Just give Lydia pizza already!&#39;;
+&#125;;
+
+const name &#x3D; &#39;Lydia&#39;;
+
+console.log(name.giveLydiaPizza())<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Just give Lydia pizza already!&quot;</code></li>
+<li>B: <code>TypeError: not a function</code></li>
+<li>C: <code>SyntaxError</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p> <code>String</code>是一个内置的构造函数，我们可以向其添加属性。我刚刚向其原型添加了一个方法。原始字符串会自动转换为由字符串原型函数生成的字符串对象。因此，所有字符串（字符串对象）都可以访问该方法！这意味着，如果您向字符串原型添加一个方法，那么<strong>所有</strong>字符串都可以使用该方法。</p>
+</li>
+<li><p>对象键</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const a &#x3D; &#123;&#125;;
+const b &#x3D; &#123; key: &#39;b&#39; &#125;;
+const c &#x3D; &#123; key: &#39;c&#39; &#125;;
+
+a[b] &#x3D; 123;
+a[c] &#x3D; 456;
+
+console.log(a[b]);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>123</code></li>
+<li>B: <code>456</code></li>
+<li>C: <code>undefined</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>这段代码中，我们尝试将一个对象作为键设置到对象<code>a</code>中，并将其值设置为<code>123</code>。然而，当我们将一个对象转换为字符串时，它会变成<code>&quot;[object Object]&quot;</code>。因此，我们实际上是在说<code>a[&quot;[object Object]&quot;] = 123</code>。然后，我们尝试再次做同样的事情。c是另一个我们隐式转换为字符串的对象。因此，<code>a[&quot;[object Object]&quot;] = 456</code>。然后，我们记录<code>a[b]</code>，实际上是<code>a[&quot;[object Object]&quot;]</code>。我们刚刚将其设置为<code>456</code>，因此它返回<code>456</code>。</p>
+<blockquote>
+<p>这段代码中的关键点是对象键自动转换为字符串，因此需要小心处理对象键。</p>
+</blockquote>
+</li>
+<li><p>kas</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const foo &#x3D; () &#x3D;&gt; console.log(&#39;First&#39;);
+const bar &#x3D; () &#x3D;&gt; setTimeout(() &#x3D;&gt; console.log(&#39;Second&#39;));
+const baz &#x3D; () &#x3D;&gt; console.log(&#39;Third&#39;);
+
+bar();
+foo();
+baz();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>First</code> <code>Second</code> <code>Third</code></li>
+<li>B: <code>First</code> <code>Third</code> <code>Second</code></li>
+<li>C: <code>Second</code> <code>First</code> <code>Third</code></li>
+<li>D: <code>Second</code> <code>Third</code> <code>First</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>这段代码中，我们首先调用了setTimeout函数，但是它是最后被打印出的。这是因为在浏览器中，我们不仅有运行时引擎，还有一个叫做WebAPI的东西。WebAPI为我们提供了setTimeout函数，以及例如DOM等其他功能。</p>
+<p>在callback被推送到WebAPI之后，setTimeout函数本身（但不是callback！）被弹出堆栈。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/05/09/javascript-jin-jie-ti-mu/image-20230612163646188.png" alt="image-20230612163646188"></p>
+<p>现在，foo函数被调用，”First”被记录下来。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/05/09/javascript-jin-jie-ti-mu/image-20230612170120088.png" alt="image-20230612170120088"></p>
+<p>foo函数被执行完毕后，它被弹出了调用栈，然后baz函数被调用并执行。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/05/09/javascript-jin-jie-ti-mu/image-20230612170135795.png" alt="image-20230612170135795"></p>
+<p>在JavaScript中，WebAPI不能随时将回调函数添加到调用栈中。相反，它将回调函数推送到一个叫做队列的数据结构中。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/05/09/javascript-jin-jie-ti-mu/image-20230612170150767.png" alt="image-20230612170150767"></p>
+<p>事件循环是JavaScript中的一种机制，它用于处理异步代码。事件循环会不断地检查调用栈和任务队列。如果调用栈为空，事件循环会从任务队列中取出下一个任务，并将其推送到调用栈中执行。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/05/09/javascript-jin-jie-ti-mu/image-20230612170204456.png" alt="image-20230612170204456"></p>
+</li>
+<li><p>2ds</p>
 </li>
 </ol>
 
