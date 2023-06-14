@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-12
+                    2023-06-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.4k
+                    6.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    22 分
+                    28 分
                 </div>
                 
 
@@ -996,8 +996,7 @@ console.log(obj);<span aria-hidden="true" class="line-numbers-rows"><span></span
 
 <p>如果您有两个具有相同名称的键，则该键将被替换。它仍将位于其第一个位置，但具有最后指定的值。</p>
 </li>
-<li><p>全局执行上下文</p>
-<blockquote>
+<li><h3 id="全局执行上下文"><a href="#全局执行上下文" class="headerlink" title="全局执行上下文"></a>全局执行上下文</h3><blockquote>
 <p>JavaScript全局执行上下文为您创建了两个东西：全局对象和“this”关键字。</p>
 </blockquote>
 <ul>
@@ -1011,8 +1010,7 @@ console.log(obj);<span aria-hidden="true" class="line-numbers-rows"><span></span
 <p><strong>Answer: A</strong></p>
 <p>基本执行上下文是全局执行上下文：它是您代码中任何地方都可以访问的内容。</p>
 </li>
-<li><p>循环迭代</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">for (let i &#x3D; 1; i &lt; 5; i++) &#123;
+<li><h3 id="循环迭代"><a href="#循环迭代" class="headerlink" title="循环迭代"></a>循环迭代</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">for (let i &#x3D; 1; i &lt; 5; i++) &#123;
   if (i &#x3D;&#x3D;&#x3D; 3) continue;
   console.log(i);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
@@ -1029,8 +1027,7 @@ console.log(obj);<span aria-hidden="true" class="line-numbers-rows"><span></span
 <p><strong>Answer: C</strong></p>
 <p><code>continue</code>语句在某个条件返回<code>true</code>时跳过当前迭代。</p>
 </li>
-<li><p>原型方法</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">String.prototype.giveLydiaPizza &#x3D; () &#x3D;&gt; &#123;
+<li><h3 id="原型方法"><a href="#原型方法" class="headerlink" title="原型方法"></a>原型方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">String.prototype.giveLydiaPizza &#x3D; () &#x3D;&gt; &#123;
   return &#39;Just give Lydia pizza already!&#39;;
 &#125;;
 
@@ -1050,8 +1047,7 @@ console.log(name.giveLydiaPizza())<span aria-hidden="true" class="line-numbers-r
 <p><strong>Answer: C</strong></p>
 <p> <code>String</code>是一个内置的构造函数，我们可以向其添加属性。我刚刚向其原型添加了一个方法。原始字符串会自动转换为由字符串原型函数生成的字符串对象。因此，所有字符串（字符串对象）都可以访问该方法！这意味着，如果您向字符串原型添加一个方法，那么<strong>所有</strong>字符串都可以使用该方法。</p>
 </li>
-<li><p>对象键</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const a &#x3D; &#123;&#125;;
+<li><h3 id="对象键"><a href="#对象键" class="headerlink" title="对象键"></a>对象键</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const a &#x3D; &#123;&#125;;
 const b &#x3D; &#123; key: &#39;b&#39; &#125;;
 const c &#x3D; &#123; key: &#39;c&#39; &#125;;
 
@@ -1075,8 +1071,7 @@ console.log(a[b]);<span aria-hidden="true" class="line-numbers-rows"><span></spa
 <p>这段代码中的关键点是对象键自动转换为字符串，因此需要小心处理对象键。</p>
 </blockquote>
 </li>
-<li><p>kas</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const foo &#x3D; () &#x3D;&gt; console.log(&#39;First&#39;);
+<li><h3 id="事件触发"><a href="#事件触发" class="headerlink" title="事件触发"></a>事件触发</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const foo &#x3D; () &#x3D;&gt; console.log(&#39;First&#39;);
 const bar &#x3D; () &#x3D;&gt; setTimeout(() &#x3D;&gt; console.log(&#39;Second&#39;));
 const baz &#x3D; () &#x3D;&gt; console.log(&#39;Third&#39;);
 
@@ -1092,8 +1087,8 @@ baz();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 
-<p><strong>Answer: B</strong></p>
 <p>这段代码中，我们首先调用了setTimeout函数，但是它是最后被打印出的。这是因为在浏览器中，我们不仅有运行时引擎，还有一个叫做WebAPI的东西。WebAPI为我们提供了setTimeout函数，以及例如DOM等其他功能。</p>
 <p>在callback被推送到WebAPI之后，setTimeout函数本身（但不是callback！）被弹出堆栈。</p>
 <p><img src="/medias/images/loading.gif" data-original="/2023/05/09/javascript-jin-jie-ti-mu/image-20230612163646188.png" alt="image-20230612163646188"></p>
@@ -1106,7 +1101,204 @@ baz();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 <p>事件循环是JavaScript中的一种机制，它用于处理异步代码。事件循环会不断地检查调用栈和任务队列。如果调用栈为空，事件循环会从任务队列中取出下一个任务，并将其推送到调用栈中执行。</p>
 <p><img src="/medias/images/loading.gif" data-original="/2023/05/09/javascript-jin-jie-ti-mu/image-20230612170204456.png" alt="image-20230612170204456"></p>
 </li>
-<li><p>2ds</p>
+<li><h3 id="点击按钮时哪一个是event-target？"><a href="#点击按钮时哪一个是event-target？" class="headerlink" title="点击按钮时哪一个是event.target？"></a>点击按钮时哪一个是event.target？</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'first div'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'second div'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+      Click!
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: 外层的 <code>div</code></li>
+<li>B: 内层的 <code>div</code></li>
+<li>C: <code>button</code></li>
+<li>D: 所有嵌套元素的数组</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>当点击一个元素时，事件会从该元素开始向上冒泡，直到达到文档根节点。在这个过程中，每个祖先元素都会收到该事件。事件的目标元素是最深层次的嵌套元素，它是直接触发事件的元素。您可以使用<code>event.target</code>属性来访问该元素。如果您想停止事件冒泡，可以使用<code>event.stopPropagation()</code>方法。这将阻止事件继续向上冒泡，从而只触发目标元素的事件处理程序。</p>
+</li>
+<li><h3 id="事件处理顺序"><a href="#事件处理顺序" class="headerlink" title="事件处理顺序"></a>事件处理顺序</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'p'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+    Click here!
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>p</code> <code>div</code></li>
+<li>B: <code>div</code> <code>p</code></li>
+<li>C: <code>p</code></li>
+<li>D: <code>div</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>如果我们点击一个<code>p</code>元素，我们会看到两个打印结果：<code>p</code>和<code>div</code>。在这个过程中，事件会经历三个阶段：捕获阶段、目标阶段和冒泡阶段。默认情况下，事件处理程序会在冒泡阶段执行（除非您将<code>useCapture</code>设置为<code>true</code>）。事件处理程序会从最深层次的嵌套元素开始执行，然后向外层元素逐步执行，直到达到文档根节点。</p>
+</li>
+<li><h3 id="引用对象的方式"><a href="#引用对象的方式" class="headerlink" title="引用对象的方式"></a>引用对象的方式</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123; name: &#39;Lydia&#39; &#125;;
+
+function sayHi(age) &#123;
+  return &#96;$&#123;this.name&#125; is $&#123;age&#125;&#96;;
+&#125;
+
+console.log(sayHi.call(person, 21));
+console.log(sayHi.bind(person, 21));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>undefined is 21</code> <code>Lydia is 21</code></li>
+<li>B: <code>function</code> <code>function</code></li>
+<li>C: <code>Lydia is 21</code> <code>Lydia is 21</code></li>
+<li>D: <code>Lydia is 21</code> <code>function</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p>我们可以使用<code>.call</code>和<code>.bind</code>方法来指定函数中的<code>this</code>关键字所引用的对象。但是，<code>.call</code>方法会立即执行函数，而<code>.bind</code>方法则会返回一个新的函数，该函数的上下文已经绑定好了，但不会立即执行。</p>
+</li>
+<li><h3 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sayHi() &#123;
+  return (() &#x3D;&gt; 0)();
+&#125;
+
+console.log(typeof sayHi());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;object&quot;</code></li>
+<li>B: <code>&quot;number&quot;</code></li>
+<li>C: <code>&quot;function&quot;</code></li>
+<li>D: <code>&quot;undefined&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p><code>sayHi</code>函数返回立即调用的函数表达式（IIFE）的返回值。这个函数返回了<code>0</code>，它的类型是<code>“number”</code>。</p>
+<p>另外，typeof操作符可以返回以下值：<code>undefined</code>、<code>boolean</code>、<code>number</code>、<code>bigint</code>、<code>string</code>、<code>symbol</code>、<code>function</code>和<code>object</code>。需要注意的是，<code>typeof null</code>返回的是<code>&quot;object&quot;</code>。</p>
+</li>
+<li><h3 id="被视为false的表达式"><a href="#被视为false的表达式" class="headerlink" title="被视为false的表达式"></a>被视为false的表达式</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">0;
+new Number(0);
+(&#39;&#39;);
+(&#39; &#39;);
+new Boolean(false);
+undefined;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>0</code>, <code>&#39;&#39;</code>, <code>undefined</code></li>
+<li>B: <code>0</code>, <code>new Number(0)</code>, <code>&#39;&#39;</code>, <code>new Boolean(false)</code>, <code>undefined</code></li>
+<li>C: <code>0</code>, <code>&#39;&#39;</code>, <code>new Boolean(false)</code>, <code>undefined</code></li>
+<li>D: All of them are falsy</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: A**
+
+<p>有以下8种falsy的数值：</p>
+<ul>
+<li><code>undefined</code></li>
+<li><code>null</code></li>
+<li><code>NaN</code></li>
+<li><code>false</code></li>
+<li><code>&#39;&#39;</code> (empty string)</li>
+<li><code>0</code></li>
+<li><code>-0</code></li>
+<li><code>0n</code> (BigInt(0))</li>
+</ul>
+<p>像new Number和new Boolean这样的函数构造器被视为truthy值</p>
+</li>
+<li><h3 id="类型判断-1"><a href="#类型判断-1" class="headerlink" title="类型判断"></a>类型判断</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(typeof typeof 1);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;number&quot;</code></li>
+<li>B: <code>&quot;string&quot;</code></li>
+<li>C: <code>&quot;object&quot;</code></li>
+<li>D: <code>&quot;undefined&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p><code>typeof 1</code> 返回 <code>&quot;number&quot;</code>. <code>typeof &quot;number&quot;</code> 返回 <code>&quot;string&quot;</code></p>
+</li>
+<li><h3 id="数组定义"><a href="#数组定义" class="headerlink" title="数组定义"></a>数组定义</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const numbers &#x3D; [1, 2, 3];
+numbers[10] &#x3D; 11;
+console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[1, 2, 3, null x 7, 11]</code></li>
+<li>B: <code>[1, 2, 3, 11]</code></li>
+<li>C: <code>[1, 2, 3, empty x 7, 11]</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>当你给数组中的一个元素设置一个超过数组长度的值时，JavaScript会创建一些被称为”empty slots”（空槽）的东西。实际上，它们的值是undefined，但你会看到类似于以下的结果：</p>
+<p>[1, 2, 3, 空 x 7, 11]</p>
+<p>具体的显示方式取决于你运行代码的环境（不同浏览器、Node等）。</p>
+</li>
+<li><h3 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">(() &#x3D;&gt; &#123;
+  let x, y;
+  try &#123;
+    throw new Error();
+  &#125; catch (x) &#123;
+    (x &#x3D; 1), (y &#x3D; 2);
+    console.log(x);
+  &#125;
+  console.log(x);
+  console.log(y);
+&#125;)();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>1</code> <code>undefined</code> <code>2</code></li>
+<li>B: <code>undefined</code> <code>undefined</code> <code>undefined</code></li>
+<li>C: <code>1</code> <code>1</code> <code>2</code></li>
+<li>D: <code>1</code> <code>undefined</code> <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>catch块接收参数x。这个x与我们传递参数时的变量不同。这个变量x是块级作用域的。</p>
+<p>稍后，我们将这个块级作用域变量设置为1，并设置变量y的值。现在，我们记录块级作用域变量x的值，它等于1。</p>
+<p>在catch块之外，x仍然是undefined，而y是2。当我们在catch块之外使用console.log(x)时，它返回undefined，而y返回2。</p>
+</li>
+<li><h3 id="所有在JavaScript中的元素只属于"><a href="#所有在JavaScript中的元素只属于" class="headerlink" title="所有在JavaScript中的元素只属于"></a>所有在JavaScript中的元素只属于</h3><ul>
+<li>A: 原始类型或对象</li>
+<li>B: 函数或对象</li>
+<li>C: 只有对象</li>
+<li>D: 数字或对象</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+</li>
+<li><h3 id="reduce方法"><a href="#reduce方法" class="headerlink" title="reduce方法"></a>reduce方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[[0, 1], [2, 3]].reduce(
+  (acc, cur) &#x3D;&gt; &#123;
+    return acc.concat(cur);
+  &#125;,
+  [1, 2],
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[0, 1, 2, 3, 1, 2]</code></li>
+<li>B: <code>[6, 1, 2]</code></li>
+<li>C: <code>[1, 2, 0, 1, 2, 3]</code></li>
+<li>D: <code>[1, 2, 6]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p><code>[1, 2]</code>是我们的初始值。这是我们开始时的值，也是第一个累加器（<code>acc</code>）的值。在第一轮中，<code>acc</code>是<code>[1, 2]</code>，<code>cur</code>是<code>[0, 1]</code>。我们将它们连接起来，结果为<code>[1, 2, 0, 1]</code>。</p>
+<p>接下来，<code>[1, 2, 0, 1]</code>成为新的<code>acc</code>，<code>[2, 3]</code>成为<code>cur</code>。我们将它们连接起来，得到<code>[1, 2, 0, 1, 2, 3]</code>。</p>
+</li>
+<li><p>都是</p>
 </li>
 </ol>
 
