@@ -306,7 +306,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E8%BF%9B%E9%98%B6.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-14
+                    2023-06-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.6k
+                    7.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    28 分
+                    31 分
                 </div>
                 
 
@@ -1293,10 +1293,104 @@ console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 
-<p><strong>Answer: A</strong></p>
 <p><code>[1, 2]</code>是我们的初始值。这是我们开始时的值，也是第一个累加器（<code>acc</code>）的值。在第一轮中，<code>acc</code>是<code>[1, 2]</code>，<code>cur</code>是<code>[0, 1]</code>。我们将它们连接起来，结果为<code>[1, 2, 0, 1]</code>。</p>
 <p>接下来，<code>[1, 2, 0, 1]</code>成为新的<code>acc</code>，<code>[2, 3]</code>成为<code>cur</code>。我们将它们连接起来，得到<code>[1, 2, 0, 1, 2, 3]</code>。</p>
+</li>
+<li><h3 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">!!null;
+!!&#39;&#39;;
+!!1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>false</code> <code>true</code> <code>false</code></li>
+<li>B: <code>false</code> <code>false</code> <code>true</code></li>
+<li>C: <code>false</code> <code>true</code> <code>true</code></li>
+<li>D: <code>true</code> <code>true</code> <code>false</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p><code>null</code>是假值。<code>!null</code>返回 <code>true</code>。<code>!true</code> 返回 <code>false</code>。</p>
+<p><code>&quot;&quot;</code> 是假值。<code>!&quot;&quot;</code> 返回 <code>true</code>。<code>!true</code> 返回 <code>false</code>。</p>
+<p><code>1</code> 是真值。<code>!1</code> 返回 <code>false</code>。<code>!false</code> 返回 <code>true</code>。</p>
+</li>
+<li><h3 id="计时器函数"><a href="#计时器函数" class="headerlink" title="计时器函数"></a>计时器函数</h3><p>setInterval在浏览器中返回什么？</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">setInterval(() &#x3D;&gt; console.log(&#39;Hi&#39;), 1000);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: 一个唯一的id</li>
+<li>B: 指定的毫秒数</li>
+<li>C: 传递的函数</li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>它返回一个唯一的 ID。此 ID 可用于通过 <code>clearInterval()</code> 函数清除该间隔。</p>
+</li>
+<li><h3 id="展开运算符"><a href="#展开运算符" class="headerlink" title="展开运算符"></a>展开运算符</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[...&#39;Lydia&#39;];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[&quot;L&quot;, &quot;y&quot;, &quot;d&quot;, &quot;i&quot;, &quot;a&quot;]</code></li>
+<li>B: <code>[&quot;Lydia&quot;]</code></li>
+<li>C: <code>[[], &quot;Lydia&quot;]</code></li>
+<li>D: <code>[[&quot;L&quot;, &quot;y&quot;, &quot;d&quot;, &quot;i&quot;, &quot;a&quot;]]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>字符串是可迭代的。展开运算符将可迭代对象的每个字符映射到一个元素。</p>
+</li>
+<li><h3 id="生成器函数"><a href="#生成器函数" class="headerlink" title="生成器函数"></a>生成器函数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function* generator(i) &#123;
+  yield i;
+  yield i * 2;
+&#125;
+
+const gen &#x3D; generator(10);
+
+console.log(gen.next().value);
+console.log(gen.next().value);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[0, 10], [10, 20]</code></li>
+<li>B: <code>20, 20</code></li>
+<li>C: <code>10, 20</code></li>
+<li>D: <code>0, 10 and 10, 20</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>常规函数在调用后无法在执行过程中被中止。然而，生成器函数可以在执行过程中被”停止”，并且稍后可以从停止的地方继续执行。每当生成器函数遇到一个 <code>yield</code> 关键字时，函数会生成 yield 关键字后指定的值。需要注意的是，在这种情况下，<strong>生成器函数不返回该值，而是生成该值</strong>。</p>
+<p>首先，我们使用 <code>i</code> 等于 <code>10</code> 初始化生成器函数。我们使用 <code>next()</code> 方法调用生成器函数。第一次调用生成器函数时，<code>i</code> 等于 <code>10</code>。它遇到第一个 <code>yield</code> 关键字：生成 <code>yield</code> 后面指定的 <code>i</code> 的值。生成器现在被”暂停”，并且输出 <code>10</code>。</p>
+<p>然后，我们再次使用 <code>next()</code> 方法调用函数。它从上次停止的地方开始继续执行，仍然将 <code>i</code> 设为 <code>10</code>。现在，它遇到下一个 <code>yield</code> 关键字，并生成 <code>i * 2</code> 的值。<code>i </code>等于 <code>10</code>，所以返回 <code>10 * 2</code>，即 <code>20</code>。这样就得到了 <code>10, 20</code> 的输出。</p>
+</li>
+<li><h3 id="Promise-race方法"><a href="#Promise-race方法" class="headerlink" title="Promise.race方法"></a><code>Promise.race</code>方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const firstPromise &#x3D; new Promise((res, rej) &#x3D;&gt; &#123;
+  setTimeout(res, 500, &#39;one&#39;);
+&#125;);
+
+const secondPromise &#x3D; new Promise((res, rej) &#x3D;&gt; &#123;
+  setTimeout(res, 100, &#39;two&#39;);
+&#125;);
+
+Promise.race([firstPromise, secondPromise]).then(res &#x3D;&gt; console.log(res));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;one&quot;</code></li>
+<li>B: <code>&quot;two&quot;</code></li>
+<li>C: <code>&quot;two&quot; &quot;one&quot;</code></li>
+<li>D: <code>&quot;one&quot; &quot;two&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>当我们将多个 Promise 传递给 <code>Promise.race</code> 方法时，它会解决（resolve）或拒绝（reject）第一个解决或拒绝的 Promise。对于 <code>setTimeout</code> 方法，我们传递了两个定时器：第一个 Promise（<code>firstPromise</code>）设置了 500 毫秒的定时器，而第二个 Promise（<code>secondPromise</code>）设置了 100 毫秒的定时器。这意味着第二个 Promise（<code>secondPromise</code>）会先解决，并带有值 <code>&#39;two&#39;</code>。此时，变量 <code>res</code> 持有值 <code>&#39;two&#39;</code>，并被输出。</p>
+<p><strong>这个方法对于需要同时发起多个异步操作，并且只关心最快结果的情况非常有用。</strong></p>
 </li>
 <li><p>都是</p>
 </li>
@@ -1818,8 +1912,7 @@ console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></
                 <a href="/2023/05/25/xiang-ying-shi-bu-ju-mei-ti-cha-xun/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/3.jpg" class="responsive-img" alt="响应式布局——媒体查询">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80.png" class="responsive-img" alt="响应式布局——媒体查询">
                         
                         <span class="card-title">响应式布局——媒体查询</span>
                     </div>
@@ -1871,8 +1964,7 @@ console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></
                 <a href="/2023/05/09/qian-duan-mian-shi-hui-zong/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/9.jpg" class="responsive-img" alt="前端面试汇总">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95.png" class="responsive-img" alt="前端面试汇总">
                         
                         <span class="card-title">前端面试汇总</span>
                     </div>
