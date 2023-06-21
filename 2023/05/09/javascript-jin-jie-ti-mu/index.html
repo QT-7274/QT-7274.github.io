@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-15
+                    2023-06-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.4k
+                    8.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    31 分
+                    35 分
                 </div>
                 
 
@@ -1387,12 +1387,109 @@ Promise.race([firstPromise, secondPromise]).then(res &#x3D;&gt; console.log(res)
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 
-<p><strong>Answer: B</strong></p>
 <p>当我们将多个 Promise 传递给 <code>Promise.race</code> 方法时，它会解决（resolve）或拒绝（reject）第一个解决或拒绝的 Promise。对于 <code>setTimeout</code> 方法，我们传递了两个定时器：第一个 Promise（<code>firstPromise</code>）设置了 500 毫秒的定时器，而第二个 Promise（<code>secondPromise</code>）设置了 100 毫秒的定时器。这意味着第二个 Promise（<code>secondPromise</code>）会先解决，并带有值 <code>&#39;two&#39;</code>。此时，变量 <code>res</code> 持有值 <code>&#39;two&#39;</code>，并被输出。</p>
 <p><strong>这个方法对于需要同时发起多个异步操作，并且只关心最快结果的情况非常有用。</strong></p>
 </li>
-<li><p>都是</p>
+<li><h3 id="变量引用"><a href="#变量引用" class="headerlink" title="变量引用"></a>变量引用</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let person &#x3D; &#123; name: &#39;Lydia&#39; &#125;;
+const members &#x3D; [person];
+person &#x3D; null;
+
+console.log(members);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>null</code></li>
+<li>B: <code>[null]</code></li>
+<li>C: <code>[&#123;&#125;]</code></li>
+<li>D: <code>[&#123; name: &quot;Lydia&quot; &#125;]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p>首先，我们声明一个变量<code>person</code>，并赋值为一个具有<code>name</code>属性的对象。</p>
+<img src="/medias/images/loading.gif" data-original="68747470733a2f2f692e696d6775722e636f6d2f544d4c314d62532e706e67.png" alt="img" style="zoom:50%;" />
+
+<p>然后，我们声明一个名为<code>members</code>的变量。我们将该数组的第一个元素设置为<code>person</code>变量的值。当将对象相互赋值时，它们通过引用进行交互。当将一个变量的引用赋给另一个变量时，会复制该引用。（请注意，<strong>它们不具有相同的引用！</strong>）</p>
+<img src="/medias/images/loading.gif" data-original="image-20230616140054327.png" alt="image-20230616140054327" style="zoom:50%;" />
+
+<p>然后，我们将变量<code>person</code>的值设置为<code>null</code>。</p>
+<img src="/medias/images/loading.gif" data-original="68747470733a2f2f692e696d6775722e636f6d2f73596a63734d542e706e67.png" alt="img" style="zoom:50%;" />
+
+<p>我们只修改了<code>person</code>变量的值，而没有修改数组中的第一个元素，因为该元素具有与对象的不同（已复制的）引用。members数组中的第一个元素仍然保留对原始对象的引用。当我们记录（log）members数组时，第一个元素仍然保留着对象的值，并将其记录下来。</p>
+</li>
+<li><h3 id="对象循环"><a href="#对象循环" class="headerlink" title="对象循环"></a>对象循环</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &#39;Lydia&#39;,
+  age: 21,
+&#125;;
+
+for (const item in person) &#123;
+  console.log(item);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; name: &quot;Lydia&quot; &#125;, &#123; age: 21 &#125;</code></li>
+<li>B: <code>&quot;name&quot;, &quot;age&quot;</code></li>
+<li>C: <code>&quot;Lydia&quot;, 21</code></li>
+<li>D: <code>[&quot;name&quot;, &quot;Lydia&quot;], [&quot;age&quot;, 21]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>使用<code>for-in</code>循环，我们可以迭代对象的键（在这种情况下为name和age）。在底层，对象的键是字符串（如果它们不是Symbol类型）。在每次循环中，我们将item的值设置为当前迭代的键。首先，item等于name，并进行记录。然后，item等于age，并进行记录。</p>
+</li>
+<li><h4 id="数值计算"><a href="#数值计算" class="headerlink" title="数值计算"></a>数值计算</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(3 + 4 + &#39;5&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;345&quot;</code></li>
+<li>B: <code>&quot;75&quot;</code></li>
+<li>C: <code>12</code></li>
+<li>D: <code>&quot;12&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>运算符的结合性（associativity）是编译器按照左到右或右到左的顺序计算表达式的方式。这仅在所有运算符具有相同的优先级时才会发生。在这里，我们只有一种运算符：<code>+</code>。对于加法运算，其结合性是从左到右。</p>
+<p>首先计算<code>3 + 4</code>，结果为数字<code>7</code>。</p>
+<p>接着计算<code>7 + &#39;5&#39;</code>，结果为<code>&quot;75&quot;</code>，这是由于类型转换。JavaScript将数字<code>7</code>转换为字符串，参见问题15。我们可以使用<code>+</code>运算符来连接两个字符串。<code>&quot;7&quot; + &quot;5&quot;</code>的结果是<code>&quot;75&quot;</code>。</p>
+</li>
+<li><h3 id="parseInt方法"><a href="#parseInt方法" class="headerlink" title="parseInt方法"></a><code>parseInt</code>方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const num &#x3D; parseInt(&#39;7*6&#39;, 10);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>42</code></li>
+<li>B: <code>&quot;42&quot;</code></li>
+<li>C: <code>7</code></li>
+<li>D: <code>NaN</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>只有字符串中的第一个数字被返回。基于基数（作为第二个参数，用于指定要将其解析为的数字类型：十进制、十六进制、八进制、二进制等），<code>parseInt</code>函数会检查字符串中的字符是否有效。一旦遇到在基数中无效的字符，它就会停止解析并忽略后面的字符。</p>
+<p><code>*</code>不是一个有效的数字。它只解析<code>&quot;7&quot;</code>为十进制数<code>7</code>。现在，变量<code>num</code>的值为<code>7</code>。</p>
+</li>
+<li><h3 id="map方法"><a href="#map方法" class="headerlink" title="map方法"></a><code>map</code>方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[1, 2, 3].map(num &#x3D;&gt; &#123;
+  if (typeof num &#x3D;&#x3D;&#x3D; &#39;number&#39;) return;
+  return num * 2;
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[]</code></li>
+<li>B: <code>[null, null, null]</code></li>
+<li>C: <code>[undefined, undefined, undefined]</code></li>
+<li>D: <code>[ 3 x empty ]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>在对数组进行映射（mapping）时，变量num的值等于当前正在循环的元素。在这种情况下，元素是数字，因此if语句的条件typeof num &#x3D;&#x3D;&#x3D; “number”返回true。map函数创建一个新数组，并将从函数返回的值插入其中。</p>
+<p>然而，我们没有返回一个值。<strong>当我们从函数中没有返回值时，函数将返回undefined</strong>。对于数组中的每个元素，函数块都会被调用，因此对于每个元素，我们都返回undefined。</p>
+</li>
+<li><p>ds</p>
 </li>
 </ol>
 
