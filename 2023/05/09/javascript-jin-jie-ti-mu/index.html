@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-16
+                    2023-06-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.3k
+                    9.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    35 分
+                    40 分
                 </div>
                 
 
@@ -1484,12 +1484,142 @@ for (const item in person) &#123;
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 
-<p><strong>Answer: C</strong></p>
 <p>在对数组进行映射（mapping）时，变量num的值等于当前正在循环的元素。在这种情况下，元素是数字，因此if语句的条件typeof num &#x3D;&#x3D;&#x3D; “number”返回true。map函数创建一个新数组，并将从函数返回的值插入其中。</p>
 <p>然而，我们没有返回一个值。<strong>当我们从函数中没有返回值时，函数将返回undefined</strong>。对于数组中的每个元素，函数块都会被调用，因此对于每个元素，我们都返回undefined。</p>
 </li>
-<li><p>ds</p>
+<li><h3 id="引用复制"><a href="#引用复制" class="headerlink" title="引用复制"></a>引用复制</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getInfo(member, year) &#123;
+  member.name &#x3D; &#39;Lydia&#39;;
+  year &#x3D; &#39;1998&#39;;
+&#125;
+
+const person &#x3D; &#123; name: &#39;Sarah&#39; &#125;;
+const birthYear &#x3D; &#39;1997&#39;;
+
+getInfo(person, birthYear);
+
+console.log(person, birthYear);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; name: &quot;Lydia&quot; &#125;, &quot;1997&quot;</code></li>
+<li>B: <code>&#123; name: &quot;Sarah&quot; &#125;, &quot;1998&quot;</code></li>
+<li>C: <code>&#123; name: &quot;Lydia&quot; &#125;, &quot;1998&quot;</code></li>
+<li>D: <code>&#123; name: &quot;Sarah&quot; &#125;, &quot;1997&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>参数按值传递，除非其值是一个对象，那么它们将按引用传递。<code>birthYear</code>是一个字符串，而不是一个对象，所以它是按值传递的。当我们按值传递参数时，会创建该值的副本（参见问题46）。</p>
+<p>变量<code>birthYear</code>引用的是值<code>&quot;1997&quot;</code>。参数<code>year</code>也引用了值<code>&quot;1997&quot;</code>，但它引用的值与<code>birthYear</code>引用的不是同一个。当我们通过将<code>year</code>设置为<code>&quot;1998&quot;</code>来更新<code>year</code>的值时，只是更新了<code>year</code>的值，<code>birthYear</code>仍然等于<code>&quot;1997&quot;</code>。</p>
+<p><code>person</code>的值是一个对象。参数<code>member</code>复制了对同一对象的引用。当我们修改<code>member</code>引用的对象的属性时，<code>person</code>的值也会被修改，因为它们都引用同一个对象。<code>person</code>的<code>name</code>属性现在等于值<code>&quot;Lydia&quot;</code>。</p>
+</li>
+<li><h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function greeting() &#123;
+  throw &#39;Hello world!&#39;;
+&#125;
+
+function sayHi() &#123;
+  try &#123;
+    const data &#x3D; greeting();
+    console.log(&#39;It worked!&#39;, data);
+  &#125; catch (e) &#123;
+    console.log(&#39;Oh no an error:&#39;, e);
+  &#125;
+&#125;
+
+sayHi();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>It worked! Hello world!</code></li>
+<li>B: <code>Oh no an error: undefined</code></li>
+<li>C: <code>SyntaxError: can only throw Error objects</code></li>
+<li>D: <code>Oh no an error: Hello world!</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p>使用<code>throw</code>语句，我们可以创建自定义错误。通过该语句，您可以抛出异常。异常可以是字符串、数字、布尔值或对象。在这种情况下，我们的异常是字符串<code>&#39;Hello world!&#39;</code>。</p>
+<p>使用<code>catch</code>语句，我们可以指定在<code>try</code>块中抛出异常时要执行的操作。一个异常被抛出：字符串<code>&#39;Hello world!&#39;</code>。现在，变量<code>e</code>的值等于该字符串，我们将其记录下来。结果是<code>&#39;Oh an error: Hello world!&#39;</code>。</p>
+</li>
+<li><h3 id="函数返回"><a href="#函数返回" class="headerlink" title="函数返回"></a>函数返回</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Car() &#123;
+  this.make &#x3D; &#39;Lamborghini&#39;;
+  return &#123; make: &#39;Maserati&#39; &#125;;
+&#125;
+
+const myCar &#x3D; new Car();
+console.log(myCar.make);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lamborghini&quot;</code></li>
+<li>B: <code>&quot;Maserati&quot;</code></li>
+<li>C: <code>ReferenceError</code></li>
+<li>D: <code>TypeError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>当您返回一个属性时，该属性的值等于返回的值，而不是构造函数中设置的值。我们返回字符串<code>&quot;Maserati&quot;</code>，所以<code>myCar.make</code>等于<code>&quot;Maserati&quot;</code>。</p>
+</li>
+<li><h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">(() &#x3D;&gt; &#123;
+  let x &#x3D; (y &#x3D; 10);
+&#125;)();
+
+console.log(typeof x);
+console.log(typeof y);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;undefined&quot;, &quot;number&quot;</code></li>
+<li>B: <code>&quot;number&quot;, &quot;number&quot;</code></li>
+<li>C: <code>&quot;object&quot;, &quot;number&quot;</code></li>
+<li>D: <code>&quot;number&quot;, &quot;undefined&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p><code>let x = (y = 10);</code> 实际上是以下代码的简写形式：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">y &#x3D; 10; 
+let x &#x3D; y; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>当我们将<code>y</code>设置为<code>10</code>时，实际上是向全局对象添加了一个属性<code>y</code>（在浏览器中是<code>window</code>对象，在Node中是<code>global</code>对象）。在浏览器中，<code>window.y</code>现在等于<code>10</code>。</p>
+<p>然后，我们声明一个变量<code>x</code>，其值为<code>y</code>，即<code>10</code>。使用<code>let</code>关键字声明的变量是块级作用域的，它们只在声明它们的块中定义；在这种情况下是立即调用的函数表达式（IIFE）。当我们使用<code>typeof</code>运算符时，操作数<code>x</code>未定义：我们试图在声明它的块之外访问<code>x</code>。这意味着<code>x</code>未定义。尚未被赋值或声明的值的类型是<code>&quot;undefined&quot;</code>。<code>console.log(typeof x)</code>返回<code>&quot;undefined&quot;</code>。</p>
+<p>然而，当我们将<code>y</code>设置为<code>10</code>时，我们创建了一个全局变量<code>y</code>。这个值可以在我们的代码的任何地方访问。<code>y</code>已经定义，并且具有<code>&quot;number&quot;</code>类型的值。<code>console.log(typeof y)</code>返回<code>&quot;number&quot;</code>。</p>
+</li>
+<li><h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Dog &#123;
+  constructor(name) &#123;
+    this.name &#x3D; name;
+  &#125;
+&#125;
+
+Dog.prototype.bark &#x3D; function() &#123;
+  console.log(&#96;Woof I am $&#123;this.name&#125;&#96;);
+&#125;;
+
+const pet &#x3D; new Dog(&#39;Mara&#39;);
+
+pet.bark();
+
+delete Dog.prototype.bark;
+
+pet.bark();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Woof I am Mara&quot;</code>, <code>TypeError</code></li>
+<li>B: <code>&quot;Woof I am Mara&quot;</code>, <code>&quot;Woof I am Mara&quot;</code></li>
+<li>C: <code>&quot;Woof I am Mara&quot;</code>, <code>undefined</code></li>
+<li>D: <code>TypeError</code>, <code>TypeError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>我们可以使用<code>delete</code>关键字从对象中删除属性，也可以从原型上删除属性。通过从原型上删除属性，该属性将不再在原型链中可用。在这种情况下，在删除了<code>Dog.prototype.bark</code>之后，<code>bark</code>函数在原型上不再可用，但我们仍然尝试访问它。</p>
+<p>当我们试图调用不是函数的东西时，会抛出<code>TypeError</code>错误。在这种情况下，抛出的错误是<code>TypeError: pet.bark is not a function</code>，因为<code>pet.bark</code>是<code>undefined</code>。</p>
+</li>
+<li><p>都是</p>
 </li>
 </ol>
 
