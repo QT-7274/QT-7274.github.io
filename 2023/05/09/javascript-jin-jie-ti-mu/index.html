@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-21
+                    2023-06-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    9.5k
+                    10.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    40 分
+                    43 分
                 </div>
                 
 
@@ -1466,8 +1466,8 @@ for (const item in person) &#123;
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 
-<p><strong>Answer: C</strong></p>
 <p>只有字符串中的第一个数字被返回。基于基数（作为第二个参数，用于指定要将其解析为的数字类型：十进制、十六进制、八进制、二进制等），<code>parseInt</code>函数会检查字符串中的字符是否有效。一旦遇到在基数中无效的字符，它就会停止解析并忽略后面的字符。</p>
 <p><code>*</code>不是一个有效的数字。它只解析<code>&quot;7&quot;</code>为十进制数<code>7</code>。现在，变量<code>num</code>的值为<code>7</code>。</p>
 </li>
@@ -1484,8 +1484,8 @@ for (const item in person) &#123;
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
-**Answer: C**
 
+<p><strong>Answer: C</strong></p>
 <p>在对数组进行映射（mapping）时，变量num的值等于当前正在循环的元素。在这种情况下，元素是数字，因此if语句的条件typeof num &#x3D;&#x3D;&#x3D; “number”返回true。map函数创建一个新数组，并将从函数返回的值插入其中。</p>
 <p>然而，我们没有返回一个值。<strong>当我们从函数中没有返回值时，函数将返回undefined</strong>。对于数组中的每个元素，函数块都会被调用，因此对于每个元素，我们都返回undefined。</p>
 </li>
@@ -1614,12 +1614,112 @@ pet.bark();<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: A**
 
-<p><strong>Answer: A</strong></p>
 <p>我们可以使用<code>delete</code>关键字从对象中删除属性，也可以从原型上删除属性。通过从原型上删除属性，该属性将不再在原型链中可用。在这种情况下，在删除了<code>Dog.prototype.bark</code>之后，<code>bark</code>函数在原型上不再可用，但我们仍然尝试访问它。</p>
 <p>当我们试图调用不是函数的东西时，会抛出<code>TypeError</code>错误。在这种情况下，抛出的错误是<code>TypeError: pet.bark is not a function</code>，因为<code>pet.bark</code>是<code>undefined</code>。</p>
 </li>
-<li><p>都是</p>
+<li><h3 id="集合输出"><a href="#集合输出" class="headerlink" title="集合输出"></a>集合输出</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const set &#x3D; new Set([1, 1, 2, 3, 4]);
+
+console.log(set);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[1, 1, 2, 3, 4]</code></li>
+<li>B: <code>[1, 2, 3, 4]</code></li>
+<li>C: <code>&#123;1, 1, 2, 3, 4&#125;</code></li>
+<li>D: <code>&#123;1, 2, 3, 4&#125;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p><code>Set</code>对象是一个包含唯一值的集合：在一个集合中，一个值只能出现一次。</p>
+<p>我们传递了可迭代对象<code>[1, 1, 2, 3, 4]</code>，其中有一个重复值<code>1</code>。由于在一个集合中不能有两个相同的值，其中一个被移除。结果是<code>&#123;1, 2, 3, 4&#125;</code>。</p>
+</li>
+<li><h3 id="模块导出与导入"><a href="#模块导出与导入" class="headerlink" title="模块导出与导入"></a>模块导出与导入</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; counter.js
+let counter &#x3D; 10;
+export default counter;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; index.js
+import myCounter from &#39;.&#x2F;counter&#39;;
+
+myCounter +&#x3D; 1;
+
+console.log(myCounter);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>10</code></li>
+<li>B: <code>11</code></li>
+<li>C: <code>Error</code></li>
+<li>D: <code>NaN</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>导入的模块是只读的：你不能修改导入的模块。只有导出它们的模块可以改变它们的值。</p>
+<p>当我们尝试增加<code>myCounter</code>的值时，会抛出一个错误：<code>myCounter</code>是只读的，不能被修改。</p>
+</li>
+<li><h3 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &#39;Lydia&#39;;
+age &#x3D; 21;
+
+console.log(delete name);
+console.log(delete age);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>false</code>, <code>true</code></li>
+<li>B: <code>&quot;Lydia&quot;</code>, <code>21</code></li>
+<li>C: <code>true</code>, <code>true</code></li>
+<li>D: <code>undefined</code>, <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p><code>delete</code>运算符返回一个布尔值：如果删除成功则返回<code>true</code>，否则返回<code>false</code>。然而，使用<code>var</code>、<code>const</code>或<code>let</code>关键字声明的变量无法使用<code>delete</code>运算符删除。</p>
+<p><code>name</code>变量是使用<code>const</code>关键字声明的，所以删除操作不成功：返回<code>false</code>。当我们将<code>age</code>设置为<code>21</code>时，实际上是向全局对象添加了一个名为<code>age</code>的属性。你可以通过这种方式成功删除对象的属性，也可以删除全局对象，因此<code>delete age</code>返回<code>true</code>。</p>
+</li>
+<li><h3 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const numbers &#x3D; [1, 2, 3, 4, 5];
+const [y] &#x3D; numbers;
+
+console.log(y);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[[1, 2, 3, 4, 5]]</code></li>
+<li>B: <code>[1, 2, 3, 4, 5]</code></li>
+<li>C: <code>1</code></li>
+<li>D: <code>[1]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>我们可以通过解构来从数组中解包值或从对象中解包属性。例如：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[a, b] &#x3D; [1, 2];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>现在<code>a</code>的值是<code>1</code>，<code>b</code>的值是<code>2</code>。在问题中实际上我们做的是：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[y] &#x3D; [1, 2, 3, 4, 5];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这意味着<code>y</code>的值等于数组中的第一个值，即数字<code>1</code>。当我们记录<code>y</code>时，返回的是<code>1</code>。</p>
+</li>
+<li><h3 id="展开运算符-1"><a href="#展开运算符-1" class="headerlink" title="展开运算符"></a>展开运算符</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const user &#x3D; &#123; name: &#39;Lydia&#39;, age: 21 &#125;;
+const admin &#x3D; &#123; admin: true, ...user &#125;;
+
+console.log(admin);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; admin: true, user: &#123; name: &quot;Lydia&quot;, age: 21 &#125; &#125;</code></li>
+<li>B: <code>&#123; admin: true, name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+<li>C: <code>&#123; admin: true, user: [&quot;Lydia&quot;, 21] &#125;</code></li>
+<li>D: <code>&#123; admin: true &#125;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>使用展开运算符（spread operator）<code>...</code>可以将对象进行合并。它可以创建一个对象的键&#x2F;值对的副本，并将其添加到另一个对象中。在这种情况下，我们创建了<code>user</code>对象的副本，并将其添加到<code>admin</code>对象中。<code>admin</code>对象现在包含了复制的键&#x2F;值对，结果为<code>&#123; admin: true, name: &quot;Lydia&quot;, age: 21 &#125;</code>。</p>
+</li>
+<li><p>sd</p>
 </li>
 </ol>
 
