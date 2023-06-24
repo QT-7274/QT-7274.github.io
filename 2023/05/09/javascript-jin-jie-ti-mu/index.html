@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-23
+                    2023-06-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    10.2k
+                    11.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    43 分
+                    49 分
                 </div>
                 
 
@@ -1715,9 +1715,121 @@ console.log(admin);<span aria-hidden="true" class="line-numbers-rows"><span></sp
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
+
+<p>使用展开运算符（spread operator）<code>...</code>可以将对象进行合并。它可以创建一个对象的键&#x2F;值对的副本，并将其添加到另一个对象中。在这种情况下，我们创建了<code>user</code>对象的副本，并将其添加到<code>admin</code>对象中。<code>admin</code>对象现在包含了复制的键&#x2F;值对，结果为<code>&#123; admin: true, name: &quot;Lydia&quot;, age: 21 &#125;</code>。</p>
+</li>
+<li><h3 id="枚举对象"><a href="#枚举对象" class="headerlink" title="枚举对象"></a>枚举对象</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123; name: &#39;Lydia&#39; &#125;;
+
+Object.defineProperty(person, &#39;age&#39;, &#123; value: 21 &#125;);
+
+console.log(person);
+console.log(Object.keys(person));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code>, <code>[&quot;name&quot;, &quot;age&quot;]</code></li>
+<li>B: <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code>, <code>[&quot;name&quot;]</code></li>
+<li>C: <code>&#123; name: &quot;Lydia&quot;&#125;</code>, <code>[&quot;name&quot;, &quot;age&quot;]</code></li>
+<li>D: <code>&#123; name: &quot;Lydia&quot;&#125;</code>, <code>[&quot;age&quot;]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
 
 <p><strong>Answer: B</strong></p>
-<p>使用展开运算符（spread operator）<code>...</code>可以将对象进行合并。它可以创建一个对象的键&#x2F;值对的副本，并将其添加到另一个对象中。在这种情况下，我们创建了<code>user</code>对象的副本，并将其添加到<code>admin</code>对象中。<code>admin</code>对象现在包含了复制的键&#x2F;值对，结果为<code>&#123; admin: true, name: &quot;Lydia&quot;, age: 21 &#125;</code>。</p>
+<p>使用<code>defineProperty</code>方法，我们可以向对象添加新属性或修改现有属性。当我们使用<code>defineProperty</code>方法向对象添加属性时，默认情况下它们是<strong>不可枚举</strong>的。<code>Object.keys</code>方法从对象中返回所有可枚举的属性名，本例中只有<code>&quot;name&quot;</code>。</p>
+<p>使用<code>defineProperty</code>方法添加的属性默认是不可变的。您可以使用<code>writable</code>、<code>configurable</code>和<code>enumerable</code>属性来覆盖此行为。这样，<code>defineProperty</code>方法使您对要添加到对象中的属性具有更多控制权。</p>
+</li>
+<li><h3 id="stringify方法"><a href="#stringify方法" class="headerlink" title="stringify方法"></a><code>stringify</code>方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const settings &#x3D; &#123;
+  username: &#39;lydiahallie&#39;,
+  level: 19,
+  health: 90,
+&#125;;
+
+const data &#x3D; JSON.stringify(settings, [&#39;level&#39;, &#39;health&#39;]);
+console.log(data);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;&#123;&quot;level&quot;:19, &quot;health&quot;:90&#125;&quot;</code></li>
+<li>B: <code>&quot;&#123;&quot;username&quot;: &quot;lydiahallie&quot;&#125;&quot;</code></li>
+<li>C: <code>&quot;[&quot;level&quot;, &quot;health&quot;]&quot;</code></li>
+<li>D: <code>&quot;&#123;&quot;username&quot;: &quot;lydiahallie&quot;, &quot;level&quot;:19, &quot;health&quot;:90&#125;&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p><code>JSON.stringify</code>的第二个参数是<em>replacer</em>。<em>replacer</em>可以是一个函数或一个数组，它允许您控制值的字符串化方式和内容。</p>
+<p>如果replacer是一个<em>array</em>，只有数组中包含的属性名将被添加到JSON字符串中。在这种情况下，只有名为<code>&quot;level&quot;</code>和<code>&quot;health&quot;</code>的属性被包含在内，<code>&quot;username&quot;</code>被排除在外。<code>data</code>现在等于<code>&quot;&#123; &quot;level&quot;: 19, &quot;health&quot;: 90 &#125;&quot;</code>。</p>
+<p>如果replacer是一个函数，该函数将在您对对象进行字符串化时调用。从该函数返回的值将成为将属性添加到JSON字符串时的属性值。如果值为<code>undefined</code>，则该属性将被排除在JSON字符串之外。</p>
+</li>
+<li><h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let num &#x3D; 10;
+
+const increaseNumber &#x3D; () &#x3D;&gt; num++;
+const increasePassedNumber &#x3D; number &#x3D;&gt; number++;
+
+const num1 &#x3D; increaseNumber();
+const num2 &#x3D; increasePassedNumber(num1);
+
+console.log(num1);
+console.log(num2);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>10</code>, <code>10</code></li>
+<li>B: <code>10</code>, <code>11</code></li>
+<li>C: <code>11</code>, <code>11</code></li>
+<li>D: <code>11</code>, <code>12</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>num1</code>的值是<code>10</code>，因为<code>increaseNumber</code>函数首先返回<code>num</code>的值，即<code>10</code>，然后才递增<code>num</code>的值。</p>
+<p><code>num2</code>的值是<code>10</code>，因为我们将<code>num1</code>传递给了<code>increasePassedNumber</code>函数。<code>number</code>等于<code>10</code>（即<code>num1</code>的值）。同样，一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>number</code>的值是<code>10</code>，所以<code>num2</code>等于<code>10</code>。</p>
+</li>
+<li><h3 id="ES6参数传递"><a href="#ES6参数传递" class="headerlink" title="ES6参数传递"></a>ES6参数传递</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const value &#x3D; &#123; number: 10 &#125;;
+
+const multiply &#x3D; (x &#x3D; &#123; ...value &#125;) &#x3D;&gt; &#123;
+  console.log((x.number *&#x3D; 2));
+&#125;;
+
+multiply();
+multiply();
+multiply(value);
+multiply(value);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>20</code>, <code>40</code>, <code>80</code>, <code>160</code></li>
+<li>B: <code>20</code>, <code>40</code>, <code>20</code>, <code>40</code></li>
+<li>C: <code>20</code>, <code>20</code>, <code>20</code>, <code>40</code></li>
+<li>D: <code>NaN</code>, <code>NaN</code>, <code>20</code>, <code>40</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>在ES6中，我们可以使用默认值初始化参数。如果没有将其他值传递给函数，或者参数的值为<code>&quot;undefined&quot;</code>，则参数的值将是默认值。在这种情况下，我们将<code>value</code>对象的属性展开到一个新对象中，因此<code>x</code>具有默认值<code>&#123; number: 10 &#125;</code>。</p>
+<p>默认参数是在调用时计算的！每次调用函数时，都会创建一个新对象。我们前两次调用<code>multiply</code>函数时都没有传递值：<code>x</code>具有默认值<code>&#123; number: 10 &#125;</code>。然后，我们记录该数字的乘积值，即<code>20</code>。</p>
+<p>第三次调用<code>multiply</code>时，我们传递了一个参数：名为<code>value</code>的对象。<code>*=</code>运算符实际上是<code>x.number = x.number * 2</code>的简写：我们修改了<code>x.number</code>的值，并记录了乘以后的值<code>20</code>。</p>
+<p>第四次调用时，我们再次传递<code>value</code>对象。<code>x.number</code>先前已经修改为<code>20</code>，所以<code>x.number = 2</code>记录了<code>40</code>。</p>
+</li>
+<li><h3 id="reduce方法-1"><a href="#reduce方法-1" class="headerlink" title="reduce方法"></a><code>reduce</code>方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[1, 2, 3, 4].reduce((x, y) &#x3D;&gt; console.log(x, y));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>1</code> <code>2</code> and <code>3</code> <code>3</code> and <code>6</code> <code>4</code></li>
+<li>B: <code>1</code> <code>2</code> and <code>2</code> <code>3</code> and <code>3</code> <code>4</code></li>
+<li>C: <code>1</code> <code>undefined</code> and <code>2</code> <code>undefined</code> and <code>3</code> <code>undefined</code> and <code>4</code> <code>undefined</code></li>
+<li>D: <code>1</code> <code>2</code> and <code>undefined</code> <code>3</code> and <code>undefined</code> <code>4</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p><code>reduce</code>方法接收的第一个参数是累加器，本例中为<code>x</code>。第二个参数是当前值，为<code>y</code>。使用<code>reduce</code>方法，我们在数组中的每个元素上执行一个回调函数，最终可能会得到一个单一的值。</p>
+<p>在这个例子中，我们并没有返回任何值，只是记录了累加器和当前值的值。</p>
+<p>累加器的值等于回调函数先前返回的值。如果您没有将可选的<code>initialValue</code>参数传递给<code>reduce</code>方法，<strong>第一次调用</strong>时累加器等于第一个元素。</p>
+<p>在第一次调用时，累加器（<code>x</code>）为<code>1</code>，当前值（<code>y</code>）为<code>2</code>。我们没有从回调函数返回值，而是记录了累加器和当前值：输出为<code>1</code>和<code>2</code>。</p>
+<p>如果您没有从函数中返回值，它将返回<code>undefined</code>。在下一次调用时，累加器为<code>undefined</code>，当前值为<code>3</code>。输出为<code>undefined</code>和<code>3</code>。</p>
+<p>在第四次调用时，我们再次没有从回调函数返回值。累加器再次为<code>undefined</code>，当前值为<code>4</code>。输出为<code>undefined</code>和<code>4</code>。</p>
 </li>
 <li><p>sd</p>
 </li>
