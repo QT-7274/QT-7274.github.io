@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-06
+                    2023-06-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    722
+                    949
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -520,18 +520,43 @@
 <h2 id="深入line-height"><a href="#深入line-height" class="headerlink" title="深入line-height"></a>深入line-height</h2><p>line-height的准确定义：两行文字<strong>基线</strong>之间的距离。关于顶线、中线、基线、底线的内容本文不再赘述。</p>
 <h3 id="height和line-height"><a href="#height和line-height" class="headerlink" title="height和line-height"></a>height和line-height</h3><p>line-height是有默认值的，当没有定义line-height属性时，浏览器就会采用默认的line-height值。</p>
 <p>一行文字的高度是由line-height决定，而不是由height决定。例如在p标签中，一个p标签的文字可以有很多行，其中line-height定义的是一行文字的高度，而height定义的才是整个段落的高度（即p标签的高度）。</p>
-<p>我们可以定义height和line-height这<strong>两个属性值相等</strong>，从而实现<strong>单行文字的垂直居中</strong>。</p>
 <h3 id="line-height的取值"><a href="#line-height的取值" class="headerlink" title="line-height的取值"></a>line-height的取值</h3><p>当line-height的取值为百分比或者em值时，元素的行高是相对于“当前元素”的font-size值来计算的。计算公式如下：</p>
 <p><code>line-height = （当前元素font-size）×（百分比）</code> </p>
 <p><code>line-height =（当前元素font-size）×（em值）</code></p>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ol>
+<li><p>对于多行文字：控制行与行之间的距离。</p>
+</li>
+<li><p>对于单行文字：让<code>height</code>等于<code>line-height</code>，可以实现文字<strong>垂直居中</strong>。</p>
+<blockquote>
+<p>由于字体设计原因，靠上述办法实现的居中，并不是绝对的垂直居中，但如果一行中都是文字，不会太影响观感。</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><blockquote>
+<ol>
+<li><code>line-height</code>过小——文字产生重叠，且最小值是<code>0</code>，不能为负数。</li>
+<li><code>line-height</code>是可以继承的，且为了能更好的呈现文字，最好写数值。</li>
+<li><code>line-height</code>和<code>height</code>是什么关系？<ul>
+<li>设置了<code>height</code>，那么高度就是<code>height</code>的值。</li>
+<li>不设置<code>height</code>的时候，会根据<code>line-height</code>计算高度。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
 <h2 id="深入vertical-align"><a href="#深入vertical-align" class="headerlink" title="深入vertical-align"></a>深入vertical-align</h2><p>W3C官方对vertical-align属性的定义有以下4个方面的解释。</p>
 <ul>
-<li>vertical-align属性用于定义<strong>周围的文字、inline元素以及inline-block元素相对于该元素基线的垂直对齐方式</strong>。</li>
+<li>vertical-align属性用于定义<strong>周围的文字、inline元素以及inline-block元素内文字的垂直对齐方式</strong>（<strong>同一行元素、表格单元格</strong>）。</li>
 <li>在表格单元格中，vertical-align属性可以定义单元格td元素中内容的对齐方式。td元素是table-cell元素，也就是说vertical-align属性对table-cell类型元素有效（<strong>针对自身而言</strong>）。</li>
 <li>vertical-align属性对inline元素、inline-block元素和table-cell元素有效，对block元素无效。</li>
 <li>vertical-align属性允许制定负长度值（如-2px）和百分比值（如50%）。</li>
 </ul>
 <p>vertical-align属性中最常见的属性值有4个：top、middle、baseline、bottom</p>
+<ol>
+<li><code>baseline</code>（默认值）：使元素的基线与父元素的基线对齐。</li>
+<li><code>top</code>：使元素的顶部与其所在行的顶部对齐。</li>
+<li><code>middle</code>：使元素的中部与父元素的基线加上父元素字母x的一半对齐。</li>
+<li><code>bottom</code>：使元素的底部与其所在行的底部对齐。</li>
+</ol>
 
                 
             </div>
@@ -1087,8 +1112,8 @@
                         <span class="chip bg-color">前端</span>
                     </a>
                     
-                    <a href="/tags/CSS/">
-                        <span class="chip bg-color">CSS</span>
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>

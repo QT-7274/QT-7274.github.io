@@ -589,22 +589,22 @@
 <h3 id="继承样式和指定样式冲突"><a href="#继承样式和指定样式冲突" class="headerlink" title="继承样式和指定样式冲突"></a>继承样式和指定样式冲突</h3><p><u>当继承样式和指定样式发生冲突时，指定样式获胜。</u></p>
 <h3 id="important"><a href="#important" class="headerlink" title="!important"></a>!important</h3><p>在CSS中，我们可以使用!important规则来改变样式的优先级。如果一个样式使用“!important”来声明，则这个样式会覆盖CSS中<strong>其他的任何样式</strong>声明。</p>
 <p><strong>如果你想要覆盖其他所有样式，可以使用!important来实现。</strong></p>
-<h4 id="important的用法"><a href="#important的用法" class="headerlink" title="!important的用法"></a>!important的用法</h4><p>在CSS中，!important有以下两种常见的使用情况。</p>
+<h4 id="important的用法"><a href="#important的用法" class="headerlink" title="!important的用法"></a><code>!important</code>的用法</h4><p>在CSS中，<code>!important</code>有以下两种常见的使用情况。</p>
 <ol>
 <li><pre><code class="css">#someId p&#123;color:red;&#125;
 p&#123;color:green;&#125;
 </code></pre>
-<p>这种情况下，如果不使用!important，则第一条样式永远比第二条样式优先级更高。</p>
+<p>这种情况下，如果不使用<code>!important</code>，则第一条样式永远比第二条样式优先级更高。</p>
 </li>
-<li><p>如果写了一些很差的行内样式，但是又想在内部样式表或外部样式表修改这个样式，这种情况下，就需要在内部样式表或外部样式表中使用!important来覆盖那些行内样式。</p>
+<li><p>如果写了一些很差的行内样式，但是又想在内部样式表或外部样式表修改这个样式，这种情况下，就需要在内部样式表或外部样式表中使用<code>!important</code>来覆盖那些行内样式。</p>
 </li>
 </ol>
-<h4 id="如何覆盖-important"><a href="#如何覆盖-important" class="headerlink" title="如何覆盖!important"></a>如何覆盖!important</h4><p>想要覆盖!important声明的样式很简单，共有两种解决方法。</p>
+<h4 id="如何覆盖-important"><a href="#如何覆盖-important" class="headerlink" title="如何覆盖!important"></a>如何覆盖<code>!important</code></h4><p>想要覆盖<code>!important</code>声明的样式很简单，共有两种解决方法。</p>
 <ol>
-<li><p>使用相同的选择器，再添加一条!important的CSS语句。</p>
+<li><p>使用相同的选择器，再添加一条<code>!important</code>的CSS语句。</p>
 <p>不过这个CSS语句得放在后面，因为在优先级相同的情况下，后面定义的属性会覆盖前面定义的属性。</p>
 </li>
-<li><p>使用更高优先级的选择器，再添加一条!important的CSS语句。</p>
+<li><p>使用更高优先级的选择器，再添加一条<code>!important</code>的CSS语句。</p>
 </li>
 </ol>
 <p>总而言之，对于CSS优先级的内容，主要掌握以下两条黄金定律即可：</p>
