@@ -4,6 +4,52 @@
   
     
     <entry>
+      <title>志愿填报</title>
+      <link href="/2023/06/26/zhi-yuan-tian-bao/"/>
+      <url>/2023/06/26/zhi-yuan-tian-bao/</url>
+      
+        <content type="html"><![CDATA[<h2 id="南京工业职业技术大学（建议冲一下）"><a href="#南京工业职业技术大学（建议冲一下）" class="headerlink" title="南京工业职业技术大学（建议冲一下）"></a>南京工业职业技术大学（建议冲一下）</h2><p>优势：</p><ol><li>相比其他二本，国家支持大</li><li>学校条件好一些，位置很好</li><li>适合你的分数，可以冲一冲</li></ol><p>劣势：</p><ol><li>专转本不久，有些措施还不太完善。</li><li>分数可能达不到要求，专业可能不太好选。</li><li>图书馆和宿舍比较小，不过在新建宿舍。</li></ol><h2 id="电子科技大学成都学院（不建议）"><a href="#电子科技大学成都学院（不建议）" class="headerlink" title="电子科技大学成都学院（不建议）"></a>电子科技大学成都学院（不建议）</h2><p>优势：</p><ol><li>地理位置优越</li></ol><p>劣势：</p><ol><li>学费高，尤其是计算机专业，一年大概学费2w左右</li><li>设施差，官僚主义严重，硬件设施烂</li><li>商业化严重</li></ol><h2 id="成都锦城学院（建议）"><a href="#成都锦城学院（建议）" class="headerlink" title="成都锦城学院（建议）"></a>成都锦城学院（建议）</h2><p>优势：</p><ol><li>设施好，环境好</li><li>寝室环境好，离电子科技大学很近</li><li>学习氛围不错</li><li>很年轻很有态度的学校，在独立学院里是很不错的。</li></ol><p>劣势：</p><ol><li>交通略不方便</li><li>地方小</li><li>学费贵</li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 硕士生涯 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS中的盒子模型</title>
+      <link href="/2023/06/26/css-zhong-de-he-zi-mo-xing/"/>
+      <url>/2023/06/26/css-zhong-de-he-zi-mo-xing/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CSS2"><a href="#CSS2" class="headerlink" title="CSS2"></a>CSS2</h1><p>具体参数请查询：<a href="https://developer.mozilla.org/zh-CN/">MDN Web Docs (mozilla.org)</a>，本文不多做赘述。</p><h2 id="盒子模型的组成"><a href="#盒子模型的组成" class="headerlink" title="盒子模型的组成"></a>盒子模型的组成</h2><ol><li><code>margin</code>（外边距）： 盒子与外界的距离。</li><li><code>border</code>（边框）： 盒子的边框。</li><li><code>padding</code>（内边距）： 紧贴内容的补白区域。</li><li><code>content</code>（内容）：元素中的文本或后代元素都是它的内容。</li></ol><img src="image-20230626155140768.png" alt="image-20230626155140768" style="zoom:50%;" /><p>盒子的大小 &#x3D; <code>content</code> + <strong>左右</strong> <code>padding</code> + <strong>左右</strong> <code>border</code> 。</p><blockquote><p>注意：外边距 margin 不会影响盒子的大小，但会影响盒子的位置。</p></blockquote><h3 id="盒子内容区（content）"><a href="#盒子内容区（content）" class="headerlink" title="盒子内容区（content）"></a>盒子内容区（content）</h3><blockquote><p>注意：</p><ol><li><code>max-width</code> 、 <code>min-width</code> 一般不与 <code>width</code> 一起使用。</li><li><code>max-height</code> 、 <code>min-height</code> 一般不与 <code>height</code> 一起使用。</li></ol></blockquote><h4 id="默认宽度"><a href="#默认宽度" class="headerlink" title="默认宽度"></a>默认宽度</h4><p>所谓的默认宽度，就是<span style="color: red"><strong>不设置 <code>width</code> 属性</strong></span>时，元素所呈现出来的宽度。<br><strong>总宽度</strong> &#x3D; 父的 <code>content</code> — 自身的左右 <code>margin</code> 。<br><strong>内容区的宽度</strong> &#x3D; 父的 <code>content</code> — 自身的左右 <code>margin</code> — 自身的左右 <code>border</code> — 自身的左右<br><code>padding</code> 。</p><h3 id="盒子内边距（padding）"><a href="#盒子内边距（padding）" class="headerlink" title="盒子内边距（padding）"></a>盒子内边距（padding）</h3><blockquote><p>注意：</p><ol><li><code>padding</code>的值不能是负数。</li><li><strong>行内元素</strong>的左右内边距是没有问题的，上下边距不能完美的设置。</li><li><strong>块级元素</strong>、<strong>行内块元素</strong>，四个方向的<strong>内边距</strong>都可以完美设置。</li></ol></blockquote><h3 id="盒子边框（border）"><a href="#盒子边框（border）" class="headerlink" title="盒子边框（border）"></a>盒子边框（border）</h3><blockquote><p>注意：</p><ol><li>边框相关属性共20个</li><li><code>border-style</code>、<code>border-width</code>、<code>border-color</code>其实也是复合属性</li></ol></blockquote><h3 id="盒子外边距（margin）"><a href="#盒子外边距（margin）" class="headerlink" title="盒子外边距（margin）"></a>盒子外边距（margin）</h3><blockquote><p>注意：</p><ol><li>子元素的<code>margin</code>，是参考父元素的<code>content</code>计算的。（因为是父亲的<code>content</code>中承装着子元素）</li><li>上<code>margin</code>、左<code>margin</code>：影响<strong>自己</strong>的位置；下<code>margin</code>、右<code>margin</code>：影响后面<strong>兄弟元素</strong>的位置。</li><li>块级元素、行内块元素，均可以完美地设置四个方向的<code>margin</code>；但行内元素，左右<code>margin</code>可以完美设置，上下<code>margin</code>设置无效。</li><li><code>margin</code>的值可以是<code>auto</code>，如果给一个块级元素设置左右<code>margin</code>都为<code>auto</code>，该块级元素会在父元素中水平居中。</li><li><code>margin</code>的值可以是负值。（详见<a href="https://qt-7274.github.io/2023/03/19/css-jin-jie-fu-margin-ji-zhu/">CSS进阶–负margin技术 | QT-7274 </a>)</li></ol></blockquote><h4 id="margin塌陷"><a href="#margin塌陷" class="headerlink" title="margin塌陷"></a><code>margin</code>塌陷</h4><p>情形参考文章：<a href="http://localhost:4000/2023/03/19/css-jin-jie-wai-bian-ju-die-jia/">CSS进阶–外边距叠加 | QT-7274</a></p><p><strong>如何解决<code>margin</code>塌陷？</strong></p><ul><li>给父元素设置不为0的<code>padding</code>。</li><li>给父元素设置宽度不为0的<code>border</code>。</li><li>给父元素设置CSS样式：<code>overflow:hidden</code>。</li></ul><h4 id="margin合并"><a href="#margin合并" class="headerlink" title="margin合并"></a><code>margin</code>合并</h4><p>情形参考文章：<a href="https://qt7274.co/2023/03/19/css-jin-jie-wai-bian-ju-die-jia/">CSS进阶–外边距叠加 | QT-7274 (qt7274.co)</a></p><p><strong>如何解决<code>margin</code>合并？</strong></p><p>无需解决，布局的时候上下的兄弟元素，只给一个设置上下外边距即可。</p><h3 id="处理内容溢出"><a href="#处理内容溢出" class="headerlink" title="处理内容溢出"></a>处理内容溢出</h3><blockquote><p>注意：</p><ol><li><code>overflow-x</code>、<code>overflow-y</code> 不能一个是<code>hidden</code>，一个是<code>visible</code>，是实验性属性，不建议使用。</li><li><code>overflow</code>常用的值是<code>hidden</code>和<code>auto</code>，除了能处理溢出的显示方式，还可以解决很多其他问题。</li></ol></blockquote><h3 id="隐藏元素的方式"><a href="#隐藏元素的方式" class="headerlink" title="隐藏元素的方式"></a>隐藏元素的方式</h3><h4 id="visibility属性"><a href="#visibility属性" class="headerlink" title="visibility属性"></a><code>visibility</code>属性</h4><p><code>visibility</code>属性默认值是<code>show</code>，如果设置为<code>hidden</code>，元素会隐藏。</p><p>但元素仍占据原有位置。</p><h4 id="display属性"><a href="#display属性" class="headerlink" title="display属性"></a><code>display</code>属性</h4><p>设置<code>display:none</code>，就可以让元素隐藏。</p><p>彻底隐藏，无法被看见，也不占用任何位置，没有大小宽高。</p><h3 id="布局技巧"><a href="#布局技巧" class="headerlink" title="布局技巧"></a>布局技巧</h3><ol><li><p>行内元素、行内块元素，可以被父元素当作文本处理。</p></li><li><p>子元素在父元素中的水平居中：</p><ul><li>若子元素为块元素，给父元素加上：margin:0 auto;。</li><li>若子元素为行内元素、行内块元素，给父元素加上：</li></ul></li><li><p>子元素在父元素中的垂直居中：</p><ul><li><p>若子元素为块元素，给子元素加上：margin-top，值为（父元素content - 子元素盒子总高）&#x2F; 2。</p></li><li><p>若子元素为行内元素、行内块元素：</p><p>让父元素的height&#x3D;line-height，每个子元素都加上：vertical-align : middle;。</p><p>若想绝对垂直居中，父元素font-size设置为0。</p></li></ul></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+            <tag> CSS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>精读《深入理解现代JavaScript》</title>
       <link href="/2023/06/24/jing-du-shen-ru-li-jie-xian-dai-javascript/"/>
       <url>/2023/06/24/jing-du-shen-ru-li-jie-xian-dai-javascript/</url>
@@ -409,7 +455,7 @@
       <link href="/2023/03/19/css-jin-jie-wai-bian-ju-die-jia/"/>
       <url>/2023/03/19/css-jin-jie-wai-bian-ju-die-jia/</url>
       
-        <content type="html"><![CDATA[<h1 id="外边距叠加"><a href="#外边距叠加" class="headerlink" title="外边距叠加"></a>外边距叠加</h1><p>外边距叠加，又称“margin叠加”，指的是当两个垂直外边距相遇时，这两个外边距将会合并成一个外边距。</p><p>其中，**叠加之后的外边距高度，等于发生叠加之前的两个外边距中的<u>最大值</u>**。</p><p>外边距叠加有三种情况：同级元素、父级元素、空元素</p><h2 id="同级元素"><a href="#同级元素" class="headerlink" title="同级元素"></a>同级元素</h2><p>当一个元素出现在另一个元素上面的时候，第1个元素的下边距（margin-bottom）将会与第2个元素的上边距（margin-top）发生合并。</p><h2 id="父子元素"><a href="#父子元素" class="headerlink" title="父子元素"></a>父子元素</h2><p>当一个元素包含在另外一个元素中时（呈父子关系），假如没有padding或border把外边距分隔开，父元素和子元素的相邻上下外边距也会发生合并。</p><h2 id="空元素"><a href="#空元素" class="headerlink" title="空元素"></a>空元素</h2><p>空元素，指的是没有子元素或者没有文字内容的元素，当一个空元素有上下外边距时，如果没有border或padding，则元素的上外边距与下外边距就会合并。如果空元素的外边距碰到另外一个元素的外边距，它们也会发生合并。</p><p>注意：</p><ol><li><strong>水平外边距，永远不会有叠加，水平外边距指的是margin-left和margin-right。</strong></li><li><strong>垂直外边距只有在以上三种情况下会叠加。</strong></li><li><strong>外边距叠加之后的外边距高度，等于发生叠加之前的两个外边距中的最大值。</strong></li><li><strong>外边距叠加针对的是block以及inline-block元素，不包括inline元素。因为inline元素的margin-top和margin-bottom设置无效。</strong></li></ol><p>建议：</p><p><u>最好统一使用margin-top或margin-bottom，不要混合使用，从而降低出现问题的风险。</u></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="外边距叠加"><a href="#外边距叠加" class="headerlink" title="外边距叠加"></a>外边距叠加</h1><p>外边距叠加，又称“margin叠加”，指的是当两个垂直外边距相遇时，这两个外边距将会合并成一个外边距。</p><p>其中，<strong>叠加之后的外边距高度，等于发生叠加之前的两个外边距中的<u>最大值</u></strong></p><p>外边距叠加有三种情况：同级元素、父级元素、空元素</p><h2 id="同级元素"><a href="#同级元素" class="headerlink" title="同级元素"></a>同级元素</h2><p>当一个元素出现在另一个元素上面的时候，第1个元素的<strong>下边距</strong>（margin-bottom）将会与第2个元素的<strong>上边距</strong>（margin-top）发生合并。</p><h2 id="父子元素"><a href="#父子元素" class="headerlink" title="父子元素"></a>父子元素</h2><p>当一个元素包含在另外一个元素中时（呈父子关系），假如没有padding或border把外边距分隔开，父元素和子元素的<strong>相邻上下外边距</strong>也会发生合并。</p><h2 id="空元素"><a href="#空元素" class="headerlink" title="空元素"></a>空元素</h2><p>空元素，指的是没有子元素或者没有文字内容的元素，当一个空元素有上下外边距时，如果没有border或padding，则元素的上外边距与下外边距就会合并。如果空元素的外边距碰到另外一个元素的外边距，它们也会发生合并。</p><p>注意：</p><ol><li><strong>水平外边距，永远不会有叠加，水平外边距指的是margin-left和margin-right。</strong></li><li><strong>垂直外边距只有在以上三种情况下会叠加。</strong></li><li><strong>外边距叠加之后的外边距高度，等于发生叠加之前的两个外边距中的最大值。</strong></li><li><strong>外边距叠加针对的是block以及inline-block元素，不包括inline元素。因为inline元素的margin-top和margin-bottom设置无效。</strong></li></ol><p>建议：</p><p><span style="color: red">最好统一使用margin-top或margin-bottom，不要混合使用，从而降低出现问题的风险。</span></p>]]></content>
       
       
       <categories>
