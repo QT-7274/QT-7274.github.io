@@ -5,8 +5,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="响应式布局——媒体查询, QT-7274">
-    <meta name="description" content="CSS中的媒体查询是学习响应式布局的基础，也是解决响应式布局最简单的一种手法。">
+    <meta name="keywords" content="精读《深入理解现代JavaScript》, QT-7274">
+    <meta name="description" content="想要了解在过去几年中被添加到 JavaScript 的最新特性，以及未来如何在语言不断发展的过程中掌握最新动态，那么本书非常适合你！">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +20,7 @@
 
     
 
-    <title>响应式布局——媒体查询 | QT-7274</title>
+    <title>精读《深入理解现代JavaScript》 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -306,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">响应式布局——媒体查询</h1>
+                    <h1 class="description center-align post-title">精读《深入理解现代JavaScript》</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                                 <span class="chip bg-color">前端</span>
                             </a>
                         
-                            <a href="/tags/CSS/">
-                                <span class="chip bg-color">CSS</span>
+                            <a href="/tags/%E4%B9%A6%E7%B1%8D/">
+                                <span class="chip bg-color">书籍</span>
                             </a>
                         
                     </div>
@@ -456,28 +456,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-05-25
+                    2023-06-24
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-15
+                    2023-06-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    370
+                    4.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    19 分
                 </div>
                 
 
@@ -500,38 +500,387 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h1><p>CSS中的媒体查询是一种技术，用于根据不同的设备和屏幕尺寸应用不同的样式。通过使用媒体查询，可以为不同的设备和屏幕尺寸提供不同的样式，从而优化用户体验。</p>
-<h2 id="媒体查询的引入方法"><a href="#媒体查询的引入方法" class="headerlink" title="媒体查询的引入方法"></a>媒体查询的引入方法</h2><ol>
-<li><p>使用@media属性进行媒体查询：</p>
-<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">@media mediatype and (condition) &#123;
-  &#x2F;* CSS rules go here *&#x2F;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+                <h2 id="第二章：块级作用域声明：-let-和-const"><a href="#第二章：块级作用域声明：-let-和-const" class="headerlink" title="第二章：块级作用域声明： let 和 const"></a>第二章：块级作用域声明： let 和 const</h2><h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>对于现在的 <code>JavaScript</code> 来说，声明变量的方式一共有三种：</p>
+<blockquote>
+<ul>
+<li><code>var</code>：变量，会跳出块级作用域</li>
+<li><code>let</code>：变量，不会跳出块级作用域</li>
+<li><code>const</code>：常量，不会跳出块级作用域</li>
+</ul>
+</blockquote>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>什么是块级作用域？</p>
+<blockquote>
+<p>所谓块级作用域指的是 <strong>两个大括号中间的内容</strong>，比如 <code>for 循环、if、函数</code> 只要存在 <code>&#123;&#125;</code> 那么都会生成块级作用域。</p>
+</blockquote>
+<p>除了块级作用域之外，<code>var</code> 和 <code>let、const</code> 在特性上也有一些区别。这个区别主要体现在两个方面 <strong>变量提升、暂时性死区（<code>TDZ</code>）</strong></p>
+<h3 id="变量提升与暂时性死区"><a href="#变量提升与暂时性死区" class="headerlink" title="变量提升与暂时性死区"></a>变量提升与暂时性死区</h3><p>咱们先来看变量提升。对于 <code>var</code> 声明的变量而言，会存在变量提升的概念，也就是可以 <strong>先使用、后定义</strong>，咱么来看这段代码：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(msg) &#x2F;&#x2F; undefined （并不会报错）
+var msg &#x3D; &#39;hello world&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>其中，mediatype 表示媒体类型，可以是 all（所有媒体设备）、print（打印设备）、screen（计算机屏幕）等等。condition 表示条件，可以是设备宽度、高度、方向、分辨率等等。</p>
-<p>此外，媒体查询可以嵌套，以便为不同的屏幕尺寸和设备类型提供更加精细的样式：</p>
-<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">@media screen and (max-width: 480px) &#123;
-  &#x2F;* CSS rules for small screens go here *&#x2F;
-  @media (orientation: portrait) &#123;
-    &#x2F;* CSS rules for portrait orientation go here *&#x2F;
-  &#125;
-  @media (orientation: landscape) &#123;
-    &#x2F;* CSS rules for landscape orientation go here *&#x2F;
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>在<code>&lt;style&gt;</code>标签中使用媒体查询：</p>
-<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">&lt;style media&#x3D;&quot;mediatype and (condition)&quot;&gt;
-  &#x2F;* 样式规则 *&#x2F;
-&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>在HTML文档中使用标签进行媒体查询：</p>
-<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">&lt;link rel&#x3D;&quot;stylesheet&quot; media&#x3D;&quot;(max-width: 768px)&quot; href&#x3D;&quot;small-screen.css&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在这段代码中，<code>msg</code> 变量先被使用，后声明。虽然打印了 <code>undefined</code>，但是它并不会报错。</p>
+<p>原因是因为，以上代码会被编译为以下形式：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var msg
+console.log(msg) &#x2F;&#x2F; undefined
+msg &#x3D; &#39;hello world&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>这样，在屏幕宽度小于等于768px时，就会加载small-screen.css样式表，从而应用相应的样式规则。</p>
+<p>即 <strong>msg 变量的定义会被提升到最前面</strong>。而这种形式就叫做 <strong>变量提升</strong>。</p>
+<p>但是如果我们使用 <code>let 或 const</code> 来代替 <code>var</code> 的话，因为 <code>let、const</code> 不具备变量提升，所以就会抛出对应的错误：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(msg2); &#x2F;&#x2F; Uncaught ReferenceError: Cannot access &#39;msg2&#39; before initialization
+let msg2 &#x3D; &#39;hello word&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>而这样的错误，就被叫做 <strong>暂时性死区（ temporal dead zone，简称TDZ ）。</strong></p>
+<h3 id="旧习换新"><a href="#旧习换新" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>这里的旧习换新主要包含两点：</p>
+<ul>
+<li>第一点是 **不要使用 <code>var</code>，改用 <code>let</code> 和 <code>const</code>**：因为无论是 <strong>跳出块级作用域也好，还是变量提升也好</strong>，在标准图灵完备的编程语言中，都不是一个应该具备的特性。</li>
+<li>第二点是 <strong>缩小变量的作用域，从而提升可维护性</strong>：想要理解这句话，可能需要具备一定的编程经验。如果大家不是很理解的话，那么可以想象一下 <strong>一万行代码的文件和一百行代码的文件</strong> 哪个更好维护？我们始终需要谨记 <strong>代码越少，越容易维护</strong>。所以 <strong>缩小你的作用域空间，减少逻辑的复杂度。</strong></li>
+</ul>
+<h2 id="第三章：函数的新特性"><a href="#第三章：函数的新特性" class="headerlink" title="第三章：函数的新特性"></a>第三章：函数的新特性</h2><p>函数作为 <code>JavaScript 世界</code> 的 <strong>一等公民</strong>，是我们在实际项目开发中，无时无刻不在使用的东西。</p>
+<p>在这一章中，咱们主要从 <strong>参数、this 指向、构造函数</strong> 这三个方面来去说明函数的新特性。</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>函数的参数分为两种 <strong>形参、实参</strong>。所谓形参指的是 <strong>定义函数时指定的形式参数</strong>。所谓实参指的是 <strong>调用函数时，传递的实际参数。</strong></p>
+<p>而在定义形参时，我们可以通过 <strong>赋值符 &#x3D;</strong> 的形式，为形参指定 <strong>默认值</strong>。这表示 <strong>如果没有传递对应的实参，则该形参默认为该值</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn(name &#x3D; &#39;张三&#39;) &#123;
+  console.log(name); &#x2F;&#x2F; 张三
+&#125;
+fn()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个默认值可以为 <strong>任意的单一表达式</strong>，比如我们可以指定一个 <strong>立即执行的箭头函数</strong>，那么此时默认值会为该函数的值：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 箭头函数：() &#x3D;&gt; &#39;李四&#39;
+&#x2F;&#x2F; (() &#x3D;&gt; &#39;李四&#39;)() 表示立即执行的箭头函数
+function fn(name &#x3D; (() &#x3D;&gt; &#39;李四&#39;)()) &#123;
+  console.log(name);
+&#125;
+fn()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在 <code>JavaScript</code> 中，函数的实参和形参并不要求是一一对应的。也就是说 <strong>实参的数量可以超过形参的数量</strong>。那么在这种情况下，如果我们想要获取到 <strong>多余的实参</strong>，一共有两种方式：</p>
+<ul>
+<li><p>第一种是传统的 <code>arguments </code>，但是它并不是通用的，<strong>在箭头函数中无法使用</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn(name) &#123;
+  console.log(arguments); &#x2F;&#x2F; [&#39;张三&#39;, 30, &#39;男&#39;, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+&#125;
+
+const fn &#x3D; (name) &#x3D;&gt; &#123;
+  console.log(arguments); &#x2F;&#x2F; Uncaught ReferenceError: arguments is not defined
+&#125;
+
+fn(&#39;张三&#39;, 30, &#39;男&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>使用@import规则引入带有媒体查询的样式表：</p>
-<pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">@import url(&quot;small-screen.css&quot;) screen and (max-width: 768px);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>第二种是 <code>ES6 之后</code> 新增的 <strong>“rest” 参数</strong>，它是通用的，表示 <strong>接收所有的剩余参数</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn(name, ...args) &#123;
+  console.log(args); &#x2F;&#x2F; [30, &#39;男&#39;]
+&#125;
+
+const fn &#x3D; (name, ...args) &#x3D;&gt; &#123;
+  console.log(args); &#x2F;&#x2F; [30, &#39;男&#39;]
+&#125;
+
+fn(&#39;张三&#39;, 30, &#39;男&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="this-指向"><a href="#this-指向" class="headerlink" title="this 指向"></a>this 指向</h3><p>针对 <code>this</code> 指向，指的是 <strong>普通函数和箭头函数</strong> 下的 <code>this</code> 指向问题。</p>
+<p>这应该是一个 <strong>面试</strong> 时的高频问点。当大家遇到这样的问题时，大多数时候只需要从三个方面进行回答即可：</p>
+<ul>
+<li><p>首先第一个方面是 <strong>普通函数的 this 指向</strong>：针对于普通函数而言，<code>this</code> 指向<span style="color: red">调用方</span></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn() &#123;
+  console.log(this); &#x2F;&#x2F; window
+&#125;
+fn() &#x2F;&#x2F; window.fn()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>然后是箭头函数：针对于箭头函数而言，不会修改 <code>this</code> 指向，即 <strong>this 指向上层作用域中的 this</strong> </p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &#39;张三&#39;,
+  fn() &#123;
+    console.log(this); &#x2F;&#x2F; person
+
+    const subFn &#x3D; () &#x3D;&gt; &#123;
+      console.log(this); &#x2F;&#x2F; 指向上层作用域（fn）中的 this
+    &#125;
+    subFn()
+  &#125;
+&#125;
+person.fn()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>最后是 <code>call、apply、bind</code> 这三个 <code>API</code>：它们都可以在 <strong>普通函数</strong> 中修改 <code>this</code> 指向，<code>this</code> 指向它们的第一个参数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &#39;张三&#39;
+&#125;
+
+const fn &#x3D; () &#x3D;&gt; &#123;
+  console.log(this); &#x2F;&#x2F; window  箭头函数永远不会修改 this 指向
+&#125;
+
+function fn2() &#123;
+  console.log(this); &#x2F;&#x2F; person
+&#125;
+
+fn.apply(person)
+fn2.call(person)
+fn.bind(person)()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>构造函数通常指 <strong>首字母大写的普通函数</strong> 。也就是说：<span style="color: red"><strong>箭头函数永远不可以作为构造函数使用</strong></span></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Person(name) &#123;
+  &#x2F;&#x2F; this 指向实例对象
+  this.name &#x3D; name
+&#125;
+const p &#x3D; new Person(&#39;张三&#39;)
+console.log(p); &#x2F;&#x2F; Person &#123;name: &#39;张三&#39;&#125;
+
+
+const Person2 &#x3D; (name) &#x3D;&gt; &#123;
+  &#x2F;&#x2F; this 指向 window
+  this.name &#x3D; name
+&#125;
+const p2 &#x3D; new Person2(&#39;张三&#39;)
+console.log(p2); &#x2F;&#x2F; Uncaught TypeError: Person2 is not a constructor<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="旧习换新-1"><a href="#旧习换新-1" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>这一章的旧习换新主要包含四点内容，也是对本章重点内容的总结：</p>
+<ul>
+<li>首选是关于箭头函数和普通函数的使用场景： <strong>不想修改 this 指向时，使用箭头函数。需要改变 this 的指向时，使用普通函数</strong></li>
+<li>其次是关于参数默认值：<strong>使用参数默认值，而不要使用代码为参数赋初始值</strong></li>
+<li>第三是关于剩余参数： <strong>使用 rest 参数替代 arguments 关键字</strong> 来获取剩余参数</li>
+</ul>
+<h2 id="第四章：类"><a href="#第四章：类" class="headerlink" title="第四章：类"></a>第四章：类</h2><p>针对于第四章而言，从名字到内容都非常的纯粹，一个字 <strong>类</strong>。</p>
+<p>那么对于这一章的内容，让我们从一个问题开始：我们常说 <strong>JavaScript 实际上没有类，只是用原型来模拟了类？是这样的吗？</strong></p>
+<p>答案是 <strong>当然不是</strong>。其实从 <code>ES2015</code> 之后，<code>ECMAScript</code> 标准为 <code>JavaScript</code> 提供了 <strong>类</strong> 的概念。它并不是原型的模拟，只是 <strong>可以用原型来模拟类而已</strong>。</p>
+<p>那么下面咱们就来看看 <code>ES2015</code> 之后的 <strong>类语法</strong></p>
+<h3 id="类语法"><a href="#类语法" class="headerlink" title="类语法"></a>类语法</h3><p>类语法分为 <strong>创建</strong> 和 <strong>使用</strong> 两部分。</p>
+<p>咱们先来看类的创建：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const fnName &#x3D; &#39;fn&#39; + Math.floor(Math.random() * 1000)
+class Color &#123;
+  &#x2F;&#x2F; 一个《构造函数》
+  constructor(r &#x3D; 0, g &#x3D; 0, b &#x3D; 0) &#123;
+    &#x2F;&#x2F; 三个《数据属性》
+    this.r &#x3D; r
+    this.g &#x3D; g
+    this.b &#x3D; b
+  &#125;
+
+  &#x2F;&#x2F; 一个《访问器属性》
+  get rgb() &#123;
+    &#x2F;&#x2F; 可通过 实例.rgb 访问
+    return &#96;rgb($&#123;this.r&#125;, $&#123;this.g&#125;, $&#123;this.b&#125;)&#96;
+  &#125;
+
+  set rgb(val) &#123;
+    &#x2F;&#x2F; 为 r、g、b 赋值
+    &#x2F;&#x2F; 可通过 实例.rgb &#x3D; xx 访问
+  &#125;
+
+  &#x2F;&#x2F; 一个《原型方法》
+  toString() &#123;
+    return &#96;重写的原型方法：$&#123;this.rgb&#125;&#96;
+  &#125;
+
+  &#x2F;&#x2F; 一个静态方法
+  static fromCss(r, g, b) &#123;
+    &#x2F;&#x2F; 利用 new this 可以直接得到 Color 实例
+    return new this(r, g, b)
+  &#125;
+
+  &#x2F;&#x2F; 动态方法名
+  [fnName]() &#123;
+    return &#96;动态方法名为：$&#123;fnName&#125;&#96;
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在这段代码中，我们通过类语法 <code>class</code> 创建了一个类 <code>Color</code>，这里大家注意，根据规范 <strong>类名首字母应该大写</strong>。这里的代码我已经写好了注释，大家可以在这里暂停来查看下对应的代码内容。</p>
+<p>而如果想要使用类的话，那么必须要通过 <code>new</code> 关键字来进行使用：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const c &#x3D; new Color(30, 144, 255)
+console.log(c[fnName]()); &#x2F;&#x2F; 动态方法名为：fn275
+console.log(c.toString()); &#x2F;&#x2F; 重写的原型方法：rgb(30, 144, 255)
+console.log(c.rgb); &#x2F;&#x2F; rgb(30, 144, 255)
+console.log(Color.fromCss(255, 255, 255)); &#x2F;&#x2F; Color &#123;r: 255, g: 255, b: 255&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="类继承"><a href="#类继承" class="headerlink" title="类继承"></a>类继承</h3><p>继承在编程语言中是一个非常常见的概念，在 <code>ES6</code> 之前想要完成继承，那么多数情况下需要使用 <strong>原型继承</strong> 的方式。而原型继承有很多种，比如：<strong>组合式继承、原型式继承、寄生式继承、寄生式组合继承 ……</strong> 很多种方式。</p>
+<p>但是在实际开发中，如果我们直接使用类语法的话，那么想要实现继承就非常容易了。只需要使用到一个关键字 <code>extends</code></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class SubColor extends Color &#123;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="super-关键字"><a href="#super-关键字" class="headerlink" title="super 关键字"></a>super 关键字</h3><p>而除了 <code>extends</code> 之外，类继承的时候还有另外一个关键字 <code>super</code>。 <code>super</code> 关键字可以用来 <strong>处理与父类相关的事情</strong>。</p>
+<p>它的使用场景主要有两个：</p>
+<h4 id="作为函数使用"><a href="#作为函数使用" class="headerlink" title="作为函数使用"></a>作为函数使用</h4><p><code>super</code> 关键字可以直接作为函数进行使用。比如：在构造函数中使用时，<code>super</code> 可以直接调用父类的构造函数，在通常情况下 <span style='color: red'><strong>这是一个必须的操作</strong></span></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class SubColor extends Color &#123;
+  constructor(r &#x3D; 0, g &#x3D; 0, b &#x3D; 0, a &#x3D; 1) &#123;
+    &#x2F;&#x2F; 触发父类的构造函数
+    super(r, g, b)
+    this.a &#x3D; a
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="作为属性查询使用"><a href="#作为属性查询使用" class="headerlink" title="作为属性查询使用"></a>作为属性查询使用</h4><p><code>super</code> 关键字可以用来 <strong>访问一个对象字面或类的 [[Prototype]] 的方法和属性</strong>。比如：我们可以在静态方法中利用 <code>super</code> 访问父类的静态方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class SubColor extends Color &#123;
+  static fromCss(r, g, b, a &#x3D; 1) &#123;
+    &#x2F;&#x2F; 通过 super 调用父类的静态方法
+    const result &#x3D; super.fromCss(r, g, b)
+    &#x2F;&#x2F;  code....
+    return new this(r, g, b, a)
+  &#125;
+&#125;
+&#x2F;&#x2F; 子类重写的 formCss。result &#x3D; &#123;color: red&#125; + &#123;fontSize: 20px&#125;
+console.log(Color.fromCss(255, 255, 255));
+console.log(SubColor.fromCss(255, 255, 255, 1)); &#x2F;&#x2F; SubColor &#123;r: 255, g: 255, b: 255, a: 1&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="new-target"><a href="#new-target" class="headerlink" title="new.target"></a>new.target</h3><p>对于类而言，最后一个需要大家关注的概念就是 <code>new.target</code>。</p>
+<p><strong><code>new.target</code></strong> 属性允许你 <strong>检测函数或构造方法是否是通过 new 运算符被调用的，并且可以返回一个指向构造方法或函数的引用</strong>。</p>
+<p>我们可以利用它来判断 <strong>当前触发构造函数时是通过哪个类来触发的</strong> ，这在 <strong>多层继承判断来源时会非常有用</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Color &#123;
+  constructor() &#123;
+    console.log(&#96;new.target.name: $&#123;new.target.name&#125;&#96;);
+  &#125;
+&#125;
+
+class SubColor extends Color &#123;
+  constructor() &#123;
+    super()
+  &#125;
+&#125;
+
+new Color() &#x2F;&#x2F; new.target: 指向 Color
+
+new SubColor() &#x2F;&#x2F; new.target: 指向 SubColor<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="旧习换新-2"><a href="#旧习换新-2" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>这里的旧习换新环节，就比较简单了，只有一点： <strong>实际开发中，通过 <code>class</code> 来完成类的构建和继承。</strong></p>
+<h2 id="第五章：对象的新特性"><a href="#第五章：对象的新特性" class="headerlink" title="第五章：对象的新特性"></a>第五章：对象的新特性</h2><p>接下来我们来看对象在 <code>ES6</code> 之后的新特性。</p>
+<p>对象在我们日常开发中使用的场景是非常多的，所以这一章中的很多新特性大家或多或少的应该都有一些了解。我挑选了几个日常开发中最常用的语法，来给大家进行下分享。</p>
+<p>首先是  <strong>可计算的属性名</strong>。</p>
+<p>有些时候，我们可能希望 <strong>对象的 <code>key</code> 是一个不确定的唯一值。</strong> 比如：世界上每一个人都是唯一的，所以 <code>person</code> 对象应该具备一个唯一的 <code>“特性”</code> ，那么我们就可以通过这种方式来进行表示</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const key &#x3D; Symbol(&#39;key&#39;)
+const person &#x3D; &#123;
+  name: &#39;张三&#39;,
+  &#x2F;&#x2F; 可计算的属性名
+  [key]: key
+&#125;
+console.log(person); &#x2F;&#x2F; &#123;name: &#39;张三&#39;, Symbol(key): Symbol(key)&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在这段代码中，我们利用 <code>Symbol</code> 构建了一个 <code>key</code>，然后利用 <code>[key]</code> 作为 <code>person</code> 的<code>唯一 key 名</code>。</p>
+<p>同时，为了方便对象字面量的编写，<code>ES6</code> 之后提供了 <strong>属性简写</strong> 的语法： <strong>当 key 和 value 拥有同样的变量名时，那么可以进行简写</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &#39;张三&#39;
+const person &#x3D; &#123;
+  &#x2F;&#x2F; name: name
+  name
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>属性简写</strong> 是我们在日常开发中非常常用的一种方式。</p>
+<p>除了属性简写之后，还有另外一个新特性也是我们在日常开发中非常常见的，那就是 <strong>展开运算符</strong>。</p>
+<p>展开运算符以 <code>...</code> 的形式进行表示，可以用在对象的展开和合并的多个场景中：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const names &#x3D; [&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;]
+
+&#x2F;&#x2F; 展开
+console.log(...names); &#x2F;&#x2F; 张三 李四 王五
+
+&#x2F;&#x2F; 合并
+console.log([&#39;赵六&#39;, ...names]); &#x2F;&#x2F;[&#39;赵六&#39;, &#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="旧习换新-3"><a href="#旧习换新-3" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>最后是对象的旧习换新环节，这个环节的内容比较多，主要有 5 个：</p>
+<ol>
+<li>当你需要一个动态的 <code>key</code> 时，可以通过可计算的属性名直接创建该对象</li>
+<li>多使用属性的简写，以此来简化对象构建的过程</li>
+<li>是 <code>Object.assign</code> 方法，这是一个 <code>ES6</code> 新增的方法。可以 <strong>将一个对象的可枚举属性复制到另一个对象上</strong> 。但是要注意，这是一个浅拷贝的</li>
+<li><code>Symbol</code> 可以构建一个唯一值。 使用 <code>Symbol</code> 作为 <code>key</code> 名，可以避免属性名冲突</li>
+<li>最后是关于实例的原型，之前访问实例的原型时多通过 <code>__proto__</code> 访问。现在可以通过 <code>Object.setPrototypeOf、Object.getPrototypeOf</code> 来直接访问原型</li>
 </ol>
+<h2 id="第六章：可迭代对象、迭代器、生成器"><a href="#第六章：可迭代对象、迭代器、生成器" class="headerlink" title="第六章：可迭代对象、迭代器、生成器"></a>第六章：可迭代对象、迭代器、生成器</h2><p>从这一章的名字就可以看出来，这一章中主要讲了三个东西 <code>可迭代对象、迭代器、生成器</code>。本章的内容在我们日常的业务项目开发中其实用的不是特别多，并且很多时候有更习惯的替代方案。但是在面试中，确有可能经常被问到，所以不妨一听。</p>
+<h3 id="可迭代对象、迭代器"><a href="#可迭代对象、迭代器" class="headerlink" title="可迭代对象、迭代器"></a>可迭代对象、迭代器</h3><p>首先咱们先来看可迭代对象、迭代器。想要了解这两个东西，咱们需要先搞清楚他们的概念：</p>
+<blockquote>
+<p>迭代器：所谓迭代器指的是 <strong>一个具有 next 方法的对象</strong>。也就是说，从 <strong>理论上</strong>，只要一个对象具备 <code>next</code> 方法，那么它就是迭代器。这里大家注意：<strong>迭代器可以应用在数组中，却 不可以 应用在普通对象中</strong></p>
+<p>可迭代对象：而可迭代对象指的是 <strong>可以通过标准方法获取迭代器，以遍历其内容的对象</strong>。</p>
+<p>所以说 <strong>可迭代对象、迭代器</strong> 通常是配合来进行说明的。</p>
+</blockquote>
+<p>而对于迭代器而言，分为 <strong>隐式迭代器 和 显示迭代器</strong> 两种。</p>
+<p>咱们先来看隐式迭代器 <code>for of</code>，它拥有 <strong>隐式</strong> 的 <code>next</code> 方法：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const names &#x3D; [&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;]
+for (const iterator of names) &#123;
+  console.log(iterator); &#x2F;&#x2F; 张三、李四、王五
+&#125;
+
+const person &#x3D; &#123;
+  name: &#39;张三&#39;,
+  age: 30
+&#125;
+&#x2F;&#x2F; Uncaught TypeError: person is not iterable
+&#x2F;&#x2F; 普通对象默认不可迭代
+for (const iterator of person) &#123;
+  console.log(iterator);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>而显示迭代器被叫做 <code>Symbol.iterator</code>，每个数组都包含一个 <code>Symbol.iterator</code> 的属性，可以利用该属性获取显示迭代器，它拥有 <strong>显示</strong> 的 <code>next</code> 方法：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const names &#x3D; [&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;]
+const it &#x3D; names[Symbol.iterator]()
+console.log(it); &#x2F;&#x2F; Array Iterator &#123;&#125;
+console.log(it.next()); &#x2F;&#x2F; &#123;value: &#39;张三&#39;, done: false&#125;
+console.log(it.next()); &#x2F;&#x2F; &#123;value: &#39;李四&#39;, done: false&#125;
+console.log(it.next()); &#x2F;&#x2F; &#123;value: &#39;王五&#39;, done: false&#125;
+console.log(it.next()); &#x2F;&#x2F; &#123;value: undefined, done: true&#125;
+
+&#x2F;&#x2F; const person &#x3D; &#123;
+&#x2F;&#x2F;   name: &#39;张三&#39;,
+&#x2F;&#x2F;   age: 30
+&#x2F;&#x2F; &#125;
+&#x2F;&#x2F; &#x2F;&#x2F; Uncaught TypeError: person is not iterable
+&#x2F;&#x2F; &#x2F;&#x2F; 普通对象默认不可迭代
+&#x2F;&#x2F; for (const iterator of person) &#123;
+&#x2F;&#x2F;   console.log(iterator);
+&#x2F;&#x2F; &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>而针对于对象而言，咱们也说过 <strong>普通对象默认不可迭代</strong>。不可迭代的原因其实是因为 <strong>缺少 Symbol.iterator 属性</strong>。所以如果我们希望让普通对象可迭代的话，那么可以通过以下两步来完成：</p>
+<ul>
+<li>为对象添加 <code>Symbol.iterator</code> 属性，返回 <code>iterator</code> 迭代器对象</li>
+<li><code>iterator</code> 迭代器对象中包含 <code>next</code> 方法</li>
+</ul>
+<p>因为在实际开发中使用场景不多，所以其中具体的代码咱们就不在这里说了。</p>
+<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><p>虽然迭代器是一个有用的工具，但由于需要显式地维护其内部状态，因此需要谨慎地创建。生成器函数提供了一个强大的选择：<strong>它允许你定义一个包含自有迭代算法的函数，同时它可以自动维护自己的状态</strong>。所以我们可以 <strong>利用生成器得到一个迭代器对象（<code>Generator</code> 符合 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols#%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%8D%8F%E8%AE%AE">可迭代协议</a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8D%8F%E8%AE%AE">迭代器协议</a>），同时该迭代器对象同样会拥有 <code>next</code> 方法</strong>。</p>
+<p>那么咱们搞明白 <strong>生成器与迭代器</strong> 的关系之后，下面咱们来看下 <strong>生成器</strong> 的语法。</p>
+<p>想要创建并使用生成器的话，一共分为三步：</p>
+<ol>
+<li><p>生成器被称为 <strong>生成器函数</strong>，所以想要构建一个生成器，那么必须要构建一个函数：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 通过在 function 后面增加一个 * 来标记当前函数为生成器函数
+function* simple() &#123;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>生成器内部包含 <strong>暂停迭代</strong> 的功能，这个暂停是配合 <code>next</code> 方法进行使用的</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function* simple() &#123;
+  for (let i &#x3D; 0; i &lt; 3; i++) &#123;
+    &#x2F;&#x2F; 使用 yield 控制暂停迭代
+    yield console.log(i);
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>调用生成器函数，可以得到一个迭代器对象，通过 <code>next</code> 方法控制 <strong>迭代过程</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const s &#x3D; simple()
+s.next() &#x2F;&#x2F; 0
+s.next() &#x2F;&#x2F; 1
+s.next() &#x2F;&#x2F; 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<p>同时对于生成器而言，它还可以 <strong>传递参数（消费值）</strong>，咱们来看这个例子：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function* add() &#123;
+  console.log(&#39;开始&#39;);
+  &#x2F;&#x2F; yield 后面的内容被叫做 value，并且 yield 包含返回值
+  const value1 &#x3D; yield &quot;请输入第一次的值&quot;
+  console.log(&#96;第一次的值为：$&#123;value1&#125;&#96;);
+
+  const value2 &#x3D; yield &quot;请输入第二次的值&quot;
+  console.log(&#96;第二次的值为：$&#123;value2&#125;&#96;);
+
+  return value1 + value2
+&#125;
+
+let result
+const gen &#x3D; add()
+&#x2F;&#x2F; 开始
+result &#x3D; gen.next()
+console.log(result);
+&#x2F;&#x2F; 第一次输入值
+result &#x3D; gen.next(35)
+console.log(result);
+&#x2F;&#x2F; 第二次输入值
+result &#x3D; gen.next(7)
+console.log(result);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="/medias/images/loading.gif" data-original="image-20230625185609320.png" alt="image-20230625185609320" style="zoom:50%;" />
+
+<h3 id="旧习换新-4"><a href="#旧习换新-4" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>就像我们开始所说的一样，在实际企业开发中生成器与自定义迭代器其实使用率并不高，所以这里的旧习换新只有一个：</p>
+<ul>
+<li><strong>利用 DOM 的可迭代特性，通过 for….of… 进行循环</strong>。比如在通过 <code>querySelectAll</code> 获取 <code>DOM</code> 的伪数组之后，伪数组虽然没有办法直接 <code>forEach</code>，但是可以利用隐式迭代器 <code>for of</code> 完成循环操作</li>
+</ul>
 
                 
             </div>
@@ -558,7 +907,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2023/05/25/xiang-ying-shi-bu-ju-mei-ti-cha-xun/">https://qt-7274.github.io/2023/05/25/xiang-ying-shi-bu-ju-mei-ti-cha-xun/</a>
+                    <a href="https://qt-7274.github.io/2023/06/24/jing-du-shen-ru-li-jie-xian-dai-javascript/">https://qt-7274.github.io/2023/06/24/jing-du-shen-ru-li-jie-xian-dai-javascript/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -600,8 +949,8 @@
                                     <span class="chip bg-color">前端</span>
                                 </a>
                             
-                                <a href="/tags/CSS/">
-                                    <span class="chip bg-color">CSS</span>
+                                <a href="/tags/%E4%B9%A6%E7%B1%8D/">
+                                    <span class="chip bg-color">书籍</span>
                                 </a>
                             
                         </div>
@@ -1046,28 +1395,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/06/12/jing-du-javascript-quan-wei-zhi-nan/">
+                <a href="/2023/06/24/jing-du-shen-ru-li-jie-xian-dai-javascript/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97.png" class="responsive-img" alt="精读《JavaScript权威指南》">
                         
-                        <span class="card-title">精读《JavaScript权威指南》</span>
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/5.jpg" class="responsive-img" alt="精读《深入理解现代JavaScript》">
+                        
+                        <span class="card-title">精读《深入理解现代JavaScript》</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            犀牛书被誉为是 “JavaScript圣经”。它的第一版发布于 1996 年，而今天我们要来看的是它在 2021 年 3 月发布的第七版。
+                            想要了解在过去几年中被添加到 JavaScript 的最新特性，以及未来如何在语言不断发展的过程中掌握最新动态，那么本书非常适合你！
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1080,6 +1431,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1102,23 +1454,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/05/09/javascript-jin-jie-ti-mu/">
+                <a href="/2023/06/24/css-xuan-ze-qi-quan-chong-ji-suan/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E8%BF%9B%E9%98%B6.png" class="responsive-img" alt="JavaScript进阶题目">
                         
-                        <span class="card-title">JavaScript进阶题目</span>
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/3.jpg" class="responsive-img" alt="CSS选择器权重计算">
+                        
+                        <span class="card-title">CSS选择器权重计算</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一些JavaScript进阶题目（长期更新）
+                            本文通过图解提供一种计算CSS选择器权重的简单方法
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-24
                             </span>
                         <span class="publish-author">
                             
@@ -1139,8 +1492,8 @@
                         <span class="chip bg-color">前端</span>
                     </a>
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
                     </a>
                     
                 </div>

@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-24
+                    2023-06-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    11.5k
+                    12.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    49 分
+                    53 分
                 </div>
                 
 
@@ -1785,8 +1785,8 @@ console.log(num2);<span aria-hidden="true" class="line-numbers-rows"><span></spa
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: A**
 
-<p><strong>Answer: A</strong></p>
 <p>一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>num1</code>的值是<code>10</code>，因为<code>increaseNumber</code>函数首先返回<code>num</code>的值，即<code>10</code>，然后才递增<code>num</code>的值。</p>
 <p><code>num2</code>的值是<code>10</code>，因为我们将<code>num1</code>传递给了<code>increasePassedNumber</code>函数。<code>number</code>等于<code>10</code>（即<code>num1</code>的值）。同样，一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>number</code>的值是<code>10</code>，所以<code>num2</code>等于<code>10</code>。</p>
 </li>
@@ -1809,8 +1809,8 @@ multiply(value);<span aria-hidden="true" class="line-numbers-rows"><span></span>
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 
-<p><strong>Answer: C</strong></p>
 <p>在ES6中，我们可以使用默认值初始化参数。如果没有将其他值传递给函数，或者参数的值为<code>&quot;undefined&quot;</code>，则参数的值将是默认值。在这种情况下，我们将<code>value</code>对象的属性展开到一个新对象中，因此<code>x</code>具有默认值<code>&#123; number: 10 &#125;</code>。</p>
 <p>默认参数是在调用时计算的！每次调用函数时，都会创建一个新对象。我们前两次调用<code>multiply</code>函数时都没有传递值：<code>x</code>具有默认值<code>&#123; number: 10 &#125;</code>。然后，我们记录该数字的乘积值，即<code>20</code>。</p>
 <p>第三次调用<code>multiply</code>时，我们传递了一个参数：名为<code>value</code>的对象。<code>*=</code>运算符实际上是<code>x.number = x.number * 2</code>的简写：我们修改了<code>x.number</code>的值，并记录了乘以后的值<code>20</code>。</p>
@@ -1826,8 +1826,8 @@ multiply(value);<span aria-hidden="true" class="line-numbers-rows"><span></span>
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: D**
 
-<p><strong>Answer: D</strong></p>
 <p><code>reduce</code>方法接收的第一个参数是累加器，本例中为<code>x</code>。第二个参数是当前值，为<code>y</code>。使用<code>reduce</code>方法，我们在数组中的每个元素上执行一个回调函数，最终可能会得到一个单一的值。</p>
 <p>在这个例子中，我们并没有返回任何值，只是记录了累加器和当前值的值。</p>
 <p>累加器的值等于回调函数先前返回的值。如果您没有将可选的<code>initialValue</code>参数传递给<code>reduce</code>方法，<strong>第一次调用</strong>时累加器等于第一个元素。</p>
@@ -1835,7 +1835,121 @@ multiply(value);<span aria-hidden="true" class="line-numbers-rows"><span></span>
 <p>如果您没有从函数中返回值，它将返回<code>undefined</code>。在下一次调用时，累加器为<code>undefined</code>，当前值为<code>3</code>。输出为<code>undefined</code>和<code>3</code>。</p>
 <p>在第四次调用时，我们再次没有从回调函数返回值。累加器再次为<code>undefined</code>，当前值为<code>4</code>。输出为<code>undefined</code>和<code>4</code>。</p>
 </li>
-<li><p>sd</p>
+<li><h3 id="使用哪个构造函数可以成功继承Dog类？"><a href="#使用哪个构造函数可以成功继承Dog类？" class="headerlink" title="使用哪个构造函数可以成功继承Dog类？"></a>使用哪个构造函数可以成功继承<code>Dog</code>类？</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Dog &#123;
+  constructor(name) &#123;
+    this.name &#x3D; name;
+  &#125;
+&#125;;
+
+class Labrador extends Dog &#123;
+  &#x2F;&#x2F; 1 
+  constructor(name, size) &#123;
+    this.size &#x3D; size;
+  &#125;
+  &#x2F;&#x2F; 2
+  constructor(name, size) &#123;
+    super(name);
+    this.size &#x3D; size;
+  &#125;
+  &#x2F;&#x2F; 3
+  constructor(size) &#123;
+    super(name);
+    this.size &#x3D; size;
+  &#125;
+  &#x2F;&#x2F; 4 
+  constructor(name, size) &#123;
+    this.name &#x3D; name;
+    this.size &#x3D; size;
+  &#125;
+
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: 1</li>
+<li>B: 2</li>
+<li>C: 3</li>
+<li>D: 4</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>在子类中，在调用<code>super</code>之前不能访问到<code>this</code>关键字。 如果这样做，它将抛出一个<code>ReferenceError</code>：1 和 4 将引发一个引用错误。</p>
+<p>使用<code>super</code>关键字，需要用给定的参数来调用父类的构造函数。 父类的构造函数接收<code>name</code>参数，因此我们需要将<code>name</code>传递给<code>super</code>。</p>
+<p><code>Labrador</code>类接收两个参数，<code>name</code>参数是由于它继承了<code>Dog</code>，<code>size</code>作为<code>Labrador</code>类的额外属性，它们都需要传递给<code>Labrador</code>的构造函数，因此使用构造函数 2 正确完成。</p>
+</li>
+<li><h3 id="模块引入"><a href="#模块引入" class="headerlink" title="模块引入"></a>模块引入</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; index.js
+console.log(&#39;running index.js&#39;);
+import &#123; sum &#125; from &#39;.&#x2F;sum.js&#39;;
+console.log(sum(1, 2));
+
+&#x2F;&#x2F; sum.js
+console.log(&#39;running sum.js&#39;);
+export const sum &#x3D; (a, b) &#x3D;&gt; a + b;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>running index.js</code>, <code>running sum.js</code>, <code>3</code></li>
+<li>B: <code>running sum.js</code>, <code>running index.js</code>, <code>3</code></li>
+<li>C: <code>running sum.js</code>, <code>3</code>, <code>running index.js</code></li>
+<li>D: <code>running index.js</code>, <code>undefined</code>, <code>running sum.js</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p><code>import</code>命令是编译阶段执行的，在代码运行之前。因此这意味着被导入的模块会先运行，而导入模块的文件会后执行。</p>
+<p>这是 CommonJS 中<code>require()</code>和<code>import</code>之间的区别。使用<code>require()</code>，您可以在运行代码时根据需要加载依赖项。 如果我们使用<code>require</code>而不是<code>import</code>，<code>running index.js</code>，<code>running sum.js</code>，<code>3</code>会被依次打印。</p>
+</li>
+<li><h3 id="类型判断-2"><a href="#类型判断-2" class="headerlink" title="类型判断"></a>类型判断</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(Number(2) &#x3D;&#x3D;&#x3D; Number(2))
+console.log(Boolean(false) &#x3D;&#x3D;&#x3D; Boolean(false))
+console.log(Symbol(&#39;foo&#39;) &#x3D;&#x3D;&#x3D; Symbol(&#39;foo&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>true</code>, <code>true</code>, <code>false</code></li>
+<li>B: <code>false</code>, <code>true</code>, <code>false</code></li>
+<li>C: <code>true</code>, <code>false</code>, <code>true</code></li>
+<li>D: <code>true</code>, <code>true</code>, <code>true</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>每个<code>Symbol</code>都是完全唯一的。传递给<code>Symbol</code>的参数只是给<code>Symbol</code>的一个描述。 <code>Symbol</code>的值不依赖于传递的参数。 当我们测试相等时，我们创建了两个全新的符号：第一个<code>Symbol（&#39;foo&#39;）</code>，第二个<code>Symbol（&#39;foo&#39;）</code>，这两个值是唯一的，彼此不相等，因此返回<code>false</code>。</p>
+</li>
+<li><p>ds</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &quot;Lydia Hallie&quot;
+console.log(name.padStart(13))
+console.log(name.padStart(2))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code></li>
+<li>B: <code>&quot;           Lydia Hallie&quot;</code>, <code>&quot;  Lydia Hallie&quot;</code> (<code>&quot;[13x whitespace]Lydia Hallie&quot;</code>, <code>&quot;[2x whitespace]Lydia Hallie&quot;</code>)</li>
+<li>C: <code>&quot; Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code> (<code>&quot;[1x whitespace]Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code>)</li>
+<li>D: <code>&quot;Lydia Hallie&quot;</code>, <code>&quot;Lyd&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>使用<code>padStart</code>方法，我们可以在字符串的开头添加填充。传递给此方法的参数是字符串的总长度（包含填充）。字符串<code>Lydia Hallie</code>的长度为<code>12</code>，因此<code>name.padStart（13）</code>在字符串的开头只会插入 1（<code>13 - 12 = 1</code>）个空格。</p>
+<p>如果传递给<code>padStart</code>方法的参数小于字符串的长度，则不会添加填充。</p>
+</li>
+<li><p>ds</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(&quot;🥑&quot; + &quot;💻&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;🥑💻&quot;</code></li>
+<li>B: <code>257548</code></li>
+<li>C: A string containing their code points</li>
+<li>D: Error</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>使用<code>+</code>运算符，您可以连接字符串。 上述情况，我们将字符串<code>&quot;🥑&quot;</code>与字符串<code>&quot;💻&quot;</code>连接起来，产生<code>&quot;🥑💻&quot;</code>。</p>
+</li>
+<li><p>ds</p>
 </li>
 </ol>
 
