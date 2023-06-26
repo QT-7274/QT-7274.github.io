@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-25
+                    2023-06-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.9k
+                    8.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    19 分
+                    33 分
                 </div>
                 
 
@@ -881,6 +881,277 @@ console.log(result);<span aria-hidden="true" class="line-numbers-rows"><span></s
 <ul>
 <li><strong>利用 DOM 的可迭代特性，通过 for….of… 进行循环</strong>。比如在通过 <code>querySelectAll</code> 获取 <code>DOM</code> 的伪数组之后，伪数组虽然没有办法直接 <code>forEach</code>，但是可以利用隐式迭代器 <code>for of</code> 完成循环操作</li>
 </ul>
+<h2 id="第七章：解构"><a href="#第七章：解构" class="headerlink" title="第七章：解构"></a>第七章：解构</h2><p>关于对象相关的最后一部分就是 <strong>解构</strong> 了。解构应该是日常开发中非常常用的语法。其目的是为了 <strong>从数据结构中快速提取对应的内容</strong></p>
+<p>解构分为两部分：对象解构 和 数组解构。</p>
+<h3 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h3><p>当对对象进行解构时，需要 <strong>配合 大括号 完成，大括号中放入需要提取的字段名，同时该字段名会作为新的变量名被创建</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &#39;张三&#39;,
+  age: 30
+&#125;
+
+&#x2F;&#x2F; 以大括号的形式来结构对象
+&#x2F;&#x2F; 以 key 的形式，获取指定属性
+const &#123; name &#125; &#x3D; person &#x2F;&#x2F; const name &#x3D; person.name
+console.log(name); &#x2F;&#x2F; 张三<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>而当 <strong>对象呈嵌套形式时</strong>，同样可以利用 <strong>嵌套解构</strong> 的形式进行结构：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &#39;曹操&#39;,
+  age: 58,
+  children: [
+    &#123;
+      name: &#39;曹丕&#39;,
+      age: 35
+    &#125;,
+    &#123;
+      name: &#39;曹植&#39;,
+      age: 28
+    &#125;
+  ]
+&#125;
+
+&#x2F;&#x2F; &#123; children &#125; 表示获取 person 的 children
+&#x2F;&#x2F; &#123; children: [caoPi] &#125; 表示从 children 中获取第一个元素，命名为 caoPi
+const &#123; children: [caoPi] &#125; &#x3D; person
+console.log(caoPi); &#x2F;&#x2F; &#123;name: &#39;曹丕&#39;, age: 35&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h3><p>而对于数组的解构，需要 <strong>配合 中括号 完成，</strong>中括号中 <strong>按照下标的顺序，依次写入新的变量名</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+
+&#x2F;&#x2F; 以中括号的形式来结构对象
+&#x2F;&#x2F; 中括号定义变量名
+const [v1, v2, v3] &#x3D; arr &#x2F;&#x2F; const v1 &#x3D; arr[0], v2 &#x3D; arr[1], v3 &#x3D; arr[2]
+console.log(v1, v2, v3); &#x2F;&#x2F; &#39;a&#39;, &#39;b&#39;, &#39;c&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同时，对于数组解构而言，也可以通过 <code>“rest” 语法</code> 直接获取 <strong>剩余元素，剩余元素会被赋值给新的数组</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+
+&#x2F;&#x2F; 以中括号的形式来结构对象
+&#x2F;&#x2F; 中括号定义变量名
+&#x2F;&#x2F; “rest” 语法... 表示剩余所有组成新数组
+const [v1, ...v2] &#x3D; arr &#x2F;&#x2F; const v1 &#x3D; arr[0], v2 &#x3D; [arr[1], arr[2]]
+console.log(v1, v2); &#x2F;&#x2F; &#39;a&#39;,  [&#39;b&#39;, &#39;c&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="旧习换新-5"><a href="#旧习换新-5" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>解构是日常开发中常用的语法，但是本身比较简单。只要大家在以后的开发中多使用解构语法，就会发现它本质上是一个非常简单的东西。</p>
+<h2 id="第八章：Promise"><a href="#第八章：Promise" class="headerlink" title="第八章：Promise"></a>第八章：Promise</h2><p>接下来咱们来看第八章、第九章关于异步处理的部分。</p>
+<p>说道异步，肯定有很多小伙伴直接想到的就是 <code>Promise</code>。 没有 <code>Promise</code> 是 <code>ES6</code> 之后专门用来处理异步的解决方案。但是要注意：</p>
+<blockquote>
+<p> <code>Promise</code> <strong>本身并不执行任何操作，它只是一种观察异步操作结果的方案</strong>。</p>
+</blockquote>
+<p>在 <code>Promise</code> 内部对整个异步的操作分为 <strong>三种状态</strong>，对应 <strong>三种结果</strong>。而语法分为 <strong>定义</strong> 和 <strong>使用</strong> 两部分。其中三种状态发生在定义阶段，三种结果发生在使用阶段。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function reload(b) &#123;
+  &#x2F;&#x2F; 创建 promise 实例
+  return new Promise((resolve, reject) &#x3D;&gt; &#123;
+    console.log(&#39;代码进入 pending 状态&#39;);
+    setTimeout(() &#x3D;&gt; &#123;
+      if (b) &#123;
+        resolve(&#39;代码进入 已成功 状态&#39;)
+      &#125; else &#123;
+        reject(&#39;代码进入 已拒绝 状态&#39;)
+      &#125;
+    &#125;, 500);
+  &#125;)
+&#125;
+
+const p1 &#x3D; reload(true)
+p1.then((data) &#x3D;&gt; &#123;
+  console.log(data); &#x2F;&#x2F; 代码进入 已成功 状态
+&#125;).finally(() &#x3D;&gt; &#123;
+  console.log(&#39;p1 已敲定&#39;);
+&#125;)
+
+const p2 &#x3D; reload(false)
+p2.then((data) &#x3D;&gt; &#123;
+  console.log(data); &#x2F;&#x2F; 代码进入 已拒绝 状态
+&#125;).finally(() &#x3D;&gt; &#123;
+  console.log(&#39;p2已敲定&#39;);
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同时，对于 <code>Promise</code> 而言，它支持链式调用的方式。只要在 <code>.then</code> 中 <code>return</code> 了内容，那么 <code>return</code> 的内容就会被封装为 <code>Promise.resolve</code> ，从而可以继续 <code>.then</code>:</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const p1 &#x3D; reload(true)
+p1.then((data) &#x3D;&gt; &#123;
+  console.log(data); &#x2F;&#x2F; 代码进入 已成功 状态
+  return &#39;进入第二次 Promise&#39;
+&#125;).then(data &#x3D;&gt; &#123;
+  console.log(data);
+  return &#39;进入第三次 Promise&#39;
+&#125;).then(data &#x3D;&gt; &#123;
+  console.log(data);
+  console.log(&#39;三次结束&#39;);
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="旧习换新-6"><a href="#旧习换新-6" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>对于 <code>Promise</code> 来说，现在在开发中的使用已经非常普遍了。所以当大家以后遇到异步问题时，应该首先考虑 <code>Promise</code></p>
+<h2 id="第九章：异步函数、迭代器、生成器"><a href="#第九章：异步函数、迭代器、生成器" class="headerlink" title="第九章：异步函数、迭代器、生成器"></a>第九章：异步函数、迭代器、生成器</h2><p><code>Promise</code> 可以帮助我们处理异步操作，但是从上面的代码我们可以看出，在 <code>Promise</code> 的 <strong>使用</strong> 阶段，代码的复杂度其实并不低。</p>
+<p>所以在 <code>ES7</code> 之后，<code>TC39</code> 推出了 <strong>异步函数</strong> 的概念，以解决 <code>Promise</code> 使用的复杂度问题。</p>
+<p>想要定义异步函数，那么需要通过 <code>async</code> 关键字来进行定义，在异步函数中，可以通过 <code>await</code> 关键字来 <strong>让异步操作，变为同步的写法</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function reload1() &#123;
+  &#x2F;&#x2F; 创建 promise 实例
+  return new Promise((resolve, reject) &#x3D;&gt; &#123;
+    setTimeout(() &#x3D;&gt; &#123;
+      resolve(&#39;reload1 进入 已成功 状态&#39;)
+    &#125;, 500);
+  &#125;)
+&#125;
+
+function reload2() &#123;
+  &#x2F;&#x2F; 创建 promise 实例
+  return new Promise((resolve, reject) &#x3D;&gt; &#123;
+    setTimeout(() &#x3D;&gt; &#123;
+      resolve(&#39;reload2 进入 已成功 状态&#39;)
+    &#125;, 500);
+  &#125;)
+&#125;
+
+function reload3() &#123;
+  &#x2F;&#x2F; 创建 promise 实例
+  return new Promise((resolve, reject) &#x3D;&gt; &#123;
+    setTimeout(() &#x3D;&gt; &#123;
+      resolve(&#39;reload3 进入 已成功 状态&#39;)
+    &#125;, 500);
+  &#125;)
+&#125;
+
+
+&#x2F;&#x2F; async 和 await 必须同时出现
+&#x2F;&#x2F; async 标记指定方法为《异步方法》,该方法会返回一个 Promise
+&#x2F;&#x2F; await 只能在《异步方法》中使用
+async function start() &#123;
+  &#x2F;&#x2F; 该操作同样为异步操作，只不过拥有了同步的写法
+  const result1 &#x3D; await reload1()
+  console.log(result1);
+  const result2 &#x3D; await reload2()
+  console.log(result2);
+  const result3 &#x3D; await reload3()
+  console.log(result3);
+
+  return &#39;start 返回值&#39;
+&#125;
+
+const p &#x3D; start()
+console.log(p); &#x2F;&#x2F; promise<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在使用 <code>async/await</code> 时，默认情况下返回值是 <code>.then</code> 的内容，如果想要捕获异常，那么需要通过 <code>try...catch...</code> 来完成。</p>
+<p>同时对于异步函数来说，也可以配合生成器进行使用，得到 <strong>异步生成器函数</strong>。这种异步生成器，在需要 <strong>手动控制多个异步请求的顺序以及结果的时候，会有些用处</strong>，如果大家没有这方面的需求，只需要有个印象就可以了。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; async 函数必然返回 promise
+async function* fetchInSeries([...urls]) &#123;
+  for (const url of urls) &#123;
+    const res &#x3D; await fetch(url)
+    &#x2F;&#x2F; g.next().value 得到 res.json()
+    yield res.json()
+  &#125;
+&#125;
+
+async function getData() &#123;
+  const g &#x3D; fetchInSeries([&#39;1.json&#39;, &#39;2.json&#39;, &#39;3.json&#39;])
+  &#x2F;*
+    let result &#x3D; await g.next()
+    while (!result.done) &#123;
+      console.log(result.value);
+      result &#x3D; await g.next()
+    &#125;
+  *&#x2F;
+  let result
+  while (!(result &#x3D; await g.next()).done) &#123;
+    console.log(result.value);
+  &#125;
+&#125;
+
+getData()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在以上代码的 <code>getData()</code> 方法中，我们通过 <code>fetchInSeries</code> 方法得到了一个迭代器 <code>g</code> ，然后利用 <code>while</code> 循环的方式进行了迭代。</p>
+<p>而整个迭代的过程可以进一步的简写，利用 <code>for await of</code> 语法，会更加轻松</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async function getData() &#123;
+  &#x2F;&#x2F; for await of：利用迭代器的特性配合 await 解析生成器
+  for await (const value of fetchInSeries([&#39;1.json&#39;, &#39;2.json&#39;, &#39;3.json&#39;])) &#123;
+    console.log(value);
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="旧习换新-7"><a href="#旧习换新-7" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>使用 <code>async、await</code> 配合 <code>promise</code> 处理异步请求，是在当前阶段开发中非常常见的一种场景。当大家遇到异步请求时，那么首先应该想到的就是 <code>Promise + async\await</code>。</p>
+<h2 id="第十章：模板字面量、标签函数和新的字符串特性"><a href="#第十章：模板字面量、标签函数和新的字符串特性" class="headerlink" title="第十章：模板字面量、标签函数和新的字符串特性"></a>第十章：模板字面量、标签函数和新的字符串特性</h2><p>从第十章开始，到第十四章为止，这五个章节主要是对传统技术的升级。</p>
+<p>以第十章为例，传统技术下，想要拼接字符串与变量，那么一般需要通过 <strong>+ 运算符</strong> 进行隐式转换。而 <code>ES6</code> 之后，提供了 <strong>模板字符串</strong> 的概念：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const msg &#x3D; &#39;world&#39;
+console.log(&#96;hello $&#123;msg&#125;&#96;); &#x2F;&#x2F; hello world<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>处理之外，还提供了一些新的字符串方法。</p>
+<p>以及通过 <code>for of</code> 隐式迭代器对字符串进行迭代操作。</p>
+<h3 id="旧习换新-8"><a href="#旧习换新-8" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>这一章的内容中，对我们日常开发和面试有用的内容其实比较少，里面还包含一些对我们没有什么用处的东西，比如 <code>Unicode 的改进</code>，这些我就略过了，如果大家对 <code>Unicode</code> 感兴趣的话，可以去看一下书中的内容。</p>
+<h2 id="第十一章：新数组特性、类型化数组"><a href="#第十一章：新数组特性、类型化数组" class="headerlink" title="第十一章：新数组特性、类型化数组"></a>第十一章：新数组特性、类型化数组</h2><p>对于第十一章来说，和第十章其实非常的类似。第十一章主要讲解的是 <code>Array 数组的改进</code>。内容主要就是两部分。</p>
+<p>第一部分是对于 <code>Array</code> 数组的新增方法。</p>
+<p>第二部分是 <strong>类型化数组</strong>。</p>
+<p>对于很多小伙伴来说，类型化数组的概念大家可能是第一次听到。但是大家应该知道 <strong>JavaScript 中传统的 “数组” 并不是真正的数组，而是一个对象。</strong> 所以在 <code>ES6</code> 之后，<code>TC39</code> 提出了一个新的概念就是 <strong>类型化数组</strong>，不同的类型化数组可以存储不同的值，但是在日常的使用中，我们可能很少会主动使用这个东西。</p>
+<h3 id="旧习换新-9"><a href="#旧习换新-9" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>数组的新增方法，在日常开发中是非常有用的。所以以上我们所列举出来的方法大家一定去 <code>MDN</code> 上看一下，至少做到有个印象。</p>
+<h2 id="第十二章：Map-和-Set"><a href="#第十二章：Map-和-Set" class="headerlink" title="第十二章：Map 和 Set"></a>第十二章：Map 和 Set</h2><p>上面两章的内容相对都比较简单。但是接下来的 <code>Map</code> 和 <code>Set</code> 可能对于很多小伙伴来说是 <strong>“盲区”</strong>。</p>
+<p>这一章一共讲到了 <code>4个</code> 新的接口：<code>Map、Set、WeakMap、WeakSet</code>。</p>
+<p>咱么先来看 <code>Map</code>。<code>Map</code> 是 <strong>以 键\值对 的形式存储数据的对象，其中键值对可以是任何值</strong>。乍一看可能和 <strong>普通对象</strong> 没有什么区别，但是大家需要注意的是 <strong>普通对象的 key 只能是 字符串</strong>。 而 <strong>Map 对象的 key 可以是任意值</strong>。</p>
+<p>也就是说虽然存储方式相同，但是可存储的内容确实大大不同的。</p>
+<p>除此之外，在 <code>API</code> 上，<code>Map</code> 和 <code>&#123;&#125;</code> 也有较大的区别。我们可以来看下关于 <code>Map</code> 对象的基本语法：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 创建
+const m &#x3D; new Map()
+&#x2F;&#x2F; 增
+m.set(&#39;name&#39;, &#39;张三&#39;)
+m.set(&#39;age&#39;, &#39;30&#39;)
+&#x2F;&#x2F; 改
+m.set(&#39;name&#39;, &#39;李四&#39;)
+&#x2F;&#x2F; 查
+m.get(&#39;name&#39;)
+&#x2F;&#x2F; 删
+m.delete(&#39;name&#39;)
+&#x2F;&#x2F; 获取长度
+console.log(m.size);
+&#x2F;&#x2F; 迭代
+for (const [key, value] of m) &#123;
+  console.log(key, value);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>而对于 <code>Set</code> 而言，它与数组有些类似，但是不同的地方在于 <strong><code>Set</code> 存储唯一值，也就是元素不可以重复。</strong></p>
+<p>同样它的语法和传统的 <code>Array</code> 也有较大的区别：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 创建
+const s &#x3D; new Set()
+&#x2F;&#x2F; 增
+s.add(&#39;张三&#39;).add(&#39;李四&#39;)
+&#x2F;&#x2F; 是否包含
+s.has(&#39;张三&#39;)
+&#x2F;&#x2F; 删
+s.delete(&#39;张三&#39;)
+&#x2F;&#x2F; 清空
+s.clear()
+&#x2F;&#x2F; 获取长度
+console.log(s.size);
+&#x2F;&#x2F; 迭代
+for (const value of s) &#123;
+  console.log(value);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>而对于 <code>Map</code> 和 <code>Set</code> 来说，都提供了一个 <code>Weak</code> 版，叫做 <code>WeakMap</code> 和 <code>WeakSet</code>。</p>
+<p> <code>WeakMap</code> 和 <code>WeakSet</code>与 <code>Map</code> 和 <code>Set</code> 的区别主要体现在三个地方：</p>
+<ul>
+<li>首先第一个地方是 <strong>值为弱引用</strong> ，这意味着它并不会影响垃圾回收。</li>
+<li>同时因为是弱引用，所以 <strong>值不会保存在内存中</strong>，这个就比较好理解了。</li>
+<li>最后就是 <strong>不可迭代</strong>。</li>
+</ul>
+<h3 id="旧习换新-10"><a href="#旧习换新-10" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>最后就是旧习换新。</p>
+<ul>
+<li>首先：如果你要以键值对的形式保存数据，同时 <code>Key</code> 非字符串，那么此时可以考虑使用 <code>Map</code></li>
+<li>其次：<code>Set</code> 对象可以存储唯一值，这在数组去重的场景下会非常有用</li>
+<li>最后：如果你希望 <code>key</code> 跟随变量的销毁而被回收时，那么可以使用 <code>WeakMap</code> 或 <code>WeakSet</code></li>
+</ul>
+<h2 id="第十三章：模块"><a href="#第十三章：模块" class="headerlink" title="第十三章：模块"></a>第十三章：模块</h2><p>第十三章主要讲解的就是模块化的概念。任何的模块化都会被分成两部分 <strong>导入</strong> 和 <strong>导出</strong>。</p>
+<p>而目前在前端领域，主要的模块化方式有两个 <code>ESM</code> 和 <code>CJS</code> 。</p>
+<p>所以说咱们在这一章中要学习的就是：</p>
+<ul>
+<li><code>ESM</code> 的导入、导出</li>
+<li><code>CJS</code> 的导入、导出</li>
+</ul>
+<p>一个四个环节。</p>
+<p>那么首先我们先来看 <code>ESM</code>。所谓 <code>ESM</code> 指的是 <strong>ES2015 之后新增的标准模块化方案 <code>ES Module</code><strong>。它相对复杂一点，分为 <strong>直接导出</strong>、</strong>按需导出</strong>、<strong>直接导入</strong>、<strong>按需导入</strong> 一共四部分。<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules">直达链接</a>。</p>
+<p>除了这标准的四部分之后，有时候在 <code>EMS</code> 中可能还会涉及到 <strong>导入同时导出</strong> 的场景，如果想要导入并导出，那么可以通过 <code>export &#123;xx&#125; from &#39;./xx&#39;</code> 的方式进行。</p>
+<p>第二个是 <code>CJS</code>。<code>CJS</code> 的逻辑与 <code>ESM</code> 相同，甚至更加简单。只是语法上会稍有不同。<code>CJS</code> 不存在按需的概念，所以只有导入和导出两部分。<a target="_blank" rel="noopener" href="https://nodejs.org/docs/latest/api/modules.html">文档直达链接</a></p>
+<p>除了 <code>CJS</code> 和 <code>EMS</code> 之外，还有一些其他的模块化方案，比如 <code>UMD</code>，<code>AMD</code>、<code>CMD</code> 等等。这些模块化方案在应用层开发中很少见，所以咱们不做讨论。</p>
+<h3 id="旧习换新-11"><a href="#旧习换新-11" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>最后就是旧习换新环节。</p>
+<p>其实对于模块化的问题，在现在的企业开发中已经是非常常见的了。无论是 <code>EMS</code> 还是 <code>CJS</code> 都已经得到了广泛的应用。所以这一章的内容，对于大多数小伙伴来说，应该都没有太大的难度才对。</p>
 
                 
             </div>
