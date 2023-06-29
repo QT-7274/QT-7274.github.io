@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="精读《深入理解现代JavaScript》, QT-7274">
-    <meta name="description" content="想要了解在过去几年中被添加到 JavaScript 的最新特性，以及未来如何在语言不断发展的过程中掌握最新动态，那么本书非常适合你！">
+    <meta name="description" content="通过此书了解在过去几年中被添加到 JavaScript 的最新特性，以及未来如何在语言不断发展的过程中掌握最新动态。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-26
+                    2023-06-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.3k
+                    10.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    33 分
+                    40 分
                 </div>
                 
 
@@ -1152,6 +1152,147 @@ for (const value of s) &#123;
 <p>除了 <code>CJS</code> 和 <code>EMS</code> 之外，还有一些其他的模块化方案，比如 <code>UMD</code>，<code>AMD</code>、<code>CMD</code> 等等。这些模块化方案在应用层开发中很少见，所以咱们不做讨论。</p>
 <h3 id="旧习换新-11"><a href="#旧习换新-11" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>最后就是旧习换新环节。</p>
 <p>其实对于模块化的问题，在现在的企业开发中已经是非常常见的了。无论是 <code>EMS</code> 还是 <code>CJS</code> 都已经得到了广泛的应用。所以这一章的内容，对于大多数小伙伴来说，应该都没有太大的难度才对。</p>
+<h2 id="第十四章：反射和代理"><a href="#第十四章：反射和代理" class="headerlink" title="第十四章：反射和代理"></a>第十四章：反射和代理</h2><p>看完模块化之后，下面咱们来看下反射和代理的概念。其中反射代表的是 <code>Reflect</code>，代理代表的是 <code>Proxy</code>。我第一次接触它们两个是在 <code>Vue 3</code> 中接触到的。</p>
+<p>这两个 <code>API</code> 多数情况下应该是配合使用的，任意一个单独拿出来，在复杂场景中都意义不大。</p>
+<p>所以说我们在介绍这两个 <code>API</code> 的时候会先介绍它们两个的作用，然后再把它们两个合起来去说。</p>
+<p>那么咱们先来看 <code>反射对象（Reflect）</code> 。它 <strong>提供了《对象基本操作的各种方法，比如：获取和设置属性值、获取和设置对象的原型、从对象中删除属性…》</strong> 等等……</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &#39;张三&#39;
+&#125;
+
+console.log(person.name) &#x2F;&#x2F; 张三
+console.log(Reflect.get(person, &#39;name&#39;)) &#x2F;&#x2F; 张三<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在这段代码中，我们可以利用 <code>Reflect.get(person, &#39;name&#39;)</code> 方法，获取到 <code>person</code> 对象下 <code>name</code> 属性的值。</p>
+<p>但是肯定有很多小伙伴看到这就说了 <strong>这有啥用啊？</strong> 我们完全可以通过 <code>person.name</code> 来获取啊。</p>
+<p>所以 <code>Reflect</code> 的真正有意义的使用，就需要配合 <code>Proxy</code> 进行了。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+	name: &#39;张三&#39;,
+	age: 30
+&#125;
+
+const p &#x3D; new Proxy(person, &#123;
+	&#x2F;**
+	 * 代理 person 的 setter 行为
+	 * @param &#123;*&#125; target person 被代理对象
+	 * @param &#123;*&#125; key 修改时的 key
+	 * @param &#123;*&#125; value 修改的 value
+	 * @param &#123;*&#125; receiver proxy 实例 p，被代理对象
+	 *&#x2F;
+	set(target, key, value, receiver) &#123;
+		console.log(target, key, value, receiver)
+		&#x2F;&#x2F; 修改被代理对象
+		target[key] &#x3D; value
+		&#x2F;&#x2F; 标记修改成功
+		return true
+	&#125;,
+
+	&#x2F;**
+	 * 代理 person 的 getter 行为
+	 * @param &#123;*&#125; target person 被代理对象
+	 * @param &#123;*&#125; key 修改时的 key
+	 * @param &#123;*&#125; receiver proxy 实例 p，被代理对象
+	 * @returns
+	 *&#x2F;
+	get(target, key, receiver) &#123;
+		return target[key]
+	&#125;
+&#125;)
+
+p.name &#x3D; &#39;李四&#39; &#x2F;&#x2F; 触发 set。注意：只有修改 proxy 实例才会触发 set
+
+console.log(p.name) &#x2F;&#x2F; 触发 get。注意：只有通过 proxy 实例才会触发 get<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在这段代码中，我们通过 <code>Proxy</code> 代理了 <code>person</code> 的 <code>getter</code> 行为和 <code>setter</code> 行为。从而可以监听到 <code>person</code> 的赋值操作和输出操作。</p>
+<p>那么下面我们来看 <code>Proxy</code> 配合 <code>Reflect</code> 的场景，这个场景可能稍微有一些复杂，需要大家在搞明白 <code>Proxy</code> 和 <code>Reflect</code> 之后再查看：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+	lastName: &#39;张&#39;,
+	firstName: &#39;三&#39;,
+	&#x2F;&#x2F; 通过 get 标识符标记，可以让方法的调用像属性的调用一样
+	get fullName() &#123;
+		return this.lastName + this.firstName
+	&#125;
+&#125;
+
+const proxy &#x3D; new Proxy(person, &#123;
+	get(target, key, receiver) &#123;
+		console.log(&#39;触发了 getter&#39;)
+		&#x2F;&#x2F; getter 行为本应触发三次，但是只触发了一次。这是因为 fullName 中的 this 指向了 target(person)，而不是 proxy 实例
+		&#x2F;&#x2F; return target[key]
+
+		&#x2F;&#x2F; 正常触发三次
+		return Reflect.get(target, key, receiver)
+	&#125;
+&#125;)
+
+console.log(proxy.fullName)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在上面的这段代码中，我们为 <code>person</code> 提供了一个 <code>get fullName() </code> 的属性方法，当 <code>fullName</code> 被触发时，它应该存在 <strong>三次 <code>getter</code> 行为</strong>，即： <strong>fullName、lastName、firstName</strong>。</p>
+<p>但是如果我们在 <code>get</code> 监听中，使用 <code>target[key]</code> 的方式，那么这三次的 <code>getter</code> 行为只会被监听一次。原因是因为 <code>fullName</code> 中的 <code>this</code> 指向 <code>person</code>，而不会指向 <code>proxy 实例</code>。</p>
+<p>所以我们需要通过 <code>Reflect.get</code> 来完成这个行为。 <code>Reflect.get</code> 的第三个参数可以控制 <code>fullName</code> 的 <code>this</code> 指向，使其指向 <code>receiver</code>，也就是  <code>proxy 实例</code>。</p>
+<h3 id="旧习换新-12"><a href="#旧习换新-12" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>如果大家从事业务开发，那么 <code>Proxy</code> 和 <code>Reflect</code> 使用的场景应该并不多。而如果有一天，你需要监听某个对象的 <code>getter</code> 或者 <code>setter</code> 动作了，那么可以直接通过 <code>Proxy</code> 来完成。</p>
+<h2 id="第十五章：正则表达式"><a href="#第十五章：正则表达式" class="headerlink" title="第十五章：正则表达式"></a>第十五章：正则表达式</h2><p>基本上每一本 <code>JavaScript</code> 的书籍都会包含一个 <strong>正则表达式</strong> 的环节，但是讲道理在日常的开发中 <strong>正则表达式</strong> 的使用不足以让我们花费大量的时间，同时书中的那些内容也不足以支撑复杂场景的 <strong>正则表达式</strong> 使用。</p>
+<p>在本书的第十五章中，我摘抄出了 <strong>3 个新增的正则标记符</strong>，为大家提供参考。</p>
+<h2 id="第十六章：共享内存"><a href="#第十六章：共享内存" class="headerlink" title="第十六章：共享内存"></a>第十六章：共享内存</h2><p>作者在书中说道： <strong>绝大多数的开发者并不需要在线程之间共享内存。</strong>  作者说的很对，所以我们这里不会花费篇章来说这个问题。如果你需要，那么可以看下书中讲解的内容。</p>
+<h2 id="第十七章：其他特性"><a href="#第十七章：其他特性" class="headerlink" title="第十七章：其他特性"></a>第十七章：其他特性</h2><p>第十七章的其他特性，主要呈现了一些单一、不成系统的特性。这些特性虽然大多都比较简单，但是有些在日常开发中还是比较有用的。</p>
+<p>我从中抽出来了对我们日常开发有价值的新特性，咱们一起来看一下：</p>
+<ul>
+<li><p><strong>BigInt</strong>：<code>BigInt</code> 主要用来处理大数字问题：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; BigInt：处理大数字（大于 2^53 - 1 的整数）问题
+const bigNum &#x3D; 900719925474099596
+console.log(bigNum); &#x2F;&#x2F; 9867273627366328000  数值错误
+
+&#x2F;&#x2F; const bigIntObj &#x3D; BigInt(900719925474099596n)
+const bigIntObj &#x3D; 900719925474099596n &#x2F;&#x2F; 加上 n 表示 bigint
+console.log(bigIntObj.toString()); &#x2F;&#x2F; 900719925474099596<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>新的整数字面量语法（二进制、八进制）</strong>：主要针对二进制、八进制</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 二进制 0b 开头
+console.log(0b1000); &#x2F;&#x2F; 8
+&#x2F;&#x2F; 八进制 0o 开头
+console.log(0o17); &#x2F;&#x2F; 15<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>省略 catch 绑定的异常</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 省略 catch 绑定的异常
+try &#123;
+  JSON.parse(&#39;abc&#39;)
+&#125; catch &#123;
+  console.log(&#39;不需要为 catch(err) &#123;...&#125;&#39;);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>新的 Math 方法</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/06/24/jing-du-shen-ru-li-jie-xian-dai-javascript/image-20230627142003717.png" alt="image-20230627142003717"></p>
+</li>
+<li><p><strong>取幂运算符</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 取幂运算符 **
+console.log(2 ** 3); &#x2F;&#x2F; 2 * 2 * 2 &#x3D; 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>空值合并</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 空值合并 ??
+const num &#x3D; 0 &#x2F;&#x2F; 0 是一个正常的数值，但是在 JavaScript 中 0 参与逻辑运算会被当做 “假”
+&#x2F;&#x2F; 利用逻辑或的逻辑中断特性
+console.log(num || 300); &#x2F;&#x2F; 300
+
+&#x2F;&#x2F; 但是在程序中，有些时候 0 会被作为一个有意义的值，所以上面案例，我们去期望得到的是 0
+&#x2F;&#x2F; 利用空值合并：?? 前面的值只有为 null 或者 undefined 才会被认为 “假”
+console.log(num ?? 300); &#x2F;&#x2F; 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong>可选链</strong></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 可选链 xx?.xx  
+const person &#x3D; &#123;
+  name: &#39;张三&#39;
+&#125;
+&#x2F;&#x2F; console.log(person.child.name); &#x2F;&#x2F; child 为 undefined，所以报错 Cannot read properties of undefined (reading &#39;name&#39;)
+
+&#x2F;&#x2F; 利用可选链，如果 ? 前面为 null 或者 undefined ，则逻辑短路
+console.log(person.child?.name); &#x2F;&#x2F; undefined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="第十八章：即将推出的类特性"><a href="#第十八章：即将推出的类特性" class="headerlink" title="第十八章：即将推出的类特性"></a>第十八章：即将推出的类特性</h2><h2 id="第十九章：展望未来"><a href="#第十九章：展望未来" class="headerlink" title="第十九章：展望未来"></a>第十九章：展望未来</h2><p>最后的十八和十九章，对我们现在而言意义就不大了。里面很多的特性现在并不支持，在实际开发中使用的场景也非常有限。</p>
+<p>如果你对这些东西比较感兴趣的话，那么可以看一下。否则意义不大。</p>
+<blockquote>
+<p>视频出处：【一小时读完《深入理解现代 JavaScript》，彻底掌握 ES6 之后 JavaScript 新特性！】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1qD4y1G7YK/?share_source=copy_web&amp;vd_source=a9f0fd4630ebe41da19ca2c83eb295e6">https://www.bilibili.com/video/BV1qD4y1G7YK/?share_source=copy_web&amp;vd_source=a9f0fd4630ebe41da19ca2c83eb295e6</a></p>
+<p>作者：LGD_Sunday</p>
+</blockquote>
 
                 
             </div>

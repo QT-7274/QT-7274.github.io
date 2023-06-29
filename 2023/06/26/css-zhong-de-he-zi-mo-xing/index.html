@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-26
+                    2023-06-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    943
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -589,6 +589,23 @@
 </li>
 </ul>
 </li>
+<li><p>使用负margin技术也可实现水平垂直居中，详见：<a href="https://qt-7274.github.io/2023/03/19/css-jin-jie-fu-margin-ji-zhu/">CSS进阶–负margin技术 | QT-7274</a></p>
+</li>
+</ol>
+<h3 id="元素之间的空白问题"><a href="#元素之间的空白问题" class="headerlink" title="元素之间的空白问题"></a>元素之间的空白问题</h3><p>产生的原因：</p>
+<p>行内元素、行内块元素，彼此之间的换行会被浏览器解析为一个空白字符。</p>
+<p>解决方案：</p>
+<ol>
+<li><strong>方案一</strong>：去掉换行和空格（不推荐）。</li>
+<li><strong>方案二</strong>：给父元素设置<code>font-size: 0</code>，再给需要显示文字的元素，单独设置字体大小（推荐）。</li>
+</ol>
+<h3 id="行内块的幽灵空白问题"><a href="#行内块的幽灵空白问题" class="headerlink" title="行内块的幽灵空白问题"></a>行内块的幽灵空白问题</h3><p>产生原因：</p>
+<p>行内块元素与文本的基线对齐，而文本的基线与文本最底端之间是有一定距离的。</p>
+<p>解决方案：</p>
+<ol>
+<li><strong>方案一</strong>：给行行内块设置<code>vertical</code>，值不为<code>baseline</code>即可，设置为<code>middel</code>、<code>bottom</code>、<code>top</code>即可。</li>
+<li><strong>方案二</strong>：若父元素中只有一张图片，设置图片为<code>display: block</code>。</li>
+<li><strong>方案三</strong>：给父元素设置<code>font-size: 0</code>。如果该行内块内部还有文本，则需单独设置<code>font-size</code>。</li>
 </ol>
 
                 
@@ -1165,7 +1182,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            想要了解在过去几年中被添加到 JavaScript 的最新特性，以及未来如何在语言不断发展的过程中掌握最新动态，那么本书非常适合你！
+                            通过此书了解在过去几年中被添加到 JavaScript 的最新特性，以及未来如何在语言不断发展的过程中掌握最新动态。
                         
                     </div>
                     <div class="publish-info">
