@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-24
+                    2023-07-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    9 分
                 </div>
                 
 
@@ -516,8 +516,17 @@
 </blockquote>
 <h3 id="aside元素"><a href="#aside元素" class="headerlink" title="aside元素"></a>aside元素</h3><p>在HTML5中，aside元素一般用于表示跟周围区域相关的内容。</p>
 <h3 id="section元素"><a href="#section元素" class="headerlink" title="section元素"></a>section元素</h3><p>在HTML5中，section元素一般用于<strong>某一个需要标题内容的区块</strong>。</p>
+<p><strong>页面中的某段文字，或文章中的某段文字（里面文字通常里面会包含标题）。</strong></p>
 <p>如果页面某个区块不需要标题，直接使用div元素即可，否则建议使用section元素。</p>
 <p>在HTML5中，article、aside元素是比section元素更具语义化的元素，可以看成是特殊的seciton元素。</p>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li><code>article</code>里面可以有多个<code>section</code>。</li>
+<li><code>section</code>强调的是分段或分块，如果你想将一块内容分成几段的时候，可以使用<code>section</code>元素。</li>
+<li><code>article</code>比<code>seciton</code>更强调独立性，一块内容如果比较独立、比较完整，应该使用<code>article</code>元素。</li>
+</ol>
+</blockquote>
 <h3 id="footer元素"><a href="#footer元素" class="headerlink" title="footer元素"></a>footer元素</h3><p>在HTML5中，footer元素一般用于两个地方：一个是“<strong>页面底部</strong>”，另一个是“<strong>文章底部</strong>”。</p>
 <p>当用于页面底部时，footer元素一般包含友情链接、版权声明、备案信息等。</p>
 <p>当用于文章底部时，也就是放在article元素内部时，footer元素一般包含“上一篇&#x2F;下一篇导航”“文章分类”“发布信息”等。</p>
@@ -629,13 +638,21 @@
 <p>对于progress元素来说，<strong>它只有max值而没有min值</strong>：任何进度条的最小值都是0，因此progress元素默认最小值也是0。此外，max和value必须是0或正数，并且max值必须大于等于value值。</p>
 <h3 id="meter元素"><a href="#meter元素" class="headerlink" title="meter元素"></a>meter元素</h3><p>在HTML5中，可以使用进度条的形式来显示数据所占的比例。</p>
 <p>meter元素和progress元素非常相似，都是以进度条形式来显示数据比例。不过，两者在语义上有很大的区别：</p>
+<blockquote>
 <ul>
 <li>meter元素一般用于显示<strong>静态数据</strong>比例。所谓的静态数据，指的是很少改变的数据。</li>
 <li>progress元素一般用于显示<strong>动态数据</strong>比例。所谓的动态数据，指的是会不断改变的数据。</li>
 </ul>
+</blockquote>
 <h3 id="figure和figcaption元素"><a href="#figure和figcaption元素" class="headerlink" title="figure和figcaption元素"></a>figure和figcaption元素</h3><p><u>figure元素用于包含图片和图注，figcaption元素用于表示图注文字。</u>在实际开发中，对于“图片+图注”效果，我们都建议使用figure和figcation这两个元素来实现，从而使得页面的语义更加良好。</p>
 <h3 id="fieldset和legend元素"><a href="#fieldset和legend元素" class="headerlink" title="fieldset和legend元素"></a>fieldset和legend元素</h3><p>在HTML5中，可以使用fieldset元素来给表单元素进行分组。其中，legend元素用于定义某一组表单的标题。</p>
 <p>他们的作用一是可以增强表单的语义，二是可以定义field元素的disabled属性来禁用整个组中的表单元素。</p>
+<h3 id="ruby元素和rt元素"><a href="#ruby元素和rt元素" class="headerlink" title="ruby元素和rt元素"></a>ruby元素和rt元素</h3><p>ruby标签包裹需要注音的文字，rt标签负责写注音，rt标签写在ruby标签的里面。</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ruby</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>魑魅魍魉<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>rt</span><span class="token punctuation">></span></span>chī mèi wǎng liǎng<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rt</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ruby</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="改良后的元素"><a href="#改良后的元素" class="headerlink" title="改良后的元素"></a>改良后的元素</h2><h3 id="a元素"><a href="#a元素" class="headerlink" title="a元素"></a>a元素</h3><p>HTML5为a元素新增了3个属性：</p>
 <table>
 <thead>
@@ -666,6 +683,36 @@
 <li>async属性用于异步加载外部JavaScript文件，当异步加载完成后，<strong>该外部JavaScript文件会立即执行，即使整个HTML文档还没有加载完成。</strong></li>
 </ul>
 <p>defer和async都是异步加载的，两者区别在于，异步加载外部JavaScript文件完成后何时执行。从上面也可以看出，defer属性更符合大多数开发场景对脚本加载执行的要求。</p>
+<h2 id="HTML5兼容性处理"><a href="#HTML5兼容性处理" class="headerlink" title="HTML5兼容性处理"></a>HTML5兼容性处理</h2><ul>
+<li><p>添加元信息，让浏览器处于最优渲染模式。</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!--设置IE总是使用最新的文档模式进行渲染--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=Edge<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--优先使用 webkit ( Chromium ) 内核进行渲染, 针对360等壳浏览器--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>renderer<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>webkit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>使用<code>html5shiv</code>让低版本浏览器认识<code>H5</code>的语义化标签</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!--[if lt ie 9]>
+&lt;script src="../sources/js/html5shiv.js">&lt;/script>
+&lt;![endif]--></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>扩展</p>
+<blockquote>
+<ul>
+<li><code>lt</code>小于</li>
+<li><code>lte</code>小于</li>
+<li><code>gt</code>大于</li>
+<li><code>gte</code>大于等于</li>
+<li><code>!</code>逻辑非</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!--[if IE 8]>仅IE8可见&lt;![endif]--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!--[if</span> <span class="token attr-name">gt</span> <span class="token attr-name">IE</span> <span class="token attr-name">8]</span><span class="token punctuation">></span></span>仅IE8以上可见<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>![endif]—</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!--[if</span> <span class="token attr-name">lt</span> <span class="token attr-name">IE</span> <span class="token attr-name">8]</span><span class="token punctuation">></span></span>仅IE8以下可见<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>![endif]—</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!--[if</span> <span class="token attr-name">gte</span> <span class="token attr-name">IE</span> <span class="token attr-name">8]</span><span class="token punctuation">></span></span>IE8及以上可见<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>![endif]—</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!--[if</span> <span class="token attr-name">lte</span> <span class="token attr-name">IE</span> <span class="token attr-name">8]</span><span class="token punctuation">></span></span>IE8及以下可见<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>![endif]—</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--[if !IE 8]>非IE8的IE可见&lt;![endif]--></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>

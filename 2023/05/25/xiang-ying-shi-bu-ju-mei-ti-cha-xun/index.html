@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-15
+                    2023-07-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    370
+                    576
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -507,7 +507,96 @@
   &#x2F;* CSS rules go here *&#x2F;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>其中，mediatype 表示媒体类型，可以是 all（所有媒体设备）、print（打印设备）、screen（计算机屏幕）等等。condition 表示条件，可以是设备宽度、高度、方向、分辨率等等。</p>
+<ul>
+<li><p><code>mediatype</code> 表示媒体类型，可以是 <code>all</code>（所有媒体设备）、<code>print</code>（打印设备）、<code>screen</code>（计算机屏幕）等等。</p>
+</li>
+<li><p><code>condition</code> 表示媒体特性，具体值如下：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>width</code></td>
+<td>检测视口宽度。</td>
+</tr>
+<tr>
+<td><code>max-width</code></td>
+<td>检测视口最大宽度。</td>
+</tr>
+<tr>
+<td><code>min-width</code></td>
+<td>检测视口最小宽度。</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>检测视口高度。</td>
+</tr>
+<tr>
+<td><code>max-height</code></td>
+<td>检测视口最大高度。</td>
+</tr>
+<tr>
+<td><code>min-height</code></td>
+<td>检测视口最小高度。</td>
+</tr>
+<tr>
+<td><code>device-width</code></td>
+<td>检测设备屏幕的宽度。</td>
+</tr>
+<tr>
+<td><code>max-device-width</code></td>
+<td>检测设备屏幕的最大宽度。</td>
+</tr>
+<tr>
+<td><code>min-device-width</code></td>
+<td>检测设备屏幕的最小宽度。</td>
+</tr>
+<tr>
+<td><code>orientation</code></td>
+<td>检测视口的旋转方向（是否横屏）。 1. portrait ：视口处于纵向，即高度大于等于宽度。 2. landscape ：视口处于横向，即宽度大于高度。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>完整列表请参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media">https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media</a></p>
+</blockquote>
+</li>
+<li><p>运算符</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>and</code></td>
+<td>并且</td>
+</tr>
+<tr>
+<td><code>,</code> 或 <code>or</code></td>
+<td>或</td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td>否定</td>
+</tr>
+<tr>
+<td><code>only</code></td>
+<td>肯定</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>完整列表请参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media">https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media</a></p>
+</blockquote>
+</li>
+<li><p>常用阈值</p>
+<p>在实际开发中，会将屏幕划分成几个区间，例如：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/05/25/xiang-ying-shi-bu-ju-mei-ti-cha-xun/image-20230705193220269.png" alt="image-20230705193220269"></p>
+</li>
+</ul>
 <p>此外，媒体查询可以嵌套，以便为不同的屏幕尺寸和设备类型提供更加精细的样式：</p>
 <pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">@media screen and (max-width: 480px) &#123;
   &#x2F;* CSS rules for small screens go here *&#x2F;

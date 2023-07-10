@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-01
+                    2023-07-03
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    15.9k
+                    16.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    69 分
+                    73 分
                 </div>
                 
 
@@ -2302,8 +2302,7 @@ console.log(checkAge(21))<span aria-hidden="true" class="line-numbers-rows"><spa
 <p>可以使用方括号表示法获取字符串中特定索引的字符，字符串中的第一个字符具有索引 0，依此类推。 在这种情况下，我们想要得到索引为 0 的元素，字符<code>&#39;I&#39;</code>被记录。</p>
 <p>请注意，IE7 及更低版本不支持此方法。 在这种情况下，应该使用<code>.charAt（）</code>。</p>
 </li>
-<li><p>ds</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sum(num1, num2 &#x3D; num1) &#123;
+<li><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sum(num1, num2 &#x3D; num1) &#123;
   console.log(num1 + num2)
 &#125;
 
@@ -2328,8 +2327,7 @@ test() &#x2F;&#x2F; Uncaught ReferenceError: Cannot access &#39;n&#39; before in
 test(3) &#x2F;&#x2F; 3 2
 test(3, 4) &#x2F;&#x2F; 3 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>ds</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; module.js 
+<li><h3 id="模块导入"><a href="#模块导入" class="headerlink" title="模块导入"></a>模块导入</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; module.js 
 export default () &#x3D;&gt; &quot;Hello world&quot;
 export const name &#x3D; &quot;Lydia&quot;
 
@@ -2351,8 +2349,7 @@ console.log(data)<span aria-hidden="true" class="line-numbers-rows"><span></span
 <p>使用<code>import * as name</code>语法，我们将<code>module.js</code>文件中所有<code>export</code>导入到<code>index.js</code>文件中，并且创建了一个名为<code>data</code>的新对象。 在<code>module.js</code>文件中，有两个导出：默认导出和命名导出。 默认导出是一个返回字符串 “Hello World” 的函数，命名导出是一个名为<code>name</code>的变量，其值为字符串<code>&quot;Lydia&quot;</code>。</p>
 <p><code>data</code>对象具有默认导出的<code>default</code>属性，其他属性具有指定 exports 的名称及其对应的值。</p>
 </li>
-<li><p>sd</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Person &#123;
+<li><h3 id="类的判断"><a href="#类的判断" class="headerlink" title="类的判断"></a>类的判断</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Person &#123;
   constructor(name) &#123;
     this.name &#x3D; name
   &#125;
@@ -2378,8 +2375,7 @@ console.log(typeof member)<span aria-hidden="true" class="line-numbers-rows"><sp
 
 <p>通过<code>new</code>来调用构造函数，将会生成构造函数<code>Person</code>的实例，对实例执行<code>typeof</code>关键字将返回<code>&quot;object&quot;</code>，上述情况打印出<code>&quot;object&quot;</code>。</p>
 </li>
-<li><p>ds</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let newList &#x3D; [1, 2, 3].push(4)
+<li><h3 id="数组方法"><a href="#数组方法" class="headerlink" title="数组方法"></a>数组方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let newList &#x3D; [1, 2, 3].push(4)
 
 console.log(newList.push(5))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -2391,12 +2387,141 @@ console.log(newList.push(5))<span aria-hidden="true" class="line-numbers-rows"><
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 
-<p><strong>Answer: B</strong></p>
 <p><code>.push</code>方法返回数组的长度，而<strong>不是数组本身</strong>！ 通过将<code>newList</code>设置为<code>[1,2,3].push(4)</code>，实际上<code>newList</code>等于数组的新长度：<code>4</code>。</p>
 <p>然后，尝试在<code>newList</code>上使用<code>.push</code>方法。 由于<code>newList</code>是数值<code>4</code>，抛出 TypeError。</p>
 </li>
-<li><p>ds</p>
+<li><h3 id="函数区别"><a href="#函数区别" class="headerlink" title="函数区别"></a>函数区别</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function giveLydiaPizza() &#123;
+  return &quot;Here is pizza!&quot;
+&#125;
+
+const giveLydiaChocolate &#x3D; () &#x3D;&gt; &quot;Here&#39;s chocolate... now go hit the gym already.&quot;
+
+console.log(giveLydiaPizza.prototype)
+console.log(giveLydiaChocolate.prototype)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; constructor: ...&#125;</code> <code>&#123; constructor: ...&#125;</code></li>
+<li>B: <code>&#123;&#125;</code> <code>&#123; constructor: ...&#125;</code></li>
+<li>C: <code>&#123; constructor: ...&#125;</code> <code>&#123;&#125;</code></li>
+<li>D: <code>&#123; constructor: ...&#125;</code> <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p>常规函数，例如<code>giveLydiaPizza</code>函数，有一个<code>prototype</code>属性，它是一个带有<code>constructor</code>属性的对象（原型对象）。 然而，箭头函数，例如<code>giveLydiaChocolate</code>函数，没有这个<code>prototype</code>属性。 尝试使用<code>giveLydiaChocolate.prototype</code>访问<code>prototype</code>属性时会返回<code>undefined</code>。</p>
+</li>
+<li><h3 id="对象循环-1"><a href="#对象循环-1" class="headerlink" title="对象循环"></a>对象循环</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &quot;Lydia&quot;,
+  age: 21
+&#125;
+
+for (const [x, y] of Object.entries(person)) &#123;
+  console.log(x, y)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>name</code> <code>Lydia</code> and <code>age</code> <code>21</code></li>
+<li>B: <code>[&quot;name&quot;, &quot;Lydia&quot;]</code> and <code>[&quot;age&quot;, 21]</code></li>
+<li>C: <code>[&quot;name&quot;, &quot;age&quot;]</code> and <code>undefined</code></li>
+<li>D: <code>Error</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p><code>Object.entries()</code>方法返回一个给定对象自身可枚举属性的键值对数组，上述情况返回一个二维数组，数组每个元素是一个包含键和值的数组：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[[&#39;name&#39;，&#39;Lydia&#39;]，[&#39;age&#39;，21]]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>使用<code>for-of</code>循环，我们可以迭代数组中的每个元素，上述情况是子数组。 我们可以使用<code>const [x，y]</code>在<code>for-of</code>循环中解构子数组。 <code>x</code>等于子数组中的第一个元素，<code>y</code>等于子数组中的第二个元素。</p>
+<p>第一个子阵列是<code>[“name”，“Lydia”]</code>，其中<code>x</code>等于<code>name</code>，而<code>y</code>等于<code>Lydia</code>。 第二个子阵列是<code>[“age”，21]</code>，其中<code>x</code>等于<code>age</code>，而<code>y</code>等于<code>21</code>。</p>
+</li>
+<li><h3 id="默认参数-1"><a href="#默认参数-1" class="headerlink" title="默认参数"></a>默认参数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getItems(fruitList, ...args, favoriteFruit) &#123;
+  return [...fruitList, ...args, favoriteFruit]
+&#125;
+
+getItems([&quot;banana&quot;, &quot;apple&quot;], &quot;pear&quot;, &quot;orange&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[&quot;banana&quot;, &quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;]</code></li>
+<li>B: <code>[[&quot;banana&quot;, &quot;apple&quot;], &quot;pear&quot;, &quot;orange&quot;]</code></li>
+<li>C: <code>[&quot;banana&quot;, &quot;apple&quot;, [&quot;pear&quot;], &quot;orange&quot;]</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p><code>... args</code>是剩余参数，剩余参数的值是一个包含所有剩余参数的数组，<strong>并且只能作为最后一个参数</strong>。上述示例中，剩余参数是第二个参数，这是不可能的，并会抛出语法错误。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getItems(fruitList, favoriteFruit, ...args) &#123;
+  return [...fruitList, ...args, favoriteFruit]
+&#125;
+
+getItems([&quot;banana&quot;, &quot;apple&quot;], &quot;pear&quot;, &quot;orange&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上述例子是有效的，将会返回数组：<code>[ &#39;banana&#39;, &#39;apple&#39;, &#39;orange&#39;, &#39;pear&#39; ]</code></p>
+</li>
+<li><h3 id="语句分号"><a href="#语句分号" class="headerlink" title="语句分号"></a>语句分号</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function nums(a, b) &#123;
+  if
+  (a &gt; b)
+  console.log(&#39;a is bigger&#39;)
+  else 
+  console.log(&#39;b is bigger&#39;)
+  return 
+  a + b
+&#125;
+
+console.log(nums(4, 2))
+console.log(nums(1, 2))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>a is bigger</code>, <code>6</code> and <code>b is bigger</code>, <code>3</code></li>
+<li>B: <code>a is bigger</code>, <code>undefined</code> and <code>b is bigger</code>, <code>undefined</code></li>
+<li>C: <code>undefined</code> and <code>undefined</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>在 JavaScript 中，我们不必显式地编写分号 (<code>;</code>)，但是 JavaScript 引擎仍然在语句之后自动添加分号。这称为<strong>自动分号插入</strong>。例如，一个语句可以是变量，或者像<code>throw</code>、<code>return</code>、<code>break</code>这样的关键字。</p>
+<p>在这里，我们在新的一行上写了一个<code>return</code>语句和另一个值<code>a + b </code>。然而，由于它是一个新行，引擎并不知道它实际上是我们想要返回的值。相反，它会在<code>return</code>后面自动添加分号。你可以这样看：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">return;
+a + b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这意味着永远不会到达<code>a + b</code>，因为函数在<code>return</code>关键字之后停止运行。如果没有返回值，就像这里，函数返回<code>undefined</code>。注意，在<code>if/else</code>语句之后没有自动插入！</p>
+</li>
+<li><p>类的设置</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Person &#123;
+  constructor() &#123;
+    this.name &#x3D; &quot;Lydia&quot;
+  &#125;
+&#125;
+
+Person &#x3D; class AnotherPerson &#123;
+  constructor() &#123;
+    this.name &#x3D; &quot;Sarah&quot;
+  &#125;
+&#125;
+
+const member &#x3D; new Person()
+console.log(member.name)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lydia&quot;</code></li>
+<li>B: <code>&quot;Sarah&quot;</code></li>
+<li>C: <code>Error: cannot redeclare Person</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>我们可以将类设置为等于其他类&#x2F;函数构造函数。 在这种情况下，我们将<code>Person</code>设置为<code>AnotherPerson</code>。 这个构造函数的名字是<code>Sarah</code>，所以新的<code>Person</code>实例<code>member</code>上的 name 属性是<code>Sarah</code>。</p>
+</li>
+<li><p>98</p>
 </li>
 </ol>
 
