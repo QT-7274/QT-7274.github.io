@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-08-29
+                    2023-07-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.4k
+                    6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    25 分
+                    27 分
                 </div>
                 
 
@@ -500,7 +500,77 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="创建组件的注意事项："><a href="#创建组件的注意事项：" class="headerlink" title="创建组件的注意事项："></a>创建组件的注意事项：</h3><blockquote>
+                <h3 id="非单文件组件"><a href="#非单文件组件" class="headerlink" title="非单文件组件"></a>非单文件组件</h3><h4 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h4><ol>
+<li><p>定义组件</p>
+<p>使用 <code>Vue.extend(options)</code> 创建，其中 <code>options</code> 和 <code>new Vue(options)</code> 时传入的<code>options</code>几乎一样，但也有区别：</p>
+<ul>
+<li><p><code>el</code>不要写，因为最终所有的组件都要经过一个<code>vm</code>的管理，由<code>vm</code>中的<code>el</code>才决定服务哪个容器。</p>
+</li>
+<li><p><code>data</code>必须写成函数，避免组件被复用时，数组存在单引用关系。</p>
+<blockquote>
+<p>直接将data写成对象，而不是一个函数，那么每个组件的data属性会<strong>共享</strong>同一个对象实例。这意味着当一个组件的data属性被修改时，其他组件的data属性也会受到影响，导致数据混乱和不可预料的行为。</p>
+<p>为了避免这个问题，Vue要求将data属性写成一个函数。这样一来，每个组件实例都会调用该函数来返回一个新的数据对象。这样每个组件都会独立拥有自己的数据对象，互不干扰。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>注册组件</p>
+<ul>
+<li>局部注册：<code>new Vue()</code> 的时候 <code>options</code> 传入 <code>components</code> 选项。</li>
+<li>全局注册：<code>Vue.component(&#39;组件名&#39;, 组件)</code></li>
+</ul>
+</li>
+<li><p>使用组件</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;定义school组件
+		const school &#x3D; Vue.extend(&#123;
+			name:&#39;school&#39;,
+			template:&#96;
+				&lt;div&gt;
+					&lt;h2&gt;学校名称：&#123;&#123;name&#125;&#125;&lt;&#x2F;h2&gt;	
+					&lt;h2&gt;学校地址：&#123;&#123;address&#125;&#125;&lt;&#x2F;h2&gt;	
+					&lt;button @click&#x3D;&quot;showName&quot;&gt;点我提示学校名&lt;&#x2F;button&gt;
+				&lt;&#x2F;div&gt;
+			&#96;,
+			data()&#123;
+				return &#123;
+					name:&#39;尚硅谷&#39;,
+					address:&#39;北京&#39;
+				&#125;
+			&#125;,
+			methods: &#123;
+				showName()&#123;
+					console.log(&#39;showName&#39;,this)
+				&#125;
+			&#125;,
+		&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h3 id="VueComponent与Vue的关系"><a href="#VueComponent与Vue的关系" class="headerlink" title="VueComponent与Vue的关系"></a>VueComponent与Vue的关系</h3><p><img src="/medias/images/loading.gif" data-original="/%E5%85%B3%E4%BA%8EVue%E4%B8%AD%E7%9A%84%E7%BB%84%E4%BB%B6%E7%9F%A5%E8%AF%86/1643034116880-0c7ffd4b-f0ed-47b2-9638-3bb71344c4f1.png" alt="image.png"></p>
+<ol>
+<li>一个重要的内置关系：<code>VueComponent.prototype. _proto  === Vue.prototype</code></li>
+<li>为什么要有这个关系：让组件实例对象VueComponent可以访问到Vue原型上的属性、方法。</li>
+</ol>
+<h3 id="创建组件的注意事项："><a href="#创建组件的注意事项：" class="headerlink" title="创建组件的注意事项："></a>创建组件的注意事项：</h3><h4 id="组件名："><a href="#组件名：" class="headerlink" title="组件名："></a>组件名：</h4><ul>
+<li>一个单词组成<ul>
+<li>第一种写法（首字母小写）：school</li>
+<li>第二种写法（<strong>首字母大写</strong>）：School（只能在</li>
+</ul>
+</li>
+<li>多个单词组成<ul>
+<li>第一种写法（kebab-case命名）：my-school</li>
+<li>第二种写法（<strong>CameCase命名</strong>）：MySchool（需要Vue脚手架支持）</li>
+</ul>
+</li>
+<li>备注<ul>
+<li>可以使用name配置项指定组件在开发者工具中呈现的名字</li>
+</ul>
+</li>
+</ul>
+<h4 id="组件标签："><a href="#组件标签：" class="headerlink" title="组件标签："></a>组件标签：</h4><ul>
+<li>第一种写法：<code>&lt;school&gt;&lt;/school&gt;</code></li>
+<li>第二种写法：<code>&lt;school/&gt;</code>（需要Vue脚手架支持）</li>
+</ul>
+<p>注意：</p>
+<blockquote>
 <p>在HTML模板中使用组件时，首字母大写的形式只能在template配置项中的HTML代码中使用，或者在单文件组件的HTML中使用。</p>
 <p>如果在像index.html这种纯html文件中使用组件时，必须使用<strong>小写单词+短横线</strong>的形式。</p>
 <p>定义名字的时候尽量使用两个或以上的单词，避免和原生的HTML标签名冲突。</p>

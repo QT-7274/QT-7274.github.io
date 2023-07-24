@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-03
+                    2023-07-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    16.8k
+                    17.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    73 分
+                    78 分
                 </div>
                 
 
@@ -2517,11 +2517,120 @@ console.log(member.name)<span aria-hidden="true" class="line-numbers-rows"><span
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 
-<p><strong>Answer: B</strong></p>
 <p>我们可以将类设置为等于其他类&#x2F;函数构造函数。 在这种情况下，我们将<code>Person</code>设置为<code>AnotherPerson</code>。 这个构造函数的名字是<code>Sarah</code>，所以新的<code>Person</code>实例<code>member</code>上的 name 属性是<code>Sarah</code>。</p>
 </li>
-<li><p>98</p>
+<li><p>Symbol类型</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const info &#x3D; &#123;
+  [Symbol(&#39;a&#39;)]: &#39;b&#39;
+&#125;
+
+console.log(info)
+console.log(Object.keys(info))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123;Symbol(&#39;a&#39;): &#39;b&#39;&#125;</code> and <code>[&quot;&#123;Symbol(&#39;a&#39;)&quot;]</code></li>
+<li>B: <code>&#123;&#125;</code> and <code>[]</code></li>
+<li>C: <code>&#123; a: &quot;b&quot; &#125;</code> and <code>[&quot;a&quot;]</code></li>
+<li>D: <code>&#123;Symbol(&#39;a&#39;): &#39;b&#39;&#125;</code> and <code>[]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p><code>Symbol</code>类型是不可枚举的。<code>Object.keys</code>方法返回对象上的<strong>所有可枚举</strong>的键属性。<code>Symbol</code>类型是不可见的，并返回一个空数组。 记录整个对象时，所有属性都是可见的，甚至是不可枚举的属性。</p>
+<p>这是<code>Symbol</code>的众多特性之一：除了表示完全唯一的值（防止对象意外名称冲突，例如当使用 2 个想要向同一对象添加属性的库时），您还可以<strong>隐藏</strong>这种方式对象的属性（尽管不完全。你仍然可以使用<code>Object.getOwnPropertySymbols()</code>方法访问 <code>Symbol</code>。</p>
+</li>
+<li><p>箭头函数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const getList &#x3D; ([x, ...y]) &#x3D;&gt; [x, y]
+const getUser &#x3D; user &#x3D;&gt; &#123; name: user.name, age: user.age &#125;
+
+const list &#x3D; [1, 2, 3, 4]
+const user &#x3D; &#123; name: &quot;Lydia&quot;, age: 21 &#125;
+
+console.log(getList(list))
+console.log(getUser(user))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[1, [2, 3, 4]]</code> and <code>SyntaxError</code></li>
+<li>B: <code>[1, [2, 3, 4]]</code> and <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+<li>C: <code>[1, 2, 3, 4]</code> and <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+<li>D: <code>Error</code> and <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p><code>getList</code>函数接收一个数组作为其参数。 在<code>getList</code>函数的括号之间，我们立即解构这个数组。 您可以将其视为：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[x, ...y] &#x3D; [1, 2, 3, 4]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>使用剩余的参数<code>... y</code>，我们将所有剩余参数放在一个数组中。 在这种情况下，其余的参数是<code>2</code>，<code>3</code>和<code>4</code>。 <code>y</code>的值是一个数组，包含所有其余参数。 在这种情况下，<code>x</code>的值等于<code>1</code>，所以当我们打印<code>[x，y]</code>时，会打印<code>[1，[2,3,4]]</code>。</p>
+<p><code>getUser</code>函数接收一个对象。对于箭头函数，如果只返回一个值，我们不必编写花括号。但是，如果您想从一个箭头函数返回一个对象，您必须将它写在圆括号之间，否则两个花括号之间的所有内容都将被解释为一个块语句！在这种情况下，花括号之间的代码不是有效的 JavaScript 代码，因此会抛出 SyntaxError。</p>
+<p>以下函数将返回一个对象：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const getUser &#x3D; user &#x3D;&gt; (&#123; name: user.name, age: user.age &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>错误类型</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &quot;Lydia&quot;
+
+console.log(name())<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>SyntaxError</code></li>
+<li>B: <code>ReferenceError</code></li>
+<li>C: <code>TypeError</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>变量<code>name</code>保存字符串的值，该字符串不是函数，因此无法调用。</p>
+<p>当值不是预期类型时，会抛出<code>TypeErrors</code>。 JavaScript 期望<code>name</code>是一个函数，因为我们试图调用它。 但它是一个字符串，因此抛出<code>TypeError</code>：<code>name is not a function</code></p>
+<p>当你编写了一些非有效的 JavaScript 时，会抛出语法错误，例如当你把<code>return</code>这个词写成<code>retrun</code>时。 当 JavaScript 无法找到您尝试访问的值的引用时，抛出<code>ReferenceErrors</code>。</p>
+</li>
+<li><p>判断</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const one &#x3D; (false || &#123;&#125; || null)
+const two &#x3D; (null || false || &quot;&quot;)
+const three &#x3D; ([] || 0 || true)
+
+console.log(one, two, three)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>false</code> <code>null</code> <code>[]</code></li>
+<li>B: <code>null</code> <code>&quot;&quot;</code> <code>true</code></li>
+<li>C: <code>&#123;&#125;</code> <code>&quot;&quot;</code> <code>[]</code></li>
+<li>D: <code>null</code> <code>null</code> <code>true</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>使用<code>||</code>运算符，我们可以返回第一个真值。 如果所有值都是假值，则返回最后一个值。</p>
+<p><code>(false || &#123;&#125; || null)</code>：空对象<code>&#123;&#125;</code>是一个真值。 这是第一个（也是唯一的）真值，它将被返回。<code>one</code>等于<code>&#123;&#125;</code>。</p>
+<p><code>(null || false ||&quot;&quot;)</code>：所有值都是假值。 这意味着返回传递的值<code>&quot;&quot;</code>。 <code>two</code>等于<code>&quot;&quot;</code>。</p>
+<p><code>([] || 0 ||&quot;&quot;)</code>：空数组<code>[]</code>是一个真值。 这是第一个返回的真值。 <code>three</code>等于<code>[]</code>。</p>
+</li>
+<li><p>真假值</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 🎉✨ This is my 100th question! ✨🎉
+
+const output &#x3D; &#96;$&#123;[] &amp;&amp; &#39;Im&#39;&#125;possible!
+You should$&#123;&#39;&#39; &amp;&amp; &#96;n&#39;t&#96;&#125; see a therapist after so much JavaScript lol&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>possible! You should see a therapist after so much JavaScript lol</code></li>
+<li>B: <code>Impossible! You should see a therapist after so much JavaScript lol</code></li>
+<li>C: <code>possible! You shouldn&#39;t see a therapist after so much JavaScript lol</code></li>
+<li>D: <code>Impossible! You shouldn&#39;t see a therapist after so much JavaScript lol</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p><code>[]</code>是一个真值。 使用<code>&amp;&amp;</code>运算符，如果左侧值是真值，则返回右侧值。 在这种情况下，左侧值<code>[]</code>是一个真值，所以返回<code>Im</code>。</p>
+<p><code>&quot;&quot;</code>是一个假值。 如果左侧值是假的，则不返回任何内容。 <code>n&#39;t</code>不会被退回。</p>
+</li>
+<li><p>ds</p>
 </li>
 </ol>
 

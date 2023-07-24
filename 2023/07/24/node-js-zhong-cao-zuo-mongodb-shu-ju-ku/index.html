@@ -1,0 +1,2387 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Node.js中操作MongoDB数据库, QT-7274">
+    <meta name="description" content="在Node.js中操作MongoDB数据库是一门必修课">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>Node.js中操作MongoDB数据库 | QT-7274</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+    
+<body>
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    <div>
+                    
+                    <img src="/medias/images/loading.gif" data-original="/medias/logo.gif" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">QT-7274</span>
+                </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+    <div class="mobile-head bg-color">
+      <div>
+        
+        <img no-lazy src="/medias/logo.gif" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">QT-7274</div>
+        <div class="logo-desc">
+          
+              Never really desperate, only the lost of the soul.
+              
+            </div>
+      </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/QT-7274/QT-7274.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #003a8c;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/QT-7274/QT-7274.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Node.js中操作MongoDB数据库</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                                <span class="chip bg-color">后端</span>
+                            </a>
+                        
+                            <a href="/tags/Node-js/">
+                                <span class="chip bg-color">Node.js</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                后端开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-07-24
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-07-24
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    25 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="MongoDB数据库下载安装与启动"><a href="#MongoDB数据库下载安装与启动" class="headerlink" title="MongoDB数据库下载安装与启动"></a><code>MongoDB</code>数据库下载安装与启动</h2><p>下载地址： <a href="https://gitee.com/link?target=https://www.mongodb.com/try/download/community">https://www.mongodb.com/try/download/community</a></p>
+<p>配置步骤如下:</p>
+<ol>
+<li>将压缩包移动到 <code>C:\Program Files</code> 下，然后解压</li>
+<li>创建 <code>C:\data\db</code> 目录，mongodb 会将数据默认保存在这个文件夹</li>
+<li>以 mongodb 中 bin 目录作为工作目录，启动命令行</li>
+<li>运行命令 <code>mongod</code>，看到最后的 <code>waiting for connections</code> 则表明服务已经启动成功</li>
+<li>然后可以使用 <code>mongo</code> 命令连接本机的 <code>mongodb</code> 服务</li>
+</ol>
+<p>修改<code>mongodb</code>数据库位置</p>
+<ol>
+<li><p>首先创建数据库目录，例如<code>d:\data</code>。然后运行命令：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">mongod -dbpath d:&#x2F;data<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>配置文件方式，在任意位置创建一个配置文件，例如<code>c:\mongodb\conf</code>的目录下创建一个名为<code>master.cfg</code>的文件，内容为<code>dbpath=d:\data</code>，然后运行命令：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">mongod -config c:\mongodb\conf\master.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h2 id="命令行交互"><a href="#命令行交互" class="headerlink" title="命令行交互"></a>命令行交互</h2><h3 id="数据库命令"><a href="#数据库命令" class="headerlink" title="数据库命令"></a>数据库命令</h3><ol>
+<li><p>显示所有的数据库</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">show dbs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>切换到指定的数据库，如果数据库不存在会自动创建数据库</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">use 数据库名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>显示当前所在的数据库</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>删除当前数据库</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">use 库名
+db.dropDatabase()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ol>
+<h3 id="集合命令"><a href="#集合命令" class="headerlink" title="集合命令"></a>集合命令</h3><ol>
+<li><p>创建集合</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.createCollection(&#39;集合名称&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>显示当前数据库中的所有集合</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">show collections<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>删除某个集合</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.drop()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>重命名集合</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.renameCollection(&#39;newName&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h3 id="文档命令"><a href="#文档命令" class="headerlink" title="文档命令"></a>文档命令</h3><ol>
+<li><p>插入文档</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.insert(文档对象);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>查询文档</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.find(查询条件)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>_id 是 mongodb 自动生成的唯一编号，用来唯一标识文档</p>
+</li>
+<li><p>更新文档</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.update(查询条件,新的文档)
+db.集合名.update(&#123;name:&#39;张三&#39;&#125;,&#123;$set:&#123;age:19&#125;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>删除文档</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.remove(查询条件)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h2 id="mongoose简介"><a href="#mongoose简介" class="headerlink" title="mongoose简介"></a><code>mongoose</code>简介</h2><ol>
+<li><code>Mongoose</code>是一个让我们可以通过<code>Node</code>来操作<code>MongoDB</code>的模块。</li>
+<li><code>Mongoose</code>是一个对象文档模型(ODM)库,它对<code>Node</code>原生的<code>MongoDB</code>模块进行了进一步的优化封装，并提供了更多的功能。在大多数情况下，它被用来把结构化的模式应用到一个<code>MongoDB</code>集合，并提供了验证和类型转换等好处。</li>
+<li>mongoose中的对象：<ul>
+<li><code>Schema</code> 模式对象（<code>Schema</code>对象定义约束了数据库中的文档结构）</li>
+<li><code>Model</code> 模型对象（<code>Model</code>对象作为集合中的所有文档的表示，相当于<code>MongoDB</code>数据库中的集合<code>collection</code>）</li>
+<li><code>Document</code> 文档对象（<code>Document</code>表示集合中的具体文档，相当于集合中的一个具体的文档）</li>
+</ul>
+</li>
+</ol>
+<p><strong>mongoose的好处</strong></p>
+<blockquote>
+<ol>
+<li>可以为文档创建一个模式结构(Schema)</li>
+<li>可以对模型中的对象&#x2F;文档进行验证</li>
+<li>数据可以通过类型转换转换为对象模型</li>
+<li>可以使用中间件来应用业务逻辑挂钩</li>
+<li>比Node原生的MongoDB驱动更容易</li>
+</ol>
+</blockquote>
+<p><strong>安装</strong></p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">npm i -S mongoose<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p><code>config/db.config.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 1.引入mongoose</span>
+<span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"mongoose"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2.连接mongodb数据库</span>
+<span class="token comment">// 指定连接数据库后不需要存在，当你插入第一条数据库后会自动创建数据库</span>
+<span class="token comment">/*
+mongoose.connect('mongodb://数据库地址:端口号/数据库名',&#123;useMongoClient:true&#125;)
+如果端口号是默认端口号(27017)则可以省略不写
+*/</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://127.0.0.1:27017/ds2'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">useNewUrlParser</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">useUnifiedTopology</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">useCreateIndex</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 3.监听mongodb数据库的连接状态</span>
+<span class="token comment">// 绑定数据库连接成功事件</span>
+mongoose<span class="token punctuation">.</span>connection<span class="token punctuation">.</span><span class="token function">once</span><span class="token punctuation">(</span><span class="token string">"open"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"连接成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 绑定数据库连接失败事件</span>
+mongoose<span class="token punctuation">.</span>connection<span class="token punctuation">.</span><span class="token function">once</span><span class="token punctuation">(</span><span class="token string">"close"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"数据库连接已经断开"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 4.断开数据库连接(一般不用)</span>
+mongooes<span class="token punctuation">.</span><span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：<code>MongoDB</code>数据库，一般情况下，只需要连接一次，连接一次后，除非项目停止服务器关闭，否则连接一般不会断开</p>
+</blockquote>
+<h2 id="创建模式对象和模型对象"><a href="#创建模式对象和模型对象" class="headerlink" title="创建模式对象和模型对象"></a>创建模式对象和模型对象</h2><p>数据库中的 <code>Schema</code>，为数据库对象的集合。<code>schema</code> 是 <code>mongoose</code> 里会用到的一种数据模式，可以理解为表结构的定义；每个 <code>schema</code> 会映射到 <code>mongodb</code> 中的一个 <code>collection</code>，它不具备操作数据库的能力。</p>
+<ul>
+<li><p>每个 <code>schema</code> 都会映射到一个 <code>MongoDB</code> <code>collection</code> 并定义这个 <code>collection</code> 里的文档结构</p>
+</li>
+<li><p>支持的字段类型</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>定义字符串</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>定义数字</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>定义日期</td>
+</tr>
+<tr>
+<td>Buffer</td>
+<td>定义二进制</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>定义布尔值</td>
+</tr>
+<tr>
+<td>Mixed</td>
+<td>定义混合类型</td>
+</tr>
+<tr>
+<td>ObjectId</td>
+<td>定义对象ID</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>定义数组</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<p><code>model/UserModel.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"mongoose"</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> Schema<span class="token operator">=</span>mongooes<span class="token punctuation">.</span>Schema<span class="token punctuation">;</span>
+<span class="token comment">//创建模式对象</span>
+<span class="token keyword">const</span> UserType<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+           <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'string'</span><span class="token punctuation">,</span>
+           <span class="token comment">//添加约束，保证数据的完整性，让数据按规矩统一</span>
+           <span class="token literal-property property">require</span><span class="token operator">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">age</span><span class="token operator">:</span>Number<span class="token punctuation">,</span>
+    <span class="token literal-property property">gender</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span>String<span class="token punctuation">,</span>
+        <span class="token comment">// 默认值</span>
+        <span class="token keyword">default</span><span class="token operator">:</span><span class="token string">'female'</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">address</span><span class="token operator">:</span>String
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//创建模型对象</span>
+<span class="token comment">//通过Schema来创建Model</span>
+<span class="token comment">//Model代表的是数据库中的集合，通过Model才能对数据库进行操作</span>
+<span class="token comment">//mongoose.model(modelName,schema)</span>
+<span class="token comment">//建立映射关系，students是集合,mongoose会自动将集合变成复数比如student会变成students</span>
+<span class="token comment">//大写也会被自动转换为小写，比如Users会变成users</span>
+<span class="token keyword">const</span> UserModel<span class="token operator">=</span>mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">"UserModel"</span><span class="token punctuation">,</span>UserType，<span class="token string">"user"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">//第一个参数表示创建的集合的名称，第二个参数表示利用的模式对象，第三个参数是强行指定集合名称</span>
+
+module<span class="token punctuation">.</span>exports  <span class="token operator">=</span> UserModel 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="文档新增"><a href="#文档新增" class="headerlink" title="文档新增"></a>文档新增</h2><h3 id="save"><a href="#save" class="headerlink" title="save()"></a><code>save()</code></h3><p>操作的是文档</p>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
+const UserModel &#x3D; require(&#39;..&#x2F;model&#x2F;UserModel&#39;);
+
+&#x2F;&#x2F;链式调用 通过new 一个Model创建一个 document
+new UserModel(&#123;name:&quot;小明&quot;,age:18&#125;).save((err,docs) &#x3D;&gt; &#123;
+    if(!err)&#123;
+        console.log(docs)
+        res.send(&#123;
+          code: 200,
+          data: &#123;
+            id: docs._id,
+          &#125;,
+        &#125;)
+        &#x2F;&#x2F;&#123; _id: 6017bd1cf4cc8544d8ed2a8a, name: &#39;小明&#39;, age: 18, __v: 0 &#125;
+    &#125;
+&#125;)   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="create"><a href="#create" class="headerlink" title="create()"></a><code>create()</code></h3><p>操作的是模型</p>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
+const UserModel &#x3D; require(&#39;..&#x2F;model&#x2F;UserModel&#39;);
+
+UserModel.create(&#123;name:&quot;小明&quot;,age:18&#125;,&#123;name:&quot;小红&quot;,age:10&#125;,(err,doc1,doc2) &#x3D;&gt; &#123;
+   if(!err)&#123;
+        console.log(doc1)
+        &#x2F;&#x2F;&#123; _id: 6017be2d77c8dd01242624bb, name: &#39;小明&#39;, age: 18, __v: 0 &#125;
+        console.log(doc2)
+        &#x2F;&#x2F;&#123; _id: 6017be2d77c8dd01242624bc, name: &#39;小红&#39;, age: 10, __v: 0 &#125;
+    &#125;
+&#125;)
+
+&#x2F;&#x2F;Model.createOne(doc, [callback]);		创建一个对象
+&#x2F;&#x2F;Model.createMany(doc, [callback]);		创建多个对象
+&#x2F;&#x2F;	-doc是需要插入的文档
+&#x2F;&#x2F;	-callback(err) 是回调函数，可以用来提示是否创建成功了<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="insertMany"><a href="#insertMany" class="headerlink" title="insertMany()"></a><code>insertMany()</code></h3><p>操作的是模型</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">UserModel.insertMany(&#123;name:&quot;小明&quot;,age:18&#125;,&#123;name:&quot;小芳&quot;,age:14&#125;,(err,docs) &#x3D;&gt; &#123;
+   if(!err)&#123;
+        console.log(docs)
+        &#x2F;*[&#123; _id: 6017befb5c36d64d08b72576, name: &#39;小明&#39;, grades: 68, __v: 0 &#125;,
+           &#123; _id: 6017befb5c36d64d08b72577, name: &#39;小芳&#39;, grades: 94, __v: 0 &#125;]*&#x2F;
+    &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="文档查询"><a href="#文档查询" class="headerlink" title="文档查询"></a>文档查询</h2><h3 id="find"><a href="#find" class="headerlink" title="find()"></a><code>find()</code></h3><p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
+mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err) &#x3D;&gt; &#123;
+    if(!err)&#123;
+        var schema &#x3D; new mongoose.Schema(&#123;name:String,grades:Number&#125;)
+        var stuModel &#x3D; mongoose.model(&#39;grades&#39;,schema)
+        &#x2F;&#x2F;查询所有数据
+        stuModel.find((err,docs) &#x3D;&gt; &#123;
+           if(!err)&#123;
+            	console.log(docs)
+        	&#125;
+        &#125;)        
+       &#x2F;* [&#123; _id: 6017befb5c36d64d08b72576, name: &#39;小明&#39;, grades: 68, __v: 0 &#125;,
+           &#123; _id: 6017befb5c36d64d08b72577, name: &#39;小芳&#39;, grades: 94, __v: 0 &#125;,
+           &#123; _id: 6017c455ba09d355a49ec8eb, name: &#39;小红&#39;, grades: 52, __v: 0 &#125;,
+           &#123; _id: 6017c455ba09d355a49ec8ec, name: &#39;小刚&#39;, grades: 46, __v: 0 &#125;]*&#x2F;
+        
+        &#x2F;&#x2F;查询成绩大于60以上的数据
+        stuModel.find(&#123;grades:&#123;$gte:60&#125;&#125;,(err,docs) &#x3D;&gt; &#123;
+            if(!err)&#123;
+                 console.log(docs)
+             &#125;
+         &#125;)
+        &#x2F;*[&#123; _id: 6017befb5c36d64d08b72576, name: &#39;小明&#39;, grades: 68, __v: 0 &#125;,
+           &#123; _id: 6017befb5c36d64d08b72577, name: &#39;小芳&#39;, grades: 94, __v: 0 &#125;]*&#x2F;
+        
+        &#x2F;&#x2F;查询成绩大于60以上且名字里存在‘芳’的数据
+        stuModel.find(&#123;name:&#x2F;芳&#x2F;,grades:&#123;$gte:60&#125;&#125;,(err,docs) &#x3D;&gt; &#123;
+            if(!err)&#123;
+                 console.log(docs)
+             &#125;
+         &#125;)
+        &#x2F;*[
+        *     &#123; _id: 6017befb5c36d64d08b72577, name: &#39;小芳&#39;, grades: 94, __v: 0 &#125;
+        * ]*&#x2F;
+        
+        &#x2F;&#x2F;查询名字里存在‘明’的数据且只输出‘name’字段
+        &#x2F;&#x2F;_id默认会返回
+        stuModel.find(&#123;name:&#x2F;明&#x2F;&#125;,&#123;name:1,_id:0&#125;,(err,docs) &#x3D;&gt; &#123;
+            if(!err)&#123;
+                 console.log(docs)
+             &#125;
+         &#125;)
+        &#x2F;&#x2F; [&#123;name: &#39;小明&#39;&#125;]
+        
+        &#x2F;&#x2F;跳过前两条数据并限制只输出一条数据
+        stuModel.find(null,null,&#123;skip:2,limit: 1&#125;,(err,docs) &#x3D;&gt; &#123;
+            if(!err)&#123;
+                 console.log(docs)
+             &#125;
+         &#125;)
+        &#x2F;*[&#123; _id: 6017c455ba09d355a49ec8eb, name: &#39;小红&#39;, grades: 52, __v: 0 &#125;*&#x2F;
+    &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="findById"><a href="#findById" class="headerlink" title="findById()"></a><code>findById()</code></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
+mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err) &#x3D;&gt; &#123;
+    if(!err)&#123;
+        var schema &#x3D; new mongoose.Schema(&#123;name:String,grades:Number&#125;)
+        var stuModel &#x3D; mongoose.model(&#39;grades&#39;,schema)
+        &#x2F;&#x2F;保存查询数据的_id
+        var aIDArr &#x3D; []
+        
+        &#x2F;&#x2F;查询所有数据
+        stuModel.find((err,docs) &#x3D;&gt; &#123;
+           if(!err)&#123;
+            	docs.forEach((item,index,arr)&#x3D;&gt;&#123;
+                    aIDArr.push(item._id)
+                &#125;)
+                &#x2F;&#x2F;显示第 0 个元素的所有字段
+                stuModel.findById(aIDArr[0],(err,doc)&#x3D;&gt;&#123;
+                    if(!err)&#123;
+                        console.log(doc)
+                    &#125;
+                &#125;)
+               &#x2F;&#x2F; &#123; _id: 6017befb5c36d64d08b72576, name: &#39;小明&#39;, grades: 68, __v: 0 &#125;
+               
+                &#x2F;&#x2F;显示第 0 个元素且只输出name字段
+                stuModel.findById(aIDArr[0],&#123;name:1,_id:0&#125;,(err,doc)&#x3D;&gt;&#123;
+                    if(!err)&#123;
+                        console.log(doc)
+                    &#125;
+                &#125;)
+               &#x2F;&#x2F; &#123; name: &#39;小明&#39; &#125;
+               
+                &#x2F;&#x2F;显示第 0 个元素且输出最少的字段(_id默认输出)
+                stuModel.findById(aIDArr[0],&#123;lean:true&#125;,(err,doc)&#x3D;&gt;&#123;
+                    if(!err)&#123;
+                        console.log(doc)
+                    &#125;
+                &#125;)
+               &#x2F;&#x2F; &#123; _id: 6017befb5c36d64d08b72576 &#125;
+        	&#125;
+        &#125;)
+    &#125;
+&#125;)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="findOne"><a href="#findOne" class="headerlink" title="findOne()"></a><code>findOne()</code></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
+mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err) &#x3D;&gt; &#123;
+    if(!err)&#123;
+        var schema &#x3D; new mongoose.Schema(&#123;name:String,grades:Number&#125;)
+        var stuModel &#x3D; mongoose.model(&#39;grades&#39;,schema)
+        &#x2F;&#x2F;找出age&gt;80的文档中的第一个文档
+        stuModel.findOne(&#123;grades:&#123;$gt:80&#125;&#125;,(err,doc) &#x3D;&gt; &#123;
+           if(!err)&#123;
+            	console.log(doc)
+        	&#125;
+        &#125;)
+        &#x2F;&#x2F;&#123; _id: 6017befb5c36d64d08b72577, name: &#39;小芳&#39;, grades: 94, __v: 0 &#125;
+
+        &#x2F;&#x2F;找出age&gt;80的文档中的第一个文档，且只输出name字段
+        stuModel.findOne(&#123;grades:&#123;$gt:80&#125;&#125;,&#123;name:1,_id:0&#125;,(err,doc) &#x3D;&gt; &#123;
+            if(!err)&#123;
+                 console.log(doc)
+             &#125;
+         &#125;)
+         &#x2F;&#x2F;&#123; name: &#39;小芳&#39; &#125;
+
+        &#x2F;&#x2F;找出age&gt;80的文档中的第一个文档，且输出包含name字段在内的最短字段
+        stuModel.findOne(&#123;grades:&#123;$gt:80&#125;&#125;,&#123;lern:true&#125;,(err,doc) &#x3D;&gt; &#123;
+            if(!err)&#123;
+                 console.log(doc)
+             &#125;
+         &#125;)
+         &#x2F;&#x2F;&#123; _id: 6017befb5c36d64d08b72577 &#125;
+    &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="复杂查询-where"><a href="#复杂查询-where" class="headerlink" title="复杂查询$where"></a>复杂查询<code>$where</code></h3><p><code>$where</code> 可以使用任意的 JavaScript 作为查询的一部分，包含JavaScript 表达式的字符串或者函数</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> schema <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token literal-property property">grades</span><span class="token operator">:</span>Number<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token comment">//添加一个测试字段</span>
+        <span class="token comment">// schema.add(&#123;test:Number&#125;)</span>
+        <span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'grades'</span><span class="token punctuation">,</span>schema<span class="token punctuation">)</span>
+        <span class="token comment">//添加两条数据</span>
+        <span class="token comment">// stuModel.create(&#123;name:"小花",grades:76,test:76&#125;,&#123;name:"小兰",grades:60,test:30&#125;,(err,docs)=>&#123;</span>
+        <span class="token comment">//     console.log(docs)</span>
+        <span class="token comment">// &#125;)</span>
+
+        <span class="token comment">//字符串 es5中this与obj指向一样，es6中只能用obj</span>
+        stuModel<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">$where</span><span class="token operator">:</span><span class="token string">"this.grades == this.test"</span> <span class="token operator">||</span> <span class="token string">"obj.grades == obj.test"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>doc</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+           <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>doc<span class="token punctuation">)</span>
+        	<span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token comment">//[&#123;_id: 6017d7cb8a95cb2a00aae3ae,name: '小花',grades: 76,test: 76,__v: 0&#125;]</span>
+
+        <span class="token comment">//函数</span>
+        stuModel<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token function-variable function">$where</span><span class="token operator">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>grades <span class="token operator">==</span> <span class="token keyword">this</span><span class="token punctuation">.</span>test <span class="token operator">||</span> obj<span class="token punctuation">.</span>grades <span class="token operator">==</span> obj<span class="token punctuation">.</span>test<span class="token operator">*</span><span class="token number">2</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>doc</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>doc<span class="token punctuation">)</span>
+             <span class="token punctuation">&#125;</span>
+         <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+         <span class="token comment">/*[&#123;_id: 6017d7cb8a95cb2a00aae3ae,name: '小花',grades: 76,test: 76,__v: 0&#125;,
+            &#123;_id: 6017d7cb8a95cb2a00aae3af,name: '小兰',grades: 60,test: 30,__v: 0&#125;]*/</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="常用查询条件"><a href="#常用查询条件" class="headerlink" title="常用查询条件"></a>常用查询条件</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$or　　　　 或关系
+
+$nor　　　 或关系取反
+
+$gt　　　　 大于
+
+$gte　　　 大于等于
+
+$lt　　　　 小于
+
+$lte　　　 小于等于
+
+$ne　　　　 不等于
+
+$in　　　　 在多个值范围内
+
+$nin　　　 不在多个值范围内
+
+$all　　　 匹配数组中多个值
+
+$regex　　 正则，用于模糊查询
+
+$size　　　 匹配数组大小
+
+$maxDistance　 范围查询，距离（基于LBS）
+
+$mod　　　　 取模运算
+
+$near　　　 邻域查询，查询附近的位置（基于LBS）
+
+$exists　　 字段是否存在
+
+$elemMatch　 匹配内数组内的元素
+
+$within　　　 范围查询（基于LBS）
+
+$box　　　　 范围查询，矩形范围（基于LBS）
+
+$center　　　 范围醒询，圆形范围（基于LBS）
+
+$centerSphere　范围查询，球形范围（基于LBS）
+
+$slice　　　　 查询字段集合中的元素（比如从第几个之后，第N到第M个元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="特定类型查询"><a href="#特定类型查询" class="headerlink" title="特定类型查询"></a>特定类型查询</h3><p><strong>方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sort</td>
+<td>排序</td>
+</tr>
+<tr>
+<td>skip</td>
+<td>跳过</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>限制</td>
+</tr>
+<tr>
+<td>select</td>
+<td>显示字段</td>
+</tr>
+<tr>
+<td>exect</td>
+<td>执行</td>
+</tr>
+<tr>
+<td>count</td>
+<td>计数</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>去重</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><code>exec()</code> 和 <code>then()</code></p>
+<p>两者返回的都是 <code>promise</code> 对象 <code>exec</code> 一般用于独立的动作一次性执行， <code>then</code> 则用于连续性的动作。从其方法名也可以区别它们的用法，<code>exec</code>就是执行的意思，<code>then</code>就是然后怎么怎么， <code>exec</code>和<code>then</code>的参数是有所不同的，前者是 <code>callback(err,doc)</code>，后者则是 <code>resolved(doc),rejected(err)</code></p>
+</blockquote>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const mongoose &#x3D; require(&#39;mongoose&#39;)
+mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;)
+var Schema &#x3D;new mongoose.Schema(&#123; name:String,grades:Number,test:&#123;type:Number,default:0&#125;&#125;)
+var stuModel &#x3D; mongoose.model(&#39;grades&#39;, Schema);
+
+&#x2F;&#x2F; 按test从小到大排序
+&#x2F;&#x2F; 1是升序，-1是降序
+stuModel.find().sort(&#123;test:1&#125;).exec((err,docs)&#x3D;&gt;&#123;
+  console.log(docs)
+&#125;)
+&#x2F;&#x2F; 按test从大到小排列
+stuModel.find().sort(&#39;-test&#39;).exec((err,docs)&#x3D;&gt;&#123;
+  console.log(docs)
+&#125;)
+&#x2F;&#x2F; 跳过1个，显示其他
+stuModel.find().skip(1).exec((err,docs)&#x3D;&gt;&#123;
+  console.log(docs)
+&#125;)
+&#x2F;&#x2F; 显示2个
+stuModel.find().limit(2).exec((err,docs)&#x3D;&gt;&#123;
+  console.log(docs)
+&#125;)
+&#x2F;&#x2F; 显示name、grades字段，不显示id字段
+stuModel.find().select(&#39;name grades -id&#39;).exec((err,docs)&#x3D;&gt;&#123;
+  console.log(docs)
+&#125;)
+&#x2F;&#x2F; 跳过第1个后，只显示2个数据，按照grades由大到小排序，且不显示id字段
+stuModel.find().skip(1).limit(2).sort(&#39;-grades&#39;).select(&#39;-id&#39;).exec((err,docs)&#x3D;&gt;&#123;
+  console.log(docs)
+  &#x2F;&#x2F;[&#123; name: &#39;小明&#39;, grades: 78, v: 0, test: 1 &#125;,&#123; name: &#39;小花&#39;, grades: 76, test: 4, v: 0 &#125;]
+&#125;)
+&#x2F;&#x2F; 显示集合stuModel中的文档数量
+stuModel.find().count((err,count)&#x3D;&gt;&#123;
+  console.log(count)
+  &#x2F;&#x2F;6
+&#125;)
+&#x2F;&#x2F; 返回集合stuModel中的grades的值
+stuModel.find().distinct(&#39;grades&#39;,(err,distinct)&#x3D;&gt;&#123;
+  console.log(distinct)
+  &#x2F;&#x2F;[ 46, 52, 60, 76, 78, 94 ]
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="文档更新"><a href="#文档更新" class="headerlink" title="文档更新"></a>文档更新</h2><h3 id="update"><a href="#update" class="headerlink" title="update()"></a><code>update()</code></h3><ul>
+<li><p><code>Model.update(conditions, doc, [options], [callback])</code></p>
+</li>
+<li><p>参数</p>
+<p><code>conditions</code>：查询条件</p>
+<p><code>doc</code>：需要修改的数据（插入的数据）</p>
+<p><code>[options]</code>：控制选项</p>
+<blockquote>
+<p><code>safe (boolean)</code>： 默认为<code>true</code>，安全模式。 </p>
+<p><code>upsert (boolean)</code>： 默认为<code>false</code>。如果不存在则创建新记录。 </p>
+<p><code>multi (boolean)</code>： 默认为<code>false</code>。是否更新多个查询记录。 </p>
+<p><code>runValidators</code>： 如果值为<code>true</code>，执行Validation验证。 </p>
+<p><code>setDefaultsOnInsert</code>： 如果<code>upsert</code>选项为<code>true</code>，在新建时插入文档定义的默认值。 </p>
+<p><code>strict (boolean)</code>： 以<code>strict</code>模式进行更新。 </p>
+<p><code>overwrite (boolean)</code>： 默认为<code>false</code>。禁用<code>update-only</code>模式，允许覆盖记录。</p>
+</blockquote>
+</li>
+<li><p>[callback]：回调函数</p>
+</li>
+<li><p>若设置了查询条件，当数据库不满足时默认什么也不发生</p>
+</li>
+<li><p><strong><code>update()</code> 方法中的回调函数不能省略，否则数据不会更新，当回调无有用信息时可以使用<code>exec()</code>简化</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">stuModel<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'小明'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token literal-property property">$set</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">test</span><span class="token operator">:</span><span class="token number">34</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;第一步，引入mongoose
+const mongoose &#x3D; require(&#39;mongoose&#39;)
+&#x2F;&#x2F;第二步，连接数据库
+mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,err&#x3D;&gt;&#123;
+  if(!err)&#123;
+    &#x2F;&#x2F;第三步，创建模板
+    var Schema &#x3D;new mongoose.Schema(&#123; name:String,grades:Number,test:&#123;type:Number,default:0&#125;&#125;)
+    &#x2F;&#x2F; var Schema &#x3D; new Schema()
+    &#x2F;&#x2F;第四步，将模板映射到集合并创建
+    var stuModel &#x3D; mongoose.model(&#39;grades&#39;,Schema)
+
+    &#x2F;&#x2F;查询name为小明的数据，并将其test更改为34
+    &#x2F;&#x2F;若有多个文档，默认只更新第一个
+    stuModel.update(&#123;name:&#39;小明&#39;&#125;,&#123;$set:&#123;test:34&#125;&#125;,(err,raw)&#x3D;&gt;&#123;
+      console.log(raw)
+    &#125;)
+      
+     &#x2F;&#x2F;&#123; n: 1, nModified: 1, ok: 1 &#125;
+	 &#x2F;&#x2F;6017befb5c36d64d08b72576	小明	68	0	34
+  &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="updateOne"><a href="#updateOne" class="headerlink" title="updateOne()"></a><code>updateOne()</code></h3><ul>
+<li><code>Model.updateOne(conditions, doc, [options], [callback])</code></li>
+<li>与<code>update()</code>相似，唯一区别为 <code>updateOne()</code> 默认更新一个文档，即使设置<code>&#123;multi:true&#125;</code>也只更新一个文档</li>
+</ul>
+<h3 id="updateMany"><a href="#updateMany" class="headerlink" title="updateMany()"></a><code>updateMany()</code></h3><ul>
+<li><code>Model.updateMany(conditions, doc, [options], [callback])</code></li>
+<li>与<code>update()</code>相似，唯一区别为<code>updateMany()</code>默认更新多个文档，即使设置<code>&#123;multi:false&#125;</code>也无法只更新一个文档</li>
+</ul>
+<h3 id="find-save"><a href="#find-save" class="headerlink" title="find()+save()"></a><code>find()</code>+<code>save()</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">,</span><span class="token parameter">err</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+     <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token literal-property property">grades</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token literal-property property">test</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">type</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token keyword">default</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+     <span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'grades'</span><span class="token punctuation">,</span>Schema<span class="token punctuation">)</span>
+	
+     <span class="token comment">//查询成绩小于60的数据，并在其名字后添加‘：差生’字段</span>
+     stuModel<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">grades</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">$lt</span><span class="token operator">:</span><span class="token number">60</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>docs</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>docs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">/*[&#123;test: 0,_id: 6017c455ba09d355a49ec8eb,name: '小红',grades: 52,__v: 0&#125;,
+        &#123;test: 0,_id: 6017c455ba09d355a49ec8ec,name: '小刚',grades: 46,__v: 0&#125;]*/</span>
+      
+      docs<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item<span class="token punctuation">,</span>index<span class="token punctuation">,</span>arr</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        item<span class="token punctuation">.</span>name <span class="token operator">+=</span> <span class="token string">'：差生'</span>
+        <span class="token comment">//将修改后的数据保存</span>
+        item<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>docs<span class="token punctuation">)</span>
+      <span class="token comment">/*[&#123;test: 0,_id: 6017c455ba09d355a49ec8eb,name: '小红：差生',grades: 52,__v: 0&#125;,
+        &#123;test: 0,_id: 6017c455ba09d355a49ec8ec,name: '小刚：差生',grades: 46,__v: 0&#125;]*/</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="findOne-save"><a href="#findOne-save" class="headerlink" title="findOne()+save()"></a><code>findOne()</code>+<code>save()</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">,</span><span class="token parameter">err</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+     <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token literal-property property">grades</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token literal-property property">test</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">type</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token keyword">default</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+     <span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'grades'</span><span class="token punctuation">,</span>Schema<span class="token punctuation">)</span>
+	
+     <span class="token comment">//查询成绩小于60的数据，并在其名字后添加‘：差生’字段</span>
+     stuModel<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'小明'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>doc</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>doc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">//&#123;test: 34,_id: 6017c455ba09d355a49ec8eb,name: '小明',grades: 68,__v: 0&#125;,</span>
+      doc<span class="token punctuation">.</span>age <span class="token operator">+=</span> <span class="token number">10</span>
+      doc<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>docs<span class="token punctuation">)</span>
+      <span class="token comment">//&#123;test: 34,_id: 6017c455ba09d355a49ec8eb,name: '小明',grades: 78,__v: 0&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="findOneAndUpdate"><a href="#findOneAndUpdate" class="headerlink" title="findOneAndUpdate()"></a><code>findOneAndUpdate()</code></h3><p><code>Model.findOneAndUpdate([conditions], [update], [options], [callback])</code></p>
+<h3 id="findByIdAndUpdate"><a href="#findByIdAndUpdate" class="headerlink" title="findByIdAndUpdate()"></a><code>findByIdAndUpdate()</code></h3><p><code>Model.findByIdAndUpdate([conditions], [update], [options], [callback])</code></p>
+<h2 id="文档删除"><a href="#文档删除" class="headerlink" title="文档删除"></a>文档删除</h2><h3 id="deleteOne"><a href="#deleteOne" class="headerlink" title="deleteOne()"></a><code>deleteOne()</code></h3><p><code>Model</code>的<code>deleteOne()</code>：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">,</span><span class="token parameter">err</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+     <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token literal-property property">grades</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token literal-property property">test</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">type</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token keyword">default</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+     <span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'grades'</span><span class="token punctuation">,</span>Schema<span class="token punctuation">)</span>
+     <span class="token comment">//删除名字中包含‘差生’的数据</span>
+	 stuModel<span class="token punctuation">.</span><span class="token function">deleteOne</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">差生</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+     <span class="token comment">// 回调函数不能省略，但可以使用exec() 简写</span>
+     <span class="token comment">//stuModel.deleteOne(&#123;name:/差生/&#125;).exec()</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>文档的<code>deleteOne()</code>：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const mongoose &#x3D; require(&#39;mongoose&#39;)
+mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,err&#x3D;&gt;&#123;
+  if(!err)&#123;
+     var Schema &#x3D;new mongoose.Schema(&#123; name:String,grades:Number,test:&#123;type:Number,default:0&#125;&#125;)
+     var stuModel &#x3D; mongoose.model(&#39;grades&#39;,Schema)
+     &#x2F;&#x2F;删除名字中包含‘差生’的数据
+	 stuModel.find(&#123;name:&#x2F;差生&#x2F;&#125;,function(err,docs)&#123;
+         docs.forEach((item,index,arr)&#x3D;&gt;&#123;
+             item.deleteOne((err,doc)&#x3D;&gt;&#123;
+                 &#x2F;&#x2F;doc为被删除的值
+                 console.log(doc)
+             &#125;)
+         &#125;)
+     &#125;)
+    &#125;)
+  &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="findOneAndRemove"><a href="#findOneAndRemove" class="headerlink" title="findOneAndRemove()"></a><code>findOneAndRemove()</code></h3><ul>
+<li>删除符合条件的一条数据</li>
+<li><code>Model.findOneAndRemove(conditions, [options], [callback])</code></li>
+<li>回调不可省略，但可以使用<code>exec()</code>简写</li>
+</ul>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">stuModel.findOneAndRemove(&#123;name:&#x2F;差生&#x2F;&#125;).exec()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="findByIdAndRemove"><a href="#findByIdAndRemove" class="headerlink" title="findByIdAndRemove()"></a><code>findByIdAndRemove()</code></h3><ul>
+<li>通过id删除数据（id是唯一的）</li>
+<li><code>Model.findByIdAndRemove(conditions, [options], [callback])</code></li>
+<li>回调不可省略，但可以使用 <code>exec()</code> 简写</li>
+</ul>
+<h2 id="前后钩子"><a href="#前后钩子" class="headerlink" title="前后钩子"></a>前后钩子</h2><ul>
+<li><p>前后钩子即 <code>pre()</code> 和 <code>post()</code> 方法（中间件）</p>
+</li>
+<li><p>中间件在<code>schema</code>上指定，类似静态方法或实例方法等</p>
+</li>
+<li><p>可以在执行以下操作时设置前后钩子</p>
+<blockquote>
+<p><code>init</code> <code>validate</code> <code>save</code> <code>remove</code> <code>count</code> <code>find</code> <code>findOne</code> <code>findOneAndRemove</code> <code>findOneAndUpdate</code> <code>insertMany</code> <code>update</code></p>
+</blockquote>
+</li>
+<li><p><code>pre()</code>：在执行某些操作前执行</p>
+</li>
+<li><p><code>post()</code>：在执行某些操作前后执行，不可以使用<code>next()</code></p>
+</li>
+</ul>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const mongoose &#x3D; require(&#39;mongoose&#39;)
+mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;)
+var Schema &#x3D;new mongoose.Schema(&#123; name:String,grades:Number,test:&#123;type:Number,default:0&#125;&#125;)
+Schema.pre(&#39;find&#39;,function(next)&#123;
+    console.log(&#39;我是pre方法1&#39;);
+    next();
+&#125;);
+Schema.pre(&#39;find&#39;,function(next)&#123;
+    console.log(&#39;我是pre方法2&#39;);
+    next();
+&#125;);
+Schema.post(&#39;find&#39;,function(docs)&#123;
+  console.log(&#39;我是post方法1&#39;);
+&#125;);
+Schema.post(&#39;find&#39;,function(docs)&#123;
+  console.log(&#39;我是post方法2&#39;);
+&#125;);  
+var stuModel &#x3D; mongoose.model(&#39;grades&#39;, Schema);
+stuModel.find(function(err,docs)&#123;
+    console.log(docs[0]);
+&#125;)    
+&#x2F;*
+我是pre方法1
+我是pre方法2
+我是post方法1
+我是post方法2
+&#123;test: 34, _id: 6017befb5c36d64d08b72576,name: &#39;小明&#39;,grades: 78,__v: 0&#125;
+*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="文档验证"><a href="#文档验证" class="headerlink" title="文档验证"></a>文档验证</h2><h3 id="required"><a href="#required" class="headerlink" title="required"></a><code>required</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name设置为必填字段，如果没有name字段，文档将不被保存，且出现错误提示</span>
+<span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span>String<span class="token punctuation">,</span>
+    <span class="token literal-property property">required</span><span class="token operator">:</span><span class="token boolean">true</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">age</span><span class="token operator">:</span>Number
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'students'</span><span class="token punctuation">,</span> Schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">stuModel</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">20</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>doc</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>doc<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//报错：name: Path `name` is required.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="default"><a href="#default" class="headerlink" title="default"></a><code>default</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//设置age字段的默认值为18，如果不设置age字段，则会取默认值</span>
+<span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span>String<span class="token punctuation">,</span>
+  <span class="token literal-property property">age</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span>Number<span class="token punctuation">,</span>
+    <span class="token keyword">default</span><span class="token operator">:</span><span class="token number">18</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'students'</span><span class="token punctuation">,</span> Schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">stuModel</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'李雷'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>doc</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>doc<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//&#123; age: 18, _id: 6018f3bd7e51343e6c4f212b, name: '李雷', __v: 0 &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="min-max"><a href="#min-max" class="headerlink" title="min max"></a><code>min</code> <code>max</code></h3><p>只适用于数字</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;将age的取值范围设置为[0,10]。如果age取值为20，文档将不被保存，且出现错误提示
+const mongoose &#x3D; require(&#39;mongoose&#39;)
+mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;)
+var Schema &#x3D;new mongoose.Schema(&#123;
+  name:String,
+  age:&#123;
+    type:Number,
+    min:10,
+    max:18
+  &#125;
+&#125;)
+var stuModel &#x3D; mongoose.model(&#39;students&#39;, Schema);
+new stuModel(&#123;name:&#39;李雷&#39;,age:20&#125;).save((err,doc)&#x3D;&gt;&#123;
+  if(err)&#123;
+    return console.log(err)
+  &#125;
+  console.log(doc)
+&#125;)
+
+&#x2F;&#x2F;age: Path &#96;age&#96; (20) is more than maximum allowed value (18).<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="match"><a href="#match" class="headerlink" title="match"></a><code>match</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name的match设置为必须存在'01'字符。如果name不存在'01'，文档将不被保存，且出现错误提示</span>
+<span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">type</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token literal-property property">match</span><span class="token operator">:</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">01</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">age</span><span class="token operator">:</span>Number<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'students'</span><span class="token punctuation">,</span> Schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">stuModel</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'李雷'</span><span class="token punctuation">,</span><span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">20</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>doc</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>doc<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//name: Path `name` is invalid (李雷).</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="enum"><a href="#enum" class="headerlink" title="enum"></a><code>enum</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name的枚举取值设置为['zs','ls','ww']，如果name不在枚举范围内取值，文档将不被保存，且出现错误提示</span>
+<span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">type</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token keyword">enum</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">'zs'</span><span class="token punctuation">,</span><span class="token string">'ls'</span><span class="token punctuation">,</span><span class="token string">'ww'</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">age</span><span class="token operator">:</span>Number<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'students'</span><span class="token punctuation">,</span> Schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">stuModel</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'lss'</span><span class="token punctuation">,</span><span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">20</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>doc</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>doc<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//name: ValidatorError: `lss` is not a valid enum value for path `name`.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="validate"><a href="#validate" class="headerlink" title="validate"></a><code>validate</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//定义名字name的长度必须在4个字符以上</span>
+<span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">type</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token literal-property property">validate</span><span class="token operator">:</span>nameLength<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">age</span><span class="token operator">:</span>Number<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> stuModel <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'students'</span><span class="token punctuation">,</span> Schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">new</span> <span class="token class-name">stuModel</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'abcd'</span><span class="token punctuation">,</span><span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">20</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>doc</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>doc<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">nameLength</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span>length<span class="token operator">></span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> <span class="token boolean">false</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//name: Validator failed for path `name` with value `abcd`</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">QT-7274</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://qt-7274.github.io/2023/07/24/node-js-zhong-cao-zuo-mongodb-shu-ju-ku/">https://qt-7274.github.io/2023/07/24/node-js-zhong-cao-zuo-mongodb-shu-ju-ku/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">QT-7274</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%90%8E%E7%AB%AF/">
+                                    <span class="chip bg-color">后端</span>
+                                </a>
+                            
+                                <a href="/tags/Node-js/">
+                                    <span class="chip bg-color">Node.js</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.gif") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid;">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'tzmyy70PpnbbxclXN4jYmjPA-gzGzoHsz',
+        appKey: 'TCY55mH7vS6x5sVr1bCLm5Gg',
+        serverURLs: '',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        requiredFields: ['nick','mail'],
+        enableQQ: 'true',
+        lang: 'zh-cn',
+        placeholder: '😉畅所欲言！\n📲请文明评论，禁止恶意评论🚫 \n⚠️公开网络空间，请不要发表任何包含个人或其他人的隐私信息🔐',
+        master: ["f18e9f29c8274571d5a0752aca9310ef"],
+        friends:["0aa4f09d8249581a4380a6fc541062e7","6a66a1ba019c52f168d99313efbef39a"]
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/07/24/node-js-zhong-de-jie-kou-gui-fan-yu-ye-wu-fen-ceng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/16.jpg" class="responsive-img" alt="Node.js中的接口规范与业务分层">
+                        
+                        <span class="card-title">Node.js中的接口规范与业务分层</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-07-24
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Node-js/" class="post-category">
+                                    Node.js
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/Node-js/">
+                        <span class="chip bg-color">Node.js</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/07/21/vue-ui-zu-jian-ku/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/3.jpg" class="responsive-img" alt="Vue UI组件库">
+                        
+                        <span class="card-title">Vue UI组件库</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">QT-7274</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/QT-7274" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2531376773@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2531376773" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2531376773" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+    <a  class="tooltipped" target="_blank" data-tooltip="微信联系我: Q5268368" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>
