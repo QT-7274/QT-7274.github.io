@@ -6,11 +6,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="尚品汇-登录注册流程, QT-7274">
-    <meta name="description" content="注册首先是静态页面：
+    <meta name="description" content="前台项目注册首先是静态页面：
 src/pages/Register/index.vue
 &amp;lt;template&amp;gt;
   &amp;lt;div class&amp;#x3D;&amp;quot;register-container&amp;quot;&amp;gt;
-    &amp;lt">
+   ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -467,21 +467,21 @@ src/pages/Register/index.vue
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-11
+                    2023-08-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.2k
+                    9.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    22 分
+                    47 分
                 </div>
                 
 
@@ -504,7 +504,7 @@ src/pages/Register/index.vue
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>首先是静态页面：</p>
+                <h2 id="前台项目"><a href="#前台项目" class="headerlink" title="前台项目"></a>前台项目</h2><h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>首先是静态页面：</p>
 <p><code>src/pages/Register/index.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
   &lt;div class&#x3D;&quot;register-container&quot;&gt;
@@ -763,7 +763,7 @@ export default &#123;
 &#125;
 &lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>这里表单验证采用的是<code>VeeValidate</code>依赖，在<code>main.js</code>中引入<code>src/plugins/validate.js</code>文件：</p>
+<p>这里表单验证采用的是<code>VeeValidate</code>依赖（仅作了解），在<code>main.js</code>中引入<code>src/plugins/validate.js</code>文件：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import Vue from &quot;vue&quot;;
 import VeeValidate from &quot;vee-validate&quot;;
 import zh_CN from &quot;vee-validate&#x2F;dist&#x2F;locale&#x2F;zh_CN&quot;;
@@ -870,7 +870,7 @@ VeeValidate.Validator.extend(&quot;agree&quot;, &#123;
          <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p><code>src/pages/Login/index.vue</code></p>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p><code>src/pages/Login/index.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
   &lt;div class&#x3D;&quot;login-container&quot;&gt;
     &lt;!-- 登录 --&gt;
@@ -1321,6 +1321,792 @@ router.beforeEach(async (to, from, next) &#x3D;&gt; &#123;
 </li>
 <li><p>用户未登录且目标路由不是需要登录才能访问的页面：直接放行到目标路由。</p>
 </li>
+</ol>
+<h2 id="后台项目"><a href="#后台项目" class="headerlink" title="后台项目"></a>后台项目</h2><h3 id="登录-1"><a href="#登录-1" class="headerlink" title="登录"></a>登录</h3><p><code>src/views/login/index.vue</code></p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div class&#x3D;&quot;login-container&quot;&gt;
+    &lt;!-- el-form组件：elementUI插件里面的一个组件，经常展示表单元素  model：用于收集表单数据  rules：表单验证规则--&gt;
+    &lt;el-form ref&#x3D;&quot;loginForm&quot; :model&#x3D;&quot;loginForm&quot; :rules&#x3D;&quot;loginRules&quot; class&#x3D;&quot;login-form&quot; auto-complete&#x3D;&quot;on&quot; label-position&#x3D;&quot;left&quot;&gt;
+
+      &lt;div class&#x3D;&quot;title-container&quot;&gt;
+        &lt;h3 class&#x3D;&quot;title&quot;&gt;登录&lt;&#x2F;h3&gt;
+      &lt;&#x2F;div&gt;
+
+      &lt;el-form-item prop&#x3D;&quot;username&quot;&gt;
+        &lt;span class&#x3D;&quot;svg-container&quot;&gt;
+          &lt;svg-icon icon-class&#x3D;&quot;user&quot; &#x2F;&gt;
+        &lt;&#x2F;span&gt;
+        &lt;el-input
+          ref&#x3D;&quot;username&quot;
+          v-model&#x3D;&quot;loginForm.username&quot;
+          placeholder&#x3D;&quot;Username&quot;
+          name&#x3D;&quot;username&quot;
+          type&#x3D;&quot;text&quot;
+          tabindex&#x3D;&quot;1&quot;
+          auto-complete&#x3D;&quot;on&quot;
+        &#x2F;&gt;
+      &lt;&#x2F;el-form-item&gt;
+
+      &lt;el-form-item prop&#x3D;&quot;password&quot;&gt;
+        &lt;span class&#x3D;&quot;svg-container&quot;&gt;
+          &lt;svg-icon icon-class&#x3D;&quot;password&quot; &#x2F;&gt;
+        &lt;&#x2F;span&gt;
+        &lt;el-input
+          :key&#x3D;&quot;passwordType&quot;
+          ref&#x3D;&quot;password&quot;
+          v-model&#x3D;&quot;loginForm.password&quot;
+          :type&#x3D;&quot;passwordType&quot;
+          placeholder&#x3D;&quot;Password&quot;
+          name&#x3D;&quot;password&quot;
+          tabindex&#x3D;&quot;2&quot;
+          auto-complete&#x3D;&quot;on&quot;
+          @keyup.enter.native&#x3D;&quot;handleLogin&quot;
+        &#x2F;&gt;
+        &lt;span class&#x3D;&quot;show-pwd&quot; @click&#x3D;&quot;showPwd&quot;&gt;
+          &lt;svg-icon :icon-class&#x3D;&quot;passwordType &#x3D;&#x3D;&#x3D; &#39;password&#39; ? &#39;eye&#39; : &#39;eye-open&#39;&quot; &#x2F;&gt;
+        &lt;&#x2F;span&gt;
+      &lt;&#x2F;el-form-item&gt;
+
+      &lt;el-button :loading&#x3D;&quot;loading&quot; type&#x3D;&quot;primary&quot; style&#x3D;&quot;width:100%;margin-bottom:30px;&quot; @click.native.prevent&#x3D;&quot;handleLogin&quot;&gt;登录&lt;&#x2F;el-button&gt;
+
+      &lt;div class&#x3D;&quot;tips&quot;&gt;
+        &lt;span style&#x3D;&quot;margin-right:20px;&quot;&gt;username: admin&lt;&#x2F;span&gt;
+        &lt;span&gt; password: any&lt;&#x2F;span&gt;
+      &lt;&#x2F;div&gt;
+
+    &lt;&#x2F;el-form&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+import &#123; validUsername &#125; from &#39;@&#x2F;utils&#x2F;validate&#39;
+
+export default &#123;
+  name: &#39;Login&#39;,
+  data() &#123;
+    &#x2F;&#x2F;先不用在意：这里面在进行表单验证，验证用户名与密码操作
+    &#x2F;&#x2F;回首在看这里
+    const validateUsername &#x3D; (rule, value, callback) &#x3D;&gt; &#123;
+      if (!validUsername(value)) &#123;
+        callback(new Error(&#39;Please enter the correct user name&#39;))
+      &#125; else &#123;
+        callback()
+      &#125;
+    &#125;
+    const validatePassword &#x3D; (rule, value, callback) &#x3D;&gt; &#123;
+      if (value.length &lt; 6) &#123;
+        callback(new Error(&#39;The password can not be less than 6 digits&#39;))
+      &#125; else &#123;
+        callback()
+      &#125;
+    &#125;
+    return &#123;
+      loginForm: &#123;
+        username: &#39;admin&#39;,
+        password: &#39;111111&#39;
+      &#125;,
+      loginRules: &#123;
+        &#x2F;&#x2F; username: [&#123; required: true, trigger: &#39;blur&#39;, validator: validateUsername &#125;],
+        &#x2F;&#x2F; password: [&#123; required: true, trigger: &#39;blur&#39;, validator: validatePassword &#125;]
+      &#125;,
+      loading: false,
+      passwordType: &#39;password&#39;,
+      redirect: undefined
+    &#125;
+  &#125;,
+  watch: &#123;
+    $route: &#123;
+      handler: function(route) &#123;
+        this.redirect &#x3D; route.query &amp;&amp; route.query.redirect
+      &#125;,
+      immediate: true
+    &#125;
+  &#125;,
+  methods: &#123;
+    showPwd() &#123;
+      if (this.passwordType &#x3D;&#x3D;&#x3D; &#39;password&#39;) &#123;
+        this.passwordType &#x3D; &#39;&#39;
+      &#125; else &#123;
+        this.passwordType &#x3D; &#39;password&#39;
+      &#125;
+      this.$nextTick(() &#x3D;&gt; &#123;
+        this.$refs.password.focus()
+      &#125;)
+    &#125;,
+    &#x2F;&#x2F;登录业务：发请求，带着用户名与密码给服务器（成功与失败）
+    handleLogin() &#123;
+      &#x2F;&#x2F;这里是在验证表单元素（用户名与密码）的是否符合规则
+      this.$refs.loginForm.validate(valid &#x3D;&gt; &#123;
+        &#x2F;&#x2F;如果符合验证规则
+        if (valid) &#123;
+          &#x2F;&#x2F;按钮会有一个loading效果
+          this.loading &#x3D; true;
+          &#x2F;&#x2F;派发一个action:user&#x2F;login,带着用户名与密码的载荷
+          this.$store.dispatch(&#39;user&#x2F;login&#39;, this.loginForm).then(() &#x3D;&gt; &#123;
+            &#x2F;&#x2F;登录成功进行路由的跳转
+            this.$router.push(&#123; path: this.redirect || &#39;&#x2F;&#39; &#125;);
+            &#x2F;&#x2F;loading效果结束
+            this.loading &#x3D; false
+          &#125;).catch(() &#x3D;&gt; &#123;
+            this.loading &#x3D; false
+          &#125;)
+        &#125; else &#123;
+          console.log(&#39;error submit!!&#39;)
+          return false
+        &#125;
+      &#125;)
+    &#125;
+  &#125;
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style lang&#x3D;&quot;scss&quot;&gt;
+&#x2F;* 修复input 背景不协调 和光标变色 *&#x2F;
+&#x2F;* Detail see https:&#x2F;&#x2F;github.com&#x2F;PanJiaChen&#x2F;vue-element-admin&#x2F;pull&#x2F;927 *&#x2F;
+
+$bg:#283443;
+$light_gray:#fff;
+$cursor: #fff;
+
+@supports (-webkit-mask: none) and (not (cater-color: $cursor)) &#123;
+  .login-container .el-input input &#123;
+    color: $cursor;
+  &#125;
+&#125;
+
+&#x2F;* reset element-ui css *&#x2F;
+.login-container &#123;
+  .el-input &#123;
+    display: inline-block;
+    height: 47px;
+    width: 85%;
+
+    input &#123;
+      background: transparent;
+      border: 0px;
+      -webkit-appearance: none;
+      border-radius: 0px;
+      padding: 12px 5px 12px 15px;
+      color: $light_gray;
+      height: 47px;
+      caret-color: $cursor;
+
+      &amp;:-webkit-autofill &#123;
+        box-shadow: 0 0 0px 1000px $bg inset !important;
+        -webkit-text-fill-color: $cursor !important;
+      &#125;
+    &#125;
+  &#125;
+
+  .el-form-item &#123;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #454545;
+  &#125;
+&#125;
+&lt;&#x2F;style&gt;
+
+&lt;style lang&#x3D;&quot;scss&quot; scoped&gt;
+$bg:#2d3a4b;
+$dark_gray:#889aa4;
+$light_gray:#eee;
+
+.login-container &#123;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background:url(~@&#x2F;assets&#x2F;1.png);
+  background-size: 100% 100%;
+
+  .login-form &#123;
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    padding: 160px 35px 0;
+    margin: 0 auto;
+    overflow: hidden;
+  &#125;
+
+  .tips &#123;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 10px;
+
+    span &#123;
+      &amp;:first-of-type &#123;
+        margin-right: 16px;
+      &#125;
+    &#125;
+  &#125;
+
+  .svg-container &#123;
+    padding: 6px 5px 6px 15px;
+    color: $dark_gray;
+    vertical-align: middle;
+    width: 30px;
+    display: inline-block;
+  &#125;
+
+  .title-container &#123;
+    position: relative;
+
+    .title &#123;
+      font-size: 26px;
+      color: $light_gray;
+      margin: 0px auto 40px auto;
+      text-align: center;
+      font-weight: bold;
+    &#125;
+  &#125;
+
+  .show-pwd &#123;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 16px;
+    color: $dark_gray;
+    cursor: pointer;
+    user-select: none;
+  &#125;
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们逐行拆解一下：</p>
+<ol>
+<li><p>登录页面使用了<code>el-form</code>组件，展示表单元素：</p>
+<ul>
+<li><p><code>model</code>：用于收集表单数据  </p>
+<p>此处默认值为：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">loginForm</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token string">'admin'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">password</span><span class="token operator">:</span> <span class="token string">'111111'</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同时在<code>el-form-item</code>中的<code>el-input</code>标签中：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-input
+          ref&#x3D;&quot;username&quot;
+          v-model&#x3D;&quot;loginForm.username&quot;
+          placeholder&#x3D;&quot;Username&quot;
+          name&#x3D;&quot;username&quot;
+          type&#x3D;&quot;text&quot;
+          tabindex&#x3D;&quot;1&quot;
+          auto-complete&#x3D;&quot;on&quot;
+        &#x2F;&gt;
+&#x2F;&#x2F;- ref&#x3D;&quot;username&quot;：给输入框设置一个引用名称，可以在代码中通过该引用名称访问和操作输入框。 
+&#x2F;&#x2F;- v-model&#x3D;&quot;loginForm.username&quot;：将输入框的值与Vue实例中的loginForm对象的username属性进行双向绑定，实现数据的同步更新。 
+&#x2F;&#x2F;- placeholder&#x3D;&quot;Username&quot;：设置输入框的占位符文本，当输入框为空时显示该文本。 
+&#x2F;&#x2F;- name&#x3D;&quot;username&quot;：设置输入框的名称，用于表单提交时标识该字段。 
+&#x2F;&#x2F;- type&#x3D;&quot;text&quot;：设置输入框的类型为文本输入。 
+&#x2F;&#x2F;- tabindex&#x3D;&quot;1&quot;：设置输入框的Tab键顺序，表示在表单中的焦点切换顺序。 
+&#x2F;&#x2F;- auto-complete&#x3D;&quot;on&quot;：启用输入框的自动完成功能。 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><code>rules</code>：表单验证规则</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> validUsername <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/utils/validate'</span>
+<span class="token literal-property property">loginRules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token literal-property property">trigger</span><span class="token operator">:</span> <span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token literal-property property">validator</span><span class="token operator">:</span> validateUsername <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">password</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token literal-property property">trigger</span><span class="token operator">:</span> <span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token literal-property property">validator</span><span class="token operator">:</span> validatePassword <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+ 
+<span class="token comment">//检验规则</span>
+<span class="token keyword">const</span> <span class="token function-variable function">validateUsername</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">rule<span class="token punctuation">,</span> value<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">validUsername</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'Please enter the correct user name'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">validatePassword</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">rule<span class="token punctuation">,</span> value<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>value<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'The password can not be less than 6 digits'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中<code>validUsername</code>规则单独引入</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * @param &#123;string&#125; str
+ * @returns &#123;Boolean&#125;
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">validUsername</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> valid_map <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'admin'</span><span class="token punctuation">,</span> <span class="token string">'editor'</span><span class="token punctuation">]</span>
+  <span class="token keyword">return</span> valid_map<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//函数的主体部分是一行代码，它使用了数组的indexOf方法来检查给定的字符串是否在valid_map数组中。</span>
+<span class="token comment">//首先，通过调用str.trim()方法去除字符串两端的空格，然后使用indexOf方法检查该字符串在valid_map数组中的索引位置。</span>
+<span class="token comment">//如果索引大于等于0，说明该字符串在数组中存在，函数返回true，否则返回false。 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p>密码切换显示</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-form-item prop&#x3D;&quot;password&quot;&gt;
+        &lt;span class&#x3D;&quot;svg-container&quot;&gt;
+          &lt;svg-icon icon-class&#x3D;&quot;password&quot; &#x2F;&gt;
+        &lt;&#x2F;span&gt;
+        &lt;el-input
+          :key&#x3D;&quot;passwordType&quot;
+          ref&#x3D;&quot;password&quot;
+          v-model&#x3D;&quot;loginForm.password&quot;
+          :type&#x3D;&quot;passwordType&quot;
+          placeholder&#x3D;&quot;Password&quot;
+          name&#x3D;&quot;password&quot;
+          tabindex&#x3D;&quot;2&quot;
+          auto-complete&#x3D;&quot;on&quot;
+          @keyup.enter.native&#x3D;&quot;handleLogin&quot;
+        &#x2F;&gt;
+        &lt;span class&#x3D;&quot;show-pwd&quot; @click&#x3D;&quot;showPwd&quot;&gt;
+          &lt;svg-icon :icon-class&#x3D;&quot;passwordType &#x3D;&#x3D;&#x3D; &#39;password&#39; ? &#39;eye&#39; : &#39;eye-open&#39;&quot; &#x2F;&gt;
+        &lt;&#x2F;span&gt;
+      &lt;&#x2F;el-form-item&gt;
+&#x2F;**
+   - :key&#x3D;&quot;passwordType&quot;：当密码类型（passwordType）发生变化时，重新渲染输入框。 
+   - ref&#x3D;&quot;password&quot;：给输入框设置一个引用，方便在代码中获取输入框的值。 
+   - v-model&#x3D;&quot;loginForm.password&quot;：将输入框的值绑定到Vue实例中的loginForm对象的password属性上。 
+   - :type&#x3D;&quot;passwordType&quot;：根据密码类型（passwordType）设置输入框的类型（password或text）。 
+   - placeholder&#x3D;&quot;Password&quot;：设置输入框的占位符为&quot;Password&quot;。 
+   - name&#x3D;&quot;password&quot;：设置输入框的名称为&quot;password&quot;。 
+   - tabindex&#x3D;&quot;2&quot;：设置输入框的tab索引为2。 
+   - auto-complete&#x3D;&quot;on&quot;：启用输入框的自动完成功能。 
+   - @keyup.enter.native&#x3D;&quot;handleLogin&quot;：当用户在输入框中按下回车键时，调用Vue实例中的handleLogin方法。
+*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"> <span class="token function">showPwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>passwordType <span class="token operator">===</span> <span class="token string">'password'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>passwordType <span class="token operator">=</span> <span class="token string">''</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>passwordType <span class="token operator">=</span> <span class="token string">'password'</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$nextTick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>password<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token comment">//首先，它会检查密码框的类型是否为"password"。如果是，则将其类型设置为空字符串，即将密码框的内容显示出来。如果不是，则将其类型设置为"password"，即将密码框的内容隐藏起来。 然后，它会使用$nextTick方法来等待DOM更新完成后，再执行后续操作。在DOM更新完成后，它会使用$refs属性来获取名为"password"的元素，并调用其focus方法，将焦点设置在密码框上。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>发起登录请求</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-button :loading&#x3D;&quot;loading&quot; type&#x3D;&quot;primary&quot; style&#x3D;&quot;width:100%;margin-bottom:30px;&quot; @click.native.prevent&#x3D;&quot;handleLogin&quot;&gt;登录&lt;&#x2F;el-button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;登录业务：发请求，带着用户名与密码给服务器（成功与失败）
+    handleLogin() &#123;
+      &#x2F;&#x2F;这里是在验证表单元素（用户名与密码）的是否符合规则
+      this.$refs.loginForm.validate(valid &#x3D;&gt; &#123;
+        &#x2F;&#x2F;如果符合验证规则
+        if (valid) &#123;
+          &#x2F;&#x2F;按钮会有一个loading效果
+          this.loading &#x3D; true;
+          &#x2F;&#x2F;派发一个action:user&#x2F;login,带着用户名与密码的载荷
+          this.$store.dispatch(&#39;user&#x2F;login&#39;, this.loginForm).then(() &#x3D;&gt; &#123;
+            &#x2F;&#x2F;登录成功进行路由的跳转
+            this.$router.push(&#123; path: this.redirect || &#39;&#x2F;&#39; &#125;);
+            &#x2F;&#x2F;loading效果结束
+            this.loading &#x3D; false
+          &#125;).catch(() &#x3D;&gt; &#123;
+            this.loading &#x3D; false
+          &#125;)
+        &#125; else &#123;
+          console.log(&#39;error submit!!&#39;)
+          return false
+        &#125;
+      &#125;)
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>src\store\modules\user.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//actions</span>
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">//这里在处理登录业务</span>
+  <span class="token keyword">async</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> commit <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> userInfo</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//解构出用户名与密码</span>
+    <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> username<span class="token punctuation">,</span> password <span class="token punctuation">&#125;</span> <span class="token operator">=</span> userInfo<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">username</span><span class="token operator">:</span> username<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token literal-property property">password</span><span class="token operator">:</span> password <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>code<span class="token operator">==</span><span class="token number">20000</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token comment">//vuex存储token</span>
+      <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'SET_TOKEN'</span><span class="token punctuation">,</span>result<span class="token punctuation">.</span>data<span class="token punctuation">.</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">//本地持久化存储token</span>
+      <span class="token function">setToken</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>data<span class="token punctuation">.</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token string">'ok'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'faile'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>src\utils\auth.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Cookies <span class="token keyword">from</span> <span class="token string">'js-cookie'</span>
+
+<span class="token keyword">const</span> TokenKey <span class="token operator">=</span> <span class="token string">'vue_admin_template_token'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> Cookies<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>TokenKey<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">setToken</span><span class="token punctuation">(</span><span class="token parameter">token</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  
+  <span class="token keyword">return</span> Cookies<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>TokenKey<span class="token punctuation">,</span> token<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">removeToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> Cookies<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>TokenKey<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>src\utils\request.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> MessageBox<span class="token punctuation">,</span> Message <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'element-ui'</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'@/store'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getToken <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/utils/auth'</span>
+
+<span class="token comment">// create an axios instance</span>
+<span class="token keyword">const</span> service <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">baseURL</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_BASE_API</span><span class="token punctuation">,</span> <span class="token comment">// url = base url + request url</span>
+  <span class="token comment">// withCredentials: true, // send cookies when cross-domain requests</span>
+  <span class="token literal-property property">timeout</span><span class="token operator">:</span> <span class="token number">5000</span> <span class="token comment">// request timeout</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//请求拦截器：携带的token字段</span>
+service<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  <span class="token parameter">config</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// do something before request is sent</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>token<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// let each request carry token</span>
+      <span class="token comment">// ['X-Token'] is a custom headers key</span>
+      <span class="token comment">// please modify it according to the actual situation</span>
+      config<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'token'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> config
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token parameter">error</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// do something with request error</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token comment">// for debug</span>
+    <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">//响应拦截器</span>
+service<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  <span class="token comment">/**
+   * If you want to get http information such as headers or status
+   * Please return  response => response
+  */</span>
+
+  <span class="token comment">/**
+   * Determine the request status by custom code
+   * Here is just an example
+   * You can also judge the status by HTTP Status Code
+   */</span>
+  <span class="token parameter">response</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> res <span class="token operator">=</span> response<span class="token punctuation">.</span>data
+
+    <span class="token comment">//服务器响应失败在干什么,因为咱们真实服务器返回code  20000也有可能200</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>code <span class="token operator">!==</span> <span class="token number">20000</span> <span class="token operator">&amp;&amp;</span> res<span class="token punctuation">.</span>code<span class="token operator">!=</span><span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">Message</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">message</span><span class="token operator">:</span> res<span class="token punctuation">.</span>message <span class="token operator">||</span> <span class="token string">'Error'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'error'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">duration</span><span class="token operator">:</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token number">1000</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+      <span class="token comment">// 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">50008</span> <span class="token operator">||</span> res<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">50012</span> <span class="token operator">||</span> res<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">50014</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// to re-login</span>
+        MessageBox<span class="token punctuation">.</span><span class="token function">confirm</span><span class="token punctuation">(</span><span class="token string">'You have been logged out, you can cancel to stay on this page, or log in again'</span><span class="token punctuation">,</span> <span class="token string">'Confirm logout'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">confirmButtonText</span><span class="token operator">:</span> <span class="token string">'Re-Login'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">cancelButtonText</span><span class="token operator">:</span> <span class="token string">'Cancel'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'warning'</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/resetToken'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            location<span class="token punctuation">.</span><span class="token function">reload</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>message <span class="token operator">||</span> <span class="token string">'Error'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//服务器相应成功干什么</span>
+      <span class="token keyword">return</span> res
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token parameter">error</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'err'</span> <span class="token operator">+</span> error<span class="token punctuation">)</span> <span class="token comment">// for debug</span>
+    <span class="token function">Message</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">message</span><span class="token operator">:</span> error<span class="token punctuation">.</span>message<span class="token punctuation">,</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'error'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">duration</span><span class="token operator">:</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token number">1000</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>权限控制</p>
+<p><code>src\permission.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Message <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'element-ui'</span>
+<span class="token keyword">import</span> NProgress <span class="token keyword">from</span> <span class="token string">'nprogress'</span> <span class="token comment">// progress bar</span>
+<span class="token keyword">import</span> <span class="token string">'nprogress/nprogress.css'</span> <span class="token comment">// progress bar style</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getToken <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/utils/auth'</span> <span class="token comment">// get token from cookie</span>
+<span class="token keyword">import</span> getPageTitle <span class="token keyword">from</span> <span class="token string">'@/utils/get-page-title'</span>
+
+NProgress<span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">showSpinner</span><span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">// NProgress Configuration</span>
+
+<span class="token keyword">const</span> whiteList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'/login'</span><span class="token punctuation">]</span> <span class="token comment">// no redirect whitelist</span>
+
+router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> from<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// start progress bar</span>
+  NProgress<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// set page title</span>
+  document<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token function">getPageTitle</span><span class="token punctuation">(</span>to<span class="token punctuation">.</span>meta<span class="token punctuation">.</span>title<span class="token punctuation">)</span>
+
+  <span class="token comment">// determine whether the user has logged in</span>
+  <span class="token keyword">const</span> hasToken <span class="token operator">=</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>hasToken<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>to<span class="token punctuation">.</span>path <span class="token operator">===</span> <span class="token string">'/login'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// if is logged in, redirect to the home page</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      NProgress<span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> hasGetUserInfo <span class="token operator">=</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>name
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>hasGetUserInfo<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">// get user info</span>
+          <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/getInfo'</span><span class="token punctuation">)</span>
+          <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token operator">...</span>to<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">// remove token and go to login page to re-login</span>
+          <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/resetToken'</span><span class="token punctuation">)</span>
+          Message<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error <span class="token operator">||</span> <span class="token string">'Has Error'</span><span class="token punctuation">)</span>
+          <span class="token function">next</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/login?redirect=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>to<span class="token punctuation">.</span>path<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+          NProgress<span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* has no token*/</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>whiteList<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>to<span class="token punctuation">.</span>path<span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// in the free login whitelist, go directly</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// other pages that do not have permission to access are redirected to the login page.</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/login?redirect=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>to<span class="token punctuation">.</span>path<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+      NProgress<span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+router<span class="token punctuation">.</span><span class="token function">afterEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// finish progress bar</span>
+  NProgress<span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>开始进度条：调用<code>NProgress.start()</code>方法开始显示进度条。  </li>
+<li>设置页面标题：根据目标路由的<code>meta.title</code>属性，调用<code>getPageTitle()</code>方法设置页面标题。  </li>
+<li>判断用户是否已登录：调用<code>getToken()</code>方法判断用户是否已登录，将结果保存在<code>hasToken</code>变量中。  </li>
+<li>如果用户已登录：    <ul>
+<li>如果目标路径是登录页：调用<code>next()</code>方法重定向到首页，并调用<code>NProgress.done()</code>方法结束进度条的显示。   </li>
+<li>否则，判断是否已获取用户信息：<ul>
+<li>如果已获取用户信息：调用<code>next()</code>方法继续路由跳转。</li>
+<li>否则，获取用户信息并跳转到目标路径：调用<code>store.dispatch(&#39;user/getInfo&#39;)</code>方法获取用户信息并调用<code>next(&#123;...to&#125;)</code>方法跳转到目标路径。</li>
+</ul>
+</li>
+<li>如果获取用户信息出错：调用<code>store.dispatch(&#39;user/resetToken&#39;)</code>方法移除<code>token</code>；调用<code>Message.error()</code>方法显示错误信息；跳转到登录页，并将目标路径作为参数传递；调用<code>NProgress.done()</code>方法结束进度条的显示。</li>
+</ul>
+</li>
+<li>如果用户未登录：    <ul>
+<li>如果目标路径在白名单中：调用<code>next()</code>方法继续路由跳转。</li>
+<li>否则，跳转到登录页，并将目标路径作为参数传递，并调用<code>NProgress.done()</code>方法结束进度条的显示。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>登出</p>
+<p><code>src\layout\components\Navbar.vue</code></p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-dropdown-item divided @click.native&#x3D;&quot;logout&quot;&gt;
+            &lt;span style&#x3D;&quot;display:block;&quot;&gt;退出&lt;&#x2F;span&gt;
+          &lt;&#x2F;el-dropdown-item&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">async</span> <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/logout'</span><span class="token punctuation">)</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/login?redirect=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>fullPath<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>src\store\modules\user.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//引入登录|退出登录|获取用户信息的接口函数</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> login<span class="token punctuation">,</span> logout<span class="token punctuation">,</span> getInfo <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/api/user'</span>
+<span class="token comment">// 获取token|设置token|删除token的函数</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getToken<span class="token punctuation">,</span> setToken<span class="token punctuation">,</span> removeToken <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/utils/auth'</span>
+<span class="token comment">//路由模块当中重置路由的方法</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> anyRoutes<span class="token punctuation">,</span> resetRouter<span class="token punctuation">,</span>asyncRoutes<span class="token punctuation">,</span>constantRoutes<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'@/router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> cloneDeep <span class="token keyword">from</span> <span class="token string">'lodash/cloneDeep'</span>
+
+<span class="token operator">...</span>
+<span class="token comment">// user logout</span>
+  <span class="token function">logout</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> commit<span class="token punctuation">,</span> state <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token function">logout</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>token<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token function">removeToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// must remove  token  first</span>
+        <span class="token function">resetRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'RESET_STATE'</span><span class="token punctuation">)</span>
+        <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>src\router\index.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//任意理由：</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">createRouter</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token comment">// mode: 'history', // require service support</span>
+  <span class="token function-variable function">scrollBehavior</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">y</span><span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token comment">//因为注册的路由是‘死的’，‘活的’路由如果根据不同用户（角色）可以展示不同菜单</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> constantRoutes
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">resetRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> newRouter <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  router<span class="token punctuation">.</span>matcher <span class="token operator">=</span> newRouter<span class="token punctuation">.</span>matcher <span class="token comment">// reset router</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将<code>resetRouter()</code>放置在<code>removeToken()</code>之后，可以确保在移除<code>token</code>后立即重置路由。这样做有以下几个好处：</p>
+<ol>
+<li>顺序性：按照先移除<code>token</code>，再重置路由的顺序，能够确保在重置路由时不会因为仍然存在<code>token</code>而导致路由的未授权访问。 </li>
+<li>完整性：移除<code>token</code>后，重置路由能够清理应用程序中与用户身份验证相关的状态，确保应用程序从一个干净的状态开始。</li>
+</ol>
+<blockquote>
+<p>注意：在Vue Router中，路由的匹配器（<code>matcher</code>）是用来根据路由配置和当前URL路径进行匹配的核心机制。匹配器负责解析URL路径，找到与之匹配的路由配置，并执行相应的操作。在重置路由时，我们希望将之前创建的<code>Router</code>实例的匹配器重置为新创建的<code>Router</code>实例的匹配器。这样做的目的是<strong>使整个应用程序重新使用新的路由配置进行路由匹配，而不是保留旧的路由状态。</strong></p>
+</blockquote>
+</li>
+</ol>
+<h3 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h3><p><code>src\store\modules\user.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//引入登录|退出登录|获取用户信息的接口函数</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> login<span class="token punctuation">,</span> logout<span class="token punctuation">,</span> getInfo <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/api/user'</span>
+<span class="token comment">// 获取token|设置token|删除token的函数</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getToken<span class="token punctuation">,</span> setToken<span class="token punctuation">,</span> removeToken <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/utils/auth'</span>
+<span class="token comment">//路由模块当中重置路由的方法</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> anyRoutes<span class="token punctuation">,</span> resetRouter<span class="token punctuation">,</span>asyncRoutes<span class="token punctuation">,</span>constantRoutes<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'@/router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> cloneDeep <span class="token keyword">from</span> <span class="token string">'lodash/cloneDeep'</span>
+
+<span class="token comment">//箭头函数</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getDefaultState</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//获取token</span>
+    <span class="token literal-property property">token</span><span class="token operator">:</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">//存储用户名</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+    <span class="token comment">//存储用户头像</span>
+    <span class="token literal-property property">avatar</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+    <span class="token comment">//服务器返回的菜单信息【根据不同的角色：返回的标记信息，数组里面的元素是字符串】</span>
+    <span class="token literal-property property">routes</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">//角色信息</span>
+    <span class="token literal-property property">roles</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">//按钮权限的信息</span>
+    <span class="token literal-property property">buttons</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">//对比之后【项目中已有的异步路由，与服务器返回的标记信息进行对比最终需要展示的理由】</span>
+    <span class="token literal-property property">resultAsyncRoutes</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">//用户最终需要展示全部路由</span>
+    <span class="token literal-property property">resultAllRputes</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token function">getDefaultState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">//唯一修改state的地方</span>
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">//重置state</span>
+  <span class="token function-variable function">RESET_STATE</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token function">getDefaultState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">//存储token</span>
+  <span class="token function-variable function">SET_TOKEN</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> token</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>token <span class="token operator">=</span> token
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">//存储用户信息</span>
+  <span class="token function-variable function">SET_USERINFO</span><span class="token operator">:</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span>userInfo</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token comment">//用户名</span>
+     state<span class="token punctuation">.</span>name <span class="token operator">=</span> userInfo<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+     <span class="token comment">//用户头像</span>
+     state<span class="token punctuation">.</span>avatar <span class="token operator">=</span> userInfo<span class="token punctuation">.</span>avatar<span class="token punctuation">;</span>
+     <span class="token comment">//菜单权限标记</span>
+     state<span class="token punctuation">.</span>routes <span class="token operator">=</span> userInfo<span class="token punctuation">.</span>routes<span class="token punctuation">;</span>
+     <span class="token comment">//按钮权限标记</span>
+     state<span class="token punctuation">.</span>buttons <span class="token operator">=</span> userInfo<span class="token punctuation">.</span>buttons<span class="token punctuation">;</span>
+     <span class="token comment">//角色</span>
+     state<span class="token punctuation">.</span>roles <span class="token operator">=</span> userInfo<span class="token punctuation">.</span>roles<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">//最终计算出的异步路由</span>
+  <span class="token function-variable function">SET_RESULTASYNCROUTES</span><span class="token operator">:</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span>asyncRoutes</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+     <span class="token comment">//vuex保存当前用户的异步路由，注意，一个用户需要展示完成路由：常量、异步、任意路由。常量路由在创建路由时已经加入到路由器当中了</span>
+     state<span class="token punctuation">.</span>resultAsyncRoutes <span class="token operator">=</span> asyncRoutes<span class="token punctuation">;</span>
+     <span class="token comment">//计算出当前用户需要展示所有路由</span>
+     state<span class="token punctuation">.</span>resultAllRputes <span class="token operator">=</span> constantRoutes<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>resultAsyncRoutes<span class="token punctuation">,</span>anyRoutes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment">//给路由器添加新的路由</span>
+      router<span class="token punctuation">.</span><span class="token function">addRoutes</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>resultAllRputes<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token comment">//定义一个函数：两个数组进行对比，对比出当前用户到底显示哪些异步路由</span>
+ <span class="token keyword">const</span> <span class="token function-variable function">computedAsyncRoutes</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">asyncRoutes<span class="token punctuation">,</span>routes</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+     <span class="token comment">//过滤出当前用户【超级管理|普通员工】需要展示的异步路由</span>
+    <span class="token keyword">return</span> asyncRoutes<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+         <span class="token comment">//数组当中没有这个元素返回索引值-1，如果有这个元素返回的索引值一定不是-1 </span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>routes<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+          <span class="token comment">//递归:别忘记还有2、3、4、5、6级路由</span>
+          <span class="token keyword">if</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>children<span class="token operator">&amp;&amp;</span>item<span class="token punctuation">.</span>children<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+              item<span class="token punctuation">.</span>children <span class="token operator">=</span> <span class="token function">computedAsyncRoutes</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>children<span class="token punctuation">,</span>routes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">&#125;</span>
+          <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+ <span class="token punctuation">&#125;</span>
+
+<span class="token comment">//actions</span>
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+
+  <span class="token comment">//获取用户信息</span>
+  <span class="token function">getInfo</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> commit<span class="token punctuation">,</span> state <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token function">getInfo</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>token<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//获取用户信息:返回数据包含：用户名name、用户头像avatar、routes[返回的标志:不同的用户应该展示哪些菜单的标记]、roles（用户角色信息）、buttons【按钮的信息：按钮权限用的标记】</span>
+        <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> data <span class="token punctuation">&#125;</span> <span class="token operator">=</span> response<span class="token punctuation">;</span>
+        <span class="token comment">//vuex存储用户全部的信息</span>
+        <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'SET_USERINFO'</span><span class="token punctuation">,</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'SET_RESULTASYNCROUTES'</span><span class="token punctuation">,</span><span class="token function">computedAsyncRoutes</span><span class="token punctuation">(</span><span class="token function">cloneDeep</span><span class="token punctuation">(</span>asyncRoutes<span class="token punctuation">)</span><span class="token punctuation">,</span>data<span class="token punctuation">.</span>routes<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token comment">//在这段代码中使用深拷贝的原因是为了确保对asyncRoutes数组进行操作时不会影响原始的asyncRoutes数组。</span>
+          <span class="token comment">//asyncRoutes是一个包含路由配置对象的数组。当我们在对路由进行操作时，比如过滤、修改或删除某些路由项时，我们需要确保对asyncRoutes数组的操作不会影响到原始的路由配置。 </span>
+          <span class="token comment">//在这个场景中，我们需要对asyncRoutes数组进行过滤，根据用户权限或其他条件来确定哪些路由项应该显示。如果我们直接对asyncRoutes数组进行操作，那么原始的路由配置也会被修改，可能会导致不可预期的结果。</span>
+        <span class="token function">resolve</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">namespaced</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  state<span class="token punctuation">,</span>
+  mutations<span class="token punctuation">,</span>
+  actions
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>总结：</p>
+<ol>
+<li>动态路由配置：通过从服务器获取的菜单信息，根据不同的角色，返回的标记信息，构建了异步路由配置。这些异步路由配置包含了不同角色所能访问的页面和功能。这样做可以根据用户的角色动态生成路由，实现了动态路由的功能。  </li>
+<li>路由过滤与对比：通过 <code>computedAsyncRoutes</code> 函数，将异步路由配置与当前用户的路由进行对比，过滤出当前用户需要展示的异步路由。该函数使用<strong>递归</strong>的方式对比路由的子路由，确保所有层级的路由都可以正确匹配。</li>
+<li>路由添加与重置：通过 <code>SET_RESULTASYNCROUTES</code>  mutation，将过滤后的异步路由添加到Vue Router实例中。这样，用户在登录后，根据其角色权限，可以动态生成并展示相应的路由。</li>
+<li>路由重置与注销：在用户注销或退出登录时，通过调用 <code>resetRouter</code> 函数重置路由，将路由恢复到初始状态。这样做可以确保用户退出登录后，再次登录时从一个干净的状态开始。</li>
 </ol>
 
                 
@@ -1836,18 +2622,17 @@ router.beforeEach(async (to, from, next) &#x3D;&gt; &#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/08/11/shang-pin-hui-deng-lu-zhu-ce-liu-cheng/">
+                <a href="/2023/08/11/shang-pin-hui-xing-neng-you-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/13.jpg" class="responsive-img" alt="尚品汇-登录注册流程">
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/23.jpg" class="responsive-img" alt="尚品汇-性能优化">
                         
-                        <span class="card-title">尚品汇-登录注册流程</span>
+                        <span class="card-title">尚品汇-性能优化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1857,9 +2642,9 @@ router.beforeEach(async (to, from, next) &#x3D;&gt; &#123;
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-08-11
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1872,7 +2657,6 @@ router.beforeEach(async (to, from, next) &#x3D;&gt; &#123;
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     

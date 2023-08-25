@@ -1,0 +1,2303 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="尚品汇-增删改查与ElementUI的技巧应用, QT-7274">
+    <meta name="description" content="添加表格数据
+为按钮添加修改状态的点击事件：
+&amp;lt;el-button
+     type&amp;#x3D;&amp;quot;primary&amp;quot;
+     icon&amp;#x3D;&amp;quot;el-icon-plus&amp;quot;
+     sty">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>尚品汇-增删改查与ElementUI的技巧应用 | QT-7274</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+    
+<body>
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    <div>
+                    
+                    <img src="/medias/images/loading.gif" data-original="/medias/logo.gif" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">QT-7274</span>
+                </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+    <div class="mobile-head bg-color">
+      <div>
+        
+        <img no-lazy src="/medias/logo.gif" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">QT-7274</div>
+        <div class="logo-desc">
+          
+              Never really desperate, only the lost of the soul.
+              
+            </div>
+      </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/QT-7274/QT-7274.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #003a8c;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/QT-7274/QT-7274.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">尚品汇-增删改查与ElementUI的技巧应用</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                <span class="chip bg-color">前端</span>
+                            </a>
+                        
+                            <a href="/tags/Vue/">
+                                <span class="chip bg-color">Vue</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                前端开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-08-14
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-08-18
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    31 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="添加表格数据"><a href="#添加表格数据" class="headerlink" title="添加表格数据"></a>添加表格数据</h2><p><img src="/medias/images/loading.gif" data-original="/2023/08/14/shang-pin-hui-zeng-shan-gai-cha-yu-elementui-de-ji-qiao-ying-yong/image-20230814224520994.png" alt="image-20230814224520994"></p>
+<p>为按钮添加修改状态的点击事件：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-button
+     type&#x3D;&quot;primary&quot;
+     icon&#x3D;&quot;el-icon-plus&quot;
+     style&#x3D;&quot;margin: 10px 0px&quot;
+     @click&#x3D;&quot;showDialog&quot;
+     &gt;添加&lt;&#x2F;el-button
+   &gt;
+   
+   ...
+    return &#123;
+     &#x2F;&#x2F;代表的分页器第几页
+     page: 1,
+     &#x2F;&#x2F;当前页数展示数据条数
+     limit: 3,
+     &#x2F;&#x2F;总共数据条数
+     total: 0,
+     &#x2F;&#x2F;列表展示的数据
+     list: [],
+     &#x2F;&#x2F;对话框显示与隐藏控制的属性
+     dialogFormVisible: false,
+     &#x2F;&#x2F;收集品牌信息:对象身上的属性，不能瞎写，需要看文档的
+     tmForm: &#123;
+       tmName: &quot;&quot;,
+       logoUrl: &quot;&quot;,
+     &#125;,
+     &#x2F;&#x2F;表单验证规则
+     rules: &#123;
+       &#x2F;&#x2F;品牌名称的验证规则
+       &#x2F;&#x2F;require:必须要校验字段（前面五角星有关系）  message 提示信息    trigger:用户行为设置（事件的设置:blur、change）
+       tmName: [
+         &#123; required: true, message: &quot;请输入品牌名称&quot;, trigger: &quot;blur&quot; &#125;,
+         &#x2F;&#x2F;自定义校验规则
+         &#123; validator: validateTmName, trigger: &quot;change&quot; &#125;,
+       ],
+       &#x2F;&#x2F;品牌的logo验证规则
+       logoUrl: [&#123; required: true, message: &quot;请选择品牌的图片&quot; &#125;],
+     &#125;,
+   &#125;;
+   ...
+    &#x2F;&#x2F;点击添加品牌的按钮，确保用户在添加新品牌时开始于一个空白的状态。 
+   showDialog() &#123;
+     &#x2F;&#x2F;显示对话框
+     this.dialogFormVisible &#x3D; true;
+     &#x2F;&#x2F;清除数据
+     this.tmForm &#x3D; &#123; tmName: &quot;&quot;, logoUrl: &quot;&quot; &#125;;
+   &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="多级数据的添加"><a href="#多级数据的添加" class="headerlink" title="多级数据的添加"></a>多级数据的添加</h3><p>例如要添加三级分类的数据，按钮点击时除了三级分类id和等级外均为空数据：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;添加属性按钮的回调
+    addAttr() &#123;
+      &#x2F;&#x2F;切换table显示与隐藏
+      this.isShowTable &#x3D; false;
+      &#x2F;&#x2F;清除数据
+      &#x2F;&#x2F;收集三级分类的id
+      this.attrInfo &#x3D; &#123;
+        attrName: &quot;&quot;, &#x2F;&#x2F;属性名
+        attrValueList: [
+          &#x2F;&#x2F;属性值，因为属性值可以有多个因此用数组，每一个属性值都是一个对象需要attrId，valueName
+        ],
+        categoryId: this.category3Id, &#x2F;&#x2F;三级分类的id
+        categoryLevel: 3, &#x2F;&#x2F;因为服务器也需要区分几级id
+      &#125;;
+    &#125;,
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>通过标识符展示添加数据的页面：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!-- 添加属性|修改属性的结构 --&gt;
+      &lt;div v-show&#x3D;&quot;!isShowTable&quot;&gt;
+        &lt;el-form :inline&#x3D;&quot;true&quot; ref&#x3D;&quot;form&quot; label-width&#x3D;&quot;80px&quot; :model&#x3D;&quot;attrInfo&quot;&gt;
+          &lt;el-form-item label&#x3D;&quot;属性名&quot;&gt;
+            &lt;el-input
+              placeholder&#x3D;&quot;请输入属性名&quot;
+              v-model&#x3D;&quot;attrInfo.attrName&quot;
+            &gt;&lt;&#x2F;el-input&gt;
+          &lt;&#x2F;el-form-item&gt;
+        &lt;&#x2F;el-form&gt;
+        &lt;el-button
+          type&#x3D;&quot;primary&quot;
+          icon&#x3D;&quot;el-icon-plus&quot;
+          @click&#x3D;&quot;addAttrValue&quot;
+          :disabled&#x3D;&quot;!attrInfo.attrName&quot;
+          &gt;添加属性值&lt;&#x2F;el-button
+        &gt;
+        &lt;el-button @click&#x3D;&quot;isShowTable &#x3D; true&quot;&gt;取消&lt;&#x2F;el-button&gt;
+        &lt;el-table
+          style&#x3D;&quot;width: 100%; margin: 20px 0px&quot;
+          border
+          :data&#x3D;&quot;attrInfo.attrValueList&quot;
+        &gt;
+          &lt;el-table-column align&#x3D;&quot;center&quot; type&#x3D;&quot;index&quot; label&#x3D;&quot;序号&quot; width&#x3D;&quot;80&quot;&gt;
+          &lt;&#x2F;el-table-column&gt;
+          &lt;el-table-column width&#x3D;&quot;width&quot; prop&#x3D;&quot;prop&quot; label&#x3D;&quot;属性值名称&quot;&gt;
+            &lt;template slot-scope&#x3D;&quot;&#123; row, $index &#125;&quot;&gt;
+              &lt;!-- 这里结构需要用到span与input进行来回的切换 --&gt;
+              &lt;el-input
+                v-model&#x3D;&quot;row.valueName&quot;
+                placeholder&#x3D;&quot;请输入属性值名称&quot;
+                size&#x3D;&quot;mini&quot;
+                v-if&#x3D;&quot;row.flag&quot;
+                @blur&#x3D;&quot;toLook(row)&quot;
+                @keyup.native.enter&#x3D;&quot;toLook(row)&quot;
+                :ref&#x3D;&quot;$index&quot;
+              &gt;&lt;&#x2F;el-input&gt;
+              &lt;span
+                v-else
+                @click&#x3D;&quot;toEdit(row, $index)&quot;
+                style&#x3D;&quot;display: block&quot;
+                &gt;&#123;&#123; row.valueName &#125;&#125;&lt;&#x2F;span
+              &gt;
+            &lt;&#x2F;template&gt;
+          &lt;&#x2F;el-table-column&gt;
+          &lt;el-table-column width&#x3D;&quot;width&quot; prop&#x3D;&quot;prop&quot; label&#x3D;&quot;操作&quot;&gt;
+            &lt;template slot-scope&#x3D;&quot;&#123; row, $index &#125;&quot;&gt;
+              &lt;!-- 气泡确认框 --&gt;
+              &lt;el-popconfirm :title&#x3D;&quot;&#96;确定删除$&#123;row.valueName&#125;?&#96;&quot; @onConfirm&#x3D;&quot;deleteAttrValue($index)&quot;&gt;
+                &lt;el-button
+                  type&#x3D;&quot;danger&quot;
+                  icon&#x3D;&quot;el-icon-delete&quot;
+                  size&#x3D;&quot;mini&quot;
+                  slot&#x3D;&quot;reference&quot;
+                &gt;&lt;&#x2F;el-button&gt;
+              &lt;&#x2F;el-popconfirm&gt;
+            &lt;&#x2F;template&gt;
+          &lt;&#x2F;el-table-column&gt;
+        &lt;&#x2F;el-table&gt;
+        &lt;el-button type&#x3D;&quot;primary&quot; @click&#x3D;&quot;addOrUpdateAttr&quot; :disabled&#x3D;&quot;attrInfo.attrValueList.length&lt;1&quot;&gt;保存&lt;&#x2F;el-button&gt;
+        &lt;el-button @click&#x3D;&quot;isShowTable &#x3D; true&quot;&gt;取消&lt;&#x2F;el-button&gt;
+      &lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意细节：</p>
+<ol>
+<li><p><code>:disabled=&quot;!attrInfo.attrName&quot;</code>只有属性名有值的时候，才可以继续添加属性值。</p>
+</li>
+<li><p><img src="/medias/images/loading.gif" data-original="/2023/08/14/shang-pin-hui-zeng-shan-gai-cha-yu-elementui-de-ji-qiao-ying-yong/image-20230815171228733.png" alt="image-20230815171228733">为达到<code>span</code>与<code>input</code>进行来回的切换，使用row.flag属性进行控制。</p>
+</li>
+<li><p><code>@blur</code>和<code>@keyup.native.enter</code>是事件监听器，分别在输入框失去焦点和按下回车键时触发<code>toLook</code>方法，并将<code>row</code>作为参数传递给<code>toLook</code>方法。<code>:ref</code>指令将当前输入框的索引值作为引用，可以在其他地方通过<code>this.$refs[index]</code>来获取该输入框的实例。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//添加属性值回调</span>
+    <span class="token function">addAttrValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">//向属性值的数组里面添加元素</span>
+      <span class="token comment">//attrId：是你相应的属性的id，目前而言我们是添加属性的操作，还没有相应的属性的id，目前而言带给服务器的id为undefined</span>
+      <span class="token comment">//valueName:相应的属性值的名称</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>attrInfo<span class="token punctuation">.</span>attrValueList<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">attrId</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>attrInfo<span class="token punctuation">.</span>id<span class="token punctuation">,</span> <span class="token comment">//对于修改某一个属性的时候，可以在已有的属性值基础之上新增新的属性值（新增属性值的时候，需要把已有的属性的id带上）</span>
+        <span class="token literal-property property">valueName</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">flag</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">//flag属性：给每一个属性值添加一个标记flag，用户切换查看模式与编辑模式，好处，每一个属性值可以控制自己的模式切换</span>
+      <span class="token comment">//当前flag属性，响应式数据（数据变化视图跟着变化）这段代码的作用是在数据变化后，将焦点聚焦在最后一个元素上。</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$nextTick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>attrInfo<span class="token punctuation">.</span>attrValueList<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    
+<span class="token comment">//失却焦点的事件---切换为查看模式，展示span</span>
+    <span class="token function">toLook</span><span class="token punctuation">(</span><span class="token parameter">row</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 如果属性值为空不能作为新的属性值，需要给用户提示，让他输入一个其他的属性值</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>row<span class="token punctuation">.</span>valueName<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+         <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$message</span><span class="token punctuation">(</span><span class="token string">'请你输入一个正常的属性值'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword">return</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+       <span class="token comment">//新增的属性值不能与已有的属性值重复</span>
+      <span class="token keyword">let</span> isRepat  <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>attrInfo<span class="token punctuation">.</span>attrValueList<span class="token punctuation">.</span><span class="token function">some</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+          <span class="token comment">//需要将row从数组里面判断的时候去除</span>
+          <span class="token comment">//row最新新增的属性值【数组的最后一项元素】</span>
+          <span class="token comment">//判断的时候，需要把已有的数组当中新增的这个属性值去除</span>
+          <span class="token keyword">if</span><span class="token punctuation">(</span>row<span class="token operator">!==</span>item<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> row<span class="token punctuation">.</span>valueName<span class="token operator">==</span>item<span class="token punctuation">.</span>valueName<span class="token punctuation">;</span>
+          <span class="token punctuation">&#125;</span>
+       <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       <span class="token keyword">if</span><span class="token punctuation">(</span>isRepat<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+      <span class="token comment">// row：形参是当前用户添加的最新的属性值</span>
+      <span class="token comment">// 当前编辑模式变为查看模式【让input消失，显示span】</span>
+      row<span class="token punctuation">.</span>flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h2 id="修改表格数据"><a href="#修改表格数据" class="headerlink" title="修改表格数据"></a>修改表格数据</h2><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!-- 
+         表格组件 
+         data:表格组件将来需要展示的数据------数组类型
+         border：是给表格添加边框
+         column属性
+         label：显示标题
+         width：对应列的宽度
+         align：标题的对齐方式
+         prop:对应列内容的字段名
+         注意1：elmentUI当中的table组件，展示的数据是以一列一列进行展示数据
+       --&gt;
+    &lt;el-table style&#x3D;&quot;width: 100%&quot; border :data&#x3D;&quot;list&quot;&gt;
+      &lt;el-table-column type&#x3D;&quot;index&quot; label&#x3D;&quot;序号&quot; width&#x3D;&quot;80px&quot; align&#x3D;&quot;center&quot;&gt;
+      &lt;&#x2F;el-table-column&gt;
+      &lt;el-table-column prop&#x3D;&quot;tmName&quot; label&#x3D;&quot;品牌名称&quot; width&#x3D;&quot;width&quot;&gt;
+      &lt;&#x2F;el-table-column&gt;
+      &lt;el-table-column prop&#x3D;&quot;logoUrl&quot; label&#x3D;&quot;品牌LOGO&quot; width&#x3D;&quot;width&quot;&gt;
+        &lt;template slot-scope&#x3D;&quot;&#123; row, $index &#125;&quot;&gt;
+          &lt;img :src&#x3D;&quot;row.logoUrl&quot; alt&#x3D;&quot;&quot; style&#x3D;&quot;width: 100px; height: 100px&quot; &#x2F;&gt;
+        &lt;&#x2F;template&gt;
+      &lt;&#x2F;el-table-column&gt;
+      &lt;el-table-column prop&#x3D;&quot;prop&quot; label&#x3D;&quot;操作&quot; width&#x3D;&quot;width&quot;&gt;
+        &lt;template slot-scope&#x3D;&quot;&#123; row, $index &#125;&quot;&gt;
+          &lt;el-button
+            type&#x3D;&quot;warning&quot;
+            icon&#x3D;&quot;el-icon-edit&quot;
+            size&#x3D;&quot;mini&quot;
+            @click&#x3D;&quot;updateTradeMark(row)&quot;
+            &gt;修改&lt;&#x2F;el-button
+          &gt;
+          &lt;el-button
+            type&#x3D;&quot;danger&quot;
+            icon&#x3D;&quot;el-icon-delete&quot;
+            size&#x3D;&quot;mini&quot;
+            @click&#x3D;&quot;deleteTradeMark(row)&quot;
+            &gt;删除&lt;&#x2F;el-button
+          &gt;
+        &lt;&#x2F;template&gt;
+      &lt;&#x2F;el-table-column&gt;
+    &lt;&#x2F;el-table&gt;
+    
+    ...
+     &#x2F;&#x2F;修改某一个品牌
+    updateTradeMark(row) &#123;
+      &#x2F;&#x2F;row：当前用户选中这个品牌信息
+      &#x2F;&#x2F;显示对话框
+      this.dialogFormVisible &#x3D; true;
+      &#x2F;&#x2F;将已有的品牌信息赋值给tmForm进行展示
+      &#x2F;&#x2F;将服务器返回品牌的信息，直接赋值给了tmForm进行展示。
+      &#x2F;&#x2F;也就是tmForm存储即为服务器返回品牌信息
+      this.tmForm &#x3D; &#123; ...row &#125;;
+    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以观察到，添加与修改使用了同一个弹出框，即实现这两个功能时都需要<code>this.dialogFormVisible = true;</code>。</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!--
+     对话框
+     标题动态切换：因为修改操作将row赋值给了tmForm，即id值被赋值
+     :visible.sync:控制对话框显示与隐藏用的
+     Form 组件提供了表单验证的功能，只需要通过 rules 属性传入约定的验证规则，并将 Form-Item 的 prop 属性设置为需校验的字段名即可
+   --&gt;
+   &lt;el-dialog
+     :title&#x3D;&quot;tmForm.id ? &#39;修改品牌&#39; : &#39;添加品牌&#39;&quot;
+     :visible.sync&#x3D;&quot;dialogFormVisible&quot;
+   &gt;
+     &lt;!-- form表单 :model属性，这个属性的作用是,把表单的数据收集到那个对象的身上 ，将来表单验证，也需要这个属性--&gt;
+     &lt;el-form style&#x3D;&quot;width: 80%&quot; :model&#x3D;&quot;tmForm&quot; :rules&#x3D;&quot;rules&quot; ref&#x3D;&quot;ruleForm&quot;&gt;
+       &lt;el-form-item label&#x3D;&quot;品牌名称&quot; label-width&#x3D;&quot;100px&quot; prop&#x3D;&quot;tmName&quot;&gt;
+         &lt;el-input autocomplete&#x3D;&quot;off&quot; v-model&#x3D;&quot;tmForm.tmName&quot;&gt;&lt;&#x2F;el-input&gt;
+       &lt;&#x2F;el-form-item&gt;
+       &lt;el-form-item label&#x3D;&quot;品牌LOGO&quot; label-width&#x3D;&quot;100px&quot; prop&#x3D;&quot;logoUrl&quot;&gt;
+         &lt;!--这里收集数据：不能使用v-model，因为不是表单元素
+           action:设置图片上传的地址
+           :on-success:可以检测到图片上传成功，当图片上传成功，会执行一次
+           :before-upload：可以在上传图片之前，会执行一次
+
+         --&gt;
+         &lt;el-upload
+           class&#x3D;&quot;avatar-uploader&quot;
+           action&#x3D;&quot;&#x2F;dev-api&#x2F;admin&#x2F;product&#x2F;fileUpload&quot;
+           :show-file-list&#x3D;&quot;false&quot;
+           :on-success&#x3D;&quot;handleAvatarSuccess&quot;
+           :before-upload&#x3D;&quot;beforeAvatarUpload&quot;
+         &gt;
+           &lt;img v-if&#x3D;&quot;tmForm.logoUrl&quot; :src&#x3D;&quot;tmForm.logoUrl&quot; class&#x3D;&quot;avatar&quot; &#x2F;&gt;
+           &lt;i v-else class&#x3D;&quot;el-icon-plus avatar-uploader-icon&quot;&gt;&lt;&#x2F;i&gt;
+           &lt;div slot&#x3D;&quot;tip&quot; class&#x3D;&quot;el-upload__tip&quot;&gt;
+             只能上传jpg&#x2F;png文件，且不超过500kb
+           &lt;&#x2F;div&gt;
+         &lt;&#x2F;el-upload&gt;
+       &lt;&#x2F;el-form-item&gt;
+     &lt;&#x2F;el-form&gt;
+     &lt;div slot&#x3D;&quot;footer&quot; class&#x3D;&quot;dialog-footer&quot;&gt;
+       &lt;el-button @click&#x3D;&quot;dialogFormVisible &#x3D; false&quot;&gt;取 消&lt;&#x2F;el-button&gt;
+       &lt;el-button type&#x3D;&quot;primary&quot; @click&#x3D;&quot;addOrUpdateTradeMark&quot;
+         &gt;确 定&lt;&#x2F;el-button
+       &gt;
+     &lt;&#x2F;div&gt;
+   &lt;&#x2F;el-dialog&gt;
+   ...
+   
+   &#x2F;&#x2F;添加按钮（添加品牌|修改品牌）
+   addOrUpdateTradeMark() &#123;
+     &#x2F;&#x2F;当全部验证字段通过，再去书写业务逻辑
+     this.$refs.ruleForm.validate(async (success) &#x3D;&gt; &#123;
+       &#x2F;&#x2F;如果全部字段符合条件
+       if (success) &#123;
+         this.dialogFormVisible &#x3D; false;
+         &#x2F;&#x2F;发请求（添加品牌|修改品牌）
+         let result &#x3D; await this.$API.trademark.reqAddOrUpdateTradeMark(
+           this.tmForm
+         );
+         if (result.code &#x3D;&#x3D; 200) &#123;
+           &#x2F;&#x2F;弹出信息:添加品牌成功、修改品牌成功
+           this.$message(&#123;
+             type: &quot;success&quot;,
+             message: this.tmForm.id ? &quot;修改品牌成功&quot; : &quot;添加品牌成功&quot;,
+           &#125;);
+           &#x2F;&#x2F;添加或者修改品牌成功以后，需要再次获取品牌列表进行展示
+           &#x2F;&#x2F;如果添加品牌： 停留在第一页。如果修改品牌：修改品牌应该留在当前页面
+           this.getPageList(this.tmForm.id ? this.page : 1);
+         &#125;
+       &#125; else &#123;
+         console.log(&quot;error submit!!&quot;);
+         return false;
+       &#125;
+     &#125;);
+   &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;图片上传之前 应用于:before-upload属性
+   beforeAvatarUpload(file) &#123;
+     const isJPG &#x3D; file.type &#x3D;&#x3D;&#x3D; &quot;image&#x2F;jpeg&quot;;
+     const isLt2M &#x3D; file.size &#x2F; 1024 &#x2F; 1024 &lt; 2;
+
+     if (!isJPG) &#123;
+       this.$message.error(&quot;上传头像图片只能是 JPG 格式!&quot;);
+     &#125;
+     if (!isLt2M) &#123;
+       this.$message.error(&quot;上传头像图片大小不能超过 2MB!&quot;);
+     &#125;
+     return isJPG &amp;&amp; isLt2M;
+   &#125;,
+    &#x2F;&#x2F;图片上传成功，应用于on-success属性
+   handleAvatarSuccess(res, file) &#123;
+     &#x2F;&#x2F;res：上传成功之后返回前端数据
+     &#x2F;&#x2F;file:上传成功之后服务器返回前端数据
+     &#x2F;&#x2F;收集品牌图片数据，因为将来需要带给服务器，即添加|修改操作需要将表单数据作为参数
+     this.tmForm.logoUrl &#x3D; res.data;
+   &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="照片墙"><a href="#照片墙" class="headerlink" title="照片墙"></a>照片墙</h4><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-form-item label&#x3D;&quot;SPU图片&quot;&gt;
+        &lt;!-- 上传图片：action图片上传的地址  list-type: 文件列表的类型 
+         file-list：照片墙需要展示的数据【数组：数组里面的元素务必要有name、url属性】
+         on-preview：图片预览功能
+         on-remove:删除图片的时候会触发
+        --&gt;
+        &lt;el-upload
+          action&#x3D;&quot;&#x2F;dev-api&#x2F;admin&#x2F;product&#x2F;fileUpload&quot;
+          list-type&#x3D;&quot;picture-card&quot;
+          :on-preview&#x3D;&quot;handlePictureCardPreview&quot;
+          :on-remove&#x3D;&quot;handleRemove&quot;
+          :on-success&#x3D;&quot;handlerSuccess&quot;
+          :file-list&#x3D;&quot;spuImageList&quot;
+        &gt;
+          &lt;i class&#x3D;&quot;el-icon-plus&quot;&gt;&lt;&#x2F;i&gt;
+        &lt;&#x2F;el-upload&gt;
+        &lt;el-dialog :visible.sync&#x3D;&quot;dialogVisible&quot;&gt;
+          &lt;img width&#x3D;&quot;100%&quot; :src&#x3D;&quot;dialogImageUrl&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;
+        &lt;&#x2F;el-dialog&gt;
+      &lt;&#x2F;el-form-item&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
+<span class="token comment">//收集SPU图片的信息</span>
+        <span class="token literal-property property">spuImageList</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token comment">// &#123;</span>
+          <span class="token comment">//   id: 0,</span>
+          <span class="token comment">//   imgName: "string",</span>
+          <span class="token comment">//   imgUrl: "string",</span>
+          <span class="token comment">//   spuId: 0,</span>
+          <span class="token comment">// &#125;,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token comment">//照片墙图片预览的回调</span>
+    <span class="token function">handlePictureCardPreview</span><span class="token punctuation">(</span><span class="token parameter">file</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">//将图片地址赋值给这个属性</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>dialogImageUrl <span class="token operator">=</span> file<span class="token punctuation">.</span>url<span class="token punctuation">;</span>
+      <span class="token comment">//对话框显示</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>dialogVisible <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    
+    <span class="token comment">//照片墙删除某一个图片的时候会触发</span>
+    <span class="token function">handleRemove</span><span class="token punctuation">(</span><span class="token parameter">file<span class="token punctuation">,</span> fileList</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">//file参数:代表的是删除的那个张图片</span>
+      <span class="token comment">//fileList:照片墙删除某一张图片以后，剩余的其他的图片</span>
+      <span class="token comment">// console.log(file, fileList,22222);</span>
+      <span class="token comment">//收集照片墙图片的数据</span>
+      <span class="token comment">//对于已有的图片【照片墙中显示的图片：有name、url字段的】，因为照片墙显示数据务必要有这两个属性</span>
+      <span class="token comment">//对于服务器而言，不需要name、url字段，将来对于有的图片的数据在提交给服务器的时候，需要处理的</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>spuImageList <span class="token operator">=</span> fileList<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    
+     <span class="token comment">//照片墙图片上传成功的回调</span>
+    <span class="token function">handlerSuccess</span><span class="token punctuation">(</span><span class="token parameter">response<span class="token punctuation">,</span> file<span class="token punctuation">,</span> fileList</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">//收集图片的信息</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>spuImageList <span class="token operator">=</span> fileList<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="多级数据的修改"><a href="#多级数据的修改" class="headerlink" title="多级数据的修改"></a>多级数据的修改</h3><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-table-column prop&#x3D;&quot;prop&quot; label&#x3D;&quot;操作&quot; width&#x3D;&quot;150&quot;&gt;
+            &lt;template slot-scope&#x3D;&quot;&#123; row, $index &#125;&quot;&gt;
+              &lt;el-button
+                type&#x3D;&quot;warning&quot;
+                icon&#x3D;&quot;el-icon-edit&quot;
+                size&#x3D;&quot;mini&quot;
+                @click&#x3D;&quot;updateAttr(row)&quot;
+              &gt;&lt;&#x2F;el-button&gt;
+              &lt;el-button
+                type&#x3D;&quot;danger&quot;
+                icon&#x3D;&quot;el-icon-delete&quot;
+                size&#x3D;&quot;mini&quot;
+              &gt;&lt;&#x2F;el-button&gt;
+            &lt;&#x2F;template&gt;
+          &lt;&#x2F;el-table-column&gt;
+
+...
+ &lt;span
+                v-else
+                @click&#x3D;&quot;toEdit(row, $index)&quot;
+                style&#x3D;&quot;display: block&quot;
+                &gt;&#123;&#123; row.valueName &#125;&#125;&lt;&#x2F;span
+              &gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;修改某一个属性
+    updateAttr(row) &#123;
+      &#x2F;&#x2F;isShowTable变为false
+      this.isShowTable &#x3D; false;
+      &#x2F;&#x2F;将选中的属性赋值给attrInfo
+      &#x2F;&#x2F;由于数据结构当中存在对象里面套数组，数组里面有套对象，因此需要使用深拷贝解决这类问题
+      &#x2F;&#x2F;深拷贝，浅拷贝在面试的时候出现频率很高，切记达到手写深拷贝与浅拷贝
+      this.attrInfo &#x3D; cloneDeep(row);
+      &#x2F;&#x2F;在修改某一个属性的时候，将相应的属性值元素添加上flag这个标记
+      this.attrInfo.attrValueList.forEach((item) &#x3D;&gt; &#123;
+        &#x2F;&#x2F;这样书写也可以给属性值添加flag自动，但是会发现视图不会跟着变化（因为flag不是响应式数据）
+        &#x2F;&#x2F;因为Vue无法探测普通的新增 property,这样书写的属性并非响应式属性（数据变化视图跟这边）
+        &#x2F;&#x2F;第一个参数:对象  第二个参数:添加新的响应式属性  第三参数：新的属性的属性值
+        this.$set(item, &quot;flag&quot;, false);
+      &#125;);
+    &#125;,
+      ...  
+   &#x2F;&#x2F;点击span的回调，变为编辑模式
+    toEdit(row, index) &#123;
+      row.flag &#x3D; true;
+      &#x2F;&#x2F;获取input节点，实现自动聚焦
+      &#x2F;&#x2F;需要注意：点击span的时候，切换为input变为编辑模式，但是需要注意，对于浏览器而言，页面重绘与重拍耗时间的
+      &#x2F;&#x2F;点击span的时候，重绘重排一个input它是需要耗费事件，因此我们不可能一点击span立马获取到input
+      &#x2F;&#x2F;$nextTick,当节点渲染完毕了，会执行一次
+      this.$nextTick(() &#x3D;&gt; &#123;
+        &#x2F;&#x2F;获取相应的input表单元素实现聚焦
+        this.$refs[index].focus();
+      &#125;);
+    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;保存按钮：进行添加属性或者修改属性的操作
+    async addOrUpdateAttr()&#123;
+      &#x2F;&#x2F;整理参数:1,如果用户添加很多属性值，且属性值为空的不应该提交给服务器
+      &#x2F;&#x2F;提交给服务器数据当中不应该出现flag字段
+      this.attrInfo.attrValueList &#x3D; this.attrInfo.attrValueList.filter(item&#x3D;&gt;&#123;
+          &#x2F;&#x2F;过滤掉属性值不是空的
+          if(item.valueName!&#x3D;&#39;&#39;)&#123;
+            &#x2F;&#x2F;删除掉flag属性
+            delete item.flag;
+            return true;
+          &#125;
+      &#125;)
+      try &#123;
+         &#x2F;&#x2F;发请求
+        await this.$API.attr.reqAddOrUpdateAttr(this.attrInfo);
+        &#x2F;&#x2F;展示平台属性的信号量进行切换
+        this.isShowTable &#x3D; true;
+        &#x2F;&#x2F;提示消失
+        this.$message(&#123;type:&#39;success&#39;,message:&#39;保存成功&#39;&#125;);
+        &#x2F;&#x2F;保存成功以后需要再次获取平台属性进行展示
+        this.getAttrList();
+      &#125; catch (error) &#123;
+        &#x2F;&#x2F; this.$message(&#39;保存失败&#39;)
+      &#125;
+
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意细节：</p>
+<ol>
+<li>对象与数组嵌套时，考虑深拷贝。</li>
+<li>添加响应式数据需要用到<code>this.$set()</code></li>
+<li>元素切换时，重绘重排需要时间，所以需要考虑节点渲染完毕。</li>
+</ol>
+<h2 id="删除表格数据"><a href="#删除表格数据" class="headerlink" title="删除表格数据"></a>删除表格数据</h2><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;删除品牌的操作
+    deleteTradeMark(row) &#123;
+      &#x2F;&#x2F;弹框
+      this.$confirm(&#96;你确定删除$&#123;row.tmName&#125;?&#96;, &quot;提示&quot;, &#123;
+        confirmButtonText: &quot;确定&quot;,
+        cancelButtonText: &quot;取消&quot;,
+        type: &quot;warning&quot;,
+      &#125;)
+        .then(async () &#x3D;&gt; &#123;
+          &#x2F;&#x2F;当用户点击确定按钮的时候会出发
+          &#x2F;&#x2F;向服务器发请求，此处没有使用vuex发起请求，注意是异步函数
+          let result &#x3D; await this.$API.trademark.reqDeleteTradeMark(row.id);
+          &#x2F;&#x2F;如果删除成功
+          if (result.code &#x3D;&#x3D; 200) &#123;
+            this.$message(&#123;
+              type: &quot;success&quot;,
+              message: &quot;删除成功!&quot;,
+            &#125;);
+            &#x2F;&#x2F;再次获取品牌列表数据
+            this.getPageList(this.list.length&gt;1?this.page:this.page-1);
+          &#125;
+        &#125;)
+        .catch(() &#x3D;&gt; &#123;
+          &#x2F;&#x2F;当用户点击取消按钮的时候会触发
+          this.$message(&#123;
+            type: &quot;info&quot;,
+            message: &quot;已取消删除&quot;,
+          &#125;);
+        &#125;);
+    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意细节：<code>this.getPageList(this.list.length&gt;1?this.page:this.page-1)</code>;这是因为<code>getPageList</code>函数参数默认为<code>page=1</code>，考虑以下情况：</p>
+<ul>
+<li>删除了当前页面非最后一条数据，此时<code>page</code>为当前页面的<code>page</code>，请求数据后仍然显示当前页面的所有数据。</li>
+<li>删除了当前页面最后一条数据，此时<code>page</code>为当前页面的<code>page-1</code>，请求数据后显示上一页的数据，即回到上一页。</li>
+</ul>
+<h2 id="分页器"><a href="#分页器" class="headerlink" title="分页器"></a>分页器</h2><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!-- 
+     分页器 
+     当前第几页、数据总条数、每一页展示条数、连续页码数
+     @size-change&#x3D;&quot;handleSizeChange&quot;
+     @current-change&#x3D;&quot;handleCurrentChange&quot;
+
+     current-page:代表的是当前第几页
+     total：代表分页器一共需要展示数据条数
+     page-size：代表的是每一页需要展示多少条数据
+     page-sizes：代表可以设置每一页展示多少条数据
+     layout：可以实现分页器布局设置分页组件的布局，包括上一页按钮、页码、下一页按钮、跳转输入框、每页显示数量选择框和总记录数的显示。 
+     pager-count:按钮的数量  如果 9  连续页码是7
+	
+   --&gt;
+   &lt;el-pagination
+     style&#x3D;&quot;margin-top: 20px; text-align: center&quot;
+     :current-page&#x3D;&quot;page&quot;
+     :total&#x3D;&quot;total&quot;
+     :page-size&#x3D;&quot;limit&quot;
+     :pager-count&#x3D;&quot;7&quot;
+     :page-sizes&#x3D;&quot;[3, 5, 10]&quot;
+     @current-change&#x3D;&quot;getPageList&quot;
+     @size-change&#x3D;&quot;handleSizeChange&quot;
+     layout&#x3D;&quot;prev, pager, next, jumper,-&gt;,sizes,total&quot;
+   &gt;
+   &lt;&#x2F;el-pagination&gt;
+   
+   ...
+   &#x2F;&#x2F;获取品牌列表的数据
+    async getPageList(pager &#x3D; 1) &#123;
+    &#x2F;&#x2F;pager默认值为1，每次点击页码都会根据页码而变化
+     this.page &#x3D; pager;
+     &#x2F;&#x2F;解构出参数
+     const &#123; page, limit &#125; &#x3D; this;
+     &#x2F;&#x2F;获取品牌列表的接口
+     &#x2F;&#x2F;当你向服务器发请求的时候，这个函数需要带参数，因此在data当中初始化两个字段，代表给服务器传递参数
+     let result &#x3D; await this.$API.trademark.reqTradeMarkList(page, limit);
+     if (result.code &#x3D;&#x3D; 200) &#123;
+       &#x2F;&#x2F;分别是展示数据总条数与列表展示的数据
+       this.total &#x3D; result.data.total;
+       this.list &#x3D; result.data.records;
+     &#125;
+   &#125;,
+   
+   &#x2F;&#x2F;当分页器某一页需要展示数据条数发生变化的时候会触发
+   handleSizeChange(limit) &#123;
+     &#x2F;&#x2F;整理参数
+     this.limit &#x3D; limit;
+     this.getPageList();
+   &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="三级分类联动"><a href="#三级分类联动" class="headerlink" title="三级分类联动"></a>三级分类联动</h2><p>注册全局组件：</p>
+<p><code>src\components\CategorySelect\index.vue</code></p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;!-- inline:代表的是行内表单，代表一行可以放置多个表单元素 --&gt;
+    &lt;el-form :inline&#x3D;&quot;true&quot; class&#x3D;&quot;demo-form-inline&quot; :model&#x3D;&quot;cForm&quot;&gt;
+      &lt;el-form-item label&#x3D;&quot;一级分类&quot;&gt;
+        &lt;el-select
+          placeholder&#x3D;&quot;请选择&quot;
+          v-model&#x3D;&quot;cForm.category1Id&quot;
+          @change&#x3D;&quot;handler1&quot;
+          :disabled&#x3D;&quot;show&quot;
+        &gt;
+          &lt;el-option
+            :label&#x3D;&quot;c1.name&quot;
+            :value&#x3D;&quot;c1.id&quot;
+            v-for&#x3D;&quot;(c1, index) in list1&quot;
+            :key&#x3D;&quot;c1.id&quot;
+          &gt;&lt;&#x2F;el-option&gt;
+        &lt;&#x2F;el-select&gt;
+      &lt;&#x2F;el-form-item&gt;
+      &lt;el-form-item label&#x3D;&quot;二级分类&quot;&gt;
+        &lt;el-select
+          placeholder&#x3D;&quot;请选择&quot;
+          v-model&#x3D;&quot;cForm.category2Id&quot;
+          @change&#x3D;&quot;handler2&quot;
+          :disabled&#x3D;&quot;show&quot;
+        &gt;
+          &lt;el-option
+            :label&#x3D;&quot;c2.name&quot;
+            :value&#x3D;&quot;c2.id&quot;
+            v-for&#x3D;&quot;(c2, index) in list2&quot;
+            :key&#x3D;&quot;c2.id&quot;
+          &gt;&lt;&#x2F;el-option&gt;
+        &lt;&#x2F;el-select&gt;
+      &lt;&#x2F;el-form-item&gt;
+      &lt;el-form-item label&#x3D;&quot;三级分类&quot;&gt;
+        &lt;el-select
+          placeholder&#x3D;&quot;请选择&quot;
+          v-model&#x3D;&quot;cForm.category3Id&quot;
+          @change&#x3D;&quot;handler3&quot;
+          :disabled&#x3D;&quot;show&quot;
+        &gt;
+          &lt;el-option
+            :label&#x3D;&quot;c3.name&quot;
+            :value&#x3D;&quot;c3.id&quot;
+            v-for&#x3D;&quot;(c3, index) in list3&quot;
+            :key&#x3D;&quot;c3.id&quot;
+          &gt;&lt;&#x2F;el-option&gt;
+        &lt;&#x2F;el-select&gt;
+      &lt;&#x2F;el-form-item&gt;
+    &lt;&#x2F;el-form&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><p>获取一级分类数据：不需要携带参数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;获取一级分类数据的方法
+    async getCategory1List() &#123;
+      &#x2F;&#x2F;获取一级分类的请求：不需要携带参数
+      let result &#x3D; await this.$API.attr.reqCategory1List();
+      if (result.code &#x3D;&#x3D; 200) &#123;
+        this.list1 &#x3D; result.data;
+      &#125;
+    &#125;,     <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>获取一级分类数据后，再根据一级分类的id获取二级分类。</p>
+<blockquote>
+<p>注意在发起请求前要<strong>清空数据</strong>，否则二级分类和一级分类的对应关系会发生混乱。</p>
+</blockquote>
+<p>并触发一个自定义事件，传递参数为分类id以及分类的级别。同理三级分类的获取也是如此。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;一级分类的select事件回调（当一级分类的option发生变化的时候获取相应二级分类的数据）
+    async handler1() &#123;
+      &#x2F;&#x2F;清除数据
+      this.list2 &#x3D; [];
+      this.list3 &#x3D; [];
+      this.cForm.category2Id &#x3D; &quot;&quot;;
+      this.cForm.category3Id &#x3D; &quot;&quot;;
+      &#x2F;&#x2F;解构出一级分类的id
+      const &#123; category1Id &#125; &#x3D; this.cForm;
+      this.$emit(&quot;getCategoryId&quot;, &#123; categoryId: category1Id, level: 1 &#125;);
+      &#x2F;&#x2F;通过一级分类的id，获取二级分类的数据
+      let result &#x3D; await this.$API.attr.reqCategory2List(category1Id);
+      if (result.code &#x3D;&#x3D; 200) &#123;
+        this.list2 &#x3D; result.data;
+      &#125;
+    &#125;,
+      &#x2F;&#x2F;二级分类的select事件回调（当二级分类的option发生变化的时候获取相应三级分类的数据）
+    async handler2() &#123;
+      &#x2F;&#x2F;清除数据
+      this.list3 &#x3D; [];
+      this.cForm.category3Id &#x3D; &quot;&quot;;
+      &#x2F;&#x2F;结构出数据
+      const &#123; category2Id &#125; &#x3D; this.cForm;
+      this.$emit(&quot;getCategoryId&quot;, &#123; categoryId: category2Id, level: 2 &#125;);
+      let result &#x3D; await this.$API.attr.reqCategory3List(category2Id);
+      if (result.code &#x3D;&#x3D; 200) &#123;
+        this.list3 &#x3D; result.data;
+      &#125;
+    &#125;,
+      &#x2F;&#x2F;三级分类的事件回调
+    handler3() &#123;
+      &#x2F;&#x2F;获取三级分类的id
+      const &#123; category3Id &#125; &#x3D; this.cForm;
+      this.$emit(&quot;getCategoryId&quot;, &#123; categoryId: category3Id, level: 3 &#125;);
+    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<p><code>src\views\product\Attr\index.vue</code></p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-card style&#x3D;&quot;margin: 20px 0px&quot;&gt;
+     &lt;CategorySelect @getCategoryId&#x3D;&quot;getCategoryId&quot; :show&#x3D;&quot;!isShowTable&quot;&gt;&lt;&#x2F;CategorySelect&gt;
+   &lt;&#x2F;el-card&gt;
+   ...
+    &#x2F;&#x2F;自定义事件的回调
+   getCategoryId(&#123; categoryId, level &#125;) &#123;
+     &#x2F;&#x2F;区分三级分类相应的id，以及父组件进行存储
+     if (level &#x3D;&#x3D; 1) &#123;
+       this.category1Id &#x3D; categoryId;
+       this.category2Id &#x3D; &quot;&quot;;
+       this.category3Id &#x3D; &quot;&quot;;
+     &#125; else if (level &#x3D;&#x3D; 2) &#123;
+       this.category2Id &#x3D; categoryId;
+       this.category3Id &#x3D; &quot;&quot;;
+     &#125; else &#123;
+       &#x2F;&#x2F;代表三级分类的id有了
+       this.category3Id &#x3D; categoryId;
+       &#x2F;&#x2F;发请求获取平台的属性数据
+       this.getAttrList();
+     &#125;
+   &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//获取平台属性的数据</span>
+    <span class="token comment">//当用户确定三级分类的数据时候，可以向服务器发请求获取平台属性进行展示</span>
+    <span class="token keyword">async</span> <span class="token function">getAttrList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">//获取分类的ID</span>
+      <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> category1Id<span class="token punctuation">,</span> category2Id<span class="token punctuation">,</span> category3Id <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+      <span class="token comment">//获取属性列表的数据</span>
+      <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$<span class="token constant">API</span><span class="token punctuation">.</span>attr<span class="token punctuation">.</span><span class="token function">reqAttrList</span><span class="token punctuation">(</span>
+        category1Id<span class="token punctuation">,</span>
+        category2Id<span class="token punctuation">,</span>
+        category3Id
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>attrList <span class="token operator">=</span> result<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="表格展示"><a href="#表格展示" class="headerlink" title="表格展示"></a>表格展示</h3><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;div v-show&#x3D;&quot;isShowTable&quot;&gt;
+       &lt;el-button
+         type&#x3D;&quot;primary&quot;
+         icon&#x3D;&quot;el-icon-plus&quot;
+         :disabled&#x3D;&quot;!category3Id&quot;
+         @click&#x3D;&quot;addAttr&quot;
+         &gt;添加属性&lt;&#x2F;el-button
+       &gt;
+       &lt;!-- 表格:展示平台属性 --&gt;
+       &lt;el-table style&#x3D;&quot;width: 100%&quot; border :data&#x3D;&quot;attrList&quot;&gt;
+         &lt;el-table-column type&#x3D;&quot;index&quot; label&#x3D;&quot;序号&quot; width&#x3D;&quot;80&quot; align&#x3D;&quot;center&quot;&gt;
+         &lt;&#x2F;el-table-column&gt;
+         &lt;el-table-column prop&#x3D;&quot;attrName&quot; label&#x3D;&quot;属性名称&quot; width&#x3D;&quot;150&quot;&gt;
+         &lt;&#x2F;el-table-column&gt;
+         &lt;el-table-column prop&#x3D;&quot;prop&quot; label&#x3D;&quot;属性值列表&quot; width&#x3D;&quot;width&quot;&gt;
+           &lt;template slot-scope&#x3D;&quot;&#123; row, $index &#125;&quot;&gt;
+             &lt;el-tag
+               type&#x3D;&quot;success&quot;
+               v-for&#x3D;&quot;(attrValue, index) in row.attrValueList&quot;
+               :key&#x3D;&quot;attrValue.id&quot;
+               style&#x3D;&quot;margin: 0px 20px&quot;
+               &gt;&#123;&#123; attrValue.valueName &#125;&#125;&lt;&#x2F;el-tag
+             &gt;
+           &lt;&#x2F;template&gt;
+         &lt;&#x2F;el-table-column&gt;
+         &lt;el-table-column prop&#x3D;&quot;prop&quot; label&#x3D;&quot;操作&quot; width&#x3D;&quot;150&quot;&gt;
+           &lt;template slot-scope&#x3D;&quot;&#123; row, $index &#125;&quot;&gt;
+             &lt;el-button
+               type&#x3D;&quot;warning&quot;
+               icon&#x3D;&quot;el-icon-edit&quot;
+               size&#x3D;&quot;mini&quot;
+               @click&#x3D;&quot;updateAttr(row)&quot;
+             &gt;&lt;&#x2F;el-button&gt;
+             &lt;el-button
+               type&#x3D;&quot;danger&quot;
+               icon&#x3D;&quot;el-icon-delete&quot;
+               size&#x3D;&quot;mini&quot;
+             &gt;&lt;&#x2F;el-button&gt;
+           &lt;&#x2F;template&gt;
+         &lt;&#x2F;el-table-column&gt;
+       &lt;&#x2F;el-table&gt;
+     &lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>isShowTable</code>属性控制表格的显示与否，即在添加|修改属性时需要隐藏，此时三种级别的分类也进入不可修改的状态。</li>
+<li>每条属性可能有多条属性值，即在<code>el-tag</code>标签中再次循环。</li>
+</ul>
+<h2 id="上架下架状态切换"><a href="#上架下架状态切换" class="headerlink" title="上架下架状态切换"></a>上架下架状态切换</h2><h2 id="抽屉效果"><a href="#抽屉效果" class="headerlink" title="抽屉效果"></a>抽屉效果</h2>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">QT-7274</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://qt-7274.github.io/2023/08/14/shang-pin-hui-zeng-shan-gai-cha-yu-elementui-de-ji-qiao-ying-yong/">https://qt-7274.github.io/2023/08/14/shang-pin-hui-zeng-shan-gai-cha-yu-elementui-de-ji-qiao-ying-yong/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">QT-7274</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                    <span class="chip bg-color">前端</span>
+                                </a>
+                            
+                                <a href="/tags/Vue/">
+                                    <span class="chip bg-color">Vue</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.gif") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid;">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'tzmyy70PpnbbxclXN4jYmjPA-gzGzoHsz',
+        appKey: 'TCY55mH7vS6x5sVr1bCLm5Gg',
+        serverURLs: '',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        requiredFields: ['nick','mail'],
+        enableQQ: 'true',
+        lang: 'zh-cn',
+        placeholder: '😉畅所欲言！\n📲请文明评论，禁止恶意评论🚫 \n⚠️公开网络空间，请不要发表任何包含个人或其他人的隐私信息🔐',
+        master: ["f18e9f29c8274571d5a0752aca9310ef"],
+        friends:["0aa4f09d8249581a4380a6fc541062e7","6a66a1ba019c52f168d99313efbef39a"]
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/08/14/shang-pin-hui-zeng-shan-gai-cha-yu-elementui-de-ji-qiao-ying-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/2.jpg" class="responsive-img" alt="尚品汇-增删改查与ElementUI的技巧应用">
+                        
+                        <span class="card-title">尚品汇-增删改查与ElementUI的技巧应用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/08/11/shang-pin-hui-xing-neng-you-hua/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/23.jpg" class="responsive-img" alt="尚品汇-性能优化">
+                        
+                        <span class="card-title">尚品汇-性能优化</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">QT-7274</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/QT-7274" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2531376773@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2531376773" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2531376773" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+    <a  class="tooltipped" target="_blank" data-tooltip="微信联系我: Q5268368" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>
