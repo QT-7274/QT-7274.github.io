@@ -535,7 +535,7 @@
 <p>最后,每个头输出的结果经过拼接和线性转换,得到增强的Queries特征表示。</p>
 <p>具体在跟踪框架中,模板特征作为Queries,搜索区域特征作为Keys和Values,多头交叉注意力允许网络学习模板与不同搜索区域位置之间的相关性,有助于生成对目标位置更敏感的特征表示。</p>
 <p>相比普通的点积相关操作,多头交叉注意力建立非线性的模板-搜索区域关联,可以提取更丰富的语义信息,是更强大的特征融合机制。</p>
-<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/medias/images/loading.gif" data-original="/TransT%E5%B7%A5%E4%BD%9C/image-20230814121535535.png" alt="image-20230814121535535"></p>
+<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p><img src="/medias/images/loading.gif" data-original="/2023/08/10/transt-gong-zuo/image-20230814121535535.png" alt="image-20230814121535535"></p>
 <ol>
 <li>输入图片包括模板图像patch和搜索区域图像patch,进入backbone网络提取特征。</li>
 <li>backbone网络分别输出模板图像特征和搜索区域特征。</li>
