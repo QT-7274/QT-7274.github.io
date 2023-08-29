@@ -463,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-22
+                    2023-08-29
                 </div>
                 
 
@@ -503,9 +503,9 @@
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>《Vue.js 设计与实现》：它不同于市场上纯粹的 “源码分析” 类的书籍。而是 <strong>从高层的设计角度，探讨框架需要关注的问题（-尤雨溪序）</strong>，以 <strong>提出问题 - 分析思路 - 解决问题</strong> 的方式，来讲解 <code>vue 3</code> 的核心设计。其内部，没有读一行 <code>vue3</code> 的源码，但却可以让我们对整个 <code>vue 3</code> 的核心，拥有一个非常清楚的认知。</p>
 <h2 id="第一篇：框架设计概览"><a href="#第一篇：框架设计概览" class="headerlink" title="第一篇：框架设计概览"></a>第一篇：框架设计概览</h2><h3 id="第一章：权衡的艺术"><a href="#第一章：权衡的艺术" class="headerlink" title="第一章：权衡的艺术"></a>第一章：权衡的艺术</h3><h4 id="命令式和声明式"><a href="#命令式和声明式" class="headerlink" title="命令式和声明式"></a>命令式和声明式</h4><p>首先第一个方面就是：<strong>命令式和声明式</strong> 的概念。</p>
 <p>所谓 <strong>命令式</strong> 指的就是：<strong>关注过程</strong> 的范式。</p>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%B2%BE%E8%AF%BB%E3%80%8AVue-js%E3%80%8B%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230612192529928.png" alt="image-20230612192529928"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-vue-js-she-ji-yu-shi-xian/image-20230612192529928.png" alt="image-20230612192529928"></p>
 <p>而 <strong>声明式</strong> 指的就是： <strong>关注结果</strong> 的范式。</p>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%B2%BE%E8%AF%BB%E3%80%8AVue-js%E3%80%8B%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230612192601767.png" alt="image-20230612192601767"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-vue-js-she-ji-yu-shi-xian/image-20230612192601767.png" alt="image-20230612192601767"></p>
 <p>那么这里大家来想一下，<code>vue</code> 是声明式的？还是命令式的？</p>
 <p>对于 <code>vue</code> 而言，它的内部实现一定是 <strong>命令式</strong> 的，而我们在使用 <code>vue</code> 的时候，则是通过 <strong>声明式</strong> 来使用的。</p>
 <p>也就是说： <strong>vue 封装了命令式的过程，对外暴露出了声明式的结果</strong></p>
@@ -521,7 +521,7 @@
 <p>而这样的一种权衡，在 <code>template</code> 模板中，更是体现的淋漓尽致。</p>
 <p>在前端领域，想要使用 <code>JavaScript</code> 修改 <code>html</code> 的方式，主要有三种：**<code>原生 JavaScript、innerHTML、虚拟 DOM</code>**</p>
 <p>很多小伙伴都会认为 <code>虚拟 DOM</code> 的性能是最高的，其实不是。</p>
-<img src="/medias/images/loading.gif" data-original="精读《Vue-js》设计与实现/image-20230612192855594.png" alt="image-20230612192855594" style="zoom:50%;" />
+<img src="/medias/images/loading.gif" data-original="image-20230612192855594.png" alt="image-20230612192855594" style="zoom:50%;" />
 
 <p>从这个对比我们可以发现，<code>虚拟 DOM</code> 的性能，并不是最高的。</p>
 <p>但是它的 <strong>心智负担（书写难度）最小</strong>， 从而带来了 <strong>可维护性最高</strong>。所以哪怕它的性能并不是最高的。<code>vue</code> 依然选择了 <code>虚拟 DOM</code> 来进行了渲染层的构建。</p>
@@ -566,7 +566,7 @@
 <p>在 <code>Vue</code> 中 <code>UI</code> 形式主要分为两种：</p>
 <ul>
 <li>声明式的模板描述<br>![image-20230208170232727](..&#x2F;..&#x2F;..&#x2F;书籍&#x2F;一小时读完系列&#x2F;book_read_quickly-master&#x2F;Vue.js 设计与实现&#x2F;Vue.js 设计与实现.assets&#x2F;image-20230208170232727.png)</li>
-<li>命令式的 render 函数<br><img src="/medias/images/loading.gif" data-original="/%E7%B2%BE%E8%AF%BB%E3%80%8AVue-js%E3%80%8B%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230208170236795.png" alt="image-20230208170236795"></li>
+<li>命令式的 render 函数<br><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-vue-js-she-ji-yu-shi-xian/image-20230208170236795.png" alt="image-20230208170236795"></li>
 </ul>
 <p>而针对于 <strong>声明式的模板描述</strong> 而言，本质上就是咱们常用的 <code>tempalte</code> 模板。它会被 <strong>编辑器</strong> 编译，得到 <strong>渲染函数 <code>render</code></strong> 。</p>
 <p>渲染器与渲染函数，并 <strong>不是</strong> 一个东西。</p>
@@ -578,7 +578,7 @@
 <h2 id="第二篇：响应式系统"><a href="#第二篇：响应式系统" class="headerlink" title="第二篇：响应式系统"></a>第二篇：响应式系统</h2><h3 id="第四章：响应系统的作用与实现"><a href="#第四章：响应系统的作用与实现" class="headerlink" title="第四章：响应系统的作用与实现"></a>第四章：响应系统的作用与实现</h3><p>在这一章中，作者从 <strong>响应式数据的概念开始，讲解了响应式系统的实现。</strong> 然后针对于 <strong>计算属性与 <code>watch</code>  的实现原理，进行了分析。</strong> 在分析的过程中，也对其所设计到的 <strong><code>调度系统（scheduler）</code> 和  <code>惰性执行（lazy）</code> 的原理进行了明确。</strong> 最后讲解了在 <strong>竞态问题下，关于过期的副作用的处理逻辑。</strong> </p>
 <h4 id="响应式数据"><a href="#响应式数据" class="headerlink" title="响应式数据"></a>响应式数据</h4><p>那么首先咱们先来看基本概念 <strong>副作用函数 与 响应式数据</strong>。</p>
 <p>所谓 <strong>副作用函数</strong> 指的是 <strong>会产生副作用的函数</strong>，这样的函数非常的多。比如</p>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%B2%BE%E8%AF%BB%E3%80%8AVue-js%E3%80%8B%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230612193528677.png" alt="image-20230612193528677"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-vue-js-she-ji-yu-shi-xian/image-20230612193528677.png" alt="image-20230612193528677"></p>
 <p>在这段代码中， <code>effect</code> 的触发会导致全局变化 <code>val</code> 发生变化，那么 <code>effect</code> 就可以被叫做<strong>副作用函数</strong>。而如果 <code>val</code> 这个数据的变化，导致了视图的变化，那么 <code>val</code> 就被叫做 <strong>响应式数据</strong>。</p>
 <p>那么如果想要实现响应式数据的话，那么它的核心逻辑，必然要依赖两个行为：</p>
 <ul>
@@ -589,11 +589,11 @@
 <p>在 <code>vue 3</code> 中，这样的两个行为通过 <code>Proxy</code> 进行的实现。</p>
 <p>那么具体的实现逻辑是什么呢？咱们来看下面的图示：</p>
 <p>首先是 <code>getter</code> 形式：</p>
-<img src="/medias/images/loading.gif" data-original="精读《Vue-js》设计与实现/image-20230208191120105.png" alt="image-20230208191120105" style="zoom:20%;" />
+<img src="/medias/images/loading.gif" data-original="image-20230208191120105.png" alt="image-20230208191120105" style="zoom:20%;" />
 
 <p>在该函数中，存在一个 <code>effect</code> 方法，方法内部触发了 <code>getter</code> 行为。一旦 <code>getter</code> 行为被触发，则把对应的 <code>effect</code> 方法保存到一个 “桶（数据对象）” 中</p>
 <p>当触发 <code>setter</code> 行为时：</p>
-<img src="/medias/images/loading.gif" data-original="精读《Vue-js》设计与实现/image-20230208191257788.png" alt="image-20230208191257788" style="zoom:23%;" />
+<img src="/medias/images/loading.gif" data-original="image-20230208191257788.png" alt="image-20230208191257788" style="zoom:23%;" />
 
 <p>则会从 “桶” 中取出 <code>effect</code> 方法，并执行。</p>
 <p>那么此时因为 <code>obj.text</code> 的值发生了变化，所以 <code>effect</code> 被执行时 <code>document.body.innerText</code> 会被赋上新的值。从而导致视图发生变化。</p>
@@ -601,7 +601,7 @@
 <p>所谓调度系统，指的就是 <strong>响应性的可调度性</strong>。</p>
 <p>而所谓的可调度，指的就是 <strong>当数据更新的动作，触发副作用函数重新执行时，有能力决定：副作用函数（effect）执行的时机、次数以及方式</strong></p>
 <p>比如，在这段打印中，决定打印的顺序</p>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%B2%BE%E8%AF%BB%E3%80%8AVue-js%E3%80%8B%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230612193750814.png" alt="image-20230612193750814"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-vue-js-she-ji-yu-shi-xian/image-20230612193750814.png" alt="image-20230612193750814"></p>
 <p>而想要实现一个调度系统，则需要依赖 <strong><code>异步：Promise</code> 和 <code>队列：jobQueue</code></strong> 来进行实现。咱们需要 <strong>基于 <code>Set</code> 构建出一个基本的队列数组 <code>jobQueue</code>，利用 <code>Promise</code> 的异步特性，来控制执行的顺序</strong></p>
 <h4 id="计算属性（computed）"><a href="#计算属性（computed）" class="headerlink" title="计算属性（computed）"></a>计算属性（computed）</h4><p>当我们可以控制了执行顺序之后，那么就可以利用这个特性来完成 <strong>计算属性（computed）</strong> 的实现了。</p>
 <p>计算属性本质上是： <strong>一个属性值，当依赖的响应式数据发生变化时，重新计算</strong></p>
@@ -618,7 +618,7 @@
 <h4 id="过期的副作用"><a href="#过期的副作用" class="headerlink" title="过期的副作用"></a>过期的副作用</h4><p><code>watch</code> 监听器的实现非常广泛，有时候我们甚至可以在 <strong><code>watch</code> 中完成一些异步操作。</strong></p>
 <p>但是大量的异步操作，极有可能会导致 <strong>竞态问题</strong>。</p>
 <p>所谓的竞态问题，指的是 <strong>在描述一个系统或者进程的输出，依赖于不受控制的事件出现顺序或者出现时机</strong>。比如咱们来看这段代码</p>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%B2%BE%E8%AF%BB%E3%80%8AVue-js%E3%80%8B%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230612193927515.png" alt="image-20230612193927515"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-vue-js-she-ji-yu-shi-xian/image-20230612193927515.png" alt="image-20230612193927515"></p>
 <blockquote>
 <p>这段代码完成的是一个异步操作。</p>
 <p>如果 <code>obj</code> 连续被修改了两次，那么就会发起两个请求。我们最终的期望应该是 <code>data</code> 被赋值为 请求B 的结果。</p>
@@ -687,7 +687,7 @@
 <li><code> . 属性赋值</code> ： <code>el.属性名 = 属性值</code> 或者 <code>el[属性名] = 属性值</code> 都属于 <code>.属性赋值</code></li>
 </ol>
 <p>我们来看这段代码：</p>
-<img src="/medias/images/loading.gif" data-original="精读《Vue-js设计与实现》/image-20230209093545078.png" alt="image-20230209093545078" style="zoom:50%;" />
+<img src="/medias/images/loading.gif" data-original="image-20230209093545078.png" alt="image-20230209093545078" style="zoom:50%;" />
 
 <blockquote>
 <p>在这段代码中，我们为 <code>textarea</code> 利用 <code>DOM Properties</code> 的方式设置了三个不同的属性：</p>
@@ -722,13 +722,13 @@
 <p>而，针对于书中的这三章来说，本质上是按照 <strong>简单 diff 算法、双端 diff 算法、快速 diff 算法</strong> 的顺序把整个 <code>diff</code> 的前世今生基本上都说了一遍。里面涉及到了非常多的代码。</p>
 <h2 id="第四篇：组件化"><a href="#第四篇：组件化" class="headerlink" title="第四篇：组件化"></a>第四篇：组件化</h2><h3 id="第十二章：组件的实现原理"><a href="#第十二章：组件的实现原理" class="headerlink" title="第十二章：组件的实现原理"></a>第十二章：组件的实现原理</h3><p>想要了解 <code>vue</code> 中组件的实现，那么首先我们需要知道什么是组件。</p>
 <p>组件本质上就是一个 <code>JavaScript</code> 对象，比如，以下对象就是一个基本的组件</p>
-<img src="/medias/images/loading.gif" data-original="精读《Vue-js设计与实现》/image-20230209105953064.png" alt="image-20230209105953064" style="zoom:33%;" />
+<img src="/medias/images/loading.gif" data-original="image-20230209105953064.png" alt="image-20230209105953064" style="zoom:33%;" />
 
 <p>而对于组件而言，同样需要使用 <code>vnode</code> 来进行表示，当 <code>vnode</code> 的 <code>type</code> 属性是一个 <strong>自定义对象</strong> 时，那么这个 <code>vnode</code> 就表示组件的 <code>vnode</code></p>
-<img src="/medias/images/loading.gif" data-original="精读《Vue-js设计与实现》/image-20230209110548502.png" alt="image-20230209110548502" style="zoom:33%;" />
+<img src="/medias/images/loading.gif" data-original="image-20230209110548502.png" alt="image-20230209110548502" style="zoom:33%;" />
 
 <p>而组件的渲染，本质上是 <strong>组件包含的 <code>DOM</code> 的渲染。</strong> 对于组件而言，必然会包含一个 <code>render</code> 渲染函数。如果没有 <code>render</code> 函数，那么 <code>vue</code> 会把 <code>template</code> 模板编译为 <code>render</code> 函数。而组件渲染的内容，其实就是 <code>render</code> 函数返回的 <code>vnode</code>。具体的渲染逻辑，全部都通过渲染器执行。</p>
-<img src="/medias/images/loading.gif" data-original="精读《Vue-js设计与实现》/image-20230613164740214.png" alt="image-20230613164740214" style="zoom:50%;" />
+<img src="/medias/images/loading.gif" data-original="image-20230613164740214.png" alt="image-20230613164740214" style="zoom:50%;" />
 
 <p><code>vue 3</code> 之后提出了 <code>composition API</code>，<code>composition API</code> 包含一个入口函数，也就是 <code>setup</code> 函数。 <code>setup</code> 函数包含两种类型的返回值：</p>
 <ol>
@@ -783,9 +783,9 @@
 </ul>
 </li>
 </ul>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%B2%BE%E8%AF%BB%E3%80%8AVue-js%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/image-20230209113241592.png" alt="image-20230209113241592"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-vue-js-she-ji-yu-shi-xian/image-20230209113241592.png" alt="image-20230209113241592"></p>
 <p>而对于 <code>vue</code> 的编译器而言，因为它是一个特定领域下的编译器，所以流程会进行一些优化，一共分为三大步</p>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%B2%BE%E8%AF%BB%E3%80%8AVue-js%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B/image-20230209113421705.png" alt="image-20230209113421705"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-vue-js-she-ji-yu-shi-xian/image-20230209113421705.png" alt="image-20230209113421705"></p>
 <ol>
 <li><code>parse</code>：通过 <code>parse</code> 函数，把模板编译成 <code>AST</code> 对象</li>
 <li><code>transform</code>：通过 <code>transform</code> 函数，把 <code>AST</code> 转化为 <code>JavaScript AST</code></li>
@@ -829,7 +829,7 @@
 </ul>
 <p>两种方式各有利弊，所以同构渲染，指的就是 <strong>把 <code>CSR</code> 和 <code>SSR</code> 进行合并</strong>。既可以单独 <code>CSR</code> ，也可以单独 <code>SSR</code>，同时还可以 **结合两者，在首次渲染时，通过 <code>SSR</code>，在非首次渲染时，通过 <code>CSR</code>**。</p>
 <p>以下是三者的对比图</p>
-<img src="/medias/images/loading.gif" data-original="精读《Vue-js设计与实现》/image-20230209121227934.png" alt="image-20230209121227934" style="zoom:50%;" />
+<img src="/medias/images/loading.gif" data-original="image-20230209121227934.png" alt="image-20230209121227934" style="zoom:50%;" />
 
 <p>而针对 <code>vue</code> 的服务端渲染来说，它是 <strong>将虚拟 <code>DOM</code>  渲染为 <code>HTML</code> 字符串</strong>，本质上是 <strong>解析的 <code>vnode</code> 对象，然后进行的 <code>html</code> 的字符串拼接</strong></p>
 <p>最后又讲解了客户端激活的原理，大致分为两步：</p>
