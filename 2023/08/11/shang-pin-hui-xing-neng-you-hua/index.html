@@ -468,21 +468,21 @@ v-if是一种惰性渲染的方式，它会根据条件决定是否在DOM中创�
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-03
+                    2023-09-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    5 分
                 </div>
                 
 
@@ -512,8 +512,45 @@ v-if是一种惰性渲染的方式，它会根据条件决定是否在DOM中创�
 <blockquote>
 <p>注意：<code>v-show</code>只是通过CSS控制元素的显示与隐藏，并<strong>不会触发元素内部的生命周期钩子函数</strong>，而<code>v-if</code>会在条件切换时<strong>触发元素的创建和销毁生命周期钩子函数</strong>。</p>
 </blockquote>
-<h2 id="防抖（Debounce）"><a href="#防抖（Debounce）" class="headerlink" title="防抖（Debounce）"></a>防抖（Debounce）</h2><p>防抖是指在事件触发后，等待一段时间后再执行回调函数。如果在等待时间内再次触发了该事件，则重新计时。防抖的主要目的是<strong>减少事件触发的频率，避免在短时间内多次触发事件导致不必要的计算或请求</strong>。常见的应用场景包括搜索框输入联想、窗口调整时的重新计算等。 </p>
-<h2 id="节流（Throttle）"><a href="#节流（Throttle）" class="headerlink" title="节流（Throttle）"></a>节流（Throttle）</h2><p>节流是指在一定时间间隔内只执行<strong>一次</strong>回调函数。当事件触发后，如果在指定的时间间隔内再次触发该事件，则忽略该事件，直到时间间隔过去后才能再次触发。节流的主要目的是<strong>控制事件触发的频率，避免在短时间内连续触发事件导致性能问题</strong>。常见的应用场景包括滚动加载、按钮点击防抖等。</p>
+<h2 id="防抖（Debounce）"><a href="#防抖（Debounce）" class="headerlink" title="防抖（Debounce）"></a>防抖（Debounce）</h2><p>防抖是指在事件触发后，等待一段时间后再执行回调函数。如果在等待时间内再次触发了该事件，则重新计时。防抖的主要目的是<strong>减少事件触发的频率，避免在短时间内多次触发事件导致不必要的计算或请求</strong>。</p>
+<p>应用场景：</p>
+<ol>
+<li>常见的应用场景包括搜索框输入联想。</li>
+<li>窗口调整时的重新计算等。</li>
+</ol>
+<p>简而言之：<strong>在固定的时间内，将多次操作变成一次操作</strong>，例如将多个请求合并为一次请求。</p>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function antiShake(fn, wait)&#123;
+    let timeout &#x3D; null;
+    return args &#x3D;&gt; &#123;
+        if(timeout)  &#123;clearTimeout(timeout)&#125;
+        timeout &#x3D; setTimeout(fn,wait)
+    &#125;
+&#125;
+function demo()&#123;
+    console.log(&#39;发起请求&#39;)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="节流（Throttle）"><a href="#节流（Throttle）" class="headerlink" title="节流（Throttle）"></a>节流（Throttle）</h2><p>节流是指在一定时间间隔内只执行<strong>一次</strong>回调函数。当事件触发后，如果在指定的时间间隔内再次触发该事件，则忽略该事件，直到时间间隔过去后才能再次触发。节流的主要目的是<strong>控制事件触发的频率，避免在短时间内连续触发事件导致性能问题</strong>。</p>
+<p>简而言之：<strong>保证一段时间内只调用一次函数。</strong></p>
+<p>应用场景：</p>
+<ol>
+<li>提交表单。</li>
+<li>高频监听事件。</li>
+</ol>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function throttle(event, time)&#123;
+    let timer &#x3D; null;
+    return function()&#123;
+        if(!timer)&#123;
+            timer &#x3D; setTimeout(()&#x3D;&gt;&#123;
+                event()
+                timer &#x3D; null
+            &#125;, time)
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
 <li>如果需要在事件触发后立即执行回调函数，并且不希望在短时间内连续触发事件，则可以使用防抖。</li>
 <li>如果需要在一定时间间隔内稳定地执行回调函数，并且不希望事件频繁触发，则可以使用节流。</li>

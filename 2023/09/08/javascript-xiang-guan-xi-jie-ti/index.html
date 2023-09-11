@@ -5,8 +5,17 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Vue3新特性, QT-7274">
-    <meta name="description" content="2020年9月18日，Vue.js发布3.0版本">
+    <meta name="keywords" content="JavaScript相关细节题, QT-7274">
+    <meta name="description" content="null和undefined
+类型判断不同
+console.log(typeof null)
+console.log(typeof undefined)
+
+何时会得到undefined？
+
+变量声明了但没有赋值
+let o;
+console">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +29,7 @@
 
     
 
-    <title>Vue3新特性 | QT-7274</title>
+    <title>JavaScript相关细节题 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -306,12 +315,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/vue-composition-api.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Vue3新特性</h1>
+                    <h1 class="description center-align post-title">JavaScript相关细节题</h1>
                 </div>
             </div>
         </div>
@@ -431,23 +440,10 @@
                                 <span class="chip bg-color">前端</span>
                             </a>
                         
-                            <a href="/tags/Vue/">
-                                <span class="chip bg-color">Vue</span>
-                            </a>
-                        
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                前端开发
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -456,28 +452,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-08-30
+                    2023-09-08
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-11
+                    2023-09-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.2k
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    17 分
+                    5 分
                 </div>
                 
 
@@ -500,493 +496,145 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a><font color='#3498db'>更新记录</font></h3><ul>
-<li>2023-09-11：vue3.0 特性的更新，分别在[Vue3.0中的响应式原理]和[其他改变]章节中。</li>
-</ul>
-<h1 id="常用Composition-API"><a href="#常用Composition-API" class="headerlink" title="常用Composition API"></a>常用Composition API</h1><p>官方文档: <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/composition-api-introduction.html">https://v3.cn.vuejs.org/guide/composition-api-introduction.html</a></p>
-<h2 id="setup"><a href="#setup" class="headerlink" title="setup"></a>setup</h2><ol>
-<li>理解：Vue3.0中一个新的配置项，值为一个函数。</li>
-<li>setup是所有<strong>Composition API（组合API）</strong>“表演的舞台”。</li>
-<li>组件中所用到的：数据、方法等等，均要配置在setup中。</li>
-<li>setup函数的两种返回值：<ol>
-<li>若返回一个对象，则对象中的属性、方法, 在模板中均可以直接使用。（重点关注！）</li>
-<li>若返回一个渲染函数：则可以自定义渲染内容。（了解）</li>
-</ol>
+                <h2 id="null和undefined"><a href="#null和undefined" class="headerlink" title="null和undefined"></a><code>null</code>和<code>undefined</code></h2><ul>
+<li><p>类型判断不同</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li>注意点：<ol>
-<li>尽量不要与Vue2.x配置混用<ul>
-<li>Vue2.x配置（data、methods、computed…）中<strong>可以访问到</strong>setup中的属性、方法。</li>
-<li>但在setup中<strong>不能访问到</strong>Vue2.x配置（data、methods、computed…）。</li>
-<li>如果有重名，setup优先。</li>
-</ul>
-</li>
-<li>setup不能是一个<code>async</code>函数，如果是这样返回值不再是<code>return</code>的对象，而是<code>promise</code>，模板看不到<code>return</code>对象中的属性。（后期也可以返回一个<code>Promise</code>实例，但需要<code>Suspense</code>和异步组件的配合）</li>
-</ol>
-</li>
-</ol>
-<h2 id="ref函数"><a href="#ref函数" class="headerlink" title="ref函数"></a>ref函数</h2><ul>
-<li><p>作用: 定义一个响应式的数据</p>
-</li>
-<li><p>语法:</p>
-<p><code>const xxx = ref(initValue)</code></p>
+<li><p>何时会得到<code>undefined</code>？</p>
 <ul>
-<li>创建一个包含响应式数据的<strong>引用对象（reference对象，简称ref对象）</strong>。</li>
-<li>JavaScript中操作数据： <code>xxx.value</code></li>
-<li>模板中读取数据: 不需要.value，直接：<code>&lt;div&gt;&#123;&#123;xxx&#125;&#125;&lt;/div&gt;</code></li>
+<li><p>变量声明了但没有赋值</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> o<span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>对象的某个属性不存在</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>传递参数少传参</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span>
+ <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>函数的默认返回值（构造函数除外）</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+ <span class="token punctuation">&#125;</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 </li>
-<li><p>备注：</p>
+<li><p>何时会得到<code>null</code>？</p>
 <ul>
-<li>接收的数据可以是：基本类型、也可以是对象类型。</li>
-<li>基本类型的数据：响应式依然是靠<code>Object.defineProperty()</code>的<code>get</code>与<code>set</code>完成的。</li>
-<li>对象类型的数据：内部 <em>“ 求助 ”</em> 了Vue3.0中的一个新函数—— <code>reactive</code>函数。</li>
-</ul>
+<li><p>作为函数的参数（此参数不是对象）,表示空值或缺失值，当函数期望接收一个参数，但没有具体的值可提供时，可以将参数设置为<code>null</code>。</p>
 </li>
-</ul>
-<h2 id="reactive函数"><a href="#reactive函数" class="headerlink" title="reactive函数"></a>reactive函数</h2><ul>
-<li>作用: 定义一个<strong>对象类型</strong>的响应式数据（基本类型不要用它，要用<code>ref</code>函数）</li>
-<li>语法：<code>const 代理对象= reactive(源对象)</code>接收一个对象（或数组），返回一个<strong>代理对象（Proxy的实例对象，简称proxy对象）</strong></li>
-<li>reactive定义的响应式数据是“深层次的”。</li>
-<li>内部基于 ES6 的 Proxy 实现，通过代理对象操作源对象内部数据进行操作。</li>
-</ul>
-<h2 id="Vue3-0中的响应式原理"><a href="#Vue3-0中的响应式原理" class="headerlink" title="Vue3.0中的响应式原理"></a>Vue3.0中的响应式原理</h2><h3 id="vue2-x的响应式"><a href="#vue2-x的响应式" class="headerlink" title="vue2.x的响应式"></a>vue2.x的响应式</h3><p>实现原理：</p>
-<ul>
-<li><p>对象类型：通过<code>Object.defineProperty()</code>对属性的读取、修改进行拦截（数据劫持）。</p>
-</li>
-<li><p>数组类型：通过重写更新数组的一系列方法来实现拦截。（对数组的变更方法进行了包裹）。</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Object.defineProperty(data, &#39;count&#39;, &#123;
-    get () &#123;&#125;, 
-    set () &#123;&#125;
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>存在问题：</p>
-<ul>
-<li>只能监测属性，不能监测对象。</li>
-<li>新增属性、删除属性，界面不会更新。</li>
-<li>数组的索引和长度的变更，界面不会更新。</li>
-<li>其他详见下方</li>
-</ul>
-</li>
-</ul>
-<h3 id="Vue3-0的响应式"><a href="#Vue3-0的响应式" class="headerlink" title="Vue3.0的响应式"></a>Vue3.0的响应式</h3><p>实现原理:</p>
-<ul>
-<li><p>通过<code>Proxy</code>（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。</p>
-</li>
-<li><p>通过<code>Reflect</code>（反射）: 对源对象的属性进行操作。</p>
-</li>
-<li><p>MDN文档中描述的Proxy与Reflect：</p>
-<ul>
-<li><p>Proxy：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy</a></p>
-</li>
-<li><p>Reflect：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect</a></p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">new Proxy(data, &#123;
-    &#x2F;&#x2F; 拦截读取属性值
-    get (target, prop) &#123;
-        return Reflect.get(target, prop)
-    &#125;,
-    &#x2F;&#x2F; 拦截设置属性值或添加新属性
-    set (target, prop, value) &#123;
-        return Reflect.set(target, prop, value)
-    &#125;,
-    &#x2F;&#x2F; 拦截删除属性
-    deleteProperty (target, prop) &#123;
-        return Reflect.deleteProperty(target, prop)
-    &#125;
-&#125;)
-
-proxy.name &#x3D; &#39;tom&#39;   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-</ul>
-<p>Vue 3.0 带来基于代理 Proxy 的 observer 实现，提供全语言覆盖的反应性跟踪，这消除了 Vue2 当中基于 Object.defineProperty 的实现所存在的很多限制：</p>
-<ul>
-<li>消除上述Vue2 中的3个缺陷。</li>
-<li>支持 Map、Set、WeakMap 和 WeakSet。</li>
-<li>用于创建 observable 的公开 API。这为中小规模场景提供了简单轻量级的跨组件状态管理解决方案。</li>
-<li>默认采用惰性观察。在 2.x 中，不管反应式数据有多大，都会在启动时被观察到。如果你的数据集很大，这可能会在应用启动时带来明显的开销。在 3.x 中，只观察用于渲染应用程序最初可见部分的数据。</li>
-<li>更精确的变更通知。在 2.x 中，通过 Vue.set 强制添加新属性将导致依赖于该对象的 watcher 收到变更通知。在 3.x 中，只有依赖于特定属性的 watcher 才会收到通知。</li>
-<li>不可变的 observable：我们可以创建值的”不可变“版本（即使是嵌套属性），除非系统在内部暂时将其“解禁”。这个机制可用于冻结 prop 传递或 Vuex 状态树以外的变化。</li>
-<li>更好的调试功能：我们可以使用新的 renderTracked 和 renderTriggered 钩子精准地跟踪组件在什么时候以及为什么重新渲染。</li>
-</ul>
-<h2 id="reactive对比ref"><a href="#reactive对比ref" class="headerlink" title="reactive对比ref"></a>reactive对比ref</h2><ul>
-<li>从定义数据角度对比：<ul>
-<li>ref用来定义：<strong>基本类型数据</strong>。</li>
-<li>reactive用来定义：<strong>对象（或数组）类型数据</strong>。</li>
-<li>备注：ref也可以用来定义<strong>对象（或数组）类型数据</strong>, 它内部会自动通过<code>reactive</code>转为<strong>代理对象</strong>。</li>
-</ul>
-</li>
-<li>从原理角度对比：<ul>
-<li>ref通过<code>Object.defineProperty()</code>的<code>get</code>与<code>set</code>来实现响应式（数据劫持）。</li>
-<li>reactive通过使用<strong>Proxy</strong>来实现响应式（数据劫持）, 并通过<strong>Reflect</strong>操作<strong>源对象</strong>内部的数据。</li>
-</ul>
-</li>
-<li>从使用角度对比：<ul>
-<li>ref定义的数据：操作数据<strong>需要</strong><code>.value</code>，读取数据时模板中直接读取<strong>不需要</strong><code>.value</code>。</li>
-<li>reactive定义的数据：操作数据与读取数据：<strong>均不需要</strong><code>.value</code>。</li>
-</ul>
-</li>
-</ul>
-<h2 id="setup的两个注意点"><a href="#setup的两个注意点" class="headerlink" title="setup的两个注意点"></a>setup的两个注意点</h2><ul>
-<li>setup执行的时机<ul>
-<li>在beforeCreate之前执行一次，this是undefined。</li>
-</ul>
-</li>
-<li>setup的参数<ul>
-<li>props：值为对象，包含：组件外部传递过来，且组件内部声明接收了的属性。</li>
-<li>context：上下文对象<ul>
-<li>attrs: 值为对象，包含：组件外部传递过来，但没有在props配置中声明的属性, 相当于 <code>this.$attrs</code>。</li>
-<li>slots: 收到的插槽内容, 相当于 <code>this.$slots</code>。</li>
-<li>emit: 分发自定义事件的函数, 相当于 <code>this.$emit</code>。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="计算属性与监视"><a href="#计算属性与监视" class="headerlink" title="计算属性与监视"></a>计算属性与监视</h2><h3 id="computed函数"><a href="#computed函数" class="headerlink" title="computed函数"></a>computed函数</h3><ul>
-<li><p>与Vue2.x中computed配置功能一致</p>
-</li>
-<li><p>写法</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123;computed&#125; from &#39;vue&#39;
-
-setup()&#123;
-    ...
-	&#x2F;&#x2F;计算属性——简写
-    let fullName &#x3D; computed(()&#x3D;&gt;&#123;
-        return person.firstName + &#39;-&#39; + person.lastName
-    &#125;)
-    &#x2F;&#x2F;计算属性——完整
-    let fullName &#x3D; computed(&#123;
-        get()&#123;
-            return person.firstName + &#39;-&#39; + person.lastName
-        &#125;,
-        set(value)&#123;
-            const nameArr &#x3D; value.split(&#39;-&#39;)
-            person.firstName &#x3D; nameArr[0]
-            person.lastName &#x3D; nameArr[1]
-        &#125;
-    &#125;)
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h3 id="watch函数"><a href="#watch函数" class="headerlink" title="watch函数"></a>watch函数</h3><ul>
-<li><p>与Vue2.x中watch配置功能一致</p>
-</li>
-<li><p>两个小“坑”：</p>
-<ul>
-<li>监视reactive定义的响应式数据时：oldValue无法正确获取、强制开启了深度监视（deep配置失效）。</li>
-<li>监视reactive定义的响应式数据中某个属性时：deep配置有效。</li>
-</ul>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;情况一：监视ref定义的响应式数据
-watch(sum,(newValue,oldValue)&#x3D;&gt;&#123;
-	console.log(&#39;sum变化了&#39;,newValue,oldValue)
-&#125;,&#123;immediate:true&#125;)
-
-&#x2F;&#x2F;情况二：监视多个ref定义的响应式数据
-watch([sum,msg],(newValue,oldValue)&#x3D;&gt;&#123;
-	console.log(&#39;sum或msg变化了&#39;,newValue,oldValue)
-&#125;) 
-
-&#x2F;* 情况三：监视reactive定义的响应式数据
-			若watch监视的是reactive定义的响应式数据，则无法正确获得oldValue！！
-			若watch监视的是reactive定义的响应式数据，则强制开启了深度监视 
-*&#x2F;
-watch(person,(newValue,oldValue)&#x3D;&gt;&#123;
-	console.log(&#39;person变化了&#39;,newValue,oldValue)
-&#125;,&#123;immediate:true,deep:false&#125;) &#x2F;&#x2F;此处的deep配置不再奏效
-
-&#x2F;&#x2F;情况四：监视reactive定义的响应式数据中的某个属性
-watch(()&#x3D;&gt;person.job,(newValue,oldValue)&#x3D;&gt;&#123;
-	console.log(&#39;person的job变化了&#39;,newValue,oldValue)
-&#125;,&#123;immediate:true,deep:true&#125;) 
-
-&#x2F;&#x2F;情况五：监视reactive定义的响应式数据中的某些属性
-watch([()&#x3D;&gt;person.job,()&#x3D;&gt;person.name],(newValue,oldValue)&#x3D;&gt;&#123;
-	console.log(&#39;person的job变化了&#39;,newValue,oldValue)
-&#125;,&#123;immediate:true,deep:true&#125;)
-
-&#x2F;&#x2F;特殊情况
-watch(()&#x3D;&gt;person.job,(newValue,oldValue)&#x3D;&gt;&#123;
-    console.log(&#39;person的job变化了&#39;,newValue,oldValue)
-&#125;,&#123;deep:true&#125;) &#x2F;&#x2F;此处由于监视的是reactive素定义的对象中的某个属性，所以deep配置有效<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h3 id="watchEffect函数"><a href="#watchEffect函数" class="headerlink" title="watchEffect函数"></a>watchEffect函数</h3><ul>
-<li><p>watch的套路是：既要指明监视的属性，也要指明监视的回调。</p>
-</li>
-<li><p>watchEffect的套路是：不用指明监视哪个属性，监视的回调中用到哪个属性，那就监视哪个属性。</p>
-</li>
-<li><p>watchEffect有点像computed：</p>
-<ul>
-<li>但computed注重的计算出来的值（回调函数的返回值），所以必须要写返回值。</li>
-<li>而watchEffect更注重的是过程（回调函数的函数体），所以不用写返回值。</li>
-</ul>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;watchEffect所指定的回调中用到的数据只要发生变化，则直接重新执行回调。
-watchEffect(()&#x3D;&gt;&#123;
-    const x1 &#x3D; sum.value
-    const x2 &#x3D; person.age
-    console.log(&#39;watchEffect配置的回调执行了&#39;)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p><img src="/medias/images/loading.gif" data-original="/2023/08/30/vue3-xin-te-xing/image-20230830173938976.png" alt="image-20230830173938976"></p>
-<ul>
-<li>Vue3.0中可以继续使用Vue2.x中的生命周期钩子，但有有两个被更名：<ul>
-<li><code>beforeDestroy</code>改名为 <code>beforeUnmount</code></li>
-<li><code>destroyed</code>改名为 <code>unmounted</code></li>
-</ul>
-</li>
-<li>Vue3.0也提供了 Composition API 形式的生命周期钩子，与Vue2.x中钩子对应关系如下：<ul>
-<li><code>beforeCreate</code>&#x3D;&#x3D;&#x3D;&gt;<code>setup()</code></li>
-<li><code>created</code>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>setup()</code></li>
-<li><code>beforeMount</code> &#x3D;&#x3D;&#x3D;&gt;<code>onBeforeMount</code></li>
-<li><code>mounted</code>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>onMounted</code></li>
-<li><code>beforeUpdate</code>&#x3D;&#x3D;&#x3D;&gt;<code>onBeforeUpdate</code></li>
-<li><code>updated</code> &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>onUpdated</code></li>
-<li><code>beforeUnmount</code> &#x3D;&#x3D;&gt;<code>onBeforeUnmount</code></li>
-<li><code>unmounted</code> &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>onUnmounted</code></li>
-</ul>
-</li>
-<li>仔细观察两个流程图头部可以看出，Vue3先将<code>el</code>挂载了之后再进行的<code>beforeCreate</code>,而Vue2是<code>created</code>之后进行判断是否挂载<code>el</code>，如果没，则流程终止，<code>beforeCreate</code>和<code>created</code>俩个钩子冗余使用，因此Vue3进行了优化的。</li>
-<li>注意：之前说到过setup执行的时机：在<code>beforeCreate</code>之前执行一次。由此可理解为何组合式生命周期钩子中的<code>beforeCreate</code>和<code>created</code>会被<code>setup</code>代替。</li>
-</ul>
-<h2 id="自定义hook函数"><a href="#自定义hook函数" class="headerlink" title="自定义hook函数"></a>自定义hook函数</h2><ul>
-<li>什么是hook？—— 本质是一个函数，把setup函数中使用的Composition API进行了封装。</li>
-<li>类似于vue2.x中的mixin。</li>
-<li>自定义hook的优势: 复用代码, 让setup中的逻辑更清楚易懂。</li>
-</ul>
-<h2 id="toRef"><a href="#toRef" class="headerlink" title="toRef"></a>toRef</h2><ul>
-<li>作用：创建一个 ref 对象，其value值指向另一个对象中的某个属性。</li>
-<li>语法：<code>const name = toRef(person,&#39;name&#39;)</code></li>
-<li>应用: 要将响应式对象中的某个属性<strong>单独提供给外部使用时</strong>。</li>
-<li>扩展：<code>toRefs</code> 与<code>toRef</code>功能一致，但可以批量创建多个 ref 对象，语法：<code>toRefs(person)</code></li>
-</ul>
-<h1 id="其它Composition-API"><a href="#其它Composition-API" class="headerlink" title="其它Composition API"></a>其它Composition API</h1><h2 id="shallowReactive-与-shallowRef"><a href="#shallowReactive-与-shallowRef" class="headerlink" title="shallowReactive 与 shallowRef"></a>shallowReactive 与 shallowRef</h2><ul>
-<li>shallowReactive：只处理对象最外层属性的响应式（浅响应式）。</li>
-<li>shallowRef：只处理基本数据类型的响应式, 不进行对象的响应式处理。</li>
-<li>什么时候使用?<ul>
-<li>如果有一个对象数据，结构比较深, 但变化时只是外层属性变化 &#x3D;&#x3D;&#x3D;&gt; shallowReactive。</li>
-<li>如果有一个对象数据，后续功能不会修改该对象中的属性，而是生新的对象来替换 &#x3D;&#x3D;&#x3D;&gt; shallowRef。</li>
-</ul>
-</li>
-</ul>
-<h2 id="readonly-与-shallowReadonly"><a href="#readonly-与-shallowReadonly" class="headerlink" title="readonly 与 shallowReadonly"></a>readonly 与 shallowReadonly</h2><ul>
-<li>readonly: 让一个响应式数据变为只读的（深只读）。</li>
-<li>shallowReadonly：让一个响应式数据变为只读的（浅只读）。</li>
-<li>应用场景: 不希望数据(尤其是这个数据是来自与其他组件时)被修改时。</li>
-</ul>
-<h2 id="toRaw-与-markRaw"><a href="#toRaw-与-markRaw" class="headerlink" title="toRaw 与 markRaw"></a>toRaw 与 markRaw</h2><ul>
-<li>toRaw：<ul>
-<li>作用：将一个由<code>reactive</code>生成的<strong>响应式对象</strong>转为<strong>普通对象</strong>。</li>
-<li>使用场景：用于读取响应式对象对应的普通对象，对这个普通对象的所有操作，不会引起页面更新。</li>
-</ul>
-</li>
-<li>markRaw：<ul>
-<li>作用：标记一个对象，使其永远不会再成为响应式对象。</li>
-<li>应用场景:<ol>
-<li>有些值不应被设置为响应式的，例如复杂的第三方类库等。</li>
-<li>当渲染具有不可变数据源的大列表时，跳过响应式转换可以提高性能。</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="customRef"><a href="#customRef" class="headerlink" title="customRef"></a>customRef</h2><ul>
-<li><p>作用：创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。</p>
-</li>
-<li><p>实现防抖效果：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;template&gt;
-	&lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;keyword&quot;&gt;
-	&lt;h3&gt;&#123;&#123;keyword&#125;&#125;&lt;&#x2F;h3&gt;
-&lt;&#x2F;template&gt;
-
-&lt;script&gt;
-	import &#123;ref,customRef&#125; from &#39;vue&#39;
-	export default &#123;
-		name:&#39;Demo&#39;,
-		setup()&#123;
-			&#x2F;&#x2F; let keyword &#x3D; ref(&#39;hello&#39;) &#x2F;&#x2F;使用Vue准备好的内置ref
-			&#x2F;&#x2F;自定义一个myRef
-			function myRef(value,delay)&#123;
-				let timer
-				&#x2F;&#x2F;通过customRef去实现自定义
-				return customRef((track,trigger)&#x3D;&gt;&#123;
-					return&#123;
-						get()&#123;
-							track() &#x2F;&#x2F;告诉Vue这个value值是需要被“追踪”的
-							return value
-						&#125;,
-						set(newValue)&#123;
-							clearTimeout(timer)
-							timer &#x3D; setTimeout(()&#x3D;&gt;&#123;
-								value &#x3D; newValue
-								trigger() &#x2F;&#x2F;告诉Vue去更新界面
-							&#125;,delay)
-						&#125;
-					&#125;
-				&#125;)
-			&#125;
-			let keyword &#x3D; myRef(&#39;hello&#39;,500) &#x2F;&#x2F;使用程序员自定义的ref
-			return &#123;
-				keyword
-			&#125;
-		&#125;
-	&#125;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h2 id="provide-与-inject"><a href="#provide-与-inject" class="headerlink" title="provide 与 inject"></a>provide 与 inject</h2><ul>
-<li><p>作用：实现<strong>祖与后代组件间</strong>通信</p>
-</li>
-<li><p>套路：父组件有一个 <code>provide</code> 选项来提供数据，后代组件有一个 <code>inject</code> 选项来开始使用这些数据</p>
-</li>
-<li><p>具体写法：</p>
-<ol>
-<li><p>祖组件中：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">setup()&#123;
-    ......
-    let car &#x3D; reactive(&#123;name:&#39;奔驰&#39;,price:&#39;40万&#39;&#125;)
-    provide(&#39;car&#39;,car)
-    ......
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>后代组件中：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">setup(props,context)&#123;
-    ......
-    const car &#x3D; inject(&#39;car&#39;)
-    return &#123;car&#125;
-    ......
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-</li>
-</ul>
-<h2 id="响应式数据的判断"><a href="#响应式数据的判断" class="headerlink" title="响应式数据的判断"></a>响应式数据的判断</h2><ul>
-<li>isRef: 检查一个值是否为一个 ref 对象</li>
-<li>isReactive: 检查一个对象是否是由 <code>reactive</code> 创建的响应式代理</li>
-<li>isReadonly: 检查一个对象是否是由 <code>readonly</code> 创建的只读代理</li>
-<li>isProxy: 检查一个对象是否是由 <code>reactive</code> 或者 <code>readonly</code> 方法创建的代理</li>
-</ul>
-<h1 id="Composition-API-的优势"><a href="#Composition-API-的优势" class="headerlink" title="Composition API 的优势"></a>Composition API 的优势</h1><h2 id="Options-API-存在的问题"><a href="#Options-API-存在的问题" class="headerlink" title="Options API 存在的问题"></a>Options API 存在的问题</h2><p>使用传统OptionsAPI中，新增或者修改一个需求，就需要分别在data，methods，computed里修改 。</p>
-<h2 id="Composition-API-的优势-1"><a href="#Composition-API-的优势-1" class="headerlink" title="Composition API 的优势"></a>Composition API 的优势</h2><p>我们可以更加优雅的组织我们的代码，函数。让相关功能的代码更加有序的组织在一起。</p>
-<h1 id="新的组件"><a href="#新的组件" class="headerlink" title="新的组件"></a>新的组件</h1><h2 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h2><ul>
-<li>在Vue2中: 组件必须有一个根标签</li>
-<li>在Vue3中: 组件可以没有根标签, 内部会将多个标签包含在一个Fragment虚拟元素中</li>
-<li>好处: 减少标签层级, 减小内存占用</li>
-</ul>
-<h2 id="Teleport"><a href="#Teleport" class="headerlink" title="Teleport"></a>Teleport</h2><p>什么是Teleport？—— <code>Teleport</code> 是一种能够将我们的<strong>组件html结构</strong>移动到指定位置的技术。</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;teleport to&#x3D;&quot;移动位置&quot;&gt;
-	&lt;div v-if&#x3D;&quot;isShow&quot; class&#x3D;&quot;mask&quot;&gt;
-		&lt;div class&#x3D;&quot;dialog&quot;&gt;
-			&lt;h3&gt;我是一个弹窗&lt;&#x2F;h3&gt;
-			&lt;button @click&#x3D;&quot;isShow &#x3D; false&quot;&gt;关闭弹窗&lt;&#x2F;button&gt;
-		&lt;&#x2F;div&gt;
-	&lt;&#x2F;div&gt;
-&lt;&#x2F;teleport&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Suspense"><a href="#Suspense" class="headerlink" title="Suspense"></a>Suspense</h2><ul>
-<li><p>等待异步组件时渲染一些额外内容，让应用有更好的用户体验</p>
-</li>
-<li><p>使用步骤：</p>
-<ul>
-<li><p>异步引入组件</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123;defineAsyncComponent&#125; from &#39;vue&#39;
-const Child &#x3D; defineAsyncComponent(()&#x3D;&gt;import(&#39;.&#x2F;components&#x2F;Child.vue&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><p>使用<code>Suspense</code>包裹组件，并配置好<code>default</code> 与 <code>fallback</code></p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;template&gt;
-    &lt;div class&#x3D;&quot;app&quot;&gt;
-        &lt;h3&gt;我是App组件&lt;&#x2F;h3&gt;
-        &lt;Suspense&gt;
-            &lt;template v-slot:default&gt;
-                &lt;Child&#x2F;&gt;
-            &lt;&#x2F;template&gt;
-            &lt;template v-slot:fallback&gt;
-                &lt;h3&gt;加载中.....&lt;&#x2F;h3&gt;
-            &lt;&#x2F;template&gt;
-        &lt;&#x2F;Suspense&gt;
-    &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-</ul>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="全局API的转移"><a href="#全局API的转移" class="headerlink" title="全局API的转移"></a>全局API的转移</h2><ul>
-<li><p>Vue 2.x 有许多全局 API 和配置。</p>
-<ul>
-<li><p>例如：注册全局组件、注册全局指令等。</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;注册全局组件
-Vue.component(&#39;MyButton&#39;, &#123;
-  data: () &#x3D;&gt; (&#123;
-    count: 0
-  &#125;),
-  template: &#39;&lt;button @click&#x3D;&quot;count++&quot;&gt;Clicked &#123;&#123; count &#125;&#125; times.&lt;&#x2F;button&gt;&#39;
-&#125;)
-
-&#x2F;&#x2F;注册全局指令
-Vue.directive(&#39;focus&#39;, &#123;
-  inserted: el &#x3D;&gt; el.focus()
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p>Vue3.0中对这些API做出了调整：</p>
-<ul>
-<li><p>将全局的API，即：<code>Vue.xxx</code>调整到应用实例（<code>app</code>）上</p>
-<p>| 2.x 全局 API（<code>Vue</code>） | 3.x 实例 API (<code>app</code>) | | ————————- | ——————————————- | | Vue.config.xxxx | app.config.xxxx | | Vue.config.productionTip | <strong>移除</strong> | | Vue.component | app.component | | Vue.directive | app.directive | | Vue.mixin | app.mixin | | Vue.use | app.use | | Vue.prototype | app.config.globalProperties |</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="其他改变"><a href="#其他改变" class="headerlink" title="其他改变"></a>其他改变</h2><ul>
-<li><p>data选项应始终被声明为一个函数。</p>
-</li>
-<li><p>过度类名的更改：</p>
-<ul>
-<li><p>Vue2.x写法</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.v-enter,
-.v-leave-to</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector">.v-leave,
-.v-enter-to</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>Vue3.x写法</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.v-enter-from,
-.v-leave-to</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.v-leave-from,
-.v-enter-to</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p><strong>移除</strong>keyCode作为 v-on 的修饰符，同时也不再支持<code>config.keyCodes</code></p>
-</li>
-<li><p><strong>移除</strong><code>v-on.native</code>修饰符</p>
-<ul>
-<li><p>父组件中绑定事件</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>my<span class="token operator">-</span>component
-  v<span class="token operator">-</span>on<span class="token operator">:</span>close<span class="token operator">=</span><span class="token string">"handleComponentEvent"</span>
-  v<span class="token operator">-</span>on<span class="token operator">:</span>click<span class="token operator">=</span><span class="token string">"handleNativeClickEvent"</span>
-<span class="token operator">/</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>子组件中声明自定义事件</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script<span class="token operator">></span>
-  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
-    <span class="token literal-property property">emits</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'close'</span><span class="token punctuation">]</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p><strong>移除</strong>过滤器（filter）</p>
+<li><p><code>null</code>是原型链的顶端，意味着它没有任何原型。</p>
 <blockquote>
-<p>过滤器虽然这看起来很方便，但它需要一个自定义语法，打破大括号内表达式是 “只是 JavaScript” 的假设，这不仅有学习成本，而且有实现成本！建议用方法调用或计算属性去替换过滤器。</p>
+<p>原型链是一种对象之间的关系，其中一个对象可以通过原型继承属性和方法。</p>
+<p>当一个对象通过原型链查找属性或方法时，如果在当前对象上找不到，它会继续在原型链上的下一个对象中查找，直到找到该属性或方法或者到达原型链的顶端。</p>
 </blockquote>
-</li>
-<li><p>支持自定义渲染器，从而使得 weex 可以通过自定义渲染器的方式来扩展，而不是直接 fork 源码来改的方式。</p>
-</li>
-<li><p>支持 Fragment（多个根节点）和 Protal（在 dom 其他部分渲染组件内容）组件，针对一些特殊的场景做了处理。</p>
-</li>
-<li><p>基于 treeshaking 优化，提供了更多的内置功能。</p>
+<p> <strong>因为<code>null</code>没有原型，所以在它上面查找任何属性或方法时，将会返回<code>undefined</code>。</strong></p>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let obj &#x3D; &#123;
+    name: &#39;John&#39;,
+    age: 25
+  &#125;;
+  
+  console.log(obj.name); &#x2F;&#x2F; 输出: &#39;John&#39;
+  console.log(obj.toString()); &#x2F;&#x2F; 输出: &#39;[object Object]&#39;
+  
+  &#x2F;&#x2F; 将原型设置为 null
+  let nullObj &#x3D; Object.create(null);
+  nullObj.name &#x3D; &#39;Jane&#39;;
+  
+  console.log(nullObj.name); &#x2F;&#x2F; 输出: &#39;Jane&#39;
+  console.log(nullObj.toString()); &#x2F;&#x2F; 报错: nullObj.toString is not a function
+
+&#x2F;&#x2F;在上述例子中，obj是一个普通的对象，它继承了  Object.prototype上的方法，如toString 。但是  nullObj是通过Object.create(null)创建的，它的原型被设置为null ，因此它没有继承任何方法。当我们尝试调用nullObj.toString()时会报错，因为  nullObj没有从原型链中找到toString方法。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>Object.prototype</code>上的方法包括：</p>
+<ul>
+<li><code>hasOwnProperty()</code> ：判断对象是否具有指定的属性，而不是继承自原型链。 </li>
+<li><code>toString()</code> ：返回对象的字符串表示。 </li>
+<li><code>valueOf()</code> ：返回对象的原始值表示。 </li>
+<li><code>isPrototypeOf()</code> ：检查对象是否是另一个对象的原型。 </li>
+<li><code>propertyIsEnumerable()</code> ：检查指定的属性是否可枚举。 </li>
+<li><code>toLocaleString()</code> ：返回对象的本地化字符串表示。</li>
+</ul>
 </li>
 </ul>
+</li>
+</ul>
+<h2 id="for-each和map"><a href="#for-each和map" class="headerlink" title="for-each和map"></a><code>for-each</code>和<code>map</code></h2><p><code>for-each</code>的特点：</p>
+<ol>
+<li>没有返回值。</li>
+<li>不能用 <code>break</code> 打断。</li>
+<li>遍历的值为 value。</li>
+</ol>
+<p>map的特点：</p>
+<ol>
+<li>有返回值（数组）默认<code>return</code>为<code>undefined</code></li>
+<li>不能用 <code>break</code> 打断</li>
+<li>接收的参数是一个函数（value, key)</li>
+</ol>
+<h2 id="递归求和"><a href="#递归求和" class="headerlink" title="递归求和"></a>递归求和</h2><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;js递归求和 1-100
+function add(num1, num2)&#123;
+    let num &#x3D; num1 + num2
+    if(num2 + 1 &gt; 100)&#123;
+        return num
+    &#125;else&#123;
+        return add(num, num2 + 1)
+    &#125;
+&#125;
+
+let sum &#x3D; add(1,2)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="ES6汇总"><a href="#ES6汇总" class="headerlink" title="ES6汇总"></a>ES6汇总</h2><h3 id="var和let和const"><a href="#var和let和const" class="headerlink" title="var和let和const"></a><code>var</code>和<code>let</code>和<code>const</code></h3><p><code>var</code>：</p>
+<ul>
+<li>函数作用域： <code>var</code> 关键字声明的变量具有函数作用域，这意味着变量的作用域限定在声明它的函数内部，而不是块级作用域。这意味着在函数内部的任何位置都可以访问到 <code>var</code> 声明的变量。</li>
+<li>变量提升：使用 <code>var</code> 关键字声明的变量会进行变量提升。这意味着无论变量声明在代码的哪个位置，它都会被提升到函数作用域的顶部。这意味着可以在<strong>变量声明之前访问变量</strong>，但其值为 <code>undefined</code> 。 </li>
+<li>可重复声明：使用 <code>var</code> 关键字可以多次声明同一个变量，而不会引发错误。这样可能会导致变量被意外覆盖或造成混淆。 </li>
+<li>全局作用域：在全局范围内使用 <code>var</code> 声明的变量会成为全局对象的属性。这意味着可以在任何地方访问这些变量，但也可能导致全局命名冲突和不良的编程实践。</li>
+</ul>
+<p><code>let</code>与<code>const</code>：</p>
+<p>相同点：</p>
+<ul>
+<li><code>let</code> 和 <code>const</code> 关键字声明的变量具有块级作用域，这意味着变量的作用域限定在最近的包含块内（例如，if语句块、循环块等），而不是函数作用域。 </li>
+<li>没有变量提升：使用 <code>let</code> 和 <code>const</code> 关键字声明的变量不会进行变量提升。这意味着在变量声明之前访问变量会引发错误。</li>
+<li>不能重复声明：使用 <code>let</code> 和 <code>const</code> 关键字声明的变量不允许在同一作用域内重复声明同一个变量。这有助于避免变量覆盖和混淆。</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li><p>块级绑定：使用 <code>let</code> 关键字声明的变量可以被重新赋值，而使用 <code>const</code> 关键字声明的变量是常量，不可重新赋值。这意味着使用 <code>const</code> 声明的变量在声明后不能再改变其值。 </p>
+</li>
+<li><p><code>const</code>实际上保证的并不是变量的值不得改动，而是变量指向的<strong>那个内存地址</strong>不得改动。</p>
+<p>对于简单类型的数据（数值、字符串、布尔值）而言，值就保存在变量指向的内存地址中，因此等同于常量。</p>
+<p>但对于复合类型的数据（主要是对象和数组）而言，变量指向的内存地址保存的<strong>只是一个指针</strong>，<code>const</code>只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，这完全不能控制。——因此声明一个对象为常量时必须非常小心。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 为foo添加一个属性，可以成功</span>
+foo<span class="token punctuation">.</span>prop <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
+foo<span class="token punctuation">.</span>prop <span class="token comment">// 123</span>
+
+<span class="token comment">// 将foo指向另一个对象，就会报错</span>
+foo <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token comment">// TypeError: "foo" is read-only</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="使用ES6快速去重"><a href="#使用ES6快速去重" class="headerlink" title="使用ES6快速去重"></a>使用ES6快速去重</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [12, 43, 23, 12, 43, 55]
+let item &#x3D; [...new Set(arr)]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="Promise执行顺序"><a href="#Promise执行顺序" class="headerlink" title="Promise执行顺序"></a><code>Promise</code>执行顺序</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const promise &#x3D; new Promise((resolve, reject) &#x3D;&gt;&#123;
+    &#x2F;&#x2F; Promise中的函数是同步执行的
+    console.log(1)
+    resolve()
+    console.log(2)
+&#125; ).then(()&#x3D;&gt;&#123;
+    console.log(3)
+&#125;)
+console.log(4)
+
+&#x2F;&#x2F;1243
+&#x2F;&#x2F;按照同步执行的顺序来确定打印顺序，在所有同步代码执行完毕后才会执行.then()方法中的回调函数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h2><p>详见<a href="https://qt-7274.github.io/2023/08/11/shang-pin-hui-xing-neng-you-hua/">尚品汇-性能优化 | QT-7274 (qblog.top)</a></p>
 
                 
             </div>
@@ -1013,7 +661,7 @@ Vue.directive(&#39;focus&#39;, &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2023/08/30/vue3-xin-te-xing/">https://qt-7274.github.io/2023/08/30/vue3-xin-te-xing/</a>
+                    <a href="https://qt-7274.github.io/2023/09/08/javascript-xiang-guan-xi-jie-ti/">https://qt-7274.github.io/2023/09/08/javascript-xiang-guan-xi-jie-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1053,10 +701,6 @@ Vue.directive(&#39;focus&#39;, &#123;
                             
                                 <a href="/tags/%E5%89%8D%E7%AB%AF/">
                                     <span class="chip bg-color">前端</span>
-                                </a>
-                            
-                                <a href="/tags/Vue/">
-                                    <span class="chip bg-color">Vue</span>
                                 </a>
                             
                         </div>
@@ -1505,12 +1149,13 @@ Vue.directive(&#39;focus&#39;, &#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/09/02/mivida-she-jiao-ping-tai-ji-qiao-hui-zong/">
+                <a href="/2023/09/08/vue-xiang-guan-xi-jie-ti/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/mivida.webp" class="responsive-img" alt="MiVida社交平台-技巧汇总">
                         
-                        <span class="card-title">MiVida社交平台-技巧汇总</span>
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/11.jpg" class="responsive-img" alt="Vue相关细节题">
+                        
+                        <span class="card-title">Vue相关细节题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1521,16 +1166,12 @@ Vue.directive(&#39;focus&#39;, &#123;
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-02
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-08
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    前端开发
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            QT-7274
                             
                         </span>
                     </div>
@@ -1540,14 +1181,6 @@ Vue.directive(&#39;focus&#39;, &#123;
                     
                     <a href="/tags/%E5%89%8D%E7%AB%AF/">
                         <span class="chip bg-color">前端</span>
-                    </a>
-                    
-                    <a href="/tags/Vue/">
-                        <span class="chip bg-color">Vue</span>
-                    </a>
-                    
-                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
-                        <span class="chip bg-color">项目开发</span>
                     </a>
                     
                 </div>
@@ -1561,12 +1194,12 @@ Vue.directive(&#39;focus&#39;, &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/08/14/shang-pin-hui-zeng-shan-gai-cha-yu-elementui-de-ji-qiao-ying-yong/">
+                <a href="/2023/09/02/css-zhong-de-bu-ju-hui-zong/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%B0%9A%E5%93%81%E6%B1%87.webp" class="responsive-img" alt="尚品汇-增删改查与ElementUI的技巧应用">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/CSS%E8%BF%9B%E9%98%B6--%E6%96%87%E6%9C%AC%E6%95%88%E6%9E%9C.png" class="responsive-img" alt="CSS中的布局汇总">
                         
-                        <span class="card-title">尚品汇-增删改查与ElementUI的技巧应用</span>
+                        <span class="card-title">CSS中的布局汇总</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1577,7 +1210,7 @@ Vue.directive(&#39;focus&#39;, &#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-02
                             </span>
                         <span class="publish-author">
                             
@@ -1596,14 +1229,6 @@ Vue.directive(&#39;focus&#39;, &#123;
                     
                     <a href="/tags/%E5%89%8D%E7%AB%AF/">
                         <span class="chip bg-color">前端</span>
-                    </a>
-                    
-                    <a href="/tags/Vue/">
-                        <span class="chip bg-color">Vue</span>
-                    </a>
-                    
-                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
-                        <span class="chip bg-color">项目开发</span>
                     </a>
                     
                 </div>
