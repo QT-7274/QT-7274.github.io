@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-05
+                    2023-09-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    883
+                    653
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -500,7 +500,10 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="CSS单位"><a href="#CSS单位" class="headerlink" title="CSS单位"></a>CSS单位</h2><p>总体来说，CSS单位可以分为绝对单位和相对单位两大类。</p>
+                <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a><font color='#3498db'>更新记录</font></h3><ul>
+<li>2023-09-12：删除部分章节。</li>
+</ul>
+<h2 id="CSS单位"><a href="#CSS单位" class="headerlink" title="CSS单位"></a>CSS单位</h2><p>总体来说，CSS单位可以分为绝对单位和相对单位两大类。</p>
 <h3 id="绝对单位"><a href="#绝对单位" class="headerlink" title="绝对单位"></a>绝对单位</h3><p>绝对单位多用于传统页面印刷中，极少用于前端开发。</p>
 <h3 id="相对单位"><a href="#相对单位" class="headerlink" title="相对单位"></a>相对单位</h3><p>在CSS中，相对单位定义的大小是不固定的，一般是相对于其他长度而言。在CSS中，常用的相对单位如下表所示：</p>
 <table>
@@ -543,13 +546,8 @@
 <td>视口宽高中较小的百分比</td>
 </tr>
 </tbody></table>
-<h4 id="像素（px）"><a href="#像素（px）" class="headerlink" title="像素（px）"></a>像素（px）</h4><p>px，全称pixel（像素），指一张图片中最小的点，或者是计算机屏幕中最小的点。严格来讲，px属于相对单位，因为屏幕分辨率不同，1px大小也是不同的。但是<u>如果不考虑屏幕分辨率，我们也可以把px当作绝对单位来看待</u>，这也是为什么很多地方说px是绝对单位的原因。</p>
-<h4 id="百分比（-）"><a href="#百分比（-）" class="headerlink" title="百分比（%）"></a>百分比（%）</h4><p>在CSS中，支持百分比作为单位的属性很多，大致可以分为3类。</p>
-<ul>
-<li>width，height，font-size的百分比是相对于<strong>父元素“相同属性”的值</strong>来计算的、</li>
-<li>line-height的百分比是相对于<strong>当前元素</strong>的font-size值来计算的。</li>
-<li>vertical-align的百分比是相对于<strong>当前元素</strong>的line-height值决定的。</li>
-</ul>
+<h4 id="像素（px）"><a href="#像素（px）" class="headerlink" title="像素（px）"></a>像素（px）</h4><p>详见<a href="http://qt-7274.github.io/2023/09/12/xiang-ying-shi-bu-ju-de-chang-yong-jie-jue-fang-an-dui-bi/">响应式布局的常用解决方案对比 | QT-7274</a></p>
+<h4 id="百分比（-）"><a href="#百分比（-）" class="headerlink" title="百分比（%）"></a>百分比（%）</h4><p>详见<a href="http://qt-7274.github.io/2023/09/12/xiang-ying-shi-bu-ju-de-chang-yong-jie-jue-fang-an-dui-bi/">响应式布局的常用解决方案对比 | QT-7274</a></p>
 <h4 id="em"><a href="#em" class="headerlink" title="em"></a>em</h4><p>在CSS中，em是相对于“<strong>当前元素</strong>”的字体大小而言的。其中，1em就等于“当前元素”字体大小。这里的字体大小指的是以px为单位的font-size值。</p>
 <blockquote>
 <p>注意：如果当前元素的font-size没有定义，则当前元素会继承父元素的font-size。如果当前元素的所有祖先元素都没有定义font-size，则当前元素会继承浏览器默认的font-size。其中，所有浏览器默认的font-size的值都是16px。</p>
@@ -561,8 +559,7 @@
 <li>使用em作为统一单位：在实际开发中，对于em我们一般需要计算两次——第一次，当前元素font-size属性的px值；第二次，当前元素其他属性（如width、height等）的px值，因为如果当前元素其他属性要以em为单位，就得以当前元素的font-size值再计算一次。</li>
 <li>使用em作为字体大小单位：如果想控制一个页面的字体大小，最佳选择是使用em作为单位，当需要改变页面整体的文字大小时，我们只需要改变根元素字体大小即可。这个特点在跨平台网站开发中有着明显的优势。</li>
 </ol>
-<h4 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h4><p>rem，是指相对于<strong>根元素</strong>（即html元素）的字体大小。rem是CSS3新引入的单位，目前的主流浏览器，除了IE8外，大部分是支持rem的。rem布局是移动端最常见的布局方式之一。</p>
-<p>rem和em很相似，不过也有明显区别：<u>em是相对“当前元素”的字体大小，而rem是相对“根元素”的字体大小。</u></p>
+<h4 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h4><p>详见<a href="http://qt-7274.github.io/2023/09/12/xiang-ying-shi-bu-ju-de-chang-yong-jie-jue-fang-an-dui-bi/">响应式布局的常用解决方案对比 | QT-7274</a></p>
 
                 
             </div>

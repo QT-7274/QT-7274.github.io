@@ -6,11 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Vue核心 列表渲染和数据监视, QT-7274">
-    <meta name="description" content="列表渲染React，Vue中的key有什么作用？
+    <meta name="description" content="更新记录
+2023-09-11：对于“如何选择key”作了补充。
 
-虚拟DOM中key的作用：key是虚拟DOM中对象的标识，当数据发生变化时，Vue会根据新数据生成新的虚拟DOM，随后Vue进行新虚拟DOM与旧虚拟DOM的差异比较，比较规则如下：
+列表渲染React，Vue中的key有什么作用？
 
-比较">
+虚拟DOM中key的作用：key是虚拟DOM中对象的标识，当数据发生变化时，Vue会根据新数据生成新的虚拟DOM，随后V">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -467,21 +468,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-26
+                    2023-09-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    979
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    5 分
                 </div>
                 
 
@@ -504,7 +505,10 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><p><span style="color: red"><code>React</code>，<code>Vue</code>中的<code>key</code>有什么作用？</span></p>
+                <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a><font color='#3498db'>更新记录</font></h3><ul>
+<li>2023-09-11：对于“如何选择key”作了补充。</li>
+</ul>
+<h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><p><code>React</code>，<code>Vue</code>中的<code>key</code>有什么作用？</p>
 <ol>
 <li><p><code>虚拟DOM</code>中<code>key</code>的作用：<code>key</code>是<code>虚拟DOM</code>中对象的标识，当数据发生变化时，Vue会根据新数据生成新的<code>虚拟DOM</code>，随后Vue进行新<code>虚拟DOM</code>与旧<code>虚拟DOM</code>的差异比较，比较规则如下：</p>
 </li>
@@ -531,9 +535,44 @@
 </li>
 <li><p>开发中如何选择<code>key</code></p>
 <ol>
-<li>最好使用每条数据的**唯一标识作为<code>key</code>**，比如id、手机号、身份证号、学号等唯一值。</li>
-<li>如果不存在对数据的逆序添加、逆序删除等破坏顺序的操作，仅用于渲染列表，使用index作为<code>key</code>是没有问题的。</li>
-<li>**即使没有写<code>:key=&quot;index&quot;</code>**，Vue 也会帮我们把 <code>index</code> 作为 <code>key</code></li>
+<li><p>最好使用每条数据的<strong>唯一标识</strong>作为<code>key</code>，比如id、手机号、身份证号、学号等唯一值。</p>
+</li>
+<li><p>如果不存在对数据的逆序添加、逆序删除等破坏顺序的操作，仅用于渲染列表，使用 <code>index</code> 作为<code>key</code>是没有问题的。</p>
+<p>如果列表中进行数据更新、排序或过滤等操作，使用索引作为 <code>key</code> ，可能会导致列表项的重新排序或过滤时出现问题，因为索引是根据项的位置而不是唯一标识来分配的。</p>
+<p>代码示例：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;ul&gt;
+      &lt;li v-for&#x3D;&quot;item in items&quot; :key&#x3D;&quot;item.id&quot;&gt;
+        &#123;&#123; item.name &#125;&#125;
+      &lt;&#x2F;li&gt;
+    &lt;&#x2F;ul&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  data() &#123;
+    return &#123;
+      items: [
+        &#123; id: 1, name: &#39;Item 1&#39; &#125;,
+        &#123; id: 2, name: &#39;Item 2&#39; &#125;,
+        &#123; id: 3, name: &#39;Item 3&#39; &#125;
+      ]
+    &#125;;
+  &#125;
+&#125;;
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>通过交换数组中最后一项和第一项的位置来改变列表的顺序：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">this.items.unshift(this.items.pop());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然而，由于我们在 <code>v-for</code> 循环中使用索引作为 <code>key</code> ，当我们执行上述代码时，Vue会将最后一项的 <code>&lt;li&gt;</code> 元素与第一项的 <code>&lt;li&gt;</code> 元素进行交换，但是它们的 <code>key</code> 值并没有改变。这样就会导致Vue错误地认为这两个元素是相同的，从而无法正确地更新DOM，结果可能是两个元素的内容混乱或丢失。</p>
+</li>
+<li><p>即使没有写<code>:key=&quot;index&quot;</code>，Vue 也会帮我们把 <code>index</code> 作为 <code>key</code></p>
+</li>
+<li><p>如果使用索引作为 <code>key</code> ，当列表项的顺序发生变化时，Vue会重新创建和销毁组件实例。这<strong>可能会导致组件的状态丢失</strong>，例如输入框中的内容或选中的状态。使用唯一标识作为 <code>key</code> 可以避免这个问题，因为Vue会根据 <code>key</code> 来复用和保持组件实例的状态。</p>
+</li>
 </ol>
 </li>
 </ol>
