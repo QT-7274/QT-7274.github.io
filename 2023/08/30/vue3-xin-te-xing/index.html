@@ -477,7 +477,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    20 分
+                    21 分
                 </div>
                 
 
@@ -558,7 +558,7 @@
 <li>reactive定义的响应式数据是“深层次的”。</li>
 <li>内部基于 ES6 的 Proxy 实现，通过代理对象操作源对象内部数据进行操作。</li>
 </ul>
-<h2 id="Vue3-0中的响应式原理"><a href="#Vue3-0中的响应式原理" class="headerlink" title="Vue3.0中的响应式原理"></a>Vue3.0中的响应式原理</h2><h3 id="vue2-x的响应式"><a href="#vue2-x的响应式" class="headerlink" title="vue2.x的响应式"></a>vue2.x的响应式</h3><p>实现原理：</p>
+<h2 id="❗Vue3-0中的响应式原理"><a href="#❗Vue3-0中的响应式原理" class="headerlink" title="❗Vue3.0中的响应式原理"></a>❗Vue3.0中的响应式原理</h2><h3 id="vue2-x的响应式"><a href="#vue2-x的响应式" class="headerlink" title="vue2.x的响应式"></a>vue2.x的响应式</h3><p>实现原理：</p>
 <ul>
 <li><p>get</p>
 <p>属性的 getter 函数，当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的this并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值</p>
@@ -654,7 +654,7 @@
 </ol>
 <h3 id="Vue3-0的响应式"><a href="#Vue3-0的响应式" class="headerlink" title="Vue3.0的响应式"></a>Vue3.0的响应式</h3><p>实现原理:</p>
 <ul>
-<li><p>通过<code>Proxy</code>（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。</p>
+<li><p>通过<code>Proxy</code>（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等（直接监听<strong>整个对象</strong>）。</p>
 </li>
 <li><p>通过<code>Reflect</code>（反射）: 对源对象的属性进行操作。</p>
 </li>
