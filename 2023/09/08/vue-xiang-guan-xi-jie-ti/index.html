@@ -6,7 +6,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Vue相关细节题, QT-7274">
-    <meta name="description" content="Vue汇总Vue中为什么要设计一个data来处理数据？data设计就是一个闭包，Vue中组件时用来复用的，且 JavaScript 中对象是引用关系，如果组件中 data 是一个对象，那么这样作用域没有隔离，子组件中的 data 属性值会相">
+    <meta name="description" content="Vue汇总❗Vue中为什么要设计一个data来处理数据？实例和组件定义data的区别vue实例的时候定义data属性既可以是一个对象，也可以是一个函数
+const app &amp;#x3D; new Vue(&amp;#123;
+    el:&amp;quot">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -443,8 +445,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                前端开发
+                            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                理论知识
                             </a>
                         
                     </div>
@@ -463,21 +465,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-11
+                    2023-09-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.1k
+                    9.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    32 分
+                    36 分
                 </div>
                 
 
@@ -500,8 +502,31 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Vue汇总"><a href="#Vue汇总" class="headerlink" title="Vue汇总"></a>Vue汇总</h2><h3 id="Vue中为什么要设计一个data来处理数据？"><a href="#Vue中为什么要设计一个data来处理数据？" class="headerlink" title="Vue中为什么要设计一个data来处理数据？"></a>Vue中为什么要设计一个data来处理数据？</h3><p>data设计就是一个闭包，Vue中组件时用来复用的，且 JavaScript 中对象是引用关系，如果组件中 data 是一个对象，那么这样作用域没有隔离，子组件中的 data 属性值会相互影响。</p>
-<p>如果组件中 data 选项是一个函数（闭包），那么每个实例可以维护一份被返回对象的独立的拷贝，组件实例之间的 data 属性值不会相互影响；而 new Vue 的实例，是不会被复用的，因此不存在引用对象的问题。</p>
+                <h2 id="Vue汇总"><a href="#Vue汇总" class="headerlink" title="Vue汇总"></a>Vue汇总</h2><h3 id="❗Vue中为什么要设计一个data来处理数据？"><a href="#❗Vue中为什么要设计一个data来处理数据？" class="headerlink" title="❗Vue中为什么要设计一个data来处理数据？"></a>❗Vue中为什么要设计一个data来处理数据？</h3><h4 id="实例和组件定义data的区别"><a href="#实例和组件定义data的区别" class="headerlink" title="实例和组件定义data的区别"></a>实例和组件定义data的区别</h4><p><code>vue</code>实例的时候定义<code>data</code>属性既可以是一个对象，也可以是一个函数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const app &#x3D; new Vue(&#123;
+    el:&quot;#app&quot;,
+    &#x2F;&#x2F; 对象格式
+    data:&#123;
+        foo:&quot;foo&quot;
+    &#125;,
+    &#x2F;&#x2F; 函数格式
+    data()&#123;
+        return &#123;
+             foo:&quot;foo&quot;
+        &#125;
+    &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>组件中定义<code>data</code>属性，只能是一个函数</p>
+<p>如果为组件<code>data</code>直接定义为一个对象</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Vue.component(&#39;component1&#39;,&#123;
+    template:&#96;&lt;div&gt;组件&lt;&#x2F;div&gt;&#96;,
+    data:&#123;
+        foo:&quot;foo&quot;
+    &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>则会得到警告信息：返回的<code>data</code>应该是一个函数在每一个组件实例中</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let makeCounter &#x3D; function() &#123;
     let num &#x3D; 0;
@@ -529,20 +554,284 @@ counter1.add()
 console.log(counter1.value()) &#x2F;&#x2F;1 二者不受影响，虽然都拥有相同的方法，但有各自的独立的词法作用域
 console.log(counter2.value()) &#x2F;&#x2F;0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="说说你对SPA单页面的理解，它的优缺点分别是什么"><a href="#说说你对SPA单页面的理解，它的优缺点分别是什么" class="headerlink" title="说说你对SPA单页面的理解，它的优缺点分别是什么?"></a>说说你对SPA单页面的理解，它的优缺点分别是什么?</h3><p>SPA ( single-page application ) 仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是<strong>利用路由机制</strong>实现 HTML 内容的变换，UI与用户的交互，避免页面的重新加载。</p>
-<p>优点：</p>
+<h4 id="组件data定义函数与对象的区别"><a href="#组件data定义函数与对象的区别" class="headerlink" title="组件data定义函数与对象的区别"></a>组件data定义函数与对象的区别</h4><p>上面讲到组件<code>data</code>必须是一个<strong>函数</strong>，这是因为在我们定义好一个组件的时候，<code>vue</code>最终都会通过<code>Vue.extend()</code>构成组件实例。</p>
+<p>这里我们模仿组件构造函数，定义<code>data</code>属性，采用对象的形式：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Component()&#123;
+ 
+&#125;
+Component.prototype.data &#x3D; &#123;
+	count : 0
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>创建两个组件实例</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const componentA &#x3D; new Component()
+const componentB &#x3D; new Component()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>修改<code>componentA</code>组件<code>data</code>属性的值，<code>componentB</code>中的值也发生了改变</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(componentB.data.count)  &#x2F;&#x2F; 0
+componentA.data.count &#x3D; 1
+console.log(componentB.data.count)  &#x2F;&#x2F; 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>产生这样的原因这是两者共用了同一个内存地址，<code>componentA</code>修改的内容，同样对<code>componentB</code>产生了影响。</p>
+<p>如果我们采用函数的形式，则不会出现这种情况（<strong>函数返回的对象内存地址并不相同</strong>）</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Component()&#123;
+	this.data &#x3D; this.data()
+&#125;
+Component.prototype.data &#x3D; function ()&#123;
+    return &#123;
+   		count : 0
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>修改<code>componentA</code>组件<code>data</code>属性的值，<code>componentB</code>中的值不受影响</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(componentB.data.count)  &#x2F;&#x2F; 0
+componentA.data.count &#x3D; 1
+console.log(componentB.data.count)  &#x2F;&#x2F; 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><code>vue</code>组件可能会有很多个实例，采用函数返回一个全新<code>data</code>形式，使每个实例对象的数据不会受到其他实例对象数据的污染。</p>
+<h4 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h4><p>首先可以看看<code>vue</code>初始化<code>data</code>的代码，<code>data</code>的定义可以是函数也可以是对象</p>
+<p>源码位置：<code>/vue-dev/src/core/instance/state.js</code></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function initData (vm: Component) &#123;
+  let data &#x3D; vm.$options.data
+  data &#x3D; vm._data &#x3D; typeof data &#x3D;&#x3D;&#x3D; &#39;function&#39;
+    ? getData(data, vm)
+    : data || &#123;&#125;
+    ...
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>data</code>既能是<code>object</code>也能是<code>function</code>，那为什么还会出现上文警告呢？</p>
+<p>别急，继续看下文</p>
+<p>组件在创建的时候，会进行选项的合并</p>
+<p>源码位置：<code>/vue-dev/src/core/util/options.js</code></p>
+<p>自定义组件会进入<code>mergeOptions</code>进行选项合并</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Vue.prototype._init &#x3D; function (options?: Object) &#123;
+    ...
+    &#x2F;&#x2F; merge options
+    if (options &amp;&amp; options._isComponent) &#123;
+      &#x2F;&#x2F; optimize internal component instantiation
+      &#x2F;&#x2F; since dynamic options merging is pretty slow, and none of the
+      &#x2F;&#x2F; internal component options needs special treatment.
+      initInternalComponent(vm, options)
+    &#125; else &#123;
+      vm.$options &#x3D; mergeOptions(
+        resolveConstructorOptions(vm.constructor),
+        options || &#123;&#125;,
+        vm
+      )
+    &#125;
+    ...
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>定义<code>data</code>会进行数据校验</p>
+<p>源码位置：<code>/vue-dev/src/core/instance/init.js</code></p>
+<p>这时候<code>vm</code>实例为<code>undefined</code>，进入<code>if</code>判断，若<code>data</code>类型不是<code>function</code>，则出现警告提示</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">strats.data &#x3D; function (
+  parentVal: any,
+  childVal: any,
+  vm?: Component
+): ?Function &#123;
+  if (!vm) &#123;
+    if (childVal &amp;&amp; typeof childVal !&#x3D;&#x3D; &quot;function&quot;) &#123;
+      process.env.NODE_ENV !&#x3D;&#x3D; &quot;production&quot; &amp;&amp;
+        warn(
+          &#39;The &quot;data&quot; option should be a function &#39; +
+            &quot;that returns a per-instance value in component &quot; +
+            &quot;definitions.&quot;,
+          vm
+        );
+
+      return parentVal;
+    &#125;
+    return mergeDataOrFn(parentVal, childVal);
+  &#125;
+  return mergeDataOrFn(parentVal, childVal, vm);
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
-<li>用户体验好、快，内容的改变不需要重新加载整个页面，避免了不必要的跳转和重复渲染;</li>
-<li>基于上面一点，SPA相对对服务器压力小;</li>
-<li>前后端职责分离，架构清晰，前端进行交互逻辑，后端负责数据处理;</li>
+<li>根实例对象<code>data</code>可以是对象也可以是函数（根实例是单例），不会产生数据污染情况</li>
+<li>组件实例对象<code>data</code>必须为函数，目的是为了防止多个组件实例对象之间共用一个<code>data</code>，产生数据污染。采用函数的形式，<code>initData</code>时会将其作为工厂函数都会返回全新<code>data</code>对象</li>
+<li>如果组件中 data 选项是一个函数（闭包），那么每个实例可以维护一份被返回对象的独立的拷贝，组件实例之间的 data 属性值不会相互影响；而 new Vue 的实例，是不会被复用的，因此不存在引用对象的问题。</li>
 </ul>
-<p>缺点：</p>
+<h3 id="动态给vue的data添加一个新的属性时会发生什么？怎样解决？"><a href="#动态给vue的data添加一个新的属性时会发生什么？怎样解决？" class="headerlink" title="动态给vue的data添加一个新的属性时会发生什么？怎样解决？"></a>动态给vue的data添加一个新的属性时会发生什么？怎样解决？</h3><h4 id="直接添加属性的问题"><a href="#直接添加属性的问题" class="headerlink" title="直接添加属性的问题"></a>直接添加属性的问题</h4><p>我们从一个例子开始</p>
+<p>定义一个<code>p</code>标签，通过<code>v-for</code>指令进行遍历</p>
+<p>然后给<code>botton</code>标签绑定点击事件，我们预期点击按钮时，数据新增一个属性，界面也 新增一行</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>(value,key) in item<span class="token punctuation">"</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>key<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    &#123;&#123; value &#125;&#125;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>addProperty<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>动态添加新属性<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>实例化一个<code>vue</code>实例，定义<code>data</code>属性和<code>methods</code>方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const app &#x3D; new Vue(&#123;
+    el:&quot;#app&quot;,
+   	data:()&#x3D;&gt;&#123;
+       	item:&#123;
+            oldProperty:&quot;旧属性&quot;
+        &#125;
+    &#125;,
+    methods:&#123;
+        addProperty()&#123;
+            this.items.newProperty &#x3D; &quot;新属性&quot;  &#x2F;&#x2F; 为items添加新属性
+            console.log(this.items)  &#x2F;&#x2F; 输出带有newProperty的items
+        &#125;
+    &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>点击按钮，发现结果不及预期，数据虽然更新了（<code>console</code>打印出了新属性），但页面并没有更新。</p>
+<h4 id="原理分析-1"><a href="#原理分析-1" class="headerlink" title="原理分析"></a>原理分析</h4><p>为什么产生上面的情况呢？</p>
+<p>下面来分析一下</p>
+<p><code>vue2</code>是用过<code>Object.defineProperty</code>实现数据响应式</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const obj &#x3D; &#123;&#125;
+Object.defineProperty(obj, &#39;foo&#39;, &#123;
+        get() &#123;
+            console.log(&#96;get foo:$&#123;val&#125;&#96;);
+            return val
+        &#125;,
+        set(newVal) &#123;
+            if (newVal !&#x3D;&#x3D; val) &#123;
+                console.log(&#96;set foo:$&#123;newVal&#125;&#96;);
+                val &#x3D; newVal
+            &#125;
+        &#125;
+    &#125;)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>当我们访问<code>foo</code>属性或者设置<code>foo</code>值的时候都能够触发<code>setter</code>与<code>getter</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">obj<span class="token punctuation">.</span>foo   
+obj<span class="token punctuation">.</span>foo <span class="token operator">=</span> <span class="token string">'new'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>但是我们为<code>obj</code>添加新属性的时候，却无法触发事件属性的拦截</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">obj<span class="token punctuation">.</span>bar  <span class="token operator">=</span> <span class="token string">'新属性'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>原因是一开始<code>obj</code>的<code>foo</code>属性被设成了响应式数据，而<code>bar</code>是后面新增的属性，并没有通过<code>Object.defineProperty</code>设置成响应式数据。这个在后面章节也反复提到。</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p><code>Vue</code> 不允许在已经创建的实例上动态添加新的响应式属性</p>
+<p>若想实现<strong>数据与视图同步更新</strong>，可采取下面三种解决方案：</p>
 <ul>
-<li>初次加载耗时多：为实现单页Web应用功能及显示效果，需要在加载页面的时候将JavaScript、CSS统一加载，部分页面按需加载;</li>
-<li>前进后退路由管理：由于单页应用在一个页面中显示所有的内容，所以不能使用浏览器的前进后退功能，所有的页面切换需要自己建立堆栈管理;</li>
-<li>SEO难度较大：由于所有的内容都在一个页面中动态替换显示，所以在 SEO 上其有着天然的弱势。</li>
+<li>Vue.set()</li>
+<li>Object.assign()</li>
+<li>$forcecUpdated()</li>
 </ul>
-<h3 id="v-show-和-v-if-有什么区别？"><a href="#v-show-和-v-if-有什么区别？" class="headerlink" title="v-show 和 v-if 有什么区别？"></a><code>v-show</code> 和 <code>v-if</code> 有什么区别？</h3><p>详见：<a href="https://qt-7274.github.io/2023/08/11/shang-pin-hui-xing-neng-you-hua/">尚品汇-性能优化 | QT-7274 (qblog.top)</a></p>
+<h5 id="Vue-set"><a href="#Vue-set" class="headerlink" title="Vue.set()"></a>Vue.set()</h5><p>Vue.set( target, propertyName&#x2F;index, value )</p>
+<p>参数</p>
+<ul>
+<li><code>&#123;Object | Array&#125; target</code></li>
+<li><code>&#123;string | number&#125; propertyName/index</code></li>
+<li><code>&#123;any&#125; value</code></li>
+</ul>
+<p>返回值：设置的值</p>
+<p>通过<code>Vue.set</code>向响应式对象中添加一个<code>property</code>，并确保这个新 <code>property</code>同样是响应式的，且触发视图更新</p>
+<p>关于<code>Vue.set</code>源码，详见后续章节：[Vue 怎么用 vm.$set() 解决对象新增属性不能响应的问题？]</p>
+<h5 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h5><p>直接使用<code>Object.assign()</code>添加到对象的新属性不会触发更新</p>
+<p>应创建一个新的对象，合并原对象和混入对象的属性</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>someObject <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>someObject<span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token literal-property property">newProperty1</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>n<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="forceUpdate"><a href="#forceUpdate" class="headerlink" title="$forceUpdate"></a>$forceUpdate</h5><p>如果你发现你自己需要在 <code>Vue</code>中做一次强制更新，99.9% 的情况，是你在某个地方做错了事。</p>
+<p><code>$forceUpdate</code>迫使<code>Vue</code> 实例重新渲染</p>
+<p>PS：仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>如果为对象添加少量的新属性，可以直接采用<code>Vue.set()</code></li>
+<li>如果需要为新对象添加大量的新属性，则通过<code>Object.assign()</code>创建新对象</li>
+<li>如果你实在不知道怎么操作时，可采取<code>$forceUpdate()</code>进行强制刷新 (不建议)</li>
+</ul>
+<p>PS：<code>vue3</code>是用过<code>proxy</code>实现数据响应式的，直接动态添加新属性仍可以实现数据响应式</p>
+<h2 id="Vue中组件和插件有什么区别？"><a href="#Vue中组件和插件有什么区别？" class="headerlink" title="Vue中组件和插件有什么区别？"></a>Vue中组件和插件有什么区别？</h2><h3 id="组件是什么"><a href="#组件是什么" class="headerlink" title="组件是什么"></a>组件是什么</h3><p>回顾以前对组件的定义：</p>
+<p>组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式，在<code>Vue</code>中每一个<code>.vue</code>文件都可以视为一个组件</p>
+<p>组件的优势</p>
+<ul>
+<li><strong>降低整个系统的耦合度</strong>，在保持接口不变的情况下，我们可以替换不同的组件快速完成需求，例如输入框，可以替换为日历、时间、范围等组件作具体的实现</li>
+<li><strong>调试方便</strong>，由于整个系统是通过组件组合起来的，在出现问题的时候，可以用排除法直接移除组件，或者根据报错的组件快速定位问题，之所以能够快速定位，是因为每个组件之间低耦合，职责单一，所以逻辑会比分析整个系统要简单</li>
+<li><strong>提高可维护性</strong>，由于每个组件的职责单一，并且组件在系统中是被复用的，所以对代码进行优化可获得系统的整体升级</li>
+</ul>
+<h3 id="插件是什么"><a href="#插件是什么" class="headerlink" title="插件是什么"></a>插件是什么</h3><p>插件通常用来为 <code>Vue</code> 添加全局功能。插件的功能范围没有严格的限制——一般有下面几种：</p>
+<ul>
+<li>添加全局方法或者属性。如: <code>vue-custom-element</code></li>
+<li>添加全局资源：指令&#x2F;过滤器&#x2F;过渡等。如 <code>vue-touch</code></li>
+<li>通过全局混入来添加一些组件选项。如<code>vue-router</code></li>
+<li>添加 <code>Vue</code> 实例方法，通过把它们添加到 <code>Vue.prototype</code> 上实现。</li>
+<li>一个库，提供自己的 <code>API</code>，同时提供上面提到的一个或多个功能。如<code>vue-router</code></li>
+</ul>
+<h3 id="两者的区别"><a href="#两者的区别" class="headerlink" title="两者的区别"></a>两者的区别</h3><p>两者的区别主要表现在以下几个方面：</p>
+<ul>
+<li>编写形式</li>
+<li>注册形式</li>
+<li>使用场景</li>
+</ul>
+<h4 id="编写形式"><a href="#编写形式" class="headerlink" title="编写形式"></a>编写形式</h4><h5 id="编写组件"><a href="#编写组件" class="headerlink" title="编写组件"></a>编写组件</h5><p>编写一个组件，可以有很多方式，我们最常见的就是<code>vue</code>单文件的这种格式，每一个<code>.vue</code>文件我们都可以看成是一个组件</p>
+<p><code>vue</code>文件标准格式</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+export default&#123; 
+    ...
+&#125;
+&lt;&#x2F;script&gt;
+&lt;style&gt;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们还可以通过<code>template</code>属性来编写一个组件，如果组件内容多，我们可以在外部定义<code>template</code>组件内容，如果组件内容并不多，我们可直接写在<code>template</code>属性上</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>template id<span class="token operator">=</span><span class="token string">"testComponent"</span><span class="token operator">></span>     <span class="token comment">// 组件显示的内容</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>component<span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>   
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+
+Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'componentA'</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span> 
+    <span class="token literal-property property">template</span><span class="token operator">:</span> <span class="token string">'#testComponent'</span>  
+    <span class="token literal-property property">template</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;div>component&lt;/div></span><span class="token template-punctuation string">`</span></span>  <span class="token comment">// 组件内容少可以通过这种形式</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="编写插件"><a href="#编写插件" class="headerlink" title="编写插件"></a>编写插件</h5><p><code>vue</code>插件的实现应该暴露一个 <code>install</code> 方法。这个方法的第一个参数是 <code>Vue</code> 构造器，第二个参数是一个可选的选项对象</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">MyPlugin.install &#x3D; function (Vue, options) &#123;
+  &#x2F;&#x2F; 1. 添加全局方法或 property
+  Vue.myGlobalMethod &#x3D; function () &#123;
+    &#x2F;&#x2F; 逻辑...
+  &#125;
+
+  &#x2F;&#x2F; 2. 添加全局资源
+  Vue.directive(&#39;my-directive&#39;, &#123;
+    bind (el, binding, vnode, oldVnode) &#123;
+      &#x2F;&#x2F; 逻辑...
+    &#125;
+    ...
+  &#125;)
+
+  &#x2F;&#x2F; 3. 注入组件选项
+  Vue.mixin(&#123;
+    created: function () &#123;
+      &#x2F;&#x2F; 逻辑...
+    &#125;
+    ...
+  &#125;)
+
+  &#x2F;&#x2F; 4. 添加实例方法
+  Vue.prototype.$myMethod &#x3D; function (methodOptions) &#123;
+    &#x2F;&#x2F; 逻辑...
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="注册形式"><a href="#注册形式" class="headerlink" title="注册形式"></a>注册形式</h4><h5 id="组件注册"><a href="#组件注册" class="headerlink" title="组件注册"></a>组件注册</h5><p><code>vue</code>组件注册主要分为全局注册与局部注册</p>
+<p>全局注册通过<code>Vue.component</code>方法，第一个参数为组件的名称，第二个参数为传入的配置项</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'my-component-name'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>局部注册只需在用到的地方通过<code>components</code>属性注册一个组件</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> component1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span> <span class="token comment">// 定义一个组件</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+	<span class="token literal-property property">components</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+		component1   <span class="token comment">// 局部注册</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="插件注册"><a href="#插件注册" class="headerlink" title="插件注册"></a>插件注册</h5><p>插件的注册通过<code>Vue.use()</code>的方式进行注册（安装），第一个参数为插件的名字，第二个参数是可选择的配置项</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>插件名字<span class="token punctuation">,</span><span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span><span class="token punctuation">&#125;</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>注意的是：</p>
+<p><strong>注册插件的时候，需要在调用 <code>new Vue()</code> 启动应用之前完成</strong></p>
+<p><code>Vue.use</code>会自动阻止多次注册相同插件，只会注册一次</p>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>组件 <code>(Component)</code> 是用来构成你的 <code>App</code> 的业务模块，它的目标是 <code>App.vue</code></p>
+<p>插件 <code>(Plugin)</code> 是用来增强你的技术栈的功能模块，它的目标是 <code>Vue</code> 本身</p>
+<blockquote>
+<p>简单来说，插件就是指对<code>Vue</code>的功能的增强或补充</p>
+</blockquote>
+<h3 id="❗说说你对SPA单页面的理解，它的优缺点分别是什么"><a href="#❗说说你对SPA单页面的理解，它的优缺点分别是什么" class="headerlink" title="❗说说你对SPA单页面的理解，它的优缺点分别是什么?"></a>❗说说你对SPA单页面的理解，它的优缺点分别是什么?</h3><h3 id="❗v-show-和-v-if-有什么区别？"><a href="#❗v-show-和-v-if-有什么区别？" class="headerlink" title="❗v-show 和 v-if 有什么区别？"></a>❗<code>v-show</code> 和 <code>v-if</code> 有什么区别？</h3><p>详见：<a href="https://qt-7274.github.io/2023/08/11/shang-pin-hui-xing-neng-you-hua/">尚品汇-性能优化 | QT-7274 (qblog.top)</a></p>
+<h3 id="v-for-遍历必须为-item-添加-key，且避免同时使用-v-if-？"><a href="#v-for-遍历必须为-item-添加-key，且避免同时使用-v-if-？" class="headerlink" title="v-for 遍历必须为 item 添加 key，且避免同时使用 v-if ？"></a><code>v-for</code> 遍历必须为 item 添加 <code>key</code>，且避免同时使用 <code>v-if</code> ？</h3><p>详见：<a href="https://qt-7274.github.io/2023/09/11/vue-xing-neng-you-hua-xiang-jie/">Vue性能优化详解 | QT-7274 (qblog.top)</a></p>
 <h3 id="Class-与-Style-如何动态绑定"><a href="#Class-与-Style-如何动态绑定" class="headerlink" title="Class 与 Style 如何动态绑定?"></a>Class 与 Style 如何动态绑定?</h3><p>Class 可以通过对象语法和数组语法进行动态绑定:</p>
 <ul>
 <li>对象语法：</li>
@@ -762,187 +1051,7 @@ methods: &#123;
 <li>事件处理函数的作用域：在 Vue 中，事件处理函数默认情况下会自动绑定到组件实例上，这样可以访问组件的数据和方法。然而，如果在循环中使用事件处理函数，可能会遇到作用域问题，导致事件处理函数无法正确访问循环中的数据。可以通过使用箭头函数或 <code>bind</code> 方法来绑定正确的作用域。   </li>
 <li>无限循环的 Watcher ：在使用 Vue 的计算属性或侦听属性时，如果存在循环依赖关系，可能会导致无限循环的 Watcher 。这会导致性能问题和页面卡顿。为了避免这种情况，需要仔细检查计算属性和侦听属性之间的依赖关系，确保它们之间没有循环引用。</li>
 </ol>
-<h3 id="Vue-组件间通信有哪几种方式？"><a href="#Vue-组件间通信有哪几种方式？" class="headerlink" title="Vue 组件间通信有哪几种方式？"></a>Vue 组件间通信有哪几种方式？</h3><p>Vue 组件间通信分类：父子组件通信、隔代组件通信、兄弟组件通信</p>
-<p>父子组件通信：</p>
-<ol>
-<li><p><code>props</code> &#x2F; <code>$emit</code> 适用父子组件通信</p>
-</li>
-<li><p><code>ref</code> 与 <code>$parent</code> &#x2F; <code>$children</code> 适用父子组件通信 </p>
-<ul>
-<li><code>ref</code>：如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例</li>
-<li><code>$parent</code> &#x2F; <code>$children</code>：访问父 &#x2F; 子实例</li>
-</ul>
-<p>代码示例：</p>
-<p>首先，在父组件中，我们可以使用 <code>ref</code> 来引用子组件或DOM元素，并通过 <code>$parent</code> 来访问父组件的属性：</p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;child-component ref&#x3D;&quot;childRef&quot;&gt;&lt;&#x2F;child-component&gt;
-    &lt;button @click&#x3D;&quot;accessParentData&quot;&gt;访问父组件数据&lt;&#x2F;button&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
-
-&lt;script&gt;
-import ChildComponent from &#39;.&#x2F;ChildComponent.vue&#39;;
-
-export default &#123;
-  components: &#123;
-    ChildComponent
-  &#125;,
-  data() &#123;
-    return &#123;
-      parentData: &#39;这是父组件的数据&#39;
-    &#125;;
-  &#125;,
-  methods: &#123;
-    accessParentData() &#123;
-      console.log(this.$parent.parentData); &#x2F;&#x2F; 输出：这是父组件的数据
-      console.log(this.$refs.childRef.childData); &#x2F;&#x2F; 输出：这是子组件的数据
-    &#125;
-  &#125;
-&#125;;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>然后，在子组件中，我们可以通过 <code>$parent</code> 来访问父组件的属性：</p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;p&gt;&#123;&#123; childData &#125;&#125;&lt;&#x2F;p&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
-
-&lt;script&gt;
-export default &#123;
-  data() &#123;
-    return &#123;
-      childData: &#39;这是子组件的数据&#39;
-    &#125;;
-  &#125;,
-  mounted() &#123;
-    console.log(this.$parent.parentData); &#x2F;&#x2F; 输出：这是父组件的数据
-  &#125;
-&#125;;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>EventBus (<code>$emit</code> &#x2F; <code>$on</code>) 适用于 父子、隔代、兄弟组件通信</p>
-<p>这种方法通过一个空的 Vue 实例作为中央事件总线（事件中心），用它来触发事件和监听事件，从而实现任何组件间的通信，包括父子、隔代、兄弟组件。</p>
-<p>代码示例：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; event-bus.js
-import Vue from &#39;vue&#39;;
-export const EventBus &#x3D; new Vue();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>在发送方组件中，使用 <code>$emit</code> 来触发一个自定义事件，并传递需要传递的数据：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123; EventBus &#125; from &#39;.&#x2F;event-bus.js&#39;;
-
-export default &#123;
-  methods: &#123;
-    sendData() &#123;
-      const data &#x3D; &#39;Hello, EventBus!&#39;;
-      EventBus.$emit(&#39;custom-event&#39;, data);
-    &#125;
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>最后，在接收方组件中，使用 $on 来监听该自定义事件，并处理接收到的数据：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123; EventBus &#125; from &#39;.&#x2F;event-bus.js&#39;;
-
-export default &#123;
-  created() &#123;
-    EventBus.$on(&#39;custom-event&#39;, this.handleCustomEvent);
-  &#125;,
-  destroyed() &#123;
-    EventBus.$off(&#39;custom-event&#39;, this.handleCustomEvent);
-  &#125;,
-  methods: &#123;
-    handleCustomEvent(data) &#123;
-      console.log(data); &#x2F;&#x2F; 输出：Hello, EventBus!
-    &#125;
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-<p>隔代组件通信：</p>
-<ol>
-<li><p><code>$attrs</code> &#x2F; <code>$listeners</code> 适用于 隔代组件通信</p>
-<ul>
-<li><code>$attrs</code>：包含了父作用域中<strong>不被 prop 所识别（且获取）的特性绑定（class 和 style 除外）</strong>。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定（class 和 style 除外），并且可以通过 <code>v-bind=&quot;$attrs&quot;</code> 传入内部组件。通常配合 <code>inheritAttrs</code> 选项一起使用。</li>
-<li><code>$listeners</code>：包含了父作用域中的（不含 <code>.native</code> 修饰器的）<code>v-on</code> <strong>事件监听器</strong>。它可以通过 <code>v-on=&quot;$listeners&quot;</code> 传入内部组件。</li>
-</ul>
-<p>代码示例：</p>
-<p>首先，在父组件中，我们可以使用 <code>$attrs</code> 将父组件中所有非props属性传递给子组件，并使用 <code>$listeners</code> 将父组件中所有事件监听器传递给子组件：</p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;child-component v-bind&#x3D;&quot;$attrs&quot; v-on&#x3D;&quot;$listeners&quot;&gt;&lt;&#x2F;child-component&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
-
-&lt;script&gt;
-import ChildComponent from &#39;.&#x2F;ChildComponent.vue&#39;;
-
-export default &#123;
-  components: &#123;
-    ChildComponent
-  &#125;,
-  data() &#123;
-    return &#123;
-      parentData: &#39;这是父组件的数据&#39;
-    &#125;;
-  &#125;
-&#125;;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>然后，在子组件中，我们可以使用 <code>$attrs</code> 来访问父组件传递的非props属性，使用 <code>$listeners</code> 来注册父组件传递的事件监听器：</p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;p&gt;&#123;&#123; $attrs.parentData &#125;&#125;&lt;&#x2F;p&gt;
-    &lt;button @click&#x3D;&quot;$listeners.clickEvent&quot;&gt;触发父组件事件&lt;&#x2F;button&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
-
-&lt;script&gt;
-export default &#123;
-  mounted() &#123;
-    console.log(this.$attrs.parentData); &#x2F;&#x2F; 输出：这是父组件的数据
-  &#125;
-&#125;;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p><code>provide</code> &#x2F; <code>inject</code> 适用于 隔代组件通信</p>
-<p>祖先组件中通过 <code>provider</code> 来提供变量，然后在子孙组件中通过 <code>inject</code> 来注入变量。</p>
-<p><code>provide</code> &#x2F; <code>inject</code> API 主要解决了跨级组件间的通信问题，而不需要在每个中间组件中显式地传递。不过它的使用场景，主要是子组件获取上级组件的状态，跨级组件间建立了一种主动提供与依赖注入的关系。</p>
-<p>代码示例：</p>
-<p>首先，在父组件中，我们可以使用 <code>provide</code> 来提供数据给子孙组件：</p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;child-component&gt;&lt;&#x2F;child-component&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
-
-&lt;script&gt;
-export default &#123;
-  provide: &#123;
-    parentData: &#39;这是父组件的数据&#39;
-  &#125;
-&#125;;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在上面的示例中，我们使用 <code>provide</code> 来提供一个名为 <code>parentData</code> 的数据给子孙组件。</p>
-<p>然后，在孙子组件中，我们可以使用 <code>inject</code> 来注入父组件提供的数据：</p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;grandchild-component&gt;&lt;&#x2F;grandchild-component&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
-
-&lt;script&gt;
-export default &#123;
-  inject: [&#39;parentData&#39;]
-&#125;;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-<p>Vuex状态管理：</p>
-<ul>
-<li>Vuex的状态存储是响应式的。当 Vue 组件从 <code>store</code> 中读取状态的时候，若 <code>store</code> 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</li>
-<li>改变 <code>store</code> 中的状态的唯一途径就是显式地提交（<code>commit</code>）<code>mutation</code>。这样使得我们可以方便地跟踪每一个状态的变化。</li>
-</ul>
-<h3 id="你使用过-Vuex-吗？"><a href="#你使用过-Vuex-吗？" class="headerlink" title="你使用过 Vuex 吗？"></a>你使用过 Vuex 吗？</h3><p>Vuex状态管理：</p>
+<h1 id="组件通信另开一篇"><a href="#组件通信另开一篇" class="headerlink" title="组件通信另开一篇"></a>组件通信另开一篇</h1><h3 id="你使用过-Vuex-吗？"><a href="#你使用过-Vuex-吗？" class="headerlink" title="你使用过 Vuex 吗？"></a>你使用过 Vuex 吗？</h3><p>Vuex状态管理：</p>
 <ul>
 <li>Vuex的状态存储是响应式的。当 Vue 组件从 <code>store</code> 中读取状态的时候，若 <code>store</code> 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</li>
 <li>改变 <code>store</code> 中的状态的唯一途径就是显式地提交（<code>commit</code>）<code>mutation</code>。这样使得我们可以方便地跟踪每一个状态的变化。<ul>

@@ -466,14 +466,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.4k
+                    7.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    26 分
+                    25 分
                 </div>
                 
 
@@ -764,32 +764,6 @@
 <h2 id="讲讲-viewport-和移动端布局"><a href="#讲讲-viewport-和移动端布局" class="headerlink" title="讲讲 viewport 和移动端布局"></a>讲讲 viewport 和移动端布局</h2><p><a target="_blank" rel="noopener" href="https://github.com/forthealllight/blog/issues/13">https://github.com/forthealllight/blog/issues/13</a></p>
 <h2 id="addEventListener-参数"><a href="#addEventListener-参数" class="headerlink" title="addEventListener 参数"></a>addEventListener 参数</h2><p><code>addEventListener(event, function, useCapture)</code></p>
 <p>其中，<code>event</code> 指定事件名；<code>function</code> 指定要事件触发时执行的函数；<code>useCapture</code> 指定事件是否在捕获或冒泡阶段执行。</p>
-<h2 id="强，协商缓存"><a href="#强，协商缓存" class="headerlink" title="强，协商缓存"></a>强，协商缓存</h2><p>缓存分为两种：强缓存和协商缓存，根据响应的 header 内容来决定。</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>获取资源形式</th>
-<th>状态码</th>
-<th>发送请求到服务器</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>强缓存</td>
-<td>从缓存取</td>
-<td>200（from cache）</td>
-<td>否，直接从缓存取</td>
-</tr>
-<tr>
-<td>协商缓存</td>
-<td>从缓存取</td>
-<td>304（not modified）</td>
-<td>是，通过服务器来告知缓存是否可用</td>
-</tr>
-</tbody></table>
-<p>强缓存相关字段有 expires，cache-control。如果 cache-control 与 expires 同时存在的话，<br>cache-control 的优先级高于 expires。<br>协商缓存相关字段有 Last-Modified&#x2F;If-Modified-Since，Etag&#x2F;If-None-Match</p>
-<h2 id="强缓存、协商缓存什么时候用哪个"><a href="#强缓存、协商缓存什么时候用哪个" class="headerlink" title="强缓存、协商缓存什么时候用哪个"></a>强缓存、协商缓存什么时候用哪个</h2><p>因为服务器上的资源不是一直固定不变的，大多数情况下它会更新，这个时候如果我们<br>还访问本地缓存，那么对用户来说，那就相当于资源没有更新，用户看到的还是旧的资<br>源；所以我们希望服务器上的资源更新了浏览器就请求新的资源，没有更新就使用本地<br>的缓存，以最大程度的减少因网络请求而产生的资源浪费。</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008956069">HTTP强缓存和协商缓存 - JavaScript学习笔记 - SegmentFault 思否</a></p>
 <h2 id="HTTP-支持的方法"><a href="#HTTP-支持的方法" class="headerlink" title="HTTP 支持的方法"></a>HTTP 支持的方法</h2><p>GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE, CONNECT</p>
 <h2 id="浏览器在生成页面的时候，会生成哪两颗树？"><a href="#浏览器在生成页面的时候，会生成哪两颗树？" class="headerlink" title="浏览器在生成页面的时候，会生成哪两颗树？"></a>浏览器在生成页面的时候，会生成哪两颗树？</h2><p>构造两棵树，DOM 树和 CSSOM 规则树，<br>当浏览器接收到服务器相应来的 HTML 文档后，会遍历文档节点，生成 DOM 树，<br>CSSOM 规则树由浏览器解析 CSS 文件生成。</p>
 <h2 id="怎么看网站的性能如何"><a href="#怎么看网站的性能如何" class="headerlink" title="怎么看网站的性能如何"></a>怎么看网站的性能如何</h2><p>检测页面加载时间一般有两种方式，一种是被动去测：就是在被检测的页面置入脚本或<br>探针，当用户访问网页时，探针自动采集数据并传回数据库进行分析，另一种主动监测<br>的方式，即主动的搭建分布式受控环境，模拟用户发起页面访问请求，主动采集性能数<br>据并分析，在检测的精准度上，专业的第三方工具效果更佳，比如说性能极客。</p>
@@ -1332,8 +1306,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    前端开发
+                            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
                                 </a>
                             
                             
@@ -1385,8 +1359,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    前端开发
+                            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
                                 </a>
                             
                             

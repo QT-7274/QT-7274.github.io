@@ -6,18 +6,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Vue核心 Vue生命周期, QT-7274">
-    <meta name="description" content="Vue生命周期
+    <meta name="description" content="更新记录
+2023-09-13：新增生命周期具体分析，新增“数据请求在created和mouted的区别”章节。
+
+Vue生命周期
 总结常用的生命周期钩子：
 
 
-mounted发送ajax请求、启动定时器、绑定自定义事件、订阅消息等初始化操作。
-beforeDestroy清除定时器、解绑自定义事件、取消订阅消息等首尾工作.
-
-
-关于销毁Vue实例：
-
-
-">
+mounted发送ajax请求、启动定时器、绑定自定义事件、订阅消息等初始化操">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -474,21 +470,21 @@ beforeDestroy清除定时器、解绑自定义事件、取消订阅消息等首�
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-26
+                    2023-09-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    153
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -511,7 +507,10 @@ beforeDestroy清除定时器、解绑自定义事件、取消订阅消息等首�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Vue生命周期"><a href="#Vue生命周期" class="headerlink" title="Vue生命周期"></a>Vue生命周期</h2><p><img src="/medias/images/loading.gif" data-original="/2023/07/10/vue-he-xin-vue-sheng-ming-zhou-qi/image-20230710223707518.png" alt="image-20230710223707518"></p>
+                <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a><font color='#3498db'>更新记录</font></h3><ul>
+<li>2023-09-13：新增生命周期具体分析，新增“数据请求在created和mouted的区别”章节。</li>
+</ul>
+<h2 id="Vue生命周期"><a href="#Vue生命周期" class="headerlink" title="Vue生命周期"></a>Vue生命周期</h2><p><img src="/medias/images/loading.gif" data-original="/2023/07/10/vue-he-xin-vue-sheng-ming-zhou-qi/image-20230710223707518.png" alt="image-20230710223707518"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>常用的生命周期钩子：</p>
 <blockquote>
 <ul>
@@ -527,6 +526,99 @@ beforeDestroy清除定时器、解绑自定义事件、取消订阅消息等首�
 <li>beforeCreate和created指的并不是vm创建之前和创建之后，指的是数据监测、数据代理之前和之后。</li>
 </ul>
 </blockquote>
+<h2 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h2><p><strong>beforeCreate -&gt; created</strong></p>
+<ul>
+<li>初始化<code>vue</code>实例，进行数据观测</li>
+</ul>
+<p><strong>created</strong></p>
+<ul>
+<li>完成数据观测，属性与方法的运算，<code>watch</code>、<code>event</code>事件回调的配置</li>
+<li>可调用<code>methods</code>中的方法，访问和修改data数据触发响应式渲染<code>dom</code>，可通过<code>computed</code>和<code>watch</code>完成数据计算</li>
+<li>此时<code>vm.$el</code> 并没有被创建</li>
+</ul>
+<p><strong>created -&gt; beforeMount</strong></p>
+<ul>
+<li>判断是否存在<code>el</code>选项，若不存在则停止编译，直到调用<code>vm.$mount(el)</code>才会继续编译</li>
+<li>优先级：<code>render</code> &gt; <code>template</code> &gt; <code>outerHTML</code></li>
+<li><code>vm.el</code>获取到的是挂载<code>DOM</code>的</li>
+</ul>
+<p><strong>beforeMount</strong></p>
+<ul>
+<li>在此阶段可获取到<code>vm.el</code></li>
+<li>此阶段<code>vm.el</code>虽已完成DOM初始化，但并未挂载在<code>el</code>选项上</li>
+</ul>
+<p><strong>beforeMount -&gt; mounted</strong></p>
+<ul>
+<li>此阶段<code>vm.el</code>完成挂载，<code>vm.$el</code>生成的<code>DOM</code>替换了<code>el</code>选项所对应的<code>DOM</code></li>
+</ul>
+<p><strong>mounted</strong></p>
+<ul>
+<li><code>vm.el</code>已完成<code>DOM</code>的挂载与渲染，此刻打印<code>vm.$el</code>，发现之前的挂载点及内容已被替换成新的DOM</li>
+</ul>
+<p><strong>beforeUpdate</strong></p>
+<ul>
+<li>更新的数据必须是被渲染在模板上的（<code>el</code>、<code>template</code>、<code>render</code>之一）</li>
+<li>此时<code>view</code>层还未更新</li>
+<li>若在<code>beforeUpdate</code>中再次修改数据，不会再次触发更新方法</li>
+</ul>
+<p><strong>updated</strong></p>
+<ul>
+<li>完成<code>view</code>层的更新</li>
+<li>若在<code>updated</code>中再次修改数据，会再次触发更新方法（<code>beforeUpdate</code>、<code>updated</code>）</li>
+</ul>
+<p><strong>beforeDestroy</strong></p>
+<ul>
+<li>实例被销毁前调用，此时实例属性与方法仍可访问</li>
+</ul>
+<p><strong>destroyed</strong></p>
+<ul>
+<li>完全销毁一个实例。可清理它与其它实例的连接，解绑它的全部指令及事件监听器</li>
+<li>并不能清除DOM，仅仅销毁实例</li>
+</ul>
+<p><strong>使用场景分析</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">生命周期</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">beforeCreate</td>
+<td align="left">执行时组件实例还未创建，通常用于插件开发中执行一些初始化任务，如<strong>设置全局变量</strong>、<strong>引入插件</strong>等</td>
+</tr>
+<tr>
+<td align="left">created</td>
+<td align="left">组件初始化完毕，各种数据可以使用，常用于<strong>异步数据获取</strong></td>
+</tr>
+<tr>
+<td align="left">beforeMount</td>
+<td align="left">未执行渲染、更新，dom未创建，可以在此阶段进行一些DOM操作，如<strong>修改DOM结构</strong>、<strong>插入其他DOM元素</strong>等</td>
+</tr>
+<tr>
+<td align="left">mounted</td>
+<td align="left">初始化结束，dom已创建，可用于获取访问数据和dom元素，如<strong>初始化第三方库</strong>、<strong>绑定事件监听器</strong>等</td>
+</tr>
+<tr>
+<td align="left">beforeUpdate</td>
+<td align="left">更新前，可用于获取更新前各种状态，可以在此阶段进行一些数据的准备工作或修改，如<strong>计算属性</strong>、<strong>监听器的更新</strong>等。</td>
+</tr>
+<tr>
+<td align="left">updated</td>
+<td align="left">更新后，所有状态已是最新，可以在此阶段执行一些需要根据数据变化做出响应的操作，如<strong>更新DOM</strong>、<strong>调用第三方库</strong>的方法等。</td>
+</tr>
+<tr>
+<td align="left">beforeDestroy</td>
+<td align="left">销毁前，可用于一些定时器或订阅的取消，<strong>取消事件监听器</strong>、<strong>清除定时器</strong>、<strong>解绑全局事件</strong>等。</td>
+</tr>
+<tr>
+<td align="left">destroyed</td>
+<td align="left">组件已销毁，作用同上，可以在此阶段进行一些善后工作，如<strong>释放资源</strong>、<strong>清理内存</strong>等。</td>
+</tr>
+</tbody></table>
+<h2 id="数据请求在created和mouted的区别"><a href="#数据请求在created和mouted的区别" class="headerlink" title="数据请求在created和mouted的区别"></a>数据请求在created和mouted的区别</h2><p>两者的相同点：都能拿到实例对象的属性和方法。</p>
+<p>两者的不同点：触发时机不同，<code>created</code>是在组件实例一旦创建完成的时候立刻调用，这时候页面<code>dom</code>节点并未生成；<code>mounted</code>是在页面<code>dom</code>节点渲染完毕之后就立刻执行的。触发时机上<code>created</code>是比<code>mounted</code>要更早的。</p>
+<p>放在<code>mounted</code>中的请求有可能导致页面闪动（因为此时页面<code>dom</code>结构已经生成），但如果在页面加载前完成请求，则不会出现此情况。建议对页面内容的改动放在<code>created</code>生命周期当中。</p>
 
                 
             </div>
