@@ -468,21 +468,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-26
+                    2023-09-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    4.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    20 分
                 </div>
                 
 
@@ -827,12 +827,35 @@ $route<span class="token punctuation">.</span>params<span class="token punctuati
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="缓存路由组件"><a href="#缓存路由组件" class="headerlink" title="缓存路由组件"></a>缓存路由组件</h2><p>作用：</p>
+<h2 id="缓存路由组件"><a href="#缓存路由组件" class="headerlink" title="缓存路由组件"></a>缓存路由组件</h2><h3 id="Keep-alive-是什么"><a href="#Keep-alive-是什么" class="headerlink" title="Keep-alive 是什么"></a>Keep-alive 是什么</h3><p><code>keep-alive</code>是<code>vue</code>中的内置组件，能在组件切换过程中将状态保留在内存中，防止重复渲染<code>DOM</code></p>
+<p><code>keep-alive</code> 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们</p>
+<p>作用：</p>
 <ul>
-<li><code>include</code>属性让不展示的路由组件保持挂载，不被销毁。</li>
-<li><code>exclude</code>属性除了这些组件，其他的保持挂载。</li>
+<li><code>include</code> - 字符串或正则表达式。只有名称匹配的组件会被缓存。</li>
+<li><code>exclude</code> - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。</li>
+<li><code>max</code> - 数字。最多可以缓存多少组件实例</li>
 </ul>
-<p><code>&lt;keep-alive include = &quot;News&quot;&gt;&lt;router-view&gt;&lt;/router-view&gt;&lt;/keep-alive&gt;</code></p>
+<h3 id="在组件中使用"><a href="#在组件中使用" class="headerlink" title="在组件中使用"></a>在组件中使用</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;keep-alive include&#x3D;&quot;a,b&quot;&gt;
+  &lt;component :is&#x3D;&quot;view&quot;&gt;&lt;&#x2F;component&gt;
+&lt;&#x2F;keep-alive&gt;
+
+&lt;!-- 正则表达式 (使用 &#96;v-bind&#96;) --&gt;
+&lt;keep-alive :include&#x3D;&quot;&#x2F;a|b&#x2F;&quot;&gt;
+  &lt;component :is&#x3D;&quot;view&quot;&gt;&lt;&#x2F;component&gt;
+&lt;&#x2F;keep-alive&gt;
+
+&lt;!-- 数组 (使用 &#96;v-bind&#96;) --&gt;
+&lt;keep-alive :include&#x3D;&quot;[&#39;a&#39;, &#39;b&#39;]&quot;&gt;
+  &lt;component :is&#x3D;&quot;view&quot;&gt;&lt;&#x2F;component&gt;
+&lt;&#x2F;keep-alive&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>匹配首先检查组件自身的 <code>name</code> 选项，如果 <code>name</code> 选项不可用，则匹配它的局部注册名称 (父组件 <code>components</code> 选项的键值)，<strong>匿名组件不能被匹配</strong></p>
+<p>⚠️设置了 keep-alive 缓存的组件，会多出两个生命周期钩子（<code>activated</code>与<code>deactivated</code>）：</p>
+<ul>
+<li>首次进入组件时：<code>beforeRouteEnter</code> &gt; <code>beforeCreate</code> &gt; <code>created</code>&gt; <code>mounted</code> &gt; <code>activated</code> &gt; … … &gt; <code>beforeRouteLeave</code> &gt; <code>deactivated</code></li>
+<li>再次进入组件时：<code>beforeRouteEnter</code> &gt;<code>activated</code> &gt; … … &gt; <code>beforeRouteLeave</code> &gt; <code>deactivated</code></li>
+</ul>
+<h3 id="在路由中使用"><a href="#在路由中使用" class="headerlink" title="在路由中使用"></a>在路由中使用</h3><p><code>&lt;keep-alive include = &quot;News&quot;&gt;&lt;router-view&gt;&lt;/router-view&gt;&lt;/keep-alive&gt;</code></p>
 <p><code>&lt;keep-alive :include = &quot;[&#39;News&#39;,&#39;Message&#39;]&quot;&gt;&lt;router-view&gt;&lt;/router-view&gt;&lt;/keep-alive&gt;</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&#x2F;&#x2F; 缓存一个路由组件
 &lt;keep-alive include &#x3D; &quot;News&quot;&gt;
@@ -844,6 +867,239 @@ $route<span class="token punctuation">.</span>params<span class="token punctuati
 	&lt;router-view&gt;&lt;&#x2F;router-view&gt;
 &lt;&#x2F;keep-alive&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>使用原则：当我们在某些场景下不需要让页面重新加载时我们可以使用<code>keepalive</code></p>
+<p>举个栗子:</p>
+<ul>
+<li><p>当我们从<code>首页</code>–&gt;<code>列表页</code>–&gt;<code>商详页</code>–&gt;<code>再返回</code>，这时候列表页应该是需要<code>keep-alive</code></p>
+</li>
+<li><p>从<code>首页</code>–&gt;<code>列表页</code>–&gt;<code>商详页</code>–&gt;<code>返回到列表页(需要缓存)</code>–&gt;<code>返回到首页(需要缓存)</code>–&gt;<code>再次进入列表页(不需要缓存)</code>，这时候可以按需来控制页面的<code>keep-alive</code></p>
+<p>例如：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;keep-alive :include&#x3D;&quot;shouldCache ? [&#39;home&#39;] : []&quot;&gt;
+      &lt;!-- 列表页的内容 --&gt;
+    &lt;&#x2F;keep-alive&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+export default &#123;
+  computed: &#123;
+    shouldCache() &#123;
+      &#x2F;&#x2F; 判断列表页的来源是否是首页
+      return this.$route.params.from !&#x3D;&#x3D; &#39;home&#39;;
+    &#125;
+  &#125;
+&#125;;
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<p>在路由中设置<code>keepAlive</code>属性判断是否需要缓存</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#123;
+  path: &#39;list&#39;,
+  name: &#39;itemList&#39;, &#x2F;&#x2F; 列表页
+  component (resolve) &#123;
+    require([&#39;@&#x2F;pages&#x2F;item&#x2F;list&#39;], resolve)
+ &#125;,
+ meta: &#123;
+  keepAlive: true,
+  title: &#39;列表页&#39;
+ &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用<code>&lt;keep-alive&gt;</code></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;div id&#x3D;&quot;app&quot; class&#x3D;&#39;wrapper&#39;&gt;
+    &lt;keep-alive&gt;
+        &lt;!-- 需要缓存的视图组件 --&gt; 
+        &lt;router-view v-if&#x3D;&quot;$route.meta.keepAlive&quot;&gt;&lt;&#x2F;router-view&gt;
+     &lt;&#x2F;keep-alive&gt;
+      &lt;!-- 不需要缓存的视图组件 --&gt;
+     &lt;router-view v-if&#x3D;&quot;!$route.meta.keepAlive&quot;&gt;&lt;&#x2F;router-view&gt;
+&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p><code>keep-alive</code>是<code>vue</code>中内置的一个组件</p>
+<p>源码位置：src&#x2F;core&#x2F;components&#x2F;keep-alive.js</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">export <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  name<span class="token punctuation">:</span> <span class="token char">'keep-alive'</span><span class="token punctuation">,</span>
+  abstract<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+  props<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+    include<span class="token punctuation">:</span> <span class="token punctuation">[</span>String<span class="token punctuation">,</span> RegExp<span class="token punctuation">,</span> Array<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    exclude<span class="token punctuation">:</span> <span class="token punctuation">[</span>String<span class="token punctuation">,</span> RegExp<span class="token punctuation">,</span> Array<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    max<span class="token punctuation">:</span> <span class="token punctuation">[</span>String<span class="token punctuation">,</span> Number<span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+
+  created <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    this<span class="token punctuation">.</span>cache <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>null<span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>keys <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+
+  destroyed <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key in this<span class="token punctuation">.</span>cache<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">pruneCacheEntry</span><span class="token punctuation">(</span>this<span class="token punctuation">.</span>cache<span class="token punctuation">,</span> key<span class="token punctuation">,</span> this<span class="token punctuation">.</span>keys<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+
+  mounted <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    this<span class="token punctuation">.</span>$<span class="token function">watch</span><span class="token punctuation">(</span><span class="token char">'include'</span><span class="token punctuation">,</span> val <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+      <span class="token function">pruneCache</span><span class="token punctuation">(</span>this<span class="token punctuation">,</span> name <span class="token operator">=</span><span class="token operator">></span> <span class="token function">matches</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>$<span class="token function">watch</span><span class="token punctuation">(</span><span class="token char">'exclude'</span><span class="token punctuation">,</span> val <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+      <span class="token function">pruneCache</span><span class="token punctuation">(</span>this<span class="token punctuation">,</span> name <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">!</span><span class="token function">matches</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* 获取默认插槽中的第一个组件节点 */</span>
+    <span class="token keyword">const</span> slot <span class="token operator">=</span> this<span class="token punctuation">.</span>$slots<span class="token punctuation">.</span><span class="token keyword">default</span>
+    <span class="token keyword">const</span> vnode <span class="token operator">=</span> <span class="token function">getFirstComponentChild</span><span class="token punctuation">(</span>slot<span class="token punctuation">)</span>
+    <span class="token comment">/* 获取该组件节点的componentOptions */</span>
+    <span class="token keyword">const</span> componentOptions <span class="token operator">=</span> vnode <span class="token operator">&amp;&amp;</span> vnode<span class="token punctuation">.</span>componentOptions
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>componentOptions<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">/* 获取该组件节点的名称，优先获取组件的name字段，如果name不存在则获取组件的tag */</span>
+      <span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token function">getComponentName</span><span class="token punctuation">(</span>componentOptions<span class="token punctuation">)</span>
+
+      <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> include<span class="token punctuation">,</span> exclude <span class="token punctuation">&#125;</span> <span class="token operator">=</span> this
+      <span class="token comment">/* 如果name不在inlcude中或者存在于exlude中则表示不缓存，直接返回vnode */</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>
+        <span class="token punctuation">(</span>include <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token operator">!</span>name <span class="token operator">||</span> <span class="token operator">!</span><span class="token function">matches</span><span class="token punctuation">(</span>include<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token comment">// excluded</span>
+        <span class="token punctuation">(</span>exclude <span class="token operator">&amp;&amp;</span> name <span class="token operator">&amp;&amp;</span> <span class="token function">matches</span><span class="token punctuation">(</span>exclude<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> vnode
+      <span class="token punctuation">&#125;</span>
+
+      <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> cache<span class="token punctuation">,</span> keys <span class="token punctuation">&#125;</span> <span class="token operator">=</span> this
+      <span class="token comment">/* 获取组件的key值 */</span>
+      <span class="token keyword">const</span> key <span class="token operator">=</span> vnode<span class="token punctuation">.</span>key <span class="token operator">==</span> null
+        <span class="token comment">// same constructor may get registered as different local components</span>
+        <span class="token comment">// so cid alone is not enough (#3269)</span>
+        ? componentOptions<span class="token punctuation">.</span>Ctor<span class="token punctuation">.</span>cid <span class="token operator">+</span> <span class="token punctuation">(</span>componentOptions<span class="token punctuation">.</span>tag ? <span class="token string">`::$&#123;componentOptions.tag&#125;`</span> <span class="token punctuation">:</span> <span class="token char">''</span><span class="token punctuation">)</span>
+        <span class="token punctuation">:</span> vnode<span class="token punctuation">.</span>key
+     <span class="token comment">/*  拿到key值后去this.cache对象中去寻找是否有该值，如果有则表示该组件有缓存，即命中缓存 */</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        vnode<span class="token punctuation">.</span>componentInstance <span class="token operator">=</span> cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">.</span>componentInstance
+        <span class="token comment">// make current key freshest</span>
+        <span class="token function">remove</span><span class="token punctuation">(</span>keys<span class="token punctuation">,</span> key<span class="token punctuation">)</span>
+        keys<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+        <span class="token comment">/* 如果没有命中缓存，则将其设置进缓存 */</span>
+        <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> vnode
+        keys<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+        <span class="token comment">// prune oldest entry</span>
+        <span class="token comment">/* 如果配置了max并且缓存的长度超过了this.max，则从缓存中删除第一个 */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>this<span class="token punctuation">.</span>max <span class="token operator">&amp;&amp;</span> keys<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token function">parseInt</span><span class="token punctuation">(</span>this<span class="token punctuation">.</span>max<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token function">pruneCacheEntry</span><span class="token punctuation">(</span>cache<span class="token punctuation">,</span> keys<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> keys<span class="token punctuation">,</span> this<span class="token punctuation">.</span>_vnode<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+
+      vnode<span class="token punctuation">.</span>data<span class="token punctuation">.</span>keepAlive <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> vnode <span class="token operator">||</span> <span class="token punctuation">(</span>slot <span class="token operator">&amp;&amp;</span> slot<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看到该组件没有<code>template</code>，而是用了<code>render</code>，在组件渲染的时候会自动执行<code>render</code>函数</p>
+<p><code>this.cache</code>是一个对象，用来存储需要缓存的组件，它将以如下形式存储：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">this<span class="token punctuation">.</span>cache <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token char">'key1'</span><span class="token punctuation">:</span><span class="token char">'组件1'</span><span class="token punctuation">,</span>
+    <span class="token char">'key2'</span><span class="token punctuation">:</span><span class="token char">'组件2'</span><span class="token punctuation">,</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在组件销毁的时候执行<code>pruneCacheEntry</code>函数</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">function pruneCacheEntry <span class="token punctuation">(</span>
+  cache<span class="token punctuation">:</span> VNodeCache<span class="token punctuation">,</span>
+  key<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+  keys<span class="token punctuation">:</span> Array<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">></span><span class="token punctuation">,</span>
+  current?<span class="token punctuation">:</span> VNode
+<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> cached <span class="token operator">=</span> cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+  <span class="token comment">/* 判断当前没有处于被渲染状态的组件，将其销毁*/</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>cached <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token operator">!</span>current <span class="token operator">||</span> cached<span class="token punctuation">.</span>tag <span class="token operator">!=</span><span class="token operator">=</span> current<span class="token punctuation">.</span>tag<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    cached<span class="token punctuation">.</span>componentInstance<span class="token punctuation">.</span>$<span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> null
+  <span class="token function">remove</span><span class="token punctuation">(</span>keys<span class="token punctuation">,</span> key<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在<code>mounted</code>钩子函数中观测 <code>include</code> 和 <code>exclude</code> 的变化，如下：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">mounted <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    this<span class="token punctuation">.</span>$<span class="token function">watch</span><span class="token punctuation">(</span><span class="token char">'include'</span><span class="token punctuation">,</span> val <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+        <span class="token function">pruneCache</span><span class="token punctuation">(</span>this<span class="token punctuation">,</span> name <span class="token operator">=</span><span class="token operator">></span> <span class="token function">matches</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>$<span class="token function">watch</span><span class="token punctuation">(</span><span class="token char">'exclude'</span><span class="token punctuation">,</span> val <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+        <span class="token function">pruneCache</span><span class="token punctuation">(</span>this<span class="token punctuation">,</span> name <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">!</span><span class="token function">matches</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果<code>include</code> 或<code>exclude</code> 发生了变化，即表示定义需要缓存的组件的规则或者不需要缓存的组件的规则发生了变化，那么就执行<code>pruneCache</code>函数，函数如下：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">function pruneCache <span class="token punctuation">(</span>keepAliveInstance<span class="token punctuation">,</span> filter<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> cache<span class="token punctuation">,</span> keys<span class="token punctuation">,</span> _vnode <span class="token punctuation">&#125;</span> <span class="token operator">=</span> keepAliveInstance
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key in cache<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> cachedNode <span class="token operator">=</span> cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>cachedNode<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token function">getComponentName</span><span class="token punctuation">(</span>cachedNode<span class="token punctuation">.</span>componentOptions<span class="token punctuation">)</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>name <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">filter</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">pruneCacheEntry</span><span class="token punctuation">(</span>cache<span class="token punctuation">,</span> key<span class="token punctuation">,</span> keys<span class="token punctuation">,</span> _vnode<span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在该函数内对<code>this.cache</code>对象进行遍历，取出每一项的<code>name</code>值，用其与新的缓存规则进行匹配，如果匹配不上，则表示在新的缓存规则下该组件已经不需要被缓存，则调用<code>pruneCacheEntry</code>函数将其从<code>this.cache</code>对象剔除即可</p>
+<p>关于<code>keep-alive</code>的最强大缓存功能是在<code>render</code>函数中实现</p>
+<p>首先获取组件的<code>key</code>值：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> key <span class="token operator">=</span> vnode<span class="token punctuation">.</span>key <span class="token operator">==</span> null? 
+componentOptions<span class="token punctuation">.</span>Ctor<span class="token punctuation">.</span>cid <span class="token operator">+</span> <span class="token punctuation">(</span>componentOptions<span class="token punctuation">.</span>tag ? <span class="token string">`::$&#123;componentOptions.tag&#125;`</span> <span class="token punctuation">:</span> <span class="token char">''</span><span class="token punctuation">)</span>
+<span class="token punctuation">:</span> vnode<span class="token punctuation">.</span>key<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>拿到<code>key</code>值后去<code>this.cache</code>对象中去寻找是否有该值，如果有则表示该组件有缓存，即命中缓存，如下：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">/* 如果命中缓存，则直接从缓存中拿 vnode 的组件实例 */</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    vnode<span class="token punctuation">.</span>componentInstance <span class="token operator">=</span> cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">.</span>componentInstance
+    <span class="token comment">/* 调整该组件key的顺序，将其从原来的地方删掉并重新放在最后一个 */</span>
+    <span class="token function">remove</span><span class="token punctuation">(</span>keys<span class="token punctuation">,</span> key<span class="token punctuation">)</span>
+    keys<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>直接从缓存中拿 <code>vnode</code> 的组件实例，此时重新调整该组件<code>key</code>的顺序，将其从原来的地方删掉并重新放在<code>this.keys</code>中最后一个</p>
+<p><code>this.cache</code>对象中没有该<code>key</code>值的情况，如下：</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">/* 如果没有命中缓存，则将其设置进缓存 */</span>
+<span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> vnode
+    keys<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+    <span class="token comment">/* 如果配置了max并且缓存的长度超过了this.max，则从缓存中删除第一个 */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this<span class="token punctuation">.</span>max <span class="token operator">&amp;&amp;</span> keys<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token function">parseInt</span><span class="token punctuation">(</span>this<span class="token punctuation">.</span>max<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">pruneCacheEntry</span><span class="token punctuation">(</span>cache<span class="token punctuation">,</span> keys<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> keys<span class="token punctuation">,</span> this<span class="token punctuation">.</span>_vnode<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>表明该组件还没有被缓存过，则以该组件的<code>key</code>为键，组件<code>vnode</code>为值，将其存入<code>this.cache</code>中，并且把<code>key</code>存入<code>this.keys</code>中</p>
+<p>此时再判断<code>this.keys</code>中缓存组件的数量是否超过了设置的最大缓存数量值<code>this.max</code>，如果超过了，则把第一个缓存组件删掉</p>
+<h3 id="缓存后如何获取数据"><a href="#缓存后如何获取数据" class="headerlink" title="缓存后如何获取数据"></a>缓存后如何获取数据</h3><p>解决方案可以有以下两种：</p>
+<ul>
+<li>beforeRouteEnter</li>
+<li>actived</li>
+</ul>
+<h3 id="beforeRouteEnter"><a href="#beforeRouteEnter" class="headerlink" title="beforeRouteEnter"></a>beforeRouteEnter</h3><p>每次组件渲染的时候，都会执行<code>beforeRouteEnter</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">beforeRouteEnter</span><span class="token punctuation">(</span>to<span class="token punctuation">,</span> from<span class="token punctuation">,</span> next<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">next</span><span class="token punctuation">(</span>vm<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>vm<span class="token punctuation">)</span>
+        <span class="token comment">// 每次进入路由执行</span>
+        vm<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">// 获取数据</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="actived"><a href="#actived" class="headerlink" title="actived"></a>actived</h3><p>在<code>keep-alive</code>缓存的组件被激活的时候，都会执行<code>actived</code>钩子</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">activated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+   this<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 获取数据</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：服务器端渲染期间<code>avtived</code>不被调用</p>
+</blockquote>
 <h2 id="路由守卫"><a href="#路由守卫" class="headerlink" title="路由守卫"></a>路由守卫</h2><h3 id="activated和deactivated"><a href="#activated和deactivated" class="headerlink" title="activated和deactivated"></a><code>activated</code>和<code>deactivated</code></h3><p><code>activated</code>和<code>deactivated</code>是路由组件所独有的两个钩子，用于捕获路由组件的激活状态。</p>
 <p>具体使用</p>
 <ol>

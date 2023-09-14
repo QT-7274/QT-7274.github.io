@@ -472,7 +472,7 @@ const app &amp;#x3D; new Vue(&amp;#123;
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    9.8k
+                    10k
                 </div>
                 
 
@@ -1280,7 +1280,10 @@ class Observer &#123;
 
 <p>更多详细源码，详见<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903903822086151">0 到 1 掌握：Vue核心之数据双向绑定</a></p>
 <h3 id="Vue-框架怎么实现对象和数组的监听？"><a href="#Vue-框架怎么实现对象和数组的监听？" class="headerlink" title="Vue 框架怎么实现对象和数组的监听？"></a>Vue 框架怎么实现对象和数组的监听？</h3><p>详见：<a href="https://qt-7274.github.io/2023/08/30/vue3-xin-te-xing/">Vue3新特性 | QT-7274 (qblog.top)</a></p>
-<h3 id="Vue中的-nextTick有什么作用？"><a href="#Vue中的-nextTick有什么作用？" class="headerlink" title="Vue中的$nextTick有什么作用？"></a>Vue中的$nextTick有什么作用？</h3><h3 id="说说你对vue的mixin的理解，有什么应用场景？"><a href="#说说你对vue的mixin的理解，有什么应用场景？" class="headerlink" title="说说你对vue的mixin的理解，有什么应用场景？"></a>说说你对vue的mixin的理解，有什么应用场景？</h3><h3 id="说说你对slot的理解？slot使用场景有哪些？"><a href="#说说你对slot的理解？slot使用场景有哪些？" class="headerlink" title="说说你对slot的理解？slot使用场景有哪些？"></a>说说你对slot的理解？slot使用场景有哪些？</h3><h3 id="Vue-observable你有了解过吗？说说看"><a href="#Vue-observable你有了解过吗？说说看" class="headerlink" title="Vue.observable你有了解过吗？说说看"></a>Vue.observable你有了解过吗？说说看</h3><h3 id="Vue-怎么用-vm-set-解决对象新增属性不能响应的问题？"><a href="#Vue-怎么用-vm-set-解决对象新增属性不能响应的问题？" class="headerlink" title="Vue 怎么用 vm.$set() 解决对象新增属性不能响应的问题？"></a>Vue 怎么用 vm.$set() 解决对象新增属性不能响应的问题？</h3><p>受现代JavaScript的限制，Vue 无法检测到对象属性的添加或删除。 由于 Vue 会在初始化实例时对属性执行 getter&#x2F;setter 转化，所以属性必须在 data 对象上存在才能让 Vue 将它转换为响应式的。 但是 Vue 提供了 <code>Vue.set(object, propertyName, value) / vm.$set(object, propertyName, value)</code>来实现为对象添加响应式属性，那框架本身是如何实现的呢？ </p>
+<h3 id="Vue中的-nextTick有什么作用？"><a href="#Vue中的-nextTick有什么作用？" class="headerlink" title="Vue中的$nextTick有什么作用？"></a>Vue中的$nextTick有什么作用？</h3><p>详见：<a href="https://qt-7274.github.io/2023/07/18/vue-he-xin-nexttick-guo-du-yu-dong-hua/">Vue核心 $nextTick 过渡与动画 | QT-7274 (qblog.top)</a></p>
+<h3 id="说说你对vue的mixin的理解，有什么应用场景？"><a href="#说说你对vue的mixin的理解，有什么应用场景？" class="headerlink" title="说说你对vue的mixin的理解，有什么应用场景？"></a>说说你对vue的mixin的理解，有什么应用场景？</h3><p>详见：<a href="https://qt-7274.github.io/2023/07/17/vue-cli-zhong-de-shu-xing/">Vue CLI中的属性 | QT-7274 (qblog.top)</a></p>
+<h3 id="说说你对slot的理解？slot使用场景有哪些？"><a href="#说说你对slot的理解？slot使用场景有哪些？" class="headerlink" title="说说你对slot的理解？slot使用场景有哪些？"></a>说说你对slot的理解？slot使用场景有哪些？</h3><h3 id="Vue-observable你有了解过吗？说说看"><a href="#Vue-observable你有了解过吗？说说看" class="headerlink" title="Vue.observable你有了解过吗？说说看"></a>Vue.observable你有了解过吗？说说看</h3><p>详见：<a href="https://qt-7274.github.io/2023/09/13/vue-zu-jian-jian-tong-xin-fang-shi-xiang-jie/">Vue组件间通信方式详解 | QT-7274 (qblog.top)</a></p>
+<h3 id="Vue-怎么用-vm-set-解决对象新增属性不能响应的问题？"><a href="#Vue-怎么用-vm-set-解决对象新增属性不能响应的问题？" class="headerlink" title="Vue 怎么用 vm.$set() 解决对象新增属性不能响应的问题？"></a>Vue 怎么用 vm.$set() 解决对象新增属性不能响应的问题？</h3><p>受现代JavaScript的限制，Vue 无法检测到对象属性的添加或删除。 由于 Vue 会在初始化实例时对属性执行 getter&#x2F;setter 转化，所以属性必须在 data 对象上存在才能让 Vue 将它转换为响应式的。 但是 Vue 提供了 <code>Vue.set(object, propertyName, value) / vm.$set(object, propertyName, value)</code>来实现为对象添加响应式属性，那框架本身是如何实现的呢？ </p>
 <p>我们查看对应的 Vue 源码：<code>vue/src/core/instance/index.js</code> </p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">set</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">target</span><span class="token operator">:</span> Array<span class="token operator">&lt;</span>any<span class="token operator">></span> <span class="token operator">|</span> Object<span class="token punctuation">,</span> <span class="token literal-property property">key</span><span class="token operator">:</span> any<span class="token punctuation">,</span> <span class="token literal-property property">val</span><span class="token operator">:</span> any</span><span class="token punctuation">)</span><span class="token operator">:</span> 
 <span class="token comment">// 如果目标是数组，并且索引是有效的数组索引</span>
@@ -1329,7 +1332,12 @@ ob<span class="token punctuation">.</span>dep<span class="token punctuation">.</
 <li>pach 算法 —— 将两个虚拟 DOM 对象的差异应用到真正的 DOM 树。</li>
 </ul>
 <p>详见<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903895467032589">深入剖析：Vue核心之虚拟DOM</a></p>
-<h3 id="Vue-中的-key-有什么作用？"><a href="#Vue-中的-key-有什么作用？" class="headerlink" title="Vue 中的 key 有什么作用？"></a>Vue 中的 key 有什么作用？</h3><p>key 是 为 Vue 中 vnode 的唯一标记，通过这个 key， 我们的 diff 操作可以更准确、更快速。</p>
+<h3 id="怎么缓存当前的组件？缓存后怎么更新？说说你对keep-alive的理解是什么？"><a href="#怎么缓存当前的组件？缓存后怎么更新？说说你对keep-alive的理解是什么？" class="headerlink" title="怎么缓存当前的组件？缓存后怎么更新？说说你对keep-alive的理解是什么？"></a>怎么缓存当前的组件？缓存后怎么更新？说说你对keep-alive的理解是什么？</h3><p>详见：<a href="https://qt-7274.github.io/2023/07/20/vue-he-xin-lu-you/">Vue核心 路由 | QT-7274 (qblog.top)</a></p>
+<h3 id="Vue常用的修饰符有哪些？有什么应用场景？"><a href="#Vue常用的修饰符有哪些？有什么应用场景？" class="headerlink" title="Vue常用的修饰符有哪些？有什么应用场景？"></a>Vue常用的修饰符有哪些？有什么应用场景？</h3><p>详见：和题目一致</p>
+<h3 id="说下你的vue项目的目录结构，如果是大型项目你该怎么划分结构和划分组"><a href="#说下你的vue项目的目录结构，如果是大型项目你该怎么划分结构和划分组" class="headerlink" title="说下你的vue项目的目录结构，如果是大型项目你该怎么划分结构和划分组"></a>说下你的vue项目的目录结构，如果是大型项目你该怎么划分结构和划分组</h3><p>详见：</p>
+<h3 id="Vue-中的-key-有什么作用？你知道vue中key的原理吗？"><a href="#Vue-中的-key-有什么作用？你知道vue中key的原理吗？" class="headerlink" title="Vue 中的 key 有什么作用？你知道vue中key的原理吗？"></a>Vue 中的 key 有什么作用？你知道vue中key的原理吗？</h3><p>详见：和题目一致</p>
+<h3 id="vue项目本地开发完成后部署到服务器后报404是什么原因呢？"><a href="#vue项目本地开发完成后部署到服务器后报404是什么原因呢？" class="headerlink" title="vue项目本地开发完成后部署到服务器后报404是什么原因呢？"></a>vue项目本地开发完成后部署到服务器后报404是什么原因呢？</h3><p>详见：<a href="https://qt-7274.github.io/2022/09/09/vue-xiang-mu-kai-fa-yu-bu-shu/">Vue项目开发与部署 | QT-7274 (qblog.top)</a></p>
+<p>key 是 为 Vue 中 vnode 的唯一标记，通过这个 key， 我们的 diff 操作可以更准确、更快速。</p>
 <p>Vue 的 diff 过程可以概括为：oldCh 和 newCh 各有两个头尾的变量oldStartIndex、oldEndIndex 和 newStartIndex、newEndIndex，它们会将新节点和旧节点进行两两对比，即一共有4种比较方式：newStartIndex 和 oldStartIndex、newEndIndex 和 oldEndIndex、newStartIndex 和 oldEndIndex、newEndIndex 和 oldStartIndex，如果以上 4 中比较都没匹配，如果设置了key，就会用 key 再进行比较，在比较的过程中，遍历会往中间靠，一旦 StartIdx &gt; Endldx 表明 oldCh和 newCh 至少有一个已经遍历完了，就会结束比较。</p>
 <blockquote>
 <p>注意：具体有无 key 的 diff 过程，可以详见详见<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903895467032589">深入剖析：Vue核心之虚拟DOM</a></p>

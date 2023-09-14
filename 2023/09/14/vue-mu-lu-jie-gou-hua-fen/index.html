@@ -5,11 +5,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Vue中key的原理, QT-7274">
-    <meta name="description" content="相关文章：
-
-Vue性能优化详解 | QT-7274 (qblog.top)中 “ v-for 遍历必须为 item 添加 key ，且避免同时使用 v-if ”
-Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
+    <meta name="keywords" content="Vue目录结构划分, QT-7274">
+    <meta name="description" content="使用vue构建项目，项目结构清晰会提高开发效率，熟悉项目的各种配置同样会让开发效率更高">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +20,7 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
 
     
 
-    <title>Vue中key的原理 | QT-7274</title>
+    <title>Vue目录结构划分 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -309,12 +306,12 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Vue中key的原理</h1>
+                    <h1 class="description center-align post-title">Vue目录结构划分</h1>
                 </div>
             </div>
         </div>
@@ -473,14 +470,14 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    5 分
                 </div>
                 
 
@@ -503,147 +500,186 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>相关文章：</p>
+                <h2 id="为什么要划分"><a href="#为什么要划分" class="headerlink" title="为什么要划分"></a>为什么要划分</h2><p>在划分项目结构的时候，需要遵循一些基本的原则：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://qblog.top/2023/09/11/vue-xing-neng-you-hua-xiang-jie/">Vue性能优化详解 | QT-7274 (qblog.top)</a>中 “ <code>v-for</code> 遍历必须为 <code>item</code> 添加 <code>key</code> ，且避免同时使用 <code>v-if</code> ”</li>
-<li><a target="_blank" rel="noopener" href="https://qblog.top/2023/07/10/vue-he-xin-lie-biao-xuan-ran-he-shu-ju-jian-shi/">Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)</a>中 “ <code>React</code>，<code>Vue</code>中的<code>key</code>有什么作用？”</li>
+<li>文件夹和文件夹内部文件的语义一致性</li>
+<li>单一入口&#x2F;出口</li>
+<li><strong>就近原则</strong>，紧耦合的文件应该放到一起，且应以相对路径引用</li>
+<li>公共的文件应该以绝对路径的方式从根目录引用</li>
+<li><code>/src</code> 外的文件不应该被引入</li>
 </ul>
-<h2 id="Key是什么"><a href="#Key是什么" class="headerlink" title="Key是什么"></a>Key是什么</h2><p>开始之前，我们先还原两个实际工作场景</p>
-<ol>
-<li><p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item in items<span class="token punctuation">"</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item.id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>用<code>+new Date()</code>生成的时间戳作为<code>key</code>，手动强制触发重新渲染</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Comp</span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>+new Date()<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ol>
-<p>那么这背后的逻辑是什么，<code>key</code>的作用又是什么？</p>
-<p>一句话来讲</p>
-<blockquote>
-<p>key是给每一个vnode的唯一id，也是diff的一种优化策略，可以根据key，更准确， 更快的找到对应的vnode节点</p>
-</blockquote>
-<h3 id="背后原理"><a href="#背后原理" class="headerlink" title="背后原理"></a>背后原理</h3><p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
-<ul>
-<li>如果不用key，Vue会采用就地复地原则：最小化element的移动，并且会尝试尽最大程度在同适当的地方对相同类型的element，做patch或者reuse。</li>
-<li>如果使用了key，Vue会根据keys的顺序记录element，曾经拥有了key的element如果不再出现的话，会被直接remove或者destoryed</li>
-</ul>
-<blockquote>
-<p>即 Vue 可以更好地跟踪每个节点的变化，从而在更新时进行优化。它可以识别出哪些节点是新增的、哪些节点是删除的、哪些节点是更新的，从而只对需要进行变动的节点进行操作，减少了不必要的 DOM 操作，提高了性能。</p>
-</blockquote>
-<p>用<code>+new Date()</code>生成的时间戳作为<code>key</code>，手动强制触发重新渲染</p>
-<ul>
-<li>当拥有新值的rerender作为key时，拥有了新key的Comp出现了，那么旧key Comp会被移除，新key Comp触发渲染</li>
-</ul>
-<h2 id="设置key与不设置key区别"><a href="#设置key与不设置key区别" class="headerlink" title="设置key与不设置key区别"></a>设置key与不设置key区别</h2><p>举个例子：</p>
-<p>创建一个实例，2秒后往<code>items</code>数组插入数据</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>demo<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item in items<span class="token punctuation">"</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&#123;&#123;item&#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>../../dist/vue.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-    <span class="token comment">// 创建实例</span>
-    <span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-      <span class="token literal-property property">el</span><span class="token operator">:</span> <span class="token string">'#demo'</span><span class="token punctuation">,</span>
-      <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">items</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">,</span> <span class="token string">'d'</span><span class="token punctuation">,</span> <span class="token string">'e'</span><span class="token punctuation">]</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-      <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span> 
-          <span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">'f'</span><span class="token punctuation">)</span>  <span class="token comment">// </span>
-       <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="文件夹和文件夹内部文件的语义一致性"><a href="#文件夹和文件夹内部文件的语义一致性" class="headerlink" title="文件夹和文件夹内部文件的语义一致性"></a>文件夹和文件夹内部文件的语义一致性</h3><p>我们的目录结构都会有一个文件夹是按照路由模块来划分的，如<code>pages</code>文件夹，这个文件夹里面应该包含我们项目所有的路由模块，并且<strong>仅应该包含路由模块</strong>，而不应该有别的其他的非路由模块的文件夹</p>
+<p>这样做的好处在于一眼就从 <code>pages</code>文件夹看出这个项目的路由有哪些</p>
+<h3 id="单一入口-x2F-出口"><a href="#单一入口-x2F-出口" class="headerlink" title="单一入口&#x2F;出口"></a>单一入口&#x2F;出口</h3><p>举个例子，在<code>pages</code>文件夹里面存在一个<code>seller</code>文件夹，这时候<code>seller</code> 文件夹应该作为一个独立的模块由外部引入，并且 <code>seller/index.js</code> 应该作为外部引入 seller 模块的唯一入口</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 错误用法
+import sellerReducer from &#39;src&#x2F;pages&#x2F;seller&#x2F;reducer&#39;
 
-<p>在不使用<code>key</code>的情况，<code>vue</code>会进行这样的操作：</p>
-<p><img src="/medias/images/loading.gif" data-original="/Vue%E4%B8%ADkey%E7%9A%84%E5%8E%9F%E7%90%86/c9da6790-3f41-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
-<p>分析下整体流程：</p>
-<ul>
-<li>比较A，A（相同类型的节点），进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
-<li>比较B，B（相同类型的节点），进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
-<li>比较C，F（相同类型的节点），进行<code>patch</code>，数据不同，发生<code>dom</code>操作</li>
-<li>比较D，C（相同类型的节点），进行<code>patch</code>，数据不同，发生<code>dom</code>操作</li>
-<li>比较E，D（相同类型的节点），进行<code>patch</code>，数据不同，发生<code>dom</code>操作</li>
-<li>循环结束，将E插入到<code>DOM</code>中</li>
-</ul>
-<p>一共发生了3次更新，1次插入操作</p>
-<p>在使用<code>key</code>的情况：<code>vue</code>会进行这样的操作：</p>
-<ul>
-<li>比较A，A（相同类型的节点），进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
-<li>比较B，B（相同类型的节点），进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
-<li>比较C，F（不相同类型），进行<code>patch</code>，但数据不同，发生<code>dom</code>操作</li>
-<li>比较E、E（相同类型的节点），进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
-<li>比较D、D（相同类型的节点），进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
-<li>比较C、C（相同类型的节点），进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
-<li>循环结束，将F插入到C之前</li>
-</ul>
-<p>一共发生了0次更新，1次插入操作</p>
-<h3 id="设置key值一定能提高diff效率吗？"><a href="#设置key值一定能提高diff效率吗？" class="headerlink" title="设置key值一定能提高diff效率吗？"></a>设置key值一定能提高diff效率吗？</h3><p>其实不然，文档中也明确表示</p>
-<blockquote>
-<p>当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略。如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素</p>
-</blockquote>
-<p>这个默认的模式是高效的，但是只适用于不依赖子组件状态或临时 DOM 状态 (例如：表单输入值) 的列表渲染输出</p>
-<p>建议尽可能在使用 <code>v-for</code> 时提供 <code>key</code>，除非遍历输出的 DOM 内容非常简单，或者是刻意依赖默认行为以获取性能上的提升</p>
-<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>源码位置：core&#x2F;vdom&#x2F;patch.js</p>
-<p>这里判断是否为同一个<code>key</code>，首先判断的是<code>key</code>值是否相等如果没有设置<code>key</code>，那么<code>key</code>为<code>undefined</code>，这时候<code>undefined</code>是恒等于<code>undefined</code></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sameVnode</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>
-        a<span class="token punctuation">.</span>key <span class="token operator">===</span> b<span class="token punctuation">.</span>key <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
-            <span class="token punctuation">(</span>
-                a<span class="token punctuation">.</span>tag <span class="token operator">===</span> b<span class="token punctuation">.</span>tag <span class="token operator">&amp;&amp;</span>
-                a<span class="token punctuation">.</span>isComment <span class="token operator">===</span> b<span class="token punctuation">.</span>isComment <span class="token operator">&amp;&amp;</span>
-                <span class="token function">isDef</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>data<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token function">isDef</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>data<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
-                <span class="token function">sameInputType</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
-            <span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>
-                <span class="token function">isTrue</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>isAsyncPlaceholder<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
-                a<span class="token punctuation">.</span>asyncFactory <span class="token operator">===</span> b<span class="token punctuation">.</span>asyncFactory <span class="token operator">&amp;&amp;</span>
-                <span class="token function">isUndef</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>asyncFactory<span class="token punctuation">.</span>error<span class="token punctuation">)</span>
-            <span class="token punctuation">)</span>
-        <span class="token punctuation">)</span>
-    <span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#x2F;&#x2F; 正确用法
+import &#123; reducer as sellerReducer &#125; from &#39;src&#x2F;pages&#x2F;seller&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>updateChildren<code>方法中会对新旧</code>vnode<code>进行</code>diff<code>，然后将比对出的结果用来更新真实的</code>DOM</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) &#123;
-    ...
-    while (oldStartIdx &lt;&#x3D; oldEndIdx &amp;&amp; newStartIdx &lt;&#x3D; newEndIdx) &#123;
-        if (isUndef(oldStartVnode)) &#123;
-            ...
-        &#125; else if (isUndef(oldEndVnode)) &#123;
-            ...
-        &#125; else if (sameVnode(oldStartVnode, newStartVnode)) &#123;
-            ...
-        &#125; else if (sameVnode(oldEndVnode, newEndVnode)) &#123;
-            ...
-        &#125; else if (sameVnode(oldStartVnode, newEndVnode)) &#123; &#x2F;&#x2F; Vnode moved right
-            ...
-        &#125; else if (sameVnode(oldEndVnode, newStartVnode)) &#123; &#x2F;&#x2F; Vnode moved left
-            ...
-        &#125; else &#123;
-            if (isUndef(oldKeyToIdx)) oldKeyToIdx &#x3D; createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
-            idxInOld &#x3D; isDef(newStartVnode.key)
-                ? oldKeyToIdx[newStartVnode.key]
-                : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
-            if (isUndef(idxInOld)) &#123; &#x2F;&#x2F; New element
-                createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
-            &#125; else &#123;
-                vnodeToMove &#x3D; oldCh[idxInOld]
-                if (sameVnode(vnodeToMove, newStartVnode)) &#123;
-                    patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
-                    oldCh[idxInOld] &#x3D; undefined
-                    canMove &amp;&amp; nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm)
-                &#125; else &#123;
-                    &#x2F;&#x2F; same key but different element. treat as new element
-                    createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
-                &#125;
-            &#125;
-            newStartVnode &#x3D; newCh[++newStartIdx]
-        &#125;
-    &#125;
-    ...
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这样做的好处在于，无论你的模块文件夹内部有多乱，外部引用的时候，都是从一个入口文件引入，这样就很好的实现了隔离，如果后续有重构需求，你就会发现这种方式的优点</p>
+<h3 id="就近原则，紧耦合的文件应该放到一起，且应以相对路径引用"><a href="#就近原则，紧耦合的文件应该放到一起，且应以相对路径引用" class="headerlink" title="就近原则，紧耦合的文件应该放到一起，且应以相对路径引用"></a>就近原则，紧耦合的文件应该放到一起，且应以相对路径引用</h3><p>使用相对路径可以保证模块内部的独立性</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 正确用法</span>
+<span class="token keyword">import</span> styles <span class="token keyword">from</span> <span class="token string">'./index.module.scss'</span>
+<span class="token comment">// 错误用法</span>
+<span class="token keyword">import</span> styles <span class="token keyword">from</span> <span class="token string">'src/pages/seller/index.module.scss'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>举个例子</p>
+<p>假设我们现在的 seller 目录是在 <code>src/pages/seller</code>，如果我们后续发生了路由变更，需要加一个层级，变成 <code>src/pages/user/seller</code>。</p>
+<p>如果我们采用第一种相对路径的方式，那就可以直接将整个文件夹拖过去就好，<code>seller</code> 文件夹内部不需要做任何变更。</p>
+<p>但是如果我们采用第二种绝对路径的方式，移动文件夹的同时，还需要对每个 <code>import</code> 的路径做修改</p>
+<h3 id="公共的文件应该以绝对路径的方式从根目录引用"><a href="#公共的文件应该以绝对路径的方式从根目录引用" class="headerlink" title="公共的文件应该以绝对路径的方式从根目录引用"></a>公共的文件应该以绝对路径的方式从根目录引用</h3><p>公共指的是多个路由模块共用，如一些公共的组件，我们可以放在<code>src/components</code>下</p>
+<p>在使用到的页面中，采用绝对路径的形式引用</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 错误用法</span>
+<span class="token keyword">import</span> Input <span class="token keyword">from</span> <span class="token string">'../../components/input'</span>
+<span class="token comment">// 正确用法</span>
+<span class="token keyword">import</span> Input <span class="token keyword">from</span> <span class="token string">'src/components/input'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同样的，如果我们需要对文件夹结构进行调整。将 <code>/src/components/input</code> 变成 <code>/src/components/new/input</code>，如果使用绝对路径，只需要全局搜索替换</p>
+<p>再加上绝对路径有全局的语义，相对路径有独立模块的语义</p>
+<h3 id="x2F-src-外的文件不应该被引入"><a href="#x2F-src-外的文件不应该被引入" class="headerlink" title="&#x2F;src 外的文件不应该被引入"></a>&#x2F;src 外的文件不应该被引入</h3><p><code>vue-cli</code>脚手架已经帮我们做了相关的约束了，正常我们的前端项目都会有个<code>src</code>文件夹，里面放着所有的项目需要的资源，<code>js</code>,<code>css</code>, <code>png</code>, <code>svg</code> 等等。<code>src</code> 外会放一些项目配置，依赖，环境等文件</p>
+<p>这样的好处是方便划分项目代码文件和配置文件</p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>单页面目录结构</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">project
+│  <span class="token punctuation">.</span>browserslistrc
+│  <span class="token punctuation">.</span>env<span class="token punctuation">.</span>production
+│  <span class="token punctuation">.</span>eslintrc<span class="token punctuation">.</span>js
+│  <span class="token punctuation">.</span>gitignore
+│  babel<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
+│  <span class="token keyword">package</span><span class="token operator">-</span>lock<span class="token punctuation">.</span>json
+│  <span class="token keyword">package</span><span class="token punctuation">.</span>json
+│  <span class="token constant">README</span><span class="token punctuation">.</span>md
+│  vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
+│  yarn<span class="token operator">-</span>error<span class="token punctuation">.</span>log
+│  yarn<span class="token punctuation">.</span>lock
+│
+├─<span class="token keyword">public</span>
+│      favicon<span class="token punctuation">.</span>ico
+│      index<span class="token punctuation">.</span>html
+│
+<span class="token operator">|</span><span class="token operator">--</span> src
+    <span class="token operator">|</span><span class="token operator">--</span> components
+        <span class="token operator">|</span><span class="token operator">--</span> input
+            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
+            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>module<span class="token punctuation">.</span>scss
+    <span class="token operator">|</span><span class="token operator">--</span> pages
+        <span class="token operator">|</span><span class="token operator">--</span> seller
+            <span class="token operator">|</span><span class="token operator">--</span> components
+                <span class="token operator">|</span><span class="token operator">--</span> input
+                    <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
+                    <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>module<span class="token punctuation">.</span>scss
+            <span class="token operator">|</span><span class="token operator">--</span> reducer<span class="token punctuation">.</span>js
+            <span class="token operator">|</span><span class="token operator">--</span> saga<span class="token punctuation">.</span>js
+            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
+            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>module<span class="token punctuation">.</span>scss
+        <span class="token operator">|</span><span class="token operator">--</span> buyer
+            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
+        <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>多页面目录结构</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">my<span class="token operator">-</span>vue<span class="token operator">-</span>test<span class="token operator">:</span><span class="token punctuation">.</span>
+│  <span class="token punctuation">.</span>browserslistrc
+│  <span class="token punctuation">.</span>env<span class="token punctuation">.</span>production
+│  <span class="token punctuation">.</span>eslintrc<span class="token punctuation">.</span>js
+│  <span class="token punctuation">.</span>gitignore
+│  babel<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
+│  <span class="token keyword">package</span><span class="token operator">-</span>lock<span class="token punctuation">.</span>json
+│  <span class="token keyword">package</span><span class="token punctuation">.</span>json
+│  <span class="token constant">README</span><span class="token punctuation">.</span>md
+│  vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
+│  yarn<span class="token operator">-</span>error<span class="token punctuation">.</span>log
+│  yarn<span class="token punctuation">.</span>lock
+│
+├─<span class="token keyword">public</span>
+│      favicon<span class="token punctuation">.</span>ico
+│      index<span class="token punctuation">.</span>html
+│
+└─src
+    ├─apis <span class="token comment">//接口文件根据页面或实例模块化</span>
+    │      index<span class="token punctuation">.</span>js
+    │      login<span class="token punctuation">.</span>js
+    │
+    ├─components <span class="token comment">//全局公共组件</span>
+    │  └─header
+    │          index<span class="token punctuation">.</span>less
+    │          index<span class="token punctuation">.</span>vue
+    │
+    ├─config <span class="token comment">//配置（环境变量配置不同passid等）</span>
+    │      env<span class="token punctuation">.</span>js
+    │      index<span class="token punctuation">.</span>js
+    │
+    ├─contant <span class="token comment">//常量</span>
+    │      index<span class="token punctuation">.</span>js
+    │
+    ├─images <span class="token comment">//图片</span>
+    │      logo<span class="token punctuation">.</span>png
+    │
+    ├─pages <span class="token comment">//多页面vue项目，不同的实例</span>
+    │  ├─index <span class="token comment">//主实例</span>
+    │  │  │  index<span class="token punctuation">.</span>js
+    │  │  │  index<span class="token punctuation">.</span>vue
+    │  │  │  main<span class="token punctuation">.</span>js
+    │  │  │  router<span class="token punctuation">.</span>js
+    │  │  │  store<span class="token punctuation">.</span>js
+    │  │  │
+    │  │  ├─components <span class="token comment">//业务组件</span>
+    │  │  └─pages <span class="token comment">//此实例中的各个路由</span>
+    │  │      ├─amenu
+    │  │      │      index<span class="token punctuation">.</span>vue
+    │  │      │
+    │  │      └─bmenu
+    │  │              index<span class="token punctuation">.</span>vue
+    │  │
+    │  └─login <span class="token comment">//另一个实例</span>
+    │          index<span class="token punctuation">.</span>js
+    │          index<span class="token punctuation">.</span>vue
+    │          main<span class="token punctuation">.</span>js
+    │
+    ├─scripts <span class="token comment">//包含各种常用配置，工具函数</span>
+    │  │  map<span class="token punctuation">.</span>js
+    │  │
+    │  └─utils
+    │          helper<span class="token punctuation">.</span>js
+    │
+    ├─store <span class="token comment">//vuex仓库</span>
+    │  │  index<span class="token punctuation">.</span>js
+    │  │
+    │  ├─index
+    │  │      actions<span class="token punctuation">.</span>js
+    │  │      getters<span class="token punctuation">.</span>js
+    │  │      index<span class="token punctuation">.</span>js
+    │  │      mutation<span class="token operator">-</span>types<span class="token punctuation">.</span>js
+    │  │      mutations<span class="token punctuation">.</span>js
+    │  │      state<span class="token punctuation">.</span>js
+    │  │
+    │  └─user
+    │          actions<span class="token punctuation">.</span>js
+    │          getters<span class="token punctuation">.</span>js
+    │          index<span class="token punctuation">.</span>js
+    │          mutation<span class="token operator">-</span>types<span class="token punctuation">.</span>js
+    │          mutations<span class="token punctuation">.</span>js
+    │          state<span class="token punctuation">.</span>js
+    │
+    └─styles <span class="token comment">//样式统一配置</span>
+        │  components<span class="token punctuation">.</span>less
+        │
+        ├─animation
+        │      index<span class="token punctuation">.</span>less
+        │      slide<span class="token punctuation">.</span>less
+        │
+        ├─base
+        │      index<span class="token punctuation">.</span>less
+        │      style<span class="token punctuation">.</span>less
+        │      <span class="token keyword">var</span><span class="token punctuation">.</span>less
+        │      widget<span class="token punctuation">.</span>less
+        │
+        └─common
+                index<span class="token punctuation">.</span>less
+                reset<span class="token punctuation">.</span>less
+                style<span class="token punctuation">.</span>less
+                transition<span class="token punctuation">.</span>less<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>项目的目录结构很重要，因为目录结构能体现很多东西，怎么规划目录结构可能每个人有自己的理解，但是按照一定的规范去进行目录的设计，能让项目整个架构看起来更为简洁，更加易用</p>
 
                 
             </div>
@@ -670,7 +706,7 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2023/09/14/vue-zhong-key-de-yuan-li/">https://qt-7274.github.io/2023/09/14/vue-zhong-key-de-yuan-li/</a>
+                    <a href="https://qt-7274.github.io/2023/09/14/vue-mu-lu-jie-gou-hua-fen/">https://qt-7274.github.io/2023/09/14/vue-mu-lu-jie-gou-hua-fen/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1158,29 +1194,30 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/09/14/vue-chang-yong-xiu-shi-fu/">
+                <a href="/2023/09/14/vue-mu-lu-jie-gou-hua-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/14.jpg" class="responsive-img" alt="Vue常用修饰符">
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/14.jpg" class="responsive-img" alt="Vue目录结构划分">
                         
-                        <span class="card-title">Vue常用修饰符</span>
+                        <span class="card-title">Vue目录结构划分</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            使用vue构建项目，项目结构清晰会提高开发效率，熟悉项目的各种配置同样会让开发效率更高
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1193,6 +1230,7 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1215,13 +1253,13 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/09/14/vue3-0-zu-jian-bian-xie-liu-cheng/">
+                <a href="/2023/09/14/vue-chang-yong-xiu-shi-fu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/22.jpg" class="responsive-img" alt="Vue3.0组件编写流程">
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/14.jpg" class="responsive-img" alt="Vue常用修饰符">
                         
-                        <span class="card-title">Vue3.0组件编写流程</span>
+                        <span class="card-title">Vue常用修饰符</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1238,8 +1276,8 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    前端开发
+                            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
                                 </a>
                             
                             
@@ -1255,10 +1293,6 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
                     
                     <a href="/tags/Vue/">
                         <span class="chip bg-color">Vue</span>
-                    </a>
-                    
-                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
-                        <span class="chip bg-color">项目开发</span>
                     </a>
                     
                 </div>
