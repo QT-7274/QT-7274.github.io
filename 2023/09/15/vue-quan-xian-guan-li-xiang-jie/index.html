@@ -5,8 +5,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Vue目录结构划分, QT-7274">
-    <meta name="description" content="使用vue构建项目，项目结构清晰会提高开发效率，熟悉项目的各种配置同样会让开发效率更高">
+    <meta name="keywords" content="Vue权限管理详解, QT-7274">
+    <meta name="description" content="概念权限是对特定资源的访问许可，所谓权限控制，也就是确保用户只能访问到被分配的资源
+而前端权限归根结底是请求的发起权，请求的发起可能有下面两种形式触发
+
+页面加载触发
+页面上的按钮点击触发
+
+总的来说，所有的请求发起都触发自前端路由或视图
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +27,7 @@
 
     
 
-    <title>Vue目录结构划分 | QT-7274</title>
+    <title>Vue权限管理详解 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -306,12 +313,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Vue目录结构划分</h1>
+                    <h1 class="description center-align post-title">Vue权限管理详解</h1>
                 </div>
             </div>
         </div>
@@ -435,6 +442,10 @@
                                 <span class="chip bg-color">Vue</span>
                             </a>
                         
+                            <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
+                                <span class="chip bg-color">项目开发</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -456,28 +467,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-09-14
+                    2023-09-15
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-14
+                    2023-09-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    3.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    13 分
                 </div>
                 
 
@@ -500,186 +511,336 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="为什么要划分"><a href="#为什么要划分" class="headerlink" title="为什么要划分"></a>为什么要划分</h2><p>在划分项目结构的时候，需要遵循一些基本的原则：</p>
+                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>权限是对特定资源的访问许可，所谓权限控制，也就是确保用户只能访问到被分配的资源</p>
+<p>而前端权限归根结底是请求的发起权，请求的发起可能有下面两种形式触发</p>
 <ul>
-<li>文件夹和文件夹内部文件的语义一致性</li>
-<li>单一入口&#x2F;出口</li>
-<li><strong>就近原则</strong>，紧耦合的文件应该放到一起，且应以相对路径引用</li>
-<li>公共的文件应该以绝对路径的方式从根目录引用</li>
-<li><code>/src</code> 外的文件不应该被引入</li>
+<li>页面加载触发</li>
+<li>页面上的按钮点击触发</li>
 </ul>
-<h3 id="文件夹和文件夹内部文件的语义一致性"><a href="#文件夹和文件夹内部文件的语义一致性" class="headerlink" title="文件夹和文件夹内部文件的语义一致性"></a>文件夹和文件夹内部文件的语义一致性</h3><p>我们的目录结构都会有一个文件夹是按照路由模块来划分的，如<code>pages</code>文件夹，这个文件夹里面应该包含我们项目所有的路由模块，并且<strong>仅应该包含路由模块</strong>，而不应该有别的其他的非路由模块的文件夹</p>
-<p>这样做的好处在于一眼就从 <code>pages</code>文件夹看出这个项目的路由有哪些</p>
-<h3 id="单一入口-x2F-出口"><a href="#单一入口-x2F-出口" class="headerlink" title="单一入口&#x2F;出口"></a>单一入口&#x2F;出口</h3><p>举个例子，在<code>pages</code>文件夹里面存在一个<code>seller</code>文件夹，这时候<code>seller</code> 文件夹应该作为一个独立的模块由外部引入，并且 <code>seller/index.js</code> 应该作为外部引入 seller 模块的唯一入口</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 错误用法
-import sellerReducer from &#39;src&#x2F;pages&#x2F;seller&#x2F;reducer&#39;
+<p>总的来说，所有的请求发起都触发自前端路由或视图</p>
+<p>所以我们可以从这两方面入手，对触发权限的源头进行控制，最终要实现的目标是：</p>
+<ul>
+<li>路由方面，用户登录后只能看到自己有权访问的导航菜单，也只能访问自己有权访问的路由地址，否则将跳转 <code>4xx</code> 提示页</li>
+<li>视图方面，用户只能看到自己有权浏览的内容和有权操作的控件</li>
+<li>最后再加上请求控制作为最后一道防线，路由可能配置失误，按钮可能忘了加权限，这种时候请求控制可以用来兜底，越权请求将在前端被拦截</li>
+</ul>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>前端权限控制可以分为四个方面：</p>
+<ul>
+<li>接口权限</li>
+<li>按钮权限</li>
+<li>菜单权限</li>
+<li>路由权限</li>
+</ul>
+<h3 id="接口权限"><a href="#接口权限" class="headerlink" title="接口权限"></a>接口权限</h3><p>接口权限目前一般采用<code>jwt</code>的形式来验证，没有通过的话一般返回<code>401</code>，跳转到登录页面重新进行登录</p>
+<p>登录完拿到<code>token</code>，将<code>token</code>存起来，通过<code>axios</code>请求拦截器进行拦截，每次请求的时候头部携带<code>token</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token parameter">config</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    config<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'token'</span><span class="token punctuation">]</span> <span class="token operator">=</span> cookie<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'token'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> config
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token operator">=></span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>response<span class="token punctuation">&#125;</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">40099</span> <span class="token operator">||</span> response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">40098</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//token过期或者错误</span>
+        router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-&#x2F;&#x2F; 正确用法
-import &#123; reducer as sellerReducer &#125; from &#39;src&#x2F;pages&#x2F;seller&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="路由权限控制"><a href="#路由权限控制" class="headerlink" title="路由权限控制"></a>路由权限控制</h3><blockquote>
+<p>参考：<a href="http://qt-7274.github.io/2023/08/11/shang-pin-hui-deng-lu-zhu-ce-liu-cheng/#%E8%B7%AF%E7%94%B1%E6%8E%A7%E5%88%B6">尚品汇-登录注册流程 | QT-7274</a></p>
+</blockquote>
+<p><strong>方案一</strong></p>
+<p>初始化即挂载全部路由，并且<strong>在路由上标记相应的权限信息</strong>，每次路由跳转前做校验</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const routerMap &#x3D; [
+  &#123;
+    path: &#39;&#x2F;permission&#39;,
+    component: Layout,
+    redirect: &#39;&#x2F;permission&#x2F;index&#39;,
+    alwaysShow: true, &#x2F;&#x2F; will always show the root menu
+    meta: &#123;
+      title: &#39;permission&#39;,
+      icon: &#39;lock&#39;,
+      roles: [&#39;admin&#39;, &#39;editor&#39;] &#x2F;&#x2F; you can set roles in root nav
+    &#125;,
+    children: [&#123;
+      path: &#39;page&#39;,
+      component: () &#x3D;&gt; import(&#39;@&#x2F;views&#x2F;permission&#x2F;page&#39;),
+      name: &#39;pagePermission&#39;,
+      meta: &#123;
+        title: &#39;pagePermission&#39;,
+        roles: [&#39;admin&#39;] &#x2F;&#x2F; or you can only set roles in sub nav
+      &#125;
+    &#125;, &#123;
+      path: &#39;directive&#39;,
+      component: () &#x3D;&gt; import(&#39;@&#x2F;views&#x2F;permission&#x2F;directive&#39;),
+      name: &#39;directivePermission&#39;,
+      meta: &#123;
+        title: &#39;directivePermission&#39;
+        &#x2F;&#x2F; if do not set roles, means: this page does not require permission
+      &#125;
+    &#125;]
+  &#125;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>这样做的好处在于，无论你的模块文件夹内部有多乱，外部引用的时候，都是从一个入口文件引入，这样就很好的实现了隔离，如果后续有重构需求，你就会发现这种方式的优点</p>
-<h3 id="就近原则，紧耦合的文件应该放到一起，且应以相对路径引用"><a href="#就近原则，紧耦合的文件应该放到一起，且应以相对路径引用" class="headerlink" title="就近原则，紧耦合的文件应该放到一起，且应以相对路径引用"></a>就近原则，紧耦合的文件应该放到一起，且应以相对路径引用</h3><p>使用相对路径可以保证模块内部的独立性</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 正确用法</span>
-<span class="token keyword">import</span> styles <span class="token keyword">from</span> <span class="token string">'./index.module.scss'</span>
-<span class="token comment">// 错误用法</span>
-<span class="token keyword">import</span> styles <span class="token keyword">from</span> <span class="token string">'src/pages/seller/index.module.scss'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这种方式存在以下四种缺点：</p>
+<ul>
+<li>加载所有的路由，如果路由很多，而用户并不是所有的路由都有权限访问，对性能会有影响。</li>
+<li>全局路由守卫里，每次路由跳转都要做权限判断。</li>
+<li>菜单信息写死在前端，要改个显示文字或权限信息，需要重新编译</li>
+<li>菜单跟路由耦合在一起，定义路由的时候还有添加菜单显示标题，图标之类的信息，而且路由不一定作为菜单显示，还要多加字段进行标识</li>
+</ul>
+<p><strong>方案二</strong></p>
+<p>初始化的时候<strong>先挂载不需要权限控制的路由</strong>，比如登录页，404等错误页。如果用户通过URL进行强制访问，则会直接进入404，相当于从源头上做了控制</p>
+<p>登录后，获取用户的权限信息，然后<strong>筛选有权限访问的路由</strong>，在全局路由守卫里进行调用<code>addRoutes</code>添加路由</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import router from &#39;.&#x2F;router&#39;
+import store from &#39;.&#x2F;store&#39;
+import &#123; Message &#125; from &#39;element-ui&#39;
+import NProgress from &#39;nprogress&#39; &#x2F;&#x2F; progress bar
+import &#39;nprogress&#x2F;nprogress.css&#39;&#x2F;&#x2F; progress bar style
+import &#123; getToken &#125; from &#39;@&#x2F;utils&#x2F;auth&#39; &#x2F;&#x2F; getToken from cookie
 
-<p>举个例子</p>
-<p>假设我们现在的 seller 目录是在 <code>src/pages/seller</code>，如果我们后续发生了路由变更，需要加一个层级，变成 <code>src/pages/user/seller</code>。</p>
-<p>如果我们采用第一种相对路径的方式，那就可以直接将整个文件夹拖过去就好，<code>seller</code> 文件夹内部不需要做任何变更。</p>
-<p>但是如果我们采用第二种绝对路径的方式，移动文件夹的同时，还需要对每个 <code>import</code> 的路径做修改</p>
-<h3 id="公共的文件应该以绝对路径的方式从根目录引用"><a href="#公共的文件应该以绝对路径的方式从根目录引用" class="headerlink" title="公共的文件应该以绝对路径的方式从根目录引用"></a>公共的文件应该以绝对路径的方式从根目录引用</h3><p>公共指的是多个路由模块共用，如一些公共的组件，我们可以放在<code>src/components</code>下</p>
-<p>在使用到的页面中，采用绝对路径的形式引用</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 错误用法</span>
-<span class="token keyword">import</span> Input <span class="token keyword">from</span> <span class="token string">'../../components/input'</span>
-<span class="token comment">// 正确用法</span>
-<span class="token keyword">import</span> Input <span class="token keyword">from</span> <span class="token string">'src/components/input'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+NProgress.configure(&#123; showSpinner: false &#125;)&#x2F;&#x2F; NProgress Configuration
 
-<p>同样的，如果我们需要对文件夹结构进行调整。将 <code>/src/components/input</code> 变成 <code>/src/components/new/input</code>，如果使用绝对路径，只需要全局搜索替换</p>
-<p>再加上绝对路径有全局的语义，相对路径有独立模块的语义</p>
-<h3 id="x2F-src-外的文件不应该被引入"><a href="#x2F-src-外的文件不应该被引入" class="headerlink" title="&#x2F;src 外的文件不应该被引入"></a>&#x2F;src 外的文件不应该被引入</h3><p><code>vue-cli</code>脚手架已经帮我们做了相关的约束了，正常我们的前端项目都会有个<code>src</code>文件夹，里面放着所有的项目需要的资源，<code>js</code>,<code>css</code>, <code>png</code>, <code>svg</code> 等等。<code>src</code> 外会放一些项目配置，依赖，环境等文件</p>
-<p>这样的好处是方便划分项目代码文件和配置文件</p>
-<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>单页面目录结构</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">project
-│  <span class="token punctuation">.</span>browserslistrc
-│  <span class="token punctuation">.</span>env<span class="token punctuation">.</span>production
-│  <span class="token punctuation">.</span>eslintrc<span class="token punctuation">.</span>js
-│  <span class="token punctuation">.</span>gitignore
-│  babel<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
-│  <span class="token keyword">package</span><span class="token operator">-</span>lock<span class="token punctuation">.</span>json
-│  <span class="token keyword">package</span><span class="token punctuation">.</span>json
-│  <span class="token constant">README</span><span class="token punctuation">.</span>md
-│  vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
-│  yarn<span class="token operator">-</span>error<span class="token punctuation">.</span>log
-│  yarn<span class="token punctuation">.</span>lock
-│
-├─<span class="token keyword">public</span>
-│      favicon<span class="token punctuation">.</span>ico
-│      index<span class="token punctuation">.</span>html
-│
-<span class="token operator">|</span><span class="token operator">--</span> src
-    <span class="token operator">|</span><span class="token operator">--</span> components
-        <span class="token operator">|</span><span class="token operator">--</span> input
-            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
-            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>module<span class="token punctuation">.</span>scss
-    <span class="token operator">|</span><span class="token operator">--</span> pages
-        <span class="token operator">|</span><span class="token operator">--</span> seller
-            <span class="token operator">|</span><span class="token operator">--</span> components
-                <span class="token operator">|</span><span class="token operator">--</span> input
-                    <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
-                    <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>module<span class="token punctuation">.</span>scss
-            <span class="token operator">|</span><span class="token operator">--</span> reducer<span class="token punctuation">.</span>js
-            <span class="token operator">|</span><span class="token operator">--</span> saga<span class="token punctuation">.</span>js
-            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
-            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>module<span class="token punctuation">.</span>scss
-        <span class="token operator">|</span><span class="token operator">--</span> buyer
-            <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js
-        <span class="token operator">|</span><span class="token operator">--</span> index<span class="token punctuation">.</span>js<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#x2F;&#x2F; 权限判断函数
+function hasPermission(roles, permissionRoles) &#123; 
+  if (roles.indexOf(&#39;admin&#39;) &gt;&#x3D; 0) return true &#x2F;&#x2F; 判断用户是否具有管理员角色，如果有，则直接返回  true ，表示管理员权限通过。
+  if (!permissionRoles) return true  &#x2F;&#x2F; 如果  permissionRoles  不存在或为空，表示不需要进行权限验证，直接返回  true ，表示权限通过。
+  return roles.some(role &#x3D;&gt; permissionRoles.indexOf(role) &gt;&#x3D; 0) &#x2F;&#x2F; 如果需要进行权限验证，使用  roles.some(role &#x3D;&gt; permissionRoles.indexOf(role) &gt;&#x3D; 0)  来判断用户所拥有的角色数组中是否有任意一个角色存在于需要验证的权限角色数组中。
+&#125;
 
-<p>多页面目录结构</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">my<span class="token operator">-</span>vue<span class="token operator">-</span>test<span class="token operator">:</span><span class="token punctuation">.</span>
-│  <span class="token punctuation">.</span>browserslistrc
-│  <span class="token punctuation">.</span>env<span class="token punctuation">.</span>production
-│  <span class="token punctuation">.</span>eslintrc<span class="token punctuation">.</span>js
-│  <span class="token punctuation">.</span>gitignore
-│  babel<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
-│  <span class="token keyword">package</span><span class="token operator">-</span>lock<span class="token punctuation">.</span>json
-│  <span class="token keyword">package</span><span class="token punctuation">.</span>json
-│  <span class="token constant">README</span><span class="token punctuation">.</span>md
-│  vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>js
-│  yarn<span class="token operator">-</span>error<span class="token punctuation">.</span>log
-│  yarn<span class="token punctuation">.</span>lock
-│
-├─<span class="token keyword">public</span>
-│      favicon<span class="token punctuation">.</span>ico
-│      index<span class="token punctuation">.</span>html
-│
-└─src
-    ├─apis <span class="token comment">//接口文件根据页面或实例模块化</span>
-    │      index<span class="token punctuation">.</span>js
-    │      login<span class="token punctuation">.</span>js
-    │
-    ├─components <span class="token comment">//全局公共组件</span>
-    │  └─header
-    │          index<span class="token punctuation">.</span>less
-    │          index<span class="token punctuation">.</span>vue
-    │
-    ├─config <span class="token comment">//配置（环境变量配置不同passid等）</span>
-    │      env<span class="token punctuation">.</span>js
-    │      index<span class="token punctuation">.</span>js
-    │
-    ├─contant <span class="token comment">//常量</span>
-    │      index<span class="token punctuation">.</span>js
-    │
-    ├─images <span class="token comment">//图片</span>
-    │      logo<span class="token punctuation">.</span>png
-    │
-    ├─pages <span class="token comment">//多页面vue项目，不同的实例</span>
-    │  ├─index <span class="token comment">//主实例</span>
-    │  │  │  index<span class="token punctuation">.</span>js
-    │  │  │  index<span class="token punctuation">.</span>vue
-    │  │  │  main<span class="token punctuation">.</span>js
-    │  │  │  router<span class="token punctuation">.</span>js
-    │  │  │  store<span class="token punctuation">.</span>js
-    │  │  │
-    │  │  ├─components <span class="token comment">//业务组件</span>
-    │  │  └─pages <span class="token comment">//此实例中的各个路由</span>
-    │  │      ├─amenu
-    │  │      │      index<span class="token punctuation">.</span>vue
-    │  │      │
-    │  │      └─bmenu
-    │  │              index<span class="token punctuation">.</span>vue
-    │  │
-    │  └─login <span class="token comment">//另一个实例</span>
-    │          index<span class="token punctuation">.</span>js
-    │          index<span class="token punctuation">.</span>vue
-    │          main<span class="token punctuation">.</span>js
-    │
-    ├─scripts <span class="token comment">//包含各种常用配置，工具函数</span>
-    │  │  map<span class="token punctuation">.</span>js
-    │  │
-    │  └─utils
-    │          helper<span class="token punctuation">.</span>js
-    │
-    ├─store <span class="token comment">//vuex仓库</span>
-    │  │  index<span class="token punctuation">.</span>js
-    │  │
-    │  ├─index
-    │  │      actions<span class="token punctuation">.</span>js
-    │  │      getters<span class="token punctuation">.</span>js
-    │  │      index<span class="token punctuation">.</span>js
-    │  │      mutation<span class="token operator">-</span>types<span class="token punctuation">.</span>js
-    │  │      mutations<span class="token punctuation">.</span>js
-    │  │      state<span class="token punctuation">.</span>js
-    │  │
-    │  └─user
-    │          actions<span class="token punctuation">.</span>js
-    │          getters<span class="token punctuation">.</span>js
-    │          index<span class="token punctuation">.</span>js
-    │          mutation<span class="token operator">-</span>types<span class="token punctuation">.</span>js
-    │          mutations<span class="token punctuation">.</span>js
-    │          state<span class="token punctuation">.</span>js
-    │
-    └─styles <span class="token comment">//样式统一配置</span>
-        │  components<span class="token punctuation">.</span>less
-        │
-        ├─animation
-        │      index<span class="token punctuation">.</span>less
-        │      slide<span class="token punctuation">.</span>less
-        │
-        ├─base
-        │      index<span class="token punctuation">.</span>less
-        │      style<span class="token punctuation">.</span>less
-        │      <span class="token keyword">var</span><span class="token punctuation">.</span>less
-        │      widget<span class="token punctuation">.</span>less
-        │
-        └─common
-                index<span class="token punctuation">.</span>less
-                reset<span class="token punctuation">.</span>less
-                style<span class="token punctuation">.</span>less
-                transition<span class="token punctuation">.</span>less<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+const whiteList &#x3D; [&#39;&#x2F;login&#39;, &#39;&#x2F;authredirect&#39;]&#x2F;&#x2F; 白名单
 
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>项目的目录结构很重要，因为目录结构能体现很多东西，怎么规划目录结构可能每个人有自己的理解，但是按照一定的规范去进行目录的设计，能让项目整个架构看起来更为简洁，更加易用</p>
+router.beforeEach((to, from, next) &#x3D;&gt; &#123;
+  NProgress.start() &#x2F;&#x2F; start progress bar
+  if (getToken()) &#123; &#x2F;&#x2F; 判断用户是否登录（是否存在token）
+    &#x2F;* 存在 token *&#x2F;
+    if (to.path &#x3D;&#x3D;&#x3D; &#39;&#x2F;login&#39;) &#123;
+      next(&#123; path: &#39;&#x2F;&#39; &#125;)
+      NProgress.done() &#x2F;&#x2F; 如果当前页面是登录页，则直接跳转到首页，并结束进度条的显示。
+    &#125; else &#123;
+      if (store.getters.roles.length &#x3D;&#x3D;&#x3D; 0) &#123; &#x2F;&#x2F; 判断当前用户是否已拉取完user_info信息
+          &#x2F;* 用户信息不存在 *&#x2F;
+        store.dispatch(&#39;GetUserInfo&#39;).then(res &#x3D;&gt; &#123; &#x2F;&#x2F; 发起请求获取user_info
+          const roles &#x3D; res.data.roles &#x2F;&#x2F; 注意:用户的角色必须为列表（单个用户可以有多个角色） [&#39;editor&#39;,&#39;develop&#39;]
+          store.dispatch(&#39;GenerateRoutes&#39;, &#123; roles &#125;).then(() &#x3D;&gt; &#123; &#x2F;&#x2F; 根据roles权限生成可访问的路由表
+            router.addRoutes(store.getters.addRouters) &#x2F;&#x2F; 动态添加可访问路由表
+            next(&#123; ...to, replace: true &#125;) &#x2F;&#x2F; 将 to 对象中的所有属性都展开并设置 replace: true ，表示使用新的路由替换当前的路由，这样导航将不会保留历史记录，即不会在浏览器的历史记录中留下新的访问记录。
+          &#125;)
+        &#125;).catch((err) &#x3D;&gt; &#123;
+            &#x2F;*  用户信息获取出现错误 *&#x2F;
+          store.dispatch(&#39;FedLogOut&#39;).then(() &#x3D;&gt; &#123; &#x2F;&#x2F; 发起退出登录请求，并跳转到首页
+            Message.error(err || &#39;Verification failed, please login again&#39;)
+            next(&#123; path: &#39;&#x2F;&#39; &#125;)
+          &#125;)
+        &#125;)
+      &#125; else &#123;
+          &#x2F;* 用户信息已存在 *&#x2F;
+        &#x2F;&#x2F; 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
+        if (hasPermission(store.getters.roles, to.meta.roles)) &#123; 
+          next()&#x2F;&#x2F;
+        &#125; else &#123;
+          next(&#123; path: &#39;&#x2F;401&#39;, replace: true, query: &#123; noGoBack: true &#125;&#125;) &#x2F;&#x2F; 没有权限，直接跳转到401页面，replace: true  表示使用新的路由替换当前的路由，而不保留历史记录，传递了一个查询参数 noGoBack ，值为 true。
+        &#125;
+        &#x2F;&#x2F; 可删 ↑
+      &#125;
+    &#125;
+  &#125; else &#123;
+    &#x2F;* has no token*&#x2F;
+    if (whiteList.indexOf(to.path) !&#x3D;&#x3D; -1) &#123; &#x2F;&#x2F; 在免登录白名单，直接进入
+      next()
+    &#125; else &#123;
+      next(&#39;&#x2F;login&#39;) &#x2F;&#x2F; 否则全部重定向到登录页
+      NProgress.done() &#x2F;&#x2F; if current page is login will not trigger afterEach hook, so manually handle it
+    &#125;
+  &#125;
+&#125;)
+
+router.afterEach(() &#x3D;&gt; &#123;
+  NProgress.done() &#x2F;&#x2F; finish progress bar
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>按需挂载，路由就需要知道用户的路由权限，也就是在用户登录进来的时候就要知道当前用户拥有哪些路由权限</p>
+<p>这种方式也存在了以下的缺点：</p>
+<ul>
+<li>全局路由守卫里，每次路由跳转都要做判断</li>
+<li>菜单信息写死在前端，要改个显示文字或权限信息，需要重新编译</li>
+<li>菜单跟路由耦合在一起，定义路由的时候还有添加菜单显示标题，图标之类的信息，而且路由不一定作为菜单显示，还要多加字段进行标识</li>
+</ul>
+<h3 id="菜单权限"><a href="#菜单权限" class="headerlink" title="菜单权限"></a>菜单权限</h3><p>菜单权限可以理解成将页面与路由进行解耦</p>
+<h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><p>菜单与路由分离，菜单由后端返回</p>
+<p>前端定义路由信息</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"login"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/login"</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/pages/Login.vue"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>name</code>字段都不为空，需要根据此字段与后端返回菜单做关联，后端返回的菜单信息中必须要有<code>name</code>对应的字段，并且做唯一性校验</p>
+<p>全局路由守卫里做判断</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function hasPermission(router, accessMenu) &#123;
+  if (whiteList.indexOf(router.path) !&#x3D;&#x3D; -1) &#123;
+    return true;
+  &#125;
+  let menu &#x3D; Util.getMenuByName(router.name, accessMenu);
+  if (menu.name) &#123;
+    return true;
+  &#125;
+  return false;
+
+&#125;
+
+Router.beforeEach(async (to, from, next) &#x3D;&gt; &#123;
+  if (getToken()) &#123;
+    let userInfo &#x3D; store.state.user.userInfo;
+    if (!userInfo.name) &#123;
+      try &#123;
+        await store.dispatch(&quot;GetUserInfo&quot;)
+        await store.dispatch(&#39;updateAccessMenu&#39;)
+        if (to.path &#x3D;&#x3D;&#x3D; &#39;&#x2F;login&#39;) &#123;
+          next(&#123; name: &#39;home_index&#39; &#125;)
+        &#125; else &#123;
+          &#x2F;&#x2F;Util.toDefaultPage([...routers], to.name, router, next);
+          next(&#123; ...to, replace: true &#125;)&#x2F;&#x2F;菜单权限更新完成,重新进一次当前路由
+        &#125;
+      &#125;  
+      catch (e) &#123;
+        if (whiteList.indexOf(to.path) !&#x3D;&#x3D; -1) &#123; &#x2F;&#x2F; 在免登录白名单，直接进入
+          next()
+        &#125; else &#123;
+          next(&#39;&#x2F;login&#39;)
+        &#125;
+      &#125;
+    &#125; else &#123;
+      if (to.path &#x3D;&#x3D;&#x3D; &#39;&#x2F;login&#39;) &#123;
+        next(&#123; name: &#39;home_index&#39; &#125;)
+      &#125; else &#123;
+        if (hasPermission(to, store.getters.accessMenu)) &#123;
+          Util.toDefaultPage(store.getters.accessMenu,to, routes, next);
+        &#125; else &#123;
+          next(&#123; path: &#39;&#x2F;403&#39;,replace:true &#125;)
+        &#125;
+      &#125;
+    &#125;
+  &#125; else &#123;
+    if (whiteList.indexOf(to.path) !&#x3D;&#x3D; -1) &#123; &#x2F;&#x2F; 在免登录白名单，直接进入
+      next()
+    &#125; else &#123;
+      next(&#39;&#x2F;login&#39;)
+    &#125;
+  &#125;
+  let menu &#x3D; Util.getMenuByName(to.name, store.getters.accessMenu);
+  Util.title(menu.title);
+&#125;);
+
+Router.afterEach((to) &#x3D;&gt; &#123;
+  window.scrollTo(0, 0);
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>每次路由跳转的时候都要判断权限，这里的判断也很简单，因为菜单的<code>name</code>与路由的<code>name</code>是一一对应的，而后端返回的菜单就已经是经过权限过滤的</p>
+<p>如果根据路由<code>name</code>找不到对应的菜单，就表示用户有没权限访问</p>
+<p>如果路由很多，可以在应用初始化的时候，只挂载不需要权限控制的路由。取得后端返回的菜单后，根据菜单与路由的对应关系，筛选出可访问的路由，通过<code>addRoutes</code>动态挂载</p>
+<p>这种方式的缺点：</p>
+<ul>
+<li>菜单需要与路由做一一对应，前端添加了新功能，需要通过菜单管理功能添加新的菜单，如果菜单配置的不对会导致应用不能正常使用</li>
+<li>全局路由守卫里，每次路由跳转都要做判断</li>
+</ul>
+<h4 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h4><p>菜单和路由都由后端返回</p>
+<p>前端统一定义路由组件</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">Home</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"../pages/Home.vue"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">UserInfo</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"../pages/UserInfo.vue"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">home</span><span class="token operator">:</span> Home<span class="token punctuation">,</span>
+    <span class="token literal-property property">userInfo</span><span class="token operator">:</span> UserInfo
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>后端路由组件返回以下格式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"home"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">"home"</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"home"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/userinfo"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">"userInfo"</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在将后端返回路由通过<code>addRoutes</code>动态挂载之间，需要将数据处理一下，将<code>component</code>字段换为真正的组件</p>
+<p>如果有嵌套路由，后端功能设计的时候，要注意添加相应的字段，前端拿到数据也要做相应的处理</p>
+<p>这种方法也会存在缺点：</p>
+<ul>
+<li>全局路由守卫里，每次路由跳转都要做判断</li>
+<li>前后端的配合要求更高</li>
+</ul>
+<h3 id="按钮权限"><a href="#按钮权限" class="headerlink" title="按钮权限"></a>按钮权限</h3><h4 id="方案一-1"><a href="#方案一-1" class="headerlink" title="方案一"></a>方案一</h4><p>按钮权限也可以用<code>v-if</code>判断</p>
+<p>但是如果页面过多，每个页面页面都要获取用户权限<code>role</code>和路由表里的<code>meta.btnPermissions</code>，然后再做判断</p>
+<p>这种方式就不展开举例了</p>
+<h4 id="方案二-1"><a href="#方案二-1" class="headerlink" title="方案二"></a>方案二</h4><p>通过自定义指令进行按钮权限的判断</p>
+<p>首先配置路由</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/permission'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">component</span><span class="token operator">:</span> Layout<span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'权限测试'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">btnPermissions</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'admin'</span><span class="token punctuation">,</span> <span class="token string">'supper'</span><span class="token punctuation">,</span> <span class="token string">'normal'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">//页面需要的权限</span>
+    <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'supper'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token function">_import</span><span class="token punctuation">(</span><span class="token string">'system/supper'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'权限测试页'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token literal-property property">btnPermissions</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'admin'</span><span class="token punctuation">,</span> <span class="token string">'supper'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">&#125;</span> <span class="token comment">//页面需要的权限</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token function">_import</span><span class="token punctuation">(</span><span class="token string">'system/normal'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'权限测试页'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token literal-property property">btnPermissions</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'admin'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">&#125;</span> <span class="token comment">//页面需要的权限</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>自定义权限鉴定指令</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token comment">/**权限指令**/</span>
+<span class="token keyword">const</span> has <span class="token operator">=</span> Vue<span class="token punctuation">.</span><span class="token function">directive</span><span class="token punctuation">(</span><span class="token string">'has'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">bind</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">el<span class="token punctuation">,</span> binding<span class="token punctuation">,</span> vnode</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 获取页面按钮权限</span>
+        <span class="token keyword">let</span> btnPermissionsArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>binding<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token comment">// 如果指令传值，获取指令参数，根据指令参数和当前登录人按钮权限做比较。</span>
+            btnPermissionsArr <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>binding<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+            <span class="token comment">// 否则获取路由中的参数，根据路由的btnPermissionsArr和当前登录人按钮权限做比较。</span>
+            btnPermissionsArr <span class="token operator">=</span> vnode<span class="token punctuation">.</span>context<span class="token punctuation">.</span>$route<span class="token punctuation">.</span>meta<span class="token punctuation">.</span>btnPermissions<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">$_has</span><span class="token punctuation">(</span>btnPermissionsArr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            el<span class="token punctuation">.</span>parentNode<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 权限检查方法</span>
+<span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">$_has</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> isExist <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token comment">// 获取用户按钮权限</span>
+    <span class="token keyword">let</span> btnPermissionsStr <span class="token operator">=</span> sessionStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">"btnPermissions"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>btnPermissionsStr <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token operator">||</span> btnPermissionsStr <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>value<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>btnPermissionsStr<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        isExist <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> isExist<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token punctuation">&#123;</span>has<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在使用的按钮中只需要引用<code>v-has</code>指令</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>el<span class="token operator">-</span>button @click<span class="token operator">=</span><span class="token string">'editClick'</span> type<span class="token operator">=</span><span class="token string">"primary"</span> v<span class="token operator">-</span>has<span class="token operator">></span>编辑<span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>button<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>关于权限如何选择哪种合适的方案，可以根据自己项目的方案项目，如考虑路由与菜单是否分离</p>
+<p>权限需要前后端结合，前端尽可能的去控制，更多的需要后台判断</p>
 
                 
             </div>
@@ -706,7 +867,7 @@ import &#123; reducer as sellerReducer &#125; from &#39;src&#x2F;pages&#x2F;sell
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2023/09/14/vue-mu-lu-jie-gou-hua-fen/">https://qt-7274.github.io/2023/09/14/vue-mu-lu-jie-gou-hua-fen/</a>
+                    <a href="https://qt-7274.github.io/2023/09/15/vue-quan-xian-guan-li-xiang-jie/">https://qt-7274.github.io/2023/09/15/vue-quan-xian-guan-li-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -750,6 +911,10 @@ import &#123; reducer as sellerReducer &#125; from &#39;src&#x2F;pages&#x2F;sell
                             
                                 <a href="/tags/Vue/">
                                     <span class="chip bg-color">Vue</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
+                                    <span class="chip bg-color">项目开发</span>
                                 </a>
                             
                         </div>
@@ -1194,9 +1359,10 @@ import &#123; reducer as sellerReducer &#125; from &#39;src&#x2F;pages&#x2F;sell
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/09/15/vue-quan-xian-guan-li-xiang-jie/">
                     <div class="card-image">
@@ -1214,9 +1380,9 @@ import &#123; reducer as sellerReducer &#125; from &#39;src&#x2F;pages&#x2F;sell
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1229,6 +1395,7 @@ import &#123; reducer as sellerReducer &#125; from &#39;src&#x2F;pages&#x2F;sell
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1255,19 +1422,19 @@ import &#123; reducer as sellerReducer &#125; from &#39;src&#x2F;pages&#x2F;sell
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/09/14/vue-chang-yong-xiu-shi-fu/">
+                <a href="/2023/09/14/vue-mu-lu-jie-gou-hua-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/14.jpg" class="responsive-img" alt="Vue常用修饰符">
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/14.jpg" class="responsive-img" alt="Vue目录结构划分">
                         
-                        <span class="card-title">Vue常用修饰符</span>
+                        <span class="card-title">Vue目录结构划分</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            使用vue构建项目，项目结构清晰会提高开发效率，熟悉项目的各种配置同样会让开发效率更高
                         
                     </div>
                     <div class="publish-info">
