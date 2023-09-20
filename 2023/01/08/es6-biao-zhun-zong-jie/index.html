@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-26
+                    2023-09-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    3.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    11 分
                 </div>
                 
 
@@ -496,7 +496,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="ES6标准总结"><a href="#ES6标准总结" class="headerlink" title="ES6标准总结"></a>ES6标准总结</h1><h2 id="let和const命令"><a href="#let和const命令" class="headerlink" title="let和const命令"></a>let和const命令</h2><h4 id="let"><a href="#let" class="headerlink" title="let"></a>let</h4><ol>
+                <h1 id="ES6标准总结"><a href="#ES6标准总结" class="headerlink" title="ES6标准总结"></a>ES6标准总结</h1><h2 id="let、const、var命令"><a href="#let、const、var命令" class="headerlink" title="let、const、var命令"></a>let、const、var命令</h2><h4 id="let"><a href="#let" class="headerlink" title="let"></a>let</h4><ol>
 <li>声明的变量只在let命令所在的代码块内有效。</li>
 <li>声明的变量一定要在声明后使用，否则报错。</li>
 <li>只要块级作用域内存在let命令，它所声明的变量就绑定这个区域，不再受外部影响（封闭作用域）。</li>
@@ -515,6 +515,44 @@
 </ul>
 </li>
 </ol>
+<h4 id="var"><a href="#var" class="headerlink" title="var"></a>var</h4><p>在ES5中，顶层对象的属性和全局变量是等价的，用<code>var</code>声明的变量既是全局变量，也是顶层变量</p>
+<blockquote>
+<p>注意：顶层对象，在浏览器环境指的是<code>window</code>对象，在 <code>Node</code> 指的是<code>global</code>对象</p>
+</blockquote>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token comment">// 10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>使用<code>var</code>声明的变量存在变量提升的情况</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(a) &#x2F;&#x2F; undefined
+var a &#x3D; 20<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>在编译阶段，编译器会将其变成以下执行</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a
+console.log(a)
+a &#x3D; 20<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>使用<code>var</code>，我们能够对一个变量进行多次声明，后面声明的变量会覆盖前面的变量声明</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a &#x3D; 20 
+var a &#x3D; 30
+console.log(a) &#x2F;&#x2F; 30<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>⚠️在函数中使用使用<code>var</code>声明变量时候，该变量是局部的</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a &#x3D; 20
+function change()&#123;
+    var a &#x3D; 30
+&#125;
+change()
+console.log(a) &#x2F;&#x2F; 20 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>⚠️而如果在函数内不使用<code>var</code>，该变量是全局的</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a &#x3D; 20
+function change()&#123;
+   a &#x3D; 30
+&#125;
+change()
+console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 <h3 id="顶层对象的属性"><a href="#顶层对象的属性" class="headerlink" title="顶层对象的属性"></a>顶层对象的属性</h3><p>在ES5中，顶层变量（在浏览器环境中指的是window对象，在Node环境中指的是global对象）&#x3D;全局变量，有以下缺点：</p>
 <ol>
 <li>无法在编译时就提示变量未声明的错误，只有运行时才能知道（因为全局变量可能是顶层对象的属性创造的，而属性的创造是动态的）。</li>
