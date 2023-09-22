@@ -470,21 +470,21 @@ v-if or v-show？在Vue.js中，v-if和v-show都是用于条件渲染的指">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-13
+                    2023-09-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    9 分
                 </div>
                 
 
@@ -582,6 +582,9 @@ v-if or v-show？在Vue.js中，v-if和v-show都是用于条件渲染的指">
 <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="防抖（Debounce）"><a href="#防抖（Debounce）" class="headerlink" title="防抖（Debounce）"></a>防抖（Debounce）</h2><p>防抖是指在事件触发后，等待一段时间后再执行回调函数。如果在等待时间内再次触发了该事件，则重新计时。防抖的主要目的是<strong>减少事件触发的频率，避免在短时间内多次触发事件导致不必要的计算或请求</strong>。</p>
+<blockquote>
+<p>n 秒后在执行该事件，若在 n 秒内被重复触发，则重新计时</p>
+</blockquote>
 <p>应用场景：</p>
 <ol>
 <li>常见的应用场景包括搜索框输入联想。</li>
@@ -600,15 +603,56 @@ function demo()&#123;
     console.log(&#39;发起请求&#39;)
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>如果需要立即执行：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function debounce(func, wait, immediate) &#123;
+
+    let timeout;
+
+    return function () &#123;
+        let context &#x3D; this;
+        let args &#x3D; arguments;
+
+        if (timeout) clearTimeout(timeout); &#x2F;&#x2F; timeout 不为null
+        if (immediate) &#123;
+            let callNow &#x3D; !timeout; &#x2F;&#x2F; 第一次会立即执行，以后只有事件执行后才会再次触发
+            timeout &#x3D; setTimeout(function () &#123;
+                timeout &#x3D; null;
+            &#125;, wait)
+            if (callNow) &#123;
+                func.apply(context, args)
+            &#125;
+        &#125;
+        else &#123;
+            timeout &#x3D; setTimeout(function () &#123;
+                func.apply(context, args)
+            &#125;, wait);
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="节流（Throttle）"><a href="#节流（Throttle）" class="headerlink" title="节流（Throttle）"></a>节流（Throttle）</h2><p>节流是指在一定时间间隔内只执行<strong>一次</strong>回调函数。当事件触发后，如果在指定的时间间隔内再次触发该事件，则忽略该事件，直到时间间隔过去后才能再次触发。节流的主要目的是<strong>控制事件触发的频率，避免在短时间内连续触发事件导致性能问题</strong>。</p>
+<blockquote>
+<p>n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效</p>
+</blockquote>
 <p>简而言之：<strong>保证一段时间内只调用一次函数。</strong></p>
 <p>应用场景：</p>
 <ol>
 <li>提交表单。</li>
 <li>高频监听事件。</li>
 </ol>
-<p>代码示例：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function throttle(event, time)&#123;
+<h3 id="时间戳写法"><a href="#时间戳写法" class="headerlink" title="时间戳写法"></a>时间戳写法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function throttled1(fn, delay &#x3D; 500) &#123;
+    let oldtime &#x3D; Date.now()
+    return function (...args) &#123;
+        let newtime &#x3D; Date.now()
+        if (newtime - oldtime &gt;&#x3D; delay) &#123;
+            fn.apply(null, args)
+            oldtime &#x3D; Date.now()
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>缺点：使用时间戳写法，事件会立即执行，停止触发后没有办法再次执行</p>
+<h3 id="定时器写法"><a href="#定时器写法" class="headerlink" title="定时器写法"></a>定时器写法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function throttle(event, time)&#123;
     let timer &#x3D; null;
     return function()&#123;
         if(!timer)&#123;
@@ -620,7 +664,28 @@ function demo()&#123;
     &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<p>缺点：使用定时器写法，<code>delay</code>毫秒后第一次执行，第二次事件停止触发后依然会再一次执行</p>
+<h3 id="精确节流"><a href="#精确节流" class="headerlink" title="精确节流"></a>精确节流</h3><p>可以将时间戳写法的特性与定时器写法的特性相结合，实现一个更加精确的节流。实现如下</p>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function throttled(fn, delay) &#123;
+    let timer &#x3D; null
+    let starttime &#x3D; Date.now()
+    return function () &#123;
+        let curTime &#x3D; Date.now() &#x2F;&#x2F; 当前时间
+        let remaining &#x3D; delay - (curTime - starttime)  &#x2F;&#x2F; 从上一次到现在，还剩下多少多余时间
+        let context &#x3D; this
+        let args &#x3D; arguments
+        clearTimeout(timer)
+        if (remaining &lt;&#x3D; 0) &#123;
+            fn.apply(context, args)
+            starttime &#x3D; Date.now()
+        &#125; else &#123;
+            timer &#x3D; setTimeout(fn, remaining);
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li>如果需要在事件触发后立即执行回调函数，并且不希望在短时间内连续触发事件，则可以使用防抖。</li>
 <li>如果需要在一定时间间隔内稳定地执行回调函数，并且不希望事件频繁触发，则可以使用节流。</li>
 </ul>

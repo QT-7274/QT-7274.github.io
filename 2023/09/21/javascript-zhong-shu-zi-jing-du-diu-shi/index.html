@@ -5,9 +5,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="力扣热门题目汇总, QT-7274">
-    <meta name="description" content="力扣1207  独一无二的出现次数前端题目判断一个字符串中出现次数最多的字符，并统计次数。例如var s = &amp;#39;aaabbbcccaaabbbdaaabbbbbbbbb&amp;#39;
-思路用 Map存储字符和对应的次数，首次出现次数为 ">
+    <meta name="keywords" content="JavaScript中数字精度丢失, QT-7274">
+    <meta name="description" content="场景复现一个经典的面试题
+0.1 + 0.2 === 0.3 // false
+
+为什么是false呢?
+先看下面这个比喻
+比如一个数 1÷3&amp;#x3D;0.33333333……
+3会一直无限循环，数学可以表示，但是计算机要存储，方便下次取">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +26,7 @@
 
     
 
-    <title>力扣热门题目汇总 | QT-7274</title>
+    <title>JavaScript中数字精度丢失 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -307,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">力扣热门题目汇总</h1>
+                    <h1 class="description center-align post-title">JavaScript中数字精度丢失</h1>
                 </div>
             </div>
         </div>
@@ -432,14 +437,23 @@
                                 <span class="chip bg-color">前端</span>
                             </a>
                         
-                            <a href="/tags/%E7%AE%97%E6%B3%95/">
-                                <span class="chip bg-color">算法</span>
+                            <a href="/tags/JavaScript/">
+                                <span class="chip bg-color">JavaScript</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                理论知识
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -448,28 +462,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-09-15
+                    2023-09-21
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-16
+                    2023-09-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.6k
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    14 分
+                    5 分
                 </div>
                 
 
@@ -492,329 +506,99 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="力扣"><a href="#力扣" class="headerlink" title="力扣"></a>力扣</h2><h3 id="1207-独一无二的出现次数"><a href="#1207-独一无二的出现次数" class="headerlink" title="1207  独一无二的出现次数"></a>1207  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-number-of-occurrences/description/">独一无二的出现次数</a></h3><h4 id="前端题目"><a href="#前端题目" class="headerlink" title="前端题目"></a>前端题目</h4><p>判断一个字符串中出现次数最多的字符，并统计次数。例如<code>var s = &#39;aaabbbcccaaabbbdaaabbbbbbbbb&#39;</code></p>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>用 <code>Map</code>存储字符和对应的次数，首次出现次数为 0 + 1，后续出现则累加，最后找出最大值：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token parameter">s</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> maxValue <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> maxString <span class="token operator">=</span> <span class="token string">''</span>
-    <span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span> <span class="token keyword">let</span> item <span class="token keyword">of</span> s<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token comment">/**
-     * 若map中不存在该字符的键，则默认出现次数为0，加1后设置为1。
-     * 若map中已存在该字符的键，则将其当前值加1，更新为新的出现次数。 
-     */</span>
-        map<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span> item<span class="token punctuation">,</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> 
-    <span class="token punctuation">&#125;</span>
-    <span class="token comment">/**
-     * 找到其中值最大的键值对，即出现次数最多
-     */</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">[</span>key<span class="token punctuation">,</span> value<span class="token punctuation">]</span> <span class="token keyword">of</span> map<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">></span> maxValue<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            maxString <span class="token operator">=</span> key<span class="token punctuation">;</span>
-            maxValue <span class="token operator">=</span> value
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> <span class="token punctuation">[</span>maxString<span class="token punctuation">,</span>maxValue<span class="token punctuation">]</span>
-    <span class="token comment">// console.log(maxString,maxValue)</span>
-<span class="token punctuation">&#125;</span>
+                <h2 id="场景复现"><a href="#场景复现" class="headerlink" title="场景复现"></a>场景复现</h2><p>一个经典的面试题</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">0.1</span> <span class="token operator">+</span> <span class="token number">0.2</span> <span class="token operator">===</span> <span class="token number">0.3</span> <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token string">'aaadsadasxxxxxxxvbbbbsadsaxxxxx'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="力扣题目"><a href="#力扣题目" class="headerlink" title="力扣题目"></a>力扣题目</h4><p>给你一个整数数组 <code>arr</code>，请你帮忙统计数组中每个数的出现次数。</p>
-<p>如果每个数的出现次数都是独一无二的，就返回 <code>true</code>；否则返回 <code>false</code>。</p>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>同上，技巧在于<strong>如何判断出现次数是独一无二的</strong>（这次不是找最大值）—— 使用 <code>Set</code> 去重：</p>
+<p>为什么是<code>false</code>呢?</p>
+<p>先看下面这个比喻</p>
+<p>比如一个数 1÷3&#x3D;0.33333333……</p>
+<p>3会一直无限循环，数学可以表示，但是计算机要存储，方便下次取出来再使用，但0.333333…… 这个数无限循环，再大的内存它也存不下，所以不能存储一个相对于数学来说的值，只能存储一个近似值，当计算机存储后再取出时就会出现精度丢失问题</p>
+<h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h2><p>“浮点数”是一种表示数字的标准，整数也可以用浮点数的格式来存储</p>
+<p>我们也可以理解成，浮点数就是小数</p>
+<p>在<code>JavaScript</code>中，现在主流的数值类型是<code>Number</code>，而<code>Number</code>采用的是<code>IEEE754</code>规范中<strong>64位双精度浮点数编码</strong></p>
+<p>这样的存储结构优点是可以归一化处理整数和小数，节省存储空间</p>
+<p>对于一个整数，可以很轻易转化成十进制或者二进制。但是对于一个浮点数来说，因为小数点的存在，小数点的位置不是固定的。解决思路就是使用科学计数法，这样小数点位置就固定了</p>
+<p>而计算机只能用二进制（0或1）表示，二进制转换为科学记数法的公式如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/09/21/javascript-zhong-shu-zi-jing-du-diu-shi/1b4b1620-86f4-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<p>其中，<code>a</code>的值为0或者1，e为小数点移动的位置</p>
+<p>举个例子：</p>
+<p>27.0转化成二进制为11011.0 ，科学计数法表示为：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/09/21/javascript-zhong-shu-zi-jing-du-diu-shi/37007090-86f4-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<p>前面讲到，<code>javaScript</code>存储方式是双精度浮点数，其长度为8个字节，即64位比特</p>
+<p>64位比特又可分为三个部分：</p>
 <ul>
-<li><p>第一次我忘了 <code>Set</code> 可以直接使用<code>.size</code>获取长度，我将其转换为数组之后获取了数组的长度；同时我还使用了 <code>Array.from</code>又遍历了一次 <code>Map</code>，只为了获取 <code>Map</code> 的值，这样代码显得有些冗余：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">uniqueOccurrences</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> frequencyMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> item <span class="token keyword">of</span> arr<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        frequencyMap<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> <span class="token punctuation">(</span>frequencyMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span>
-     <span class="token keyword">let</span> value_array <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>frequencyMap<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-     <span class="token keyword">let</span> set_array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span>value_array<span class="token punctuation">)</span><span class="token punctuation">]</span>
-     <span class="token keyword">return</span> value_array<span class="token punctuation">.</span>length <span class="token operator">===</span> set_array<span class="token punctuation">.</span>length
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>第二次我提前准备了一个数组，并通过解构赋值将 <code>Map</code> 的值添加进去，代码简洁多了：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var uniqueOccurrences &#x3D; function(arr) &#123;
-    let frequencyMap &#x3D; new Map()
-    let valueArray &#x3D; []
-    for (let item of arr)&#123;
-        frequencyMap.set(item, (frequencyMap.get(item) || 0) + 1)
-    &#125;
-    valueArray.push(...frequencyMap.values())
-    const occurrenceSet &#x3D; new Set(frequencyMap.values());
-    return valueArray.length &#x3D;&#x3D;&#x3D; occurrenceSet.size
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>也可以用对象完成：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let check &#x3D; &#123;&#125;;
-for (let item of arr) check[item] !&#x3D; null ? check[item]++ : check[item] &#x3D; 1;
-return Object.values(check).length &#x3D;&#x3D;&#x3D; new Set(Object.values(check)).size<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li>符号位S：第 1 位是正负数符号位（sign），0代表正数，1代表负数</li>
+<li>指数位E：中间的 11 位存储指数（exponent），用来表示次方数，可以为正负数。在双精度浮点数中，指数的固定偏移量为1023</li>
+<li>尾数位M：最后的 52 位是尾数（mantissa），超出的部分自动进一舍零</li>
 </ul>
-<p><img src="/medias/images/loading.gif" data-original="/%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95%E6%B1%87%E6%80%BB/image-20230916001252644.png" alt="image-20230916001252644"></p>
-<h2 id="滑动窗口相关题目"><a href="#滑动窗口相关题目" class="headerlink" title="滑动窗口相关题目"></a>滑动窗口相关题目</h2><p><strong>滑动窗口算法的代码框架</strong></p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 注意：javascript 代码由 chatGPT🤖 根据我的 cpp 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
-&#x2F;&#x2F; 本代码还未经过力扣测试，仅供参考，如有疑惑，可以参照我写的 cpp 代码对比查看。
+<p>如下图所示：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/09/21/javascript-zhong-shu-zi-jing-du-diu-shi/430d0100-86f4-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p>举个例子：</p>
+<p>27.5 转换为二进制11011.1</p>
+<p>11011.1转换为科学记数法 </p>
+<p>符号位为1(正数)，指数位为4+，1023+4，即1027</p>
+<p>因为它是十进制的需要转换为二进制，即 <code>10000000011</code>，小数部分为<code>10111</code>，补够52位即： 1011 1000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000&#96;</p>
+<p>所以27.5存储为计算机的二进制标准形式（符号位+指数位+小数部分 (阶数)），既下面所示</p>
+<p><code>0+10000000011+011 1000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000</code></p>
+<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>再回到问题上</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">0.1</span> <span class="token operator">+</span> <span class="token number">0.2</span> <span class="token operator">===</span> <span class="token number">0.3</span> <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-var slidingWindow &#x3D; function(s) &#123;
-    &#x2F;&#x2F; 用合适的数据结构记录窗口中的数据
-    const window &#x3D; new Map();
-    
-    let left &#x3D; 0, right &#x3D; 0;
-    while (right &lt; s.length) &#123;
-        &#x2F;&#x2F; c 是将移入窗口的字符
-        let c &#x3D; s[right];
-        window.set(c, (window.get(c) || 0) + 1);
-        &#x2F;&#x2F; 增大窗口
-        right++;
-        &#x2F;&#x2F; 进行窗口内数据的一系列更新
-        ...
+<p>通过上面的学习，我们知道，在<code>javascript</code>语言中，0.1 和 0.2 都转化成二进制后再进行运算</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 0.1 和 0.2 都转化成二进制后再进行运算</span>
+<span class="token number">0.00011001100110011001100110011001100110011001100110011010</span> <span class="token operator">+</span>
+<span class="token number">0.0011001100110011001100110011001100110011001100110011010</span> <span class="token operator">=</span>
+<span class="token number">0.0100110011001100110011001100110011001100110011001100111</span>
 
-        &#x2F;*** debug 输出的位置 ***&#x2F;
-        &#x2F;&#x2F; 注意在最终的解法代码中不要 console.log
-        &#x2F;&#x2F; 因为 IO 操作很耗时，可能导致超时
-        console.log(&quot;window: [&quot; + left + &quot;, &quot; + right + &quot;)&quot;);
-        &#x2F;********************&#x2F;
-        
-        &#x2F;&#x2F; 判断左侧窗口是否要收缩
-        while (left &lt; right &amp;&amp; window needs shrink) &#123;
-            &#x2F;&#x2F; d 是将移出窗口的字符
-            let d &#x3D; s[left];
-            window.set(d, window.get(d) - 1);
-            &#x2F;&#x2F; 缩小窗口
-            left++;
-            &#x2F;&#x2F; 进行窗口内数据的一系列更新
-            ...
-        &#125;
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">// 转成十进制正好是 0.30000000000000004</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>其中两处 <code>...</code> 表示的更新窗口数据的地方，到时候你直接往里面填就行了</strong>。</p>
-<p>而且，这两个 <code>...</code> 处的操作分别是扩大和缩小窗口的更新操作，等会你会发现它们操作是完全对称的。</p>
-<p>另外，虽然滑动窗口代码框架中有一个嵌套的 while 循环，但算法的时间复杂度依然是 <code>O(N)</code>，其中 <code>N</code> 是输入字符串&#x2F;数组的长度。</p>
-<p>为什么呢？简单说，指针 <code>left, right</code> 不会回退（它们的值只增不减），所以字符串&#x2F;数组中的每个元素都只会进入窗口一次，然后被移出窗口一次，不会说有某些元素多次进入和离开窗口，所以算法的时间复杂度就和字符串&#x2F;数组的长度成正比。后文 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/di-ling-zh-bfe1b/suan-fa-sh-05f25/">算法时空复杂度分析实用指南</a> 有具体讲时间复杂度的估算，这里就不展开了。</p>
-<h3 id="模板套路"><a href="#模板套路" class="headerlink" title="模板套路"></a>模板套路</h3><ol>
-<li><strong>什么时候应该移动 <code>right</code> 扩大窗口？窗口加入字符时，应该更新哪些数据？</strong></li>
-<li><strong>什么时候窗口应该暂停扩大，开始移动 <code>left</code> 缩小窗口？从窗口移出字符时，应该更新哪些数据？</strong></li>
-<li><strong>我们要的结果应该在扩大窗口时还是缩小窗口时进行更新？</strong></li>
-</ol>
-<h3 id="76-最小覆盖子串"><a href="#76-最小覆盖子串" class="headerlink" title="76  最小覆盖子串"></a>76  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/description/">最小覆盖子串</a></h3><p>给你一个字符串 <code>s</code> 、一个字符串 <code>t</code> 。返回 <code>s</code> 中涵盖 <code>t</code> 所有字符的最小子串。如果 <code>s</code> 中不存在涵盖 <code>t</code> 所有字符的子串，则返回空字符串 <code>&quot;&quot;</code> 。</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wtcaE1/">LCR 016. 无重复字符的最长子串</a></p>
-</blockquote>
-<h4 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h4><ol>
-<li>我们在字符串 <code>S</code> 中使用双指针中的左右指针技巧，初始化 <code>left = right = 0</code>，把索引<strong>左闭右开</strong>区间 <code>[left, right)</code> 称为一个「窗口」。</li>
-<li>我们先不断地增加 <code>right</code> 指针扩大窗口 <code>[left, right)</code>，<strong>直到窗口中的字符串符合要求（包含了 <code>T</code> 中的所有字符）</strong>。</li>
-<li>此时，我们停止增加 <code>right</code>，转而不断增加 <code>left</code> 指针缩小窗口 <code>[left, right)</code>，<strong>直到窗口中的字符串不再符合要求</strong>（不包含 <code>T</code> 中的所有字符了）。同时，每次增加 <code>left</code>，我们都要更新一轮结果。</li>
-<li>重复第 2 和第 3 步，直到 <code>right</code> 到达字符串 <code>S</code> 的尽头。</li>
-</ol>
-<p>这个思路其实也不难，<strong>第 2 步相当于在寻找一个「可行解」，然后第 3 步在优化这个「可行解」，最终找到最优解</strong>，也就是最短的覆盖子串。左右指针轮流前进，窗口大小增增减减，窗口不断向右滑动，这就是「滑动窗口」这个名字的来历。</p>
-<p>代码实现：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var minWindow &#x3D; function(s, t) &#123;
-    &#x2F;&#x2F; 哈希表 need 记录需要匹配的字符及对应的出现次数
-    &#x2F;&#x2F; 哈希表 window 记录窗口中满足 need 条件的字符及其出现次数
-    let need &#x3D; new Map()
-    let window &#x3D; new Map()
-    &#x2F;&#x2F; 记录字符串 t 中 所有字符的出现次数
-    for (let item of t)&#123;
-        need.set(item, (need.get(item) || 0) + 1)
-    &#125;
+<p>所以输出<code>false</code></p>
+<p>再来一个问题，那么为什么<code>x=0.1</code>得到<code>0.1</code>？</p>
+<p>主要是存储二进制时小数点的偏移量最大为52位，最多可以表达的位数是<code>2^53=9007199254740992</code>，对应科学计数尾数是 <code>9.007199254740992</code>，这也是 JS 最多能表示的精度</p>
+<p>它的长度是 16，所以可以使用 <code>toPrecision(16)</code> 来做精度运算，超过的精度会自动做凑整处理</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">.10000000000000000555</span><span class="token punctuation">.</span><span class="token function">toPrecision</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span>
+<span class="token comment">// 返回 0.1000000000000000，去掉末尾的零后正好为 0.1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-    let left &#x3D; 0, right &#x3D; 0;
-    let valid &#x3D; 0;
-    &#x2F;&#x2F; 记录最小覆盖子串的起始索引及长度
-    let start &#x3D; 0, len &#x3D; Infinity;
-    
-    while (right &lt; s.length)&#123;
-        &#x2F;&#x2F; c 是将移入窗口的字符，s[0]，s[1]
-        let c &#x3D; s[right];
-        &#x2F;&#x2F; 右指针向前移动，扩大窗口
-        right++;
-        &#x2F;&#x2F; 进行窗口内数据的一系列更新
-        &#x2F;&#x2F; need中为t的字符及对应出现次数，如果c命中need中的字符，将c添加到window中，并记录出现次数
-        if(need.has(c))&#123;
-            window.set(c, (window.get(c) || 0) + 1)
-            if(window.get(c) &#x3D;&#x3D;&#x3D; need.get(c))&#123;
-                &#x2F;&#x2F; 记录命中次数，即有几个t的字符命中了s中的字符
-                valid++
-            &#125;
-        &#125;
-        &#x2F;&#x2F; 判断左侧窗口是否收缩
-        while (valid &#x3D;&#x3D;&#x3D; need.size)&#123; &#x2F;&#x2F; 此时已经找到一个包含 t 中所有字符的子串
-            &#x2F;&#x2F; 在这里更新最小覆盖子串
-            if (right - left &lt; len)&#123;
-                &#x2F;&#x2F; 没有超出 len，则最小覆盖子串的起始索引为左指针，缩小窗口，别忘了更新len，因为两个指针一直向前移动
-                start &#x3D; left; 
-                len &#x3D; right - left
-            &#125;
-            &#x2F;&#x2F; d 是将移出窗口的字符
-            let d &#x3D; s[left];
-            &#x2F;&#x2F; 缩小窗口
-            left++;
-            &#x2F;&#x2F; 进行窗口内数据的一系列更新
-            if (need.has(d)) &#123;
-                if (window.get(d) &#x3D;&#x3D;&#x3D; need.get(d)) &#123;
-                    valid--;
-                &#125;
-                window.set(d, window.get(d) - 1);
-            &#125;
-        &#125;
+<p>但看到的 <code>0.1</code> 实际上并不是 <code>0.1</code>。不信你可用更高的精度试试：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">0.1</span><span class="token punctuation">.</span><span class="token function">toPrecision</span><span class="token punctuation">(</span><span class="token number">21</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0.100000000000000005551</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-    &#125;
-    &#x2F;&#x2F; 返回最小覆盖子串
-    return len &#x3D;&#x3D;&#x3D; Infinity ? &#39;&#39; : s.substring(start,len + start);
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果整数大于 <code>9007199254740992</code> 会出现什么情况呢？</p>
+<p>由于指数位最大值是1023，所以最大可以表示的整数是 <code>2^1024 - 1</code>，这就是能表示的最大整数。但你并不能这样计算这个数字，因为从 <code>2^1024</code> 开始就变成了 <code>Infinity</code></p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">> Math.pow(2, 1023)
+8.98846567431158e+307
 
-<h3 id="567-字符串的排列"><a href="#567-字符串的排列" class="headerlink" title="567  字符串的排列"></a>567  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutation-in-string/description/">字符串的排列</a></h3><p>给你两个字符串 <code>s1</code> 和 <code>s2</code> ，写一个函数来判断 <code>s2</code> 是否包含 <code>s1</code> 的排列。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
-<p>换句话说，<code>s1</code> 的排列之一是 <code>s2</code> 的 <strong>子串</strong> 。</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/MPnaiL/">LCR 014. 字符串的排列</a></p>
-</blockquote>
-<h4 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h4><blockquote>
-<p>注意：输入的 <code>s1</code> 是可以包含重复字符的，所以这个题难度不小。</p>
-</blockquote>
-<p>这种题目，是明显的滑动窗口算法，<strong>相当给你一个 <code>S</code> 和一个 <code>T</code>，请问你 <code>S</code> 中是否存在一个子串，包含 <code>T</code> 中所有字符且不包含其他字符</strong>？</p>
-<p>对于这道题的解法代码，基本上和最小覆盖子串一模一样，只需要改变几个地方：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var checkInclusion &#x3D; function (s1, s2) &#123;
-    let need &#x3D; new Map();
-    let window &#x3D; new Map();
-    for (let c of s1) &#123;
-        need.set(c, (need.get(c) || 0) + 1);
-    &#125;
+> Math.pow(2, 1024)
+Infinity<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-    let left &#x3D; 0, right &#x3D; 0;
-    let valid &#x3D; 0;
-    while (right &lt; s2.length) &#123;
-        let c &#x3D; s2[right];
-        right++;
-        &#x2F;&#x2F; 进行窗口内数据的一系列更新
-        if (need.has(c)) &#123;
-            window.set(c, (window.get(c) || 0) + 1);
-            if (window.get(c) &#x3D;&#x3D; need.get(c))
-                valid++;
-        &#125;
-        
-        &#x2F;&#x2F; 判断左侧窗口是否要收缩
-        while (right - left &gt;&#x3D; s1.length) &#123;
-            &#x2F;&#x2F; 在这里判断是否找到了合法的子串
-            if (valid &#x3D;&#x3D;&#x3D; need.size)
-                return true;
-            let d &#x3D; s2[left];
-            left++;
-            &#x2F;&#x2F; 进行窗口内数据的一系列更新
-            if (need.has(d)) &#123;
-                if (window.get(d) &#x3D;&#x3D; need.get(d))
-                    valid--;
-                window.set(d, window.get(d) - 1);
-            &#125;
-        &#125;
-    &#125;
-    &#x2F;&#x2F; 未找到符合条件的子串
-    return false;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li><p>本题移动 <code>left</code> 缩小窗口的时机是窗口大小大于 <code>t.size()</code> 时，因为排列嘛，显然<strong>长度应该是一样的</strong>。</p>
-</li>
-<li><p>当发现 <code>valid == need.size()</code> 时，就说明窗口中就是一个合法的排列，所以立即返回 <code>true</code>。</p>
-<p>至于如何处理窗口的扩大和缩小，和最小覆盖子串完全相同。</p>
-</li>
-</ol>
-<blockquote>
-<p>注意：</p>
-<ol>
-<li>由于这道题中 <code>[left, right)</code> 其实维护的是一个<strong>定长</strong>的窗口，窗口大小为 <code>t.size()</code>。因为定长窗口每次向前滑动时只会移出一个字符，所以可以把内层的 while 改成 if，效果是一样的。</li>
-<li><code>while (right - left &gt;= s1.length)</code> 不能改为 <code>while (right - left &gt;= need.size)</code>，因为这两个值只有在  <code>s1</code>  中的所有字符都是不同的情况下才会相等。也就是说，如果  <code>s1</code>  中没有重复的字符，那么  <code>need.size</code>  就等于  <code>s1.length</code> 。   但是，如果  <code>s1</code>  中有重复的字符，那么  <code>need.size</code>  就会小于  <code>s1.length</code> 。因为  <code>need.size</code>  只计算不同字符的种类数，而不考虑每个字符的重复次数。</li>
-</ol>
-</blockquote>
-<h3 id="438-找到字符串中所有字母异位词"><a href="#438-找到字符串中所有字母异位词" class="headerlink" title="438 找到字符串中所有字母异位词"></a>438 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/description/">找到字符串中所有字母异位词</a></h3><p>给定两个字符串 <code>s</code> 和 <code>p</code>，找到 <code>s</code> 中所有 <code>p</code> 的 <strong>异位词</strong> 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。</p>
-<p><strong>异位词</strong> 指由相同字母重排列形成的字符串（包括相同的字符串）。</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/VabMRr/">LCR 015. 找到字符串中所有字母异位词</a></p>
-</blockquote>
-<p>呵呵，这个所谓的字母异位词，不就是排列吗，搞个高端的说法就能糊弄人了吗？<strong>相当于，输入一个串 <code>S</code>，一个串 <code>T</code>，找到 <code>S</code> 中所有 <code>T</code> 的排列，返回它们的起始索引</strong>。</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var findAnagrams &#x3D; function (s, p) &#123;
-  let need &#x3D; new Map();
-  let window &#x3D; new Map();
-
-  for (let item of p) &#123;
-    need.set(item, (need.get(item) || 0) + 1);
-  &#125;
-
-  let left &#x3D; 0,
-    right &#x3D; 0;
-  let valid &#x3D; 0;
-  let indexArray &#x3D; [];
-  while (right &lt; s.length) &#123;
-    let c &#x3D; s[right];
-    right++;
-    if (need.has(c)) &#123;
-      window.set(c, (window.get(c) || 0) + 1);
-      if (need.get(c) &#x3D;&#x3D;&#x3D; window.get(c)) valid++;
-    &#125;
-    &#x2F;&#x2F; 找到匹配的子串，注意本题的子串长度和 p 的长度是一致的，即窗口大小是不变的
-    while (right - left &gt;&#x3D; p.length) &#123;
-        if(valid &#x3D;&#x3D;&#x3D; need.size)
-        &#123;
-            indexArray.push(left)
-        &#125;
-      let d &#x3D; s[left];
-      left++;
-      &#x2F;&#x2F; 进行窗口内数据的一系列更新
-      if (need.has(d)) &#123;
-        if (window.get(d) &#x3D;&#x3D;&#x3D; need.get(d)) &#123;
-          &#x2F;&#x2F; 说明移出的字符刚好是 need 中的字符，中断此循环，右指针继续向前，左指针停止
-          valid--;
-        &#125;
-        window.set(d, window.get(d) - 1);
-      &#125;
-    &#125;
-  &#125;
-  return indexArray
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>跟寻找字符串的排列一样，只是找到一个合法异位词（排列）之后将起始索引加入 <code>res</code> 即可。</p>
-<h3 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3 无重复字符的最长子串"></a>3 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/">无重复字符的最长子串</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
-<blockquote>
+<p>那么对于 <code>(2^53, 2^63)</code> 之间的数会出现什么情况呢？</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/">剑指 Offer 48. 最长不含重复字符的子字符串</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wtcaE1/">LCR 016. 无重复字符的最长子串</a></li>
+<li><code>(2^53, 2^54)</code> 之间的数会两个选一个，只能精确表示偶数</li>
+<li><code>(2^54, 2^55)</code> 之间的数会四个选一个，只能精确表示4个倍数</li>
+<li>… 依次跳过更多2的倍数</li>
 </ul>
-</blockquote>
-<p>回到模板的三个问题：</p>
-<ul>
-<li>扩大窗口的时机：搜索整个字符串，<strong>右指针一直前进直到边界</strong>。</li>
-<li>缩小窗口的时机：<strong>出现重复字符</strong>的时候缩小窗口，需要计数器（也就是Map中存放的字符出现次数）</li>
-<li>结果输出的时机：<strong>缩小窗口后</strong>，因为此时没有重复的字符。</li>
-</ul>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var lengthOfLongestSubstring &#x3D; function(s) &#123;
-    let window &#x3D; new Map()
-    let right &#x3D; 0
-    let left &#x3D; 0
-    let res &#x3D; 0
-   
-    while(right &lt; s.length)&#123;
-        let c &#x3D; s[right]
-        right++
-        window.set(c, (window.get(c) || 0) + 1)
-        &#x2F;&#x2F; 判断收缩条件，出现重复的字符的时候，就收缩！
-        while(window.get(c) &gt; 1)&#123;
-            let d &#x3D; s[left]
-            left++
-            window.set(d, window.get(d) - 1)
-        &#125;
-        &#x2F;&#x2F; 在这里更新答案
-        res &#x3D; Math.max(res, right - left);
+<p>要想解决大数的问题你可以引用第三方库 <code>bignumber.js</code>，原理是把所有数字当作字符串，重新实现了计算逻辑，缺点是性能比原生差很多</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>计算机存储双精度浮点数需要先把十进制数转换为二进制的科学记数法的形式，然后计算机以自己的规则{符号位+(指数位+指数偏移量的二进制)+小数部分}存储二进制的科学记数法</p>
+<p><strong>因为存储时有位数限制</strong>（64位），<strong>并且某些十进制的浮点数在转换为二进制数时会出现无限循环</strong>，<strong>会造成二进制的舍入操作</strong>(0舍1入)，当再转换为十进制时就造成了计算误差</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>理论上用有限的空间来存储无限的小数是不可能保证精确的，但我们可以处理一下得到我们期望的结果</p>
+<p>当你拿到 <code>1.4000000000000001</code> 这样的数据要展示时，建议使用 <code>toPrecision</code> 凑整并 <code>parseFloat</code> 转成数字后再显示，如下：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">parseFloat(1.4000000000000001.toPrecision(12)) === 1.4  // True<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-    &#125;
-   return res
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>封装成方法就是：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">strip</span><span class="token punctuation">(</span><span class="token parameter">num<span class="token punctuation">,</span> precision <span class="token operator">=</span> <span class="token number">12</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token operator">+</span><span class="token function">parseFloat</span><span class="token punctuation">(</span>num<span class="token punctuation">.</span><span class="token function">toPrecision</span><span class="token punctuation">(</span>precision<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>这就是变简单了，连 <code>need</code> 和 <code>valid</code> 都不需要，而且更新窗口内数据也只需要简单的更新计数器 <code>window</code> 即可。</p>
-<p>当 <code>window[c]</code> 值大于 1 时，说明窗口中存在重复字符，不符合条件，就该移动 <code>left</code> 缩小窗口了嘛。</p>
-<p>唯一需要注意的是，在哪里更新结果 <code>res</code> 呢？我们要的是最长无重复子串，哪一个阶段可以保证窗口中的字符串是没有重复的呢？</p>
-<p>这里和之前不一样，要在收缩窗口完成后更新 <code>res</code>，因为窗口收缩的 while 条件是存在重复元素，换句话说收缩完成后一定保证窗口中没有重复嘛。</p>
+<p>对于运算类操作，如 <code>+-*/</code>，就不能使用 <code>toPrecision</code> 了。正确的做法是把小数转成整数后再运算。以加法为例：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * 精确加法
+ */</span>
+<span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter">num1<span class="token punctuation">,</span> num2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> num1Digits <span class="token operator">=</span> <span class="token punctuation">(</span>num1<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> num2Digits <span class="token operator">=</span> <span class="token punctuation">(</span>num2<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> baseNum <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>num1Digits<span class="token punctuation">,</span> num2Digits<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>num1 <span class="token operator">*</span> baseNum <span class="token operator">+</span> num2 <span class="token operator">*</span> baseNum<span class="token punctuation">)</span> <span class="token operator">/</span> baseNum<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后还可以使用第三方库，如<code>Math.js</code>、<code>BigDecimal.js</code></p>
 
                 
             </div>
@@ -841,7 +625,7 @@ var slidingWindow &#x3D; function(s) &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2023/09/15/qian-duan-chang-yong-suan-fa-hui-zong/">https://qt-7274.github.io/2023/09/15/qian-duan-chang-yong-suan-fa-hui-zong/</a>
+                    <a href="https://qt-7274.github.io/2023/09/21/javascript-zhong-shu-zi-jing-du-diu-shi/">https://qt-7274.github.io/2023/09/21/javascript-zhong-shu-zi-jing-du-diu-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -883,8 +667,8 @@ var slidingWindow &#x3D; function(s) &#123;
                                     <span class="chip bg-color">前端</span>
                                 </a>
                             
-                                <a href="/tags/%E7%AE%97%E6%B3%95/">
-                                    <span class="chip bg-color">算法</span>
+                                <a href="/tags/JavaScript/">
+                                    <span class="chip bg-color">JavaScript</span>
                                 </a>
                             
                         </div>
@@ -1333,13 +1117,13 @@ var slidingWindow &#x3D; function(s) &#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/09/16/qian-duan-zhi-shi-dian-suan-fa-hui-zong/">
+                <a href="/2023/09/21/javascript-zhong-shang-la-jia-zai-he-xia-la-shua-xin/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/16.jpg" class="responsive-img" alt="前端知识点算法汇总">
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/23.jpg" class="responsive-img" alt="JavaScript中上拉加载和下拉刷新">
                         
-                        <span class="card-title">前端知识点算法汇总</span>
+                        <span class="card-title">JavaScript中上拉加载和下拉刷新</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1350,14 +1134,14 @@ var slidingWindow &#x3D; function(s) &#123;
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-16
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-09-21
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
                                 </a>
                             
                             
@@ -1371,8 +1155,8 @@ var slidingWindow &#x3D; function(s) &#123;
                         <span class="chip bg-color">前端</span>
                     </a>
                     
-                    <a href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>
@@ -1386,31 +1170,31 @@ var slidingWindow &#x3D; function(s) &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/09/15/vue-xu-ni-dom-xiang-jie/">
+                <a href="/2023/09/21/javascript-huan-cun-xiang-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/4.jpg" class="responsive-img" alt="Vue虚拟DOM详解">
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/15.jpg" class="responsive-img" alt="JavaScript缓存详解">
                         
-                        <span class="card-title">Vue虚拟DOM详解</span>
+                        <span class="card-title">JavaScript缓存详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文大部分内容转载于 稀土掘金，作者 随风而逝_风逝
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    前端开发
+                            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
                                 </a>
                             
                             
@@ -1424,8 +1208,8 @@ var slidingWindow &#x3D; function(s) &#123;
                         <span class="chip bg-color">前端</span>
                     </a>
                     
-                    <a href="/tags/Vue/">
-                        <span class="chip bg-color">Vue</span>
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>
