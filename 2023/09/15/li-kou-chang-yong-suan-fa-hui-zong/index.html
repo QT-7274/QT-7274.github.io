@@ -471,14 +471,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.8k
+                    10.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    24 分
+                    42 分
                 </div>
                 
 
@@ -1026,6 +1026,395 @@ function palindrome(s, left, right) &#123;
 <blockquote>
 <p>注意：之前的左右指针都是从两端向中间相向而行，而回文子串问题则是让左右指针从中心向两端扩展。</p>
 </blockquote>
+<h4 id="88-合并两个有序数组"><a href="#88-合并两个有序数组" class="headerlink" title="88 合并两个有序数组"></a>88 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-sorted-array/description/">合并两个有序数组</a></h4><p>给你两个按 <strong>非递减顺序</strong> 排列的整数数组 <code>nums1</code> 和 <code>nums2</code>，另有两个整数 <code>m</code> 和 <code>n</code> ，分别表示 <code>nums1</code> 和 <code>nums2</code> 中的元素数目。</p>
+<p>请你 <strong>合并</strong> <code>nums2</code> 到 <code>nums1</code> 中，使合并后的数组同样按 <strong>非递减顺序</strong> 排列。</p>
+<p><strong>注意：</strong>最终，合并后数组不应由函数返回，而是存储在数组 <code>nums1</code> 中。为了应对这种情况，<code>nums1</code> 的初始长度为 <code>m + n</code>，其中前 <code>m</code> 个元素表示应合并的元素，后 <code>n</code> 个元素为 <code>0</code> ，应忽略。<code>nums2</code> 的长度为 <code>n</code> 。</p>
+<h5 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h5><p>对于单链表来说，我们直接用双指针从头开始合并即可，但对于数组来说会出问题。因为题目让我直接把结果存到 <code>nums1</code> 中，而 <code>nums1</code> 的开头有元素，如果我们无脑复制单链表的逻辑，会覆盖掉 <code>nums1</code> 的原始元素，导致错误。</p>
+<p>但 <code>nums1</code> 后面是空的呀，所以这道题需要我们稍微变通一下：<strong>将双指针初始化在数组的尾部，然后从后向前进行合并</strong>，这样即便覆盖了 <code>nums1</code> 中的元素，这些元素也必然早就被用过了（因为 <code>m</code> 一定不大于 <code>nums1</code> 的长度），不会影响答案的正确性。</p>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var merge &#x3D; function(nums1, m, nums2, n) &#123;
+    &#x2F;&#x2F; 两个指针分别初始化在两个数组的最后一个元素（类似拉链两端的锯齿）
+    var i &#x3D; m - 1, j &#x3D; n - 1;
+    &#x2F;&#x2F; 生成排序的结果（类似拉链的拉锁）
+    var p &#x3D; nums1.length - 1;
+    &#x2F;&#x2F; 从后向前生成结果数组，类似合并两个有序链表的逻辑
+    while (i &gt;&#x3D; 0 &amp;&amp; j &gt;&#x3D; 0) &#123;
+        if (nums1[i] &gt; nums2[j]) &#123;
+            nums1[p] &#x3D; nums1[i];
+            i--;
+        &#125; else &#123;
+            nums1[p] &#x3D; nums2[j];
+            j--;
+        &#125;
+        p--;
+    &#125;
+    &#x2F;&#x2F; 可能其中一个数组的指针走到尽头了，而另一个还没走完
+    &#x2F;&#x2F; 因为我们本身就是在往 nums1 中放元素，所以只需考虑 nums2 是否剩元素即可
+    while (j &gt;&#x3D; 0) &#123;
+        nums1[p] &#x3D; nums2[j];
+        j--;
+        p--;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="415-字符串相加"><a href="#415-字符串相加" class="headerlink" title="415 字符串相加"></a>415 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-strings/description/">字符串相加</a></h4><p>给定两个字符串形式的非负整数 <code>num1</code> 和<code>num2</code> ，计算它们的和并同样以字符串形式返回。</p>
+<p>你不能使用任何內建的用于处理大整数的库（比如 <code>BigInteger</code>）， 也不能直接将输入的字符串转换为整数形式。</p>
+<h5 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h5><ul>
+<li>创建双指针，从后向前移动，将每一次指针对应的值转换为数值后，相加的值保存在新数组中。</li>
+<li>注意：相加的值需要考虑进位的问题，即进位数要保留给下一次相加。</li>
+<li>注意：需要考虑两个字符串位数不同的问题，需要用0来补位</li>
+</ul>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var addStrings &#x3D; function (num1, num2) &#123;
+    &#x2F;&#x2F; 初始化指针和结果数组
+    let i &#x3D; num1.length - 1; &#x2F;&#x2F; 指向num1的最后一位
+    let j &#x3D; num2.length - 1; &#x2F;&#x2F; 指向num2的最后一位
+    let array &#x3D; []; &#x2F;&#x2F; 存储结果的数组
+    let carry &#x3D; 0; &#x2F;&#x2F; 进位值
+
+    &#x2F;&#x2F; 从最后一位开始相加，直到两个数字的所有位都相加完毕
+    while (i &gt;&#x3D; 0 || j &gt;&#x3D; 0 || carry !&#x3D;&#x3D; 0) &#123;
+        &#x2F;&#x2F; 获取当前位上的数字，并加上进位值
+        let val1 &#x3D; i &gt;&#x3D; 0 ? parseInt(num1[i]) : 0; &#x2F;&#x2F; 如果i小于0，说明已经遍历完num1的所有位数，将val1设为0
+        let val2 &#x3D; j &gt;&#x3D; 0 ? parseInt(num2[j]) : 0; &#x2F;&#x2F; 如果j小于0，说明已经遍历完num2的所有位数，将val2设为0
+        let sum &#x3D; val1 + val2 + carry; &#x2F;&#x2F; 当前位上的数字相加
+
+        &#x2F;&#x2F; 将当前位上的数字存入结果数组，并更新进位值
+        array.unshift(sum % 10); &#x2F;&#x2F; 将当前位上的数字存入结果数组的开头（unshift()方法）
+        carry &#x3D; Math.floor(sum &#x2F; 10); &#x2F;&#x2F; 更新进位值
+
+        &#x2F;&#x2F; 移动指针，继续下一位的相加
+        i--;
+        j--;
+    &#125;
+
+    &#x2F;&#x2F; 将结果数组转换为字符串并返回
+    return array.join(&#39;&#39;);
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/description/">两数之和</a></h4><p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<h5 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a>思路</h5><ul>
+<li>两数之和问题和167题基本相同，需要先进行排序，再用滑动指针求和</li>
+<li>注意：因为题目要求我们返回元素的索引，而排序会破坏元素的原始索引，所以要记录值和原始索引的映射。</li>
+<li>注意：不能直接对原数组使用 <code>sort</code> 排序，这样会改变原数组的结构。</li>
+<li>注意：返回的索引要考虑数组中会出现相同元素的情况，不能只使用 <code>indexOf</code> 方法</li>
+</ul>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var twoSum &#x3D; function (nums, target) &#123;
+    let array &#x3D; nums.slice().sort(function (a, b) &#123;
+        return a - b ;
+    &#125;);
+    let left &#x3D; 0,
+        right &#x3D; nums.length - 1;
+        while (left &lt; right) &#123;
+            var sum &#x3D; array[left] + array[right];
+            if (sum &#x3D;&#x3D;&#x3D; target) &#123;
+                let index1 &#x3D; nums.indexOf(array[left]); &#x2F;&#x2F; 查找数组中指定元素第一次出现的索引
+                let index2 &#x3D; nums.lastIndexOf(array[right]); &#x2F;&#x2F; 查找数组中指定元素最后一次出现的索引
+
+                return [index1 , index2 ];
+            &#125; else if (sum &lt; target) &#123;
+                left++; &#x2F;&#x2F; 让 sum 大一点
+            &#125; else if (sum &gt; target) &#123;
+                right--; &#x2F;&#x2F; 让 sum 小一点
+            &#125;
+        &#125;
+        return []
+
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="括号相关问题"><a href="#括号相关问题" class="headerlink" title="括号相关问题"></a>括号相关问题</h2><h3 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20 有效的括号"></a>20 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/description/">有效的括号</a></h3><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;&#123;&#39;</code>，<code>&#39;&#125;&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串 <code>s</code> ，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<ol>
+<li>左括号必须用相同类型的右括号闭合。</li>
+<li>左括号必须以正确的顺序闭合。</li>
+<li>每个右括号都有一个对应的相同类型的左括号。</li>
+</ol>
+<h4 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a>思路</h4><ul>
+<li>栈是一种先进后出的数据结构，处理括号问题的时候尤其有用。遇到左括号就入栈，遇到右括号就去栈中寻找最近的左括号，看是否匹配。</li>
+<li>匹配的规则：在栈的长度合法的情况下，检查栈的顶部元素，如果匹配就出栈，否则继续循环。</li>
+</ul>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function isValid(str) &#123;
+    var left &#x3D; [];
+    for (var i &#x3D; 0; i &lt; str.length; i++) &#123;
+        var c &#x3D; str.charAt(i);
+        if (c &#x3D;&#x3D;&#x3D; &#39;(&#39; || c &#x3D;&#x3D;&#x3D; &#39;&#123;&#39; || c &#x3D;&#x3D;&#x3D; &#39;[&#39;)
+            left.push(c);
+        else &#123; &#x2F;&#x2F; 字符 c 是右括号
+            if (left.length !&#x3D;&#x3D; 0 &amp;&amp; leftOf(c) &#x3D;&#x3D;&#x3D; left[left.length - 1])
+                left.pop();
+            else
+                &#x2F;&#x2F; 和最近的左括号不匹配
+                return false;
+        &#125;
+    &#125;
+    &#x2F;&#x2F; 是否所有的左括号都被匹配了
+    return left.length &#x3D;&#x3D;&#x3D; 0;
+&#125;
+
+function leftOf(c) &#123;
+    if (c &#x3D;&#x3D;&#x3D; &#39;&#125;&#39;) return &#39;&#123;&#39;;
+    if (c &#x3D;&#x3D;&#x3D; &#39;)&#39;) return &#39;(&#39;;
+    return &#39;[&#39;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="921-使括号有效的最少添加"><a href="#921-使括号有效的最少添加" class="headerlink" title="921 使括号有效的最少添加"></a>921 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/description/">使括号有效的最少添加</a></h3><p>只有满足下面几点之一，括号字符串才是有效的：</p>
+<ul>
+<li>它是一个空字符串，或者</li>
+<li>它可以被写成 <code>AB</code> （<code>A</code> 与 <code>B</code> 连接）, 其中 <code>A</code> 和 <code>B</code> 都是有效字符串，或者</li>
+<li>它可以被写作 <code>(A)</code>，其中 <code>A</code> 是有效字符串。</li>
+</ul>
+<p>给定一个括号字符串 <code>s</code> ，在每一次操作中，你都可以在字符串的任何位置插入一个括号</p>
+<ul>
+<li>例如，如果 <code>s = &quot;()))&quot;</code> ，你可以插入一个开始括号为 <code>&quot;(()))&quot;</code> 或结束括号为 <code>&quot;())))&quot;</code> 。</li>
+</ul>
+<p>返回 <em>为使结果字符串 <code>s</code> 有效而必须添加的最少括号数</em>。</p>
+<h4 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a>思路</h4><p><strong>以左括号为基准，通过维护对右括号的需求数 <code>need</code>，来计算最小的插入次数</strong></p>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 注意：javascript 代码由 chatGPT🤖 根据我的 cpp 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
+&#x2F;&#x2F; 本代码不保证正确性，仅供参考。如有疑惑，可以参照我写的 cpp 代码对比查看。
+
+&#x2F;&#x2F; 使用 var 声明函数
+var minAddToMakeValid &#x3D; function(s) &#123;
+    &#x2F;&#x2F; res 记录插入次数
+    let res &#x3D; 0;
+    &#x2F;&#x2F; need 变量记录右括号的需求量
+    let need &#x3D; 0;
+
+    for (let i &#x3D; 0; i &lt; s.length; i++) &#123;
+        if (s[i] &#x3D;&#x3D; &#39;(&#39;) &#123;
+            &#x2F;&#x2F; 对右括号的需求 + 1
+            need++;
+        &#125;
+        
+        if (s[i] &#x3D;&#x3D; &#39;)&#39;) &#123;
+            &#x2F;&#x2F; 对右括号的需求 - 1
+            need--;
+
+            if (need &#x3D;&#x3D; -1) &#123;
+                need &#x3D; 0;
+                &#x2F;&#x2F; 需插入一个左括号
+                res++;
+            &#125;
+        &#125;
+    &#125;
+    
+    return res + need;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><p><strong>当 <code>need == -1</code> 的时候意味着什么</strong>？</p>
+<p>因为只有遇到右括号 <code>)</code> 的时候才会 <code>need--</code>，<code>need == -1</code> 意味着右括号太多了，所以需要插入左括号（ <code>res</code> 记录）。</p>
+<p>比如说 <code>s = &quot;))&quot;</code> 这种情况，需要插入 2 个左括号，使得 <code>s</code> 变成 <code>&quot;()()&quot;</code>，才是一个有效括号串。</p>
+</li>
+<li><p>**算法为什么返回 <code>res + need</code>**？</p>
+<p>因为 <code>res</code> 记录的左括号的插入次数，<code>need</code> 记录了右括号的需求，当 for 循环结束后，若 <code>need</code> 不为 0，那么就意味着右括号还不够，需要插入。</p>
+<p>比如说 <code>s = &quot;))(&quot;</code> 这种情况，插入 2 个左括号之后，还要再插入 1 个右括号，使得 <code>s</code> 变成 <code>&quot;()()()&quot;</code>，才是一个有效括号串。</p>
+</li>
+</ol>
+<h3 id="1541-平衡括号字符串的最少插入次数"><a href="#1541-平衡括号字符串的最少插入次数" class="headerlink" title="1541 平衡括号字符串的最少插入次数"></a>1541 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-insertions-to-balance-a-parentheses-string/description/">平衡括号字符串的最少插入次数</a></h3><p>给你一个括号字符串 <code>s</code> ，它只包含字符 <code>&#39;(&#39;</code> 和 <code>&#39;)&#39;</code> 。一个括号字符串被称为平衡的当它满足：</p>
+<ul>
+<li>任何左括号 <code>&#39;(&#39;</code> 必须对应两个连续的右括号 <code>&#39;))&#39;</code> 。</li>
+<li>左括号 <code>&#39;(&#39;</code> 必须在对应的连续两个右括号 <code>&#39;))&#39;</code> 之前。</li>
+</ul>
+<p>比方说 <code>&quot;())&quot;</code>， <code>&quot;())(())))&quot;</code> 和 <code>&quot;(())())))&quot;</code> 都是平衡的， <code>&quot;)()&quot;</code>， <code>&quot;()))&quot;</code> 和 <code>&quot;(()))&quot;</code> 都是不平衡的。</p>
+<p>你可以在任意位置插入字符 ‘(‘ 和 ‘)’ 使字符串平衡。</p>
+<p>请你返回让 <code>s</code> 平衡的最少插入次数。</p>
+<h4 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a>思路</h4><ul>
+<li><strong>核心思路还是和刚才一样，通过一个 <code>need</code> 变量记录对右括号的需求数，根据 <code>need</code> 的变化来判断是否需要插入</strong>。</li>
+<li><strong>首先，类似第一题，当 <code>need == -1</code> 时，意味着我们遇到一个多余的右括号，显然需要插入一个左括号。但是和第一题不同的是，此时我们已经遇到一个多余的右括号，所以还需要一个右括号才能满足平衡，所以此时 <code>need = 1</code>。</strong></li>
+<li><strong>注意：由上述得知左括号有时会出现奇数个右括号的需求，需要插入一个右括号。因为一个左括号需要两个右括号嘛，右括号的需求必须是偶数，这一点也是本题的难点。</strong></li>
+</ul>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var minInsertions &#x3D; function (s) &#123;
+    let need &#x3D; 0; &#x2F;&#x2F; 记录对右括号的需求
+    let res &#x3D; 0; &#x2F;&#x2F; 记录对左括号的需求
+
+    for (let i &#x3D; 0; i &lt; s.length; i++) &#123;
+        let c &#x3D; s.charAt(i);
+
+        if (c &#x3D;&#x3D;&#x3D; &quot;(&quot;) &#123;
+            need &#x3D; need + 2; &#x2F;&#x2F; 需要右括号 2 个
+
+            &#x2F;&#x2F; 由下方 need &#x3D; 1可以得知，有时左括号只需要一个右括号匹配，所以当need为奇数时需要单独匹配
+
+            if (need % 2 &#x3D;&#x3D;&#x3D; 1) &#123;
+                res++; &#x2F;&#x2F; 插入一个右括号
+                need--; &#x2F;&#x2F; 此时插入了一个右括号，那么对右括号的需求就要相应减一
+            &#125;
+        &#125;
+
+        if (c &#x3D;&#x3D;&#x3D; &quot;)&quot;) &#123;
+            need &#x3D; need - 1;
+
+            &#x2F;&#x2F; 当右括号很多，就需要左括号的需求
+            if (need &#x3D;&#x3D;&#x3D; -1) &#123;
+                res++;
+                need &#x3D; 1; &#x2F;&#x2F; 注意因为一个左括号需要两个右括号，所以插入一个左括号后还需求一个右括号
+            &#125;
+        &#125;
+    &#125;
+
+    return res + need;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509 斐波那契数"></a>509 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/description/">斐波那契数</a></h3><p>1.<strong>暴力递归</strong></p>
+<p>斐波那契数列的数学形式就是递归的，写成代码就是这样：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">fib</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token constant">N</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">N</span> <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">||</span> <span class="token constant">N</span> <span class="token operator">===</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">fib</span><span class="token punctuation">(</span><span class="token constant">N</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fib</span><span class="token punctuation">(</span><span class="token constant">N</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个算法的时间复杂度为二者相乘，即 O(2^n)，指数级别，爆炸。</p>
+<p>观察递归树，很明显发现了算法低效的原因：存在大量重复计算，比如 <code>f(18)</code> 被计算了两次，而且你可以看到，以 <code>f(18)</code> 为根的这个递归树体量巨大，多算一遍，会耗费巨大的时间。更何况，还不止 <code>f(18)</code> 这一个节点被重复计算，所以这个算法及其低效。</p>
+<p>2.<strong>带备忘录的递归解法</strong></p>
+<p>明确了问题，其实就已经把问题解决了一半。即然耗时的原因是重复计算，那么我们可以造一个「备忘录」，每次算出某个子问题的答案后别急着返回，先记到「备忘录」里再返回；每次遇到一个子问题先去「备忘录」里查一查，如果发现之前已经解决过这个问题了，直接把答案拿出来用，不要再耗时去计算了。</p>
+<p>一般使用一个数组充当这个「备忘录」，当然你也可以使用哈希表（字典），思想都是一样的。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var fib &#x3D; function(N) &#123;
+    &#x2F;&#x2F; 备忘录全初始化为 0
+    let memo &#x3D; new Array(N + 1).fill(0);
+    &#x2F;&#x2F; 进行带备忘录的递归
+    return dp(memo, N);
+&#125;;
+
+&#x2F;&#x2F; 带着备忘录进行递归
+var dp &#x3D; function(memo, n) &#123;
+    &#x2F;&#x2F; base case
+    if (n &#x3D;&#x3D; 0 || n &#x3D;&#x3D; 1) return n;
+    &#x2F;&#x2F; 已经计算过，不用再计算了
+    if (memo[n] !&#x3D; 0) return memo[n];
+    memo[n] &#x3D; dp(memo, n - 1) + dp(memo, n - 2);
+    return memo[n];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>3、<code>dp</code> 数组的迭代（递推）解法</strong></p>
+<p>有了上一步「备忘录」的启发，我们可以把这个「备忘录」独立出来成为一张表，通常叫做 DP table，在这张表上完成「自底向上」的推算岂不美哉！</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var fib &#x3D; function(N) &#123;
+    if (N &#x3D;&#x3D;&#x3D; 0) return 0;
+    let dp &#x3D; new Array(N + 1).fill(0);
+    &#x2F;&#x2F; base case
+    dp[0] &#x3D; 0; dp[1] &#x3D; 1;
+    &#x2F;&#x2F; 状态转移
+    for (let i &#x3D; 2; i &lt;&#x3D; N; i++) &#123;
+        dp[i] &#x3D; dp[i - 1] + dp[i - 2];
+    &#125;
+
+    return dp[N];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="322-零钱兑换"><a href="#322-零钱兑换" class="headerlink" title="322 零钱兑换"></a>322 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/description/">零钱兑换</a></h3><p>给你一个整数数组 <code>coins</code> ，表示不同面额的硬币；以及一个整数 <code>amount</code> ，表示总金额。</p>
+<p>计算并返回可以凑成总金额所需的 <strong>最少的硬币个数</strong> 。如果没有任何一种硬币组合能组成总金额，返回 <code>-1</code> 。</p>
+<p>你可以认为每种硬币的数量是无限的。</p>
+<p>1.<strong>暴力递归</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">coinChange</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">coins<span class="token punctuation">,</span> amount</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 题目要求的最终结果是 dp(amount)</span>
+    <span class="token keyword">return</span> <span class="token function">dp</span><span class="token punctuation">(</span>coins<span class="token punctuation">,</span> amount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 定义：要凑出金额 n，至少要 dp(coins, n) 个硬币</span>
+<span class="token keyword">function</span> <span class="token function">dp</span><span class="token punctuation">(</span><span class="token parameter">coins<span class="token punctuation">,</span> amount</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// base case</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>amount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>amount <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token number">Infinity</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> coin <span class="token keyword">of</span> coins<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 计算子问题的结果</span>
+        <span class="token keyword">let</span> subProblem <span class="token operator">=</span> <span class="token function">dp</span><span class="token punctuation">(</span>coins<span class="token punctuation">,</span> amount <span class="token operator">-</span> coin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 子问题无解则跳过</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>subProblem <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token comment">// 在子问题中选择最优解，然后加一</span>
+        res <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> subProblem <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> res <span class="token operator">==</span> <span class="token number">Infinity</span> <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">:</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2.<strong>带备忘录的递归</strong></p>
+<p>类似之前斐波那契数列的例子，只需要稍加修改，就可以通过备忘录消除子问题：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var coinChange &#x3D; function(coins, amount) &#123;
+    const memo &#x3D; new Array(amount + 1).fill(-666);
+    &#x2F;&#x2F; 备忘录初始化为一个不会被取到的特殊值，代表还未被计算
+    const dp &#x3D; (coins, amount) &#x3D;&gt; &#123;
+        if (amount &#x3D;&#x3D; 0) return 0;
+        if (amount &lt; 0) return -1;
+        &#x2F;&#x2F; 查备忘录，防止重复计算
+        if (memo[amount] !&#x3D; -666) return memo[amount];
+
+        let res &#x3D; Infinity;
+        for (let coin of coins) &#123;
+            &#x2F;&#x2F; 计算子问题的结果
+            let subProblem &#x3D; dp(coins, amount - coin);
+
+            &#x2F;&#x2F; 子问题无解则跳过
+            if (subProblem &#x3D;&#x3D; -1) continue;
+            &#x2F;&#x2F; 在子问题中选择最优解，然后加一
+            res &#x3D; Math.min(res, subProblem + 1);
+        &#125;
+        memo[amount] &#x3D; (res &#x3D;&#x3D; Infinity) ? -1 : res;
+        return memo[amount];
+    &#125;
+
+    return dp(coins, amount);
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>3.<strong>dp 数组的迭代解法</strong></p>
+<p>当然，我们也可以自底向上使用 dp table 来消除重叠子问题，关于「状态」「选择」和 base case 与之前没有区别，<code>dp</code> 数组的定义和刚才 <code>dp</code> 函数类似，也是把「状态」，也就是目标金额作为变量。不过 <code>dp</code> 函数体现在函数参数，而 <code>dp</code> 数组体现在数组索引：</p>
+<p><strong><code>dp</code> 数组的定义：当目标金额为 <code>i</code> 时，至少需要 <code>dp[i]</code> 枚硬币凑出</strong>。</p>
+<p>根据我们文章开头给出的动态规划代码框架可以写出如下解法：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
+ * @param &#123;number[]&#125; coins
+ * @param &#123;number&#125; amount
+ * @return &#123;number&#125;
+ *&#x2F;
+var coinChange &#x3D; function(coins, amount) &#123;
+    var dp &#x3D; new Array(amount + 1).fill(amount + 1);
+     &#x2F;&#x2F; The size of the array is amount + 1, and the initial value is also amount + 1
+    &#x2F;&#x2F;  dp[i] represents the minimum number of coins needed for the amount i
+    dp[0] &#x3D; 0;
+    &#x2F;&#x2F; The outer loop is traversing all the values of all states
+    for (var i &#x3D; 0; i &lt; dp.length; i++) &#123;
+        &#x2F;&#x2F; The inner loop is to find the minimum value of all choices
+        for (var coin of coins) &#123;
+            &#x2F;&#x2F; Sub-problems are unsolvable, skip
+            if (i - coin &lt; 0) &#123;
+                continue;
+            &#125;
+            dp[i] &#x3D; Math.min(dp[i], 1 + dp[i - coin]);
+
+        &#125;
+    &#125;
+    return (dp[amount] &#x3D;&#x3D; amount + 1) ? -1 : dp[amount];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70 爬楼梯"></a>70 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/description/">爬楼梯</a></h3><p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
+<p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<h4 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a>思路</h4><p>爬到第 <code>n</code> 级台阶的方法个数等于爬到 <code>n - 1</code> 的方法个数和爬到 <code>n - 2</code> 的方法个数之和。</p>
+<p>代码示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var climbStairs &#x3D; function(n) &#123;
+
+    let memo &#x3D; new Array(n+1).fill(-666)
+    return dp(memo,n)
+
+&#125;;
+
+const dp &#x3D; function(memo, n)
+&#123;
+    if(n &#x3D;&#x3D;&#x3D; 1) return 1
+    if(n &#x3D;&#x3D;&#x3D; 2) return 2
+
+    if(memo[n] !&#x3D; -666) return memo[n]
+
+    memo[n] &#x3D; dp(memo,n-1) + dp(memo,n-2)
+
+    console.log(memo[n])
+    return memo[n]
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
