@@ -459,14 +459,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-23
+                    2023-09-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.7k
+                    8.8k
                 </div>
                 
 
@@ -540,11 +540,11 @@
 </li>
 <li><strong>头部压缩</strong><ul>
 <li>HTTP&#x2F;1.1：在HTTP&#x2F;1.1中，每个请求和响应都需要发送相同的头部信息，这会浪费带宽。</li>
-<li>HTTP&#x2F;2：在HTTP&#x2F;1.1中，每个请求和响应都需要发送相同的头部信息，这会浪费带宽。</li>
+<li>HTTP&#x2F;2：HTTP&#x2F;2使用HPACK算法对头部进行压缩，减小了数据传输的大小，减轻了网络负担。这对于移动设备和慢速连接的用户尤其重要。</li>
 </ul>
 </li>
 <li><strong>服务器推送</strong><ul>
-<li>HTTP&#x2F;1.1：在HTTP&#x2F;1.1中，每个请求和响应都需要发送相同的头部信息，这会浪费带宽。</li>
+<li>HTTP&#x2F;1.1：在HTTP&#x2F;1.1中，服务器无法主动向客户端推送资源，客户端必须明确请求。</li>
 <li>HTTP&#x2F;2：HTTP&#x2F;2允许服务器推送（Server Push）与请求的资源相关的其他资源，以提前加载可能需要的内容。这可以减少往返时间，提高性能。</li>
 </ul>
 </li>
@@ -753,11 +753,12 @@
 <li>对于 GET 方式的请求，浏览器会把 http header 和 data 一并发送出去，服务器响应 200<br>（返回数据）；</li>
 <li>对于 POST，浏览器先发送 header，服务器响应 100 continue，浏览器再发送 data，服<br>务器响应 200 ok（返回数据）。</li>
 </ul>
-<h2 id="❗csrf-和-xss-的网络攻击及防范"><a href="#❗csrf-和-xss-的网络攻击及防范" class="headerlink" title="❗csrf 和 xss 的网络攻击及防范"></a>❗csrf 和 xss 的网络攻击及防范</h2><h3 id="描述一下-XSS-和-CRSF-攻击？防御方法？"><a href="#描述一下-XSS-和-CRSF-攻击？防御方法？" class="headerlink" title="描述一下 XSS 和 CRSF 攻击？防御方法？"></a>描述一下 XSS 和 CRSF 攻击？防御方法？</h3><p>XSS, 即为（Cross Site Scripting）, 中文名为<strong>跨站脚本</strong>, 是发生在目标用户的浏览器层面上的，当渲染 DOM 树的过程成发生了不在预期内执行的 JS 代码时，就发生了 XSS 攻击。</p>
+<h2 id="❗csrf-和-xss-的网络攻击及防范"><a href="#❗csrf-和-xss-的网络攻击及防范" class="headerlink" title="❗csrf 和 xss 的网络攻击及防范"></a>❗csrf 和 xss 的网络攻击及防范</h2><h3 id="描述一下-XSS-和-CRSF-攻击？防御方法？"><a href="#描述一下-XSS-和-CRSF-攻击？防御方法？" class="headerlink" title="描述一下 XSS 和 CRSF 攻击？防御方法？"></a>描述一下 XSS 和 CRSF 攻击？防御方法？</h3><p>XSS, 即为（Cross Site Scripting）, 中文名为<strong>跨站脚本</strong>，是发生在目标用户的浏览器层面上的，当渲染 DOM 树的过程成发生了不在预期内执行的 JS 代码时，就发生了 XSS 攻击。</p>
 <p>大多数 XSS 攻击的主要方式是嵌入一段远程或者第三方域上的 JS 代码。实际上是在<strong>目标网站的作用域</strong>下执行了这段 JS 代码。</p>
-<p>CSRF（Cross Site Request Forgery，<strong>跨站请求伪造</strong>），字面理解意思就是在别的站点伪造<br>了一个请求。</p>
+<p>CSRF（Cross Site Request Forgery，<strong>跨站请求伪造</strong>），字面理解意思就是在别的站点伪造了一个请求。</p>
 <p>专业术语来说就是在受害者访问一个网站时，其 Cookie 还没有过期的情况下，攻击者伪造一个链接地址发送受害者并欺骗让其点击，从而形成 CSRF 攻击。</p>
-<p>XSS 防御的总体思路是：<strong>对输入(和 URL 参数)进行过滤（cookie 设置 httpOnly 属性），对输出进行编码</strong>。也就是对提交的所有内容进行过滤，对 url 中的参数进行过滤，过滤掉会导致脚本执行的相关内容；然后对动态输出到页面的内容进行 html 编码，<strong>使脚本无法在浏览器中执行</strong>。虽然对输入过滤可以被绕过，但是也还是会拦截很大一部分的 XSS 攻击。<br>防御 CSRF 攻击主要有三种策略：验证 HTTP Referer 字段；在请求地址中添加 token 并验证；在 HTTP 头中自定义属性并验证。</p>
+<p>XSS 防御的总体思路是：<strong>对输入(和 URL 参数)进行过滤（cookie 设置 httpOnly 属性），对输出进行编码</strong>。也就是对提交的所有内容进行过滤，对 url 中的参数进行过滤，过滤掉会导致脚本执行的相关内容；然后对动态输出到页面的内容进行 html 编码，<strong>使脚本无法在浏览器中执行</strong>。虽然对输入过滤可以被绕过，但是也还是会拦截很大一部分的 XSS 攻击。</p>
+<p>CSRF 防御的总体思路是：CSRF令牌（CSRF Token）和同源检测。CSRF令牌是一种随机生成的令牌，它会嵌入到页面中的表单或请求中，并在后台进行验证，以确保请求是由合法的用户发起的。同源检测则是通过检查请求的来源是否与目标站点相同来防止跨站请求。</p>
 <h2 id="❗WebSocket-的实现和应用"><a href="#❗WebSocket-的实现和应用" class="headerlink" title="❗WebSocket 的实现和应用"></a>❗WebSocket 的实现和应用</h2><h3 id="什么是-WebSocket"><a href="#什么是-WebSocket" class="headerlink" title="什么是 WebSocket?"></a>什么是 WebSocket?</h3><p>WebSocket 是一种基于 TCP 协议的应用层协议，它允许客户端和服务器之间进行全双工通信，从而实现实时数据传输。 </p>
 <p>WebSocket 是 HTML5 中的协议，支持持久连续，http 协议不支持持久性连接。Http1.0 和 HTTP1.1 都不支持持久性的链接，HTTP1.1 中的 keep-alive，将多个 http 请求合并为 1 个。</p>
 <blockquote>
