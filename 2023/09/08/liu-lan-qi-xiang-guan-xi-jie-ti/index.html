@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-20
+                    2023-09-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.2k
+                    8.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    26 分
+                    31 分
                 </div>
                 
 
@@ -525,15 +525,87 @@
 <li>SSL 证书也需要钱，功能越强大的证书费用越高。</li>
 <li>SSL 证书需要绑定 IP，不能再同一个 ip 上绑定多个域名，ipv4 资源支持不了这种消耗。</li>
 </ul>
-<h3 id="HTTP-2-0-的特性"><a href="#HTTP-2-0-的特性" class="headerlink" title="HTTP 2.0 的特性"></a>HTTP 2.0 的特性</h3><p>http2.0 的特性如下：</p>
-<ol>
-<li>内容安全，应为 http2.0 是基于 https 的，天然具有安全特性，通过 http2.0 的特性可以避免单纯使用 https 的性能下降。</li>
-<li>多路复用：HTTP&#x2F;2.0 支持多路复用，允许在单个 TCP 连接上同时发送多个请求和响应。这样可以避免 HTTP&#x2F;1.1 中的队头阻塞问题，提高了并发性能和响应速度。</li>
-<li>二进制分帧：HTTP&#x2F;2.0 将传输的数据划分为更小的二进制帧，每个帧都有自己的帧头，可以独立发送和处理。这种二进制分帧的机制可以更高效地利用网络带宽，减少了延迟。</li>
-<li>头部压缩：HTTP&#x2F;2.0 使用 HPACK 算法对请求和响应的头部进行压缩，减少了数据传输的大小，提高了性能。</li>
-<li>服务器推送：HTTP&#x2F;2.0 允许服务器在客户端请求之前主动推送相关资源，以提高性能和加载速度。  </li>
-<li>流量优先级：HTTP&#x2F;2.0 支持为不同的请求设置优先级，可以确保重要的请求优先得到处理，提高用户体验。</li>
+<h3 id="http-1-1-较-http-1-0的新增内容"><a href="#http-1-1-较-http-1-0的新增内容" class="headerlink" title="http  1.1 较  http  1.0的新增内容"></a><code>http</code>  1.1 较  <code>http</code>  1.0的新增内容</h3><ol>
+<li><strong>持久连接</strong>（Persistent Connections）：HTTP 1.1引入了持久连接，也称为连接复用。这意味着在<strong>单个TCP连接上可以发送多个HTTP请求和响应，而不需要为每个请求和响应都建立新的连接</strong>。这样可以减少连接建立和关闭的开销，提高性能。   </li>
+<li><strong>流水线</strong>（Pipelining）：HTTP 1.1支持请求的流水线处理，即在<strong>一个连接上可以同时发送多个请求，而不需要等待每个请求的响应。</strong>这样可以减少请求的延迟，提高效率。   (注意：⚠️服务器<strong>必须按照客户端请求的先后顺序</strong>依次回送相应的结果，以保证客户端能够区分出每次请求的响应内容。)</li>
+<li><strong>分块传输编码</strong>（Chunked Transfer Encoding）：HTTP 1.1引入了分块传输编码，<strong>允许服务器将响应分成多个块进行传输</strong>。这样可以在服务器生成响应的过程中逐步发送数据，而不需要等待整个响应生成完毕。这对于大型响应或动态生成的响应非常有用。   </li>
+<li><strong>主机名的支持</strong>（Host Header）：HTTP 1.1要求请求头中必须包含Host字段，用于指定请求的目标主机。这使得在一台服务器上可以托管多个域名的网站成为可能。  </li>
+<li><strong>缓存控制</strong>（Cache Control）：HTTP 1.1引入了更精细的缓存控制机制，允许服务器和客户端更好地控制缓存的行为，包括缓存的过期时间、验证等。</li>
 </ol>
+<h3 id="http-2-0-较-http-1-1的新增内容"><a href="#http-2-0-较-http-1-1的新增内容" class="headerlink" title="http 2.0 较  http  1.1的新增内容"></a><code>http</code> 2.0 较  <code>http</code>  1.1的新增内容</h3><ol>
+<li><strong>多路复用</strong>（Multiplexing）<ul>
+<li>HTTP&#x2F;1.1： 在HTTP&#x2F;1.1中，每个请求都需要按顺序发送和接收，如果一个资源加载时间较长，它会阻塞后续请求，导致性能瓶颈。</li>
+<li>HTTP&#x2F;2： HTTP&#x2F;2引入了多路复用，允许多个请求和响应同时在单个TCP连接上传输。这意味着浏览器可以同时获取多个资源，显著提高了页面加载速度。</li>
+</ul>
+</li>
+<li><strong>头部压缩</strong><ul>
+<li>HTTP&#x2F;1.1：在HTTP&#x2F;1.1中，每个请求和响应都需要发送相同的头部信息，这会浪费带宽。</li>
+<li>HTTP&#x2F;2：在HTTP&#x2F;1.1中，每个请求和响应都需要发送相同的头部信息，这会浪费带宽。</li>
+</ul>
+</li>
+<li><strong>服务器推送</strong><ul>
+<li>HTTP&#x2F;1.1：在HTTP&#x2F;1.1中，每个请求和响应都需要发送相同的头部信息，这会浪费带宽。</li>
+<li>HTTP&#x2F;2：HTTP&#x2F;2允许服务器推送（Server Push）与请求的资源相关的其他资源，以提前加载可能需要的内容。这可以减少往返时间，提高性能。</li>
+</ul>
+</li>
+<li><strong>二进制传输</strong><ul>
+<li>HTTP&#x2F;1.1：HTTP&#x2F;1.1使用文本协议，头部信息和内容以可读文本形式传输。</li>
+<li>HTTP&#x2F;2：HTTP&#x2F;2采用二进制协议，将头部和内容压缩成二进制数据，提高了传输效率，减少了解析时间。</li>
+</ul>
+</li>
+<li><strong>连接复用</strong><ul>
+<li>HTTP&#x2F;1.1：在HTTP&#x2F;1.1中，为每个请求都需要建立和维护一个独立的TCP连接。</li>
+<li>HTTP&#x2F;2：HTTP&#x2F;2使用单个TCP连接复用多个请求和响应，减少了连接建立和维护的开销，提高了效率。</li>
+</ul>
+</li>
+</ol>
+<h3 id="http-3-0-较-http-2-0的新增内容"><a href="#http-3-0-较-http-2-0的新增内容" class="headerlink" title="http 3.0 较  http 2.0的新增内容"></a><code>http</code> 3.0 较  <code>http</code> 2.0的新增内容</h3><p>Google搞了一个基于UDP协议的QUIC协议，并且使用在了HTTP&#x2F;3上， HTTP&#x2F;3之前的名称为HTTP-over-QUIC。</p>
+<ol>
+<li><p><strong>多路复用</strong></p>
+<p>QUIC基于UDP，一个连接上的多个stream之间没有依赖，即使丢包，只需要重发丢失的包即可，不需要重传整个连接。</p>
+</li>
+<li><p><strong>更好的移动端表现</strong></p>
+<p>QUIC在移动端的表现比TCP好，因为TCP是基于IP识别连接，而QUIC是通过ID识别链接。 无论网络环境如何变化，只要ID不便，就能迅速重新连上。</p>
+</li>
+<li><p><strong>加密认证的根文——武装到牙齿</strong></p>
+<p>TCP协议头没有经过任何加密和认证，在传输过程中很容易被中间网络设备篡改、注入和窃听。</p>
+<p>QUIC的packet可以说武装到了牙齿，除了个别报文，比如PUBLIC_RESET和CHLO，所有报文头部都是经过认证的，报文Body都是经过加密的。</p>
+<p>所以只要对 QUIC 做任何更改，接收端都能及时发现，有效地降低了安全风险。</p>
+</li>
+<li><p><strong>向前纠错机制</strong></p>
+<p>QUIC协议有一个非常独特的特性，称为向前纠错（Foward Error Connec，FEC），每个数据包除了它本身的内容之外还包括了其他数据包的数据，因此少量的丢包可以通过其他包的冗余数据直接组装而无需重传。</p>
+<p>向前纠错牺牲了每个数据包可以发送数据的上限，但是带来的提升大于丢包导致的数据重传，因为数据重传将会消耗更多的时间（包括确认数据包丢失，请求重传，等待新数据包等步骤的时间消耗）。</p>
+<p>例如：</p>
+<p>我总共发送三个包，协议会算出这个三个包的异或值并单独发出一个校验包，也就是总共发出了四个包。<br>当其中出现了非校验包丢失的情况，可以通过另外三个包计算出丢失的数据包的内容。<br>当然这种技术只能使用在丢失一个包的情况下，如果出现丢失多个包，就不能使用纠错机制了，只能使用重传的方式了。</p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="HTTP-1-0"><a href="#HTTP-1-0" class="headerlink" title="HTTP 1.0"></a>HTTP 1.0</h4><ul>
+<li>无状态，无连接</li>
+<li>短连接：每次发送请求都要重新建立tcp请求，即三次握手，非常浪费性能</li>
+<li>无host头域，也就是http请求头里的host，</li>
+<li>不允许断点续传，而且不能只传输对象的一部分，要求传输整个对象</li>
+</ul>
+<h4 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP 1.1"></a>HTTP 1.1</h4><ul>
+<li>长连接，流水线，使用connection:keep-alive使用长连接</li>
+<li>请求管道化</li>
+<li>增加缓存处理（新的字段如cache-control）</li>
+<li>增加Host字段，支持断点传输等</li>
+<li>由于长连接会给服务器造成压力</li>
+</ul>
+<h4 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP 2.0"></a><strong>HTTP 2.0</strong></h4><ul>
+<li>二进制分帧</li>
+<li>头部压缩，双方各自维护一个header的索引表，使得不需要直接发送值，通过发送key缩减头部大小</li>
+<li>多路复用（或连接共享），使用多个stream，每个stream又分帧传输，使得一个tcp连接能够处理多个http请求</li>
+<li>服务器推送（Sever push）</li>
+</ul>
+<h4 id="HTTP-3-0"><a href="#HTTP-3-0" class="headerlink" title="HTTP 3.0"></a>HTTP 3.0</h4><ul>
+<li>基于google的QUIC协议，而quic协议是使用udp实现的</li>
+<li>减少了tcp三次握手时间，以及tls握手时间</li>
+<li>解决了http 2.0中前一个stream丢包导致后一个stream被阻塞的问题</li>
+<li>优化了重传策略，重传包和原包的编号不同，降低后续重传计算的消耗</li>
+<li>连接迁移，不再用tcp四元组确定一个连接，而是用一个64位随机数来确定这个连接</li>
+<li>更合适的流量控制</li>
+</ul>
 <h4 id="cache-control-的值有哪些"><a href="#cache-control-的值有哪些" class="headerlink" title="cache-control 的值有哪些"></a>cache-control 的值有哪些</h4><p>cache-control 是一个通用消息头字段被用于 HTTP 请求和响应中，通过指定指令来实现缓存机制，这个缓存指令是单向的，常见的取值有 private、no-cache、max-age、must-revalidate 等，默认为 private。</p>
 <h2 id="❗TCP和UDP的区别"><a href="#❗TCP和UDP的区别" class="headerlink" title="❗TCP和UDP的区别"></a>❗TCP和UDP的区别</h2><ul>
 <li><p>TCP 是面向连接的，UDP 是无连接的即发送数据前不需要先建立链接。</p>
