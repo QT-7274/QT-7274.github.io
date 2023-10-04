@@ -1,0 +1,3716 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="JavaScript代码题目, QT-7274">
+    <meta name="description" content="类型问题
+var let 变量
+function sayHi() &amp;#123;
+  console.log(name);
+  console.log(age);
+  var name &amp;#x3D; &amp;#39;Lydia&amp;#39;;
+  le">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>JavaScript代码题目 | QT-7274</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+    
+<body>
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    <div>
+                    
+                    <img src="/medias/images/loading.gif" data-original="/medias/logo.gif" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">QT-7274</span>
+                </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+    <div class="mobile-head bg-color">
+      <div>
+        
+        <img no-lazy src="/medias/logo.gif" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">QT-7274</div>
+        <div class="logo-desc">
+          
+              Never really desperate, only the lost of the soul.
+              
+            </div>
+      </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/QT-7274/QT-7274.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #003a8c;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/QT-7274/QT-7274.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">JavaScript代码题目</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                <span class="chip bg-color">前端</span>
+                            </a>
+                        
+                            <a href="/tags/JavaScript/">
+                                <span class="chip bg-color">JavaScript</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                前端开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-10-03
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-10-04
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    16.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    74 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="类型问题"><a href="#类型问题" class="headerlink" title="类型问题"></a>类型问题</h2><ol>
+<li><p>var let 变量</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sayHi() &#123;
+  console.log(name);
+  console.log(age);
+  var name &#x3D; &#39;Lydia&#39;;
+  let age &#x3D; 21;
+&#125;
+
+sayHi();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>Lydia</code> and <code>undefined</code></li>
+<li>B: <code>Lydia</code> and <code>ReferenceError</code></li>
+<li>C: <code>ReferenceError</code> and <code>21</code></li>
+<li>D: <code>undefined</code> and <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p>在函数中，我们使用了 <code>var</code> 关键词来声明<code>name</code> 变量，这导致变量被提升（内存空间在创建阶段设置），默认值为<code>undefined</code>，直到该变量被定义的那一行。</p>
+<p>而带有 <code>let</code>关键字 (和 <code>const</code>)的变量会被提升，但和 <code>var</code>不同的是，它不会被初始化。在我们初始化它们之前，它们是不可访问的，这被称为“时间死区”。</p>
+<p>当我们尝试在声明变量之前访问变量时，JavaScript 会抛出  <code>ReferenceError</code>。</p>
+</li>
+<li><p>对象解释</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const bird &#x3D; &#123;
+  size: &#39;small&#39;,
+&#125;;
+
+const mouse &#x3D; &#123;
+  name: &#39;Mickey&#39;,
+  small: true,
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>mouse.bird.size</code> is not valid</li>
+<li>B: <code>mouse[bird.size]</code> is not valid</li>
+<li>C: <code>mouse[bird[&quot;size&quot;]]</code> is not valid</li>
+<li>D: All of them are valid</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>在 JavaScript 中，所有对象键都是字符串（除非它是 <code>Symbol</code>）。尽管我们可能不会将它们输入为字符串，但它们总是会在底层转换为字符串。 当使用方括号表示法时，JavaScript会进行解释（或解包）语句。它看到第一个开放的方括号<code>[</code>，然后继续查找直到找到闭合的方括号<code>]</code>。只有在找到闭合的方括号后，它才会评估语句。</p>
+<p>在这个例子中，<code>mouse[bird.size]</code>首先评估<code>bird.size</code>，它的值是<code>&quot;small&quot;</code>。然后，<code>mouse[&quot;small&quot;]</code>返回<code>true</code>。</p>
+<p>然而，使用点表示法时，这种情况不会发生。<code>mouse</code>没有一个名为<code>bird</code>的键，这意味着<code>mouse.bird</code>是<code>undefined</code>的。然后，我们使用点表示法来获取<code>size</code>：<code>mouse.bird.size</code>。由于<code>mouse.bird</code>是<code>undefined</code>的，实际上我们正在请求<code>undefined.size</code>。这是无效的，并且会引发类似于<code>Cannot read property &quot;size&quot; of undefined</code>。</p>
+</li>
+<li><p>引用类型赋值</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">greeting</span><span class="token operator">:</span> <span class="token string">'Hey!'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> d<span class="token punctuation">;</span>
+
+d <span class="token operator">=</span> c<span class="token punctuation">;</span>
+c<span class="token punctuation">.</span>greeting <span class="token operator">=</span> <span class="token string">'Hello'</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>greeting<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>Hello</code></li>
+<li>B: <code>Hey!</code></li>
+<li>C: <code>undefined</code></li>
+<li>D: <code>ReferenceError</code></li>
+<li>E: <code>TypeError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: A**
+
+<p><strong>Answer: A</strong></p>
+<p>在JavaScript中，当将一个对象赋值给另一个对象时，它们之间是通过引用进行交互的。这意味着，当我们将一个对象赋值给另一个变量时，实际上是将该对象的引用复制到了新变量中，而不是将对象本身复制到新变量中。</p>
+<p>在这个例子中，变量<code>c</code>保存了一个对象的值。稍后，我们将<code>d</code>赋值为与<code>c</code>具有相同引用的对象。这意味着，<code>c</code>和<code>d</code>现在都引用同一个对象，因此对该对象的任何更改都会反映在c和d中。这种交互方式可以节省内存，因为它避免了在内存中复制大量的对象。但需要注意的是，如果我们想要复制一个对象而不是引用它，我们需要使用深拷贝（deep copy）或浅拷贝（shallow copy）的技术。</p>
+<p>当你改变一个对象时，所有引用该对象的变量都会改变。</p>
+</li>
+<li><p>变量赋值</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let greeting;
+greetign &#x3D; &#123;&#125;; &#x2F;&#x2F; Typo!
+console.log(greetign);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123;&#125;</code></li>
+<li>B: <code>ReferenceError: greetign is not defined</code></li>
+<li>C: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>   它记录了对象，因为我们刚刚在全局对象上创建了一个空对象！当我们将<code>greeting</code>拼写错误为<code>greetign</code>时，JS解释器实际上将其视为：</p>
+<ul>
+<li>在Node.js中，<code>global.greetign = &#123;&#125;</code> 。</li>
+<li>在浏览器中，<code>window.greetign = &#123;&#125;</code>，<code>frames.geetign = &#123;&#125;</code>和<code>self.greetign</code>。 </li>
+<li>在Web Workers中，<code>self.greetign</code>。</li>
+<li>在所有环境中<code>globalThis.greetign</code>。</li>
+<li>为了避免这种情况，我们可以使用<code>&quot;use strict&quot;</code>。这可以确保在将变量设置为任何值之前已经声明了它。</li>
+</ul>
+</li>
+<li><p>var 关键字</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var num &#x3D; 8;
+var num &#x3D; 10;
+
+console.log(num);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>8</code></li>
+<li>B: <code>10</code></li>
+<li>C: <code>SyntaxError</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>使用<code>var</code>关键字，您可以声明多个具有相同名称的变量。变量将保存最新的值。</p>
+<p>使用<code>let</code>或<code>const</code>无法这样做，因为它们是块作用域的。</p>
+</li>
+<li><p>检测键的存在</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const obj &#x3D; &#123; 1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39; &#125;;
+const set &#x3D; new Set([1, 2, 3, 4, 5]);
+
+obj.hasOwnProperty(&#39;1&#39;);
+obj.hasOwnProperty(1);
+set.has(&#39;1&#39;);
+set.has(1);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>false</code> <code>true</code> <code>false</code> <code>true</code></li>
+<li>B: <code>false</code> <code>true</code> <code>true</code> <code>true</code></li>
+<li>C: <code>true</code> <code>true</code> <code>false</code> <code>true</code></li>
+<li>D: <code>true</code> <code>true</code> <code>true</code> <code>true</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>所有对象的键（不包括 Symbols）在底层都是字符串，即使您没有将其键入为字符串。这就是为什么<code>obj.hasOwnProperty(&#39;1&#39;)</code>也返回<code>true</code>的原因。</p>
+<p>但是对于集合来说，情况并非如此。我们的集合中没有<code>&#39;1&#39;</code>，所有<code>set.has(&#39;1&#39;)</code>返回<code>false</code>。它具有数字类型<code>1</code>，<code>set.has(1)</code>返回<code>true</code>。</p>
+</li>
+<li><p>重复的键</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const obj &#x3D; &#123; a: &#39;one&#39;, b: &#39;two&#39;, a: &#39;three&#39; &#125;;
+console.log(obj);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; a: &quot;one&quot;, b: &quot;two&quot; &#125;</code></li>
+<li>B: <code>&#123; b: &quot;two&quot;, a: &quot;three&quot; &#125;</code></li>
+<li>C: <code>&#123; a: &quot;three&quot;, b: &quot;two&quot; &#125;</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: B**
+
+<p><strong>Answer: B</strong></p>
+<p>如果您有两个具有相同名称的键，则该键将被替换。它仍将位于其第一个位置，但具有最后指定的值。</p>
+</li>
+<li><p>原型方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">String.prototype.giveLydiaPizza &#x3D; () &#x3D;&gt; &#123;
+  return &#39;Just give Lydia pizza already!&#39;;
+&#125;;
+
+const name &#x3D; &#39;Lydia&#39;;
+
+console.log(name.giveLydiaPizza())<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Just give Lydia pizza already!&quot;</code></li>
+<li>B: <code>TypeError: not a function</code></li>
+<li>C: <code>SyntaxError</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p> <code>String</code>是一个内置的构造函数，我们可以向其添加属性。我刚刚向其原型添加了一个方法。原始字符串会自动转换为由字符串原型函数生成的字符串对象。因此，所有字符串（字符串对象）都可以访问该方法！这意味着，如果您向字符串原型添加一个方法，那么<strong>所有</strong>字符串都可以使用该方法。</p>
+</li>
+<li><p>将对象作为键</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const a &#x3D; &#123;&#125;;
+const b &#x3D; &#123; key: &#39;b&#39; &#125;;
+const c &#x3D; &#123; key: &#39;c&#39; &#125;;
+
+a[b] &#x3D; 123;
+a[c] &#x3D; 456;
+
+console.log(a[b]);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>123</code></li>
+<li>B: <code>456</code></li>
+<li>C: <code>undefined</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>这段代码中，我们尝试将一个对象作为键设置到对象<code>a</code>中，并将其值设置为<code>123</code>。然而，当我们将一个对象转换为字符串时，它会变成<code>&quot;[object Object]&quot;</code>。因此，我们实际上是在说<code>a[&quot;[object Object]&quot;] = 123</code>。然后，我们尝试再次做同样的事情。c是另一个我们隐式转换为字符串的对象。因此，<code>a[&quot;[object Object]&quot;] = 456</code>。然后，我们记录<code>a[b]</code>，实际上是<code>a[&quot;[object Object]&quot;]</code>。我们刚刚将其设置为<code>456</code>，因此它返回<code>456</code>。</p>
+<blockquote>
+<p>这段代码中的关键点是对象键自动转换为字符串，因此需要小心处理对象键。</p>
+</blockquote>
+</li>
+<li><p>类型判断再判断</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(typeof typeof 1);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;number&quot;</code></li>
+<li>B: <code>&quot;string&quot;</code></li>
+<li>C: <code>&quot;object&quot;</code></li>
+<li>D: <code>&quot;undefined&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p><code>typeof 1</code> 返回 <code>&quot;number&quot;</code>. <code>typeof &quot;number&quot;</code> 返回 <code>&quot;string&quot;</code></p>
+</li>
+<li><p>数组定义</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const numbers &#x3D; [1, 2, 3];
+numbers[10] &#x3D; 11;
+console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[1, 2, 3, null x 7, 11]</code></li>
+<li>B: <code>[1, 2, 3, 11]</code></li>
+<li>C: <code>[1, 2, 3, empty x 7, 11]</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>当你给数组中的一个元素设置一个超过数组长度的值时，JavaScript会创建一些被称为”empty slots”（空槽）的东西。实际上，它们的值是undefined，但你会看到类似于以下的结果：</p>
+<p>[1, 2, 3, 空 x 7, 11]</p>
+<p>具体的显示方式取决于你运行代码的环境（不同浏览器、Node等）。</p>
+</li>
+<li><p>类型判断</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">!!null;
+!!&#39;&#39;;
+!!1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>false</code> <code>true</code> <code>false</code></li>
+<li>B: <code>false</code> <code>false</code> <code>true</code></li>
+<li>C: <code>false</code> <code>true</code> <code>true</code></li>
+<li>D: <code>true</code> <code>true</code> <code>false</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p><code>null</code>是假值。<code>!null</code>返回 <code>true</code>。<code>!true</code> 返回 <code>false</code>。</p>
+<p><code>&quot;&quot;</code> 是假值。<code>!&quot;&quot;</code> 返回 <code>true</code>。<code>!true</code> 返回 <code>false</code>。</p>
+<p><code>1</code> 是真值。<code>!1</code> 返回 <code>false</code>。<code>!false</code> 返回 <code>true</code>。</p>
+</li>
+<li><p>对象的引用</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let person &#x3D; &#123; name: &#39;Lydia&#39; &#125;;
+const members &#x3D; [person];
+person &#x3D; null;
+
+console.log(members);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>null</code></li>
+<li>B: <code>[null]</code></li>
+<li>C: <code>[&#123;&#125;]</code></li>
+<li>D: <code>[&#123; name: &quot;Lydia&quot; &#125;]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p>首先，我们声明一个变量<code>person</code>，并赋值为一个具有<code>name</code>属性的对象。</p>
+<p>然后，我们声明一个名为<code>members</code>的变量。我们将该数组的第一个元素设置为<code>person</code>变量的值。当将对象相互赋值时，它们通过引用进行交互。当将一个变量的引用赋给另一个变量时，会复制该引用。（请注意，<strong>它们不具有相同的引用！</strong>）</p>
+<p>然后，我们将变量<code>person</code>的值设置为<code>null</code>。</p>
+<p>我们只修改了<code>person</code>变量的值，而没有修改数组中的第一个元素，因为该元素具有与对象的不同（已复制的）引用。members数组中的第一个元素仍然保留对原始对象的引用。当我们记录（log）members数组时，第一个元素仍然保留着对象的值，并将其记录下来。</p>
+</li>
+<li><p>对象循环</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &#39;Lydia&#39;,
+  age: 21,
+&#125;;
+
+for (const item in person) &#123;
+  console.log(item);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; name: &quot;Lydia&quot; &#125;, &#123; age: 21 &#125;</code></li>
+<li>B: <code>&quot;name&quot;, &quot;age&quot;</code></li>
+<li>C: <code>&quot;Lydia&quot;, 21</code></li>
+<li>D: <code>[&quot;name&quot;, &quot;Lydia&quot;], [&quot;age&quot;, 21]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>使用<code>for-in</code>循环，我们可以迭代对象的键（在这种情况下为name和age）。在底层，对象的键是字符串（如果它们不是Symbol类型）。在每次循环中，我们将item的值设置为当前迭代的键。首先，item等于name，并进行记录。然后，item等于age，并进行记录。</p>
+</li>
+<li><p>箭头函数和类型判断</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">(() &#x3D;&gt; &#123;
+  let x &#x3D; (y &#x3D; 10);
+&#125;)();
+
+console.log(typeof x);
+console.log(typeof y);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;undefined&quot;, &quot;number&quot;</code></li>
+<li>B: <code>&quot;number&quot;, &quot;number&quot;</code></li>
+<li>C: <code>&quot;object&quot;, &quot;number&quot;</code></li>
+<li>D: <code>&quot;number&quot;, &quot;undefined&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p><code>let x = (y = 10);</code> 实际上是以下代码的简写形式：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">y &#x3D; 10; 
+let x &#x3D; y; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>当我们将<code>y</code>设置为<code>10</code>时，实际上是向全局对象添加了一个属性<code>y</code>（在浏览器中是<code>window</code>对象，在Node中是<code>global</code>对象）。在浏览器中，<code>window.y</code>现在等于<code>10</code>。</p>
+<p>然后，我们声明一个变量<code>x</code>，其值为<code>y</code>，即<code>10</code>。使用<code>let</code>关键字声明的变量是块级作用域的，它们只在声明它们的块中定义；在这种情况下是立即调用的函数表达式（IIFE）。当我们使用<code>typeof</code>运算符时，操作数<code>x</code>未定义：我们试图在声明它的块之外访问<code>x</code>。这意味着<code>x</code>未定义。尚未被赋值或声明的值的类型是<code>&quot;undefined&quot;</code>。<code>console.log(typeof x)</code>返回<code>&quot;undefined&quot;</code>。</p>
+<p>然而，当我们将<code>y</code>设置为<code>10</code>时，我们创建了一个全局变量<code>y</code>。这个值可以在我们的代码的任何地方访问。<code>y</code>已经定义，并且具有<code>&quot;number&quot;</code>类型的值。<code>console.log(typeof y)</code>返回<code>&quot;number&quot;</code>。</p>
+</li>
+<li><p>数组赋值</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const numbers &#x3D; [1, 2, 3, 4, 5];
+const [y] &#x3D; numbers;
+
+console.log(y);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[[1, 2, 3, 4, 5]]</code></li>
+<li>B: <code>[1, 2, 3, 4, 5]</code></li>
+<li>C: <code>1</code></li>
+<li>D: <code>[1]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>我们可以通过解构来从数组中解包值或从对象中解包属性。例如：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[a, b] &#x3D; [1, 2];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>现在<code>a</code>的值是<code>1</code>，<code>b</code>的值是<code>2</code>。在问题中实际上我们做的是：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[y] &#x3D; [1, 2, 3, 4, 5];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这意味着<code>y</code>的值等于数组中的第一个值，即数字<code>1</code>。当我们记录<code>y</code>时，返回的是<code>1</code>。</p>
+</li>
+<li><p>类型比较</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(Number(2) &#x3D;&#x3D;&#x3D; Number(2))
+console.log(Boolean(false) &#x3D;&#x3D;&#x3D; Boolean(false))
+console.log(Symbol(&#39;foo&#39;) &#x3D;&#x3D;&#x3D; Symbol(&#39;foo&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>true</code>, <code>true</code>, <code>false</code></li>
+<li>B: <code>false</code>, <code>true</code>, <code>false</code></li>
+<li>C: <code>true</code>, <code>false</code>, <code>true</code></li>
+<li>D: <code>true</code>, <code>true</code>, <code>true</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>每个<code>Symbol</code>都是完全唯一的。传递给<code>Symbol</code>的参数只是给<code>Symbol</code>的一个描述。 <code>Symbol</code>的值不依赖于传递的参数。 当我们测试相等时，我们创建了两个全新的符号：第一个<code>Symbol(&#39;foo&#39;)</code>，第二个<code>Symbol(&#39;foo&#39;)</code>，这两个值是唯一的，彼此不相等，因此返回<code>false</code>。</p>
+</li>
+<li><p>对象解构</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const &#123; name: myName &#125; &#x3D; &#123; name: &quot;Lydia&quot; &#125;;
+
+console.log(name);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lydia&quot;</code></li>
+<li>B: <code>&quot;myName&quot;</code></li>
+<li>C: <code>undefined</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p>当我们从右侧的对象解构属性<code>name</code>时，我们将其值<code>Lydia</code>分配给名为<code>myName</code>的变量。</p>
+<p>使用<code>&#123;name：myName&#125;</code>，我们是在告诉 JavaScript 我们要创建一个名为<code>myName</code>的新变量，并且其值是右侧对象的<code>name</code>属性的值。</p>
+<p>当我们尝试打印<code>name</code>，一个未定义的变量时，就会引发<code>ReferenceError</code>。</p>
+</li>
+<li><p>对象引用</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &quot;Lydia&quot;,
+  age: 21
+&#125;
+
+let city &#x3D; person.city
+city &#x3D; &quot;Amsterdam&quot;
+
+console.log(person)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+<li>B: <code>&#123; name: &quot;Lydia&quot;, age: 21, city: &quot;Amsterdam&quot; &#125;</code></li>
+<li>C: <code>&#123; name: &quot;Lydia&quot;, age: 21, city: undefined &#125;</code></li>
+<li>D: <code>&quot;Amsterdam&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>我们将变量<code>city</code>设置为等于<code>person</code>对象上名为<code>city</code>的属性的值。 这个对象上没有名为<code>city</code>的属性，因此变量<code>city</code>的值为<code>undefined</code>。</p>
+<p>请注意，我们没有引用<code>person</code>对象本身，只是将变量<code>city</code>设置为等于<code>person</code>对象上<code>city</code>属性的当前值。</p>
+<p>然后，我们将<code>city</code>设置为等于字符串<code>“Amsterdam”</code>。 这不会更改 person 对象：<strong>没有对该对象的引用</strong>。</p>
+<p>因此打印<code>person</code>对象时，会返回未修改的对象。</p>
+</li>
+<li><p>Symbol类型</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const info &#x3D; &#123;
+  [Symbol(&#39;a&#39;)]: &#39;b&#39;
+&#125;
+
+console.log(info)
+console.log(Object.keys(info))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123;Symbol(&#39;a&#39;): &#39;b&#39;&#125;</code> and <code>[&quot;&#123;Symbol(&#39;a&#39;)&quot;]</code></li>
+<li>B: <code>&#123;&#125;</code> and <code>[]</code></li>
+<li>C: <code>&#123; a: &quot;b&quot; &#125;</code> and <code>[&quot;a&quot;]</code></li>
+<li>D: <code>&#123;Symbol(&#39;a&#39;): &#39;b&#39;&#125;</code> and <code>[]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p><code>Symbol</code>类型是不可枚举的。<code>Object.keys</code>方法返回对象上的<strong>所有可枚举</strong>的键属性。<code>Symbol</code>类型是不可见的，并返回一个空数组。 记录整个对象时，所有属性都是可见的，甚至是不可枚举的属性。</p>
+<p>这是<code>Symbol</code>的众多特性之一：除了表示完全唯一的值（防止对象意外名称冲突，例如当使用 2 个想要向同一对象添加属性的库时），您还可以<strong>隐藏</strong>这种方式对象的属性（尽管不完全。你仍然可以使用<code>Object.getOwnPropertySymbols()</code>方法访问 <code>Symbol</code>。</p>
+</li>
+<li><p>错误类型</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &quot;Lydia&quot;
+
+console.log(name())<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>SyntaxError</code></li>
+<li>B: <code>ReferenceError</code></li>
+<li>C: <code>TypeError</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>变量<code>name</code>保存字符串的值，该字符串不是函数，因此无法调用。</p>
+<p>当值不是预期类型时，会抛出<code>TypeErrors</code>。 JavaScript 期望<code>name</code>是一个函数，因为我们试图调用它。 但它是一个字符串，因此抛出<code>TypeError</code>：<code>name is not a function</code></p>
+<p>当你编写了一些非有效的 JavaScript 时，会抛出语法错误，例如当你把<code>return</code>这个词写成<code>retrun</code>时。 当 JavaScript 无法找到您尝试访问的值的引用时，抛出<code>ReferenceErrors</code>。</p>
+</li>
+<li><p>或运算符</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const one &#x3D; (false || &#123;&#125; || null)
+const two &#x3D; (null || false || &quot;&quot;)
+const three &#x3D; ([] || 0 || true)
+
+console.log(one, two, three)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>false</code> <code>null</code> <code>[]</code></li>
+<li>B: <code>null</code> <code>&quot;&quot;</code> <code>true</code></li>
+<li>C: <code>&#123;&#125;</code> <code>&quot;&quot;</code> <code>[]</code></li>
+<li>D: <code>null</code> <code>null</code> <code>true</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>使用<code>||</code>运算符，我们可以返回第一个真值。 <strong>如果所有值都是假值，则返回最后一个值。</strong></p>
+<p><code>(false || &#123;&#125; || null)</code>：空对象<code>&#123;&#125;</code>是一个真值。 这是第一个（也是唯一的）真值，它将被返回。<code>one</code>等于<code>&#123;&#125;</code>。</p>
+<p><code>(null || false ||&quot;&quot;)</code>：所有值都是假值。 这意味着返回传递的值<code>&quot;&quot;</code>。 <code>two</code>等于<code>&quot;&quot;</code>。</p>
+<p><code>([] || 0 ||&quot;&quot;)</code>：空数组<code>[]</code>是一个真值。 这是第一个返回的真值。 <code>three</code>等于<code>[]</code>。</p>
+</li>
+<li><p>与运算符</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 🎉✨ This is my 100th question! ✨🎉
+
+const output &#x3D; &#96;$&#123;[] &amp;&amp; &#39;Im&#39;&#125;possible!
+You should$&#123;&#39;&#39; &amp;&amp; &#96;n&#39;t&#96;&#125; see a therapist after so much JavaScript lol&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>possible! You should see a therapist after so much JavaScript lol</code></li>
+<li>B: <code>Impossible! You should see a therapist after so much JavaScript lol</code></li>
+<li>C: <code>possible! You shouldn&#39;t see a therapist after so much JavaScript lol</code></li>
+<li>D: <code>Impossible! You shouldn&#39;t see a therapist after so much JavaScript lol</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p><code>[]</code>是一个真值。 使用<code>&amp;&amp;</code>运算符，如果左侧值是真值，则返回右侧值。 在这种情况下，左侧值<code>[]</code>是一个真值，所以返回<code>Im</code>。</p>
+<p><code>&quot;&quot;</code>是一个假值。 如果左侧值是假的，则不返回任何内容。 <code>n&#39;t</code>不会被退回。</p>
+</li>
+<li><p>上的</p>
+</li>
+<li><p>都是</p>
+</li>
+</ol>
+<h2 id="类的问题"><a href="#类的问题" class="headerlink" title="类的问题"></a>类的问题</h2><ol>
+<li><p>类中方法调用</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Chameleon &#123;
+  static colorChange(newColor) &#123;
+    this.newColor &#x3D; newColor;
+    return this.newColor;
+  &#125;
+
+  constructor(&#123; newColor &#x3D; &#39;green&#39; &#125; &#x3D; &#123;&#125;) &#123;
+    this.newColor &#x3D; newColor;
+  &#125;
+&#125;
+
+const freddie &#x3D; new Chameleon(&#123; newColor: &#39;purple&#39; &#125;);
+console.log(freddie.colorChange(&#39;orange&#39;));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>orange</code></li>
+<li>B: <code>purple</code></li>
+<li>C: <code>green</code></li>
+<li>D: <code>TypeError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<pre><code>**Answer: D**
+</code></pre>
+<p><code>colorChange</code>函数是一个静态方法，它只能存在于创建它的构造函数中，不能被传递给任何子类或在类实例上调用。因此，由于<code>freddie</code>是Chameleon类的一个实例，不能在它上面调用colorChange函数，会抛出<code>TypeError</code>错误。</p>
+</li>
+<li><p>原型添加方法与删除</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Dog &#123;
+  constructor(name) &#123;
+    this.name &#x3D; name;
+  &#125;
+&#125;
+
+Dog.prototype.bark &#x3D; function() &#123;
+  console.log(&#96;Woof I am $&#123;this.name&#125;&#96;);
+&#125;;
+
+const pet &#x3D; new Dog(&#39;Mara&#39;);
+
+pet.bark();
+
+delete Dog.prototype.bark;
+
+pet.bark();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Woof I am Mara&quot;</code>, <code>TypeError</code></li>
+<li>B: <code>&quot;Woof I am Mara&quot;</code>, <code>&quot;Woof I am Mara&quot;</code></li>
+<li>C: <code>&quot;Woof I am Mara&quot;</code>, <code>undefined</code></li>
+<li>D: <code>TypeError</code>, <code>TypeError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: A**
+
+<p><strong>Answer: A</strong></p>
+<p>我们可以使用<code>delete</code>关键字从对象中删除属性，也可以从原型上删除属性。通过从原型上删除属性，该属性将不再在原型链中可用。在这种情况下，在删除了<code>Dog.prototype.bark</code>之后，<code>bark</code>函数在原型上不再可用，但我们仍然尝试访问它。</p>
+<p>当我们试图调用不是函数的东西时，会抛出<code>TypeError</code>错误。在这种情况下，抛出的错误是<code>TypeError: pet.bark is not a function</code>，因为<code>pet.bark</code>是<code>undefined</code>。</p>
+</li>
+<li><p>使用哪个构造函数可以成功继承<code>Dog</code>类？</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Dog &#123;
+  constructor(name) &#123;
+    this.name &#x3D; name;
+  &#125;
+&#125;;
+
+class Labrador extends Dog &#123;
+  &#x2F;&#x2F; 1 
+  constructor(name, size) &#123;
+    this.size &#x3D; size;
+  &#125;
+  &#x2F;&#x2F; 2
+  constructor(name, size) &#123;
+    super(name);
+    this.size &#x3D; size;
+  &#125;
+  &#x2F;&#x2F; 3
+  constructor(size) &#123;
+    super(name);
+    this.size &#x3D; size;
+  &#125;
+  &#x2F;&#x2F; 4 
+  constructor(name, size) &#123;
+    this.name &#x3D; name;
+    this.size &#x3D; size;
+  &#125;
+
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: 1</li>
+<li>B: 2</li>
+<li>C: 3</li>
+<li>D: 4</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>在子类中，在调用<code>super</code>之前不能访问到<code>this</code>关键字。 如果这样做，它将抛出一个<code>ReferenceError</code>：1 和 4 将引发一个引用错误。</p>
+<p>使用<code>super</code>关键字，需要用给定的参数来调用父类的构造函数。 父类的构造函数接收<code>name</code>参数，因此我们需要将<code>name</code>传递给<code>super</code>。</p>
+<p><code>Labrador</code>类接收两个参数，<code>name</code>参数是由于它继承了<code>Dog</code>，<code>size</code>作为<code>Labrador</code>类的额外属性，它们都需要传递给<code>Labrador</code>的构造函数，因此使用构造函数 2 正确完成。</p>
+</li>
+<li><p>实例对象</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Person &#123;
+  constructor(name) &#123;
+    this.name &#x3D; name
+  &#125;
+&#125;
+
+const member &#x3D; new Person(&quot;John&quot;)
+console.log(typeof member)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;class&quot;</code></li>
+<li>B: <code>&quot;function&quot;</code></li>
+<li>C: <code>&quot;object&quot;</code></li>
+<li>D: <code>&quot;string&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>类是构造函数的语法糖，如果用构造函数的方式来重写<code>Person</code>类则将是：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Person() &#123;
+  this.name &#x3D; name
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>通过<code>new</code>来调用构造函数，将会生成构造函数<code>Person</code>的实例，对实例执行<code>typeof</code>关键字将返回<code>&quot;object&quot;</code>，上述情况打印出<code>&quot;object&quot;</code>。</p>
+</li>
+<li><p>类的设置</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Person &#123;
+  constructor() &#123;
+    this.name &#x3D; &quot;Lydia&quot;
+  &#125;
+&#125;
+
+Person &#x3D; class AnotherPerson &#123;
+  constructor() &#123;
+    this.name &#x3D; &quot;Sarah&quot;
+  &#125;
+&#125;
+
+const member &#x3D; new Person()
+console.log(member.name)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lydia&quot;</code></li>
+<li>B: <code>&quot;Sarah&quot;</code></li>
+<li>C: <code>Error: cannot redeclare Person</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: B**
+
+<p><strong>Answer: B</strong></p>
+<p>我们可以将类设置为等于其他类&#x2F;函数构造函数。 在这种情况下，我们将<code>Person</code>设置为<code>AnotherPerson</code>。 这个构造函数的名字是<code>Sarah</code>，所以新的<code>Person</code>实例<code>member</code>上的 name 属性是<code>Sarah</code>。</p>
+</li>
+<li><p>是多少</p>
+</li>
+<li><p>上的</p>
+</li>
+<li><p>是</p>
+</li>
+</ol>
+<h2 id="函数问题"><a href="#函数问题" class="headerlink" title="函数问题"></a>函数问题</h2><ol>
+<li><p>循环变量</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>0 1 2</code> and <code>0 1 2</code></li>
+<li>B: <code>0 1 2</code> and <code>3 3 3</code></li>
+<li>C: <code>3 3 3</code> and <code>0 1 2</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<pre><code>**Answer: C**
+</code></pre>
+<p>在JavaScript中，由于事件队列的存在，<code>setTimeout</code>回调函数在循环执行后才被调用。在第一个循环中，变量<code>i</code>使用<code>var</code>关键字声明，因此该值是全局的。在循环期间，我们每次使用一元运算符<code>++</code>将<code>i</code>的值增加<code>1</code>。因此，在循环中使用<code>var</code>声明变量时，每次循环都会覆盖上一次循环中的变量值，最终导致所有的变量都共享同一个值。当<code>setTimeout</code>回调函数被调用时，第一个示例中的i等于3。</p>
+<p>在第二个循环中，变量<code>i</code>使用<code>let</code>关键字声明：使用<code>let</code>（和<code>const</code>）关键字声明的变量是块作用域的（块是<code>&#123; &#125;</code>之间的任何内容）。在每次迭代期间，i将具有新值，并且每个值都在循环内部作用域。</p>
+</li>
+<li><p>函数属性</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function bark() &#123;
+  console.log(&#39;Woof!&#39;);
+&#125;
+
+bark.animal &#x3D; &#39;dog&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: 无事发生，这种写法完全正确。</li>
+<li>B: <code>SyntaxError</code>。你不能以这种方式向函数添加属性。</li>
+<li>C: 输出的结果是字符串<code>&quot;Woof&quot;</code>。</li>
+<li>D: <code>ReferenceError</code>。</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: A**
+
+<p><strong>Answer: A</strong></p>
+<p>这在JavaScript中是可能的，因为函数是<strong>对象</strong>！（除了原始类型之外，所有东西都是对象）</p>
+<p>函数是一种特殊类型的对象。你自己编写的代码并不是实际的函数。函数是一个带有属性的对象。这个属性是可调用的。</p>
+</li>
+<li><p>原型方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Person(firstName, lastName) &#123;
+  this.firstName &#x3D; firstName;
+  this.lastName &#x3D; lastName;
+&#125;
+
+const member &#x3D; new Person(&#39;Lydia&#39;, &#39;Hallie&#39;);
+Person.getFullName &#x3D; function() &#123;
+  return &#96;$&#123;this.firstName&#125; $&#123;this.lastName&#125;&#96;;
+&#125;;
+
+console.log(member.getFullName());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>TypeError</code></li>
+<li>B: <code>SyntaxError</code></li>
+<li>C: <code>Lydia Hallie</code></li>
+<li>D: <code>undefined</code> <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>在JavaScript中，函数是对象。因此，方法<code>getFullName</code>被添加到构造函数对象本身中。因此，我们可以调用<code>Person.getFullName()</code>，但是<code>member.getFullName</code>会抛出<code>TypeError</code>错误。如果你想让一个方法对所有对象实例都可用，你必须将它添加到<strong>原型属性</strong>中(这是因为原型属性是所有对象实例共享的):</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Person.prototype.getFullName &#x3D; function() &#123;
+  return &#96;$&#123;this.firstName&#125; $&#123;this.lastName&#125;&#96;;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>函数作用域</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Person(firstName, lastName) &#123;
+  this.firstName &#x3D; firstName;
+  this.lastName &#x3D; lastName;
+&#125;
+
+const lydia &#x3D; new Person(&#39;Lydia&#39;, &#39;Hallie&#39;);
+const sarah &#x3D; Person(&#39;Sarah&#39;, &#39;Smith&#39;);
+
+console.log(lydia);
+console.log(sarah);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>Person &#123;firstName: &quot;Lydia&quot;, lastName: &quot;Hallie&quot;&#125;</code> and <code>undefined</code></li>
+<li>B: <code>Person &#123;firstName: &quot;Lydia&quot;, lastName: &quot;Hallie&quot;&#125;</code> and <code>Person &#123;firstName: &quot;Sarah&quot;, lastName: &quot;Smith&quot;&#125;</code></li>
+<li>C: <code>Person &#123;firstName: &quot;Lydia&quot;, lastName: &quot;Hallie&quot;&#125;</code> and <code>&#123;&#125;</code></li>
+<li>D: <code>Person &#123;firstName: &quot;Lydia&quot;, lastName: &quot;Hallie&quot;&#125;</code> and <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>对于<code>sarah</code>，我们没有使用<code>new</code>关键字。当使用<code>new</code>时，<code>this</code>指的是我们创建的新空对象。然而，如果你不加<code>new</code>，<code>this</code>指的是<strong>全局对象</strong>！</p>
+<p>我们说<code>this.firstName</code>等于<code>&quot;Sarah&quot;</code>，<code>this.lastName</code>等于<code>&quot;Smith&quot;</code>。实际上，我们定义了<code>global.firstName=&#39;Sarah&#39;</code>和<code>global.lastName=&#39;Smith&#39;</code>。<code>sarah</code>本身是<code>undefined</code>，因为我们没有从<code>Person</code>函数中返回一个值。</p>
+<p>在JavaScript中，如果我们想要创建一个正确的对象，我们可以使用<code>return</code>语句或者使用<code>new</code>关键字。如果我们使用<code>return</code>语句，我们可以在函数内部返回一个新的对象，这个对象将成为函数的返回值。如果我们使用<code>new</code>关键字，我们可以创建一个新的空对象，并将它作为函数内部的<code>this</code>关键字的值。然后，我们可以在函数内部使用<code>this</code>关键字来设置新对象的属性和方法。最后，函数将返回这个新对象。无论是使用<code>return</code>语句还是使用<code>new</code>关键字，我们都可以创建一个正确的对象。</p>
+</li>
+<li><p>函数参数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getAge(...args) &#123;
+  console.log(typeof args);
+&#125;
+
+getAge(21);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;number&quot;</code></li>
+<li>B: <code>&quot;array&quot;</code></li>
+<li>C: <code>&quot;object&quot;</code></li>
+<li>D: <code>&quot;NaN&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>rest参数（…args）允许我们将所有剩余的参数“收集”到一个数组中。数组是一个对象，因此typeof args返回”object”。这意味着我们可以使用数组的方法来操作这些参数。例如，我们可以使用args.length来获取传递的参数的数量，或者使用args.forEach来遍历这些参数。使用rest参数可以使函数更加灵活，因为它允许我们接受任意数量的参数。</p>
+</li>
+<li><p>严格模式</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getAge() &#123;
+  &#39;use strict&#39;;
+  age &#x3D; 21;
+  console.log(age);
+&#125;
+
+getAge();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>21</code></li>
+<li>B: <code>undefined</code></li>
+<li>C: <code>ReferenceError</code></li>
+<li>D: <code>TypeError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: C**
+
+<p><strong>Answer: C</strong></p>
+<p>使用”use strict”可以确保不会意外地声明全局变量。在上面的代码中，我们没有声明变量age，但由于我们使用了”use strict”，它会抛出一个引用错误。如果我们没有使用”use strict”，它仍然可以工作，因为属性age会被添加到全局对象中。使用”use strict”可以帮助我们避免一些常见的错误，例如意外地声明全局变量或使用未声明的变量。它还可以使代码更加严格，从而提高代码的可读性和可维护性。</p>
+</li>
+<li><p>异常捕获</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">(() &#x3D;&gt; &#123;
+  let x, y;
+  try &#123;
+    throw new Error();
+  &#125; catch (x) &#123;
+    (x &#x3D; 1), (y &#x3D; 2);
+    console.log(x);
+  &#125;
+  console.log(x);
+  console.log(y);
+&#125;)();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>1</code> <code>undefined</code> <code>2</code></li>
+<li>B: <code>undefined</code> <code>undefined</code> <code>undefined</code></li>
+<li>C: <code>1</code> <code>1</code> <code>2</code></li>
+<li>D: <code>1</code> <code>undefined</code> <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>catch块接收参数x。这个x与我们传递参数时的变量不同。这个变量x是块级作用域的。</p>
+<p>稍后，我们将这个块级作用域变量设置为1，并设置变量y的值。现在，我们记录块级作用域变量x的值，它等于1。</p>
+<p>在catch块之外，x仍然是undefined，而y是2。当我们在catch块之外使用console.log(x)时，它返回undefined，而y返回2。</p>
+</li>
+<li><p>拓展运算符</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[...&#39;Lydia&#39;];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[&quot;L&quot;, &quot;y&quot;, &quot;d&quot;, &quot;i&quot;, &quot;a&quot;]</code></li>
+<li>B: <code>[&quot;Lydia&quot;]</code></li>
+<li>C: <code>[[], &quot;Lydia&quot;]</code></li>
+<li>D: <code>[[&quot;L&quot;, &quot;y&quot;, &quot;d&quot;, &quot;i&quot;, &quot;a&quot;]]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>字符串是可迭代的。展开运算符将可迭代对象的每个字符映射到一个元素。</p>
+</li>
+<li><p>生成器函数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function* generator(i) &#123;
+  yield i;
+  yield i * 2;
+&#125;
+
+const gen &#x3D; generator(10);
+
+console.log(gen.next().value);
+console.log(gen.next().value);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[0, 10], [10, 20]</code></li>
+<li>B: <code>20, 20</code></li>
+<li>C: <code>10, 20</code></li>
+<li>D: <code>0, 10 and 10, 20</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>常规函数在调用后无法在执行过程中被中止。然而，生成器函数可以在执行过程中被”停止”，并且稍后可以从停止的地方继续执行。每当生成器函数遇到一个 <code>yield</code> 关键字时，函数会生成 yield 关键字后指定的值。需要注意的是，在这种情况下，<strong>生成器函数不返回该值，而是生成该值</strong>。</p>
+<p>首先，我们使用 <code>i</code> 等于 <code>10</code> 初始化生成器函数。我们使用 <code>next()</code> 方法调用生成器函数。第一次调用生成器函数时，<code>i</code> 等于 <code>10</code>。它遇到第一个 <code>yield</code> 关键字：生成 <code>yield</code> 后面指定的 <code>i</code> 的值。生成器现在被”暂停”，并且输出 <code>10</code>。</p>
+<p>然后，我们再次使用 <code>next()</code> 方法调用函数。它从上次停止的地方开始继续执行，仍然将 <code>i</code> 设为 <code>10</code>。现在，它遇到下一个 <code>yield</code> 关键字，并生成 <code>i * 2</code> 的值。<code>i </code>等于 <code>10</code>，所以返回 <code>10 * 2</code>，即 <code>20</code>。这样就得到了 <code>10, 20</code> 的输出。</p>
+</li>
+<li><p>Promise 方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const firstPromise &#x3D; new Promise((res, rej) &#x3D;&gt; &#123;
+  setTimeout(res, 500, &#39;one&#39;);
+&#125;);
+
+const secondPromise &#x3D; new Promise((res, rej) &#x3D;&gt; &#123;
+  setTimeout(res, 100, &#39;two&#39;);
+&#125;);
+
+Promise.race([firstPromise, secondPromise]).then(res &#x3D;&gt; console.log(res));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;one&quot;</code></li>
+<li>B: <code>&quot;two&quot;</code></li>
+<li>C: <code>&quot;two&quot; &quot;one&quot;</code></li>
+<li>D: <code>&quot;one&quot; &quot;two&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: B**
+
+<p><strong>Answer: B</strong></p>
+<p>当我们将多个 Promise 传递给 <code>Promise.race</code> 方法时，它会解决（resolve）或拒绝（reject）第一个解决或拒绝的 Promise。对于 <code>setTimeout</code> 方法，我们传递了两个定时器：第一个 Promise（<code>firstPromise</code>）设置了 500 毫秒的定时器，而第二个 Promise（<code>secondPromise</code>）设置了 100 毫秒的定时器。这意味着第二个 Promise（<code>secondPromise</code>）会先解决，并带有值 <code>&#39;two&#39;</code>。此时，变量 <code>res</code> 持有值 <code>&#39;two&#39;</code>，并被输出。</p>
+</li>
+<li><p>参数传递</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getInfo(member, year) &#123;
+  member.name &#x3D; &#39;Lydia&#39;;
+  year &#x3D; &#39;1998&#39;;
+&#125;
+
+const person &#x3D; &#123; name: &#39;Sarah&#39; &#125;;
+const birthYear &#x3D; &#39;1997&#39;;
+
+getInfo(person, birthYear);
+
+console.log(person, birthYear);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; name: &quot;Lydia&quot; &#125;, &quot;1997&quot;</code></li>
+<li>B: <code>&#123; name: &quot;Sarah&quot; &#125;, &quot;1998&quot;</code></li>
+<li>C: <code>&#123; name: &quot;Lydia&quot; &#125;, &quot;1998&quot;</code></li>
+<li>D: <code>&#123; name: &quot;Sarah&quot; &#125;, &quot;1997&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>参数按值传递，除非其值是一个对象，那么它们将按引用传递。<code>birthYear</code>是一个字符串，而不是一个对象，所以它是按值传递的。<strong>当我们按值传递参数时，会创建该值的副本</strong>（参见问题46）。</p>
+<p>变量<code>birthYear</code>引用的是值<code>&quot;1997&quot;</code>。参数<code>year</code>也引用了值<code>&quot;1997&quot;</code>，但它引用的值与<code>birthYear</code>引用的不是同一个。当我们通过将<code>year</code>设置为<code>&quot;1998&quot;</code>来更新<code>year</code>的值时，只是更新了<code>year</code>的值，<code>birthYear</code>仍然等于<code>&quot;1997&quot;</code>。</p>
+<p><code>person</code>的值是一个对象。参数<code>member</code>复制了对同一对象的引用。当我们修改<code>member</code>引用的对象的属性时，<code>person</code>的值也会被修改，因为它们都引用同一个对象。<code>person</code>的<code>name</code>属性现在等于值<code>&quot;Lydia&quot;</code>。</p>
+</li>
+<li><p>自定义异常</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function greeting() &#123;
+  throw &#39;Hello world!&#39;;
+&#125;
+
+function sayHi() &#123;
+  try &#123;
+    const data &#x3D; greeting();
+    console.log(&#39;It worked!&#39;, data);
+  &#125; catch (e) &#123;
+    console.log(&#39;Oh no an error:&#39;, e);
+  &#125;
+&#125;
+
+sayHi();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>It worked! Hello world!</code></li>
+<li>B: <code>Oh no an error: undefined</code></li>
+<li>C: <code>SyntaxError: can only throw Error objects</code></li>
+<li>D: <code>Oh no an error: Hello world!</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p>使用<code>throw</code>语句，我们可以创建自定义错误。通过该语句，您可以抛出异常。异常可以是字符串、数字、布尔值或对象。在这种情况下，我们的异常是字符串<code>&#39;Hello world!&#39;</code>。</p>
+<p>使用<code>catch</code>语句，我们可以指定在<code>try</code>块中抛出异常时要执行的操作。一个异常被抛出：字符串<code>&#39;Hello world!&#39;</code>。现在，变量<code>e</code>的值等于该字符串，我们将其记录下来。结果是<code>&#39;Oh an error: Hello world!&#39;</code>。</p>
+</li>
+<li><p>默认参数和解构赋值</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const value &#x3D; &#123; number: 10 &#125;;
+
+const multiply &#x3D; (x &#x3D; &#123; ...value &#125;) &#x3D;&gt; &#123;
+  console.log((x.number *&#x3D; 2));
+&#125;;
+
+multiply();
+multiply();
+multiply(value);
+multiply(value);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>20</code>, <code>40</code>, <code>80</code>, <code>160</code></li>
+<li>B: <code>20</code>, <code>40</code>, <code>20</code>, <code>40</code></li>
+<li>C: <code>20</code>, <code>20</code>, <code>20</code>, <code>40</code></li>
+<li>D: <code>NaN</code>, <code>NaN</code>, <code>20</code>, <code>40</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: C**
+**Answer: C**
+
+<p>在ES6中，我们可以使用默认值初始化参数。如果没有将其他值传递给函数，或者参数的值为<code>&quot;undefined&quot;</code>，则参数的值将是默认值。在这种情况下，我们将<code>value</code>对象的属性展开到一个新对象中，因此<code>x</code>具有默认值<code>&#123; number: 10 &#125;</code>。</p>
+<p>默认参数是在调用时计算的！每次调用函数时，都会创建一个新对象。我们前两次调用<code>multiply</code>函数时都没有传递值：<code>x</code>具有默认值<code>&#123; number: 10 &#125;</code>。然后，我们记录该数字的乘积值，即<code>20</code>。</p>
+<p>第三次调用<code>multiply</code>时，我们传递了一个参数：名为<code>value</code>的对象。<code>*=</code>运算符实际上是<code>x.number = x.number * 2</code>的简写：我们修改了<code>x.number</code>的值，并记录了乘以后的值<code>20</code>。</p>
+<p>第四次调用时，我们再次传递<code>value</code>对象。<code>x.number</code>先前已经修改为<code>20</code>，所以<code>x.number = 2</code>记录了<code>40</code>。</p>
+</li>
+<li><p>生成器函数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function* startGame() &#123;
+  const 答案 &#x3D; yield &quot;Do you love JavaScript?&quot;;
+  if (答案 !&#x3D;&#x3D; &quot;Yes&quot;) &#123;
+    return &quot;Oh wow... Guess we&#39;re gone here&quot;;
+  &#125;
+  return &quot;JavaScript loves you back ❤️&quot;;
+&#125;
+
+const game &#x3D; startGame();
+console.log(&#x2F;* 1 *&#x2F;); &#x2F;&#x2F; Do you love JavaScript?
+console.log(&#x2F;* 2 *&#x2F;); &#x2F;&#x2F; JavaScript loves you back ❤️<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>game.next(&quot;Yes&quot;).value</code> and <code>game.next().value</code></li>
+<li>B: <code>game.next.value(&quot;Yes&quot;)</code> and <code>game.next.value()</code></li>
+<li>C: <code>game.next().value</code> and <code>game.next(&quot;Yes&quot;).value</code></li>
+<li>D: <code>game.next.value()</code> and <code>game.next.value(&quot;Yes&quot;)</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p><code>generator</code>函数在遇到<code>yield</code>关键字时会 “暂停” 其执行。 首先，我们需要让函数产生字符串<code>Do you love JavaScript?</code>，这可以通过调用<code>game.next().value</code>来完成。上述函数的第一行就有一个<code>yield</code>关键字，那么运行立即停止了，<code>yield</code>表达式本身没有返回值，或者说总是返回<code>undefined</code>，这意味着此时变量 <code>答案</code> 为<code>undefined</code>。</p>
+<p><code>next</code>方法可以带一个参数，该参数会被当作上一个 <code>yield</code> 表达式的返回值。当我们调用<code>game.next(&quot;Yes&quot;).value</code>时，先前的 <code>yield</code> 的返回值将被替换为传递给<code>next()</code>函数的参数<code>&quot;Yes&quot;</code>。此时变量 <code>答案</code> 被赋值为 <code>&quot;Yes&quot;</code>，<code>if</code>语句返回<code>false</code>，所以<code>JavaScript loves you back ❤️</code>被打印。</p>
+</li>
+<li><p>Promise打印</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async function getData() &#123;
+  return await Promise.resolve(&quot;I made it!&quot;);
+&#125;
+
+const data &#x3D; getData();
+console.log(data);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;I made it!&quot;</code></li>
+<li>B: <code>Promise &#123;&lt;resolved&gt;: &quot;I made it!&quot;&#125;</code></li>
+<li>C: <code>Promise &#123;&lt;pending&gt;&#125;</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>异步函数始终返回一个 promise。<code>await</code>仍然需要等待 promise 的解决：当我们调用<code>getData()</code>并将其赋值给<code>data</code>，此时<code>data</code>为<code>getData</code>方法返回的一个挂起的 promise，该 promise 并没有解决。</p>
+<p>如果我们想要访问已解决的值<code>&quot;I made it!&quot;</code>，可以在<code>data</code>上使用<code>.then()</code>方法：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">data.then(res &#x3D;&gt; console.log(res))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这样将打印 <code>&quot;I made it!&quot;</code></p>
+</li>
+<li><p>记忆函数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const add &#x3D; () &#x3D;&gt; &#123;
+  const cache &#x3D; &#123;&#125;;
+  return num &#x3D;&gt; &#123;
+    if (num in cache) &#123;
+      return &#96;From cache! $&#123;cache[num]&#125;&#96;;
+    &#125; else &#123;
+      const result &#x3D; num + 10;
+      cache[num] &#x3D; result;
+      return &#96;Calculated! $&#123;result&#125;&#96;;
+    &#125;
+  &#125;;
+&#125;;
+
+const addFunction &#x3D; add();
+console.log(addFunction(10));
+console.log(addFunction(10));
+console.log(addFunction(5 * 2));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>Calculated! 20</code> <code>Calculated! 20</code> <code>Calculated! 20</code></li>
+<li>B: <code>Calculated! 20</code> <code>From cache! 20</code> <code>Calculated! 20</code></li>
+<li>C: <code>Calculated! 20</code> <code>From cache! 20</code> <code>From cache! 20</code></li>
+<li>D: <code>Calculated! 20</code> <code>From cache! 20</code> <code>Error</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p><code>add</code>函数是一个记忆函数。 通过记忆化，我们可以缓存函数的结果，以加快其执行速度。上述情况，我们创建一个<code>cache</code>对象，用于存储先前返回过的值。</p>
+<p>如果我们使用相同的参数多次调用<code>addFunction</code>函数，它首先检查缓存中是否已有该值，如果有，则返回缓存值，这将节省执行时间。如果没有，那么它将计算该值，并存储在缓存中。</p>
+<p>我们用相同的值三次调用了<code>addFunction</code>函数：</p>
+<p>在第一次调用，<code>num</code>等于<code>10</code>时函数的值尚未缓存，if 语句<code>num in cache</code>返回<code>false</code>，else 块的代码被执行：<code>Calculated! 20</code>，并且其结果被添加到缓存对象，<code>cache</code>现在看起来像<code>&#123;10：20&#125;</code>。</p>
+<p>第二次，<code>cache</code>对象包含<code>10</code>的返回值。 if 语句 <code>num in cache</code> 返回<code>true</code>，<code>From cache! 20</code>被打印。</p>
+<p>第三次，我们将<code>5 * 2</code>(值为 10) 传递给函数。 <code>cache</code>对象包含<code>10</code>的返回值。 if 语句 <code>num in cache</code> 返回<code>true</code>，<code>From cache! 20</code>被打印。</p>
+</li>
+<li><p>函数默认参数</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sayHi(name) &#123;
+  return &#96;Hi there, $&#123;name&#125;&#96;
+&#125;
+
+console.log(sayHi())<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>Hi there, </code></li>
+<li>B: <code>Hi there, undefined</code></li>
+<li>C: <code>Hi there, null</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: B</strong></p>
+<p>默认情况下，如果不给函数传参，参数的值将为<code>undefined</code>。 上述情况，我们没有给参数<code>name</code>传值。 <code>name</code>等于<code>undefined</code>，并被打印。</p>
+<p>在 ES6 中，我们可以使用默认参数覆盖此默认的<code>undefined</code>值。 例如：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sayHi(name &#x3D; &#39;Lydia&#39;)&#123;...&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在这种情况下，如果我们没有传递值或者如果我们传递<code>undefined</code>，<code>name</code>总是等于字符串<code>Lydia</code></p>
+</li>
+<li><p>块级作用域</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function checkAge(age) &#123;
+  if (age &lt; 18) &#123;
+    const message &#x3D; &quot;Sorry, you&#39;re too young.&quot;
+  &#125; else &#123;
+    const message &#x3D; &quot;Yay! You&#39;re old enough!&quot;
+  &#125;
+
+  return message
+&#125;
+
+console.log(checkAge(21))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Sorry, you&#39;re too young.&quot;</code></li>
+<li>B: <code>&quot;Yay! You&#39;re old enough!&quot;</code></li>
+<li>C: <code>ReferenceError</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p><code>const</code>和<code>let</code>声明的变量是具有<strong>块级作用域</strong>的，块是大括号（<code>&#123;&#125;</code>）之间的任何东西，即上述情况<code>if / else</code>语句的花括号。 由于块级作用域，我们无法在声明的块之外引用变量，因此抛出<code>ReferenceError</code>。</p>
+</li>
+<li><p>then的调用</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fetch(&#39;https:&#x2F;&#x2F;www.website.com&#x2F;api&#x2F;user&#x2F;1&#39;)
+  .then(res &#x3D;&gt; res.json())
+  .then(res &#x3D;&gt; console.log(res))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>fetch</code>方法的结果</li>
+<li>B: 第二次调用<code>fetch</code>方法的结果</li>
+<li>C: 前一个<code>.then()</code>中回调方法返回的结果</li>
+<li>D: 总是<code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: B**
+
+<p><strong>Answer: B</strong></p>
+<p>第二个<code>.then</code>中<code>res</code>的值等于前一个<code>.then</code>中的回调函数返回的值。 你可以像这样继续链接<code>.then</code>，将值传递给下一个处理程序。</p>
+</li>
+<li><p>默认参数的位置</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sum(num1, num2 &#x3D; num1) &#123;
+  console.log(num1 + num2)
+&#125;
+
+sum(10)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>NaN</code></li>
+<li>B: <code>20</code></li>
+<li>C: <code>ReferenceError</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>您可以将默认参数的值设置为函数的另一个参数，只要另一个参数定义在其之前即可。 我们将值<code>10</code>传递给<code>sum</code>函数。 如果<code>sum</code>函数只接收 1 个参数，则意味着没有传递<code>num2</code>的值，这种情况下，<code>num1</code>的值等于传递的值<code>10</code>。 <code>num2</code>的默认值是<code>num1</code>的值，即<code>10</code>。 <code>num1 + num2</code>返回<code>20</code>。</p>
+<p>如果您尝试将默认参数的值设置为后面定义的参数，则可能导致参数的值尚未初始化，从而引发错误。比如：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function test(m &#x3D; n, n &#x3D; 2) &#123;
+	console.log(m, n)
+&#125;
+test() &#x2F;&#x2F; Uncaught ReferenceError: Cannot access &#39;n&#39; before initialization
+test(3) &#x2F;&#x2F; 3 2
+test(3, 4) &#x2F;&#x2F; 3 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>箭头函数的原型</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function giveLydiaPizza() &#123;
+  return &quot;Here is pizza!&quot;
+&#125;
+
+const giveLydiaChocolate &#x3D; () &#x3D;&gt; &quot;Here&#39;s chocolate... now go hit the gym already.&quot;
+
+console.log(giveLydiaPizza.prototype)
+console.log(giveLydiaChocolate.prototype)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; constructor: ...&#125;</code> <code>&#123; constructor: ...&#125;</code></li>
+<li>B: <code>&#123;&#125;</code> <code>&#123; constructor: ...&#125;</code></li>
+<li>C: <code>&#123; constructor: ...&#125;</code> <code>&#123;&#125;</code></li>
+<li>D: <code>&#123; constructor: ...&#125;</code> <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p>常规函数，例如<code>giveLydiaPizza</code>函数，有一个<code>prototype</code>属性，它是一个带有<code>constructor</code>属性的对象（原型对象）。 然而，箭头函数，例如<code>giveLydiaChocolate</code>函数，没有这个<code>prototype</code>属性。 尝试使用<code>giveLydiaChocolate.prototype</code>访问<code>prototype</code>属性时会返回<code>undefined</code>。</p>
+</li>
+<li><p>默认参数位置</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getItems(fruitList, ...args, favoriteFruit) &#123;
+  return [...fruitList, ...args, favoriteFruit]
+&#125;
+
+getItems([&quot;banana&quot;, &quot;apple&quot;], &quot;pear&quot;, &quot;orange&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[&quot;banana&quot;, &quot;apple&quot;, &quot;pear&quot;, &quot;orange&quot;]</code></li>
+<li>B: <code>[[&quot;banana&quot;, &quot;apple&quot;], &quot;pear&quot;, &quot;orange&quot;]</code></li>
+<li>C: <code>[&quot;banana&quot;, &quot;apple&quot;, [&quot;pear&quot;], &quot;orange&quot;]</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p><code>... args</code>是剩余参数，剩余参数的值是一个包含所有剩余参数的数组，<strong>并且只能作为最后一个参数</strong>。上述示例中，剩余参数是第二个参数，这是不可能的，并会抛出语法错误。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getItems(fruitList, favoriteFruit, ...args) &#123;
+  return [...fruitList, ...args, favoriteFruit]
+&#125;
+
+getItems([&quot;banana&quot;, &quot;apple&quot;], &quot;pear&quot;, &quot;orange&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上述例子是有效的，将会返回数组：<code>[ &#39;banana&#39;, &#39;apple&#39;, &#39;orange&#39;, &#39;pear&#39; ]</code></p>
+</li>
+<li><p>语句分号</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function nums(a, b) &#123;
+  if
+  (a &gt; b)
+  console.log(&#39;a is bigger&#39;)
+  else 
+  console.log(&#39;b is bigger&#39;)
+  return 
+  a + b
+&#125;
+
+console.log(nums(4, 2))
+console.log(nums(1, 2))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>a is bigger</code>, <code>6</code> and <code>b is bigger</code>, <code>3</code></li>
+<li>B: <code>a is bigger</code>, <code>undefined</code> and <code>b is bigger</code>, <code>undefined</code></li>
+<li>C: <code>undefined</code> and <code>undefined</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>在 JavaScript 中，我们不必显式地编写分号 (<code>;</code>)，但是 JavaScript 引擎仍然在语句之后自动添加分号。这称为<strong>自动分号插入</strong>。例如，一个语句可以是变量，或者像<code>throw</code>、<code>return</code>、<code>break</code>这样的关键字。</p>
+<p>在这里，我们在新的一行上写了一个<code>return</code>语句和另一个值<code>a + b </code>。然而，由于它是一个新行，引擎并不知道它实际上是我们想要返回的值。相反，它会在<code>return</code>后面自动添加分号。你可以这样看：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">return;
+a + b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这意味着永远不会到达<code>a + b</code>，因为函数在<code>return</code>关键字之后停止运行。如果没有返回值，就像这里，函数返回<code>undefined</code>。注意，在<code>if/else</code>语句之后没有自动插入！</p>
+</li>
+<li><p>箭头函数的返回值</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const getList &#x3D; ([x, ...y]) &#x3D;&gt; [x, y]
+const getUser &#x3D; user &#x3D;&gt; &#123; name: user.name, age: user.age &#125;
+
+const list &#x3D; [1, 2, 3, 4]
+const user &#x3D; &#123; name: &quot;Lydia&quot;, age: 21 &#125;
+
+console.log(getList(list))
+console.log(getUser(user))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[1, [2, 3, 4]]</code> and <code>SyntaxError</code></li>
+<li>B: <code>[1, [2, 3, 4]]</code> and <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+<li>C: <code>[1, 2, 3, 4]</code> and <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+<li>D: <code>Error</code> and <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p><code>getList</code>函数接收一个数组作为其参数。 在<code>getList</code>函数的括号之间，我们立即解构这个数组。 您可以将其视为：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[x, ...y] &#x3D; [1, 2, 3, 4]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>使用剩余的参数<code>... y</code>，我们将所有剩余参数放在一个数组中。 在这种情况下，其余的参数是<code>2</code>，<code>3</code>和<code>4</code>。 <code>y</code>的值是一个数组，包含所有其余参数。 在这种情况下，<code>x</code>的值等于<code>1</code>，所以当我们打印<code>[x，y]</code>时，会打印<code>[1，[2,3,4]]</code>。</p>
+<p><code>getUser</code>函数接收一个对象。对于箭头函数，如果只返回一个值，我们不必编写花括号。但是，如果您想从一个箭头函数返回一个对象，您必须将它写在圆括号之间，否则两个花括号之间的所有内容都将被解释为一个块语句！在这种情况下，花括号之间的代码不是有效的 JavaScript 代码，因此会抛出 SyntaxError。</p>
+<p>以下函数将返回一个对象：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const getUser &#x3D; user &#x3D;&gt; (&#123; name: user.name, age: user.age &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>都是</p>
+</li>
+<li><p>都是</p>
+</li>
+</ol>
+<h2 id="this作用域"><a href="#this作用域" class="headerlink" title="this作用域"></a>this作用域</h2><ol>
+<li><p>箭头函数的作用域</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const shape &#x3D; &#123;
+  radius: 10,
+  diameter() &#123;
+    return this.radius * 2;
+  &#125;,
+  perimeter: () &#x3D;&gt; 2 * Math.PI * this.radius,
+&#125;;
+
+console.log(shape.diameter());
+console.log(shape.perimeter());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>20</code> and <code>62.83185307179586</code></li>
+<li>B: <code>20</code> and <code>NaN</code></li>
+<li>C: <code>20</code> and <code>63</code></li>
+<li>D: <code>NaN</code> and <code>63</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>请注意，<code>diameter</code>的值是一个正则函数，而<code>perimeter</code>的值是一个箭头函数。对于箭头函数，<code>this</code>关键字指的是它当前周围的作用域，这与常规函数不同！这意味着当我们调用 <code>perimeter</code> 时，它不是指形状对象，而是指它周围的范围（例如 window对象）。<br>该对象没有值<code>radius</code>，返回 <code>NaN</code>。</p>
+</li>
+<li><p>绑定 <code>this</code> 作用域</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123; name: &#39;Lydia&#39; &#125;;
+
+function sayHi(age) &#123;
+  return &#96;$&#123;this.name&#125; is $&#123;age&#125;&#96;;
+&#125;
+
+console.log(sayHi.call(person, 21));
+console.log(sayHi.bind(person, 21));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>undefined is 21</code> <code>Lydia is 21</code></li>
+<li>B: <code>function</code> <code>function</code></li>
+<li>C: <code>Lydia is 21</code> <code>Lydia is 21</code></li>
+<li>D: <code>Lydia is 21</code> <code>function</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p>我们可以使用<code>.call</code>和<code>.bind</code>方法来指定函数中的<code>this</code>关键字所引用的对象。但是，<code>.call</code>方法会立即执行函数，而<code>.bind</code>方法则会返回一个新的函数，该函数的上下文已经绑定好了，但不会立即执行。</p>
+</li>
+<li><p>函数返回</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Car() &#123;
+  this.make &#x3D; &#39;Lamborghini&#39;;
+  return &#123; make: &#39;Maserati&#39; &#125;;
+&#125;
+
+const myCar &#x3D; new Car();
+console.log(myCar.make);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lamborghini&quot;</code></li>
+<li>B: <code>&quot;Maserati&quot;</code></li>
+<li>C: <code>ReferenceError</code></li>
+<li>D: <code>TypeError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>当您返回一个属性时，该属性的值等于返回的值，而不是构造函数中设置的值。我们返回字符串<code>&quot;Maserati&quot;</code>，所以<code>myCar.make</code>等于<code>&quot;Maserati&quot;</code>。</p>
+</li>
+<li><p>this指向与改变</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var status &#x3D; &quot;😎&quot;
+
+setTimeout(() &#x3D;&gt; &#123;
+  const status &#x3D; &quot;😍&quot;
+
+  const data &#x3D; &#123;
+    status: &quot;🥑&quot;,
+    getStatus() &#123;
+      return this.status
+    &#125;
+  &#125;
+
+  console.log(data.getStatus())
+  console.log(data.getStatus.call(this))
+&#125;, 0)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;🥑&quot;</code> and <code>&quot;😍&quot;</code></li>
+<li>B: <code>&quot;🥑&quot;</code> and <code>&quot;😎&quot;</code></li>
+<li>C: <code>&quot;😍&quot;</code> and <code>&quot;😎&quot;</code></li>
+<li>D: <code>&quot;😎&quot;</code> and <code>&quot;😎&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p><code>this</code>关键字的指向取决于使用它的位置。 在<strong>函数</strong>中，比如<code>getStatus</code>，<code>this</code>指向的是调用它的对象，上述例子中<code>data</code>对象调用了<code>getStatus</code>，因此<code>this</code>指向的就是<code>data</code>对象。 当我们打印<code>this.status</code>时，<code>data</code>对象的<code>status</code>属性被打印，即<code>&quot;🥑&quot;</code>。</p>
+<p>使用<code>call</code>方法，可以更改<code>this</code>指向的对象。<code>data.getStatus.call(this)</code>是将<code>this</code>的指向由<code>data</code>对象更改为全局对象。在全局对象上，有一个名为<code>status</code>的变量，其值为<code>”😎“</code>。 因此打印<code>this.status</code>时，会打印<code>“😎”</code>。</p>
+</li>
+<li><p>上的</p>
+</li>
+<li><p>都是</p>
+</li>
+<li><p>上的</p>
+</li>
+</ol>
+<h2 id="运算问题"><a href="#运算问题" class="headerlink" title="运算问题"></a>运算问题</h2><ol>
+<li><p>计算转换</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">+true;
+!&#39;Lydia&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>1</code> and <code>false</code></li>
+<li>B: <code>false</code> and <code>NaN</code></li>
+<li>C: <code>false</code> and <code>false</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>一元加号运算符（unary plus）会尝试将操作数转换为数字。在JavaScript中，<code>true</code>被转换为<code>1</code>，<code>false</code>被转换为<code>0</code>。</p>
+<p>字符串<code>&#39;Lydia&#39;</code>，它是一个真值（truthy value），也就是说它在布尔上下文中会被视为true。因此，我们实际上在问“这个真值是否为假值？”这个表达式的结果是<code>false</code>，因为“Lydia”是一个真值，不是假值。</p>
+</li>
+<li><p>类型比较</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let a &#x3D; 3;
+let b &#x3D; new Number(3);
+let c &#x3D; 3;
+
+console.log(a &#x3D;&#x3D; b);
+console.log(a &#x3D;&#x3D;&#x3D; b);
+console.log(b &#x3D;&#x3D;&#x3D; c);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>true</code> <code>false</code> <code>true</code></li>
+<li>B: <code>false</code> <code>false</code> <code>true</code></li>
+<li>C: <code>true</code> <code>false</code> <code>false</code></li>
+<li>D: <code>false</code> <code>true</code> <code>true</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p><code>new Number()</code>是一个内置的函数构造器。虽然它看起来像一个数字，但它实际上不是一个数字：它有许多额外的特性，并且是一个对象。</p>
+<p>当我们使用<code>==</code>运算符（相等运算符）时，它只检查它们是否具有相同的值。它们都具有值<code>3</code>，因此返回<code>true</code>。</p>
+<p>然而，当我们使用<code>===</code>运算符（严格相等运算符）时，值和类型都应该相同。但实际上它们不同：<code>new Number()</code>不是一个数字，而是一个对象。因此两者都返回<code>false</code>。</p>
+</li>
+<li><p>数值运算</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sum(a, b) &#123;
+  return a + b;
+&#125;
+
+sum(1, &#39;2&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>NaN</code></li>
+<li>B: <code>TypeError</code></li>
+<li>C: <code>&quot;12&quot;</code></li>
+<li>D: <code>3</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: C**
+
+<p><strong>Answer: C</strong></p>
+<p>JavaScript是一种<strong>动态类型语言</strong>：不指定某些变量的类型。值可以自动转换为另一种类型，这被称为隐式类型转换。转换是从一种类型转换为另一种类型。</p>
+<p>在这个例子中，JavaScript将数字<code>1</code>转换为字符串，以便函数有意义并返回一个值。在数字类型（<code>1</code>）和字符串类型（<code>&#39;2&#39;</code>）相加时，数字被视为字符串。我们可以像<code>&quot;Hello&quot;+&quot;World&quot;</code>一样连接字符串，所以这里发生的是<code>&quot;1&quot;+&quot;2&quot;</code>，返回<code>&quot;12&quot;</code>。</p>
+</li>
+<li><p>运算符</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let number &#x3D; 0;
+console.log(number++);
+console.log(++number);
+console.log(number);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>1</code> <code>1</code> <code>2</code></li>
+<li>B: <code>1</code> <code>2</code> <code>2</code></li>
+<li>C: <code>0</code> <code>2</code> <code>2</code></li>
+<li>D: <code>0</code> <code>1</code> <code>2</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>后缀一元运算符<code>++</code>：</p>
+<p>返回值（此处返回<code>0</code>）<br>增加值（数字现在为<code>1</code>）<br>前缀一元运算符 <code>++</code>：</p>
+<p>增加值（数字现在为<code>2</code>）<br>返回值（此处返回<code>2</code>）<br>这将返回<code>0 2 2</code>。</p>
+</li>
+<li><p>标记模板字面量</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getPersonInfo(one, two, three) &#123;
+  console.log(one);
+  console.log(two);
+  console.log(three);
+&#125;
+
+const person &#x3D; &#39;Lydia&#39;;
+const age &#x3D; 21;
+
+getPersonInfo&#96;$&#123;person&#125; is $&#123;age&#125; years old&#96;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lydia&quot;</code> <code>21</code> <code>[&quot;&quot;, &quot; is &quot;, &quot; years old&quot;]</code></li>
+<li>B: <code>[&quot;&quot;, &quot; is &quot;, &quot; years old&quot;]</code> <code>&quot;Lydia&quot;</code> <code>21</code></li>
+<li>C: <code>&quot;Lydia&quot;</code> <code>[&quot;&quot;, &quot; is &quot;, &quot; years old&quot;]</code> <code>21</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>如果你使用标记模板字面量，第一个参数的值总是一个字符串值的数组。其余的参数获取传递的表达式的值！</p>
+</li>
+<li><p>对象比较</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function checkAge(data) &#123;
+  if (data &#x3D;&#x3D;&#x3D; &#123; age: 18 &#125;) &#123;
+    console.log(&#39;You are an adult!&#39;);
+  &#125; else if (data &#x3D;&#x3D; &#123; age: 18 &#125;) &#123;
+    console.log(&#39;You are still an adult.&#39;);
+  &#125; else &#123;
+    console.log(&#96;Hmm.. You don&#39;t have an age I guess&#96;);
+  &#125;
+&#125;
+
+checkAge(&#123; age: 18 &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>You are an adult!</code></li>
+<li>B: <code>You are still an adult.</code></li>
+<li>C: <code>Hmm.. You don&#39;t have an age I guess</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>JavaScript中比较相等性时，原始值是按照它们的值进行比较的，而对象是按照它们的引用进行比较的。JavaScript会检查这些对象是否具有指向内存中相同位置的引用。</p>
+<p>我们比较的两个对象没有这个引用：我们作为参数传递的对象与我们用来检查相等性的对象在内存中引用的位置不同。因此，它们被认为是不相等的。</p>
+<blockquote>
+<p>在JavaScript中，&#x3D;&#x3D;和&#x3D;&#x3D;&#x3D;都用于比较两个值的相等性。&#x3D;&#x3D;运算符比较两个值是否相等，但它会进行类型转换。如果两个值的类型不同，&#x3D;&#x3D;运算符会尝试将它们转换为相同的类型，然后再进行比较。例如，如果我们比较数字1和字符串”1”，&#x3D;&#x3D;运算符会将字符串”1”转换为数字1，然后再进行比较。如果两个值的类型相同，&#x3D;&#x3D;运算符会直接比较它们的值。</p>
+</blockquote>
+<p>这就是为什么 <code>&#123; age: 18 &#125; === &#123; age: 18 &#125;</code> 和 <code>&#123; age: 18 &#125; == &#123; age: 18 &#125;</code> 返回 <code>false</code>.</p>
+</li>
+<li><p>eval方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const sum &#x3D; eval(&#39;10*10+5&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>105</code></li>
+<li>B: <code>&quot;105&quot;</code></li>
+<li>C: <code>TypeError</code></li>
+<li>D: <code>&quot;10*10+5&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p><code>eval</code>函数评估作为字符串传递的代码。如果它是一个表达式，就像这个例子一样，它会评估这个表达式。这个表达式是<code>10 * 10 + 5</code>。这将返回数字<code>105</code>。</p>
+</li>
+<li><p>类型判断</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sayHi() &#123;
+  return (() &#x3D;&gt; 0)();
+&#125;
+
+console.log(typeof sayHi());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;object&quot;</code></li>
+<li>B: <code>&quot;number&quot;</code></li>
+<li>C: <code>&quot;function&quot;</code></li>
+<li>D: <code>&quot;undefined&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p><code>sayHi</code>函数返回立即调用的函数表达式（IIFE）的返回值。这个函数返回了<code>0</code>，它的类型是<code>“number”</code>。</p>
+<p>另外，typeof操作符可以返回以下值：<code>undefined</code>、<code>boolean</code>、<code>number</code>、<code>bigint</code>、<code>string</code>、<code>symbol</code>、<code>function</code>和<code>object</code>。需要注意的是，<code>typeof null</code>返回的是<code>&quot;object&quot;</code>。</p>
+</li>
+<li><p>加法运算</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(3 + 4 + &#39;5&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;345&quot;</code></li>
+<li>B: <code>&quot;75&quot;</code></li>
+<li>C: <code>12</code></li>
+<li>D: <code>&quot;12&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>运算符的结合性（associativity）是编译器按照左到右或右到左的顺序计算表达式的方式。这仅在所有运算符具有相同的优先级时才会发生。在这里，我们只有一种运算符：<code>+</code>。对于加法运算，其结合性是从左到右。</p>
+<p>首先计算<code>3 + 4</code>，结果为数字<code>7</code>。</p>
+<p>接着计算<code>7 + &#39;5&#39;</code>，结果为<code>&quot;75&quot;</code>，这是由于类型转换。JavaScript将数字<code>7</code>转换为字符串，参见问题15。我们可以使用<code>+</code>运算符来连接两个字符串。<code>&quot;7&quot; + &quot;5&quot;</code>的结果是<code>&quot;75&quot;</code>。</p>
+</li>
+<li><p>解构赋值</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const user &#x3D; &#123; name: &#39;Lydia&#39;, age: 21 &#125;;
+const admin &#x3D; &#123; admin: true, ...user &#125;;
+
+console.log(admin);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; admin: true, user: &#123; name: &quot;Lydia&quot;, age: 21 &#125; &#125;</code></li>
+<li>B: <code>&#123; admin: true, name: &quot;Lydia&quot;, age: 21 &#125;</code></li>
+<li>C: <code>&#123; admin: true, user: [&quot;Lydia&quot;, 21] &#125;</code></li>
+<li>D: <code>&#123; admin: true &#125;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: B**
+
+<p><strong>Answer: B</strong></p>
+<p>使用展开运算符（spread operator）<code>...</code>可以将对象进行合并。它可以创建一个对象的键&#x2F;值对的副本，并将其添加到另一个对象中。在这种情况下，我们创建了<code>user</code>对象的副本，并将其添加到<code>admin</code>对象中。<code>admin</code>对象现在包含了复制的键&#x2F;值对，结果为<code>&#123; admin: true, name: &quot;Lydia&quot;, age: 21 &#125;</code>。</p>
+</li>
+<li><p>运算符</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let num &#x3D; 10;
+
+const increaseNumber &#x3D; () &#x3D;&gt; num++;
+const increasePassedNumber &#x3D; number &#x3D;&gt; number++;
+
+const num1 &#x3D; increaseNumber();
+const num2 &#x3D; increasePassedNumber(num1);
+
+console.log(num1);
+console.log(num2);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>10</code>, <code>10</code></li>
+<li>B: <code>10</code>, <code>11</code></li>
+<li>C: <code>11</code>, <code>11</code></li>
+<li>D: <code>11</code>, <code>12</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: A**
+
+<p><strong>Answer: A</strong></p>
+<p>一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>num1</code>的值是<code>10</code>，因为<code>increaseNumber</code>函数首先返回<code>num</code>的值，即<code>10</code>，然后才递增<code>num</code>的值。</p>
+<p><code>num2</code>的值是<code>10</code>，因为我们将<code>num1</code>传递给了<code>increasePassedNumber</code>函数。<code>number</code>等于<code>10</code>（即<code>num1</code>的值）。同样，一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>number</code>的值是<code>10</code>，所以<code>num2</code>等于<code>10</code>。</p>
+</li>
+<li><p>是</p>
+</li>
+<li><p>上的</p>
+</li>
+</ol>
+<h2 id="内置方法"><a href="#内置方法" class="headerlink" title="内置方法"></a>内置方法</h2><ol>
+<li><p>reduce方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[[0, 1], [2, 3]].reduce(
+  (acc, cur) &#x3D;&gt; &#123;
+    return acc.concat(cur);
+  &#125;,
+  [1, 2],
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[0, 1, 2, 3, 1, 2]</code></li>
+<li>B: <code>[6, 1, 2]</code></li>
+<li>C: <code>[1, 2, 0, 1, 2, 3]</code></li>
+<li>D: <code>[1, 2, 6]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: C**
+
+<p><strong>Answer: C</strong></p>
+<p><code>[1, 2]</code>是我们的初始值。这是我们开始时的值，也是第一个累加器（<code>acc</code>）的值。在第一轮中，<code>acc</code>是<code>[1, 2]</code>，<code>cur</code>是<code>[0, 1]</code>。我们将它们连接起来，结果为<code>[1, 2, 0, 1]</code>。</p>
+<p>接下来，<code>[1, 2, 0, 1]</code>成为新的<code>acc</code>，<code>[2, 3]</code>成为<code>cur</code>。我们将它们连接起来，得到<code>[1, 2, 0, 1, 2, 3]</code>。</p>
+</li>
+<li><p><code>parseInt</code> 方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const num &#x3D; parseInt(&#39;7*6&#39;, 10);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>42</code></li>
+<li>B: <code>&quot;42&quot;</code></li>
+<li>C: <code>7</code></li>
+<li>D: <code>NaN</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: C**
+
+<p><strong>Answer: C</strong></p>
+<p>只有字符串中的第一个数字被返回。基于基数（作为第二个参数，用于指定要将其解析为的数字类型：十进制、十六进制、八进制、二进制等），<code>parseInt</code>函数会检查字符串中的字符是否有效。一旦遇到在基数中无效的字符，它就会停止解析并忽略后面的字符。</p>
+<p><code>*</code>不是一个有效的数字。它只解析<code>&quot;7&quot;</code>为十进制数<code>7</code>。现在，变量<code>num</code>的值为<code>7</code>。</p>
+</li>
+<li><p><code>map</code>方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[1, 2, 3].map(num &#x3D;&gt; &#123;
+  if (typeof num &#x3D;&#x3D;&#x3D; &#39;number&#39;) return;
+  return num * 2;
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[]</code></li>
+<li>B: <code>[null, null, null]</code></li>
+<li>C: <code>[undefined, undefined, undefined]</code></li>
+<li>D: <code>[ 3 x empty ]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: C</strong></p>
+<p>在对数组进行映射（mapping）时，变量num的值等于当前正在循环的元素。在这种情况下，元素是数字，因此if语句的条件typeof num &#x3D;&#x3D;&#x3D; “number”返回true。map函数创建一个新数组，并将从函数返回的值插入其中。</p>
+<p>然而，我们没有返回一个值。<strong>当我们从函数中没有返回值时，函数将返回undefined</strong>。对于数组中的每个元素，函数块都会被调用，因此对于每个元素，我们都返回undefined。</p>
+</li>
+<li><p>set方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const set &#x3D; new Set([1, 1, 2, 3, 4]);
+
+console.log(set);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[1, 1, 2, 3, 4]</code></li>
+<li>B: <code>[1, 2, 3, 4]</code></li>
+<li>C: <code>&#123;1, 1, 2, 3, 4&#125;</code></li>
+<li>D: <code>&#123;1, 2, 3, 4&#125;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: D</strong></p>
+<p><code>Set</code>对象是一个包含唯一值的集合：在一个集合中，一个值只能出现一次。</p>
+<p>我们传递了可迭代对象<code>[1, 1, 2, 3, 4]</code>，其中有一个重复值<code>1</code>。由于在一个集合中不能有两个相同的值，其中一个被移除。结果是<code>&#123;1, 2, 3, 4&#125;</code>。</p>
+</li>
+<li><p>delete方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &#39;Lydia&#39;;
+age &#x3D; 21;
+
+console.log(delete name);
+console.log(delete age);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>false</code>, <code>true</code></li>
+<li>B: <code>&quot;Lydia&quot;</code>, <code>21</code></li>
+<li>C: <code>true</code>, <code>true</code></li>
+<li>D: <code>undefined</code>, <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p><code>delete</code>运算符返回一个布尔值：如果删除成功则返回<code>true</code>，否则返回<code>false</code>。然而，<strong>使用<code>var</code>、<code>const</code>或<code>let</code>关键字声明的变量无法使用<code>delete</code>运算符删除。</strong></p>
+<p><code>name</code>变量是使用<code>const</code>关键字声明的，所以删除操作不成功：返回<code>false</code>。当我们将<code>age</code>设置为<code>21</code>时，实际上是向全局对象添加了一个名为<code>age</code>的属性。你可以通过这种方式成功删除对象的属性，也可以删除全局对象，因此<code>delete age</code>返回<code>true</code>。</p>
+</li>
+<li><p>Object.defineProperty和Object.keys()方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123; name: &#39;Lydia&#39; &#125;;
+
+Object.defineProperty(person, &#39;age&#39;, &#123; value: 21 &#125;);
+
+console.log(person);
+console.log(Object.keys(person));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code>, <code>[&quot;name&quot;, &quot;age&quot;]</code></li>
+<li>B: <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code>, <code>[&quot;name&quot;]</code></li>
+<li>C: <code>&#123; name: &quot;Lydia&quot;&#125;</code>, <code>[&quot;name&quot;, &quot;age&quot;]</code></li>
+<li>D: <code>&#123; name: &quot;Lydia&quot;&#125;</code>, <code>[&quot;age&quot;]</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>使用<code>defineProperty</code>方法，我们可以向对象添加新属性或修改现有属性。当我们使用<code>defineProperty</code>方法向对象添加属性时，默认情况下它们是<strong>不可枚举</strong>的。<code>Object.keys</code>方法从对象中返回所有可枚举的属性名，本例中只有<code>&quot;name&quot;</code>。</p>
+<p>使用<code>defineProperty</code>方法添加的属性默认是不可变的。您可以使用<code>writable</code>、<code>configurable</code>和<code>enumerable</code>属性来覆盖此行为。这样，<code>defineProperty</code>方法使您对要添加到对象中的属性具有更多控制权。</p>
+</li>
+<li><p>stringify方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const settings &#x3D; &#123;
+  username: &#39;lydiahallie&#39;,
+  level: 19,
+  health: 90,
+&#125;;
+
+const data &#x3D; JSON.stringify(settings, [&#39;level&#39;, &#39;health&#39;]);
+console.log(data);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;&#123;&quot;level&quot;:19, &quot;health&quot;:90&#125;&quot;</code></li>
+<li>B: <code>&quot;&#123;&quot;username&quot;: &quot;lydiahallie&quot;&#125;&quot;</code></li>
+<li>C: <code>&quot;[&quot;level&quot;, &quot;health&quot;]&quot;</code></li>
+<li>D: <code>&quot;&#123;&quot;username&quot;: &quot;lydiahallie&quot;, &quot;level&quot;:19, &quot;health&quot;:90&#125;&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p><code>JSON.stringify</code>的第二个参数是<em>replacer</em>。<em>replacer</em>可以是一个函数或一个数组，它允许您控制值的字符串化方式和内容。</p>
+<p>如果replacer是一个<em>array</em>，只有数组中包含的属性名将被添加到JSON字符串中。在这种情况下，只有名为<code>&quot;level&quot;</code>和<code>&quot;health&quot;</code>的属性被包含在内，<code>&quot;username&quot;</code>被排除在外。<code>data</code>现在等于<code>&quot;&#123; &quot;level&quot;: 19, &quot;health&quot;: 90 &#125;&quot;</code>。</p>
+<p>如果replacer是一个函数，该函数将在您对对象进行字符串化时调用。从该函数返回的值将成为将属性添加到JSON字符串时的属性值。如果值为<code>undefined</code>，则该属性将被排除在JSON字符串之外。</p>
+</li>
+<li><p>reduce方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[1, 2, 3, 4].reduce((x, y) &#x3D;&gt; console.log(x, y));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>1</code> <code>2</code> and <code>3</code> <code>3</code> and <code>6</code> <code>4</code></li>
+<li>B: <code>1</code> <code>2</code> and <code>2</code> <code>3</code> and <code>3</code> <code>4</code></li>
+<li>C: <code>1</code> <code>undefined</code> and <code>2</code> <code>undefined</code> and <code>3</code> <code>undefined</code> and <code>4</code> <code>undefined</code></li>
+<li>D: <code>1</code> <code>2</code> and <code>undefined</code> <code>3</code> and <code>undefined</code> <code>4</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: D**
+
+<p><strong>Answer: D</strong></p>
+<p><code>reduce</code>方法接收的第一个参数是累加器，本例中为<code>x</code>。第二个参数是当前值，为<code>y</code>。使用<code>reduce</code>方法，我们在数组中的每个元素上执行一个回调函数，最终可能会得到一个单一的值。</p>
+<p>在这个例子中，我们并没有返回任何值，只是记录了累加器和当前值的值。</p>
+<p>累加器的值等于回调函数先前返回的值。如果您没有将可选的<code>initialValue</code>参数传递给<code>reduce</code>方法，<strong>第一次调用</strong>时累加器等于第一个元素。</p>
+<p>在第一次调用时，累加器（<code>x</code>）为<code>1</code>，当前值（<code>y</code>）为<code>2</code>。我们没有从回调函数返回值，而是记录了累加器和当前值：输出为<code>1</code>和<code>2</code>。</p>
+<p>如果您没有从函数中返回值，它将返回<code>undefined</code>。在下一次调用时，累加器为<code>undefined</code>，当前值为<code>3</code>。输出为<code>undefined</code>和<code>3</code>。</p>
+<p>在第四次调用时，我们再次没有从回调函数返回值。累加器再次为<code>undefined</code>，当前值为<code>4</code>。输出为<code>undefined</code>和<code>4</code>。</p>
+</li>
+<li><p>padStart 方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &quot;Lydia Hallie&quot;
+console.log(name.padStart(13))
+console.log(name.padStart(2))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&quot;Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code></li>
+<li>B: <code>&quot;           Lydia Hallie&quot;</code>, <code>&quot;  Lydia Hallie&quot;</code> (<code>&quot;[13x whitespace]Lydia Hallie&quot;</code>, <code>&quot;[2x whitespace]Lydia Hallie&quot;</code>)</li>
+<li>C: <code>&quot; Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code> (<code>&quot;[1x whitespace]Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code>)</li>
+<li>D: <code>&quot;Lydia Hallie&quot;</code>, <code>&quot;Lyd&quot;</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>使用<code>padStart</code>方法，我们可以在字符串的开头添加填充。传递给此方法的参数是字符串的<strong>总长度（包含填充）</strong>。字符串<code>Lydia Hallie</code>的长度为<code>12</code>，因此<code>name.padStart（13）</code>在字符串的开头只会插入 1（<code>13 - 12 = 1</code>）个空格。</p>
+<p>如果传递给<code>padStart</code>方法的参数小于字符串的长度，则不会添加填充。</p>
+</li>
+<li><p>String.raw 方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(String.raw&#96;Hello\nworld&#96;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>Hello world!</code></li>
+<li>B: <code>Hello</code><br><code>world</code></li>
+<li>C: <code>Hello\nworld</code></li>
+<li>D: <code>Hello\n</code><br><code>world</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p><code>String.raw</code>函数是用来获取一个模板字符串的原始字符串的，它返回一个字符串，其中忽略了转义符（<code>\n</code>，<code>\v</code>，<code>\t</code>等）。但反斜杠可能造成问题，因为你可能会遇到下面这种类似情况：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const path &#x3D; &#96;C:\Documents\Projects\table.html&#96;
+String.raw&#96;$&#123;path&#125;&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这将导致：</p>
+<p><code>&quot;C:DocumentsProjects able.html&quot;</code></p>
+<p>直接使用<code>String.raw</code></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">String.raw&#96;C:\Documents\Projects\table.html&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>它会忽略转义字符并打印：<code>C:\Documents\Projects\table.html</code></p>
+<p>上述情况，字符串是<code>Hello\nworld</code>被打印出。</p>
+</li>
+<li><p>list.push 方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function addToList(item, list) &#123;
+  return list.push(item);
+&#125;
+
+const result &#x3D; addToList(&quot;apple&quot;, [&quot;banana&quot;]);
+console.log(result);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>[&#39;apple&#39;, &#39;banana&#39;]</code></li>
+<li>B: <code>2</code></li>
+<li>C: <code>true</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p><code>push()</code>方法返回新数组的长度。一开始，数组包含一个元素（字符串<code>&quot;banana&quot;</code>），长度为 1。 在数组中添加字符串<code>&quot;apple&quot;</code>后，长度变为 2，并将从<code>addToList</code>函数返回。</p>
+<p><code>push</code>方法修改原始数组，如果你想从函数返回数组而不是数组长度，那么应该在 push <code>item</code>之后返回<code>list</code>。</p>
+</li>
+<li><p>Object.freeze方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const box &#x3D; &#123; x: 10, y: 20 &#125;;
+
+Object.freeze(box);
+
+const shape &#x3D; box;
+shape.x &#x3D; 100;
+console.log(shape)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; x: 100, y: 20 &#125;</code></li>
+<li>B: <code>&#123; x: 10, y: 20 &#125;</code></li>
+<li>C: <code>&#123; x: 100 &#125;</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: B**
+
+<p><strong>Answer: B</strong></p>
+<p><code>Object.freeze</code>使得无法添加、删除或修改对象的属性（除非属性的值是另一个对象）。</p>
+<p>当我们创建变量<code>shape</code>并将其设置为等于冻结对象<code>box</code>时，<code>shape</code>指向的也是冻结对象。你可以使用<code>Object.isFrozen</code>检查一个对象是否被冻结，上述情况，<code>Object.isFrozen(shape)</code>将返回<code>true</code>。</p>
+<p>由于<code>shape</code>被冻结，并且<code>x</code>的值不是对象，所以我们不能修改属性<code>x</code>。 <code>x</code>仍然等于<code>10</code>，<code>&#123;x：10，y：20&#125;</code>被打印。</p>
+<p>注意，上述例子我们对属性<code>x</code>进行修改，可能会导致抛出 TypeError 异常（最常见但不仅限于严格模式下时）。</p>
+</li>
+<li><p>Object.entries方法</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
+  name: &quot;Lydia&quot;,
+  age: 21
+&#125;
+
+for (const [x, y] of Object.entries(person)) &#123;
+  console.log(x, y)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>name</code> <code>Lydia</code> and <code>age</code> <code>21</code></li>
+<li>B: <code>[&quot;name&quot;, &quot;Lydia&quot;]</code> and <code>[&quot;age&quot;, 21]</code></li>
+<li>C: <code>[&quot;name&quot;, &quot;age&quot;]</code> and <code>undefined</code></li>
+<li>D: <code>Error</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p><code>Object.entries()</code>方法返回一个给定对象自身可枚举属性的键值对数组，上述情况返回一个二维数组，数组每个元素是一个包含键和值的数组：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[[&#39;name&#39;，&#39;Lydia&#39;]，[&#39;age&#39;，21]]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>使用<code>for-of</code>循环，我们可以迭代数组中的每个元素，上述情况是子数组。 我们可以使用<code>const [x，y]</code>在<code>for-of</code>循环中解构子数组。 <code>x</code>等于子数组中的第一个元素，<code>y</code>等于子数组中的第二个元素。</p>
+<p>第一个子阵列是<code>[“name”，“Lydia”]</code>，其中<code>x</code>等于<code>name</code>，而<code>y</code>等于<code>Lydia</code>。 第二个子阵列是<code>[“age”，21]</code>，其中<code>x</code>等于<code>age</code>，而<code>y</code>等于<code>21</code>。</p>
+</li>
+<li><p>都是</p>
+</li>
+<li><p>是</p>
+</li>
+</ol>
+<h2 id="概念问题"><a href="#概念问题" class="headerlink" title="概念问题"></a>概念问题</h2><ol>
+<li><p>事件传播的三个阶段顺序？</p>
+<ul>
+<li>A: 目标阶段 &gt; 捕获阶段 &gt; 冒泡阶段</li>
+<li>B: 冒泡阶段 &gt; 目标阶段 &gt; 捕获阶段</li>
+<li>C: 目标阶段 &gt; 冒泡阶段 &gt; 捕获阶段</li>
+<li>D: 捕获阶段 &gt; 目标阶段 &gt; 冒泡阶段</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: D</strong></p>
+<p>在捕获阶段中，事件从祖先元素开始向下传播到目标元素。然后，事件到达目标元素并触发。接着，冒泡阶段开始，事件从目标元素开始向上冒泡到最外层的元素。因此，在事件传播的过程中，捕获阶段和冒泡阶段都是必要的，它们共同构成了事件传播的完整过程。</p>
+</li>
+<li><p>所有对象都有原型么？</p>
+<ul>
+<li>A: 正确</li>
+<li>B: 错误</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>所有对象都有原型，除了<strong>基础对象</strong>。基础对象是由用户创建的对象，或使用<code>new</code>关键字创建的对象。基础对象可以访问一些方法和属性，例如<code>.toString</code>方法。这就是为什么可以使用内置的JavaScript方法的原因！所有类似的方法都在原型上可用。虽然JavaScript无法直接在对象上找到它，但它会沿着原型链向下查找并在那里找到它，这使得它对您可用。</p>
+</li>
+<li><p>cool_secret 可以访问多长时间？</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">sessionStorage.setItem(&#39;cool_secret&#39;, 123);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: 永远，数据不会丢失。</li>
+<li>B: 当用户关闭选项卡时。</li>
+<li>C: 当用户关闭整个浏览器时，不仅仅是选项卡。</li>
+<li>D: 当用户关闭他们的计算机时。</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p>存储在<code>sessionStorage</code>中的数据在关闭选项卡后会被删除。</p>
+<p>如果您使用了<code>localStorage</code>，除非例如调用<code>localStorage.clear()</code>，否则数据将永久存在。</p>
+</li>
+<li><p>全局执行上下文</p>
+<p>JavaScript全局执行上下文为您创建了两个东西：全局对象和“this”关键字。</p>
+<ul>
+<li>A: 正确</li>
+<li>B: 错误</li>
+<li>C: 取决于环境</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>基本执行上下文是全局执行上下文：它是您代码中任何地方都可以访问的内容。</p>
+</li>
+<li><p>事件循环</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const foo &#x3D; () &#x3D;&gt; console.log(&#39;First&#39;);
+const bar &#x3D; () &#x3D;&gt; setTimeout(() &#x3D;&gt; console.log(&#39;Second&#39;));
+const baz &#x3D; () &#x3D;&gt; console.log(&#39;Third&#39;);
+
+bar();
+foo();
+baz();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>First</code> <code>Second</code> <code>Third</code></li>
+<li>B: <code>First</code> <code>Third</code> <code>Second</code></li>
+<li>C: <code>Second</code> <code>First</code> <code>Third</code></li>
+<li>D: <code>Second</code> <code>Third</code> <code>First</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: B**
+
+<p><strong>Answer: B</strong></p>
+<p>事件循环相关知识。</p>
+</li>
+<li><p>点击按钮时哪一个是event.target？</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'first div'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'second div'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'button'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+      Click!
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: 外层的 <code>div</code></li>
+<li>B: 内层的 <code>div</code></li>
+<li>C: <code>button</code></li>
+<li>D: 所有嵌套元素的数组</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>当点击一个元素时，事件会从该元素开始向上冒泡，直到达到文档根节点。在这个过程中，每个祖先元素都会收到该事件。事件的目标元素是最深层次的嵌套元素，它是直接触发事件的元素。您可以使用<code>event.target</code>属性来访问该元素。如果您想停止事件冒泡，可以使用<code>event.stopPropagation()</code>方法。这将阻止事件继续向上冒泡，从而只触发目标元素的事件处理程序。</p>
+</li>
+<li><p>判断为 <code>false</code> 的值</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">0;
+new Number(0);
+(&#39;&#39;);
+(&#39; &#39;);
+new Boolean(false);
+undefined;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>0</code>, <code>&#39;&#39;</code>, <code>undefined</code></li>
+<li>B: <code>0</code>, <code>new Number(0)</code>, <code>&#39;&#39;</code>, <code>new Boolean(false)</code>, <code>undefined</code></li>
+<li>C: <code>0</code>, <code>&#39;&#39;</code>, <code>new Boolean(false)</code>, <code>undefined</code></li>
+<li>D: All of them are falsy</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+**Answer: A**
+
+<p><strong>Answer: A</strong></p>
+<p>有以下8种为false的数值：</p>
+<ul>
+<li><code>undefined</code></li>
+<li><code>null</code></li>
+<li><code>NaN</code></li>
+<li><code>false</code></li>
+<li><code>&#39;&#39;</code> (empty string)</li>
+<li><code>0</code></li>
+<li><code>-0</code></li>
+<li><code>0n</code> (BigInt(0))</li>
+</ul>
+<p>像new Number和new Boolean这样的函数构造器被视为真值</p>
+</li>
+<li><p>所有在JavaScript中的元素只属于？</p>
+<ul>
+<li>A: 原始类型或对象</li>
+<li>B: 函数或对象</li>
+<li>C: 只有对象</li>
+<li>D: 数字或对象</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+</li>
+<li><p><code>setInterval</code> 在浏览器中返回什么？</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">setInterval(() &#x3D;&gt; console.log(&#39;Hi&#39;), 1000);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>A: 一个唯一的id</li>
+<li>B: 指定的毫秒数</li>
+<li>C: 传递的函数</li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+<p><strong>Answer: A</strong></p>
+<p>它返回一个唯一的 ID。此 ID 可用于通过 <code>clearInterval()</code> 函数清除该间隔。</p>
+</li>
+<li><p>模块的导入与导出</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; counter.js
+let counter &#x3D; 10;
+export default counter;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; index.js
+import myCounter from &#39;.&#x2F;counter&#39;;
+
+myCounter +&#x3D; 1;
+
+console.log(myCounter);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>10</code></li>
+<li>B: <code>11</code></li>
+<li>C: <code>Error</code></li>
+<li>D: <code>NaN</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: C</strong></p>
+<p>导入的模块是只读的：你不能修改导入的模块。只有导出它们的模块可以改变它们的值。</p>
+<p>当我们尝试增加<code>myCounter</code>的值时，会抛出一个错误：<code>myCounter</code>是只读的，不能被修改。</p>
+</li>
+<li><p>import和require的执行顺序</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; index.js
+console.log(&#39;running index.js&#39;);
+import &#123; sum &#125; from &#39;.&#x2F;sum.js&#39;;
+console.log(sum(1, 2));
+
+&#x2F;&#x2F; sum.js
+console.log(&#39;running sum.js&#39;);
+export const sum &#x3D; (a, b) &#x3D;&gt; a + b;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>running index.js</code>, <code>running sum.js</code>, <code>3</code></li>
+<li>B: <code>running sum.js</code>, <code>running index.js</code>, <code>3</code></li>
+<li>C: <code>running sum.js</code>, <code>3</code>, <code>running index.js</code></li>
+<li>D: <code>running index.js</code>, <code>undefined</code>, <code>running sum.js</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: B</strong></p>
+<p><code>import</code>命令是编译阶段执行的，在代码运行之前。因此这意味着被导入的模块会先运行，而导入模块的文件会后执行。</p>
+<p>这是 CommonJS 中<code>require()</code>和<code>import</code>之间的区别。使用<code>require()</code>，您可以在运行代码时根据需要加载依赖项。 如果我们使用<code>require</code>而不是<code>import</code>，<code>running index.js</code>，<code>running sum.js</code>，<code>3</code>会被依次打印。</p>
+</li>
+<li><p>纯函数判断</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sum(a, b) &#123;
+  return a + b;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: Yes</li>
+<li>B: No</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>纯函数在相同的输入值时，需产生相同的输出，其输出的结果，与输入值以外的其他隐藏信息或状态无关，也和由 I&#x2F;O 设备产生的外部输出无关。 纯函数不会产生副作用。</p>
+<p>纯函数与副作用的定义可参考： <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%89%AF%E4%BD%9C%E7%94%A8_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)">https://zh.wikipedia.org/wiki/%E5%89%AF%E4%BD%9C%E7%94%A8_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)</a></p>
+</li>
+<li><p>模块导入</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; module.js 
+export default () &#x3D;&gt; &quot;Hello world&quot;
+export const name &#x3D; &quot;Lydia&quot;
+
+&#x2F;&#x2F; index.js 
+import * as data from &quot;.&#x2F;module&quot;
+
+console.log(data)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>A: <code>&#123; default: function default(), name: &quot;Lydia&quot; &#125;</code></li>
+<li>B: <code>&#123; default: function default() &#125;</code></li>
+<li>C: <code>&#123; default: &quot;Hello world&quot;, name: &quot;Lydia&quot; &#125;</code></li>
+<li>D: Global object of <code>module.js</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+
+
+<p><strong>Answer: A</strong></p>
+<p>使用<code>import * as name</code>语法，我们将<code>module.js</code>文件中所有<code>export</code>导入到<code>index.js</code>文件中，并且创建了一个名为<code>data</code>的新对象。 在<code>module.js</code>文件中，有两个导出：默认导出和命名导出。 默认导出是一个返回字符串 “Hello World” 的函数，命名导出是一个名为<code>name</code>的变量，其值为字符串<code>&quot;Lydia&quot;</code>。</p>
+<p><code>data</code>对象具有默认导出的<code>default</code>属性，其他属性具有指定 exports 的名称及其对应的值。</p>
+</li>
+<li><p>都是</p>
+</li>
+<li><p>都是</p>
+</li>
+<li><p>都是</p>
+</li>
+<li><p>都是</p>
+</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">QT-7274</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://qt-7274.github.io/2023/10/03/javascript-dai-ma-ti-mu/">https://qt-7274.github.io/2023/10/03/javascript-dai-ma-ti-mu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">QT-7274</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                    <span class="chip bg-color">前端</span>
+                                </a>
+                            
+                                <a href="/tags/JavaScript/">
+                                    <span class="chip bg-color">JavaScript</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.gif") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid;">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'tzmyy70PpnbbxclXN4jYmjPA-gzGzoHsz',
+        appKey: 'TCY55mH7vS6x5sVr1bCLm5Gg',
+        serverURLs: '',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        requiredFields: ['nick','mail'],
+        enableQQ: 'true',
+        lang: 'zh-cn',
+        placeholder: '😉畅所欲言！\n📲请文明评论，禁止恶意评论🚫 \n⚠️公开网络空间，请不要发表任何包含个人或其他人的隐私信息🔐',
+        master: ["f18e9f29c8274571d5a0752aca9310ef"],
+        friends:["0aa4f09d8249581a4380a6fc541062e7","6a66a1ba019c52f168d99313efbef39a"]
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/10/03/javascript-dai-ma-ti-mu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/1.jpg" class="responsive-img" alt="JavaScript代码题目">
+                        
+                        <span class="card-title">JavaScript代码题目</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/18.jpg" class="responsive-img" alt="CSS属性计算过程">
+                        
+                        <span class="card-title">CSS属性计算过程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">QT-7274</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/QT-7274" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2531376773@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2531376773" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2531376773" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+    <a  class="tooltipped" target="_blank" data-tooltip="微信联系我: Q5268368" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>

@@ -463,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-13
+                    2023-10-04
                 </div>
                 
 
@@ -622,6 +622,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <details><summary><b>Answer</b></summary>
 <p>
 **Answer: A**
+**Answer: A**
 
 <p>在JavaScript中，当将一个对象赋值给另一个对象时，它们之间是通过引用进行交互的。这意味着，当我们将一个对象赋值给另一个变量时，实际上是将该对象的引用复制到了新变量中，而不是将对象本身复制到新变量中。</p>
 <p>在这个例子中，变量<code>c</code>保存了一个对象的值。稍后，我们将<code>d</code>赋值为与<code>c</code>具有相同引用的对象。这意味着，<code>c</code>和<code>d</code>现在都引用同一个对象，因此对该对象的任何更改都会反映在c和d中。这种交互方式可以节省内存，因为它避免了在内存中复制大量的对象。但需要注意的是，如果我们想要复制一个对象而不是引用它，我们需要使用深拷贝（deep copy）或浅拷贝（shallow copy）的技术。</p>
@@ -712,6 +713,7 @@ bark.animal &#x3D; &#39;dog&#39;;<span aria-hidden="true" class="line-numbers-ro
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: A**
 **Answer: A**
 
 <p>这在JavaScript中是可能的，因为函数是<strong>对象</strong>！（除了原始类型之外，所有东西都是对象）</p>
@@ -805,6 +807,7 @@ sum(1, &#39;2&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></s
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 **Answer: C**
 
 <p>JavaScript是一种<strong>动态类型语言</strong>：不指定某些变量的类型。值可以自动转换为另一种类型，这被称为隐式类型转换。转换是从一种类型转换为另一种类型。</p>
@@ -914,6 +917,7 @@ getAge();<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <details><summary><b>Answer</b></summary>
 <p>
 **Answer: C**
+**Answer: C**
 
 <p>使用”use strict”可以确保不会意外地声明全局变量。在上面的代码中，我们没有声明变量age，但由于我们使用了”use strict”，它会抛出一个引用错误。如果我们没有使用”use strict”，它仍然可以工作，因为属性age会被添加到全局对象中。使用”use strict”可以帮助我们避免一些常见的错误，例如意外地声明全局变量或使用未声明的变量。它还可以使代码更加严格，从而提高代码的可读性和可维护性。</p>
 </li>
@@ -980,8 +984,8 @@ set.has(1);<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 
-<p><strong>Answer: B</strong></p>
 <p>所有对象的键（不包括 Symbols）在底层都是字符串，即使您没有将其键入为字符串。这就是为什么<code>obj.hasOwnProperty(&#39;1&#39;)</code>也返回<code>true</code>的原因。</p>
 <p>但是对于集合来说，情况并非如此。我们的集合中没有<code>&#39;1&#39;</code>，所有<code>set.has(&#39;1&#39;)</code>返回<code>false</code>。它具有数字类型<code>1</code>，<code>set.has(1)</code>返回<code>true</code>。</p>
 </li>
@@ -996,6 +1000,7 @@ console.log(obj);<span aria-hidden="true" class="line-numbers-rows"><span></span
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 **Answer: B**
 
 <p>如果您有两个具有相同名称的键，则该键将被替换。它仍将位于其第一个位置，但具有最后指定的值。</p>
@@ -1027,8 +1032,8 @@ console.log(obj);<span aria-hidden="true" class="line-numbers-rows"><span></span
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 
-<p><strong>Answer: C</strong></p>
 <p><code>continue</code>语句在某个条件返回<code>true</code>时跳过当前迭代。</p>
 </li>
 <li><h3 id="原型方法"><a href="#原型方法" class="headerlink" title="原型方法"></a>原型方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">String.prototype.giveLydiaPizza &#x3D; () &#x3D;&gt; &#123;
@@ -1047,8 +1052,8 @@ console.log(name.giveLydiaPizza())<span aria-hidden="true" class="line-numbers-r
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: A**
 
-<p><strong>Answer: C</strong></p>
 <p> <code>String</code>是一个内置的构造函数，我们可以向其添加属性。我刚刚向其原型添加了一个方法。原始字符串会自动转换为由字符串原型函数生成的字符串对象。因此，所有字符串（字符串对象）都可以访问该方法！这意味着，如果您向字符串原型添加一个方法，那么<strong>所有</strong>字符串都可以使用该方法。</p>
 </li>
 <li><h3 id="对象键"><a href="#对象键" class="headerlink" title="对象键"></a>对象键</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const a &#x3D; &#123;&#125;;
@@ -1068,8 +1073,8 @@ console.log(a[b]);<span aria-hidden="true" class="line-numbers-rows"><span></spa
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 
-<p><strong>Answer: B</strong></p>
 <p>这段代码中，我们尝试将一个对象作为键设置到对象<code>a</code>中，并将其值设置为<code>123</code>。然而，当我们将一个对象转换为字符串时，它会变成<code>&quot;[object Object]&quot;</code>。因此，我们实际上是在说<code>a[&quot;[object Object]&quot;] = 123</code>。然后，我们尝试再次做同样的事情。c是另一个我们隐式转换为字符串的对象。因此，<code>a[&quot;[object Object]&quot;] = 456</code>。然后，我们记录<code>a[b]</code>，实际上是<code>a[&quot;[object Object]&quot;]</code>。我们刚刚将其设置为<code>456</code>，因此它返回<code>456</code>。</p>
 <blockquote>
 <p>这段代码中的关键点是对象键自动转换为字符串，因此需要小心处理对象键。</p>
@@ -1091,6 +1096,7 @@ baz();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 **Answer: B**
 
 <p>这段代码中，我们首先调用了setTimeout函数，但是它是最后被打印出的。这是因为在浏览器中，我们不仅有运行时引擎，还有一个叫做WebAPI的东西。WebAPI为我们提供了setTimeout函数，以及例如DOM等其他功能。</p>
@@ -1139,8 +1145,8 @@ baz();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: A**
 
-<p><strong>Answer: A</strong></p>
 <p>如果我们点击一个<code>p</code>元素，我们会看到两个打印结果：<code>p</code>和<code>div</code>。在这个过程中，事件会经历三个阶段：捕获阶段、目标阶段和冒泡阶段。默认情况下，事件处理程序会在冒泡阶段执行（除非您将<code>useCapture</code>设置为<code>true</code>）。事件处理程序会从最深层次的嵌套元素开始执行，然后向外层元素逐步执行，直到达到文档根节点。</p>
 </li>
 <li><h3 id="引用对象的方式"><a href="#引用对象的方式" class="headerlink" title="引用对象的方式"></a>引用对象的方式</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123; name: &#39;Lydia&#39; &#125;;
@@ -1200,7 +1206,7 @@ undefined;<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 <p>
 **Answer: A**
 
-<p>有以下8种falsy的数值：</p>
+<p>有以下8种为false的数值：</p>
 <ul>
 <li><code>undefined</code></li>
 <li><code>null</code></li>
@@ -1211,7 +1217,7 @@ undefined;<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 <li><code>-0</code></li>
 <li><code>0n</code> (BigInt(0))</li>
 </ul>
-<p>像new Number和new Boolean这样的函数构造器被视为truthy值</p>
+<p>像new Number和new Boolean这样的函数构造器被视为真值</p>
 </li>
 <li><h3 id="类型判断-1"><a href="#类型判断-1" class="headerlink" title="类型判断"></a>类型判断</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(typeof typeof 1);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -1265,8 +1271,8 @@ console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: A**
 
-<p><strong>Answer: A</strong></p>
 <p>catch块接收参数x。这个x与我们传递参数时的变量不同。这个变量x是块级作用域的。</p>
 <p>稍后，我们将这个块级作用域变量设置为1，并设置变量y的值。现在，我们记录块级作用域变量x的值，它等于1。</p>
 <p>在catch块之外，x仍然是undefined，而y是2。当我们在catch块之外使用console.log(x)时，它返回undefined，而y返回2。</p>
@@ -1279,8 +1285,7 @@ console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
-
-<p><strong>Answer: A</strong></p>
+**Answer: A**
 </li>
 <li><h3 id="reduce方法"><a href="#reduce方法" class="headerlink" title="reduce方法"></a>reduce方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[[0, 1], [2, 3]].reduce(
   (acc, cur) &#x3D;&gt; &#123;
@@ -1297,6 +1302,7 @@ console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 **Answer: C**
 
 <p><code>[1, 2]</code>是我们的初始值。这是我们开始时的值，也是第一个累加器（<code>acc</code>）的值。在第一轮中，<code>acc</code>是<code>[1, 2]</code>，<code>cur</code>是<code>[0, 1]</code>。我们将它们连接起来，结果为<code>[1, 2, 0, 1]</code>。</p>
@@ -1471,6 +1477,7 @@ for (const item in person) &#123;
 <details><summary><b>Answer</b></summary>
 <p>
 **Answer: C**
+**Answer: C**
 
 <p>只有字符串中的第一个数字被返回。基于基数（作为第二个参数，用于指定要将其解析为的数字类型：十进制、十六进制、八进制、二进制等），<code>parseInt</code>函数会检查字符串中的字符是否有效。一旦遇到在基数中无效的字符，它就会停止解析并忽略后面的字符。</p>
 <p><code>*</code>不是一个有效的数字。它只解析<code>&quot;7&quot;</code>为十进制数<code>7</code>。现在，变量<code>num</code>的值为<code>7</code>。</p>
@@ -1487,12 +1494,14 @@ for (const item in person) &#123;
 <li>D: <code>[ 3 x empty ]</code></li>
 </ul>
 <details><summary><b>Answer</b></summary>
-<p>
-
+<p></li>
+</ol>
 <p><strong>Answer: C</strong></p>
-<p>在对数组进行映射（mapping）时，变量num的值等于当前正在循环的元素。在这种情况下，元素是数字，因此if语句的条件typeof num &#x3D;&#x3D;&#x3D; “number”返回true。map函数创建一个新数组，并将从函数返回的值插入其中。</p>
-<p>然而，我们没有返回一个值。<strong>当我们从函数中没有返回值时，函数将返回undefined</strong>。对于数组中的每个元素，函数块都会被调用，因此对于每个元素，我们都返回undefined。</p>
-</li>
+<pre><code>在对数组进行映射（mapping）时，变量num的值等于当前正在循环的元素。在这种情况下，元素是数字，因此if语句的条件typeof num === &quot;number&quot;返回true。map函数创建一个新数组，并将从函数返回的值插入其中。
+
+然而，我们没有返回一个值。**当我们从函数中没有返回值时，函数将返回undefined**。对于数组中的每个元素，函数块都会被调用，因此对于每个元素，我们都返回undefined。
+</code></pre>
+<ol start="51">
 <li><h3 id="引用复制"><a href="#引用复制" class="headerlink" title="引用复制"></a>引用复制</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getInfo(member, year) &#123;
   member.name &#x3D; &#39;Lydia&#39;;
   year &#x3D; &#39;1998&#39;;
@@ -1515,7 +1524,7 @@ console.log(person, birthYear);<span aria-hidden="true" class="line-numbers-rows
 <p>
 
 <p><strong>Answer: A</strong></p>
-<p>参数按值传递，除非其值是一个对象，那么它们将按引用传递。<code>birthYear</code>是一个字符串，而不是一个对象，所以它是按值传递的。当我们按值传递参数时，会创建该值的副本（参见问题46）。</p>
+<p>参数按值传递，除非其值是一个对象，那么它们将按引用传递。<code>birthYear</code>是一个字符串，而不是一个对象，所以它是按值传递的。<strong>当我们按值传递参数时，会创建该值的副本</strong>（参见问题46）。</p>
 <p>变量<code>birthYear</code>引用的是值<code>&quot;1997&quot;</code>。参数<code>year</code>也引用了值<code>&quot;1997&quot;</code>，但它引用的值与<code>birthYear</code>引用的不是同一个。当我们通过将<code>year</code>设置为<code>&quot;1998&quot;</code>来更新<code>year</code>的值时，只是更新了<code>year</code>的值，<code>birthYear</code>仍然等于<code>&quot;1997&quot;</code>。</p>
 <p><code>person</code>的值是一个对象。参数<code>member</code>复制了对同一对象的引用。当我们修改<code>member</code>引用的对象的属性时，<code>person</code>的值也会被修改，因为它们都引用同一个对象。<code>person</code>的<code>name</code>属性现在等于值<code>&quot;Lydia&quot;</code>。</p>
 </li>
@@ -1582,8 +1591,8 @@ console.log(typeof y);<span aria-hidden="true" class="line-numbers-rows"><span><
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: A**
 
-<p><strong>Answer: B</strong></p>
 <p><code>let x = (y = 10);</code> 实际上是以下代码的简写形式：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">y &#x3D; 10; 
 let x &#x3D; y; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -1619,6 +1628,7 @@ pet.bark();<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 <details><summary><b>Answer</b></summary>
 <p>
 **Answer: A**
+**Answer: A**
 
 <p>我们可以使用<code>delete</code>关键字从对象中删除属性，也可以从原型上删除属性。通过从原型上删除属性，该属性将不再在原型链中可用。在这种情况下，在删除了<code>Dog.prototype.bark</code>之后，<code>bark</code>函数在原型上不再可用，但我们仍然尝试访问它。</p>
 <p>当我们试图调用不是函数的东西时，会抛出<code>TypeError</code>错误。在这种情况下，抛出的错误是<code>TypeError: pet.bark is not a function</code>，因为<code>pet.bark</code>是<code>undefined</code>。</p>
@@ -1635,8 +1645,8 @@ console.log(set);<span aria-hidden="true" class="line-numbers-rows"><span></span
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: D**
 
-<p><strong>Answer: D</strong></p>
 <p><code>Set</code>对象是一个包含唯一值的集合：在一个集合中，一个值只能出现一次。</p>
 <p>我们传递了可迭代对象<code>[1, 1, 2, 3, 4]</code>，其中有一个重复值<code>1</code>。由于在一个集合中不能有两个相同的值，其中一个被移除。结果是<code>&#123;1, 2, 3, 4&#125;</code>。</p>
 </li>
@@ -1680,7 +1690,7 @@ console.log(delete age);<span aria-hidden="true" class="line-numbers-rows"><span
 <p>
 
 <p><strong>Answer: A</strong></p>
-<p><code>delete</code>运算符返回一个布尔值：如果删除成功则返回<code>true</code>，否则返回<code>false</code>。然而，使用<code>var</code>、<code>const</code>或<code>let</code>关键字声明的变量无法使用<code>delete</code>运算符删除。</p>
+<p><code>delete</code>运算符返回一个布尔值：如果删除成功则返回<code>true</code>，否则返回<code>false</code>。然而，<strong>使用<code>var</code>、<code>const</code>或<code>let</code>关键字声明的变量无法使用<code>delete</code>运算符删除。</strong></p>
 <p><code>name</code>变量是使用<code>const</code>关键字声明的，所以删除操作不成功：返回<code>false</code>。当我们将<code>age</code>设置为<code>21</code>时，实际上是向全局对象添加了一个名为<code>age</code>的属性。你可以通过这种方式成功删除对象的属性，也可以删除全局对象，因此<code>delete age</code>返回<code>true</code>。</p>
 </li>
 <li><h3 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const numbers &#x3D; [1, 2, 3, 4, 5];
@@ -1696,8 +1706,8 @@ console.log(y);<span aria-hidden="true" class="line-numbers-rows"><span></span><
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: C**
 
-<p><strong>Answer: C</strong></p>
 <p>我们可以通过解构来从数组中解包值或从对象中解包属性。例如：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">[a, b] &#x3D; [1, 2];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -1719,6 +1729,7 @@ console.log(admin);<span aria-hidden="true" class="line-numbers-rows"><span></sp
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 **Answer: B**
 
 <p>使用展开运算符（spread operator）<code>...</code>可以将对象进行合并。它可以创建一个对象的键&#x2F;值对的副本，并将其添加到另一个对象中。在这种情况下，我们创建了<code>user</code>对象的副本，并将其添加到<code>admin</code>对象中。<code>admin</code>对象现在包含了复制的键&#x2F;值对，结果为<code>&#123; admin: true, name: &quot;Lydia&quot;, age: 21 &#125;</code>。</p>
@@ -1786,6 +1797,7 @@ console.log(num2);<span aria-hidden="true" class="line-numbers-rows"><span></spa
 <details><summary><b>Answer</b></summary>
 <p>
 **Answer: A**
+**Answer: A**
 
 <p>一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>num1</code>的值是<code>10</code>，因为<code>increaseNumber</code>函数首先返回<code>num</code>的值，即<code>10</code>，然后才递增<code>num</code>的值。</p>
 <p><code>num2</code>的值是<code>10</code>，因为我们将<code>num1</code>传递给了<code>increasePassedNumber</code>函数。<code>number</code>等于<code>10</code>（即<code>num1</code>的值）。同样，一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>number</code>的值是<code>10</code>，所以<code>num2</code>等于<code>10</code>。</p>
@@ -1810,6 +1822,7 @@ multiply(value);<span aria-hidden="true" class="line-numbers-rows"><span></span>
 <details><summary><b>Answer</b></summary>
 <p>
 **Answer: C**
+**Answer: C**
 
 <p>在ES6中，我们可以使用默认值初始化参数。如果没有将其他值传递给函数，或者参数的值为<code>&quot;undefined&quot;</code>，则参数的值将是默认值。在这种情况下，我们将<code>value</code>对象的属性展开到一个新对象中，因此<code>x</code>具有默认值<code>&#123; number: 10 &#125;</code>。</p>
 <p>默认参数是在调用时计算的！每次调用函数时，都会创建一个新对象。我们前两次调用<code>multiply</code>函数时都没有传递值：<code>x</code>具有默认值<code>&#123; number: 10 &#125;</code>。然后，我们记录该数字的乘积值，即<code>20</code>。</p>
@@ -1826,6 +1839,7 @@ multiply(value);<span aria-hidden="true" class="line-numbers-rows"><span></span>
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: D**
 **Answer: D**
 
 <p><code>reduce</code>方法接收的第一个参数是累加器，本例中为<code>x</code>。第二个参数是当前值，为<code>y</code>。使用<code>reduce</code>方法，我们在数组中的每个元素上执行一个回调函数，最终可能会得到一个单一的值。</p>
@@ -1914,7 +1928,7 @@ console.log(Symbol(&#39;foo&#39;) &#x3D;&#x3D;&#x3D; Symbol(&#39;foo&#39;))<span
 <p>
 
 <p><strong>Answer: A</strong></p>
-<p>每个<code>Symbol</code>都是完全唯一的。传递给<code>Symbol</code>的参数只是给<code>Symbol</code>的一个描述。 <code>Symbol</code>的值不依赖于传递的参数。 当我们测试相等时，我们创建了两个全新的符号：第一个<code>Symbol（&#39;foo&#39;）</code>，第二个<code>Symbol（&#39;foo&#39;）</code>，这两个值是唯一的，彼此不相等，因此返回<code>false</code>。</p>
+<p>每个<code>Symbol</code>都是完全唯一的。传递给<code>Symbol</code>的参数只是给<code>Symbol</code>的一个描述。 <code>Symbol</code>的值不依赖于传递的参数。 当我们测试相等时，我们创建了两个全新的符号：第一个<code>Symbol(&#39;foo&#39;)</code>，第二个<code>Symbol(&#39;foo&#39;)</code>，这两个值是唯一的，彼此不相等，因此返回<code>false</code>。</p>
 </li>
 <li><h3 id="padStart方法"><a href="#padStart方法" class="headerlink" title="padStart方法"></a><code>padStart</code>方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &quot;Lydia Hallie&quot;
 console.log(name.padStart(13))
@@ -1930,7 +1944,7 @@ console.log(name.padStart(2))<span aria-hidden="true" class="line-numbers-rows">
 <p>
 
 <p><strong>Answer: C</strong></p>
-<p>使用<code>padStart</code>方法，我们可以在字符串的开头添加填充。传递给此方法的参数是字符串的总长度（包含填充）。字符串<code>Lydia Hallie</code>的长度为<code>12</code>，因此<code>name.padStart（13）</code>在字符串的开头只会插入 1（<code>13 - 12 = 1</code>）个空格。</p>
+<p>使用<code>padStart</code>方法，我们可以在字符串的开头添加填充。传递给此方法的参数是字符串的<strong>总长度（包含填充）</strong>。字符串<code>Lydia Hallie</code>的长度为<code>12</code>，因此<code>name.padStart（13）</code>在字符串的开头只会插入 1（<code>13 - 12 = 1</code>）个空格。</p>
 <p>如果传递给<code>padStart</code>方法的参数小于字符串的长度，则不会添加填充。</p>
 </li>
 <li><h3 id="字符串连接"><a href="#字符串连接" class="headerlink" title="字符串连接"></a>字符串连接</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(&quot;🥑&quot; + &quot;💻&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -2185,8 +2199,8 @@ console.log(sayHi())<span aria-hidden="true" class="line-numbers-rows"><span></s
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 
-<p><strong>Answer: B</strong></p>
 <p>默认情况下，如果不给函数传参，参数的值将为<code>undefined</code>。 上述情况，我们没有给参数<code>name</code>传值。 <code>name</code>等于<code>undefined</code>，并被打印。</p>
 <p>在 ES6 中，我们可以使用默认参数覆盖此默认的<code>undefined</code>值。 例如：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sayHi(name &#x3D; &#39;Lydia&#39;)&#123;...&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -2283,6 +2297,7 @@ console.log(checkAge(21))<span aria-hidden="true" class="line-numbers-rows"><spa
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
+**Answer: B**
 **Answer: B**
 
 <p>第二个<code>.then</code>中<code>res</code>的值等于前一个<code>.then</code>中的回调函数返回的值。 你可以像这样继续链接<code>.then</code>，将值传递给下一个处理程序。</p>
@@ -2606,7 +2621,7 @@ console.log(one, two, three)<span aria-hidden="true" class="line-numbers-rows"><
 <p>
 
 <p><strong>Answer: B</strong></p>
-<p>使用<code>||</code>运算符，我们可以返回第一个真值。 如果所有值都是假值，则返回最后一个值。</p>
+<p>使用<code>||</code>运算符，我们可以返回第一个真值。 <strong>如果所有值都是假值，则返回最后一个值。</strong></p>
 <p><code>(false || &#123;&#125; || null)</code>：空对象<code>&#123;&#125;</code>是一个真值。 这是第一个（也是唯一的）真值，它将被返回。<code>one</code>等于<code>&#123;&#125;</code>。</p>
 <p><code>(null || false ||&quot;&quot;)</code>：所有值都是假值。 这意味着返回传递的值<code>&quot;&quot;</code>。 <code>two</code>等于<code>&quot;&quot;</code>。</p>
 <p><code>([] || 0 ||&quot;&quot;)</code>：空数组<code>[]</code>是一个真值。 这是第一个返回的真值。 <code>three</code>等于<code>[]</code>。</p>
