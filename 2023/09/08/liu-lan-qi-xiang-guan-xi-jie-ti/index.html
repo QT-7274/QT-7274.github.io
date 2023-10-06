@@ -459,7 +459,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-04
+                    2023-10-06
                 </div>
                 
 
@@ -496,7 +496,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="HTTP-和-HTTPS"><a href="#HTTP-和-HTTPS" class="headerlink" title="HTTP 和 HTTPS"></a>HTTP 和 HTTPS</h2><p><code>http</code>：</p>
+                <h2 id="HTTP-和-HTTPS"><a href="#HTTP-和-HTTPS" class="headerlink" title="HTTP 和 HTTPS"></a>HTTP 和 HTTPS</h2><ol>
+<li><p>介绍</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p><code>http</code>：</p>
 <ul>
 <li>超文本传输协议，是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器端请求和应答的标准（TCP），通过使用URL来定位资源，并使用请求-响应的方式进行通信。HTTP是<strong>无状态</strong>的，每个请求都是独立的，服务器不会保留任何关于客户端的信息。它使用简单的方法（如GET、POST、PUT、DELETE）来操作和传输数据。HTTP是Web应用程序通信的基础，使得我们能够在互联网上浏览和交互。</li>
 </ul>
@@ -504,35 +509,60 @@
 <ul>
 <li>是以安全为目标的 HTTP 通道，简单讲是 HTTP 的安全版，即 HTTP 下加入 SSL 层，HTTPS 的安全基础是 SSL，因此加密的详细内容就需要 SSL。https 协议的主要作用是：建立一个信息安全通道，来确保数组的传输，确保网站的真实性。</li>
 </ul>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ul>
+</li>
+<li><p>区别</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<ul>
 <li>http 传输的数据都是<strong>未加密</strong>的，也就是明文的，网景公司设置了 SSL 协议来对 http 协议传输的数据进行加密处理，简单来说 https 协议是由 http 和 SSL 协议构建的可进行加密传输和身份认证的网络协议，比 http 协议的<strong>安全性更高</strong>。</li>
 <li>https 协议需要 ca 证书，费用较高。</li>
 <li>http 的连接很简单，是无状态的；HTTPS 协议是由 SSL + HTTP 协议构建的可进行加密传输、身份认证的网络协议，比 http 协议安全。</li>
 </ul>
-<h3 id="❗https协议的工作原理"><a href="#❗https协议的工作原理" class="headerlink" title="❗https协议的工作原理"></a>❗<code>https</code>协议的工作原理</h3><p>客户端在使用 HTTPS 方式与 Web 服务器通信时有以下几个步骤：</p>
+</li>
+<li><p>https协议的工作原理</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>客户端在使用 HTTPS 方式与 Web 服务器通信时有以下几个步骤：</p>
 <ol>
-<li>客户使用 https url 访问服务器，则要求 web 服务器建立 ssl 链接。</li>
-<li>web 服务器接收到客户端的请求之后，会将网站的证书（证书中包含了公钥），返回或<br>者说传输给客户端。</li>
-<li>客户端和 web 服务器端开始协商 SSL 链接的安全等级，也就是加密等级。</li>
-<li>客户端浏览器通过双方协商一致的安全等级，建立会话密钥，然后通过网站的公钥来加<br>密会话密钥，并传送给网站。</li>
-<li>web 服务器通过自己的私钥解密出会话密钥。</li>
-<li>web 服务器通过会话密钥加密与客户端之间的通信。</li>
+<li>客户使用 https url 访问服务器，则要求 web 服务器<strong>建立</strong> ssl 链接。</li>
+<li>web 服务器接收到客户端的请求之后，会将网站的证书（证书中包含了公钥），返回或者说<strong>传输</strong>给客户端。</li>
+<li>客户端和 web 服务器端开始<strong>协商</strong> SSL 链接的安全等级，也就是加密等级。</li>
+<li>客户端浏览器通过双方协商一致的安全等级，建立会话密钥，然后通过网站的公钥来<strong>加密</strong>会话密钥，并传送给网站。</li>
+<li>web 服务器通过自己的私钥<strong>解密</strong>出会话密钥。</li>
+<li>web 服务器通过会话密钥加密与客户端之间的<strong>通信</strong>。</li>
 </ol>
-<h3 id="https协议的优点"><a href="#https协议的优点" class="headerlink" title="https协议的优点"></a><code>https</code>协议的优点</h3><p>使用 HTTPS 协议可认证用户和服务器，确保数据发送到正确的客户机和服务器；HTTPS 协议是由 SSL+HTTP 协议构建的可进行加密传输、身份认证的网络协议，要比 http 协议安全，可防止数据在传输过程中不被窃取、改变，确保数据的完整性。HTTPS 是现行架构下最安全的解决方案，虽然不是绝对安全，但它大幅增加了中间人攻击的成本。</p>
-<h3 id="https协议的缺点"><a href="#https协议的缺点" class="headerlink" title="https协议的缺点"></a><code>https</code>协议的缺点</h3><ul>
+</li>
+<li><p>https协议的优点</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>使用 HTTPS 协议可认证用户和服务器，确保数据发送到正确的客户机和服务器；HTTPS 协议是由 SSL+HTTP 协议构建的可进行加密传输、身份认证的网络协议，要比 http 协议安全，可防止数据在传输过程中不被窃取、改变，确保数据的完整性。HTTPS 是现行架构下最安全的解决方案，虽然不是绝对安全，但它大幅增加了中间人攻击的成本。</p>
+</li>
+<li><p>https协议的缺点</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<ul>
 <li>https <strong>握手阶段比较费时</strong>，会使页面加载时间延长 50%，增加 10%~20%的耗电。</li>
 <li>https <strong>缓存不如 http 高效</strong>，会增加数据开销。</li>
 <li>SSL 证书也需要钱，功能越强大的证书费用越高。</li>
 <li>SSL 证书需要绑定 IP，不能再同一个 ip 上绑定多个域名，ipv4 资源支持不了这种消耗。</li>
 </ul>
-<h3 id="http-1-1-较-http-1-0的新增内容"><a href="#http-1-1-较-http-1-0的新增内容" class="headerlink" title="http  1.1 较  http  1.0的新增内容"></a><code>http</code>  1.1 较  <code>http</code>  1.0的新增内容</h3><ol>
+</li>
+<li><p>三个版本http的不同点</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<h5 id="http-1-1-较-http-1-0的新增内容"><a href="#http-1-1-较-http-1-0的新增内容" class="headerlink" title="http  1.1 较  http  1.0的新增内容"></a><code>http</code>  1.1 较  <code>http</code>  1.0的新增内容</h5><ol>
 <li><strong>持久连接</strong>（Persistent Connections）：HTTP 1.1引入了持久连接，也称为连接复用。这意味着在<strong>单个TCP连接上可以发送多个HTTP请求和响应，而不需要为每个请求和响应都建立新的连接</strong>。这样可以减少连接建立和关闭的开销，提高性能。   </li>
 <li><strong>流水线</strong>（Pipelining）：HTTP 1.1支持请求的流水线处理，即在<strong>一个连接上可以同时发送多个请求，而不需要等待每个请求的响应。</strong>这样可以减少请求的延迟，提高效率。   (注意：⚠️服务器<strong>必须按照客户端请求的先后顺序</strong>依次回送相应的结果，以保证客户端能够区分出每次请求的响应内容。)</li>
 <li><strong>分块传输编码</strong>（Chunked Transfer Encoding）：HTTP 1.1引入了分块传输编码，<strong>允许服务器将响应分成多个块进行传输</strong>。这样可以在服务器生成响应的过程中逐步发送数据，而不需要等待整个响应生成完毕。这对于大型响应或动态生成的响应非常有用。   </li>
 <li><strong>主机名的支持</strong>（Host Header）：HTTP 1.1要求请求头中必须包含Host字段，用于指定请求的目标主机。这使得在一台服务器上可以托管多个域名的网站成为可能。  </li>
 <li><strong>缓存控制</strong>（Cache Control）：HTTP 1.1引入了更精细的缓存控制机制，允许服务器和客户端更好地控制缓存的行为，包括缓存的过期时间、验证等。</li>
 </ol>
-<h3 id="http-2-0-较-http-1-1的新增内容"><a href="#http-2-0-较-http-1-1的新增内容" class="headerlink" title="http 2.0 较  http  1.1的新增内容"></a><code>http</code> 2.0 较  <code>http</code>  1.1的新增内容</h3><ol>
+<h5 id="http-2-0-较-http-1-1的新增内容"><a href="#http-2-0-较-http-1-1的新增内容" class="headerlink" title="http 2.0 较  http  1.1的新增内容"></a><code>http</code> 2.0 较  <code>http</code>  1.1的新增内容</h5><ol>
 <li><strong>多路复用</strong>（Multiplexing）<ul>
 <li>HTTP&#x2F;1.1： 在HTTP&#x2F;1.1中，每个请求都需要按顺序发送和接收，如果一个资源加载时间较长，它会阻塞后续请求，导致性能瓶颈。</li>
 <li>HTTP&#x2F;2： HTTP&#x2F;2引入了多路复用，允许多个请求和响应同时在单个TCP连接上传输。这意味着浏览器可以同时获取多个资源，显著提高了页面加载速度。</li>
@@ -559,7 +589,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="http-3-0-较-http-2-0的新增内容"><a href="#http-3-0-较-http-2-0的新增内容" class="headerlink" title="http 3.0 较  http 2.0的新增内容"></a><code>http</code> 3.0 较  <code>http</code> 2.0的新增内容</h3><p>Google搞了一个基于UDP协议的QUIC协议，并且使用在了HTTP&#x2F;3上， HTTP&#x2F;3之前的名称为HTTP-over-QUIC。</p>
+<h5 id="http-3-0-较-http-2-0的新增内容"><a href="#http-3-0-较-http-2-0的新增内容" class="headerlink" title="http 3.0 较  http 2.0的新增内容"></a><code>http</code> 3.0 较  <code>http</code> 2.0的新增内容</h5><p>Google搞了一个基于UDP协议的QUIC协议，并且使用在了HTTP&#x2F;3上， HTTP&#x2F;3之前的名称为HTTP-over-QUIC。</p>
 <ol>
 <li><p><strong>多路复用</strong></p>
 <p>QUIC基于UDP，一个连接上的多个stream之间没有依赖，即使丢包，只需要重发丢失的包即可，不需要重传整个连接。</p>
@@ -579,7 +609,7 @@
 <p>我总共发送三个包，协议会算出这个三个包的异或值并单独发出一个校验包，也就是总共发出了四个包。<br>当其中出现了非校验包丢失的情况，可以通过另外三个包计算出丢失的数据包的内容。<br>当然这种技术只能使用在丢失一个包的情况下，如果出现丢失多个包，就不能使用纠错机制了，只能使用重传的方式了。</p>
 </li>
 </ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="HTTP-1-0"><a href="#HTTP-1-0" class="headerlink" title="HTTP 1.0"></a>HTTP 1.0</h4><ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h4 id="HTTP-1-0"><a href="#HTTP-1-0" class="headerlink" title="HTTP 1.0"></a>HTTP 1.0</h4><ul>
 <li>无状态，无连接</li>
 <li>短连接：每次发送请求都要重新建立tcp请求，即三次握手，非常浪费性能</li>
 <li>无host头域，也就是http请求头里的host，</li>
@@ -606,8 +636,20 @@
 <li>连接迁移，不再用tcp四元组确定一个连接，而是用一个64位随机数来确定这个连接</li>
 <li>更合适的流量控制</li>
 </ul>
-<h4 id="cache-control-的值有哪些"><a href="#cache-control-的值有哪些" class="headerlink" title="cache-control 的值有哪些"></a>cache-control 的值有哪些</h4><p>cache-control 是一个通用消息头字段被用于 HTTP 请求和响应中，通过指定指令来实现缓存机制，这个缓存指令是单向的，常见的取值有 private、no-cache、max-age、must-revalidate 等，默认为 private。</p>
+</li>
+<li><p>cache-control 的值有哪些</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>cache-control 是一个通用消息头字段被用于 HTTP 请求和响应中，通过指定指令来实现缓存机制，这个缓存指令是单向的，常见的取值有 private、no-cache、max-age、must-revalidate 等，默认为 private。</p>
+</li>
+</ol>
 <h2 id="❗TCP和UDP的区别"><a href="#❗TCP和UDP的区别" class="headerlink" title="❗TCP和UDP的区别"></a>❗TCP和UDP的区别</h2><ul>
+<li><p>区别</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<ul>
 <li><p>TCP 是面向连接的，UDP 是无连接的即发送数据前不需要先建立链接。</p>
 </li>
 <li><p>TCP 提供可靠的服务。也就是说，通过 TCP 连接传送的数据，无差错，不丢失，<br>不重复，且按序到达；</p>
@@ -620,7 +662,14 @@
 <li><p>TCP 的首部较大为 20 字节，而 UDP 只有 8 字节。</p>
 </li>
 </ul>
-<h2 id="❗常见状态码"><a href="#❗常见状态码" class="headerlink" title="❗常见状态码"></a>❗常见状态码</h2><table>
+</li>
+</ul>
+<h2 id="❗常见状态码"><a href="#❗常见状态码" class="headerlink" title="❗常见状态码"></a>❗常见状态码</h2><ul>
+<li><p>状态码</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<table>
 <thead>
 <tr>
 <th>状态码</th>
@@ -659,7 +708,13 @@
 <td>只需要传输很少的数据量来做文件的校验，如果文件没有修改过，则不需要返回全量的数据。</td>
 </tr>
 </tbody></table>
-<h2 id="❗Cookie、sessionStorage、localStorage-的区别"><a href="#❗Cookie、sessionStorage、localStorage-的区别" class="headerlink" title="❗Cookie、sessionStorage、localStorage 的区别"></a>❗Cookie、sessionStorage、localStorage 的区别</h2><p>共同点：都是保存在浏览器端，并且是同源的<br>Cookie：</p>
+</li>
+</ul>
+<h2 id="❗Cookie、sessionStorage、localStorage-的区别"><a href="#❗Cookie、sessionStorage、localStorage-的区别" class="headerlink" title="❗Cookie、sessionStorage、localStorage 的区别"></a>❗Cookie、sessionStorage、localStorage 的区别</h2><ul>
+<li><p>Cookie</p>
+<details><summary><b>答案</b></summary>
+<p>
+
 <ul>
 <li><p>cookie 数据<strong>始终在同源的 http 请求中携带</strong>（即使不需要），即 cookie 在浏览器和服务器间来回传递。而 sessionStorage 和 localStorage 不会自动把数据发给服务器，仅在本地保存。</p>
 </li>
@@ -676,8 +731,17 @@
 </ul>
 </li>
 </ul>
-<p>sessionStorage：仅在当前<strong>浏览器窗口关闭前有效</strong>，自然也就不可能持久保持。</p>
-<p>localStorage：</p>
+</li>
+<li><p>sessionStorage</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>sessionStorage：仅在<strong>当前浏览器窗口关闭前有效</strong>，自然也就不可能持久保持。</p>
+</li>
+<li><p>localStorage</p>
+<details><summary><b>答案</b></summary>
+<p>
+
 <ul>
 <li>始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据。</li>
 <li>localStorage 在所有同源窗口中都是共享的。</li>
@@ -688,15 +752,29 @@
 <li>无法像<code>Cookie</code>一样设置过期时间</li>
 <li>只能存入字符串，无法直接存对象</li>
 </ul>
-<h3 id="❗Cookie-和-Session-的区别"><a href="#❗Cookie-和-Session-的区别" class="headerlink" title="❗Cookie 和 Session 的区别"></a>❗Cookie 和 Session 的区别</h3><ol>
+</li>
+</ul>
+<h2 id="❗Cookie-和-Session-的区别"><a href="#❗Cookie-和-Session-的区别" class="headerlink" title="❗Cookie 和 Session 的区别"></a>❗Cookie 和 Session 的区别</h2><ul>
+<li><p>区别</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<ol>
 <li>存储位置：Cookie是在客户端（浏览器）中存储的小型文本文件，而 Session 是在服务器端存储的数据结构。   </li>
-<li>数据存储：Cookie可以存储在客户端的浏览器中，以便在多个页面之间共享数据。而Session存储在服务器端，每个用户都有自己的Session对象，用于存储用户特定的数据。   </li>
-<li>安全性：由于Cookie存储在客户端，所以<strong>可能会受到安全性的威胁</strong>。恶意用户可以篡改Cookie的内容或进行Cookie劫持。而Session存储在服务器端，相对来说更安全。   </li>
-<li>容量限制：Cookie的大小通常受到限制，一般为4KB左右。而Session的容量限制相对较大，取决于服务器的配置。   </li>
-<li>生命周期：Cookie可以设置过期时间，可以在浏览器关闭后仍然存在。而<strong>Session通常在用户关闭浏览器或一段时间不活动后会自动过期</strong>。   </li>
+<li>数据存储：Cookie可以存储在客户端的浏览器中，以便在多个页面之间共享数据。而Session存储在服务器端，每个用户都有自己的Session对象，用于存储用户特定的数据</li>
+<li>安全性：由于Cookie存储在客户端，所以<strong>可能会受到安全性的威胁</strong>。恶意用户可以篡改Cookie的内容或进行Cookie劫持。而Session存储在服务器端，相对来说更安全。</li>
+<li>容量限制：Cookie的大小通常受到限制，一般为4KB左右。而Session的容量限制相对较大，取决于服务器的配置。</li>
+<li>生命周期：Cookie可以设置过期时间，可以在浏览器关闭后仍然存在。而<strong>Session通常在用户关闭浏览器或一段时间不活动后会自动过期</strong>。 </li>
 <li>跨域支持：Cookie可以设置为跨域访问，可以在不同域之间共享数据。而Session通常与特定的域相关联，不容易跨域访问。</li>
 </ol>
-<h2 id="❗在地址栏里输入一个-URL-到这个页面呈现出来，中间会发生什么？"><a href="#❗在地址栏里输入一个-URL-到这个页面呈现出来，中间会发生什么？" class="headerlink" title="❗在地址栏里输入一个 URL,到这个页面呈现出来，中间会发生什么？"></a>❗在地址栏里输入一个 URL,到这个页面呈现出来，中间会发生什么？</h2><ol>
+</li>
+</ul>
+<h2 id="❗在地址栏里输入一个-URL-到这个页面呈现出来，中间会发生什么？"><a href="#❗在地址栏里输入一个-URL-到这个页面呈现出来，中间会发生什么？" class="headerlink" title="❗在地址栏里输入一个 URL,到这个页面呈现出来，中间会发生什么？"></a>❗在地址栏里输入一个 URL,到这个页面呈现出来，中间会发生什么？</h2><ul>
+<li><p>发生过程</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<ol>
 <li><p>输入 url 后，首先需要找到这个 url 域名的服务器 ip，为了寻找这个 ip，浏览器<strong>首先会寻找缓存</strong>，查看缓存中是否有记录，缓存的查找记录为：浏览器缓存 🔜 系统缓存 🔜 路由器缓存，如果没有：</p>
 <ul>
 <li>查找系统的 hosts 文件中是否有记录，如果没有：<ul>
@@ -741,7 +819,14 @@
 <li>并行下载页面中的资源，根据缓存策略决定是否使用本地缓存。  </li>
 <li>最后将页面绘制并呈现给用户。</li>
 </ol>
+</li>
+</ul>
 <h2 id="❗GET-和-POST-的区别"><a href="#❗GET-和-POST-的区别" class="headerlink" title="❗GET 和 POST 的区别"></a>❗GET 和 POST 的区别</h2><ul>
+<li><p>区别</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<ul>
 <li>get 参数通过 url 传递，post 放在 request body 中。</li>
 <li>get 请求在 url 中传递的<strong>参数是有长度限制的</strong>，而 post 没有。</li>
 <li>get 比 post 更不安全，因为参数直接暴露在 url 中，所以不能用来传递敏感信息。</li>
@@ -753,28 +838,66 @@
 <li>对于 GET 方式的请求，浏览器会把 http header 和 data 一并发送出去，服务器响应 200<br>（返回数据）；</li>
 <li>对于 POST，浏览器先发送 header，服务器响应 100 continue，浏览器再发送 data，服<br>务器响应 200 ok（返回数据）。</li>
 </ul>
-<h2 id="❗csrf-和-xss-的网络攻击及防范"><a href="#❗csrf-和-xss-的网络攻击及防范" class="headerlink" title="❗csrf 和 xss 的网络攻击及防范"></a>❗csrf 和 xss 的网络攻击及防范</h2><h3 id="描述一下-XSS-和-CRSF-攻击？防御方法？"><a href="#描述一下-XSS-和-CRSF-攻击？防御方法？" class="headerlink" title="描述一下 XSS 和 CRSF 攻击？防御方法？"></a>描述一下 XSS 和 CRSF 攻击？防御方法？</h3><p>XSS, 即为（Cross Site Scripting）, 中文名为<strong>跨站脚本</strong>，是发生在目标用户的浏览器层面上的，当渲染 DOM 树的过程成发生了不在预期内执行的 JS 代码时，就发生了 XSS 攻击。</p>
+</li>
+</ul>
+<h2 id="❗csrf-和-xss-的网络攻击及防范"><a href="#❗csrf-和-xss-的网络攻击及防范" class="headerlink" title="❗csrf 和 xss 的网络攻击及防范"></a>❗csrf 和 xss 的网络攻击及防范</h2><h3 id="描述一下-XSS-和-CRSF-攻击？防御方法？"><a href="#描述一下-XSS-和-CRSF-攻击？防御方法？" class="headerlink" title="描述一下 XSS 和 CRSF 攻击？防御方法？"></a>描述一下 XSS 和 CRSF 攻击？防御方法？</h3><ul>
+<li><p>描述</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>XSS, 即为（Cross Site Scripting）, 中文名为<strong>跨站脚本</strong>，是发生在目标用户的浏览器层面上的，当渲染 DOM 树的过程成发生了不在预期内执行的 JS 代码时，就发生了 XSS 攻击。</p>
 <p>大多数 XSS 攻击的主要方式是嵌入一段远程或者第三方域上的 JS 代码。实际上是在<strong>目标网站的作用域</strong>下执行了这段 JS 代码。</p>
 <p>CSRF（Cross Site Request Forgery，<strong>跨站请求伪造</strong>），字面理解意思就是在别的站点伪造了一个请求。</p>
 <p>专业术语来说就是在受害者访问一个网站时，其 Cookie 还没有过期的情况下，攻击者伪造一个链接地址发送受害者并欺骗让其点击，从而形成 CSRF 攻击。</p>
 <p>XSS 防御的总体思路是：<strong>对输入(和 URL 参数)进行过滤（cookie 设置 httpOnly 属性），对输出进行编码</strong>。也就是对提交的所有内容进行过滤，对 url 中的参数进行过滤，过滤掉会导致脚本执行的相关内容；然后对动态输出到页面的内容进行 html 编码，<strong>使脚本无法在浏览器中执行</strong>。虽然对输入过滤可以被绕过，但是也还是会拦截很大一部分的 XSS 攻击。</p>
+<blockquote>
+<p>需要在 HTTP 头部配上，set-cookie：<br>httponly-这个属性可以防止 XSS,它会禁止 javascript 脚本来访问 cookie。<br>secure - 这个属性告诉浏览器仅在请求为 https 的时候发送 cookie。<br>结果应该是这样的：<code>Set-Cookie=&lt;cookie-value&gt;.....</code></p>
+</blockquote>
 <p>CSRF 防御的总体思路是：CSRF令牌（CSRF Token）和同源检测。CSRF令牌是一种随机生成的令牌，它会嵌入到页面中的表单或请求中，并在后台进行验证，以确保请求是由合法的用户发起的。同源检测则是通过检查请求的来源是否与目标站点相同来防止跨站请求。</p>
-<h2 id="❗WebSocket-的实现和应用"><a href="#❗WebSocket-的实现和应用" class="headerlink" title="❗WebSocket 的实现和应用"></a>❗WebSocket 的实现和应用</h2><h3 id="什么是-WebSocket"><a href="#什么是-WebSocket" class="headerlink" title="什么是 WebSocket?"></a>什么是 WebSocket?</h3><p>WebSocket 是一种基于 TCP 协议的应用层协议，它允许客户端和服务器之间进行全双工通信，从而实现实时数据传输。 </p>
+</li>
+</ul>
+<h2 id="❗WebSocket-的实现和应用"><a href="#❗WebSocket-的实现和应用" class="headerlink" title="❗WebSocket 的实现和应用"></a>❗WebSocket 的实现和应用</h2><h3 id="什么是-WebSocket"><a href="#什么是-WebSocket" class="headerlink" title="什么是 WebSocket?"></a>什么是 WebSocket?</h3><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>WebSocket 是一种基于 TCP 协议的应用层协议，它允许客户端和服务器之间进行全双工通信，从而实现实时数据传输。 </p>
 <p>WebSocket 是 HTML5 中的协议，支持持久连续，http 协议不支持持久性连接。Http1.0 和 HTTP1.1 都不支持持久性的链接，HTTP1.1 中的 keep-alive，将多个 http 请求合并为 1 个。</p>
 <blockquote>
 <p>持久连接（Persistent Connection），也称为HTTP Keep-Alive，是指在HTTP协议中，客户端和服务器之间的TCP连接在完成一次请求和响应后，保持打开状态，以便在同一连接上进行多次请求和响应。</p>
 <p>传统的HTTP协议中，每个请求都需要建立一个新的TCP连接，请求完成后立即关闭连接，这样会导致频繁的连接和断开，增加了网络开销和延迟。 </p>
 <p>需要注意的是，持久连接并不是永久保持连接的意思，它仅在一段时间内保持连接打开，超过一定时间或达到一定条件后，连接仍然会被关闭。</p>
 </blockquote>
-<h3 id="WebSocket-是什么样的协议，具体有什么优点？"><a href="#WebSocket-是什么样的协议，具体有什么优点？" class="headerlink" title="WebSocket 是什么样的协议，具体有什么优点？"></a>WebSocket 是什么样的协议，具体有什么优点？</h3><p>HTTP 的生命周期通过 Request 来界定，也就是 Request 一个 Response，那么在 Http1.0协议中，这次 Http 请求就结束了。尽管在 HTTP 1.1中使用了持久化连接，但是在 Http 中一个 Request 只能对应有一个 Response，而且这个 Response 是被动的，不能主动发起。</p>
+</li>
+</ul>
+<h3 id="WebSocket-是什么样的协议，具体有什么优点？"><a href="#WebSocket-是什么样的协议，具体有什么优点？" class="headerlink" title="WebSocket 是什么样的协议，具体有什么优点？"></a>WebSocket 是什么样的协议，具体有什么优点？</h3><ul>
+<li><p>优点</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>HTTP 的生命周期通过 Request 来界定，也就是 Request 一个 Response，那么在 Http1.0协议中，这次 Http 请求就结束了。尽管在 HTTP 1.1中使用了持久化连接，但是在 Http 中一个 Request 只能对应有一个 Response，而且这个 Response 是被动的，不能主动发起。</p>
 <ol>
 <li>实时性：WebSocket 可以在客户端和服务器之间建立持久连接，实时传输数据，避免了 HTTP 请求和响应的开销。   </li>
 <li>可靠性：WebSocket 协议可以<strong>自动处理</strong>连接的断开和重连，保证了数据传输的可靠性。   </li>
 <li>节省带宽：WebSocket 协议的<strong>数据帧头部相对较小</strong>，可以节省带宽，降低网络延迟。   </li>
 <li>跨域支持：WebSocket 协议<strong>支持跨域通信</strong>，可以在不同的域名之间进行实时数据传输。</li>
 </ol>
-<h2 id="fetch-发送-2-次请求的原因"><a href="#fetch-发送-2-次请求的原因" class="headerlink" title="fetch 发送 2 次请求的原因"></a>fetch 发送 2 次请求的原因</h2><p>fetch 发送 post 请求的时候，总是发送 2 次，第一次状态码是 204，第二次才成功？原因很简单，因为你用 fetch 的 post 请求的时候，导致 fetch 第一次发送了一个 Options 请求（预检请求），<strong>以确定服务器是否允许实际请求的跨域访问</strong>，如果服务器支持，则在第二次中发送真正的请求。</p>
-<h2 id="一个图片-url-访问后直接下载怎样实现？"><a href="#一个图片-url-访问后直接下载怎样实现？" class="headerlink" title="一个图片 url 访问后直接下载怎样实现？"></a>一个图片 url 访问后直接下载怎样实现？</h2><p>请求的返回头里面，用于浏览器解析的重要参数就是 OSS 的 API 文档里面的返回 http 头，决定用户下载行为的参数。<br>下载的情况下：</p>
+</li>
+</ul>
+<h2 id="fetch-发送-2-次请求的原因"><a href="#fetch-发送-2-次请求的原因" class="headerlink" title="fetch 发送 2 次请求的原因"></a>fetch 发送 2 次请求的原因</h2><ul>
+<li><p>原因</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>fetch 发送 post 请求的时候，总是发送 2 次，第一次状态码是 204，第二次才成功？原因很简单，因为你用 fetch 的 post 请求的时候，导致 fetch 第一次发送了一个 Options 请求（预检请求），<strong>以确定服务器是否允许实际请求的跨域访问</strong>，如果服务器支持，则在第二次中发送真正的请求。</p>
+</li>
+</ul>
+<h2 id="一个图片-url-访问后直接下载怎样实现？"><a href="#一个图片-url-访问后直接下载怎样实现？" class="headerlink" title="一个图片 url 访问后直接下载怎样实现？"></a>一个图片 url 访问后直接下载怎样实现？</h2><ul>
+<li><p>实现</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>请求的返回头里面，用于浏览器解析的重要参数就是 OSS 的 API 文档里面的返回 http 头，决定用户下载行为的参数。<br>下载的情况下：</p>
 <ol>
 <li>x-oss-object-type:<br>Normal</li>
 <li>x-oss-request-id:<br>598D5ED34F29D01FE2925F41</li>
@@ -782,14 +905,28 @@
 <li>Content-Disposition：该参数指定了响应的处理方式，可以设置为”attachment”，表示将文件作为附件下载。示例：Content-Disposition: attachment; filename&#x3D;”image.jpg”   </li>
 <li>Content-Type：该参数指定了响应的内容类型，可以根据具体的文件类型设置对应的MIME类型。示例：Content-Type: image&#x2F;jpeg</li>
 </ol>
-<h2 id="说一下-web-Quality（无障碍）"><a href="#说一下-web-Quality（无障碍）" class="headerlink" title="说一下 web Quality（无障碍）"></a>说一下 web Quality（无障碍）</h2><p>能够被残障人士使用的网站才能称得上一个易用的（易访问的）网站。<br>残障人士指的是那些带有残疾或者身体不健康的用户。<br>使用 alt 属性：<br><code>&lt;img src=&quot;person.jpg&quot; alt=&quot;this is a person&quot;/&gt;</code><br>有时候浏览器会无法显示图像。具体的原因有：</p>
+</li>
+</ul>
+<h2 id="说一下-web-Quality（无障碍）"><a href="#说一下-web-Quality（无障碍）" class="headerlink" title="说一下 web Quality（无障碍）"></a>说一下 web Quality（无障碍）</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>能够被残障人士使用的网站才能称得上一个易用的（易访问的）网站。<br>残障人士指的是那些带有残疾或者身体不健康的用户。<br>使用 alt 属性：<br><code>&lt;img src=&quot;person.jpg&quot; alt=&quot;this is a person&quot;/&gt;</code><br>有时候浏览器会无法显示图像。具体的原因有：</p>
 <ul>
 <li>用户关闭了图像显示</li>
 <li>浏览器是不支持图形显示的迷你浏览器</li>
 <li>浏览器是语音浏览器（供盲人和弱视人群使用）</li>
 <li>如果您使用了 alt 属性，那么浏览器至少可以显示或读出有关图像的描述。</li>
 </ul>
-<h2 id="几个很实用的-BOM-属性对象方法"><a href="#几个很实用的-BOM-属性对象方法" class="headerlink" title="几个很实用的 BOM 属性对象方法?"></a>几个很实用的 BOM 属性对象方法?</h2><p>BOM (Browser Object Model) 是一组用于操作浏览器窗口的属性、方法和事件的对象集合。以下是几个常用的 BOM 属性和方法：</p>
+</li>
+</ul>
+<h2 id="几个很实用的-BOM-属性对象方法"><a href="#几个很实用的-BOM-属性对象方法" class="headerlink" title="几个很实用的 BOM 属性对象方法?"></a>几个很实用的 BOM 属性对象方法?</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>BOM (Browser Object Model) 是一组用于操作浏览器窗口的属性、方法和事件的对象集合。以下是几个常用的 BOM 属性和方法：</p>
 <ol>
 <li>window 对象：<ul>
 <li><code>window.location</code> ：获取或设置当前窗口的 URL。</li>
@@ -827,27 +964,88 @@
 </ul>
 </li>
 </ol>
-<h2 id="说一下-HTML5-drag-api"><a href="#说一下-HTML5-drag-api" class="headerlink" title="说一下 HTML5 drag api"></a>说一下 HTML5 drag api</h2><p>dragstart：事件主体是被拖放元素，在开始拖放被拖放元素时触发。<br>darg：事件主体是被拖放元素，在正在拖放被拖放元素时触发。<br>dragenter：事件主体是目标元素，在被拖放元素进入某元素时触发。<br>dragover：事件主体是目标元素，在被拖放在某元素内移动时触发。<br>dragleave：事件主体是目标元素，在被拖放元素移出目标元素是触发。<br>drop：事件主体是目标元素，在目标元素完全接受被拖放元素时触发。<br>dragend：事件主体是被拖放元素，在整个拖放操作结束时触发。</p>
-<h2 id="说一下-http2-0"><a href="#说一下-http2-0" class="headerlink" title="说一下 http2.0"></a>说一下 http2.0</h2><h2 id="说一下-web-worker"><a href="#说一下-web-worker" class="headerlink" title="说一下 web worker"></a>说一下 web worker</h2><p>在 HTML 页面中，如果在执行脚本时，页面的状态是不可响应的，直到脚本执行完成后，页面才变成可响应。web worker 是运行在后台的 js，独立于其他脚本，不会影响页面你的性能。并且通过 postMessage 将结果回传到主线程。这样在进行复杂操作的时候，就不会阻塞主线程了。<br>如何创建 web worker：<br>检测浏览器对于 web worker 的支持性<br>创建 web worker 文件（js，回传函数等）<br>创建 web worker 对象</p>
-<h2 id="对-HTML-语义化标签的理解"><a href="#对-HTML-语义化标签的理解" class="headerlink" title="对 HTML 语义化标签的理解"></a>对 HTML 语义化标签的理解</h2><p>HTML5 语义化标签是指正确的标签包含了正确的内容，结构良好，便于阅读，比如 nav 表示导航条，类似的还有 article、header、footer 等等标签。</p>
-<h2 id="iframe-是什么？有什么缺点？"><a href="#iframe-是什么？有什么缺点？" class="headerlink" title="iframe 是什么？有什么缺点？"></a>iframe 是什么？有什么缺点？</h2><p>定义：iframe 元素会创建包含另一个文档的内联框架<br>提示：可以将提示文字放在<iframe></iframe>之间，来提示某些不支持 iframe 的浏览器<br>缺点：</p>
+</li>
+</ul>
+<h2 id="说一下-HTML5-drag-api"><a href="#说一下-HTML5-drag-api" class="headerlink" title="说一下 HTML5 drag api"></a>说一下 HTML5 drag api</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>dragstart：事件主体是被拖放元素，在开始拖放被拖放元素时触发。<br>darg：事件主体是被拖放元素，在正在拖放被拖放元素时触发。<br>dragenter：事件主体是目标元素，在被拖放元素进入某元素时触发。<br>dragover：事件主体是目标元素，在被拖放在某元素内移动时触发。<br>dragleave：事件主体是目标元素，在被拖放元素移出目标元素是触发。<br>drop：事件主体是目标元素，在目标元素完全接受被拖放元素时触发。<br>dragend：事件主体是被拖放元素，在整个拖放操作结束时触发。</p>
+</li>
+</ul>
+<h2 id="说一下-web-worker"><a href="#说一下-web-worker" class="headerlink" title="说一下 web worker"></a>说一下 web worker</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>在 HTML 页面中，如果在执行脚本时，页面的状态是不可响应的，直到脚本执行完成后，页面才变成可响应。web worker 是运行在后台的 js，<strong>独立于其他脚本，不会影响页面你的性能</strong>。并且通过 postMessage 将结果回传到主线程。这样在进行复杂操作的时候，就不会阻塞主线程了。<br>如何创建 web worker：<br>检测浏览器对于 web worker 的支持性<br>创建 web worker 文件（js，回传函数等）<br>创建 web worker 对象</p>
+</li>
+</ul>
+<h2 id="对-HTML-语义化标签的理解"><a href="#对-HTML-语义化标签的理解" class="headerlink" title="对 HTML 语义化标签的理解"></a>对 HTML 语义化标签的理解</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>HTML5 语义化标签是指正确的标签包含了正确的内容，结构良好，便于阅读，比如 nav 表示导航条，类似的还有 article、header、footer 等等标签。</p>
+</li>
+</ul>
+<h2 id="iframe-是什么？有什么缺点？"><a href="#iframe-是什么？有什么缺点？" class="headerlink" title="iframe 是什么？有什么缺点？"></a>iframe 是什么？有什么缺点？</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>定义：iframe 元素会创建包含另一个文档的内联框架<br>提示：可以将提示文字放在<iframe></iframe>之间，来提示某些不支持 iframe 的浏览器</p>
+</li>
+<li><p>缺点</p>
+<details><summary><b>答案</b></summary>
+<p>
+
 <ul>
 <li>安全性问题：由于iframe可以加载其他网页，存在安全风险。恶意网站可以利用iframe来进行钓鱼攻击、点击劫持等。   </li>
 <li>阻塞页面加载：当页面中包含大量的iframe时，每个iframe都需要进行独立的请求和加载，这可能会导致页面加载速度变慢。   </li>
-<li>SEO问题：搜索引擎可能无法正确解析iframe中的内容，从而影响网页的搜索引擎优化。   </li>
+<li><strong>SEO问题</strong>：搜索引擎可能无法正确解析iframe中的内容，从而影响网页的搜索引擎优化。   </li>
 <li>跨域限制：由于浏览器的同源策略，iframe默认会受到<strong>跨域限制</strong>。这意味着，如果嵌入的网页与当前页面不在同一个域下，那么在访问嵌入的内容时可能会受到限制。</li>
 </ul>
-<h2 id="Doctype-作用-严格模式与混杂模式如何区分？它们有何意义"><a href="#Doctype-作用-严格模式与混杂模式如何区分？它们有何意义" class="headerlink" title="Doctype 作用?严格模式与混杂模式如何区分？它们有何意义?"></a>Doctype 作用?严格模式与混杂模式如何区分？它们有何意义?</h2><p>Doctype 声明于文档最前面，告诉浏览器以何种方式来渲染页面，这里有两种模式，严格模式和混杂模式。<br>严格模式的排版和 JavaScript 运作模式是以该浏览器支持的最高标准运行。<br>混杂模式，向后兼容，模拟老式浏览器，防止浏览器无法兼容页面。</p>
-<h2 id="Cookie-如何防范-XSS-攻击"><a href="#Cookie-如何防范-XSS-攻击" class="headerlink" title="Cookie 如何防范 XSS 攻击"></a>Cookie 如何防范 XSS 攻击</h2><p>XSS（跨站脚本攻击）是指攻击者在返回的 HTML 中嵌入 javascript 脚本，为了减轻这些<br>攻击，需要在 HTTP 头部配上，set-cookie：<br>httponly-这个属性可以防止 XSS,它会禁止 javascript 脚本来访问 cookie。<br>secure - 这个属性告诉浏览器仅在请求为 https 的时候发送 cookie。<br>结果应该是这样的：<code>Set-Cookie=&lt;cookie-value&gt;.....</code></p>
+</li>
+</ul>
+<h2 id="Doctype-作用-严格模式与混杂模式如何区分？它们有何意义"><a href="#Doctype-作用-严格模式与混杂模式如何区分？它们有何意义" class="headerlink" title="Doctype 作用?严格模式与混杂模式如何区分？它们有何意义?"></a>Doctype 作用?严格模式与混杂模式如何区分？它们有何意义?</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>Doctype 声明于文档最前面，告诉浏览器以何种方式来渲染页面，这里有两种模式，严格模式和混杂模式。<br>严格模式的排版和 JavaScript 运作模式是以该浏览器支持的最高标准运行。<br>混杂模式，向后兼容，模拟老式浏览器，防止浏览器无法兼容页面。</p>
+</li>
+</ul>
 <h2 id="一句话概括-RESTFUL"><a href="#一句话概括-RESTFUL" class="headerlink" title="一句话概括 RESTFUL"></a>一句话概括 RESTFUL</h2><p>就是用 URL 定位资源，用 HTTP 的状态码来描述操作。</p>
 <h2 id="讲讲-viewport-和移动端布局"><a href="#讲讲-viewport-和移动端布局" class="headerlink" title="讲讲 viewport 和移动端布局"></a>讲讲 viewport 和移动端布局</h2><p><a target="_blank" rel="noopener" href="https://github.com/forthealllight/blog/issues/13">https://github.com/forthealllight/blog/issues/13</a></p>
-<h2 id="addEventListener-参数"><a href="#addEventListener-参数" class="headerlink" title="addEventListener 参数"></a>addEventListener 参数</h2><p><code>addEventListener(event, function, useCapture)</code></p>
+<h2 id="addEventListener-参数"><a href="#addEventListener-参数" class="headerlink" title="addEventListener 参数"></a>addEventListener 参数</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p><code>addEventListener(event, function, useCapture)</code></p>
 <p>其中，<code>event</code> 指定事件名；<code>function</code> 指定要事件触发时执行的函数；<code>useCapture</code> 指定事件是否在捕获或冒泡阶段执行。</p>
+</li>
+</ul>
 <h2 id="HTTP-支持的方法"><a href="#HTTP-支持的方法" class="headerlink" title="HTTP 支持的方法"></a>HTTP 支持的方法</h2><p>GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE, CONNECT</p>
-<h2 id="浏览器在生成页面的时候，会生成哪两颗树？"><a href="#浏览器在生成页面的时候，会生成哪两颗树？" class="headerlink" title="浏览器在生成页面的时候，会生成哪两颗树？"></a>浏览器在生成页面的时候，会生成哪两颗树？</h2><p>构造两棵树，DOM 树和 CSSOM 规则树，<br>当浏览器接收到服务器相应来的 HTML 文档后，会遍历文档节点，生成 DOM 树，<br>CSSOM 规则树由浏览器解析 CSS 文件生成。</p>
-<h2 id="怎么看网站的性能如何"><a href="#怎么看网站的性能如何" class="headerlink" title="怎么看网站的性能如何"></a>怎么看网站的性能如何</h2><p>检测页面加载时间一般有两种方式，一种是被动去测：就是在被检测的页面置入脚本或<br>探针，当用户访问网页时，探针自动采集数据并传回数据库进行分析，另一种主动监测<br>的方式，即主动的搭建分布式受控环境，模拟用户发起页面访问请求，主动采集性能数<br>据并分析，在检测的精准度上，专业的第三方工具效果更佳，比如说性能极客。</p>
-<h2 id="HTML5-和-CSS3-用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><a href="#HTML5-和-CSS3-用的多吗？你了解它们的新属性吗？有在项目中用过吗？" class="headerlink" title="HTML5 和 CSS3 用的多吗？你了解它们的新属性吗？有在项目中用过吗？"></a>HTML5 和 CSS3 用的多吗？你了解它们的新属性吗？有在项目中用过吗？</h2><p>html5：<br>1）标签增删<br>8 个语义元素 header section footer aside nav main article figure<br>内容元素 mark 高亮 progress 进度<br>新的表单控件 calander date time email url search<br>新的 input 类型 color date datetime datetime-local email<br>移除过时标签 big font frame frameset<br>2）canvas 绘图，支持内联 SVG。支持 MathML<br>3）多媒体 audio video source embed track<br>4）本地离线存储，把需要离线存储在本地的文件列在一个 manifest 配置文件<br>5）web 存储。localStorage、SessionStorage<br>css3：<br>CSS3 边框如 border-radius，box-shadow 等；CSS3 背景如 background-size，background-origin等；CSS3 2D，3D 转换如 transform 等；CSS3 动画如 animation 等。 </p>
+<h2 id="怎么看网站的性能如何"><a href="#怎么看网站的性能如何" class="headerlink" title="怎么看网站的性能如何"></a>怎么看网站的性能如何</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>检测页面加载时间一般有两种方式，一种是被动去测：就是在被检测的页面置入脚本或探针，当用户访问网页时，<strong>探针自动采集数据并传回数据库进行分析</strong>，另一种主动监测的方式，即主动的搭建分布式受控环境，<strong>模拟用户发起页面访问请求</strong>，主动采集性能数据并分析，在检测的精准度上，专业的第三方工具效果更佳，比如说性能极客。</p>
+</li>
+</ul>
+<h2 id="HTML5-和-CSS3-用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><a href="#HTML5-和-CSS3-用的多吗？你了解它们的新属性吗？有在项目中用过吗？" class="headerlink" title="HTML5 和 CSS3 用的多吗？你了解它们的新属性吗？有在项目中用过吗？"></a>HTML5 和 CSS3 用的多吗？你了解它们的新属性吗？有在项目中用过吗？</h2><ul>
+<li><p>概念</p>
+<details><summary><b>答案</b></summary>
+<p>
+
+<p>html5：<br>1）标签增删<br>8 个语义元素 header section footer aside nav main article figure<br>内容元素 mark 高亮 progress 进度<br>新的表单控件 calander date time email url search<br>新的 input 类型 color date datetime datetime-local email<br>移除过时标签 big font frame frameset<br>2）canvas 绘图，支持内联 SVG。支持 MathML<br>3）多媒体 audio video source embed track<br>4）本地离线存储，把需要离线存储在本地的文件列在一个 manifest 配置文件<br>5）web 存储。localStorage、SessionStorage<br>css3：<br>CSS3 边框如 border-radius，box-shadow 等；CSS3 背景如 background-size，background-origin等；CSS3 2D，3D 转换如 transform 等；CSS3 动画如 animation 等。 </p>
 <p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xkweb/p/5862612.html">CSS3新增的属性有哪些： - 徐先森讲web - 博客园 (cnblogs.com)</a></p>
+</li>
+</ul>
 
                 
             </div>
