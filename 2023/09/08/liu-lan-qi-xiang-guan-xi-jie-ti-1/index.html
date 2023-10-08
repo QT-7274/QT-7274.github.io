@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="浏览器相关细节题, QT-7274">
+    <meta name="keywords" content="浏览器相关细节题（1）, QT-7274">
     <meta name="description" content="这篇文章是关于浏览器的理论知识，涵盖了知识点包括浏览器架构、HTTP协议、渲染过程、缓存机制、安全性等。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -20,7 +20,7 @@
 
     
 
-    <title>浏览器相关细节题 | QT-7274</title>
+    <title>浏览器相关细节题（1） | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -306,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">浏览器相关细节题</h1>
+                    <h1 class="description center-align post-title">浏览器相关细节题（1）</h1>
                 </div>
             </div>
         </div>
@@ -459,7 +459,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-06
+                    2023-10-08
                 </div>
                 
 
@@ -473,7 +473,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    31 分
+                    32 分
                 </div>
                 
 
@@ -1002,10 +1002,23 @@
 <p>
 
 <ul>
-<li>安全性问题：由于iframe可以加载其他网页，存在安全风险。恶意网站可以利用iframe来进行钓鱼攻击、点击劫持等。   </li>
-<li>阻塞页面加载：当页面中包含大量的iframe时，每个iframe都需要进行独立的请求和加载，这可能会导致页面加载速度变慢。   </li>
-<li><strong>SEO问题</strong>：搜索引擎可能无法正确解析iframe中的内容，从而影响网页的搜索引擎优化。   </li>
-<li>跨域限制：由于浏览器的同源策略，iframe默认会受到<strong>跨域限制</strong>。这意味着，如果嵌入的网页与当前页面不在同一个域下，那么在访问嵌入的内容时可能会受到限制。</li>
+<li><p>安全性问题：由于iframe可以加载其他网页，存在安全风险。恶意网站可以利用iframe来进行钓鱼攻击、点击劫持等。   </p>
+</li>
+<li><p>阻塞页面加载：当页面中包含大量的iframe时，每个iframe都需要进行独立的请求和加载，这可能会导致页面加载速度变慢。   </p>
+</li>
+<li><p><strong>SEO问题</strong>：搜索引擎可能无法正确解析iframe中的内容，从而影响网页的搜索引擎优化。   </p>
+</li>
+<li><p>跨域限制：由于浏览器的同源策略，iframe默认会受到<strong>跨域限制</strong>。这意味着，如果嵌入的网页与当前页面不在同一个域下，而浏览器并行加载的页面个数是有限制的。</p>
+</li>
+<li><p>小型设备无法完全显示。</p>
+</li>
+<li><p>出现多个滚动条，页面调试麻烦。</p>
+</li>
+<li><p>浏览器的后退按钮失效</p>
+<p>加分项：</p>
+<p>使用 JavaScript 动态给 iframe 的 src 加载页面内容，代码如下：</p>
+<p><code>document.getElementById(&quot;xxx&quot;).src = &quot;test.html&quot;;</code></p>
+</li>
 </ul>
 </li>
 </ul>
@@ -1040,12 +1053,10 @@
 <h2 id="HTML5-和-CSS3-用的多吗？你了解它们的新属性吗？有在项目中用过吗？"><a href="#HTML5-和-CSS3-用的多吗？你了解它们的新属性吗？有在项目中用过吗？" class="headerlink" title="HTML5 和 CSS3 用的多吗？你了解它们的新属性吗？有在项目中用过吗？"></a>HTML5 和 CSS3 用的多吗？你了解它们的新属性吗？有在项目中用过吗？</h2><ul>
 <li><p>概念</p>
 <details><summary><b>答案</b></summary>
-<p>
-
-<p>html5：<br>1）标签增删<br>8 个语义元素 header section footer aside nav main article figure<br>内容元素 mark 高亮 progress 进度<br>新的表单控件 calander date time email url search<br>新的 input 类型 color date datetime datetime-local email<br>移除过时标签 big font frame frameset<br>2）canvas 绘图，支持内联 SVG。支持 MathML<br>3）多媒体 audio video source embed track<br>4）本地离线存储，把需要离线存储在本地的文件列在一个 manifest 配置文件<br>5）web 存储。localStorage、SessionStorage<br>css3：<br>CSS3 边框如 border-radius，box-shadow 等；CSS3 背景如 background-size，background-origin等；CSS3 2D，3D 转换如 transform 等；CSS3 动画如 animation 等。 </p>
-<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xkweb/p/5862612.html">CSS3新增的属性有哪些： - 徐先森讲web - 博客园 (cnblogs.com)</a></p>
-</li>
+<p></li>
 </ul>
+<p>html5：<br>  1）标签增删<br>  8 个语义元素 header section footer aside nav main article figure<br>  内容元素 mark 高亮 progress 进度<br>  新的表单控件 calander date time email url search<br>  新的 input 类型 color date datetime datetime-local email<br>  移除过时标签 big font frame frameset<br>  2）canvas 绘图，支持内联 SVG。支持 MathML<br>  3）多媒体 audio video source embed track<br>  4）本地离线存储，把需要离线存储在本地的文件列在一个 manifest 配置文件<br>  5）web 存储。localStorage、SessionStorage<br>  css3：<br>  CSS3 边框如 border-radius，box-shadow 等；CSS3 背景如 background-size，background-origin等；CSS3 2D，3D 转换如 transform 等；CSS3 动画如 animation 等。 </p>
+<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xkweb/p/5862612.html">CSS3新增的属性有哪些： - 徐先森讲web - 博客园 (cnblogs.com)</a></p>
 
                 
             </div>
@@ -1072,7 +1083,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2023/09/08/liu-lan-qi-xiang-guan-xi-jie-ti/">https://qt-7274.github.io/2023/09/08/liu-lan-qi-xiang-guan-xi-jie-ti/</a>
+                    <a href="https://qt-7274.github.io/2023/09/08/liu-lan-qi-xiang-guan-xi-jie-ti-1/">https://qt-7274.github.io/2023/09/08/liu-lan-qi-xiang-guan-xi-jie-ti-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
