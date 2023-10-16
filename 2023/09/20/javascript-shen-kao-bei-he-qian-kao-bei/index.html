@@ -470,21 +470,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-20
+                    2023-10-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -593,7 +593,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 <h3 id="JSON-stringify"><a href="#JSON-stringify" class="headerlink" title="JSON.stringify()"></a>JSON.stringify()</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const obj2&#x3D;JSON.parse(JSON.stringify(obj1));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>但是这种方式存在弊端，会忽略<code>undefined</code>、<code>symbol</code>和<code>函数</code></p>
+<p>但是这种方式存在弊端：</p>
+<p><strong>缺点：</strong></p>
+<blockquote>
+<p>如果obj里面有时间对象，转换过后，时间将只是字符串的形式<br>如果obj有RegExp, Error 对象，则序列化的结果将只得到空对象<br>如果obj里面有函数，undefined，序列化后的结果会把函数或undefined丢失<br>如果obj里有NaN，Infinity 和 -Infinity，则序列化的结果会变成null<br>JSON.stringify() 只能序列化对象的可枚举的自由属性，例如 如果obj中的对象是由构造函数生成的，则使用JSON.parse(JSON.stringify),则会丢弃对象的constructor<br>如果对象中存在循环引用的情况也无法正确实现深拷贝</p>
+</blockquote>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
     <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'A'</span><span class="token punctuation">,</span>
     <span class="token literal-property property">name1</span><span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
