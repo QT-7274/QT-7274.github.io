@@ -465,21 +465,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-16
+                    2023-10-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    24.3k
+                    24.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    120 分
+                    123 分
                 </div>
                 
 
@@ -1075,7 +1075,622 @@ console.log(obj);<span aria-hidden="true" class="line-numbers-rows"><span></span
 </ol>
 </li>
 </ul>
-<h2 id="算法类"><a href="#算法类" class="headerlink" title="算法类"></a>算法类</h2><h3 id="将-HTTP-header-转换成-js-对象"><a href="#将-HTTP-header-转换成-js-对象" class="headerlink" title="将 HTTP header 转换成 js 对象"></a>将 HTTP header 转换成 js 对象</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
+<h2 id="字符串类"><a href="#字符串类" class="headerlink" title="字符串类"></a>字符串类</h2><h3 id="实现一个字符串匹配算法indexOf"><a href="#实现一个字符串匹配算法indexOf" class="headerlink" title="实现一个字符串匹配算法indexOf"></a>实现一个字符串匹配算法indexOf</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function myIndexOf(str1,str2) &#123;
+    if (str2.length &lt;&#x3D; 0) return -1
+    const shortStr &#x3D; str1.length &gt;&#x3D; str2.length ? str2 : str1
+    const longStr &#x3D; shortStr  &#x3D;&#x3D;&#x3D; str1 ? str2 : str1
+    firstChar &#x3D; shortStr[0]
+    let left &#x3D; 0 
+    for (var i &#x3D; 0; i &lt; longStr.length; i++) &#123;
+        &#x2F;&#x2F; 如果当前字符与  firstChar  相等，将  left  更新为当前索引位置  i ，以记录目标字符串在长字符串中的起始索引。
+        left &#x3D; longStr[i] &#x3D;&#x3D;&#x3D; firstChar ? i : left
+        &#x2F;&#x2F; 通过  substr  方法截取长字符串中与目标字符串长度相等的子字符串，与目标字符串进行比较。如果相等，说明找到了目标字符串在长字符串中的位置，返回  left 。 
+        if (longStr.substr(left,shortStr.length) &#x3D;&#x3D;&#x3D; shortStr) return left 
+    &#125;
+    return -1
+&#125;
+
+console.log(myIndexOf(&#39;zhpp&#39;,&#39;pp&#39;)); &#x2F;&#x2F; 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="功能复现"><a href="#功能复现" class="headerlink" title="功能复现"></a>功能复现</h2><h3 id="手写用-ES6proxy-如何实现-arr-1-的访问"><a href="#手写用-ES6proxy-如何实现-arr-1-的访问" class="headerlink" title="手写用 ES6proxy 如何实现 arr[-1] 的访问"></a>手写用 ES6proxy 如何实现 arr[-1] 的访问</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr&#x3D; [1,2,3,4]
+let proxy &#x3D; new Proxy(arr,&#123;
+  get(target,key)&#123;
+    if(key&lt;0)&#123;
+      return target[target.length+parseInt(key)]
+    &#125;
+    return target[key] 
+  &#125;
+&#125;)
+console.log(proxy[-2]);
+console.log(proxy[2]);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="实现简单路由"><a href="#实现简单路由" class="headerlink" title="实现简单路由"></a>实现简单路由</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Router() &#123;
+    this.routes &#x3D; &#123;&#125;
+    this.currentUrl &#x3D; &#39;&#39;
+
+    &#x2F;**
+    * router.routes(&#39;&#x2F;home&#39;, () &#x3D;&gt; &#123;
+             &#x2F;&#x2F; 处理home路径的回调逻辑
+     &#125;);
+    *&#x2F;
+
+    this.routes &#x3D; function (path, callback) &#123;
+
+        this.routes[path] &#x3D; callback || function () &#123;&#125;
+    &#125;
+
+    &#x2F;&#x2F; 复现 refresh 实现
+    this.refresh &#x3D; function () &#123;
+        &#x2F;&#x2F; 获取url，去除开头的  #  符号，如果  location.hash.slice(1)  的结果为空字符串或为假值，即没有哈希部分或哈希部分为空，则将默认值  &#39;&#x2F;&#39;  赋给  curUrl  属性。
+        this.currentUrl &#x3D; location.hash.slice(1) || &#39;&#x2F;&#39;
+
+        this.routes[this.currentUrl]()
+    &#125;
+
+    &#x2F;&#x2F; 什么时候执行 refresh 呢？ load和hashchange事件会触发
+    this.init &#x3D; function () &#123;
+        window.addEventListener(&#39;load&#39;, this.refresh.bind(this), false)
+        window.addEventListener(&#39;hashchange&#39;, this.refresh.bind(this), false)
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="实现可过期的localstorage数据"><a href="#实现可过期的localstorage数据" class="headerlink" title="实现可过期的localstorage数据"></a>实现可过期的localstorage数据</h3><p>可以在存储数据时，在数据中加入一个过期时间戳，然后在获取数据时，先判断该数据的时间戳是否已经过期，如果已过期，则将该数据从 localStorage 中删除，并返回 null，否则返回该数据。</p>
+<ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function setWithExpiration(key, value, expirationMinutes) &#123;
+  const expirationMS &#x3D; expirationMinutes * 60 * 1000;
+  const record &#x3D; &#123; value: value, timestamp: new Date().getTime() + expirationMS &#125;;
+  localStorage.setItem(key, JSON.stringify(record));
+&#125;
+
+function getWithExpiration(key) &#123;
+  const record &#x3D; JSON.parse(localStorage.getItem(key));
+  if (!record) &#123;
+    return null;
+  &#125;
+  if (new Date().getTime() &gt; record.timestamp) &#123;
+    localStorage.removeItem(key);
+    return null;
+  &#125;
+  return record.value;
+&#125;
+&#x2F;&#x2F; 使用方法
+setWithExpiration(&quot;data&quot;, &#123; foo: &quot;bar&quot; &#125;, 1); &#x2F;&#x2F; 设置 data 数据，1 分钟后过期
+const data &#x3D; getWithExpiration(&quot;data&quot;); &#x2F;&#x2F; 获取 data 数据
+console.log(data); &#x2F;&#x2F; &#123; foo: &quot;bar&quot; &#125;
+setTimeout(() &#x3D;&gt; &#123;
+  const expiredData &#x3D; getWithExpiration(&quot;data&quot;); &#x2F;&#x2F; 获取 data 数据
+  console.log(expiredData); &#x2F;&#x2F; null，数据已过期，被自动删除
+&#125;, 60 * 1000); &#x2F;&#x2F; 1 分钟后<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="map键值对转换"><a href="#map键值对转换" class="headerlink" title="map键值对转换"></a>map键值对转换</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<p>题目：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">arr &#x3D; [
+    &#123;
+        name: &quot;可乐&quot;,
+        categories: [&quot;热门&quot;, &quot;饮料&quot;],
+    &#125;,
+    &#123;
+        name: &quot;苹果&quot;,
+        categories: [&quot;热门&quot;, &quot;食物&quot;],
+    &#125;,
+    &#123;
+        name: &quot;洗衣液&quot;,
+        categories: [&quot;生活用品&quot;],
+    &#125;,
+];
+
+&#x2F;&#x2F; [
+&#x2F;&#x2F;     &#123; name: &quot;热门&quot;, categories: [&quot;可乐&quot;, &quot;苹果&quot;] &#125;,
+&#x2F;&#x2F;     &#123; name: &quot;饮料&quot;, categories: [&quot;可乐&quot;] &#125;,
+&#x2F;&#x2F;     &#123; name: &quot;食物&quot;, categories: [&quot;苹果&quot;] &#125;,
+&#x2F;&#x2F;     &#123; name: &quot;生活用品&quot;, categories: [&quot;洗衣液&quot;] &#125;,
+&#x2F;&#x2F; ];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>解法：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function changeFormat(arr)&#123;
+
+    let res &#x3D; []
+    let map &#x3D; new Map()
+
+    arr.forEach(item&#x3D;&gt;&#123;
+        let categories &#x3D; item.categories
+        &#x2F;&#x2F; console.log(categories)
+        categories.map(keyword&#x3D;&gt;&#123;
+            if(!map.get(keyword))
+            &#123;
+                &#x2F;&#x2F; 注意值必须为数组，否则无法调用 push 方法
+                map.set(keyword,[item.name])
+            &#125;else&#123;
+                &#x2F;&#x2F; 注意：如果只是设置了种类为键，名称为值，则会出现不同种类有相同的值：&#123; &#39;热门&#39; &#x3D;&gt; &#39;可乐&#39;, &#39;饮料&#39; &#x3D;&gt; &#39;可乐&#39;, &#39;食物&#39; &#x3D;&gt; &#39;苹果&#39;, &#39;生活用品&#39; &#x3D;&gt; &#39;洗衣液&#39; &#125;
+                map.get(keyword).push(item.name)
+            &#125;
+        &#125;)
+    &#125;)
+
+    map.forEach((key,val)&#x3D;&gt;&#123;
+        res.push(&#123;name:val,categories:key&#125;)
+    &#125;)
+    return res
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="实现日期格式化函数"><a href="#实现日期格式化函数" class="headerlink" title="实现日期格式化函数"></a>实现日期格式化函数</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function formatDate(date, format) &#123;
+    const pad &#x3D; (n) &#x3D;&gt; n &lt; 10 ? &#39;0&#39; + n : n;
+    const dateDict &#x3D; &#123;
+        &quot;YYYY&quot;: date.getFullYear(),
+        &quot;MM&quot;: pad(date.getMonth() + 1),
+        &quot;DD&quot;: pad(date.getDate()),
+        &quot;HH&quot;: pad(date.getHours()),
+        &quot;mm&quot;: pad(date.getMinutes()),
+        &quot;ss&quot;: pad(date.getSeconds())
+    &#125;;
+    &#x2F;&#x2F; 代码中使用了正则表达式  &#x2F; (YYYY|MM|DD|HH|mm|ss) &#x2F;g  匹配字符串中的占位符，并使用箭头函数  matched &#x3D;&gt; dateDict[matched]  将匹配到的占位符替换为对应的日期值。 
+    return format.replace(&#x2F;(YYYY|MM|DD|HH|mm|ss)&#x2F;g, matched &#x3D;&gt; dateDict[matched]);
+&#125;
+let date &#x3D; new Date();
+console.log(formatDate(date, &#39;YYYY-MM-DD&#39;)); &#x2F;&#x2F; 输出形如 &#39;2023-09-08&#39; 的日期
+console.log(formatDate(date, &#39;YYYY&#x2F;MM&#x2F;DD HH:mm:ss&#39;)); &#x2F;&#x2F; 输出形如 &#39;2023&#x2F;09&#x2F;08 17:20:04&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="渲染节点的render函数"><a href="#渲染节点的render函数" class="headerlink" title="渲染节点的render函数"></a>渲染节点的render函数</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-none"><code class="language-none">&#123;
+  tag: &#39;DIV&#39;,
+  attrs:&#123;
+  id:&#39;app&#39;
+  &#125;,
+  children: [
+    &#123;
+      tag: &#39;SPAN&#39;,
+      children: [
+        &#123; tag: &#39;A&#39;, children: [] &#125;
+      ]
+    &#125;,
+    &#123;
+      tag: &#39;SPAN&#39;,
+      children: [
+        &#123; tag: &#39;A&#39;, children: [] &#125;,
+        &#123; tag: &#39;A&#39;, children: [] &#125;
+      ]
+    &#125;
+  ]
+&#125;
+把上诉虚拟Dom转化成下方真实Dom
+&lt;div id&#x3D;&quot;app&quot;&gt;
+  &lt;span&gt;
+    &lt;a&gt;&lt;&#x2F;a&gt;
+  &lt;&#x2F;span&gt;
+  &lt;span&gt;
+    &lt;a&gt;&lt;&#x2F;a&gt;
+    &lt;a&gt;&lt;&#x2F;a&gt;
+  &lt;&#x2F;span&gt;
+&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+	1.数字类型转化为字符串
+	2.字符串类型创建为文本节点
+	3.对于节点内的tag标签，使用dom创建
+	4.如果vnode存在attrs属性，遍历后使用dom设置
+	5.对于孩子进行遍历，dom添加节点后递归
+**/</span>
+
+<span class="token comment">// 真正的渲染函数</span>
+<span class="token keyword">function</span> <span class="token function">_render</span><span class="token punctuation">(</span><span class="token parameter">vnode</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 如果是数字类型转化为字符串</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> vnode <span class="token operator">===</span> <span class="token string">"number"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    vnode <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span>vnode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// 字符串类型直接就是文本节点</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> vnode <span class="token operator">===</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> document<span class="token punctuation">.</span><span class="token function">createTextNode</span><span class="token punctuation">(</span>vnode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// 普通DOM</span>
+  <span class="token keyword">const</span> dom <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span>vnode<span class="token punctuation">.</span>tag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>vnode<span class="token punctuation">.</span>attrs<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 遍历属性</span>
+    Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>vnode<span class="token punctuation">.</span>attrs<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> value <span class="token operator">=</span> vnode<span class="token punctuation">.</span>attrs<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      dom<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// 子数组进行递归操作</span>
+  vnode<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">child</span><span class="token punctuation">)</span> <span class="token operator">=></span> dom<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span><span class="token function">_render</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> dom<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="手写map方法"><a href="#手写map方法" class="headerlink" title="手写map方法"></a>手写map方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Array.prototype._map &#x3D; function (cb, thisBinding) &#123;
+  &#x2F;&#x2F; 排除回调非函数情况
+  if (typeof cb !&#x3D;&#x3D; &quot;function&quot;) &#123;
+    throw new TypeError(&#96;$&#123;cb&#125; is not a function&#96;);
+  &#125;
+  &#x2F;&#x2F; 排除this为非可迭代对象情况
+  if (this &#x3D;&#x3D; null || typeof this[Symbol.iterator] !&#x3D;&#x3D; &quot;function&quot;) &#123;
+    throw new TypeError(&#96;$&#123;this&#125; is not a iterable&#96;);
+  &#125;
+  &#x2F;&#x2F; 将可迭代对象转换成数组
+  const array &#x3D; [...this];
+  const result &#x3D; [];
+  &#x2F;&#x2F; 执行遍历并回调
+  for (let i &#x3D; 0; i &lt; array.length; i++) &#123;
+    result.push(cb.call(thisBinding, array[i], i, this));
+  &#125;
+  return result;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="模拟-lodash-中的-get-函数"><a href="#模拟-lodash-中的-get-函数" class="headerlink" title="模拟 lodash 中的 _.get() 函数"></a>模拟 lodash 中的 _.get() 函数</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * --- 题目描述 ---
+ *
+ * 补充函数的 TODO 部分，模拟 lodash 中的 _.get() 函数。
+ *
+ * --- 测试用例 ---
+ *
+ * 输入：
+ * const obj = &#123; selector: &#123; to: &#123; toutiao: "FE Coder"&#125; &#125;, target: [1, 2, &#123; name: 'byted'&#125;]&#125;;
+ * get(obj, 'selector.to.toutiao', 'target[0]', 'target[2].name')
+ * 输出：
+ * ['FE coder', 1, 'byted']
+ */</span>
+
+<span class="token keyword">function</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token parameter">object<span class="token punctuation">,</span> <span class="token operator">...</span>path</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> path<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        item<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\[</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"."</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">path</span> <span class="token operator">=></span> object <span class="token operator">=</span> object <span class="token operator">&amp;&amp;</span> object<span class="token punctuation">[</span>path<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> object<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="多种思路题"><a href="#多种思路题" class="headerlink" title="多种思路题"></a>多种思路题</h2><h3 id="数组中的最大值（至少使用三种方法）"><a href="#数组中的最大值（至少使用三种方法）" class="headerlink" title="数组中的最大值（至少使用三种方法）"></a>数组中的最大值（至少使用三种方法）</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [1, 3, 55, 77, 1000];
+&#x2F;&#x2F; 1. 调用Math
+let res &#x3D; Math.max(...arr);
+&#x2F;&#x2F; 2. 排序
+arr.sort((a, b) &#x3D;&gt; a - b)[arr.length - 1];
+&#x2F;&#x2F; 3. 可以采用快排
+&#x2F;&#x2F; 4. 直接获取最大值
+function getMax(arr)&#123;
+    let res &#x3D; -Infinity;
+    for(let i &#x3D; 0; i &lt; arr.length; i++)&#123;
+        res &#x3D; Math.max(res, arr[i]);
+    &#125;
+    return res;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="不用循环求和（至少使用三种方法）"><a href="#不用循环求和（至少使用三种方法）" class="headerlink" title="不用循环求和（至少使用三种方法）"></a>不用循环求和（至少使用三种方法）</h3><p>可以初始化判断参数是否为数组，长度是否合法：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>arr <span class="token operator">||</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token operator">||</span> arr<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'参数必须是数组,且不允许为空'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><p>forEach方法</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+arr<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    sum <span class="token operator">+=</span> item<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: 15</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>reduce</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> sum <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">accumulator<span class="token punctuation">,</span> currentValue</span><span class="token punctuation">)</span> <span class="token operator">=></span> accumulator <span class="token operator">+</span> currentValue<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出:15</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>eval函数</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token function">eval</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"+"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出:15 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>递归</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sumArray</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 基线条件：如果数组为空，那么总和就是0</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token function">sumArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 递归步骤：取数组的第一个元素并加上对剩余部分调用sumArray函数的结果</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">sumArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出：15</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h3 id="数组扁平化"><a href="#数组扁平化" class="headerlink" title="数组扁平化"></a>数组扁平化</h3><p>数组扁平化是指将多维嵌套的数组转换为一维数组的过程。在扁平化后的数组中，<strong>所有的元素都位于同一级别，没有嵌套结构</strong>。   </p>
+<p>举个例子，考虑一个多维嵌套的数组 <code>[1, [2, [3, 4]], 5]</code> ，使用数组扁平化后，将得到一维数组 <code>[1, 2, 3, 4, 5]</code> 。原本嵌套的数组被展开成了一个没有嵌套结构的一维数组。 </p>
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var arr &#x3D; [1, [2, [3, 4]]];
+
+function flatten(arr) &#123;
+    var result &#x3D; [];
+    for (var i &#x3D; 0, len &#x3D; arr.length; i &lt; len; i++) &#123;
+        if (Array.isArray(arr[i])) &#123;
+            result &#x3D; result.concat(flatten(arr[i]))
+        &#125;
+        else &#123;
+            result.push(arr[i])
+        &#125;
+    &#125;
+    return result;
+&#125;
+
+console.log(flatten(arr))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="ES6-拓展运算符"><a href="#ES6-拓展运算符" class="headerlink" title="ES6 拓展运算符"></a>ES6 拓展运算符</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var arr &#x3D; [1, [2, [3, 4]]];
+
+function flatten(arr) &#123;
+    &#x2F;&#x2F; 注意这种方法不使用其他数组，即在原数组上进行扁平化，原地扁平化
+    while (arr.some(item &#x3D;&gt; Array.isArray(item))) &#123;
+        arr &#x3D; [].concat(...arr);
+    &#125;
+    return arr;
+&#125;
+
+console.log(flatten(arr))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="flat方法实现"><a href="#flat方法实现" class="headerlink" title="flat方法实现"></a>flat方法实现</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [1, [2, 3, [4, 5]], 1, 2, [6, 7]]
+Array.prototype.myFlat &#x3D; function () &#123;
+    return this.reduce((pre, cur) &#x3D;&gt; &#123;
+        cur instanceof Array ? pre.push(...cur.myFlat()) : pre.push(cur)
+        return pre
+    &#125;, [])
+&#125;
+&#x2F;&#x2F; 或
+function flatten(arr)
+&#123;
+
+   let list &#x3D; []
+
+   return arr.reduce((pre,cur)&#x3D;&gt;&#123;
+      if(Array.isArray(cur))
+      &#123;
+         return pre.concat(flatten(cur))
+      &#125;else&#123;
+         return pre.concat(cur)
+      &#125;
+   &#125;,[])
+
+   
+&#125;
+console.log(arr.myFlat());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><h2 id="字符串类-1"><a href="#字符串类-1" class="headerlink" title="字符串类"></a>字符串类</h2><h3 id="判断一个字符串是否为驼峰字符串"><a href="#判断一个字符串是否为驼峰字符串" class="headerlink" title="判断一个字符串是否为驼峰字符串"></a>判断一个字符串是否为驼峰字符串</h3><blockquote>
+<p> 例如：judge(‘ByteDance’,’BD’) -&gt; true judge(‘Bytedance’,’BD’) -&gt; false</p>
+</blockquote>
+<ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function judge(str,abbr)&#123;
+    &#x2F;&#x2F; 使用正则表达式 &#x2F;[A-Z][a-z]*&#x2F;g 匹配字符串中的所有以大写字母开头的单词，并将它们的首字母取出来。
+  return str.match(&#x2F;[A-Z][a-z]*&#x2F;g).map(item&#x3D;&gt;item[0]).join(&#39;&#39;) &#x3D;&#x3D;&#x3D; abbr
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="压缩字符串"><a href="#压缩字符串" class="headerlink" title="压缩字符串"></a>压缩字符串</h3><blockquote>
+<p>例如：将abbccccaaa-&gt;a1b2c4a3</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function ShortenStr(str) &#123;
+    const map &#x3D; new Map()
+       res &#x3D; &#39;&#39;
+       for(let i &#x3D; 0; i &lt; str.length;i++)
+       &#123;
+           let char &#x3D; str[i]
+           map.set(char, (map.get(char) || 0) + 1)
+       &#125;
+
+       map.forEach((key, value) &#x3D;&gt; &#123;
+          res +&#x3D; key + value
+       &#125;);
+        &#x2F;&#x2F;    for([key,value] of map)
+        &#x2F;&#x2F;    &#123;
+        &#x2F;&#x2F;         res +&#x3D; key + value
+        &#x2F;&#x2F;    &#125;
+      return res
+   &#125;
+   console.log(ShortenStr(&quot;abbccccaaa&quot;));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="-2"><a href="#-2" class="headerlink" title=""></a></h3><h2 id="算法类"><a href="#算法类" class="headerlink" title="算法类"></a>算法类</h2><h3 id="使用递归完成1到100的累加"><a href="#使用递归完成1到100的累加" class="headerlink" title="使用递归完成1到100的累加"></a>使用递归完成1到100的累加</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">process</span><span class="token punctuation">(</span><span class="token parameter">cur<span class="token punctuation">,</span> total <span class="token operator">=</span> <span class="token number">0</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> cur <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">?</span> total <span class="token operator">:</span> <span class="token function">process</span><span class="token punctuation">(</span>cur <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> total <span class="token operator">+</span> cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：不能写成 <code>cur--</code>，会导致每次传入的 <code>cur</code> 值都相同，因为 <code>cur</code> 的值在计算之后才会减1。这会导致递归调用无法结束，最终导致栈溢出。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="打印出1-10000以内的对称数（回文数）"><a href="#打印出1-10000以内的对称数（回文数）" class="headerlink" title="打印出1-10000以内的对称数（回文数）"></a>打印出1-10000以内的对称数（回文数）</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function isSymmetryNum(start,end)&#123;
+    for(let i &#x3D; start; i &lt; end + 1; i++)&#123;
+        let str &#x3D; String(i);
+        if(str.length &lt;&#x3D; 1) continue;
+        if(str.split(&quot;&quot;).reverse().join(&quot;&quot;) &#x3D;&#x3D;&#x3D; str)&#123;
+            console.log(i);
+        &#125;
+    &#125;
+&#125;
+isSymmetryNum(1,10000)
+
+&#x2F;&#x2F; 或用一行代码实现
+function palindromes1(num) &#123;
+    return +((&#39;&#39;+num).split(&#39;&#39;).reverse().join(&#39;&#39;)) &#x3D;&#x3D;&#x3D; num
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="请实现一个模块-math，支持链式调用math-add-2-4-minus-3-times-2"><a href="#请实现一个模块-math，支持链式调用math-add-2-4-minus-3-times-2" class="headerlink" title="请实现一个模块 math，支持链式调用math.add(2,4).minus(3).times(2);"></a>请实现一个模块 math，支持链式调用math.add(2,4).minus(3).times(2);</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class math &#123;
+  constructor(initValue &#x3D; 0) &#123;
+    this.value &#x3D; initValue;
+  &#125;
+  add(...args) &#123;
+    this.value &#x3D; args.reduce((pre, cur) &#x3D;&gt; pre + cur, this.value);
+    return this;
+  &#125;
+  minus(...args) &#123;
+    this.value &#x3D; this.value - args.reduce((pre, cur) &#x3D;&gt; pre + cur);
+    return this;
+  &#125;
+  times(timer) &#123;
+    this.value &#x3D; timer * this.value;
+    return this;
+  &#125;
+  getVal() &#123;
+    return this.value;
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="实现-5-add-3-minus-2-功能"><a href="#实现-5-add-3-minus-2-功能" class="headerlink" title="实现(5).add(3).minus(2)功能"></a>实现(5).add(3).minus(2)功能</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">function</span> <span class="token function">check</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//统一转成数字</span>
+     <span class="token keyword">return</span> x <span class="token operator">=</span> <span class="token function">isNaN</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">0</span> <span class="token operator">:</span> x <span class="token operator">-</span> <span class="token number">0</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> <span class="token function">add</span> <span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+     x <span class="token operator">=</span> <span class="token function">check</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+     <span class="token keyword">return</span> <span class="token keyword">this</span> <span class="token operator">+</span> x
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> <span class="token function">minus</span> <span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+     x <span class="token operator">=</span> <span class="token function">check</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+     <span class="token keyword">return</span> <span class="token keyword">this</span> <span class="token operator">-</span> x
+  <span class="token punctuation">&#125;</span>
+  
+  <span class="token class-name">Number</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>add <span class="token operator">=</span> add
+
+  <span class="token class-name">Number</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>minus <span class="token operator">=</span> minus    
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'12'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">minus</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 16</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">// 7</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'abc'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">minus</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="有一堆整数，请把他们分成三份，确保每一份和尽量相等（11，42，23，4，5，6-，4，-5，-6-，11，-23-，42-，56，-78，-90）"><a href="#有一堆整数，请把他们分成三份，确保每一份和尽量相等（11，42，23，4，5，6-，4，-5，-6-，11，-23-，42-，56，-78，-90）" class="headerlink" title="有一堆整数，请把他们分成三份，确保每一份和尽量相等（11，42，23，4，5，6 ，4， 5， 6 ，11， 23 ，42 ，56， 78， 90）"></a>有一堆整数，请把他们分成三份，确保每一份和尽量相等（11，42，23，4，5，6 ，4， 5， 6 ，11， 23 ，42 ，56， 78， 90）</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a &#x3D; [11, 42, 23, 4, 5, 6, 4, 5, 6, 11, 23, 42, 56, 78, 90]
+
+function  oneToThreeArr(arr)&#123;
+  let res &#x3D; [&#123;sum: 0, arr: []&#125;, &#123;sum: 0, arr: []&#125;, &#123;sum: 0, arr: []&#125;]
+  &#x2F;&#x2F;从大到小排序,每次把最大的值给到和最小的数组中
+  arr &#x3D; arr.slice().sort((a,b) &#x3D;&gt; b - a);&#x2F;&#x2F;拷贝一份再排序
+  arr.map(item &#x3D;&gt; &#123;
+    let min &#x3D; res.sort((a,b) &#x3D;&gt; a.sum - b.sum)[0];&#x2F;&#x2F;找到到当前和最小的那个数组
+    min.sum +&#x3D; item;
+    min.arr.push(item);
+  &#125;)
+  return res;
+&#125;
+console.log(oneToThreeArr(a));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意： <code>(a, b) =&gt; &#123;a.sum - b.sum&#125;</code> 等价于 <code>(a, b) =&gt; &#123; return a.sum - b.sum&#125;</code>，不可缺少 <code>return</code>  语句，因为在括号内是函数体。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Fibonacci</span><span class="token punctuation">(</span><span class="token parameter">n<span class="token punctuation">,</span>num<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>sum<span class="token operator">=</span><span class="token number">1</span></span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token operator">&lt;=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token function">Fibonacci</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>sum<span class="token punctuation">,</span>num<span class="token operator">+</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="求最接近的值"><a href="#求最接近的值" class="headerlink" title="求最接近的值"></a>求最接近的值</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [3, 56, 56, 23, 7, 76, -2, 345, 45, 76, 3];
+const num &#x3D; 37<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function main(arr, num)&#123;
+    &#x2F;&#x2F; 即求两数之间的距离，找出最小距离的索引
+    const dif &#x3D; arr.map(item &#x3D;&gt; Math.abs(item - num));
+    let minIndex &#x3D; 0;
+    for(let i &#x3D; 1; i &lt; arr.length; ++i)&#123;
+        dif[i] &lt; dif[minIndex] &amp;&amp; (minIndex &#x3D; i);
+    &#125;
+    &#x2F;&#x2F; 此处可以使用内置的方法找到最小值和索引
+    &#x2F;&#x2F; const min &#x3D; Math.min(...dif);
+    &#x2F;&#x2F; const index &#x3D; dif.findIndex(i &#x3D;&gt; i &#x3D;&#x3D;&#x3D; min);
+    return arr[minIndex];
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="素数"><a href="#素数" class="headerlink" title="素数"></a>素数</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function isPrime(num) &#123;
+    if (num &lt;&#x3D; 1) return false; &#x2F;&#x2F; 素数定义为大于1的自然数中，除了1和它本身以外不再有其他因数的自然数
+    if (num &#x3D;&#x3D;&#x3D; 2) return true; &#x2F;&#x2F; 2是唯一的偶素数
+    if (num % 2 &#x3D;&#x3D;&#x3D; 0) return false; &#x2F;&#x2F; 排除其他偶数
+	
+	&#x2F;&#x2F; 因为如果一个数字n不是素数，那么它一定可以分解成两个因数a和b，其中a和b都不等于1和n本身。那么其中一个因数必然小于等于n的平方根，另一个因数就大于等于n的平方根。
+    const sqrt &#x3D; Math.sqrt(num);
+    for(let i &#x3D; 3; i &lt;&#x3D; sqrt; i +&#x3D; 2) &#123; 
+        if (num % i &#x3D;&#x3D;&#x3D; 0)
+            return false;
+    &#125;
+    
+    return true;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="一个数组，找出每个数组元素右侧第一个比当前数大的数的下标，时间复杂度O-N"><a href="#一个数组，找出每个数组元素右侧第一个比当前数大的数的下标，时间复杂度O-N" class="headerlink" title="一个数组，找出每个数组元素右侧第一个比当前数大的数的下标，时间复杂度O(N)"></a>一个数组，找出每个数组元素右侧第一个比当前数大的数的下标，时间复杂度O(N)</h3><ul>
+<li><details><summary><b>答案</b></summary>
+<p>
+
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function main(arr)&#123;
+    if(arr.length &lt; 2) return [];
+    &#x2F;&#x2F; 单调递减栈
+    const stack &#x3D; [arr[0]], res &#x3D; [];
+    for(let i &#x3D; 1; i &lt; arr.length; ++i)&#123;
+        if(arr[i] &gt; stack[stack.length - 1])&#123;
+            stack.push(arr[i]);
+            res.push(arr[i]);
+        &#125;
+    &#125;
+    return res;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="将-HTTP-header-转换成-js-对象"><a href="#将-HTTP-header-转换成-js-对象" class="headerlink" title="将 HTTP header 转换成 js 对象"></a>将 HTTP header 转换成 js 对象</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
  * --- 题目描述 ---
  *
  * 实现一个方法，把 HTTP 文本形式(字符串)的 header 转换成 JS 对象。
@@ -1149,351 +1764,11 @@ function autoGenerateFunc(generatorFunc) &#123;
    &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="使用递归完成1到100的累加"><a href="#使用递归完成1到100的累加" class="headerlink" title="使用递归完成1到100的累加"></a>使用递归完成1到100的累加</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function process(cur, total &#x3D; 0) &#123;
-  return cur &#x3D;&#x3D;&#x3D; 0 ? total : process(cur - 1, total + cur);
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="打印出1-10000以内的对称数（回文数）"><a href="#打印出1-10000以内的对称数（回文数）" class="headerlink" title="打印出1-10000以内的对称数（回文数）"></a>打印出1-10000以内的对称数（回文数）</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function isSymmetryNum(start,end)&#123;
-    for(let i &#x3D; start; i &lt; end + 1; i++)&#123;
-        let str &#x3D; String(i);
-        if(str.length &lt;&#x3D; 1) continue;
-        if(str.split(&quot;&quot;).reverse().join(&quot;&quot;) &#x3D;&#x3D;&#x3D; str)&#123;
-            console.log(i);
-        &#125;
-    &#125;
-&#125;
-isSymmetryNum(1,10000)
-
-&#x2F;&#x2F; 或用一行代码实现
-function palindromes1(num) &#123;
-    return +((&#39;&#39;+num).split(&#39;&#39;).reverse().join(&#39;&#39;)) &#x3D;&#x3D;&#x3D; num
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="实现一个字符串匹配算法indexOf"><a href="#实现一个字符串匹配算法indexOf" class="headerlink" title="实现一个字符串匹配算法indexOf"></a>实现一个字符串匹配算法indexOf</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function myIndexOf(str1,str2) &#123;
-    if (str2.length &lt;&#x3D; 0) return -1
-    const shortStr &#x3D; str1.length &gt;&#x3D; str2.length ? str2 : str1
-    const longStr &#x3D; shortStr  &#x3D;&#x3D;&#x3D; str1 ? str2 : str1
-    firstChar &#x3D; shortStr[0]
-    let left &#x3D; 0 
-    for (var i &#x3D; 0; i &lt; longStr.length; i++) &#123;
-        &#x2F;&#x2F; 如果当前字符与  firstChar  相等，将  left  更新为当前索引位置  i ，以记录目标字符串在长字符串中的起始索引。
-        left &#x3D; longStr[i] &#x3D;&#x3D;&#x3D; firstChar ? i : left
-        &#x2F;&#x2F; 通过  substr  方法截取长字符串中与目标字符串长度相等的子字符串，与目标字符串进行比较。如果相等，说明找到了目标字符串在长字符串中的位置，返回  left 。 
-        if (longStr.substr(left,shortStr.length) &#x3D;&#x3D;&#x3D; shortStr) return left 
-    &#125;
-    return -1
-&#125;
-
-console.log(myIndexOf(&#39;zhpp&#39;,&#39;pp&#39;)); &#x2F;&#x2F; 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="请实现一个模块-math，支持链式调用math-add-2-4-minus-3-times-2"><a href="#请实现一个模块-math，支持链式调用math-add-2-4-minus-3-times-2" class="headerlink" title="请实现一个模块 math，支持链式调用math.add(2,4).minus(3).times(2);"></a>请实现一个模块 math，支持链式调用math.add(2,4).minus(3).times(2);</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">math</span> <span class="token punctuation">&#123;</span>
-  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">initValue <span class="token operator">=</span> <span class="token number">0</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> initValue<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-  <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> args<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">pre<span class="token punctuation">,</span> cur</span><span class="token punctuation">)</span> <span class="token operator">=></span> pre <span class="token operator">+</span> cur<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-  <span class="token function">minus</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">-</span> args<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">pre<span class="token punctuation">,</span> cur</span><span class="token punctuation">)</span> <span class="token operator">=></span> pre <span class="token operator">+</span> cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-  <span class="token function">times</span><span class="token punctuation">(</span><span class="token parameter">timer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> timer <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-  <span class="token function">getVal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="实现-5-add-3-minus-2-功能"><a href="#实现-5-add-3-minus-2-功能" class="headerlink" title="实现(5).add(3).minus(2)功能"></a>实现(5).add(3).minus(2)功能</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">(function() &#123;
-  function check(x) &#123; &#x2F;&#x2F;统一转成数字
-     return x &#x3D; isNaN(x) ? 0 : x - 0
-  &#125;
-
-  function add (x) &#123;
-     x &#x3D; check(x)
-     return this + x
-  &#125;
-
-  function minus (x) &#123;
-     x &#x3D; check(x)
-     return this - x
-  &#125;
-  
-  Number.prototype.add &#x3D; add
-
-  Number.prototype.minus &#x3D; minus    
-&#125;)();
-
-console.log((5).add(&#39;12&#39;).minus(&#39;1&#39;)) &#x2F;&#x2F; 16
-console.log((5).add(2))  &#x2F;&#x2F; 7
-console.log((5).add(&#39;abc&#39;).minus(&#39;1&#39;)) &#x2F;&#x2F; 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="手写用-ES6proxy-如何实现-arr-1-的访问"><a href="#手写用-ES6proxy-如何实现-arr-1-的访问" class="headerlink" title="手写用 ES6proxy 如何实现 arr[-1] 的访问"></a>手写用 ES6proxy 如何实现 arr[-1] 的访问</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr<span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span>
-<span class="token keyword">let</span> proxy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
-  <span class="token function">get</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span>key<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>key<span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-      <span class="token keyword">return</span> target<span class="token punctuation">[</span>target<span class="token punctuation">.</span>length<span class="token operator">+</span><span class="token function">parseInt</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> target<span class="token punctuation">[</span>key<span class="token punctuation">]</span> 
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>proxy<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>proxy<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="有一堆整数，请把他们分成三份，确保每一份和尽量相等（11，42，23，4，5，6-4-5-6-11-23-42-56-78-90）"><a href="#有一堆整数，请把他们分成三份，确保每一份和尽量相等（11，42，23，4，5，6-4-5-6-11-23-42-56-78-90）" class="headerlink" title="有一堆整数，请把他们分成三份，确保每一份和尽量相等（11，42，23，4，5，6 4 5 6 11 23 42 56 78 90）"></a>有一堆整数，请把他们分成三份，确保每一份和尽量相等（11，42，23，4，5，6 4 5 6 11 23 42 56 78 90）</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">,</span> <span class="token number">56</span><span class="token punctuation">,</span> <span class="token number">78</span><span class="token punctuation">,</span> <span class="token number">90</span><span class="token punctuation">]</span>
-
-<span class="token keyword">function</span>  <span class="token function">oneToThreeArr</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token literal-property property">sum</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">arr</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">sum</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">arr</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">sum</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token literal-property property">arr</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
-  <span class="token comment">//从大到小排序,每次把最大的值给到和最小的数组中</span>
-  arr <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span>b</span><span class="token punctuation">)</span> <span class="token operator">=></span> b <span class="token operator">-</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//拷贝一份再排序</span>
-  arr<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> min <span class="token operator">=</span> res<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span>b</span><span class="token punctuation">)</span> <span class="token operator">=></span> a<span class="token punctuation">.</span>sum <span class="token operator">-</span> b<span class="token punctuation">.</span>sum<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//找到到当前和最小的那个数组</span>
-    min<span class="token punctuation">.</span>sum <span class="token operator">+=</span> item<span class="token punctuation">;</span>
-    min<span class="token punctuation">.</span>arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-  <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">oneToThreeArr</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="数组中的最大值"><a href="#数组中的最大值" class="headerlink" title="数组中的最大值"></a>数组中的最大值</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [1, 3, 55, 77, 1000];
-&#x2F;&#x2F; 1. 调用Math
-let res &#x3D; Math.max(...arr);
-&#x2F;&#x2F; 2. 排序
-arr.sort((a, b) &#x3D;&gt; a - b)[arr.length - 1];
-&#x2F;&#x2F; 3. 可以采用快排
-&#x2F;&#x2F; 4. 直接获取最大值
-function getMax(arr)&#123;
-    let res &#x3D; -Infinity;
-    for(let i &#x3D; 0; i &lt; arr.length; i++)&#123;
-        res &#x3D; Math.max(res, arr[i]);
-    &#125;
-    return res;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Fibonacci(n,num&#x3D;1,sum&#x3D;1)&#123;
-
-    if (n&lt;&#x3D;2)&#123;
-        return sum;
-    &#125;
-    return Fibonacci(n-1,sum,num+sum);
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="实现简单路由"><a href="#实现简单路由" class="headerlink" title="实现简单路由"></a>实现简单路由</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Router()&#123;
-            this.routes&#x3D;&#123;&#125;
-            this.curUrl&#x3D;&#39;&#39;
- 
-            &#x2F;&#x2F;添加回调函数
-            this.route&#x3D;function(path,callback)&#123;
-                this.routes[path]&#x3D;callback||function()&#123;&#125;
-            &#125;
-            &#x2F;&#x2F;执行回调函数
-            this.refresh&#x3D;function()&#123;
-                &#x2F;&#x2F;获取url，去除开头的  #  符号，如果  location.hash.slice(1)  的结果为空字符串或为假值，即没有哈希部分或哈希部分为空，则将默认值  &#39;&#x2F;&#39;  赋给  curUrl  属性。
-                this.curUrl&#x3D;location.hash.slice(1)||&#39;&#x2F;&#39;
-                this.routes[this.curUrl]()
-            &#125;
-            &#x2F;&#x2F;监听load和hashchange
-            this.init&#x3D;function()&#123;
-                window.addEventListener(&#39;load&#39;,this.refresh.bind(this),false)
-                window.addEventListener(&#39;hashchange&#39;,this.refresh.bind(this),false)
-            &#125;
-        &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="实现可过期的localstorage数据"><a href="#实现可过期的localstorage数据" class="headerlink" title="实现可过期的localstorage数据"></a>实现可过期的localstorage数据</h3><p>可以在存储数据时，在数据中加入一个过期时间戳，然后在获取数据时，先判断该数据的时间戳是否已经过期，如果已过期，则将该数据从 localStorage 中删除，并返回 null，否则返回该数据。</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function setWithExpiration(key, value, expirationMinutes) &#123;
-  const expirationMS &#x3D; expirationMinutes * 60 * 1000;
-  const record &#x3D; &#123; value: value, timestamp: new Date().getTime() + expirationMS &#125;;
-  localStorage.setItem(key, JSON.stringify(record));
-&#125;
-
-function getWithExpiration(key) &#123;
-  const record &#x3D; JSON.parse(localStorage.getItem(key));
-  if (!record) &#123;
-    return null;
-  &#125;
-  if (new Date().getTime() &gt; record.timestamp) &#123;
-    localStorage.removeItem(key);
-    return null;
-  &#125;
-  return record.value;
-&#125;
-&#x2F;&#x2F; 使用方法
-setWithExpiration(&quot;data&quot;, &#123; foo: &quot;bar&quot; &#125;, 1); &#x2F;&#x2F; 设置 data 数据，1 分钟后过期
-const data &#x3D; getWithExpiration(&quot;data&quot;); &#x2F;&#x2F; 获取 data 数据
-console.log(data); &#x2F;&#x2F; &#123; foo: &quot;bar&quot; &#125;
-setTimeout(() &#x3D;&gt; &#123;
-  const expiredData &#x3D; getWithExpiration(&quot;data&quot;); &#x2F;&#x2F; 获取 data 数据
-  console.log(expiredData); &#x2F;&#x2F; null，数据已过期，被自动删除
-&#125;, 60 * 1000); &#x2F;&#x2F; 1 分钟后<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="判断一个字符串是否为驼峰字符串"><a href="#判断一个字符串是否为驼峰字符串" class="headerlink" title="判断一个字符串是否为驼峰字符串"></a>判断一个字符串是否为驼峰字符串</h3><p> judge(‘ByteDance’,’BD’) -&gt; true judge(‘Bytedance’,’BD’) -&gt; false</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function judge(str,abbr)&#123;
-    &#x2F;&#x2F; 使用正则表达式 &#x2F;[A-Z][a-z]*&#x2F;g 匹配字符串中的所有以大写字母开头的单词，并将它们的首字母取出来。
-  return str.match(&#x2F;[A-Z][a-z]*&#x2F;g).map(item&#x3D;&gt;item[0]).join(&#39;&#39;) &#x3D;&#x3D;&#x3D; abbr
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="压缩字符串"><a href="#压缩字符串" class="headerlink" title="压缩字符串"></a>压缩字符串</h3><p>将abbccccaaa-&gt;a1b2c4a3</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function ShortenStr(str) &#123;
-  const map &#x3D; new Map();
-  let res &#x3D; &quot;&quot;;
-  for (let char of str) &#123;
-    map.set(char, (map.get(char) || 0) + 1);
-  &#125;
-  for ([char, count] of map) &#123;
-    res +&#x3D; char + count;
-  &#125;
-  return res;
-&#125;
-console.log(ShortenStr(&quot;abbccccaaa&quot;));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="map键值对转换"><a href="#map键值对转换" class="headerlink" title="map键值对转换"></a>map键值对转换</h3><p>题目：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">arr &#x3D; [
-    &#123;
-        name: &quot;可乐&quot;,
-        categories: [&quot;热门&quot;, &quot;饮料&quot;],
-    &#125;,
-    &#123;
-        name: &quot;苹果&quot;,
-        categories: [&quot;热门&quot;, &quot;食物&quot;],
-    &#125;,
-    &#123;
-        name: &quot;洗衣液&quot;,
-        categories: [&quot;生活用品&quot;],
-    &#125;,
-];
-
-&#x2F;&#x2F; [
-&#x2F;&#x2F;     &#123; name: &quot;热门&quot;, categories: [&quot;可乐&quot;, &quot;苹果&quot;] &#125;,
-&#x2F;&#x2F;     &#123; name: &quot;饮料&quot;, categories: [&quot;可乐&quot;] &#125;,
-&#x2F;&#x2F;     &#123; name: &quot;食物&quot;, categories: [&quot;苹果&quot;] &#125;,
-&#x2F;&#x2F;     &#123; name: &quot;生活用品&quot;, categories: [&quot;洗衣液&quot;] &#125;,
-&#x2F;&#x2F; ];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>解法：</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function changeFormat(arr)&#123;
-    let res &#x3D; [];
-    let map &#x3D; new Map();
-    arr.forEach(item &#x3D;&gt; &#123;
-      let categories &#x3D; item.categories;
-      categories.map(keyWord &#x3D;&gt; &#123;
-          console.log(keyWord)
-        if(!map.has(keyWord))&#123;
-          map.set(keyWord, [item.name]);
-        &#125;else&#123;
-          map.get(keyWord).push(item.name);
-        &#125;
-      &#125;)
-    &#125;)
-    map.forEach((val, key) &#x3D;&gt; &#123;
-      res.push(&#123; name: key, categories: val&#125;)
-    &#125;)
-    return res;
-  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="求最接近的值"><a href="#求最接近的值" class="headerlink" title="求最接近的值"></a>求最接近的值</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [3, 56, 56, 23, 7, 76, -2, 345, 45, 76, 3];
-const num &#x3D; 37<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function main(arr, num)&#123;
-    const dif &#x3D; arr.map(item &#x3D;&gt; Math.abs(item - num));
-    let minIndex &#x3D; 0;
-    for(let i &#x3D; 1; i &lt; arr.length; ++i)&#123;
-        dif[i] &lt; dif[minIndex] &amp;&amp; (minIndex &#x3D; i);
-    &#125;
-    &#x2F;&#x2F; 此处可以使用内置的方法找到最小值和索引
-    &#x2F;&#x2F; const min &#x3D; Math.min(...dif);
-    &#x2F;&#x2F; const index &#x3D; dif.findIndex(i &#x3D;&gt; i &#x3D;&#x3D;&#x3D; min);
-    return arr[minIndex];
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="不用循环求和"><a href="#不用循环求和" class="headerlink" title="不用循环求和"></a>不用循环求和</h3><p>可以初始化判断参数是否为数组，长度是否合法：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>arr <span class="token operator">||</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token operator">||</span> arr<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'参数必须是数组,且不允许为空'</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li><p>forEach方法</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-arr<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    sum <span class="token operator">+=</span> item<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: 15</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>reduce</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> sum <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">accumulator<span class="token punctuation">,</span> currentValue</span><span class="token punctuation">)</span> <span class="token operator">=></span> accumulator <span class="token operator">+</span> currentValue<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出:15</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>eval函数</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token function">eval</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"+"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出:15 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>递归</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sumArray</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 基线条件：如果数组为空，那么总和就是0</span>
-        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token function">sumArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 递归步骤：取数组的第一个元素并加上对剩余部分调用sumArray函数的结果</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">sumArray</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出：15</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-<h3 id="一个数组，找出每个数组元素右侧第一个比当前数大的数的下标，时间复杂度O-N"><a href="#一个数组，找出每个数组元素右侧第一个比当前数大的数的下标，时间复杂度O-N" class="headerlink" title="一个数组，找出每个数组元素右侧第一个比当前数大的数的下标，时间复杂度O(N)"></a>一个数组，找出每个数组元素右侧第一个比当前数大的数的下标，时间复杂度O(N)</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function main(arr)&#123;
-    if(arr.length &lt; 2) return [];
-    &#x2F;&#x2F; 单调递减栈
-    const stack &#x3D; [arr[0]], res &#x3D; [];
-    for(let i &#x3D; 1; i &lt; arr.length; ++i)&#123;
-        if(arr[i] &gt; stack[stack.length - 1])&#123;
-            stack.push(arr[i]);
-            res.push(arr[i]);
-        &#125;
-    &#125;
-    return res;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="素数"><a href="#素数" class="headerlink" title="素数"></a>素数</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">isPrime</span><span class="token punctuation">(</span><span class="token parameter">num</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">// 素数定义为大于1的自然数中，除了1和它本身以外不再有其他因数的自然数</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">===</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 2是唯一的偶素数</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">// 排除其他偶数</span>
-	
-	<span class="token comment">// 因为如果一个数字n不是素数，那么它一定可以分解成两个因数a和b，其中a和b都不等于1和n本身。那么其中一个因数必然小于等于n的平方根，另一个因数就大于等于n的平方根。</span>
-    <span class="token keyword">const</span> sqrt <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">sqrt</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> sqrt<span class="token punctuation">;</span> i <span class="token operator">+=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">%</span> i <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    
-    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="实现日期格式化函数"><a href="#实现日期格式化函数" class="headerlink" title="实现日期格式化函数"></a>实现日期格式化函数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function formatDate(date, format) &#123;
-    const pad &#x3D; (n) &#x3D;&gt; n &lt; 10 ? &#39;0&#39; + n : n;
-    const dateDict &#x3D; &#123;
-        &quot;YYYY&quot;: date.getFullYear(),
-        &quot;MM&quot;: pad(date.getMonth() + 1),
-        &quot;DD&quot;: pad(date.getDate()),
-        &quot;HH&quot;: pad(date.getHours()),
-        &quot;mm&quot;: pad(date.getMinutes()),
-        &quot;ss&quot;: pad(date.getSeconds())
-    &#125;;
-    &#x2F;&#x2F; 代码中使用了正则表达式  &#x2F; (YYYY|MM|DD|HH|mm|ss) &#x2F;g  匹配字符串中的占位符，并使用箭头函数  matched &#x3D;&gt; dateDict[matched]  将匹配到的占位符替换为对应的日期值。 
-    return format.replace(&#x2F;(YYYY|MM|DD|HH|mm|ss)&#x2F;g, matched &#x3D;&gt; dateDict[matched]);
-&#125;
-let date &#x3D; new Date();
-console.log(formatDate(date, &#39;YYYY-MM-DD&#39;)); &#x2F;&#x2F; 输出形如 &#39;2023-09-08&#39; 的日期
-console.log(formatDate(date, &#39;YYYY&#x2F;MM&#x2F;DD HH:mm:ss&#39;)); &#x2F;&#x2F; 输出形如 &#39;2023&#x2F;09&#x2F;08 17:20:04&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h3 id="判断对象是否存在循环引用"><a href="#判断对象是否存在循环引用" class="headerlink" title="判断对象是否存在循环引用"></a>判断对象是否存在循环引用</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function isCyclic(obj) &#123;
   let seenObjects &#x3D; new WeakSet();
 
   function detect (obj) &#123;
-    if (判断是否为对象) &#123;
+    if (Object.prototype.toString.call(obj) &#x3D;&#x3D;&#x3D; &#39;[object Object]&#39;) &#123;
       if(seenObjects.has(obj)) &#123;
         return true;
       &#125;
@@ -1518,7 +1793,9 @@ console.log(isCyclic(cyclicObj1)); &#x2F;&#x2F; 输出：true
 console.log(isCyclic(cyclicObj2)); &#x2F;&#x2F; 输出：true
 console.log(isCyclic(&#123;&#125;)); &#x2F;&#x2F; 输出：false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="实现函数solution-arr-k"><a href="#实现函数solution-arr-k" class="headerlink" title="实现函数solution(arr, k)"></a>实现函数solution(arr, k)</h3><p>arr是number数组，k是number，返回前k个最小的数字组成的数组，<strong>保持相对顺序</strong><br>输入:[1,2,3,4,5,3,2]，3，输出：[1,2,2]<br>输入:[1,2,3,4,5,3,2]，4，输出：[1,2,3,2]<br>输入:[1,2,3,4,5,3,2]，5，输出：[1,2,3,3,2]</p>
+<h3 id="实现函数solution-arr-k"><a href="#实现函数solution-arr-k" class="headerlink" title="实现函数solution(arr, k)"></a>实现函数solution(arr, k)</h3><blockquote>
+<p>arr是number数组，k是number，返回前k个最小的数字组成的数组，<strong>保持相对顺序</strong><br>输入:[1,2,3,4,5,3,2]，3，输出：[1,2,2]<br>输入:[1,2,3,4,5,3,2]，4，输出：[1,2,3,2]<br>输入:[1,2,3,4,5,3,2]，5，输出：[1,2,3,3,2]</p>
+</blockquote>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function smallestK(arr, k) &#123;
   &#x2F;&#x2F; 将数组中每个元素和其索引打包在一起
   let indexedArr &#x3D; arr.map((value, index) &#x3D;&gt; (&#123;value, index&#125;));
@@ -1644,29 +1921,32 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>思路是先使用 tmp 将数组中的元素处理成 <code>id: &#123;id...menu_name...menu_url...parent_id&#125;</code> 类的格式，然后针对该数据处理成树状结构。</p>
 <p>实现代码如下：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">buildTree</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">const</span> tmp <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    
-    arr<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-        tmp<span class="token punctuation">[</span>item<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    Object<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>item<span class="token punctuation">.</span>parent_id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 如果节点没有父节点，即该节点为根节点</span>
-            <span class="token keyword">const</span> parent <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">parentItem</span><span class="token punctuation">)</span> <span class="token operator">=></span> parentItem<span class="token punctuation">.</span>id <span class="token operator">===</span> item<span class="token punctuation">.</span>parent_id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>parent<span class="token punctuation">.</span>children<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 该节点的父节点和该节点没有形成关系</span>
-                parent<span class="token punctuation">.</span>children <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            parent<span class="token punctuation">.</span>children<span class="token punctuation">[</span>item<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-            res<span class="token punctuation">[</span>item<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+   <span class="token keyword">const</span> tmp <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+   <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+   
+   arr<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+       tmp<span class="token punctuation">[</span>item<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+   
+   Object<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>item<span class="token punctuation">.</span>parent_id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 如果节点没有父节点，即该节点为根节点</span>
+         <span class="token comment">// 从 tmp 对象的值中寻找 id 和当前子对象 parent_id 相等的值</span>
+           <span class="token keyword">const</span> parent <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">parentItem</span><span class="token punctuation">)</span> <span class="token operator">=></span> parentItem<span class="token punctuation">.</span>id <span class="token operator">===</span> item<span class="token punctuation">.</span>parent_id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>parent<span class="token punctuation">.</span>children<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 该节点的父节点和该节点没有形成关系，第一次循环中将所有父节点的所有孩子置为空</span>
+               parent<span class="token punctuation">.</span>children <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span> 
+           <span class="token punctuation">&#125;</span>
+         <span class="token comment">//   设置父节点的孩子，即当前值</span>
+           parent<span class="token punctuation">.</span>children<span class="token punctuation">[</span>item<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+           res<span class="token punctuation">[</span>item<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+   <span class="token keyword">return</span> res<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">buildTree</span><span class="token punctuation">(</span>menu_list<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">buildTree</span><span class="token punctuation">(</span>menu_list<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="树形结构转成列表"><a href="#树形结构转成列表" class="headerlink" title="树形结构转成列表"></a>树形结构转成列表</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const data &#x3D; [
     &#123;
@@ -1707,64 +1987,6 @@ const &#123;children&#125; &#x3D; cur;
 return Array.isArray(children) &amp;&amp; children.length &gt; 0 ? prev.concat(treeToList(children), cur) : prev.concat(cur);
 &#125;, [])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-
-<h3 id="渲染节点的render函数"><a href="#渲染节点的render函数" class="headerlink" title="渲染节点的render函数"></a>渲染节点的render函数</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&#123;
-  tag: 'DIV',
-  attrs:&#123;
-  id:'app'
-  &#125;,
-  children: [
-    &#123;
-      tag: 'SPAN',
-      children: [
-        &#123; tag: 'A', children: [] &#125;
-      ]
-    &#125;,
-    &#123;
-      tag: 'SPAN',
-      children: [
-        &#123; tag: 'A', children: [] &#125;,
-        &#123; tag: 'A', children: [] &#125;
-      ]
-    &#125;
-  ]
-&#125;
-把上诉虚拟Dom转化成下方真实Dom
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 真正的渲染函数
-function _render(vnode) &#123;
-  &#x2F;&#x2F; 如果是数字类型转化为字符串
-  if (typeof vnode &#x3D;&#x3D;&#x3D; &quot;number&quot;) &#123;
-    vnode &#x3D; String(vnode);
-  &#125;
-  &#x2F;&#x2F; 字符串类型直接就是文本节点
-  if (typeof vnode &#x3D;&#x3D;&#x3D; &quot;string&quot;) &#123;
-    return document.createTextNode(vnode);
-  &#125;
-  &#x2F;&#x2F; 普通DOM
-  const dom &#x3D; document.createElement(vnode.tag);
-  if (vnode.attrs) &#123;
-    &#x2F;&#x2F; 遍历属性
-    Object.keys(vnode.attrs).forEach((key) &#x3D;&gt; &#123;
-      const value &#x3D; vnode.attrs[key];
-      dom.setAttribute(key, value);
-    &#125;);
-  &#125;
-  &#x2F;&#x2F; 子数组进行递归操作
-  vnode.children.forEach((child) &#x3D;&gt; dom.appendChild(_render(child)));
-  return dom;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h3 id="列表转换为数组"><a href="#列表转换为数组" class="headerlink" title="列表转换为数组"></a>列表转换为数组</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [
     &#123; id: 1, name: &#39;部门1&#39;, pid: 0 &#125;,
     &#123; id: 2, name: &#39;部门2&#39;, pid: 1 &#125;,
@@ -1795,45 +2017,6 @@ function get_tree(arr) &#123;
   &#125;
   console.log(get_tree(arr));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="数组扁平化"><a href="#数组扁平化" class="headerlink" title="数组扁平化"></a>数组扁平化</h3><p>数组扁平化是指将多维嵌套的数组转换为一维数组的过程。在扁平化后的数组中，<strong>所有的元素都位于同一级别，没有嵌套结构</strong>。   </p>
-<p>举个例子，考虑一个多维嵌套的数组 <code>[1, [2, [3, 4]], 5]</code> ，使用数组扁平化后，将得到一维数组 <code>[1, 2, 3, 4, 5]</code> 。原本嵌套的数组被展开成了一个没有嵌套结构的一维数组。 </p>
-<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var arr &#x3D; [1, [2, [3, 4]]];
-
-function flatten(arr) &#123;
-    var result &#x3D; [];
-    for (var i &#x3D; 0, len &#x3D; arr.length; i &lt; len; i++) &#123;
-        if (Array.isArray(arr[i])) &#123;
-            result &#x3D; result.concat(flatten(arr[i]))
-        &#125;
-        else &#123;
-            result.push(arr[i])
-        &#125;
-    &#125;
-    return result;
-&#125;
-
-console.log(flatten(arr))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="ES6-拓展运算符"><a href="#ES6-拓展运算符" class="headerlink" title="ES6 拓展运算符"></a>ES6 拓展运算符</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var arr &#x3D; [1, [2, [3, 4]]];
-
-function flatten(arr) &#123;
-    while (arr.some(item &#x3D;&gt; Array.isArray(item))) &#123;
-        arr &#x3D; [].concat(...arr);
-    &#125;
-    return arr;
-&#125;
-
-console.log(flatten(arr))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="flat方法实现"><a href="#flat方法实现" class="headerlink" title="flat方法实现"></a>flat方法实现</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [1, [2, 3, [4, 5]], 1, 2, [6, 7]]
-Array.prototype.myFlat &#x3D; function () &#123;
-    return this.reduce((pre, cur) &#x3D;&gt; &#123;
-        cur instanceof Array ? pre.push(...cur.myFlat()) : pre.push(cur)
-        return pre
-    &#125;, [])
-&#125;
-console.log(arr.myFlat());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h3 id="逆对象扁平"><a href="#逆对象扁平" class="headerlink" title="逆对象扁平"></a>逆对象扁平</h3><p>逆对象扁平（Inverse Object Flattening）是指将扁平化的数据结构转换回原始的嵌套对象结构。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unflattenObject</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
@@ -1855,74 +2038,7 @@ console.log(arr.myFlat());<span aria-hidden="true" class="line-numbers-rows"><sp
 
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">unflattenObject</span><span class="token punctuation">(</span>testObj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出：&#123; a: &#123; b: &#123; c: 1 &#125; &#125;, d: &#123; e: [2,3] &#125; &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="实现-执行一次的函数"><a href="#实现-执行一次的函数" class="headerlink" title="实现 执行一次的函数"></a>实现 执行一次的函数</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">one</span><span class="token punctuation">(</span><span class="token parameter">callback</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>flag<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
-        flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="管道函数"><a href="#管道函数" class="headerlink" title="管道函数"></a>管道函数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function pipe(...fns) &#123;
-    return function(...args) &#123;
-        if (fns.length &#x3D;&#x3D;&#x3D; 0) return;
-        if (fns.length &#x3D;&#x3D;&#x3D; 1) return fns[0](...args);
-        
-        return fns.reduce((acc, fn) &#x3D;&gt; &#123;
-            if (typeof acc &#x3D;&#x3D;&#x3D; &#39;function&#39;) &#123;
-                acc &#x3D; acc(...args);
-                args &#x3D; []; &#x2F;&#x2F; 清空参数列表，因为之后的函数应该接收上一个函数的结果作为输入
-            &#125;
-            return fn(acc); &#x2F;&#x2F; 将上一步骤得到结果作为当前操作器输入
-        &#125;);
-    &#125;;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="手写map方法"><a href="#手写map方法" class="headerlink" title="手写map方法"></a>手写map方法</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Array.prototype._map &#x3D; function (cb, thisBinding) &#123;
-  &#x2F;&#x2F; 排除回调非函数情况
-  if (typeof cb !&#x3D;&#x3D; &quot;function&quot;) &#123;
-    throw new TypeError(&#96;$&#123;cb&#125; is not a function&#96;);
-  &#125;
-  &#x2F;&#x2F; 排除this为非可迭代对象情况
-  if (this &#x3D;&#x3D; null || typeof this[Symbol.iterator] !&#x3D;&#x3D; &quot;function&quot;) &#123;
-    throw new TypeError(&#96;$&#123;this&#125; is not a iterable&#96;);
-  &#125;
-  &#x2F;&#x2F; 将可迭代对象转换成数组
-  const array &#x3D; [...this];
-  const result &#x3D; [];
-  &#x2F;&#x2F; 执行遍历并回调
-  for (let i &#x3D; 0; i &lt; array.length; i++) &#123;
-    result.push(cb.call(thisBinding, array[i], i, this));
-  &#125;
-  return result;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="模拟-lodash-中的-get-函数"><a href="#模拟-lodash-中的-get-函数" class="headerlink" title="模拟 lodash 中的 _.get() 函数"></a>模拟 lodash 中的 _.get() 函数</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
- * --- 题目描述 ---
- *
- * 补充函数的 TODO 部分，模拟 lodash 中的 _.get() 函数。
- *
- * --- 测试用例 ---
- *
- * 输入：
- * const obj = &#123; selector: &#123; to: &#123; toutiao: "FE Coder"&#125; &#125;, target: [1, 2, &#123; name: 'byted'&#125;]&#125;;
- * get(obj, 'selector.to.toutiao', 'target[0]', 'target[2].name')
- * 输出：
- * ['FE coder', 1, 'byted']
- */</span>
-
-<span class="token keyword">function</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token parameter">object<span class="token punctuation">,</span> <span class="token operator">...</span>path</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> path<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-        item<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\[</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"."</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">path</span> <span class="token operator">=></span> object <span class="token operator">=</span> object <span class="token operator">&amp;&amp;</span> object<span class="token punctuation">[</span>path<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> object<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="将十进制数字转为二进制数字字符串"><a href="#将十进制数字转为二进制数字字符串" class="headerlink" title="将十进制数字转为二进制数字字符串"></a>将十进制数字转为二进制数字字符串</h3><p>使用内置方法</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> x <span class="token operator">=</span> <span class="token number">10</span>
@@ -1976,6 +2092,33 @@ console<span class="token punctuation">.</span><span class="token function">log<
 因此，第二次循环结束时， acc.map(v => val.map(item => [...v, item])).flat()  的结果就是  [ [1, 3], [2, 3], [1, 4], [2, 4] ] 。 
 **/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
+<h2 id="闭包应用类"><a href="#闭包应用类" class="headerlink" title="闭包应用类"></a>闭包应用类</h2><h3 id="实现-执行一次的函数"><a href="#实现-执行一次的函数" class="headerlink" title="实现 执行一次的函数"></a>实现 执行一次的函数</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">one</span><span class="token punctuation">(</span><span class="token parameter">callback</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token comment">// 注意是匿名函数</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>flag<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+        flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="管道函数"><a href="#管道函数" class="headerlink" title="管道函数"></a>管道函数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function pipe(...fns) &#123;
+    return function(...args) &#123;
+        if (fns.length &#x3D;&#x3D;&#x3D; 0) return;
+        if (fns.length &#x3D;&#x3D;&#x3D; 1) return fns[0](...args);
+        
+        return fns.reduce((acc, fn) &#x3D;&gt; &#123;
+            if (typeof acc &#x3D;&#x3D;&#x3D; &#39;function&#39;) &#123;
+                acc &#x3D; acc(...args);
+                args &#x3D; []; &#x2F;&#x2F; 清空参数列表，因为之后的函数应该接收上一个函数的结果作为输入
+            &#125;
+            return fn(acc); &#x2F;&#x2F; 将上一步骤得到结果作为当前操作器输入
+        &#125;);
+    &#125;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h2 id="原理类"><a href="#原理类" class="headerlink" title="原理类"></a>原理类</h2><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function deepClone(obj, hash &#x3D; new WeakMap()) &#123;
   if (obj &#x3D;&#x3D;&#x3D; null) return obj; &#x2F;&#x2F; 如果是null或者undefined我就不进行拷贝操作
   if (obj instanceof Date) return new Date(obj);
