@@ -6,11 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="PyTorch模型训练常规流程, QT-7274">
-    <meta name="description" content="部分代码参考：
+    <meta name="description" content="部分代码参考：神经网络量化初探 | QT-7274 (qblog.top)
 模型训练常规流程
-准备数据集
-# 准备数据集
-train_data &amp;#x3D; torchvision.datasets.CIFAR10(root&amp;#x3D;&amp;quot;.&amp;#x2F;dataset&amp;quot;, trai">
+设置变量，选择设备等操作
+epochs = 2 
+batch_size = 64
+torch.manual_seed(0) # 设置随机种子并选择">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -474,14 +475,14 @@ train_data &amp;#x3D; torchvision.datasets.CIFAR10(root&amp;#x3D;&amp;quot;.&amp
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    70
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    9 分
                 </div>
                 
 
@@ -504,19 +505,234 @@ train_data &amp;#x3D; torchvision.datasets.CIFAR10(root&amp;#x3D;&amp;quot;.&amp
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>部分代码参考：</p>
+                <p>部分代码参考：<a href="https://qt-7274.github.io/2023/10/21/shen-jing-wang-luo-liang-hua-chu-tan/">神经网络量化初探 | QT-7274 (qblog.top)</a></p>
 <h2 id="模型训练常规流程"><a href="#模型训练常规流程" class="headerlink" title="模型训练常规流程"></a>模型训练常规流程</h2><ol>
+<li><p>设置变量，选择设备等操作</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">epochs <span class="token operator">=</span> <span class="token number">2</span> 
+batch_size <span class="token operator">=</span> <span class="token number">64</span>
+torch<span class="token punctuation">.</span>manual_seed<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment"># 设置随机种子并选择设备（GPU或CPU)</span>
+device <span class="token operator">=</span> torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">"cuda"</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">"cpu"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 <li><p>准备数据集</p>
-<pre class="line-numbers language-none"><code class="language-none"># 准备数据集
-train_data &#x3D; torchvision.datasets.CIFAR10(root&#x3D;&quot;.&#x2F;dataset&quot;, train&#x3D;True, transform&#x3D;torchvision.transforms.ToTensor(),
-                                          download&#x3D;True)
-test_data &#x3D; torchvision.datasets.CIFAR10(root&#x3D;&quot;.&#x2F;dataset&quot;, train&#x3D;False, transform&#x3D;torchvision.transforms.ToTensor(),
-                                         download&#x3D;True)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 准备数据集</span>
+train_data <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span>root<span class="token operator">=</span><span class="token string">"./dataset"</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                          download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+test_data <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span>root<span class="token operator">=</span><span class="token string">"./dataset"</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                         download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>是的</p>
+<li><p>标识数据集长度（如果不需要可忽略）</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># length 长度</span>
+train_data_size <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>train_data<span class="token punctuation">)</span>
+test_data_size <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_data<span class="token punctuation">)</span>
+
+<span class="token comment"># 如果train_data_size=10, 训练数据集的长度为：10</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"训练数据集的长度为：&#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>train_data_size<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"测试数据集的长度为：&#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>test_data_size<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
+<li><p>使用 DataLoader 来加载数据集</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 利用 DataLoader 来加载数据集</span>
+train_dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>train_data<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span>
+test_dataloader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>test_data<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">64</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 或直接将训练数据写在 DataLoader 中</span>
+<span class="token comment"># train_loader = torch.utils.data.DataLoader( # 数据加载器，按照批次大小和随机顺序加载到模型中进行训练</span>
+<span class="token comment">#         datasets.MNIST('../data/MNIST', train=True, download=False,</span>
+<span class="token comment">#                        transform=transforms.Compose([</span>
+<span class="token comment">#                            transforms.ToTensor(),</span>
+<span class="token comment">#                            transforms.Normalize((0.1307,), (0.3081,)) # 创建数据集</span>
+<span class="token comment">#                        ])),</span>
+<span class="token comment">#         batch_size=batch_size, shuffle=True)</span>
+<span class="token comment"># test_loader = torch.utils.data.DataLoader(</span>
+<span class="token comment">#         datasets.MNIST('../data/MNIST', train=False, download=False, transform=transforms.Compose([</span>
+<span class="token comment">#             transforms.ToTensor(),</span>
+<span class="token comment">#             transforms.Normalize((0.1307,), (0.3081,))</span>
+<span class="token comment">#         ])),</span>
+<span class="token comment">#         batch_size=1000, shuffle=True)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>创建网络模型并部署到设备上</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">model <span class="token operator">=</span> ConvNet<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span> <span class="token comment"># 创建了一个卷积神经网络模型并部署到设备上</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>设置损失函数</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 损失函数</span>
+loss_fn <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>设置优化器</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 优化器</span>
+<span class="token comment"># learning_rate = 0.01</span>
+<span class="token comment"># 1e-2=1 x (10)^(-2) = 1 /100 = 0.01</span>
+learning_rate <span class="token operator">=</span> <span class="token number">1e-2</span>
+optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>tudui<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>learning_rate<span class="token punctuation">)</span>  <span class="token comment"># 这里的参数，SGD里面的，只要定义两个参数，一个是tudui.parameters()本身，另一个是lr</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>设置训练网络的其他参数，以及 TensorBoard 设置</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 设置训练网络的一些参数</span>
+
+<span class="token comment"># 记录训练的次数</span>
+total_train_step <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token comment"># 记录测试的次数</span>
+total_test_step <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token comment"># 训练的轮数</span>
+epoch <span class="token operator">=</span> <span class="token number">10</span>
+
+<span class="token comment"># 添加tensorboard</span>
+writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token string">"../logs_train"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>开始训练</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"------------第 &#123;&#125; 轮训练开始------------"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 训练步骤开始</span>
+    tudui<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 这两个层，只对一部分层起作用，比如 dropout层；如果有这些特殊的层，才需要调用这个语句</span>
+    <span class="token keyword">for</span> data <span class="token keyword">in</span> train_dataloader<span class="token punctuation">:</span>
+        imgs<span class="token punctuation">,</span> targets <span class="token operator">=</span> data
+        outputs <span class="token operator">=</span> tudui<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span>
+        loss <span class="token operator">=</span> loss_fn<span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+
+        <span class="token comment"># 优化器优化模型</span>
+        optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 优化器，梯度清零</span>
+        loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        total_train_step <span class="token operator">=</span> total_train_step <span class="token operator">+</span> <span class="token number">1</span>
+        <span class="token keyword">if</span> total_train_step <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"训练次数：&#123;&#125;, Loss: &#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>total_train_step<span class="token punctuation">,</span> loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 这里用到的 item()方法，有说法的，其实加不加都行，就是输出的形式不一样而已</span>
+            writer<span class="token punctuation">.</span>add_scalar<span class="token punctuation">(</span><span class="token string">"train_loss"</span><span class="token punctuation">,</span> loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> total_train_step<span class="token punctuation">)</span>  <span class="token comment"># 这里是不是在画曲线？</span>
+
+    <span class="token comment"># 每训练完一轮，进行测试，在测试集上测试，以测试集的损失或者正确率，来评估有没有训练好，测试时，就不要调优了，就是以当前的模型，进行测试，所以不用再使用梯度（with no_grad 那句）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>开始测试</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 测试步骤开始</span>
+    tudui<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 这两个层，只对一部分层起作用，比如 dropout层；如果有这些特殊的层，才需要调用这个语句</span>
+    total_test_loss <span class="token operator">=</span> <span class="token number">0</span>
+    total_accuracy <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 这样后面就没有梯度了，  测试的过程中，不需要更新参数，所以不需要梯度？</span>
+        <span class="token keyword">for</span> data <span class="token keyword">in</span> test_dataloader<span class="token punctuation">:</span>  <span class="token comment"># 在测试集中，选取数据</span>
+            imgs<span class="token punctuation">,</span> targets <span class="token operator">=</span> data
+            outputs <span class="token operator">=</span> tudui<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span>  <span class="token comment"># 分类的问题，是可以这样的，用一个output进行绘制</span>
+            loss <span class="token operator">=</span> loss_fn<span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+            total_test_loss <span class="token operator">=</span> total_test_loss <span class="token operator">+</span> loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 为了查看总体数据上的 loss，创建的 total_test_loss，初始值是0</span>
+            accuracy <span class="token operator">=</span> <span class="token punctuation">(</span>outputs<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> targets<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 正确率，这是分类问题中，特有的一种，评价指标，语义分割之类的，不一定非要有这个东西，这里是存疑的，再看。</span>
+            total_accuracy <span class="token operator">=</span> total_accuracy <span class="token operator">+</span> accuracy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>保存模型</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"整体测试集上的Loss: &#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>total_test_loss<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"整体测试集上的正确率: &#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>total_accuracy <span class="token operator">/</span> test_data_size<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 即便是输出了上一行的 loss，也不能很好的表现出效果。</span>
+    <span class="token comment"># 在分类问题上比较特有，通常使用正确率来表示优劣。因为其他问题，可以可视化地显示在tensorbo中。</span>
+    <span class="token comment"># 这里在（二）中，讲了很复杂的，没仔细听。这里很有说法，argmax（）相关的，有截图在word笔记中。</span>
+    writer<span class="token punctuation">.</span>add_scalar<span class="token punctuation">(</span><span class="token string">"test_loss"</span><span class="token punctuation">,</span> total_test_loss<span class="token punctuation">,</span> total_test_step<span class="token punctuation">)</span>
+    writer<span class="token punctuation">.</span>add_scalar<span class="token punctuation">(</span><span class="token string">"test_accuracy"</span><span class="token punctuation">,</span> total_accuracy <span class="token operator">/</span> test_data_size<span class="token punctuation">,</span> total_test_step<span class="token punctuation">)</span>
+    total_test_step <span class="token operator">=</span> total_test_step <span class="token operator">+</span> <span class="token number">1</span>
+
+    torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>tudui<span class="token punctuation">,</span> <span class="token string">"tudui_&#123;&#125;.pth"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 保存方式一，其实后缀都可以自己取，习惯用 .pth。</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"模型已保存"</span><span class="token punctuation">)</span>
+
+writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h3 id="训练函数的常规流程"><a href="#训练函数的常规流程" class="headerlink" title="训练函数的常规流程"></a>训练函数的常规流程</h3><ol>
+<li><p>开启训练模式</p>
+<p>该模式开启只对部分特定模型有用，详见 <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.train">https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.train</a></p>
+<p>不过还是建议开启，提高代码可读性：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">train</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> device<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>对 train_loader 进行迭代</p>
+<p>注意：如果需要获取<strong>迭代的索引</strong>和和<strong>对应的数据</strong>，可考虑使用 <code>enumerate</code> ，这样可以方便地在训练中进行批次级别的操作：</p>
+<blockquote>
+<p>class enumerate(<br>iterable: Iterable,<br>start: int &#x3D; …<br>)</p>
+<hr>
+<p>Return an enumerate object.</p>
+<p> iterable<br>  an object supporting iteration</p>
+<p>The enumerate object yields pairs containing a count (from start, which defaults to zero) and a value yielded by the iterable argument.</p>
+<p><strong>enumerate is useful for obtaining an indexed list</strong>:<br>  (0, seq[0]), (1, seq[1]), (2, seq[2]), …</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">total <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> batch_idx<span class="token punctuation">,</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> target<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>将数据和目标移动到指定设备上</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data<span class="token punctuation">,</span> target <span class="token operator">=</span> data<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">,</span> target<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span> <span class="token comment"># 移动到指定的设备上</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>将数据传给模型，获得模型的输出；通过损失函数计算输出和目标之间的损失</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">output <span class="token operator">=</span> model<span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token comment"># 将数据传给模型，获得模型的输出</span>
+loss <span class="token operator">=</span> F<span class="token punctuation">.</span>cross_entropy<span class="token punctuation">(</span>output<span class="token punctuation">,</span> target<span class="token punctuation">)</span> <span class="token comment"># 计算输出和目标之间的交叉熵损失</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>将模型梯度置零，计算损失的梯度，根据梯度更新优化器</p>
+<blockquote>
+<ul>
+<li>因为在PyTorch中，每次计算梯度时，梯度值会被累加到之前的梯度上，为了避免这种情况，需要先将梯度清零。</li>
+<li>计算损失相对于模型参数的梯度。这一步是通过调用反向传播算法来计算梯度，根据损失函数对模型参数求导。</li>
+<li>根据计算得到的梯度更新优化器。这一步是根据梯度值来更新模型参数，使得模型能够朝着损失函数下降的方向进行优化。</li>
+</ul>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 将模型的梯度置零，以准备计算新的梯度</span>
+loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 计算损失相对于模型参数的梯度</span>
+optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 更新优化器</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>其他可视化操作，例如查看每一轮的损失情况，训练进度，进度条的长度等</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">total <span class="token operator">+=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token comment"># 更新 total 变量</span>
+       
+progress <span class="token operator">=</span> math<span class="token punctuation">.</span>ceil<span class="token punctuation">(</span>batch_idx <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span> <span class="token comment"># 根据当前批次的索引和训练数据加载器的长度计算进度条的长度</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\rTrain epoch %d: %d/%d, [%-51s] %d%%"</span> <span class="token operator">%</span>
+<span class="token punctuation">(</span>epoch<span class="token punctuation">,</span> total<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token string">'-'</span> <span class="token operator">*</span> progress <span class="token operator">+</span> <span class="token string">'>'</span><span class="token punctuation">,</span> progress <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h3 id="测试函数的常规流程"><a href="#测试函数的常规流程" class="headerlink" title="测试函数的常规流程"></a>测试函数的常规流程</h3><blockquote>
+<p>每训练完一轮，进行测试，在测试集上测试，以测试集的损失或者正确率，来评估有没有训练好，测试时，就不要调优了，就是以当前的模型，进行测试，所以不用再使用梯度（with no_grad 那句）。</p>
+</blockquote>
+<ol>
+<li><p>开启评估模式</p>
+<p>该模式开启只对部分特定模型有用，同训练模式。</p>
+<p>不过还是建议开启，提高代码可读性：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">test</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> device<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>设置损失计数和准确计数：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">test_loss <span class="token operator">=</span> <span class="token number">0</span>
+correct <span class="token operator">=</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>禁用梯度计算，因为我们在测试函数中只关心模型的输出和性能指标，不需要计算梯度；迭代 test_loader，步骤同训练函数：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">for</span> data<span class="token punctuation">,</span> target <span class="token keyword">in</span> test_loader<span class="token punctuation">:</span>
+         data<span class="token punctuation">,</span> target <span class="token operator">=</span> data<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span class="token punctuation">,</span> target<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+         output <span class="token operator">=</span> model<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：测试函数中我们不需要使用优化器，我们只是在评估模型在给定数据集上的性能，而不是进行参数的更新和优化。</p>
+</blockquote>
+</li>
+<li><p>计算整个数据集的损失，即将每个批次的损失进行相加，同时转换为标量，即转换为一个单一的实数更容易进行数学运算：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">test_loss <span class="token operator">+=</span> F<span class="token punctuation">.</span>cross_entropy<span class="token punctuation">(</span>output<span class="token punctuation">,</span> target<span class="token punctuation">,</span> reduction<span class="token operator">=</span><span class="token string">'sum'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># sum up batch loss</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：训练函数中没有 <code>sum</code>这个参数，默认为 <code>mean</code> 。这是因为在训练函数中我们得到单批次的损失值，是为了计算损失相对于模型参数的梯度，并在后续更新梯度，无需求和。</p>
+</blockquote>
+</li>
+<li><p>找到每个样本预测概率最大的<strong>类别</strong>的索引，即使用 <code>torch.argmax(*input*, *dim*, *keepdim=False*)</code></p>
+<blockquote>
+<p><code>torch.argmax</code> 函数返回的是 <code>torch.max</code> 函数的第二个返回值，<code>torch.max</code> 函数用于找到张量中的最大值及其索引。它返回两个值，第一个值是最大值本身，第二个值是最大值对应的索引。   因此，<code>torch.argmax</code> 函数实际上是使用 <code>torch.max</code> 函数来找到最大值的索引。</p>
+<p>参数说明： </p>
+<ul>
+<li>input：输入的张量。  </li>
+<li>dim：指定的维度，沿着该维度进行最大值的搜索。如果未指定，则在整个张量上进行搜索。  </li>
+<li>keepdim：是否保持输出张量的维度和输入张量相同。如果设置为True，则输出张量的维度会在指定维度上保持为1。</li>
+</ul>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">pred <span class="token operator">=</span> output<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> keepdim<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>将最大类别的索引和目标类别的索引进行比较，统计其中相等的布尔值，从而计算准确率：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">correct <span class="token operator">+=</span> pred<span class="token punctuation">.</span>eq<span class="token punctuation">(</span>target<span class="token punctuation">.</span>view_as<span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p><code>eq()</code> 函数会逐元素比较两个张量，相同的元素会被标记为True，不同的元素会被标记为False。 </p>
+</blockquote>
+</li>
+<li><p>计算平均损失、正确的预测数量、测试数据集的总量以及准确格式化为字符串：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">test_loss <span class="token operator">/=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTest: average loss: &#123;:.4f&#125;, accuracy: &#123;&#125;/&#123;&#125; (&#123;:.0f&#125;%)'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>
+        test_loss<span class="token punctuation">,</span> correct<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token number">100.</span> <span class="token operator">*</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> test_loss<span class="token punctuation">,</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 
                 
@@ -1032,18 +1248,17 @@ test_data &#x3D; torchvision.datasets.CIFAR10(root&#x3D;&quot;.&#x2F;dataset&quo
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/10/27/pytorch-mo-xing-xun-lian-chang-gui-liu-cheng/">
+                <a href="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/23.jpg" class="responsive-img" alt="PyTorch模型训练常规流程">
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/15.jpg" class="responsive-img" alt="神经网络知识蒸馏初探">
                         
-                        <span class="card-title">PyTorch模型训练常规流程</span>
+                        <span class="card-title">神经网络知识蒸馏初探</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1053,9 +1268,9 @@ test_data &#x3D; torchvision.datasets.CIFAR10(root&#x3D;&quot;.&#x2F;dataset&quo
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-27
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-27
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1068,16 +1283,11 @@ test_data &#x3D; torchvision.datasets.CIFAR10(root&#x3D;&quot;.&#x2F;dataset&quo
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
                         <span class="chip bg-color">深度学习</span>
-                    </a>
-                    
-                    <a href="/tags/PyTorch/">
-                        <span class="chip bg-color">PyTorch</span>
                     </a>
                     
                 </div>
