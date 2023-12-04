@@ -1,0 +1,1777 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="《深度学习图解》反向传播, QT-7274">
+    <meta name="description" content="反向传播交通信号灯问题神经网络如何学习整个数据集？
+可以通过解读交通信号灯的含义来知道什么时候过马路是安全的。但是我们只能观察每种灯光组合和周围的人通行或止步的相关性来进行判断：
+
+准备数据如何训练一个监督神经网络？
+可以交给它两个数据集，">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>《深度学习图解》反向传播 | QT-7274</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+    
+<body>
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    <div>
+                    
+                    <img src="/medias/images/loading.gif" data-original="/medias/logo.gif" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">QT-7274</span>
+                </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+    <div class="mobile-head bg-color">
+      <div>
+        
+        <img no-lazy src="/medias/logo.gif" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">QT-7274</div>
+        <div class="logo-desc">
+          
+              Never really desperate, only the lost of the soul.
+              
+            </div>
+      </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/QT-7274/QT-7274.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #003a8c;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/QT-7274/QT-7274.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">《深度学习图解》反向传播</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">深度学习</span>
+                            </a>
+                        
+                            <a href="/tags/%E3%80%8A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9B%BE%E8%A7%A3%E3%80%8B/">
+                                <span class="chip bg-color">《深度学习图解》</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                深度学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-11-28
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-12-02
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    15 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h2><h3 id="交通信号灯问题"><a href="#交通信号灯问题" class="headerlink" title="交通信号灯问题"></a>交通信号灯问题</h3><p>神经网络如何学习整个数据集？</p>
+<p>可以通过解读交通信号灯的含义来知道什么时候过马路是安全的。但是我们只能观察每种灯光组合和周围的人通行或止步的相关性来进行判断：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231128201102104.png" alt="image-20231128201102104"></p>
+<h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><p>如何训练一个监督神经网络？</p>
+<p>可以交给它两个数据集，让它学习如何将其中一个转化到另一个。目前确实有两个数据集，一方面有六组信号灯状态记录；一方面有六组人们是否通行的观察记录。</p>
+<p>目前：我们已经知道任意给定时刻的交通信号灯状态+我们想知道穿过马路是否安全。</p>
+<h3 id="矩阵和矩阵关系"><a href="#矩阵和矩阵关系" class="headerlink" title="矩阵和矩阵关系"></a>矩阵和矩阵关系</h3><p>将交通信号灯转换为数学表达。</p>
+<p>我们现在需要用数字形式来模拟交通信号灯的模式：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231128201509445.png" alt="image-20231128201509445"></p>
+<blockquote>
+<p>在数据矩阵中，管理是用一行来表示每个样例记录，并将每一项（属性）对应记录为一列。</p>
+</blockquote>
+<p>如果信号灯配有调光器，能够以不同的强度发光的情况是这样的：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231128202326773.png" alt="image-20231128202326773"></p>
+<p>或者矩阵A乘以10得到的矩阵B也是合理的。</p>
+<p>同时为了学习输出数据模式，我们还需要以矩阵形式表达这种模式，如下图所示：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231128203300715.png" alt="image-20231128203300715"></p>
+<h4 id="使用Python创建矩阵"><a href="#使用Python创建矩阵" class="headerlink" title="使用Python创建矩阵"></a>使用Python创建矩阵</h4><p>输入矩阵：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+streetlights <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span> <span class="token punctuation">[</span> <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出矩阵：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">walk_vs_stop <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span> <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>我们想让神经网络学习如何将输入矩阵转换为输出矩阵。</p>
+<h4 id="建立神经网络"><a href="#建立神经网络" class="headerlink" title="建立神经网络"></a>建立神经网络</h4><p>代码示例：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+weights <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.5</span><span class="token punctuation">,</span><span class="token number">0.48</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">0.7</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+alpha <span class="token operator">=</span> <span class="token number">0.1</span>
+
+streetlights <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span> <span class="token punctuation">[</span> <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span>
+
+walk_vs_stop <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span> <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span>
+
+<span class="token builtin">input</span> <span class="token operator">=</span> streetlights<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment"># [1,0,1]</span>
+goal_prediction <span class="token operator">=</span> walk_vs_stop<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment"># equals 0... i.e. "stop"</span>
+
+<span class="token keyword">for</span> iteration <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    prediction <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">.</span>dot<span class="token punctuation">(</span>weights<span class="token punctuation">)</span>
+    error <span class="token operator">=</span> <span class="token punctuation">(</span>goal_prediction <span class="token operator">-</span> prediction<span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span>
+    delta <span class="token operator">=</span> prediction <span class="token operator">-</span> goal_prediction
+    weights <span class="token operator">=</span> weights <span class="token operator">-</span> <span class="token punctuation">(</span>alpha <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token builtin">input</span> <span class="token operator">*</span> delta<span class="token punctuation">)</span><span class="token punctuation">)</span>	
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" Prediction:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>prediction<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="学习整个数据集"><a href="#学习整个数据集" class="headerlink" title="学习整个数据集"></a>学习整个数据集</h4><p>神经网络不光只可以学习一条信号灯记录，我们希望它把所有记录都学完。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+weights <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.5</span><span class="token punctuation">,</span><span class="token number">0.48</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">0.7</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+alpha <span class="token operator">=</span> <span class="token number">0.1</span>
+
+streetlights <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span>
+
+walk_vs_stop <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span> <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span>
+
+<span class="token builtin">input</span> <span class="token operator">=</span> streetlights<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment"># [1,0,1]</span>
+goal_prediction <span class="token operator">=</span> walk_vs_stop<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment"># equals 0... i.e. "stop"</span>
+
+<span class="token keyword">for</span> iteration <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    error_for_all_lights <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> row_index <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>walk_vs_stop<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">input</span> <span class="token operator">=</span> streetlights<span class="token punctuation">[</span>row_index<span class="token punctuation">]</span>
+        goal_prediction <span class="token operator">=</span> walk_vs_stop<span class="token punctuation">[</span>row_index<span class="token punctuation">]</span>
+        
+        prediction <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">.</span>dot<span class="token punctuation">(</span>weights<span class="token punctuation">)</span>
+        
+        error <span class="token operator">=</span> <span class="token punctuation">(</span>goal_prediction <span class="token operator">-</span> prediction<span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span>
+        error_for_all_lights <span class="token operator">+=</span> error
+        
+        delta <span class="token operator">=</span> prediction <span class="token operator">-</span> goal_prediction
+        weights <span class="token operator">=</span> weights <span class="token operator">-</span> <span class="token punctuation">(</span>alpha <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token builtin">input</span> <span class="token operator">*</span> delta<span class="token punctuation">)</span><span class="token punctuation">)</span>	
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Prediction:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>prediction<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>error_for_all_lights<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="完全、批量和随机梯度下降"><a href="#完全、批量和随机梯度下降" class="headerlink" title="完全、批量和随机梯度下降"></a>完全、批量和随机梯度下降</h3><h4 id="随机梯度下降每次对一个样例更新权重"><a href="#随机梯度下降每次对一个样例更新权重" class="headerlink" title="随机梯度下降每次对一个样例更新权重"></a>随机梯度下降每次对一个样例更新权重</h4><p>即分别为每个训练样例执行预测和权重更新，它先拿到第一条信号灯的数据，尝试基于它进行预测，计算权重增量  <code>weight_delta</code> 并更新权重，然后继续读取第二条信号灯的数据，以此类推。</p>
+<h4 id="完全梯度下降每次对整个数据集更新权重"><a href="#完全梯度下降每次对整个数据集更新权重" class="headerlink" title="完全梯度下降每次对整个数据集更新权重"></a>完全梯度下降每次对整个数据集更新权重</h4><p>网络针对整个数据集计算增量权重 <code>weight_delta</code> 的平均值，并在均值计算完成之后更新权重，而非对每个训练用例更新权重。</p>
+<h3 id="批量梯度下降对每n个样例更新权重"><a href="#批量梯度下降对每n个样例更新权重" class="headerlink" title="批量梯度下降对每n个样例更新权重"></a>批量梯度下降对每n个样例更新权重</h3><p>它并非在计算一个样例之后或遍历整个样本数据集之后更新权重，而是选择确定批次大小（通常在8到256之间）的样例，然后更新权重。</p>
+<h3 id="神经网络对相关性的学习"><a href="#神经网络对相关性的学习" class="headerlink" title="神经网络对相关性的学习"></a>神经网络对相关性的学习</h3><p>神经网络并不知道它在处理信号灯的数据。它只是在尝试识别(三种可能中的)哪种输入与输出相关。它通过分析网络的最终权重确认了中间的信号灯。</p>
+<blockquote>
+<p>注意：中间的权重非常接近1，而最左边和最右边的权重都非常接近0。任何权重数值高的位置都具有高相关性，相反，最左边和最右边的输入相对于输出是随机的（它们的权重值非常接近于0）。</p>
+</blockquote>
+<p>网络如何确定相关性？</p>
+<p>平均而言，中间那一项权重收到的向上压力更大，其他权重所受到的向下的压力更大。</p>
+<p>那么压力从何而来？为什么不同权重所受到的压力有所不同？</p>
+<h4 id="向上与向下的压力"><a href="#向上与向下的压力" class="headerlink" title="向上与向下的压力"></a>向上与向下的压力</h4><p>来自于数据。</p>
+<p>对于给定输入，每个节点都各自尝试做出正确的预测。大多数情况下，每个节点在尝试这样做的时候都会忽略其他所有节点。<strong>唯一的交叉通信在于这三个权值必须共享相同的误差度量。</strong>权重更新只不过是将这个共享的误差度量值与每个对应的输入相乘。</p>
+<p>为什么要这样做呢？</p>
+<p>神经网络能够学习的关键部分是<strong>误差归因</strong>，它意味着给定共享误差，神经网络需要找出哪些权重对这些误差产生了影响（可以据此进行调整），哪些权重没有（可以不管它们）。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231128213543423.png" alt="image-20231128213543423"></p>
+<p>例如第一个训练样例，因为中间的输入是0，所以中间的权重与预测结果完全无关。不管权重是多少，它都会乘以0（输入数据）。因此，该训练样例中的任何误差（无论它是太高或还是太低）都只能归因于最左边和最右边的权重。</p>
+<p>现在我们来看第一个训练样例对权重产生的压力，如果网络预测值应该为0，且相应的输入为1，则会导致错误，从而使得对应的权重值趋近于0。</p>
+<blockquote>
+<p>权重为+表示有向1方向的压力，-表示有向0方向的压力，0表示没有压力，因为输入数据点为0，所以权重不会改变。</p>
+</blockquote>
+<p>总体而言：</p>
+<ul>
+<li>竖着看最左边的权重对应的压力两负一正，所以平均而言它的值会趋近于0。</li>
+<li>中间权重对应的压力是3个正值，所以平均而言它的值会趋近于1。</li>
+<li>右边权重三负三正，所以平均而言它的值会趋近于0。</li>
+</ul>
+<blockquote>
+<p>预测结果是输入数据的加权和。学习算法对与输出相关的输入所对应的权重以向上（向1的方向）压力作为奖励，而对与输出不相关的输入所对应的权重以向下（向0的方向）压力作为惩罚。</p>
+</blockquote>
+<h4 id="边界情况：过拟合"><a href="#边界情况：过拟合" class="headerlink" title="边界情况：过拟合"></a>边界情况：过拟合</h4><p>所有的权值都有误差。如果某个特定的权重配置意外地在预测数据集和输出数据集之间创建了<strong>完美的吻合</strong>（比如使得error &#x3D;&#x3D;&#x3D; 0），而此时并没有给真正最重要的输入赋予最大的权重，那么神经网络将停止学习。</p>
+<p>本质上，神经网络只是记住了那个完美吻合的训练样例，而不是找出能够推广到任意可能的组合的相关性。</p>
+<blockquote>
+<p>深度学习面临的最大挑战是训练你的神经网络去泛化而不仅仅是记忆。</p>
+</blockquote>
+<h4 id="边界情况：压力冲突"><a href="#边界情况：压力冲突" class="headerlink" title="边界情况：压力冲突"></a>边界情况：压力冲突</h4><p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129120027886.png" alt="image-20231129120027886"></p>
+<p>最右边的一列似乎有数量相等的向上和向下的力矩，但是网络正确地将之对应的（最右边的）权重降低到了0，这意味着它向下的力矩必须大于向上的力矩，这是怎么回事？</p>
+<p>左边和中间的权重有足够的信息使它们自行收敛。左边的权重降低到0，中间的权重升高到1。 随着中间的权重越来越高，正样本所带来的误差也在不断减小。<strong>但是当它们接近最优位置时，最右边的权重与预测结果的无关性则更加明显。</strong></p>
+<p>让我们考虑-一个极端的例子:左边和中间的权重被完美地分别设置为0和1。网络会发生什么?如果右边的权重值大于0，则网络预测的结果会过高；如果右边的权重值低于0，则网络预测的结果会过低。</p>
+<blockquote>
+<p>在其他节点学习的过程中，它们会吸收一部分误差，它们也会吸收一部分相关性。</p>
+</blockquote>
+<p>这种情况下，中间的权重有持续的信息来吸收所有的相关性（由于中间那项输入与输出之间有着1:1的对应关系），当你想预测1时，误差会变得非常小，但是你想要预测0时，误差变大，这把右边的权重不断向下推。</p>
+<blockquote>
+<ul>
+<li><p>正则化是有利的，因为如果一个权重具有相同的向上和向下的压力，不会产生任何好处，它不会对任何一个方向有帮助。</p>
+</li>
+<li><p>正则化的目的是使得只有真正具有强相关性的权重才能保持不变，<strong>其他的一切都应该被压制</strong>，因为它们会产生噪声。</p>
+</li>
+<li><p>正则化有副作用，它会导致神经网络的训练加快（迭代次数更少），因为最右边的权重存在同时受到正负两个方向的压力的问题。</p>
+<p>这种情况下，由于最右边的节点没有表现出明确的相关性，网络将立即把它向0的方向推。如果没有经过正则化——就好像之前的训练过程那样，直到左边的权重和中间的权重慢慢开始找到它们的模式，我们才会知道最右侧的输入是无用的。</p>
+</li>
+</ul>
+</blockquote>
+<p>考虑如下极端情况：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129123249545.png" alt="image-20231129123249545"></p>
+<p>这种情况下任何一列输入和输出之间都没有相关性，每项权重都受到等量的向上和向下的压力，所有的输入在正负压力之间都是平衡的，那么神经网络应该如何处理？</p>
+<h3 id="学习间接相关性"><a href="#学习间接相关性" class="headerlink" title="学习间接相关性"></a>学习间接相关性</h3><p><strong>如果数据没有相关性，那么创建具有相关性的中间数据！</strong></p>
+<p>解决方案：<strong>使用两个神经网络</strong>。第一个将创建一个与输出数据具有有限相关性的中间数据集，第二个将使用这种有限相关性正确预测输出。</p>
+<h4 id="创建关联"><a href="#创建关联" class="headerlink" title="创建关联"></a>创建关联</h4><p>我们的目标是训练这个网络使得即使在输入数据集和输出数据集（layer_0和layer_2）之间没有相关性的情况下，用layer_0创建的数据集layer_1仍与layer_2相关。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129164518587.png" alt="image-20231129164518587"></p>
+<blockquote>
+<p>注意：这个网络仍然只是一个函数。它有一组以某种特定的方式放在一起的权重。此外，梯度下降仍然有效，因为你可以计算每个权重对误差的贡献，调整它使误差降到0。</p>
+</blockquote>
+<h4 id="反向传播：远程错误归因"><a href="#反向传播：远程错误归因" class="headerlink" title="反向传播：远程错误归因"></a>反向传播：远程错误归因</h4><ol>
+<li><p>从layer_1到layer_2的预测应该是什么？</p>
+<p>是layer_1的数值的加权平均值。</p>
+</li>
+<li><p>如果layer_2以x的误差偏高，你如何知道layer_1的哪些值贡献了误差？</p>
+<p>权重较高的值贡献更多误差，权重较低的值贡献的误差较少。</p>
+</li>
+<li><p>假设从layer_1到layer_2最左边的权重是0。layer_1上的该节点导致了多少误差？</p>
+<p>答案是0。因为权重准确地描述了每个layer_1节点对layer_2预测的贡献份额，也意味着这些权重能准确描述每个layer_1节点对layer_2的误差的贡献。</p>
+</li>
+<li><p>如何利用layer_2的delta（增量）来求出layer_1处的delta（增量）呢？</p>
+<p>将它乘以layer_1的各个权重。这种反向传递增量信号的过程叫作<strong>反向传播</strong>。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129170253214.png" alt="image-20231129170253214"></p>
+</li>
+</ol>
+<h4 id="反向传播：为什么有效？"><a href="#反向传播：为什么有效？" class="headerlink" title="反向传播：为什么有效？"></a>反向传播：为什么有效？</h4><p>反向传播让你做的事情：“如果你想让这个节点升高x，那么前面4个节点中的每一个都需要变高或者变低 x*weights_1_2 这么多，因为这些权重将预测的结果放大了 weights_1_2 倍。”</p>
+<p>当权重矩阵 weights_1_2 反过来使用时，会将误差适当放大。它放大了误差，使得你知道每个 layer_1 节点应该向上或向下移动多少。</p>
+<blockquote>
+<p>对于每一个权重，将它的输出增量乘以它的输入值，然后将权重调整那么多（或者，你也可以用alpha对其进行缩放）。</p>
+</blockquote>
+<h3 id="线性与非线性"><a href="#线性与非线性" class="headerlink" title="线性与非线性"></a>线性与非线性</h3><p>目前展示的神经网络是不可用的。例如如下的代数运算：</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129172424649.png" alt="image-20231129172424649"></p>
+<p>这里的要点是：对于任何两个乘法，我都可以用一个乘法来完成同样的事情。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129172712011.png" alt="image-20231129172712011"></p>
+<p>如上图，对于你创建的任何一个三层的神经网络，都存在着一个有着相同的行为模式的两层神经网络。即两个连续的加权和运算等价于一个加权和运算，只是代价更昂贵。</p>
+<p><strong>如果你现在训练这种三层网络，它不会收敛。</strong></p>
+<p>尝试着调整中间层之前，先讨论一下它的实现方式：</p>
+<ol>
+<li><p>每个输入都有一个权重通往相应的每一个节点。</p>
+</li>
+<li><p>中间层中的每个节点都和各个输入节点存在一定的关联，中间节点唯一可以摆脱和某个特定输入节点的相关性的方法，是与另一个输入节点建立更多相关性。</p>
+<blockquote>
+<p>注意：中间节点不能向这个过程添加任何内容，它们自己不会带来任何相关性，只是或多或少与不同的输入节点相关。</p>
+</blockquote>
+</li>
+<li><p>已知输入和输出之间不存在相关性，中间层只是把一些已经没用的相关性混合在一起。</p>
+<p>我们真正需要的是使中间层能够<strong>选择性地</strong>与输入节点相关联。</p>
+<p>这被称为条件相关，或者选择相关。</p>
+</li>
+</ol>
+<h4 id="选择性相关的秘密"><a href="#选择性相关的秘密" class="headerlink" title="选择性相关的秘密"></a>选择性相关的秘密</h4><ol>
+<li><p>当值低于0时“关闭”节点</p>
+<p>看起来太简单了，好像不会产生什么作用，但是不妨考虑一下：如果一个节点的值低于0，通常情况下这个节点仍然与输入具有一定的相关性，只是这个相关性的值恰好是负的而已。</p>
+<p>但是如果在节点为负的时候“关闭”它（将其设置为0），那么它与任何输入的相关性都会为0。这样节点就可以在它想要的时候选择性关联相应的对象，否则如果左边输入的权重值为0，右边输入的权重值是一个大负数，同时接受左右两边的输入将导致节点的值一直为0。</p>
+<blockquote>
+<p>注意：这对于两层神经网络是不可能的。因此，三层网络具有更强的能力。</p>
+</blockquote>
+</li>
+<li><p>这种“如果节点为负,则将其设置为0”的逻辑有一个漂亮的术语:“非线性”。</p>
+<p>没有这项调整的话，神经网络将是线性的。也就是说，如果没有这项技术，输出<br>层能够选择的相关性和它在两层网络中可选的相关性没有什么区别。它直接与输<br>入层相关，就意味着它不能解决新的路灯数据集的问题。</p>
+<p>非线性变换有很多种，这种最常用而且是许多情况下最好的方法，称为<strong>ReLu</strong>。</p>
+</li>
+</ol>
+<p><strong>调整权重来降低一系列训练样例上的误差，最终目标在于寻找输入层和输出层之间的相关性。如果不存在相关性，则误差永远不会达到0。</strong></p>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><ol>
+<li><p>初始化权重并进行正向传播</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129182637210.png" alt="image-20231129182637210"></p>
+</li>
+<li><p>反向传播</p>
+<p>将两层神经网络的代码记住是一件重要的事情。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129190036491.png" alt="image-20231129190036491"></p>
+<p> <code>relu2deriv</code> 函数在 <code>output &gt; 0</code>时返回1；否则，返回0。这是 relu 函数的斜率。</p>
+<p>那么为什么<code>layer_1_delta</code>函数要这样做呢？</p>
+<ol>
+<li>首先将输出的delta乘以与之连接的每个权重，这么做算出了每项权重对误差的贡献大小。</li>
+<li>如果relu将某个layer_1节点的输出设置为0，则不会对误差产生任何影响。</li>
+</ol>
+<blockquote>
+<p>注意：<code>layer_1_delta</code>是于1层与二层之间权重矩阵的转置相乘的，因为矩阵的逆运算。</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="反向传播的一次迭代"><a href="#反向传播的一次迭代" class="headerlink" title="反向传播的一次迭代"></a>反向传播的一次迭代</h4><p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129193458217.png" alt="image-20231129193458217"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129193802191.png" alt="image-20231129193802191"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129194012313.png" alt="image-20231129194012313"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/image-20231129194250223.png" alt="image-20231129194250223"></p>
+<p>代码示例：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">relu</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>x <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">*</span> x <span class="token comment"># returns x if x > 0</span>
+                       <span class="token comment"># return 0 otherwise</span>
+
+<span class="token keyword">def</span> <span class="token function">relu2deriv</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> output<span class="token operator">></span><span class="token number">0</span> <span class="token comment"># returns 1 for input > 0</span>
+                    <span class="token comment"># return 0 otherwise</span>
+
+streetlights <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">[</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">]</span> <span class="token punctuation">]</span> <span class="token punctuation">)</span>
+
+walk_vs_stop <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>T
+    
+alpha <span class="token operator">=</span> <span class="token number">0.2</span>
+hidden_size <span class="token operator">=</span> <span class="token number">4</span>
+
+weights_0_1 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>random<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span>hidden_size<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
+weights_1_2 <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>random<span class="token punctuation">(</span><span class="token punctuation">(</span>hidden_size<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
+
+<span class="token keyword">for</span> iteration <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+   layer_2_error <span class="token operator">=</span> <span class="token number">0</span>
+   <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>streetlights<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+      layer_0 <span class="token operator">=</span> streetlights<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>
+      layer_1 <span class="token operator">=</span> relu<span class="token punctuation">(</span>np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>layer_0<span class="token punctuation">,</span>weights_0_1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      layer_2 <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>layer_1<span class="token punctuation">,</span>weights_1_2<span class="token punctuation">)</span>
+
+      layer_2_error <span class="token operator">+=</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">(</span>layer_2 <span class="token operator">-</span> walk_vs_stop<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+      layer_2_delta <span class="token operator">=</span> <span class="token punctuation">(</span>layer_2 <span class="token operator">-</span> walk_vs_stop<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+      layer_1_delta<span class="token operator">=</span>layer_2_delta<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>weights_1_2<span class="token punctuation">.</span>T<span class="token punctuation">)</span><span class="token operator">*</span>relu2deriv<span class="token punctuation">(</span>layer_1<span class="token punctuation">)</span>
+
+      weights_1_2 <span class="token operator">-=</span> alpha <span class="token operator">*</span> layer_1<span class="token punctuation">.</span>T<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>layer_2_delta<span class="token punctuation">)</span>
+      weights_0_1 <span class="token operator">-=</span> alpha <span class="token operator">*</span> layer_0<span class="token punctuation">.</span>T<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>layer_1_delta<span class="token punctuation">)</span>
+
+   <span class="token keyword">if</span><span class="token punctuation">(</span>iteration <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>layer_2_error<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">QT-7274</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://qt-7274.github.io/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/">https://qt-7274.github.io/2023/11/28/shen-du-xue-xi-tu-jie-fan-xiang-chuan-bo/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">QT-7274</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">深度学习</span>
+                                </a>
+                            
+                                <a href="/tags/%E3%80%8A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9B%BE%E8%A7%A3%E3%80%8B/">
+                                    <span class="chip bg-color">《深度学习图解》</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.gif") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid;">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'tzmyy70PpnbbxclXN4jYmjPA-gzGzoHsz',
+        appKey: 'TCY55mH7vS6x5sVr1bCLm5Gg',
+        serverURLs: '',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        requiredFields: ['nick','mail'],
+        enableQQ: 'true',
+        lang: 'zh-cn',
+        placeholder: '😉畅所欲言！\n📲请文明评论，禁止恶意评论🚫 \n⚠️公开网络空间，请不要发表任何包含个人或其他人的隐私信息🔐',
+        master: ["f18e9f29c8274571d5a0752aca9310ef"],
+        friends:["0aa4f09d8249581a4380a6fc541062e7","6a66a1ba019c52f168d99313efbef39a"]
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/11/30/shen-du-xue-xi-tu-jie-zheng-ze-hua-he-pi-chu-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/6.jpg" class="responsive-img" alt="《深度学习图解》正则化和批处理">
+                        
+                        <span class="card-title">《深度学习图解》正则化和批处理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-11-30
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9B%BE%E8%A7%A3%E3%80%8B/">
+                        <span class="chip bg-color">《深度学习图解》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/6.jpg" class="responsive-img" alt="《深度学习图解》梯度下降">
+                        
+                        <span class="card-title">《深度学习图解》梯度下降</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9B%BE%E8%A7%A3%E3%80%8B/">
+                        <span class="chip bg-color">《深度学习图解》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">QT-7274</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/QT-7274" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2531376773@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2531376773" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2531376773" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+    <a  class="tooltipped" target="_blank" data-tooltip="微信联系我: Q5268368" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>
