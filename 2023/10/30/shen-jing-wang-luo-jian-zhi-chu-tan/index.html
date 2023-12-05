@@ -464,7 +464,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-11-15
+                    2023-12-05
                 </div>
                 
 
@@ -501,11 +501,11 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h2><p><img src="/medias/images/loading.gif" data-original="/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D%E5%88%9D%E6%8E%A2/image-20231030111206019.png" alt="image-20231030111206019"></p>
+                <h2 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h2><p><img src="/medias/images/loading.gif" data-original="/2023/10/30/shen-jing-wang-luo-jian-zhi-chu-tan/image-20231030111206019.png" alt="image-20231030111206019"></p>
 <p>如上图，我们发现函数的曲线其实已经有点过拟合了，但是如果我们去掉一些参数很小的项，那么它的泛化性就更好：</p>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D%E5%88%9D%E6%8E%A2/image-20231030111316278.png" alt="image-20231030111316278"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/10/30/shen-jing-wang-luo-jian-zhi-chu-tan/image-20231030111316278.png" alt="image-20231030111316278"></p>
 <p>即剪枝的目的：<strong>去掉一些不重要的参数，让我们的模型变得更小，计算效率更高。</strong></p>
-<h3 id="如何剪枝"><a href="#如何剪枝" class="headerlink" title="如何剪枝"></a>如何剪枝</h3><p><img src="/medias/images/loading.gif" data-original="/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D%E5%88%9D%E6%8E%A2/image-20231030111543398.png" alt="image-20231030111543398"></p>
+<h3 id="如何剪枝"><a href="#如何剪枝" class="headerlink" title="如何剪枝"></a>如何剪枝</h3><p><img src="/medias/images/loading.gif" data-original="/2023/10/30/shen-jing-wang-luo-jian-zhi-chu-tan/image-20231030111543398.png" alt="image-20231030111543398"></p>
 <p>例如我们要将前一个网络剪枝成后一个网络，有以下步骤：</p>
 <ol>
 <li>用矩阵表示系数，例如上图中最后一层全连接层，输入是4个，输出是3个，那么我们就可以用一个4 * 3的矩阵进行表示。</li>
@@ -516,7 +516,7 @@
 <p>综上所述，我们的目标就是：<strong>如何求出一个掩码矩阵？</strong></p>
 </blockquote>
 <p>numpy为我们提供了一个简单的方法：</p>
-<p><img src="/medias/images/loading.gif" data-original="/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%89%AA%E6%9E%9D%E5%88%9D%E6%8E%A2/image-20231030192019969.png" alt="image-20231030192019969"></p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/10/30/shen-jing-wang-luo-jian-zhi-chu-tan/image-20231030192019969.png" alt="image-20231030192019969"></p>
 <p>即先求出系数矩阵的绝对值，然后告诉该函数要减掉百分之多少的枝，最好函数返回一个阈值：即小于该阈值的数都被剪掉了。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ol>
 <li><p>设置掩码，同时考虑掩码是否为空的情况：</p>
