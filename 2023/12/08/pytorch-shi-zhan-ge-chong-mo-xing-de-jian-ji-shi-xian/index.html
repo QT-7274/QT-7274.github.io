@@ -1,0 +1,2184 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="PyTorch实战：各种模型的简洁实现, QT-7274">
+    <meta name="description" content="线性回归的初始实现%matplotlib inline
+import matplotlib_inline
+import torch
+from IPython import display
+from matplotlib import pyp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>PyTorch实战：各种模型的简洁实现 | QT-7274</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+    
+<body>
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    <div>
+                    
+                    <img src="/medias/images/loading.gif" data-original="/medias/logo.gif" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">QT-7274</span>
+                </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+    <div class="mobile-head bg-color">
+      <div>
+        
+        <img no-lazy src="/medias/logo.gif" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">QT-7274</div>
+        <div class="logo-desc">
+          
+              Never really desperate, only the lost of the soul.
+              
+            </div>
+      </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/QT-7274/QT-7274.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #003a8c;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/QT-7274/QT-7274.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">PyTorch实战：各种模型的简洁实现</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">深度学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                深度学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-12-08
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-12-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    9.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    38 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="线性回归的初始实现"><a href="#线性回归的初始实现" class="headerlink" title="线性回归的初始实现"></a>线性回归的初始实现</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">%</span>matplotlib inline
+<span class="token keyword">import</span> matplotlib_inline
+<span class="token keyword">import</span> torch
+<span class="token keyword">from</span> IPython <span class="token keyword">import</span> display
+<span class="token keyword">from</span> matplotlib <span class="token keyword">import</span> pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> random<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="生成数据集"><a href="#生成数据集" class="headerlink" title="生成数据集"></a>生成数据集</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">num_inputs <span class="token operator">=</span> <span class="token number">2</span>
+num_examples <span class="token operator">=</span> <span class="token number">1000</span>
+true_w <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3.4</span><span class="token punctuation">]</span> <span class="token comment"># 表示真实权重</span>
+true_b <span class="token operator">=</span> <span class="token number">4.2</span> <span class="token comment"># 表示真实偏差</span>
+features <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>num_examples<span class="token punctuation">,</span> num_inputs<span class="token punctuation">,</span>
+                       dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span> <span class="token comment"># torch.randn函数会从标准正态分布中随机采样一个张量</span>
+labels <span class="token operator">=</span> true_w<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> true_w<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> true_b <span class="token comment"># 将权重第一项和features第一列相乘得到第一项，再将权重第二项与features第二列相乘，最后加上偏差</span>
+labels <span class="token operator">+=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.01</span><span class="token punctuation">,</span> size<span class="token operator">=</span>labels<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                       dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span> <span class="token comment"># 模拟真实数据中的噪声，均值为0，标准差为0.01，大小和labels相同</span>
+
+<span class="token comment"># print(features)</span>
+<span class="token comment"># print(labels)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">use_svg_display</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 用矢量图显示，这对于需要高质量矢量图形的情况非常有用</span>
+    <span class="token comment"># display.set_matplotlib_formats('svg') # 通常情况下，该方法将输出渲染为PNG图像格式，但是这个函数自2021年5月起已被弃用</span>
+ matplotlib_inline<span class="token punctuation">.</span>backend_inline<span class="token punctuation">.</span>set_matplotlib_formats<span class="token punctuation">(</span><span class="token string">'svg'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">set_figsize</span><span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">3.5</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    use_svg_display<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># 设置图的尺寸</span>
+    plt<span class="token punctuation">.</span>rcParams<span class="token punctuation">[</span><span class="token string">'figure.figsize'</span><span class="token punctuation">]</span> <span class="token operator">=</span> figsize <span class="token comment"># plt.rcParams是Matplotlib库中的一个全局配置对象，用于设置和控制图形的各种参数。通过修改plt.rcParams中的参数，可以影响图形的样式、布局、字体、颜色等方面</span>
+
+ 
+
+<span class="token comment"># 设置图像的大小</span>
+<span class="token comment"># plt.rcParams['figure.figsize'] = (10, 10)</span>
+
+<span class="token comment"># 设置图像的分辨率</span>
+<span class="token comment"># plt.rcParams['figure.dpi'] = 300</span>
+
+<span class="token comment"># 设置保存的图像的分辨率</span>
+<span class="token comment"># plt.rcParams['savefig.dpi'] = 300</span>
+
+<span class="token comment"># 设置线条的颜色</span>
+<span class="token comment"># plt.rcParams['lines.color'] = 'r'</span>
+
+<span class="token comment"># 设置线条的样式</span>
+<span class="token comment"># plt.rcParams['lines.linestyle'] = '--'</span>
+
+<span class="token comment"># 设置线条的宽度</span>
+<span class="token comment"># plt.rcParams['lines.linewidth'] = 2.0</span>
+
+<span class="token comment"># 设置字体</span>
+<span class="token comment"># plt.rcParams['font.family'] = 'serif'</span>
+
+<span class="token comment"># 设置字体大小</span>
+<span class="token comment"># plt.rcParams['font.size'] = 12</span>
+
+<span class="token comment"># 设置字体颜色</span>
+<span class="token comment"># plt.rcParams['text.color'] = 'k'</span>
+
+<span class="token comment"># 设置背景颜色</span>
+<span class="token comment"># plt.rcParams['axes.facecolor'] = 'white'</span>
+
+<span class="token comment"># 设置坐标轴的颜色</span>
+<span class="token comment"># plt.rcParams['axes.edgecolor'] = 'black'</span>
+
+<span class="token comment"># 设置标题的大小</span>
+<span class="token comment"># plt.rcParams['axes.titlesize'] = 20</span>
+
+<span class="token comment"># 设置坐标轴标签的大小</span>
+<span class="token comment"># plt.rcParams['axes.labelsize'] = 15</span>
+
+<span class="token comment"># 设置坐标轴刻度的大小</span>
+<span class="token comment"># plt.rcParams['xtick.labelsize'] = 10</span>
+<span class="token comment"># plt.rcParams['ytick.labelsize'] = 10</span>
+
+<span class="token comment"># 设置图例的大小</span>
+<span class="token comment"># plt.rcParams['legend.fontsize'] = 'large'</span>
+
+<span class="token comment"># 设置图例的位置</span>
+<span class="token comment"># plt.rcParams['legend.loc'] = 'best'</span>
+
+
+<span class="token comment"># # 在../d2lzh_pytorch里面添加上面两个函数后就可以这样导入</span>
+<span class="token comment"># import sys</span>
+<span class="token comment"># sys.path.append("..")</span>
+<span class="token comment"># from d2lzh_pytorch import * </span>
+
+set_figsize<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> labels<span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment"># 获取features的二维数组的第二列的所有元素，并将其转换为numpy数组，同理转换labels数组；1是散点的大小</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">data_iter</span><span class="token punctuation">(</span>batch_size<span class="token punctuation">,</span> features<span class="token punctuation">,</span> labels<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># [每个批次的大小 特征数据 标签数据] 可以按批次随机读取数据的迭代器</span>
+    num_examples <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>features<span class="token punctuation">)</span> <span class="token comment"># 计算特征的长度</span>
+    indices <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span>num_examples<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 创建一个长度为特征长度的列表，range函数会生成一个从0开始，到num_examples - 1结束的整数序列。</span>
+    random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>indices<span class="token punctuation">)</span>  <span class="token comment"># 样本的读取顺序是随机的</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> num_examples<span class="token punctuation">,</span> batch_size<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># 每次循环处理一个批次的数据，循环的步长为batch_size，因为每次循环处理的是一个新的批次</span>
+        j <span class="token operator">=</span> torch<span class="token punctuation">.</span>LongTensor<span class="token punctuation">(</span>indices<span class="token punctuation">[</span>i<span class="token punctuation">:</span> <span class="token builtin">min</span><span class="token punctuation">(</span>i <span class="token operator">+</span> batch_size<span class="token punctuation">,</span> num_examples<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># 最后一次可能不足一个batch，创建一个张量j，包含当前批次的索引</span>
+        <span class="token keyword">yield</span>  features<span class="token punctuation">.</span>index_select<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">,</span> labels<span class="token punctuation">.</span>index_select<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> j<span class="token punctuation">)</span> <span class="token comment"># 使用index_select函数从features和labels中选择出当前批次的数据，并使用yield关键字返回。yield关键字表示这是一个生成器函数，每次调用next方法时，都会返回下一个批次的数据。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">batch_size <span class="token operator">=</span> <span class="token number">10</span>
+
+<span class="token keyword">for</span> X<span class="token punctuation">,</span> y <span class="token keyword">in</span> data_iter<span class="token punctuation">(</span>batch_size<span class="token punctuation">,</span> features<span class="token punctuation">,</span> labels<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+    <span class="token keyword">break</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="初始化模型参数"><a href="#初始化模型参数" class="headerlink" title="初始化模型参数"></a>初始化模型参数</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">w <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.01</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span> <span class="token comment"># 使用NumPy的random.normal函数生成一个形状为(num_inputs, 1)的正态分布随机数数组，该正态分布的均值为0，标准差为0.01。</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span> <span class="token comment"># 偏置初始化为0</span>
+
+w<span class="token punctuation">.</span>requires_grad_<span class="token punctuation">(</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+b<span class="token punctuation">.</span>requires_grad_<span class="token punctuation">(</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">linreg</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> w<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 本函数已保存在d2lzh_pytorch包中方便以后使用</span>
+    <span class="token keyword">return</span> torch<span class="token punctuation">.</span>mm<span class="token punctuation">(</span>X<span class="token punctuation">,</span> w<span class="token punctuation">)</span> <span class="token operator">+</span> b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="定义损失函数"><a href="#定义损失函数" class="headerlink" title="定义损失函数"></a>定义损失函数</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">squared_loss</span><span class="token punctuation">(</span>y_hat<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 本函数已保存在d2lzh_pytorch包中方便以后使用</span>
+    <span class="token comment"># 注意这里返回的是向量, 另外, pytorch里的MSELoss并没有除以 2</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>y_hat <span class="token operator">-</span> y<span class="token punctuation">.</span>view<span class="token punctuation">(</span>y_hat<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">/</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="定义优化算法"><a href="#定义优化算法" class="headerlink" title="定义优化算法"></a>定义优化算法</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">sgd</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> lr<span class="token punctuation">,</span> batch_size<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 本函数已保存在d2lzh_pytorch包中方便以后使用</span>
+    <span class="token keyword">for</span> param <span class="token keyword">in</span> params<span class="token punctuation">:</span>
+        param<span class="token punctuation">.</span>data <span class="token operator">-=</span> lr <span class="token operator">*</span> param<span class="token punctuation">.</span>grad <span class="token operator">/</span> batch_size <span class="token comment"># 注意这里更改param时用的param.data</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">lr <span class="token operator">=</span> <span class="token number">0.03</span>
+num_epochs <span class="token operator">=</span> <span class="token number">3</span>
+net <span class="token operator">=</span> linreg
+loss <span class="token operator">=</span> squared_loss
+
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 训练模型一共需要num_epochs个迭代周期</span>
+    <span class="token comment"># 在每一个迭代周期中，会使用训练数据集中所有样本一次（假设样本数能够被批量大小整除）。X</span>
+    <span class="token comment"># 和y分别是小批量样本的特征和标签</span>
+    <span class="token keyword">for</span> X<span class="token punctuation">,</span> y <span class="token keyword">in</span> data_iter<span class="token punctuation">(</span>batch_size<span class="token punctuation">,</span> features<span class="token punctuation">,</span> labels<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        l <span class="token operator">=</span> loss<span class="token punctuation">(</span>net<span class="token punctuation">(</span>X<span class="token punctuation">,</span> w<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># l是有关小批量X和y的损失</span>
+        l<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 小批量的损失对模型参数求梯度</span>
+        sgd<span class="token punctuation">(</span><span class="token punctuation">[</span>w<span class="token punctuation">,</span> b<span class="token punctuation">]</span><span class="token punctuation">,</span> lr<span class="token punctuation">,</span> batch_size<span class="token punctuation">)</span>  <span class="token comment"># 使用小批量随机梯度下降迭代模型参数</span>
+
+        <span class="token comment"># 不要忘了梯度清零</span>
+        w<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        b<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    train_l <span class="token operator">=</span> loss<span class="token punctuation">(</span>net<span class="token punctuation">(</span>features<span class="token punctuation">,</span> w<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">,</span> labels<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'epoch %d, loss %f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> train_l<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：如果要重新训练，请执行随机权重初始化那段代码。</p>
+</blockquote>
+<h2 id="线性回归的简洁实现"><a href="#线性回归的简洁实现" class="headerlink" title="线性回归的简洁实现"></a>线性回归的简洁实现</h2><p>随着深度学习框架的发展，开发深度学习应用变得越来越便利。实践中，我们通常可以用比上一节更简洁的代码来实现同样的模型。在本节中，我们将介绍如何使用PyTorch更方便地实现线性回归的训练。</p>
+<h3 id="生成数据集-1"><a href="#生成数据集-1" class="headerlink" title="生成数据集"></a>生成数据集</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">num_inputs <span class="token operator">=</span> <span class="token number">2</span>
+num_examples <span class="token operator">=</span> <span class="token number">1000</span>
+true_w <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3.4</span><span class="token punctuation">]</span>
+true_b <span class="token operator">=</span> <span class="token number">4.2</span>
+features <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>num_examples<span class="token punctuation">,</span> num_inputs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span><span class="token builtin">float</span><span class="token punctuation">)</span>
+labels <span class="token operator">=</span> true_w<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> true_w<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> features<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> true_b
+labels <span class="token operator">+=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.01</span><span class="token punctuation">,</span> size<span class="token operator">=</span>labels<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span><span class="token builtin">float</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="读取数据-1"><a href="#读取数据-1" class="headerlink" title="读取数据"></a>读取数据</h3><p>PyTorch提供了<code>data</code>包来读取数据。由于<code>data</code>常用作变量名，我们将导入的<code>data</code>模块用<code>Data</code>代替。在每一次迭代中，我们将随机读取包含10个数据样本的小批量。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">as</span> Data
+
+batch_size <span class="token operator">=</span> <span class="token number">10</span>
+<span class="token comment"># 将训练数据的特征和标签组合</span>
+dataset <span class="token operator">=</span> Data<span class="token punctuation">.</span>TensorDataset<span class="token punctuation">(</span>features<span class="token punctuation">,</span> labels<span class="token punctuation">)</span>
+<span class="token comment"># 随机读取小批量</span>
+data_iter <span class="token operator">=</span> Data<span class="token punctuation">.</span>DataLoader<span class="token punctuation">(</span>dataset<span class="token punctuation">,</span> batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="定义模型-1"><a href="#定义模型-1" class="headerlink" title="定义模型"></a>定义模型</h3><p>在上一节从零开始的实现中，我们需要定义模型参数，并使用它们一步步描述模型是怎样计算的。当模型结构变得更复杂时，这些步骤将变得更繁琐。其实，PyTorch提供了大量预定义的层，这使我们只需关注使用哪些层来构造模型。下面将介绍如何使用PyTorch更简洁地定义线性回归。</p>
+<ol>
+<li><p>导入 <code>torch.nn</code> 模块。实际上，“nn”是neural networks（神经网络）的缩写。顾名思义，该模块定义了大量神经网络的层。之前我们已经用过了<code>autograd</code>，而<code>nn</code>就是利用<code>autograd</code>来定义模型。</p>
+</li>
+<li><p><code>nn</code>的核心数据结构是<code>Module</code>，它是一个抽象概念，既可以表示神经网络中的某个层（layer），也可以表示一个包含很多层的神经网络。</p>
+<blockquote>
+<p>在实际使用中，最常见的做法是继承<code>nn.Module</code>，撰写自己的网络&#x2F;层。</p>
+</blockquote>
+<p>一个<code>nn.Module</code>实例应该包含一些层以及返回输出的前向传播（forward）方法。</p>
+</li>
+</ol>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">LinearNet</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n_feature<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment">#初始化对象的属性和层</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>LinearNet<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 因为我们要继承nn.Module的功能</span>
+        self<span class="token punctuation">.</span>linear <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>n_feature<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment"># 创建一个线性层对象，接收两个参数，输入特征为n_feature，输出特征为1</span>
+    <span class="token comment"># 输入特征数和输出特征数决定了权重矩阵和偏置的形状。权重矩阵的形状是（输出特征数，输入特征数），偏置的形状是（输出特征数，）</span>
+    <span class="token comment"># forward 定义前向传播</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        y <span class="token operator">=</span> self<span class="token punctuation">.</span>linear<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> y
+
+net <span class="token operator">=</span> LinearNet<span class="token punctuation">(</span>num_inputs<span class="token punctuation">)</span> <span class="token comment"># 传给 n_feature</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>net<span class="token punctuation">)</span> <span class="token comment"># 使用print可以打印出网络的结构</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">LinearNet(
+  (linear): Linear(in_features&#x3D;2, out_features&#x3D;1, bias&#x3D;True)
+)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>事实上我们还可以用<code>nn.Sequential</code>来更加方便地搭建网络，<code>Sequential</code>是一个有序的容器，网络层将按照在传入<code>Sequential</code>的顺序依次被添加到计算图中。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 写法一</span>
+net <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+    nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token comment"># 此处还可以传入其他层</span>
+    <span class="token punctuation">)</span>
+
+<span class="token comment"># 写法二</span>
+net <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span><span class="token punctuation">)</span>
+net<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">'linear'</span><span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># net.add_module ......</span>
+
+<span class="token comment"># 写法三</span>
+<span class="token keyword">from</span> collections <span class="token keyword">import</span> OrderedDict
+net <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>OrderedDict<span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token punctuation">(</span><span class="token string">'linear'</span><span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token comment"># ......</span>
+        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>net<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>net<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以通过<code>net.parameters()</code>来查看模型所有的可学习参数，此函数将返回一个生成器。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> param <span class="token keyword">in</span> net<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">Parameter containing:
+tensor([[-0.0277,  0.2771]], requires_grad&#x3D;True)
+Parameter containing:
+tensor([0.3395], requires_grad&#x3D;True)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>作为一个单层神经网络，线性回归输出层中的神经元和输入层中各个输入完全连接。因此，线性回归的输出层又叫全连接层。</p>
+<blockquote>
+<p>注意：<code>torch.nn</code>仅支持输入一个batch的样本不支持单个样本输入，如果只有单个样本，可使用<code>input.unsqueeze(0)</code>来添加一维。</p>
+<p>例如我们有一个单个样本<code>x</code>，它的形状是<code>[特征数]</code>，例如<code>[3]</code>。如果我们想将它作为批量样本输入到<code>torch.nn</code>模型中，我们需要给它添加一个维度，使其形状变为<code>[1, 特征数]</code>，例如<code>[1, 3]</code>。我们可以使用<code>unsqueeze(0)</code>来实现这一点。下面是一个例子：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+
+<span class="token comment"># 假设我们有一个形状为[3]的单个样本</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  <span class="token comment"># 输出：torch.Size([3])</span>
+
+<span class="token comment"># 使用unsqueeze(0)给它添加一个维度</span>
+x <span class="token operator">=</span> x<span class="token punctuation">.</span>unsqueeze<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>  <span class="token comment"># 输出：torch.Size([1, 3])</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在<code>unsqueeze</code>函数中，<code>0</code>是一个参数，表示要在哪个维度上添加新的维度。具体来说，<code>0</code>表示在第一个维度（也就是最外层的维度）上添加新的维度。例如，如果我们有一个形状为<code>[3\]</code>的张量，使用<code>unsqueeze(0)</code>后，它的形状会变为<code>[1, 3]</code></p>
+</blockquote>
+<h3 id="初始化模型参数-1"><a href="#初始化模型参数-1" class="headerlink" title="初始化模型参数"></a>初始化模型参数</h3><p>在使用<code>net</code>前，我们需要初始化模型参数，如线性回归模型中的权重和偏差。PyTorch在<code>init</code>模块中提供了多种参数初始化方法。</p>
+<p>这里的<code>init</code>是<code>initializer</code>的缩写形式。我们通过<code>init.normal_</code>将权重参数每个元素初始化为随机采样于均值为0、标准差为0.01的正态分布。偏差会初始化为零。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> init
+
+init<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span>net<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token punctuation">,</span> mean<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> std<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">)</span>
+init<span class="token punctuation">.</span>constant_<span class="token punctuation">(</span>net<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>bias<span class="token punctuation">,</span> val<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># 也可以直接修改bias的data: net[0].bias.data.fill_(0)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：如果这里的<code>net</code>是用之前一开始的代码自定义的，那么上面代码会报错，<code>net[0].weight</code>应改为<code>net.linear.weight</code>，<code>bias</code>亦然。因为<code>net[0]</code>这样根据下标访问子模块的写法只有当<code>net</code>是个<code>ModuleList</code>或者<code>Sequential</code>实例时才可以。</p>
+</blockquote>
+<h3 id="定义损失函数-1"><a href="#定义损失函数-1" class="headerlink" title="定义损失函数"></a>定义损失函数</h3><p>PyTorch在<code>nn</code>模块中提供了各种损失函数，这些损失函数可看作是一种特殊的层，PyTorch也将这些损失函数实现为<code>nn.Module</code>的子类。我们现在使用它提供的均方误差损失作为模型的损失函数。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">loss <span class="token operator">=</span> nn<span class="token punctuation">.</span>MSELoss<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="定义优化算法-1"><a href="#定义优化算法-1" class="headerlink" title="定义优化算法"></a>定义优化算法</h3><p>同样，我们也无须自己实现小批量随机梯度下降算法。<code>torch.optim</code>模块提供了很多常用的优化算法比如SGD、Adam和RMSProp等。下面我们创建一个用于优化<code>net</code>所有参数的优化器实例，并指定学习率为0.03的小批量随机梯度下降（SGD）为优化算法。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>optim <span class="token keyword">as</span> optim
+
+optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>net<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.03</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>optimizer<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.03
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们还可以为不同子网络设置不同的学习率，这在finetune时经常用到。例：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">optimizer <span class="token operator">=</span>optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span><span class="token punctuation">[</span>
+                <span class="token comment"># 如果对某个参数不指定学习率，就使用最外层的默认学习率</span>
+                <span class="token punctuation">&#123;</span><span class="token string">'params'</span><span class="token punctuation">:</span> net<span class="token punctuation">.</span>subnet1<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token comment"># lr=0.03</span>
+                <span class="token punctuation">&#123;</span><span class="token string">'params'</span><span class="token punctuation">:</span> net<span class="token punctuation">.</span>subnet2<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'lr'</span><span class="token punctuation">:</span> <span class="token number">0.01</span><span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.03</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>有时候我们不想让学习率固定成一个常数，那如何调整学习率呢？主要有两种做法。</p>
+<ul>
+<li><p>一种是修改<code>optimizer.param_groups</code>中对应的学习率：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> epoch <span class="token operator">==</span> <span class="token number">50</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> param_group <span class="token keyword">in</span> optimizer<span class="token punctuation">.</span>param_groups<span class="token punctuation">:</span>
+            param_group<span class="token punctuation">[</span><span class="token string">'lr'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0.01</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>另一种是更简单也是较为推荐的做法——新建优化器，由于optimizer十分轻量级，构建开销很小，故而可以构建新的optimizer。但是后者对于使用动量的优化器（如Adam），会丢失动量等状态信息，可能会造成损失函数的收敛出现震荡等情况。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 假设我们正在使用PyTorch</span>
+<span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>optim <span class="token keyword">as</span> optim
+
+<span class="token comment"># 创建一个简单的模型</span>
+model <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 创建一个优化器</span>
+optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 在训练过程中，我们可能想要在某个时刻改变学习率</span>
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> epoch <span class="token operator">==</span> <span class="token number">50</span><span class="token punctuation">:</span>
+        optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># 这里省略了训练代码...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="训练模型-1"><a href="#训练模型-1" class="headerlink" title="训练模型"></a>训练模型</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">num_epochs <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> num_epochs <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> X<span class="token punctuation">,</span> y <span class="token keyword">in</span> data_iter<span class="token punctuation">:</span>
+        output <span class="token operator">=</span> net<span class="token punctuation">(</span>X<span class="token punctuation">)</span>
+        l <span class="token operator">=</span> loss<span class="token punctuation">(</span>output<span class="token punctuation">,</span> y<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 梯度清零，等价于net.zero_grad()</span>
+        l<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'epoch %d, loss: %f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>epoch<span class="token punctuation">,</span> l<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">epoch 1, loss: 0.000457
+epoch 2, loss: 0.000081
+epoch 3, loss: 0.000198<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>下面我们分别比较学到的模型参数和真实的模型参数。我们从<code>net</code>获得需要的层，并访问其权重（<code>weight</code>）和偏差（<code>bias</code>）。学到的参数和真实的参数很接近。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dense <span class="token operator">=</span> net<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>true_w<span class="token punctuation">,</span> dense<span class="token punctuation">.</span>weight<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>true_b<span class="token punctuation">,</span> dense<span class="token punctuation">.</span>bias<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">[2, -3.4] tensor([[ 1.9999, -3.4005]])
+4.2 tensor([4.2011])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="图像分类数据集"><a href="#图像分类数据集" class="headerlink" title="图像分类数据集"></a>图像分类数据集</h2><p>在介绍softmax回归的实现前我们先引入一个多类图像分类数据集。它将在后面的章节中被多次使用，以方便我们观察比较算法之间在模型精度和计算效率上的区别。图像分类数据集中最常用的是手写数字识别数据集MNIST[1]。</p>
+<p>但大部分模型在MNIST上的分类精度都超过了95%。为了更直观地观察算法之间的差异，我们将使用一个图像内容更加复杂的数据集Fashion-MNIST[2]（这个数据集也比较小，只有几十M，没有GPU的电脑也能吃得消）。</p>
+<p>本节我们将使用torchvision包，它是服务于PyTorch深度学习框架的，主要用来构建计算机视觉模型。torchvision主要由以下几部分构成：</p>
+<ol>
+<li><code>torchvision.datasets</code>: 一些加载数据的函数及常用的数据集接口；</li>
+<li><code>torchvision.models</code>: 包含常用的模型结构（含预训练模型），例如AlexNet、VGG、ResNet等；</li>
+<li><code>torchvision.transforms</code>: 常用的图片变换，例如裁剪、旋转等；</li>
+<li><code>torchvision.utils</code>: 其他的一些有用的方法。</li>
+</ol>
+<h3 id="获取数据集"><a href="#获取数据集" class="headerlink" title="获取数据集"></a>获取数据集</h3><p>首先导入本节需要的包或模块：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torchvision
+<span class="token keyword">import</span> torchvision<span class="token punctuation">.</span>transforms <span class="token keyword">as</span> transforms
+<span class="token keyword">import</span> matplotlib_inline
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> time<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>下面，我们通过torchvision的<code>torchvision.datasets</code>来下载这个数据集。第一次调用时会自动从网上获取数据。我们通过参数<code>train</code>来指定获取训练数据集或测试数据集（testing data set）。测试数据集也叫测试集（testing set），只用来评价模型的表现，并不用来训练模型。</p>
+<blockquote>
+<p>注意：另外我们还指定了参数<code>transform = transforms.ToTensor()</code>使所有数据转换为<code>Tensor</code>，如果不进行转换则返回的是PIL图片。</p>
+</blockquote>
+<p><code>transforms.ToTensor()</code>将尺寸为 (H x W x C) 且数据位于[0, 255]的PIL图片或者数据类型为<code>np.uint8</code>的NumPy数组转换为尺寸为(C x H x W)且数据类型为<code>torch.float32</code>且位于[0.0, 1.0]的<code>Tensor</code>。</p>
+<blockquote>
+<p>注意： 由于像素值为0到255的整数，所以刚好是uint8所能表示的范围，包括<code>transforms.ToTensor()</code>在内的一些关于图片的函数就默认输入的是uint8型，若不是，可能不会报错但可能得不到想要的结果。所以，<strong>如果用像素值(0-255整数)表示图片数据，那么一律将其类型设置成uint8，避免不必要的bug。</strong> 本人就被这点坑过，详见<a target="_blank" rel="noopener" href="https://tangshusen.me/2018/12/05/kaggle-doodle-reco/">我的这个博客2.2.4节</a>。</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">mnist_train <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>FashionMNIST<span class="token punctuation">(</span>root<span class="token operator">=</span><span class="token string">'~/Datasets/FashionMNIST'</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> transform<span class="token operator">=</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+mnist_test <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>FashionMNIST<span class="token punctuation">(</span>root<span class="token operator">=</span><span class="token string">'~/Datasets/FashionMNIST'</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> transform<span class="token operator">=</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>上面的<code>mnist_train</code>和<code>mnist_test</code>都是<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/data.html"><code>torch.utils.data.Dataset</code></a>的子类，所以我们可以用<code>len()</code>来获取该数据集的大小，还可以用下标来获取具体的一个样本。</p>
+<p>训练集中和测试集中的每个类别的图像数分别为6,000和1,000。因为有10个类别，所以训练集和测试集的样本数分别为60,000和10,000。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>mnist_train<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>mnist_train<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>mnist_test<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;class &#39;torchvision.datasets.mnist.FashionMNIST&#39;&gt;
+60000 10000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>我们可以通过下标来访问任意一个样本:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">feature<span class="token punctuation">,</span> label <span class="token operator">=</span> mnist_train<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>feature<span class="token punctuation">.</span>shape<span class="token punctuation">,</span> label<span class="token punctuation">)</span>  <span class="token comment"># Channel x Height x Width</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">torch.Size([1, 28, 28]) tensor(9)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>变量<code>feature</code>对应高和宽均为28像素的图像。由于我们使用了<code>transforms.ToTensor()</code>，所以每个像素的数值为[0.0, 1.0]的32位浮点数。</p>
+<blockquote>
+<p>注意：<code>feature</code>的尺寸是 (C x H x W) 的，而不是 (H x W x C)。第一维是通道数，因为数据集中是灰度图像，所以通道数为1。后面两维分别是图像的高和宽。</p>
+</blockquote>
+<p>Fashion-MNIST中一共包括了10个类别，分别为t-shirt（T恤）、trouser（裤子）、pullover（套衫）、dress（连衣裙）、coat（外套）、sandal（凉鞋）、shirt（衬衫）、sneaker（运动鞋）、bag（包）和ankle boot（短靴）。以下函数可以将数值标签转成相应的文本标签。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 本函数已保存在d2lzh包中方便以后使用</span>
+<span class="token keyword">def</span> <span class="token function">get_fashion_mnist_labels</span><span class="token punctuation">(</span>labels<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    text_labels <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'t-shirt'</span><span class="token punctuation">,</span> <span class="token string">'trouser'</span><span class="token punctuation">,</span> <span class="token string">'pullover'</span><span class="token punctuation">,</span> <span class="token string">'dress'</span><span class="token punctuation">,</span> <span class="token string">'coat'</span><span class="token punctuation">,</span>
+                   <span class="token string">'sandal'</span><span class="token punctuation">,</span> <span class="token string">'shirt'</span><span class="token punctuation">,</span> <span class="token string">'sneaker'</span><span class="token punctuation">,</span> <span class="token string">'bag'</span><span class="token punctuation">,</span> <span class="token string">'ankle boot'</span><span class="token punctuation">]</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>text_labels<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> labels<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>下面定义一个可以在一行里画出多张图像和对应标签的函数。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 本函数已保存在d2lzh包中方便以后使用</span>
+<span class="token keyword">def</span> <span class="token function">show_fashion_mnist</span><span class="token punctuation">(</span>images<span class="token punctuation">,</span> labels<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    d2l<span class="token punctuation">.</span>use_svg_display<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 设置matplotlib的图像显示模式为SVG格式。</span>
+    <span class="token comment"># 这里的_表示我们忽略（不使用）的变量</span>
+    _<span class="token punctuation">,</span> figs <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplots<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>images<span class="token punctuation">)</span><span class="token punctuation">,</span> figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 创建一个新的图像窗口，并返回一个包含窗口和子图对象元组。在这里，我们只关注子图对象，所以使用_忽略窗口对象。</span>
+    <span class="token keyword">for</span> f<span class="token punctuation">,</span> img<span class="token punctuation">,</span> lbl <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span>figs<span class="token punctuation">,</span> images<span class="token punctuation">,</span> labels<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># zip是一个内置函数，它用于将可迭代的对象作为参数，返回一个迭代器，它的每一个元素都是一个元组，元组中的每一个元素分别来自figs, images, labels</span>
+        f<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 将图像转换为28×28的numpy数组，并显示在子图上</span>
+        f<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span>lbl<span class="token punctuation">)</span> <span class="token comment"># 设置子图的标题为对应的标签</span>
+        f<span class="token punctuation">.</span>axes<span class="token punctuation">.</span>get_xaxis<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>set_visible<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span> <span class="token comment"># 隐藏子图的x轴和y轴</span>
+        f<span class="token punctuation">.</span>axes<span class="token punctuation">.</span>get_yaxis<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>set_visible<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span> 
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>现在，我们看一下训练数据集中前10个样本的图像内容和文本标签。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X<span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    X<span class="token punctuation">.</span>append<span class="token punctuation">(</span>mnist_train<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    y<span class="token punctuation">.</span>append<span class="token punctuation">(</span>mnist_train<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+show_fashion_mnist<span class="token punctuation">(</span>X<span class="token punctuation">,</span> get_fashion_mnist_labels<span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/3.5_output1.png" alt="img"></p>
+<h3 id="读取小批量"><a href="#读取小批量" class="headerlink" title="读取小批量"></a>读取小批量</h3><p>我们将在训练数据集上训练模型，并将训练好的模型在测试数据集上评价模型的表现。前面说过，<code>mnist_train</code>是<code>torch.utils.data.Dataset</code>的子类，所以我们可以将其传入<code>torch.utils.data.DataLoader</code>来创建一个读取小批量数据样本的DataLoader实例。</p>
+<p>在实践中，数据读取经常是训练的性能瓶颈，特别当模型较简单或者计算硬件性能较高时。PyTorch的<code>DataLoader</code>中一个很方便的功能是允许使用多进程来加速数据读取。这里我们通过参数<code>num_workers</code>来设置4个进程读取数据。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">batch_size <span class="token operator">=</span> <span class="token number">256</span>
+<span class="token keyword">if</span> sys<span class="token punctuation">.</span>platform<span class="token punctuation">.</span>startswith<span class="token punctuation">(</span><span class="token string">'win'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    num_workers <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># 0表示不用额外的进程来加速读取数据</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    num_workers <span class="token operator">=</span> <span class="token number">4</span>
+train_iter <span class="token operator">=</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>DataLoader<span class="token punctuation">(</span>mnist_train<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> num_workers<span class="token operator">=</span>num_workers<span class="token punctuation">)</span>
+test_iter <span class="token operator">=</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>DataLoader<span class="token punctuation">(</span>mnist_test<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> num_workers<span class="token operator">=</span>num_workers<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们将获取并读取Fashion-MNIST数据集的逻辑封装在<code>d2lzh_pytorch.load_data_fashion_mnist</code>函数中供后面章节调用。该函数将返回<code>train_iter</code>和<code>test_iter</code>两个变量。</p>
+<p>最后我们查看读取一遍训练数据需要的时间。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> X<span class="token punctuation">,</span> y <span class="token keyword">in</span> train_iter<span class="token punctuation">:</span>
+    <span class="token keyword">continue</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%.2f sec'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">1.57 sec<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="softmax回归的初始实现"><a href="#softmax回归的初始实现" class="headerlink" title="softmax回归的初始实现"></a>softmax回归的初始实现</h2><h3 id="获取和读取数据"><a href="#获取和读取数据" class="headerlink" title="获取和读取数据"></a>获取和读取数据</h3><p>我们将使用Fashion-MNIST数据集，并设置批量大小为256。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">batch_size <span class="token operator">=</span> <span class="token number">256</span>
+train_iter<span class="token punctuation">,</span> test_iter <span class="token operator">=</span> d2l<span class="token punctuation">.</span>load_data_fashion_mnist<span class="token punctuation">(</span>batch_size<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="初始化模型参数-2"><a href="#初始化模型参数-2" class="headerlink" title="初始化模型参数"></a>初始化模型参数</h3><p>跟线性回归中的例子一样，我们将使用向量表示每个样本。已知每个样本输入是高和宽均为28像素的图像。模型的输入向量的长度是 28×28&#x3D;78428×28&#x3D;78428×28&#x3D;784：该向量的每个元素对应图像中每个像素。</p>
+<p>由于图像有10个类别，单层神经网络输出层的输出个数为10，因此softmax回归的权重和偏差参数分别为784×10784×10784×10和1×101×101×10的矩阵。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">num_inputs <span class="token operator">=</span> <span class="token number">784</span>
+num_outputs <span class="token operator">=</span> <span class="token number">10</span>
+
+W <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.01</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> num_outputs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span><span class="token builtin">float</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>num_outputs<span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span><span class="token builtin">float</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同之前一样，我们需要模型参数梯度。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">W<span class="token punctuation">.</span>requires_grad_<span class="token punctuation">(</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+b<span class="token punctuation">.</span>requires_grad_<span class="token punctuation">(</span>requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="实现softmax运算"><a href="#实现softmax运算" class="headerlink" title="实现softmax运算"></a>实现softmax运算</h3><p>在介绍如何定义softmax回归之前，我们先描述一下对如何对多维<code>Tensor</code>按维度操作。在下面的例子中，给定一个<code>Tensor</code>矩阵<code>X</code>。我们可以只对其中同一列（<code>dim=0</code>）或同一行（<code>dim=1</code>）的元素求和，并在结果中保留行和列这两个维度（<code>keepdim=True</code>）。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>X<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> keepdim<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>X<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> keepdim<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">tensor([[5, 7, 9]])
+tensor([[ 6],
+        [15]])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>下面我们就可以定义前面小节里介绍的softmax运算了。</p>
+<p>在下面的函数中，矩阵<code>X</code>的<strong>行数是样本数，列数是输出个数</strong>。</p>
+<p>为了表达样本预测各个输出的概率，softmax运算会先通过<code>exp</code>函数对每个元素做指数运算，再对<code>exp</code>矩阵同行元素求和，最后令矩阵每行各元素与该行元素之和相除。这样一来，最终得到的矩阵每行元素和为1且非负。因此，该矩阵每行都是合法的概率分布。</p>
+<p>softmax运算的输出矩阵中的任意一行元素代表了一个样本在各个输出类别上的预测概率。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">softmax</span><span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    X_exp <span class="token operator">=</span> X<span class="token punctuation">.</span>exp<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    partition <span class="token operator">=</span> X_exp<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> keepdim<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> X_exp <span class="token operator">/</span> partition  <span class="token comment"># 这里应用了广播机制</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看到，对于随机输入，我们将每个元素变成了非负数，且每一行和为1。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+X_prob <span class="token operator">=</span> softmax<span class="token punctuation">(</span>X<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>X_prob<span class="token punctuation">,</span> X_prob<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">tensor([[0.2206, 0.1520, 0.1446, 0.2690, 0.2138],
+        [0.1540, 0.2290, 0.1387, 0.2019, 0.2765]]) tensor([1., 1.])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="定义模型-2"><a href="#定义模型-2" class="headerlink" title="定义模型"></a>定义模型</h3><p>有了softmax运算，我们可以定义上节描述的softmax回归模型了。这里通过<code>view</code>函数将每张原始图像改成长度为<code>num_inputs</code>的向量。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">net</span><span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> softmax<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>mm<span class="token punctuation">(</span>X<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> num_inputs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> W<span class="token punctuation">)</span> <span class="token operator">+</span> b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="定义损失函数-2"><a href="#定义损失函数-2" class="headerlink" title="定义损失函数"></a>定义损失函数</h3><p>上一节中，我们介绍了softmax回归使用的交叉熵损失函数。为了得到标签的预测概率，我们可以使用<code>gather</code>函数。</p>
+<p>在下面的例子中，变量<code>y_hat</code>是2个样本在3个类别的预测概率，变量<code>y</code>是这2个样本的标签类别。通过使用<code>gather</code>函数，我们得到了2个样本的标签的预测概率。与softmax回归数学表述中标签类别离散值从1开始逐一递增不同，在代码中，标签类别的离散值是从0开始逐一递增的。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">y_hat <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">,</span> <span class="token number">0.6</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0.3</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> torch<span class="token punctuation">.</span>LongTensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+y_hat<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 提取操作，1表示按列提取，即对于y_hat的每一行，根据y中对应行的值作为列索引，提取y_hat中的元素。例如，对于第一行，y中对应的值是0，所以提取y_hat第一行第0列的值0.1；对于第二行，y中对应的值是2，所以提取y_hat第二行第2列的值0.5。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">tensor([[0.1000],
+        [0.5000]])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>下面实现了交叉熵损失函数。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">cross_entropy</span><span class="token punctuation">(</span>y_hat<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span> torch<span class="token punctuation">.</span>log<span class="token punctuation">(</span>y_hat<span class="token punctuation">.</span>gather<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="计算分类准确率"><a href="#计算分类准确率" class="headerlink" title="计算分类准确率"></a>计算分类准确率</h3><p>给定一个类别的预测概率分布<code>y_hat</code>，我们把预测概率最大的类别作为输出类别。如果它与真实类别<code>y</code>一致，说明这次预测是正确的。分类准确率即正确预测数量与总预测数量之比。</p>
+<p>为了演示准确率的计算，下面定义准确率<code>accuracy</code>函数。其中<code>y_hat.argmax(dim=1)</code>返回矩阵<code>y_hat</code>每行中最大元素的索引，且返回结果与变量<code>y</code>形状相同。相等条件判断式<code>(y_hat.argmax(dim=1) == y)</code>是一个类型为<code>ByteTensor</code>的<code>Tensor</code>，我们用<code>float()</code>将其转换为值为0（相等为假）或1（相等为真）的浮点型<code>Tensor</code>。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">accuracy</span><span class="token punctuation">(</span>y_hat<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>y_hat<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>让我们继续使用在演示<code>gather</code>函数时定义的变量<code>y_hat</code>和<code>y</code>，并将它们分别作为预测概率分布和标签。可以看到，第一个样本预测类别为2（该行最大元素0.6在本行的索引为2），与真实标签0不一致；第二个样本预测类别为2（该行最大元素0.5在本行的索引为2），与真实标签2一致。因此，这两个样本上的分类准确率为0.5。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>accuracy<span class="token punctuation">(</span>y_hat<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">0.5<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>类似地，我们可以评价模型<code>net</code>在数据集<code>data_iter</code>上的准确率。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 本函数已保存在d2lzh_pytorch包中方便以后使用。该函数将被逐步改进：它的完整实现将在“图像增广”一节中描述</span>
+<span class="token keyword">def</span> <span class="token function">evaluate_accuracy</span><span class="token punctuation">(</span>data_iter<span class="token punctuation">,</span> net<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    acc_sum<span class="token punctuation">,</span> n <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> X<span class="token punctuation">,</span> y <span class="token keyword">in</span> data_iter<span class="token punctuation">:</span>
+        acc_sum <span class="token operator">+=</span> <span class="token punctuation">(</span>net<span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        n <span class="token operator">+=</span> y<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token keyword">return</span> acc_sum <span class="token operator">/</span> n<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>因为我们随机初始化了模型<code>net</code>，所以这个随机模型的准确率应该接近于类别个数10的倒数即0.1。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>evaluate_accuracy<span class="token punctuation">(</span>test_iter<span class="token punctuation">,</span> net<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">0.0681<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="训练模型-2"><a href="#训练模型-2" class="headerlink" title="训练模型"></a>训练模型</h3><p>训练softmax回归的实现跟3.2（线性回归的从零开始实现）一节介绍的线性回归中的实现非常相似。我们同样使用小批量随机梯度下降来优化模型的损失函数。在训练模型时，迭代周期数<code>num_epochs</code>和学习率<code>lr</code>都是可以调的超参数。改变它们的值可能会得到分类更准确的模型。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">num_epochs<span class="token punctuation">,</span> lr <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0.1</span>
+
+<span class="token comment"># 本函数已保存在d2lzh包中方便以后使用</span>
+<span class="token keyword">def</span> <span class="token function">train_ch3</span><span class="token punctuation">(</span>net<span class="token punctuation">,</span> train_iter<span class="token punctuation">,</span> test_iter<span class="token punctuation">,</span> loss<span class="token punctuation">,</span> num_epochs<span class="token punctuation">,</span> batch_size<span class="token punctuation">,</span>
+              params<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> optimizer<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        train_l_sum<span class="token punctuation">,</span> train_acc_sum<span class="token punctuation">,</span> n <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> X<span class="token punctuation">,</span> y <span class="token keyword">in</span> train_iter<span class="token punctuation">:</span>
+            y_hat <span class="token operator">=</span> net<span class="token punctuation">(</span>X<span class="token punctuation">)</span>
+            l <span class="token operator">=</span> loss<span class="token punctuation">(</span>y_hat<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+            <span class="token comment"># 梯度清零</span>
+            <span class="token keyword">if</span> optimizer <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+                optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">elif</span> params <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span> <span class="token keyword">and</span> params<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>grad <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+                <span class="token keyword">for</span> param <span class="token keyword">in</span> params<span class="token punctuation">:</span>
+                    param<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+            l<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> optimizer <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+                d2l<span class="token punctuation">.</span>sgd<span class="token punctuation">(</span>params<span class="token punctuation">,</span> lr<span class="token punctuation">,</span> batch_size<span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># “softmax回归的简洁实现”一节将用到</span>
+
+
+            train_l_sum <span class="token operator">+=</span> l<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            train_acc_sum <span class="token operator">+=</span> <span class="token punctuation">(</span>y_hat<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            n <span class="token operator">+=</span> y<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        test_acc <span class="token operator">=</span> evaluate_accuracy<span class="token punctuation">(</span>test_iter<span class="token punctuation">,</span> net<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'epoch %d, loss %.4f, train acc %.3f, test acc %.3f'</span>
+              <span class="token operator">%</span> <span class="token punctuation">(</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> train_l_sum <span class="token operator">/</span> n<span class="token punctuation">,</span> train_acc_sum <span class="token operator">/</span> n<span class="token punctuation">,</span> test_acc<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+train_ch3<span class="token punctuation">(</span>net<span class="token punctuation">,</span> train_iter<span class="token punctuation">,</span> test_iter<span class="token punctuation">,</span> cross_entropy<span class="token punctuation">,</span> num_epochs<span class="token punctuation">,</span> batch_size<span class="token punctuation">,</span> <span class="token punctuation">[</span>W<span class="token punctuation">,</span> b<span class="token punctuation">]</span><span class="token punctuation">,</span> lr<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">epoch 1, loss 0.7878, train acc 0.749, test acc 0.794
+epoch 2, loss 0.5702, train acc 0.814, test acc 0.813
+epoch 3, loss 0.5252, train acc 0.827, test acc 0.819
+epoch 4, loss 0.5010, train acc 0.833, test acc 0.824
+epoch 5, loss 0.4858, train acc 0.836, test acc 0.815<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h3><p>训练完成后，现在就可以演示如何对图像进行分类了。给定一系列图像（第三行图像输出），我们比较一下它们的真实标签（第一行文本输出）和模型预测结果（第二行文本输出）。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X<span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token builtin">iter</span><span class="token punctuation">(</span>test_iter<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+true_labels <span class="token operator">=</span> d2l<span class="token punctuation">.</span>get_fashion_mnist_labels<span class="token punctuation">(</span>y<span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+pred_labels <span class="token operator">=</span> d2l<span class="token punctuation">.</span>get_fashion_mnist_labels<span class="token punctuation">(</span>net<span class="token punctuation">(</span>X<span class="token punctuation">)</span><span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+titles <span class="token operator">=</span> <span class="token punctuation">[</span>true <span class="token operator">+</span> <span class="token string">'\n'</span> <span class="token operator">+</span> pred <span class="token keyword">for</span> true<span class="token punctuation">,</span> pred <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span>true_labels<span class="token punctuation">,</span> pred_labels<span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+d2l<span class="token punctuation">.</span>show_fashion_mnist<span class="token punctuation">(</span>X<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">,</span> titles<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/3.6_output1.png" alt="img"></p>
+<h2 id="softmax回归的简洁实现"><a href="#softmax回归的简洁实现" class="headerlink" title="softmax回归的简洁实现"></a>softmax回归的简洁实现</h2><p>首先导入所需的包或模块：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">import</span> init
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> sys
+sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span> 
+<span class="token keyword">import</span> d2lzh_pytorch <span class="token keyword">as</span> d2l<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="获取和读取数据-1"><a href="#获取和读取数据-1" class="headerlink" title="获取和读取数据"></a>获取和读取数据</h3><p>我们仍然使用Fashion-MNIST数据集和上一节中设置的批量大小。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">batch_size <span class="token operator">=</span> <span class="token number">256</span>
+train_iter<span class="token punctuation">,</span> test_iter <span class="token operator">=</span> d2l<span class="token punctuation">.</span>load_data_fashion_mnist<span class="token punctuation">(</span>batch_size<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="定义和初始化模型"><a href="#定义和初始化模型" class="headerlink" title="定义和初始化模型"></a>定义和初始化模型</h3><p>softmax回归的输出层是一个全连接层，所以我们用一个线性模块就可以了。因为前面我们数据返回的每个batch样本<code>x</code>的形状为(batch_size, 1, 28, 28), 所以我们要先用<code>view()</code>将<code>x</code>的形状转换成(batch_size, 784)才送入全连接层。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">num_inputs <span class="token operator">=</span> <span class="token number">784</span>
+num_outputs <span class="token operator">=</span> <span class="token number">10</span>
+
+<span class="token keyword">class</span> <span class="token class-name">LinearNet</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num_inputs<span class="token punctuation">,</span> num_outputs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>LinearNet<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>linear <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> num_outputs<span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># x shape: (batch, 1, 28, 28)</span>
+        y <span class="token operator">=</span> self<span class="token punctuation">.</span>linear<span class="token punctuation">(</span>x<span class="token punctuation">.</span>view<span class="token punctuation">(</span>x<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> y
+
+net <span class="token operator">=</span> LinearNet<span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> num_outputs<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们将对<code>x</code>的形状转换的这个功能自定义一个<code>FlattenLayer</code>并记录在<code>d2lzh_pytorch</code>中方便后面使用。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 本函数已保存在d2lzh_pytorch包中方便以后使用</span>
+<span class="token keyword">class</span> <span class="token class-name">FlattenLayer</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>FlattenLayer<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># x shape: (batch, *, *, ...)</span>
+        <span class="token keyword">return</span> x<span class="token punctuation">.</span>view<span class="token punctuation">(</span>x<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这样我们就可以更方便地定义我们的模型：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> OrderedDict
+
+net <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+    <span class="token comment"># FlattenLayer(),</span>
+    <span class="token comment"># nn.Linear(num_inputs, num_outputs)</span>
+    OrderedDict<span class="token punctuation">(</span><span class="token punctuation">[</span>
+        <span class="token punctuation">(</span><span class="token string">'flatten'</span><span class="token punctuation">,</span> FlattenLayer<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">'linear'</span><span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>num_inputs<span class="token punctuation">,</span> num_outputs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然后，我们使用均值为0、标准差为0.01的正态分布随机初始化模型的权重参数。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">init<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span>net<span class="token punctuation">.</span>linear<span class="token punctuation">.</span>weight<span class="token punctuation">,</span> mean<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> std<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">)</span>
+init<span class="token punctuation">.</span>constant_<span class="token punctuation">(</span>net<span class="token punctuation">.</span>linear<span class="token punctuation">.</span>bias<span class="token punctuation">,</span> val<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="softmax和交叉熵损失函数"><a href="#softmax和交叉熵损失函数" class="headerlink" title="softmax和交叉熵损失函数"></a>softmax和交叉熵损失函数</h3><p>如果做了上一节的练习，那么你可能意识到了分开定义softmax运算和交叉熵损失函数可能会造成数值不稳定。因此，PyTorch提供了一个包括softmax运算和交叉熵损失计算的函数。它的数值稳定性更好。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">loss <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="定义优化算法-2"><a href="#定义优化算法-2" class="headerlink" title="定义优化算法"></a>定义优化算法</h3><p>我们使用学习率为0.1的小批量随机梯度下降作为优化算法。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>net<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="训练模型-3"><a href="#训练模型-3" class="headerlink" title="训练模型"></a>训练模型</h3><p>接下来，我们使用上一节中定义的训练函数来训练模型。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">num_epochs <span class="token operator">=</span> <span class="token number">5</span>
+d2l<span class="token punctuation">.</span>train_ch3<span class="token punctuation">(</span>net<span class="token punctuation">,</span> train_iter<span class="token punctuation">,</span> test_iter<span class="token punctuation">,</span> loss<span class="token punctuation">,</span> num_epochs<span class="token punctuation">,</span> batch_size<span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">,</span> optimizer<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">epoch 1, loss 0.0031, train acc 0.745, test acc 0.790
+epoch 2, loss 0.0022, train acc 0.812, test acc 0.807
+epoch 3, loss 0.0021, train acc 0.825, test acc 0.806
+epoch 4, loss 0.0020, train acc 0.832, test acc 0.810
+epoch 5, loss 0.0019, train acc 0.838, test acc 0.823<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="多层感知机"><a href="#多层感知机" class="headerlink" title="多层感知机"></a>多层感知机</h2><h3 id="隐藏层"><a href="#隐藏层" class="headerlink" title="隐藏层"></a>隐藏层</h3><p>多层感知机在单层神经网络的基础上引入了一到多个隐藏层（hidden layer）。隐藏层位于输入层和输出层之间。下图展示了一个多层感知机的神经网络图，它含有一个隐藏层，该层中有5个隐藏单元。</p>
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/image-20231211174053052.png" alt="image-20231211174053052"></p>
+<p>上图所示的多层感知机中，输入和输出个数分别为4和3，中间的隐藏层中包含了5个隐藏单元（hidden unit）。由于输入层不涉及计算，上图中的多层感知机的层数为2。</p>
+<p>由上图可见，隐藏层中的神经元和输入层中各个输入完全连接，输出层中的神经元和隐藏层中的各个神经元也完全连接。因此，多层感知机中的隐藏层和输出层都是全连接层。</p>
+<p>具体来说，给定一个小批量样本 $\boldsymbol{X} \in \mathbb{R}^{n \times d}$ ，其批量大小为 $n$ ，输入个数为 $d$ 。假设多层感知机只有一个隐藏层，其中隐藏单元个数为 $h$ 。记隐藏层的输出 (也称为隐藏层变量或隐藏变量)为 $\boldsymbol{H}$ ，有 $\boldsymbol{H} \in \mathbb{R}^{n \times h}$ 。因为隐藏层和输出层均是全连接层，可以设隐藏层的权重参数和偏差参数分别为 $\boldsymbol{W}_h \in \mathbb{R}^{d \times h}$ 和 $\boldsymbol{b}_h \in \mathbb{R}^{1 \times h}$ ，输出层的权重和偏差参数分别为 $\boldsymbol{W}_o \in \mathbb{R}^{h \times q}$ 和 $\boldsymbol{b}_o \in \mathbb{R}^{1 \times q}$ 。</p>
+<p>我们先来看一种含单隐藏层的多层感知机的设计。其输出 $O \in \mathbb{R}^{n \times q}$ 的计算为<br>$$<br>\begin{aligned}<br>\boldsymbol{H} &amp; &#x3D;\boldsymbol{X} \boldsymbol{W}_h+\boldsymbol{b}_h, \<br>\boldsymbol{O} &amp; &#x3D;\boldsymbol{H} \boldsymbol{W}_o+\boldsymbol{b}_o,<br>\end{aligned}<br>$$<br>也就是将隐藏层的输出直接作为输出层的输入。如果将以上两个式子联立起来，可以得到<br>$$<br>\boldsymbol{O}&#x3D;\left(\boldsymbol{X} \boldsymbol{W}_h+\boldsymbol{b}_h\right) \boldsymbol{W}_o+\boldsymbol{b}_o&#x3D;\boldsymbol{X} \boldsymbol{W}_h \boldsymbol{W}_o+\boldsymbol{b}_h \boldsymbol{W}_o+\boldsymbol{b}_o .<br>$$</p>
+<p>从联立后的式子可以看出，虽然神经网络引入了隐藏层，却依然等价于一个单层神经网络: 其中输出层权重参数为 $\boldsymbol{W}_h \boldsymbol{W}_o$ ，偏差参数为 $\boldsymbol{b}_h \boldsymbol{W}_o+\boldsymbol{b}_o$ 。不难发现，即便再添加更多的隐藏层，以上设计<strong>依然只能与仅含输出层的单层神经网络等价</strong>。</p>
+<h3 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h3><p>上述问题的根源在于全连接层只是对数据做仿射变换（affine transformation），而多个仿射变换的叠加仍然是一个仿射变换。解决问题的一个方法是引入<strong>非线性变换</strong>，例如对隐藏变量使用按元素运算的非线性函数进行变换，然后再作为下一个全连接层的输入。这个非线性函数被称为激活函数（activation function）。下面我们介绍几个常用的激活函数。</p>
+<h4 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h4><p>ReLU (rectified linear unit) 函数提供了一个很简单的非线性变换。给定元素 $x$ ，该函数定义为<br>$$<br>\operatorname{ReLU}(x)&#x3D;\max (x, 0) .<br>$$<br>可以看出，ReLU函数只保留正数元素，并将负数元素清零。为了直观地观察这一非线性变换，我们先定义一个绘图函数<code>xyplot</code>。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">%</span>matplotlib inline
+<span class="token keyword">import</span> torch
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pylab <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> sys
+sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span> 
+<span class="token keyword">import</span> d2lzh_pytorch <span class="token keyword">as</span> d2l
+
+<span class="token keyword">def</span> <span class="token function">xyplot</span><span class="token punctuation">(</span>x_vals<span class="token punctuation">,</span> y_vals<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    d2l<span class="token punctuation">.</span>set_figsize<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    d2l<span class="token punctuation">.</span>plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x_vals<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> y_vals<span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    d2l<span class="token punctuation">.</span>plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'x'</span><span class="token punctuation">)</span>
+    d2l<span class="token punctuation">.</span>plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span>name <span class="token operator">+</span> <span class="token string">'(x)'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们接下来通过<code>Tensor</code>提供的<code>relu</code>函数来绘制ReLU函数。可以看到，该激活函数是一个两段线性函数。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x <span class="token operator">=</span> torch<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">8.0</span><span class="token punctuation">,</span> <span class="token number">8.0</span><span class="token punctuation">,</span> <span class="token number">0.1</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> x<span class="token punctuation">.</span>relu<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xyplot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">'relu'</span><span class="token punctuation">)</span>Copy to clipboardErrorCopied<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/3.8_relu.png" alt="img"></p>
+<p>显然，当输入为负数时，ReLU函数的导数为0；当输入为正数时，ReLU函数的导数为1。尽管输入为0时ReLU函数不可导，但是我们可以取此处的导数为0。下面绘制ReLU函数的导数。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">y<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xyplot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> x<span class="token punctuation">.</span>grad<span class="token punctuation">,</span> <span class="token string">'grad of relu'</span><span class="token punctuation">)</span>Copy to clipboardErrorCopied<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/3.8_relu_grad.png" alt="img"></p>
+<h4 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h4><p>sigmoid函数可以将元素的值变换到0和1之间：<br>$$<br>\operatorname{sigmoid}(x)&#x3D;\frac{1}{1+\exp (-x)} .<br>$$<br>sigmoid函数在早期的神经网络中较为普遍，但它目前逐渐被更简单的ReLU函数取代。在后面“循环神经网络”一章中我们会介绍如何利用它值域在0到1之间这一特性来控制信息在神经网络中的流动。下面绘制了sigmoid函数。当输入接近0时，sigmoid函数接近线性变换。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">y <span class="token operator">=</span> x<span class="token punctuation">.</span>sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xyplot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">'sigmoid'</span><span class="token punctuation">)</span>Copy to clipboardErrorCopied<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/3.8_sigmoid.png" alt="img"></p>
+<p>依据链式法则，sigmoid函数的导数<br>$$<br>\operatorname{sigmoid}^{\prime}(x)&#x3D;\operatorname{sigmoid}(x)(1-\operatorname{sigmoid}(x)) .<br>$$<br>下面绘制了sigmoid函数的导数。当输入为0时，sigmoid函数的导数达到最大值0.25；当输入越偏离0时，sigmoid函数的导数越接近0。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+y<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xyplot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> x<span class="token punctuation">.</span>grad<span class="token punctuation">,</span> <span class="token string">'grad of sigmoid'</span><span class="token punctuation">)</span>Copy to clipboardErrorCopied<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/3.8_sigmoid_grad.png" alt="img"></p>
+<h4 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h4><p>tanh（双曲正切）函数可以将元素的值变换到-1和1之间：<br>$$<br>\tanh (x)&#x3D;\frac{1-\exp (-2 x)}{1+\exp (-2 x)}<br>$$<br>我们接着绘制tanh函数。当输入接近0时，tanh函数接近线性变换。虽然该函数的形状和sigmoid函数的形状很像，但tanh函数在坐标系的原点上对称。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">y <span class="token operator">=</span> x<span class="token punctuation">.</span>tanh<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xyplot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token string">'tanh'</span><span class="token punctuation">)</span>Copy to clipboardErrorCopied<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/3.8_tanh.png" alt="img"></p>
+<p>依据链式法则，tanh函数的导数<br>$$<br>\tanh ^{\prime}(x)&#x3D;1-\tanh ^2(x) .<br>$$<br>下面绘制了tanh函数的导数。当输入为0时，tanh函数的导数达到最大值1；当输入越偏离0时，tanh函数的导数越接近0。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+y<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xyplot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> x<span class="token punctuation">.</span>grad<span class="token punctuation">,</span> <span class="token string">'grad of tanh'</span><span class="token punctuation">)</span>Copy to clipboardErrorCopied<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/medias/images/loading.gif" data-original="/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/3.8_tanh_grad.png" alt="img"></p>
+<h3 id="多层感知机-1"><a href="#多层感知机-1" class="headerlink" title="多层感知机"></a>多层感知机</h3><p>多层感知机就是含有至少一个隐藏层的由全连接层组成的神经网络，且每个隐藏层的输出通过激活函数进行变换。多层感知机的层数和各隐藏层中隐藏单元个数都是超参数。以单隐藏层为例并沿用本节之前定义的符号，多层感知机按以下方式计算输出：<br>$$<br>\begin{aligned}<br>\boldsymbol{H} &amp; &#x3D;\phi\left(\boldsymbol{X} \boldsymbol{W}_h+\boldsymbol{b}_h\right), \<br>\boldsymbol{O} &amp; &#x3D;\boldsymbol{H} \boldsymbol{W}_o+\boldsymbol{b}_o,<br>\end{aligned}<br>$$</p>
+<p>其中 $\phi$ 表示激活函数。在分类问题中，我们可以对输出 $\boldsymbol{O}$ 做softmax运算，并使用softmax回归中的交叉摘损失函数。在回归问题中，我们将输出层的输出个数设为 1 ，并将输出 $\boldsymbol{O}$ 直接提供给线性回归中使用的平方损失函数。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">QT-7274</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://qt-7274.github.io/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/">https://qt-7274.github.io/2023/12/08/pytorch-shi-zhan-ge-chong-mo-xing-de-jian-ji-shi-xian/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">QT-7274</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">深度学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.gif") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid;">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'tzmyy70PpnbbxclXN4jYmjPA-gzGzoHsz',
+        appKey: 'TCY55mH7vS6x5sVr1bCLm5Gg',
+        serverURLs: '',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        requiredFields: ['nick','mail'],
+        enableQQ: 'true',
+        lang: 'zh-cn',
+        placeholder: '😉畅所欲言！\n📲请文明评论，禁止恶意评论🚫 \n⚠️公开网络空间，请不要发表任何包含个人或其他人的隐私信息🔐',
+        master: ["f18e9f29c8274571d5a0752aca9310ef"],
+        friends:["0aa4f09d8249581a4380a6fc541062e7","6a66a1ba019c52f168d99313efbef39a"]
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/12/15/pytorch-shi-zhan-can-chai-wang-luo-resnet/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/9.jpg" class="responsive-img" alt="PyTorch实战：残差网络（ResNet）">
+                        
+                        <span class="card-title">PyTorch实战：残差网络（ResNet）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-12-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C/">
+                        <span class="chip bg-color">论文工作</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/12/05/shen-du-xue-xi-tu-jie-da-jian-shen-du-xue-xi-kuang-jia/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/7.jpg" class="responsive-img" alt="《深度学习图解》搭建深度学习框架">
+                        
+                        <span class="card-title">《深度学习图解》搭建深度学习框架</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E3%80%8A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9B%BE%E8%A7%A3%E3%80%8B/">
+                        <span class="chip bg-color">《深度学习图解》</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">QT-7274</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/QT-7274" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2531376773@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2531376773" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2531376773" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+    <a  class="tooltipped" target="_blank" data-tooltip="微信联系我: Q5268368" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>
