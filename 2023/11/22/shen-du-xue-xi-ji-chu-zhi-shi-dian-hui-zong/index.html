@@ -7,11 +7,12 @@
     <meta charset="utf-8">
     <meta name="keywords" content="深度学习基础——知识点汇总, QT-7274">
     <meta name="description" content="如今在神经网络上获得更好性能的最可靠的方法是什么？
+
 训练一个更大的神经网络
 投入更多数据
 
 这只能在一定程度上起作用，因为最终你耗尽了数据，或者最终你的网络是如此大规模导致将要用太久的时间去训练。
-所以如果你没有大量的训练集，那效果会取决于">
+所以如果你没有大量的训练集，那效果会取决">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -471,14 +472,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    14.5k
+                    14.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    56 分
+                    55 分
                 </div>
                 
 
@@ -501,114 +502,180 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="如今在神经网络上获得更好性能的最可靠的方法是什么？"><a href="#如今在神经网络上获得更好性能的最可靠的方法是什么？" class="headerlink" title="如今在神经网络上获得更好性能的最可靠的方法是什么？"></a>如今在神经网络上获得更好性能的最可靠的方法是什么？</h3><ol>
+                <h3 id="如今在神经网络上获得更好性能的最可靠的方法是什么？">如今在神经网络上获得更好性能的最可靠的方法是什么？</h3>
+<ol>
 <li>训练一个更大的神经网络</li>
 <li>投入更多数据</li>
 </ol>
 <p>这只能在一定程度上起作用，因为最终你耗尽了数据，或者最终你的网络是如此大规模导致将要用太久的时间去训练。</p>
 <p>所以如果你没有大量的训练集，那效果会取决于你的特征工程能力，那将决定最终的性能。</p>
 <p>最终的性能更多的是取决于你在用工程选择特征方面的能力以及算法处理方面的一些细节，只是在某些大数据规模非常庞大的训练集，我们能更加持续地看到更大的由神经网络控制的其它方法。</p>
-<h3 id="为什么说神经网络的巨大突破是从sigmoid函数转换到一个ReLU函数？"><a href="#为什么说神经网络的巨大突破是从sigmoid函数转换到一个ReLU函数？" class="headerlink" title="为什么说神经网络的巨大突破是从sigmoid函数转换到一个ReLU函数？"></a>为什么说神经网络的巨大突破是从sigmoid函数转换到一个ReLU函数？</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231122110230888.png" alt="image-20231122110230888"></p>
+<h3 id="为什么说神经网络的巨大突破是从sigmoid函数转换到一个ReLU函数？">为什么说神经网络的巨大突破是从sigmoid函数转换到一个ReLU函数？</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231122110230888.png" alt="image-20231122110230888"></p>
 <ul>
 <li>在某些极端区域，这个<strong>sigmoid</strong>函数的梯度会接近零，所以学习的速度会变得非常缓慢，因为当你实现梯度下降以及梯度接近零的时候，参数会更新的很慢，所以学习的速率也会变的很慢。</li>
 <li>通过改变这个被叫做激活函数的东西，神经网络换用这一个函数，叫做<strong>ReLU</strong>的函数（修正线性单元），<strong>ReLU</strong>它的梯度对于<strong>所有输入的负值都是零</strong>，因此梯度更加不会趋向逐渐减少到零，使得梯度下降（<strong>gradient descent</strong>）的算法运行的更快</li>
 </ul>
-<h3 id="什么是二分类算法？（前向传播和反向传播的基础）"><a href="#什么是二分类算法？（前向传播和反向传播的基础）" class="headerlink" title="什么是二分类算法？（前向传播和反向传播的基础）"></a>什么是二分类算法？（前向传播和反向传播的基础）</h3><p>逻辑回归(<strong>logistic regression</strong>)是一个用于二分类的算法，我们的目标是习得一个分类器，它以图片的特征向量作为输入，然后预测输出结果y为1还是0，也就是预测图片中是否有我们需要的对象：</p>
-<h4 id="符号定义"><a href="#符号定义" class="headerlink" title="符号定义"></a>符号定义</h4><p>$x$：表示一个$n_x$维数据，为输入数据，维度为$\left(n_x, 1\right)$</p>
+<h3 id="什么是二分类算法？（前向传播和反向传播的基础）">什么是二分类算法？（前向传播和反向传播的基础）</h3>
+<p>逻辑回归(<strong>logistic regression</strong>)是一个用于二分类的算法，我们的目标是习得一个分类器，它以图片的特征向量作为输入，然后预测输出结果y为1还是0，也就是预测图片中是否有我们需要的对象：</p>
+<h4 id="符号定义">符号定义</h4>
+<p>$x$：表示一个$n_x$维数据，为输入数据，维度为$\left(n_x, 1\right)$</p>
 <p>$y$：表示输出结果，取值为$(0,1)$；</p>
 <p>$\left(x^{(i)}, y^{(i)}\right)$：表示第$i$组数据，可能是训练数据，也可能是测试数据，此处默认为训练数据；</p>
-<p>$X&#x3D;\left[x^{(1)}, x^{(2)}, \ldots, x^{(m)}\right]$：表示所有的训练数据集的输入值，放在一个$n_x \times m$的矩阵中，其中$m$表示样本数目</p>
-<p>$Y&#x3D;\left[y^{(1)}, y^{(2)}, \ldots, y^{(m)}\right]$：对应表示所有训练数据集的输出值，维度为$1 \times m$</p>
+<p>$X=\left[x^{(1)}, x^{(2)}, \ldots, x^{(m)}\right]$：表示所有的训练数据集的输入值，放在一个$n_x \times m$的矩阵中，其中$m$表示样本数目</p>
+<p>$Y=\left[y^{(1)}, y^{(2)}, \ldots, y^{(m)}\right]$：对应表示所有训练数据集的输出值，维度为$1 \times m$</p>
 <p>用一对$(x,y)$来表示一个单独的样本，$x$代表$n_{x}$维的特征向量，$y$表示标签（输出结果）只能为0或1。而训练集将由$m$个训练样本组成，其中$(x^{(1)},y^{(1)})$表示第一个样本的输入和输出，以此类推，然后所有的这些一起表示整个训练集。有时候为了强调这是训练样本的个数，会写作$M_{train}$</p>
 <blockquote>
 <p>注意：在Python中可将向量表示为矩阵的常用手段：<code>X.shape</code>等于$(n_{x},m)$，以及<code>Y.shape</code>等于$(1,m)$</p>
 </blockquote>
-<h3 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h3><h4 id="Hypothesis-Function（假设函数）为什么不可以使用线性函数？"><a href="#Hypothesis-Function（假设函数）为什么不可以使用线性函数？" class="headerlink" title="Hypothesis Function（假设函数）为什么不可以使用线性函数？"></a><strong>Hypothesis Function</strong>（假设函数）为什么不可以使用线性函数？</h4><p>你想要一个算法能够输出预测，你只能称之为 $\hat{y}$ ，也就是你对实际值 $y$ 的估计。更正式地来说，你想让 $\hat{y}$ 表示 $y$ 等于1的一种可能性或者是机会，前提条件是给定了输入特征 $X$ 。换句话来说，如果 $X$ 是我们在上个视频看到的图片，你想让 $\hat{y}$ 来告诉你这是一只猫的图片的机率有多大。</p>
-<p>在之前的视频中所说的， $X$ 是一个 $n_x$ 维的向量（相当于有 $n_x$ 个特征的特征向量）。我们用 $w$ 来表示逻辑回归的参数，这也是一个 $n_x$ 维向量（因为 $w$ 实际上是特征权重，维度与特征向量相同)，参数里面还有 $b$ ，这是一个实数 (表示偏差)。所以给出输入 $x$ 以及参数 $w$和 $b$ 之后，我们怎样产生输出预测值 $\hat{y}$ ，一件你可以尝试却<strong>不可行</strong>的事是让 $\hat{y}&#x3D;w^T x+b$ 。</p>
+<h3 id="逻辑回归">逻辑回归</h3>
+<h4 id="Hypothesis-Function（假设函数）为什么不可以使用线性函数？"><strong>Hypothesis Function</strong>（假设函数）为什么不可以使用线性函数？</h4>
+<p>你想要一个算法能够输出预测，你只能称之为 $\hat{y}$ ，也就是你对实际值 $y$ 的估计。更正式地来说，你想让 $\hat{y}$ 表示 $y$ 等于1的一种可能性或者是机会，前提条件是给定了输入特征 $X$ 。换句话来说，如果 $X$ 是我们在上个视频看到的图片，你想让 $\hat{y}$ 来告诉你这是一只猫的图片的机率有多大。</p>
+<p>在之前的视频中所说的， $X$ 是一个 $n_x$ 维的向量（相当于有 $n_x$ 个特征的特征向量）。我们用 $w$ 来表示逻辑回归的参数，这也是一个 $n_x$ 维向量（因为 $w$ 实际上是特征权重，维度与特征向量相同)，参数里面还有 $b$ ，这是一个实数 (表示偏差)。所以给出输入 $x$ 以及参数 $w$和 $b$ 之后，我们怎样产生输出预测值 $\hat{y}$ ，一件你可以尝试却<strong>不可行</strong>的事是让 $\hat{y}=w^T x+b$ 。</p>
 <blockquote>
 <p>原因：因为 $w^T x+b$ 可能比1要大得多，或者甚至为一个负值。</p>
 <p>对于你想要的在 0 和 1 之间的概率来说它是没有意义的，因此在逻辑回归中，我们的输出应该是 $\hat{y}$ 等于由上面得到的线性函数式子作为自变量的sigmoid函数中，将线性函数转换为非线性函数。</p>
 </blockquote>
 <p>关于$z$的sigmoid函数的图像：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231122190412250.png" alt="image-20231122190412250"></p>
-<p>关于sigmoid函数的公式：$\sigma(z)&#x3D;\frac{1}{1+e^{-z}}$ ，在这里 $z$ 是一个实数。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231122190412250.png" alt="image-20231122190412250"></p>
+<p>关于sigmoid函数的公式：$\sigma(z)=\frac{1}{1+e^{-z}}$ ，在这里 $z$ 是一个实数。</p>
 <blockquote>
 <p>注意：如果 $z$ 非常大那么 $e^{-z}$ 将会接近于 0 ，关于 $z$ 的sigmoid函数将会近似等于 1 除以 1 加上某个非常接近于 0 的项，因为 $e$ 的指数如果是个绝对值很大的负数的话，这项将会接近于 0 ，所以如果 $z$ 很大的话那么关于 $z$ 的sigmoid函数会非常接近1。</p>
-<p>相反地，如果 $z$ 非常小或者说是一个绝对值很大的负数，那么关于 $e^{-z}$ 这项会变成一个很大的数，你可以认为这是 1 除以 1 加上一个非常非常大的数，所以关于 $z$ 的 $\operatorname{sigmoid}$ 函数就会非常接近于 0 ，因此当你实现逻辑回归时，你的工作就是去让机器学习参数 $w$ 以及 $b$ 这样才使得 $\hat{y}$ 成为对 $y&#x3D;1$ 这一情况的概率的一个很好的估计。</p>
+<p>相反地，如果 $z$ 非常小或者说是一个绝对值很大的负数，那么关于 $e^{-z}$ 这项会变成一个很大的数，你可以认为这是 1 除以 1 加上一个非常非常大的数，所以关于 $z$ 的 $\operatorname{sigmoid}$ 函数就会非常接近于 0 ，因此当你实现逻辑回归时，你的工作就是去让机器学习参数 $w$ 以及 $b$ 这样才使得 $\hat{y}$ 成为对 $y=1$ 这一情况的概率的一个很好的估计。</p>
 </blockquote>
 <p>备选的符号惯例：</p>
 <p>在这个备选的符号惯例里，你有一个参数向量 $\theta_0, \theta_1, \theta_2, \ldots, \theta_{n_x}$ ，这样 $\theta_0$ 就充当了 $b$ ，这是一个实数，而剩下的 $\theta_1$ 直到 $\theta_{n_x}$ 充当了 $w$ ，结果就是当你实现你的神经网络时，有一个比较简单的方法是保持 $b$ 和 $w$ 分开。</p>
-<h3 id="逻辑回归的代价函数"><a href="#逻辑回归的代价函数" class="headerlink" title="逻辑回归的代价函数"></a>逻辑回归的代价函数</h3><h4 id="为什么需要逻辑回归的代价函数"><a href="#为什么需要逻辑回归的代价函数" class="headerlink" title="为什么需要逻辑回归的代价函数"></a>为什么需要逻辑回归的代价函数</h4><p>损失函数（误差函数）：用来衡量预测输出值和实际值有多接近：Loss function: $L(\hat{y}, y)$</p>
+<h3 id="逻辑回归的代价函数">逻辑回归的代价函数</h3>
+<h4 id="为什么需要逻辑回归的代价函数">为什么需要逻辑回归的代价函数</h4>
+<p>损失函数（误差函数）：用来衡量预测输出值和实际值有多接近：Loss function: $L(\hat{y}, y)$</p>
 <p>一般我们用预测值和实际值的平方差或者它们平方差的一半，但是通常在逻辑回归中我们不这么做，因为当我们在学习逻辑回归参数的时候，会发现我们的优化目标不是凸优化，只能找到多个局部最优值，<strong>梯度下降法很可能找不到全局最优值</strong>，虽然平方差是一个不错的损失函数，但是我们在逻辑回归模型中会定义另外一个损失函数。</p>
-<p>那么在逻辑回归中用到的损失函数是：$L(\hat{y}, y)&#x3D;-y \log (\hat{y})-(1-y) \log (1-\hat{y})$</p>
+<p>那么在逻辑回归中用到的损失函数是：$L(\hat{y}, y)=-y \log (\hat{y})-(1-y) \log (1-\hat{y})$</p>
 <p>和使用平方误差作为损失函数的理念相同，你会想要让这个误差尽可能地小，对于这个逻辑回归损失函数，我们也想让它尽可能地小：</p>
 <ul>
-<li>当 $y&#x3D;1$ 时损失函数 $L&#x3D;-\log (\hat{y})$ ，如果想要损失函数 $L$ 尽可能得小，那么 $\hat{y}$ 就要尽可能大，因为 sigmoid函数取值 $[0,1]$ ，所以 $\hat{y}$ 会无限接近于1。</li>
-<li>当 $y&#x3D;0$ 时损失函数 $L&#x3D;-\log (1-\hat{y})$ ，如果想要损失函数 $L$ 尽可能得小，那么 $\hat{y}$ 就要尽可能小，因为sigmoid函数取值 $[0,1]$ ，所以 $\hat{y}$ 会无限接近于 0 。</li>
+<li>当 $y=1$ 时损失函数 $L=-\log (\hat{y})$ ，如果想要损失函数 $L$ 尽可能得小，那么 $\hat{y}$ 就要尽可能大，因为 sigmoid函数取值 $[0,1]$ ，所以 $\hat{y}$ 会无限接近于1。</li>
+<li>当 $y=0$ 时损失函数 $L=-\log (1-\hat{y})$ ，如果想要损失函数 $L$ 尽可能得小，那么 $\hat{y}$ 就要尽可能小，因为sigmoid函数取值 $[0,1]$ ，所以 $\hat{y}$ 会无限接近于 0 。</li>
 </ul>
 <p><strong>后续有很多函数效果何其类似，就是如果 $y$ 等于1，我们就尽可能让 $\hat{y}$ 变大，如果 $y$ 等于0，我们就尽可能让 $\hat{y}$ 变小。</strong></p>
-<p>损失函数是在单个训练样本中定义的，它衡量的是算法在单个训练样本中表现如何，为了衡量算法在全部训练样本上的表现如何，我们需要定义一个算法的代价函数，算法的代价函数是对 $m$ 个样本的损失函数求和然后除以 $m$ :<br>$J(w, b)&#x3D;\frac{1}{m} \sum_{i&#x3D;1}^m L\left(\hat{y}^{(i)}, y^{(i)}\right)&#x3D;\frac{1}{m} \sum_{i&#x3D;1}^m\left(-y^{(i)} \log \hat{y}^{(i)}-\left(1-y^{(i)}\right) \log \left(1-\hat{y}^{(i)}\right)\right)$ </p>
+<p>损失函数是在单个训练样本中定义的，它衡量的是算法在单个训练样本中表现如何，为了衡量算法在全部训练样本上的表现如何，我们需要定义一个算法的代价函数，算法的代价函数是对 $m$ 个样本的损失函数求和然后除以 $m$ :<br>
+$J(w, b)=\frac{1}{m} \sum_{i=1}^m L\left(\hat{y}^{(i)}, y^{(i)}\right)=\frac{1}{m} \sum_{i=1}^m\left(-y^{(i)} \log \hat{y}^{(i)}-\left(1-y^{(i)}\right) \log \left(1-\hat{y}^{(i)}\right)\right)$</p>
 <p><strong>损失函数只适用于像这样的单个训练样本，而代价函数是参数的总代价</strong>，所以在训练笽辑回归模型时候，我们需要找到合适的 $w$ 和 $b$ ，来让代价函数 $J$ 的总代价降到最低。</p>
-<h4 id="为什么损失函数是这种形式？"><a href="#为什么损失函数是这种形式？" class="headerlink" title="为什么损失函数是这种形式？"></a>为什么损失函数是这种形式？</h4><p>详见：<a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson1-week2.html#header-n361">深度学习笔记 (ai-start.com)</a></p>
-<h3 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h3><p>梯度下降法的图示：</p>
+<h4 id="为什么损失函数是这种形式？">为什么损失函数是这种形式？</h4>
+<p>详见：<a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson1-week2.html#header-n361">深度学习笔记 (ai-start.com)</a></p>
+<h3 id="梯度下降法">梯度下降法</h3>
+<p>梯度下降法的图示：</p>
 <p>代价函数（成本函数）是一个凸函数(<strong>convex function</strong>)，具有全局最小值：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231122192633426.png" alt="image-20231122192633426"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231122192633426.png" alt="image-20231122192633426"></p>
 <ol>
 <li><strong>初始化 $w$ 和 $b$ 向量</strong>，可采用随机初始化的方法，因为对于逻辑回归几乎所有的初始化方法都有效，因为函数是凸函数，无论在哪里初始化，应该达到同一点或大致相同的点。</li>
 <li><strong>朝最陡的下坡方向走一步，不断地迭代</strong></li>
 <li><strong>直到走到全局最优解或者接近全局最优解的地方</strong></li>
 </ol>
-<p>梯度下降法的公式：<br>$$<br>\begin{gathered}<br>w:&#x3D;w-\alpha \frac{\partial J(w, b)}{\partial w} \newline<br>b:&#x3D;b-\alpha \frac{\partial J(w, b)}{\partial b}<br>\end{gathered}<br>$$<br>$\partial$ 表示求偏导符号，可以读作round， $\frac{\partial J(w, b)}{\partial w}$ 就是函数 $J(w, b)$ 对 $w$ 求偏导，在代码中我们会使用 $d w$ 表示这个结果， $\frac{\partial J(w, b)}{\partial b}$ 就是函数 $J(w, b)$ 对 $b$ 求偏导，迭代就是不断重复做如图的公式。</p>
-<p>:&#x3D;表示更新参数，<br>$a$ 表示学习率 (learning rate)，用来控制步长 (step) ，即向下走一步的长度 $\frac{d J(w)}{d w}$ 就是函数 $J(w)$ 对 $w$ 求导（derivative），在代码中我们会使用 $d w$ 表示这个结果，即导数的定义的应用。</p>
-<h3 id="前向传播和反向传播"><a href="#前向传播和反向传播" class="headerlink" title="前向传播和反向传播"></a>前向传播和反向传播</h3><p>前向传播指从输入层开始，通过一系列的计算和传递，将输入数据逐层传递至输出层的过程。</p>
+<p>梯度下降法的公式：<br>
+$$<br>
+\begin{gathered}<br>
+w:=w-\alpha \frac{\partial J(w, b)}{\partial w} \newline<br>
+b:=b-\alpha \frac{\partial J(w, b)}{\partial b}<br>
+\end{gathered}<br>
+$$<br>
+$\partial$ 表示求偏导符号，可以读作round， $\frac{\partial J(w, b)}{\partial w}$ 就是函数 $J(w, b)$ 对 $w$ 求偏导，在代码中我们会使用 $d w$ 表示这个结果， $\frac{\partial J(w, b)}{\partial b}$ 就是函数 $J(w, b)$ 对 $b$ 求偏导，迭代就是不断重复做如图的公式。</p>
+<p>:=表示更新参数，<br>
+$a$ 表示学习率 (learning rate)，用来控制步长 (step) ，即向下走一步的长度 $\frac{d J(w)}{d w}$ 就是函数 $J(w)$ 对 $w$ 求导（derivative），在代码中我们会使用 $d w$ 表示这个结果，即导数的定义的应用。</p>
+<h3 id="前向传播和反向传播">前向传播和反向传播</h3>
+<p>前向传播指从输入层开始，通过一系列的计算和传递，将输入数据逐层传递至输出层的过程。</p>
 <p>而反向传播我们给出以下几个步骤：</p>
 <ol>
 <li>进行前馈传导计算, 利用前向传导公式, 得到 $L_2, L_3, \ldots$ 直到输出层 $L_{n_l}$ 的激活值。</li>
 <li>对输出层 (第 $n_l$ 层), 计算:</li>
 </ol>
-<p>$$<br>\delta^{\left(n_l\right)}&#x3D;-\left(y-a^{\left(n_l\right)}\right) \bullet f^{\prime}\left(z^{\left(n_l\right)}\right)<br>$$</p>
+<p>$$<br>
+\delta^{\left(n_l\right)}=-\left(y-a^{\left(n_l\right)}\right) \bullet f^{\prime}\left(z^{\left(n_l\right)}\right)<br>
+$$</p>
 <blockquote>
-<p>注意：此处公式是根据代价函数为平方差的一半进行推导的：<br>$$<br>\delta_i^{\left(n_l\right)}&#x3D;\frac{\partial}{\partial z_i^{n_l}} J(W, b ; x, y)&#x3D;\frac{\partial}{\partial z_i^{n_l}} \frac{1}{2}\left|y-h_{W, b}(x)\right|^2&#x3D;-\left(y_i-a_i^{\left(n_l\right)}\right) \cdot f^{\prime}\left(z_i^{\left(n_l\right)}\right)<br>$$</p>
+<p>注意：此处公式是根据代价函数为平方差的一半进行推导的：<br>
+$$<br>
+\delta_i^{\left(n_l\right)}=\frac{\partial}{\partial z_i^{n_l}} J(W, b ; x, y)=\frac{\partial}{\partial z_i^{n_l}} \frac{1}{2}\left|y-h_{W, b}(x)\right|^2=-\left(y_i-a_i^{\left(n_l\right)}\right) \cdot f^{\prime}\left(z_i^{\left(n_l\right)}\right)<br>
+$$</p>
 </blockquote>
 <ol start="3">
-<li>对于 $l&#x3D;n_l-1, n_l-2, n_l-3, \ldots, 2$ 的各层, 计算:</li>
+<li>对于 $l=n_l-1, n_l-2, n_l-3, \ldots, 2$ 的各层, 计算:</li>
 </ol>
-<p>$$<br>\delta^{(l)}&#x3D;\left(\left(W^{(l)}\right)^T \delta^{(l+1)}\right) \bullet f^{\prime}\left(z^{(l)}\right)<br>$$</p>
+<p>$$<br>
+\delta^{(l)}=\left(\left(W^{(l)}\right)^T \delta^{(l+1)}\right) \bullet f^{\prime}\left(z^{(l)}\right)<br>
+$$</p>
 <blockquote>
-<p>注意：完整推导过程如下：<br>$$<br>\begin{aligned}<br>&amp; \delta_i^{\left(n_{l-1}\right)}&#x3D;\frac{\partial}{\partial z_i^{n_l-1}} J(W, b ; x, y)&#x3D;\frac{\partial}{\partial z^{n_l}} J(W, b ; x, y) \cdot \frac{\partial z_i^{n_l}}{\partial z_i^{n_{l-1}}} \newline<br>&amp; \left.&#x3D;\delta_i^{\left(n_l\right)} \cdot \frac{\partial z_i^{n_l}}{\partial z_i^{n_{l-1}}}&#x3D;\delta_i^{\left(n_l\right)} \cdot \frac{\partial}{\partial z_i^{n_{l-1}}} \sum_{j&#x3D;1}^{s_{l-1}} W_{j i}^{n_l-1} f\left(\sum_i^{n_l-1}\right)\right)&#x3D;\left(\sum_{j&#x3D;1}^{s_{l-1}} W_{j i}^{n_l-1} \delta_i^{\left(n_l\right)}\right) f^{\prime}\left(z_i^{n_l-1}\right) \<br>&amp;<br>\end{aligned}<br>$$<br>根据递推过程, 将 $n_l-1$ 与 $n_l$ 的关系替换为 $l$ 与 $l+1$ 的关系, 可以得到上面的结果:<br>$$<br>\delta_i^{(l)}&#x3D;\left(\sum_{j&#x3D;1}^{s_{l+1}} W_{j i}^{(l)} \delta_j^{(l+1)}\right) f^{\prime}\left(z_i^{(l)}\right)<br>$$</p>
+<p>注意：完整推导过程如下：<br>
+$$<br>
+\begin{aligned}<br>
+&amp; \delta_i^{\left(n_{l-1}\right)}=\frac{\partial}{\partial z_i^{n_l-1}} J(W, b ; x, y)=\frac{\partial}{\partial z^{n_l}} J(W, b ; x, y) \cdot \frac{\partial z_i^{n_l}}{\partial z_i^{n_{l-1}}} \newline<br>
+&amp; \left.=\delta_i^{\left(n_l\right)} \cdot \frac{\partial z_i^{n_l}}{\partial z_i^{n_{l-1}}}=\delta_i^{\left(n_l\right)} \cdot \frac{\partial}{\partial z_i^{n_{l-1}}} \sum_{j=1}^{s_{l-1}} W_{j i}^{n_l-1} f\left(\sum_i^{n_l-1}\right)\right)=\left(\sum_{j=1}^{s_{l-1}} W_{j i}^{n_l-1} \delta_i^{\left(n_l\right)}\right) f^{\prime}\left(z_i^{n_l-1}\right) \<br>
+&amp;<br>
+\end{aligned}<br>
+$$<br>
+根据递推过程, 将 $n_l-1$ 与 $n_l$ 的关系替换为 $l$ 与 $l+1$ 的关系, 可以得到上面的结果:<br>
+$$<br>
+\delta_i^{(l)}=\left(\sum_{j=1}^{s_{l+1}} W_{j i}^{(l)} \delta_j^{(l+1)}\right) f^{\prime}\left(z_i^{(l)}\right)<br>
+$$</p>
 </blockquote>
 <ol start="4">
-<li><p>计算最终需要的偏导数值:<br>$$<br>\begin{aligned}<br>\nabla_{W^{(l)}} J(W, b ; x, y) &amp; &#x3D;\delta^{(l+1)}\left(a^{(l)}\right)^T, \newline<br>\nabla_{b^{(l)}} J(W, b ; x, y) &amp; &#x3D;\delta^{(l+1)} .<br>\end{aligned}<br>$$</p>
+<li>
+<p>计算最终需要的偏导数值:<br>
+$$<br>
+\begin{aligned}<br>
+\nabla_{W^{(l)}} J(W, b ; x, y) &amp; =\delta^{(l+1)}\left(a^{(l)}\right)^T, \newline<br>
+\nabla_{b^{(l)}} J(W, b ; x, y) &amp; =\delta^{(l+1)} .<br>
+\end{aligned}<br>
+$$</p>
 <blockquote>
-<p>注意: </p>
+<p>注意:</p>
 <ol>
-<li>在以上的第2步和第3步中, 我们需要为每一个 $i$ 值计算其 $f^{\prime}\left(z_i^{(l)}\right)$ 。假设 $f(z)$ 是sigmoid函数, 并且我们已经在前向传导运算中得到了 $a_i^{(l)}$ 。那么, 使用我们早先推导出的 $f^{\prime}(z)$ 表达式, 就可以计算得到 $f^{\prime}\left(z_i^{(l)}\right)&#x3D;a_i^{(l)}\left(1-a_i^{(l)}\right)^{\circ}$</li>
-<li>我们使用 “$\cdot$” 表示向量乘积运算符（在Matlab或Octave里用 “.*”表示, 也称作阿达马乘积) 。若 $a&#x3D;b \bullet c$, 则 $a_i&#x3D;b_i c_i$ 。</li>
+<li>在以上的第2步和第3步中, 我们需要为每一个 $i$ 值计算其 $f^{\prime}\left(z_i^{(l)}\right)$ 。假设 $f(z)$ 是sigmoid函数, 并且我们已经在前向传导运算中得到了 $a_i^{(l)}$ 。那么, 使用我们早先推导出的 $f^{\prime}(z)$ 表达式, 就可以计算得到 $f^{\prime}\left(z_i^{(l)}\right)=a_i^{(l)}\left(1-a_i^{(l)}\right)^{\circ}$</li>
+<li>我们使用 “$\cdot$” 表示向量乘积运算符（在Matlab或Octave里用 “.*”表示, 也称作阿达马乘积) 。若 $a=b \bullet c$, 则 $a_i=b_i c_i$ 。</li>
 </ol>
 </blockquote>
 </li>
 </ol>
 <p>下面我们实现批量梯度下降法中的一次迭代：</p>
 <ol>
-<li>对于所有 $l$, 令 $\Delta W^{(l)}:&#x3D;0, \Delta b^{(l)}:&#x3D;0$ （设置为全零矩阵或全零向量）</li>
-<li>对于 $i&#x3D;1$ 到 $m$,<br>a. 使用反向传播算法计算 $\nabla_{W^{(l)}} J(W, b ; x, y)$ 和 $\nabla_{b^{(l)}} J(W, b ; x, y)$ 。<br>b. 计算 $\Delta W^{(l)}:&#x3D;\Delta W^{(l)}+\nabla_{W^{(l)}} J(W, b ; x, y)$ 。<br>c. 计算 $\Delta b^{(l)}:&#x3D;\Delta b^{(l)}+\nabla_{b^{(l)}} J(W, b ; x, y)$ 。</li>
-<li>更新权重参数:<br>$$<br>\begin{aligned}<br>W^{(l)} &amp; &#x3D;W^{(l)}-\alpha\left[\left(\frac{1}{m} \Delta W^{(l)}\right)+\lambda W^{(l)}\right] \newline<br>b^{(l)} &amp; &#x3D;b^{(l)}-\alpha\left[\frac{1}{m} \Delta b^{(l)}\right]<br>\end{aligned}<br>$$</li>
+<li>对于所有 $l$, 令 $\Delta W^{(l)}:=0, \Delta b^{(l)}:=0$ （设置为全零矩阵或全零向量）</li>
+<li>对于 $i=1$ 到 $m$,<br>
+a. 使用反向传播算法计算 $\nabla_{W^{(l)}} J(W, b ; x, y)$ 和 $\nabla_{b^{(l)}} J(W, b ; x, y)$ 。<br>
+b. 计算 $\Delta W^{(l)}:=\Delta W^{(l)}+\nabla_{W^{(l)}} J(W, b ; x, y)$ 。<br>
+c. 计算 $\Delta b^{(l)}:=\Delta b^{(l)}+\nabla_{b^{(l)}} J(W, b ; x, y)$ 。</li>
+<li>更新权重参数:<br>
+$$<br>
+\begin{aligned}<br>
+W^{(l)} &amp; =W^{(l)}-\alpha\left[\left(\frac{1}{m} \Delta W^{(l)}\right)+\lambda W^{(l)}\right] \newline<br>
+b^{(l)} &amp; =b^{(l)}-\alpha\left[\frac{1}{m} \Delta b^{(l)}\right]<br>
+\end{aligned}<br>
+$$</li>
 </ol>
 <p>现在, 我们可以重复梯度下降法的迭代步骤来减小代价函数 $J(W, b)$ 的值, 进而求解我们的神经网络。</p>
-<h3 id="向量化"><a href="#向量化" class="headerlink" title="向量化"></a>向量化</h3><h4 id="为什么需要向量化？"><a href="#为什么需要向量化？" class="headerlink" title="为什么需要向量化？"></a>为什么需要向量化？</h4><p>因为使用非向量化的实现，算法实现速度很慢，而向量化实现将会非常直接进行计算。例如计算$W^T x$，代码如下：</p>
+<h3 id="向量化">向量化</h3>
+<h4 id="为什么需要向量化？">为什么需要向量化？</h4>
+<p>因为使用非向量化的实现，算法实现速度很慢，而向量化实现将会非常直接进行计算。例如计算$W^T x$，代码如下：</p>
 <p><code>z=np.dot(w,x)+b</code></p>
-<h4 id="如何在深度学习中使用向量化？"><a href="#如何在深度学习中使用向量化？" class="headerlink" title="如何在深度学习中使用向量化？"></a>如何在深度学习中使用向量化？</h4><p>首先我们回顾一下逻辑回归的前向传播步骤。</p>
+<h4 id="如何在深度学习中使用向量化？">如何在深度学习中使用向量化？</h4>
+<p>首先我们回顾一下逻辑回归的前向传播步骤。</p>
 <ol>
-<li><p>如果你有 $m$ 个训练样本，然后对第一个样本进行预测，你需要这样计算。计算 $z$ ，我正在使用这个熟悉的公式 $z^{(1)}&#x3D;w^T x^{(1)}+b$然后计算激活函数 $a^{(1)}&#x3D;\sigma\left(z^{(1)}\right)$ ，计算第一个样本的预测值 $y$ 。</p>
+<li>
+<p>如果你有 $m$ 个训练样本，然后对第一个样本进行预测，你需要这样计算。计算 $z$ ，我正在使用这个熟悉的公式 $z^{(1)}=w^T x^{(1)}+b$然后计算激活函数 $a^{(1)}=\sigma\left(z^{(1)}\right)$ ，计算第一个样本的预测值 $y$ 。</p>
 </li>
-<li><p>然后对第二个样本进行预测，你需要计算 $z^{(2)}&#x3D;w^T x^{(2)}+b ， a^{(2)}&#x3D;\sigma\left(z^{(2)}\right)$ 。然后对第三个样本进行预测，你需要计算 $z^{(3)}&#x3D;w^T x^{(3)}+b ， a^{(3)}&#x3D;\sigma\left(z^{(3)}\right)$ ，依次类推。</p>
+<li>
+<p>然后对第二个样本进行预测，你需要计算 $z^{(2)}=w^T x^{(2)}+b ， a^{(2)}=\sigma\left(z^{(2)}\right)$ 。然后对第三个样本进行预测，你需要计算 $z^{(3)}=w^T x^{(3)}+b ， a^{(3)}=\sigma\left(z^{(3)}\right)$ ，依次类推。</p>
 </li>
-<li><p>如果你有 $m$ 个训练样本，你可能需要这样做 $m$ 次，可以看出，为了完成前向传播步骤，即对我们的 $m$ 个样本都计算出预测值。有一个办法可以并且不需要任何一个明确的for循环：</p>
+<li>
+<p>如果你有 $m$ 个训练样本，你可能需要这样做 $m$ 次，可以看出，为了完成前向传播步骤，即对我们的 $m$ 个样本都计算出预测值。有一个办法可以并且不需要任何一个明确的for循环：</p>
 <ol>
-<li><p>首先，回忆一下我们曾经定义了一个矩阵 $X$ 作为你的训练输入，像这样在不同的列中堆积在一起。这是一个 $n_x$ 行 $m$ 列的矩阵。我现在将它写为Python numpy的形式 $\left(n_x, m\right)$ ，这只是表示 $X$ 是一个 $n_x$ 乘以 $m$ 的矩阵 $R^{n_x \times m}$ 。</p>
+<li>
+<p>首先，回忆一下我们曾经定义了一个矩阵 $X$ 作为你的训练输入，像这样在不同的列中堆积在一起。这是一个 $n_x$ 行 $m$ 列的矩阵。我现在将它写为Python numpy的形式 $\left(n_x, m\right)$ ，这只是表示 $X$ 是一个 $n_x$ 乘以 $m$ 的矩阵 $R^{n_x \times m}$ 。</p>
 </li>
-<li><p>我打算先构建一个 $1 \times m$ 的矩阵，实际上它是一个行向量，同时我准备计算 $z^{(1)} ， z^{(2)}$ .. 一直到 $z^{(m)}$ ，所有值都是在同一时间内完成。结果发现它可以表达为 $w$ 的转置乘以大写矩阵 $x$然后加上向量 $[b b \ldots b] ，\left(\left[z^{(1)} z^{(2)} \ldots z^{(m)}\right]&#x3D;w^T+[b b \ldots b]\right)$ 。 $[b b \ldots b]$ 是一个 $1 \times m$ 的向量或者 $1 \times m$ 的矩阵或者是一个 $m$ 维的行向量。所以希望你熟悉矩阵乘法，你会发现的 $w$ 转置乘以 $x^{(1)} ， x^{(2)}$ 一直到 $x^{(m)}$ 。</p>
-<p>所以 $w$ 转置可以是一个行向量。所以第一项 $w^T X$ 将计算 $w$ 的转置乘以 $x^{(1)} ， w$ 转置乘以 $x^{(2)}$ 等等。然后我们加上第二项 $[b b \ldots b]$ ，你最终将 $b$ 加到了每个元素上。所以你最终得到了另一个 $1 \times m$ 的向量：<br>$$<br>\left[z^{(1)} z^{(2)} \ldots z^{(m)}\right]&#x3D;w^T X+[b b \ldots b]&#x3D;\left[w^T x^{(1)}+b, w^T x^{(2)}+b \ldots w^T x^{(m)}+b\right]<br>$$<br>那么用numpy命令是<code>Z = np.dot(w.T, X) + b</code>。</p>
+<li>
+<p>我打算先构建一个 $1 \times m$ 的矩阵，实际上它是一个行向量，同时我准备计算 $z^{(1)} ， z^{(2)}$ … 一直到 $z^{(m)}$ ，所有值都是在同一时间内完成。结果发现它可以表达为 $w$ 的转置乘以大写矩阵 $x$然后加上向量 $[b b \ldots b] ，\left(\left[z^{(1)} z^{(2)} \ldots z^{(m)}\right]=w^T+[b b \ldots b]\right)$ 。 $[b b \ldots b]$ 是一个 $1 \times m$ 的向量或者 $1 \times m$ 的矩阵或者是一个 $m$ 维的行向量。所以希望你熟悉矩阵乘法，你会发现的 $w$ 转置乘以 $x^{(1)} ， x^{(2)}$ 一直到 $x^{(m)}$ 。</p>
+<p>所以 $w$ 转置可以是一个行向量。所以第一项 $w^T X$ 将计算 $w$ 的转置乘以 $x^{(1)} ， w$ 转置乘以 $x^{(2)}$ 等等。然后我们加上第二项 $[b b \ldots b]$ ，你最终将 $b$ 加到了每个元素上。所以你最终得到了另一个 $1 \times m$ 的向量：<br>
+$$<br>
+\left[z^{(1)} z^{(2)} \ldots z^{(m)}\right]=w^T X+[b b \ldots b]=\left[w^T x^{(1)}+b, w^T x^{(2)}+b \ldots w^T x^{(m)}+b\right]<br>
+$$<br>
+那么用numpy命令是<code>Z = np.dot(w.T, X) + b</code>。</p>
 <blockquote>
 <p>注意：python中有一个巧妙的地方，这里 $b$ 是一个实数，或者说是一个 $1 \times m$ 的行向量 。但是当你将这个向量加上这个实数时，Python自动把这个实数 $b$ 扩展成一个 $1 \times m$ 的行向量，它在Python中被称作广播(<strong>brosdcasting</strong>)</p>
 </blockquote>
@@ -616,51 +683,111 @@
 </ol>
 </li>
 </ol>
-<h4 id="向量化如何在逻辑回归的梯度输出中使用？"><a href="#向量化如何在逻辑回归的梯度输出中使用？" class="headerlink" title="向量化如何在逻辑回归的梯度输出中使用？"></a>向量化如何在逻辑回归的梯度输出中使用？</h4><p>前向传播步骤： </p>
-<p>(1) $z^{[l]}&#x3D;W^{[l]} \cdot a^{[l-1]}+b^{[l]}$ </p>
-<p>(2) $a^{[l]}&#x3D;g^{[l]}\left(z^{[l]}\right)$</p>
-<p>向量化实现过程: </p>
-<p>(1) $z^{[l]}&#x3D;W^{[l]} \cdot A^{[l-1]}+b^{[l]}$ </p>
-<p>(2) $A^{[l]}&#x3D;g^{[l]}\left(Z^{[l]}\right)$</p>
-<p>所以反向传播的步骤可以写成:<br>(1) $d z^{[l]}&#x3D;d a^{[l]} * g^{[l]^{\prime}}\left(z^{[l]}\right)$<br>(2) $d w^{[l]}&#x3D;d z^{[l]} \cdot a^{[l-1]}$<br>(3) $d b^{[l]}&#x3D;d z^{[l]}$<br>(4) $d a^{[l-1]}&#x3D;w^{[l] T} \cdot d z^{[l]}$<br>(5) $d z^{[l]}&#x3D;w^{[l+1] T} d z^{[l+1]} \cdot g^{[l]^{\prime}}\left(z^{[l]}\right)$</p>
-<p>式子 (5) 由式子 (4) 带入式子 (1) 得到，前四个式子就可实现反向函数。<br>向量化实现过程可以写成:<br>(6) $d Z^{[l]}&#x3D;d A^{[l]} * g^{[l]^{\prime}}\left(Z^{[l]}\right)$<br>(7) $d W^{[l]}&#x3D;\frac{1}{m} d Z^{[l]} \cdot A^{[l-1] T}$<br>(8) $d b^{[l]}&#x3D;\frac{1}{m}$ np. $\operatorname{sum}\left(d z^{[l]}\right.$, axis $&#x3D;1$, keepdims $&#x3D;$ True $)$<br>(9) $d A^{[l-1]}&#x3D;W^{[l] T} \cdot d Z^{[l]}$</p>
-<h3 id="什么是numpy中的广播机制？"><a href="#什么是numpy中的广播机制？" class="headerlink" title="什么是numpy中的广播机制？"></a>什么是numpy中的广播机制？</h3><p>在进行广播时，NumPy会自动调整数组的形状，使得它们具有相容的维度。具体来说，广播机制遵循以下规则：   </p>
+<h4 id="向量化如何在逻辑回归的梯度输出中使用？">向量化如何在逻辑回归的梯度输出中使用？</h4>
+<p>前向传播步骤：</p>
+<p>(1) $z^{[l]}=W^{[l]} \cdot a^{[l-1]}+b^{[l]}$</p>
+<p>(2) $a^{[l]}=g^{[l]}\left(z^{[l]}\right)$</p>
+<p>向量化实现过程:</p>
+<p>(1) $z^{[l]}=W^{[l]} \cdot A^{[l-1]}+b^{[l]}$</p>
+<p>(2) $A^{[l]}=g^{[l]}\left(Z^{[l]}\right)$</p>
+<p>所以反向传播的步骤可以写成:<br>
+(1) $d z^{[l]}=d a^{[l]} * g^{[l]^{\prime}}\left(z^{[l]}\right)$<br>
+(2) $d w^{[l]}=d z^{[l]} \cdot a^{[l-1]}$<br>
+(3) $d b^{[l]}=d z^{[l]}$<br>
+(4) $d a^{[l-1]}=w^{[l] T} \cdot d z^{[l]}$<br>
+(5) $d z^{[l]}=w^{[l+1] T} d z^{[l+1]} \cdot g^{[l]^{\prime}}\left(z^{[l]}\right)$</p>
+<p>式子 (5) 由式子 (4) 带入式子 (1) 得到，前四个式子就可实现反向函数。<br>
+向量化实现过程可以写成:<br>
+(6) $d Z^{[l]}=d A^{[l]} * g^{[l]^{\prime}}\left(Z^{[l]}\right)$<br>
+(7) $d W^{[l]}=\frac{1}{m} d Z^{[l]} \cdot A^{[l-1] T}$<br>
+(8) $d b^{[l]}=\frac{1}{m}$ np. $\operatorname{sum}\left(d z^{[l]}\right.$, axis $=1$, keepdims $=$ True $)$<br>
+(9) $d A^{[l-1]}=W^{[l] T} \cdot d Z^{[l]}$</p>
+<h3 id="什么是numpy中的广播机制？">什么是numpy中的广播机制？</h3>
+<p>在进行广播时，NumPy会自动调整数组的形状，使得它们具有相容的维度。具体来说，广播机制遵循以下规则：</p>
 <ol>
-<li>如果两个数组的维度数不同，那么维度较少的数组会在其前面补1，直到维度数相同。  </li>
-<li>如果两个数组在某个维度上的大小不同，但其中一个数组的大小为1，那么可以将该数组在该维度上进行扩展，使得维度大小相同。  </li>
+<li>如果两个数组的维度数不同，那么维度较少的数组会在其前面补1，直到维度数相同。</li>
+<li>如果两个数组在某个维度上的大小不同，但其中一个数组的大小为1，那么可以将该数组在该维度上进行扩展，使得维度大小相同。</li>
 <li>如果两个数组在某个维度上的大小既不相等，也不为1，那么会引发错误，表示无法进行广播。</li>
 </ol>
-<h3 id="神经网络概述"><a href="#神经网络概述" class="headerlink" title="神经网络概述"></a>神经网络概述</h3><p>例如一个层数为2的神经网络，整个计算过程如下：<br>$$<br>\left.\begin{array}{r}<br>x \<br>W^{[1]} \<br>b^{[1]}<br>\end{array}\right} \Longrightarrow z^{[1]}&#x3D;W^{[1]} x+b^{[1]} \Longrightarrow a^{[1]}&#x3D;\sigma\left(z^{[1]}\right)<br>$$</p>
-<p>类似逻辑回归，接下来需要使用另一个线性方程对应的参数计算 $z^{[2]}$ ，计算 $a^{[2]}$ ，此时 $a^{[2]}$ 就是整个神经网络的输出，用 $\hat{y}$ 表示网络的输出：<br>$$<br>\begin{aligned}<br>&amp; \left.\begin{array}{r}<br>a^{[1]}&#x3D;\sigma\left(z^{[1]}\right) \<br>W^{[2]} \<br>b^{[2]}<br>\end{array}\right} \Longrightarrow z^{[2]}&#x3D;W^{[2]} a^{[1]}+b^{[2]} \Longrightarrow a^{[2]}&#x3D;\sigma\left(z^{[2]}\right) \<br>&amp; \Longrightarrow L\left(a^{[2]}, y\right) \<br>&amp;<br>\end{aligned}<br>$$</p>
+<h3 id="神经网络概述">神经网络概述</h3>
+<p>例如一个层数为2的神经网络，整个计算过程如下：<br>
+$$<br>
+\left.\begin{array}{r}<br>
+x \<br>
+W^{[1]} \<br>
+b^{[1]}<br>
+\end{array}\right} \Longrightarrow z^{[1]}=W^{[1]} x+b^{[1]} \Longrightarrow a^{[1]}=\sigma\left(z^{[1]}\right)<br>
+$$</p>
+<p>类似逻辑回归，接下来需要使用另一个线性方程对应的参数计算 $z^{[2]}$ ，计算 $a^{[2]}$ ，此时 $a^{[2]}$ 就是整个神经网络的输出，用 $\hat{y}$ 表示网络的输出：<br>
+$$<br>
+\begin{aligned}<br>
+&amp; \left.\begin{array}{r}<br>
+a^{[1]}=\sigma\left(z^{[1]}\right) \<br>
+W^{[2]} \<br>
+b^{[2]}<br>
+\end{array}\right} \Longrightarrow z^{[2]}=W^{[2]} a^{[1]}+b^{[2]} \Longrightarrow a^{[2]}=\sigma\left(z^{[2]}\right) \<br>
+&amp; \Longrightarrow L\left(a^{[2]}, y\right) \<br>
+&amp;<br>
+\end{aligned}<br>
+$$</p>
 <p>同时也需要进行反向传播来更新参数，从右到左反向计算：</p>
-<p>$$<br>\begin{aligned}<br>&amp; \left.\begin{array}{r}<br>d a^{[1]}&#x3D;d \sigma\left(z^{[1]}\right) \<br>d W^{[2]} \<br>d b^{[2]}<br>\end{array}\right} \Longleftarrow d z^{[2]}&#x3D;d\left(W^{[2]} \alpha^{[1]}+b^{[2]}\right) \Longleftarrow d a^{[2]}&#x3D;d \sigma\left(z^{[2]}\right) \<br>&amp; \Longleftarrow d L\left(a^{[2]}, y\right) \<br>&amp;<br>\end{aligned}<br>$$</p>
-<h3 id="神经网络表示"><a href="#神经网络表示" class="headerlink" title="神经网络表示"></a>神经网络表示</h3><p>这是一张神经网络的图片，让我们给此图的不同部分取一些名字：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/L1_week3_3.png" alt="img"></p>
+<p>$$<br>
+\begin{aligned}<br>
+&amp; \left.\begin{array}{r}<br>
+d a^{[1]}=d \sigma\left(z^{[1]}\right) \<br>
+d W^{[2]} \<br>
+d b^{[2]}<br>
+\end{array}\right} \Longleftarrow d z^{[2]}=d\left(W^{[2]} \alpha^{[1]}+b^{[2]}\right) \Longleftarrow d a^{[2]}=d \sigma\left(z^{[2]}\right) \<br>
+&amp; \Longleftarrow d L\left(a^{[2]}, y\right) \<br>
+&amp;<br>
+\end{aligned}<br>
+$$</p>
+<h3 id="神经网络表示">神经网络表示</h3>
+<p>这是一张神经网络的图片，让我们给此图的不同部分取一些名字：</p>
+<p><img src="/medias/images/loading.gif" data-original="L1_week3_3.png" alt="img"></p>
 <ul>
-<li><p>输入特征 $x_1, x_2, x_3$，被称为神经网络的<strong>输入层</strong>。</p>
+<li>
+<p>输入特征 $x_1, x_2, x_3$，被称为神经网络的<strong>输入层</strong>。</p>
 <p>如同我们使用向量 $X$ 表示输入特征一样，有一个可代替的记号 $a^{[0]}$ 可以用来表示输入特征，它意味着网络中不同层的值会传递到它们后面的层中：</p>
 <ul>
-<li><p>输入层将 $x$ 传递给隐藏层，所以我们将输入层的激活值称为 $a^{[0]}$; </p>
+<li>
+<p>输入层将 $x$ 传递给隐藏层，所以我们将输入层的激活值称为 $a^{[0]}$;</p>
 </li>
-<li><p>下一层即隐藏层也同样会产生一些激活值，那么我将其记作 $a^{[1]}$ ，所以具体地，这里的第一个单元或结点我们将其表示为 $a_1^{[1]}$ ，第二个结点的值我们记为 $a_2^{[1]}$ 以此类推。</p>
+<li>
+<p>下一层即隐藏层也同样会产生一些激活值，那么我将其记作 $a^{[1]}$ ，所以具体地，这里的第一个单元或结点我们将其表示为 $a_1^{[1]}$ ，第二个结点的值我们记为 $a_2^{[1]}$ 以此类推。</p>
 </li>
-<li><p>所以这里的是一个四维的向量如果写成Python代码，那么它是一个规模为 $4 \times 1$ 的矩阵或一个大小为 4 的列向量，如下公式，它是四维的，因为在本例中，我们有四个结点或者单元，或者称为四个隐藏层单元：<br>$$<br>a^{[1]}&#x3D;\left[\begin{array}{c}<br>a_1^{[1]} \<br>a_2^{[1]} \<br>a_3^{[1]} \<br>a_4^{[1]}<br>\end{array}\right]<br>$$</p>
+<li>
+<p>所以这里的是一个四维的向量如果写成Python代码，那么它是一个规模为 $4 \times 1$ 的矩阵或一个大小为 4 的列向量，如下公式，它是四维的，因为在本例中，我们有四个结点或者单元，或者称为四个隐藏层单元：<br>
+$$<br>
+a^{[1]}=\left[\begin{array}{c}<br>
+a_1^{[1]} \<br>
+a_2^{[1]} \<br>
+a_3^{[1]} \<br>
+a_4^{[1]}<br>
+\end{array}\right]<br>
+$$</p>
 </li>
-<li><p>最后输出层将产生某个数值 $a$，它只是一个单独的实数，所以 $\hat{y}$ 值将取为 $a^{[2]}$。</p>
+<li>
+<p>最后输出层将产生某个数值 $a$，它只是一个单独的实数，所以 $\hat{y}$ 值将取为 $a^{[2]}$。</p>
 </li>
 </ul>
 </li>
-<li><p>中间的层被称为神经网络的<strong>隐藏层</strong>，原因是在你使用监督学习训练一个神经网络的时候，训练集包含了输入也包含了目标输出，所以术语隐藏层的含义是在训练集中，<strong>这些中间结点的准确值我们是不知道的</strong>，也就是说你看不见它们在训练集中应具有的值。</p>
+<li>
+<p>中间的层被称为神经网络的<strong>隐藏层</strong>，原因是在你使用监督学习训练一个神经网络的时候，训练集包含了输入也包含了目标输出，所以术语隐藏层的含义是在训练集中，<strong>这些中间结点的准确值我们是不知道的</strong>，也就是说你看不见它们在训练集中应具有的值。</p>
 </li>
-<li><p>最后一层称为神经网络的<strong>输出层</strong>，它负责产生预测值。</p>
+<li>
+<p>最后一层称为神经网络的<strong>输出层</strong>，它负责产生预测值。</p>
 <blockquote>
 <p>注意：</p>
 <ol>
-<li><p>图中的神经网络只能称为是一个两层的神经网络，原因是当我们计算网络的层数时，输入层是不算入总层数内，所以隐藏层是第一层，输出层是第二层。</p>
+<li>
+<p>图中的神经网络只能称为是一个两层的神经网络，原因是当我们计算网络的层数时，输入层是不算入总层数内，所以隐藏层是第一层，输出层是第二层。</p>
 </li>
-<li><p>我们将输入层称为第零层，所以在技术上，这仍然是一个三层的神经网络，因为这里有输入层、隐藏层，还有输出层。</p>
+<li>
+<p>我们将输入层称为第零层，所以在技术上，这仍然是一个三层的神经网络，因为这里有输入层、隐藏层，还有输出层。</p>
 </li>
-<li><p>隐藏层以及最后的输出层是带有参数的，这里的隐藏层将拥有两个参数 $W$ 和 $b$ ，我将给它们加上上标 ${ }^{[1]}\left(W^{[1]}, b^{[1]}\right)$ ，表示这些参数是和第一层这个隐藏层有关系的。</p>
+<li>
+<p>隐藏层以及最后的输出层是带有参数的，这里的隐藏层将拥有两个参数 $W$ 和 $b$ ，我将给它们加上上标 ${ }^{[1]}\left(W^{[1]}, b^{[1]}\right)$ ，表示这些参数是和第一层这个隐藏层有关系的。</p>
 <p>之后在这个例子中我们会看到 $W$ 是一个 $4 \times 3$ 的矩阵，而 $b$ 是一个 $4 \times 1$ 的向量，第一个数字 4 源自于我们有四个结点或隐藏层单元，然后数字 3 源自于这里有三个输入特征；</p>
 <p>类似的输出层也有一些与之关联的参数 $W^{[2]}$ 以及 $b^{[2]}$ 。从维数上来看，它们的规模分别是 $1 \times 4$ 以及 $1 \times 1$ 。 $1 \times 4$ 是因为隐藏层有四个隐藏层单元而输出层只有一个单元。</p>
 </li>
@@ -668,79 +795,152 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="神经网络的计算"><a href="#神经网络的计算" class="headerlink" title="神经网络的计算"></a>神经网络的计算</h3><p>逻辑回归的计算有两个步骤：</p>
+<h3 id="神经网络的计算">神经网络的计算</h3>
+<p>逻辑回归的计算有两个步骤：</p>
 <ol>
-<li>按步骤计算出 $z$ </li>
+<li>按步骤计算出 $z$</li>
 <li>以<strong>sigmoid</strong>函数为激活函数计算 $z$（得出 $a$）</li>
 </ol>
 <p>神经网络只是如此做了很多重复计算，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/L1_week3_6.png" alt="img"></p>
-<h4 id="向量化计算"><a href="#向量化计算" class="headerlink" title="向量化计算"></a>向量化计算</h4><p>向量化的过程是将神经网络中的一层神经元参数纵向堆积起来，例如隐藏层中的 $w$ 纵向堆积起来变成一个 (4,3) 的矩阵，用符号 $W^{[1]}$ 表示。因此公式改为：</p>
+<p><img src="/medias/images/loading.gif" data-original="L1_week3_6.png" alt="img"></p>
+<h4 id="向量化计算">向量化计算</h4>
+<p>向量化的过程是将神经网络中的一层神经元参数纵向堆积起来，例如隐藏层中的 $w$ 纵向堆积起来变成一个 (4,3) 的矩阵，用符号 $W^{[1]}$ 表示。因此公式改为：</p>
 <ol>
-<li>$z^{[n]}&#x3D;w^{[n]} x+b^{[n]}$</li>
-<li>$a^{[n]}&#x3D;\sigma\left(z^{[n]}\right)$</li>
+<li>$z^{[n]}=w^{[n]} x+b^{[n]}$</li>
+<li>$a^{[n]}=\sigma\left(z^{[n]}\right)$</li>
 </ol>
-<p>即<br>$$<br>\left[\begin{array}{c}<br>z_1^{[1]} \<br>z_2^{[1]} \<br>z_3^{[1]} \<br>z_4^{[1]}<br>\end{array}\right]&#x3D;\overbrace{\left[\begin{array}{c}<br>\ldots W_1^{[1] T} \ldots \<br>\ldots W_2^{[1] T} \ldots \<br>\ldots W_3^{[1] T} \ldots \<br>\ldots W_4^{[1] T} \ldots<br>\end{array}\right]}^{W^{[1]}} * \overbrace{\left[\begin{array}{c}<br>x_1 \<br>x_2 \<br>x_3<br>\end{array}\right]}^{\text {input }}+\overbrace{\left[\begin{array}{c}<br>b_1^{[1]} \<br>b_2^{[1]} \<br>b_3^{[1]} \<br>b_4^{[1]}<br>\end{array}\right]}^{b^{[1]}}<br>$$<br>如果要加入更多样本，只需向矩阵X中加入更多列：<br>$$<br>\begin{aligned}<br>&amp; W^{[1]} x&#x3D;\left[\begin{array}{l}<br>\cdots \<br>\cdots \<br>\cdots<br>\end{array}\right]\left[\begin{array}{cccc}<br>\vdots &amp; \vdots &amp; \vdots &amp; \vdots \<br>x^{(1)} &amp; x^{(2)} &amp; x^{(3)} &amp; \vdots \<br>\vdots &amp; \vdots &amp; \vdots &amp; \vdots<br>\end{array}\right]&#x3D;\left[\begin{array}{cccc}<br>\vdots &amp; \vdots &amp; \vdots &amp; \vdots \<br>w^{(1)} x^{(1)} &amp; w^{(1)} x^{(2)} &amp; w^{(1)} x^{(3)} &amp; \vdots \<br>\vdots &amp; \vdots &amp; \vdots &amp; \vdots<br>\end{array}\right]&#x3D; \<br>&amp; {\left[\begin{array}{cccc}<br>\vdots &amp; \vdots &amp; \vdots &amp; \vdots \<br>z^{<a href="1">1</a>} &amp; z^{<a href="2">1</a>} &amp; z^{<a href="3">1</a>} &amp; \vdots \<br>\vdots &amp; \vdots &amp; \vdots &amp; \vdots<br>\end{array}\right]&#x3D;Z^{[1]}} \<br>&amp;<br>\end{aligned}<br>$$<br>即当有不同的训练样本时，将它们堆到矩阵 $X$ 的各列中，那么它们的输出也会相应地堆叠到矩阵 $Z^{[1]}$ 的各列中；之后就可以直接计算矩阵 $Z^{[1]}$ 加上 $b^{[1]}$，因为它们的列向量具有相同的尺寸，Python的广播机制可以处理这种矩阵与向量直接相加的情况，最终得到公式 $Z^{[n]}&#x3D;W^{[n]} x+B^{[n]}$</p>
-<h3 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h3><p>有些激活函数比<strong>sigmoid</strong>激活函数效果更好，例如<strong>tanh</strong>函数或者双曲正切函数是总体上都优于<strong>sigmoid</strong>函数的激活函数。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/L1_week3_9.jpg" alt="w600"></p>
-<p>如图， $a&#x3D;\tan (z)$ 的值域是位于+1和-1之间，公式为: $a&#x3D;\tanh (z)&#x3D;\frac{e^z-e^{-z}}{e^z+e^{-z}}$</p>
+<p>即<br>
+$$<br>
+\left[\begin{array}{c}<br>
+z_1^{[1]} \<br>
+z_2^{[1]} \<br>
+z_3^{[1]} \<br>
+z_4^{[1]}<br>
+\end{array}\right]=\overbrace{\left[\begin{array}{c}<br>
+\ldots W_1^{[1] T} \ldots \<br>
+\ldots W_2^{[1] T} \ldots \<br>
+\ldots W_3^{[1] T} \ldots \<br>
+\ldots W_4^{[1] T} \ldots<br>
+\end{array}\right]}^{W^{[1]}} * \overbrace{\left[\begin{array}{c}<br>
+x_1 \<br>
+x_2 \<br>
+x_3<br>
+\end{array}\right]}^{\text {input }}+\overbrace{\left[\begin{array}{c}<br>
+b_1^{[1]} \<br>
+b_2^{[1]} \<br>
+b_3^{[1]} \<br>
+b_4^{[1]}<br>
+\end{array}\right]}^{b^{[1]}}<br>
+$$<br>
+如果要加入更多样本，只需向矩阵X中加入更多列：<br>
+$$<br>
+\begin{aligned}<br>
+&amp; W^{[1]} x=\left[\begin{array}{l}<br>
+\cdots \<br>
+\cdots \<br>
+\cdots<br>
+\end{array}\right]\left[\begin{array}{cccc}<br>
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots \<br>
+x^{(1)} &amp; x^{(2)} &amp; x^{(3)} &amp; \vdots \<br>
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots<br>
+\end{array}\right]=\left[\begin{array}{cccc}<br>
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots \<br>
+w^{(1)} x^{(1)} &amp; w^{(1)} x^{(2)} &amp; w^{(1)} x^{(3)} &amp; \vdots \<br>
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots<br>
+\end{array}\right]= \<br>
+&amp; {\left[\begin{array}{cccc}<br>
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots \<br>
+z^{<a href="1">1</a>} &amp; z^{<a href="2">1</a>} &amp; z^{<a href="3">1</a>} &amp; \vdots \<br>
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots<br>
+\end{array}\right]=Z^{[1]}} \<br>
+&amp;<br>
+\end{aligned}<br>
+$$<br>
+即当有不同的训练样本时，将它们堆到矩阵 $X$ 的各列中，那么它们的输出也会相应地堆叠到矩阵 $Z^{[1]}$ 的各列中；之后就可以直接计算矩阵 $Z^{[1]}$ 加上 $b^{[1]}$，因为它们的列向量具有相同的尺寸，Python的广播机制可以处理这种矩阵与向量直接相加的情况，最终得到公式 $Z^{[n]}=W^{[n]} x+B^{[n]}$</p>
+<h3 id="激活函数">激活函数</h3>
+<p>有些激活函数比<strong>sigmoid</strong>激活函数效果更好，例如<strong>tanh</strong>函数或者双曲正切函数是总体上都优于<strong>sigmoid</strong>函数的激活函数。</p>
+<p><img src="/medias/images/loading.gif" data-original="L1_week3_9.jpg" alt="w600"></p>
+<p>如图， $a=\tan (z)$ 的值域是位于+1和-1之间，公式为: $a=\tanh (z)=\frac{e^z-e^{-z}}{e^z+e^{-z}}$</p>
 <p>事实上，<strong>tanh</strong>函数是<strong>sigmoid</strong>的向下平移和伸缩后的结果。对它进行了变形后，穿过了零点，并且值域介于+1和-1之间。</p>
 <p><strong>tanh</strong>函数的优势在于其函数值域在-1和+1的激活函数，其均值是更接近零均值的，在训练一个算法模型时，如果使用<strong>tanh</strong>函数代替<strong>sigmoid</strong>函数中心化数据，使得数据的平均值更接近0而不是0.5。</p>
 <blockquote>
 <p>注意：有一个例外，在在二分类的问题中，对于输出层，因为 $y$ 的值是0或1，所以想让 $\hat{y}$ 的数值介于0和1之间，而不是在-1和+1之间，需要使用<strong>sigmoid</strong>激活函数。</p>
 </blockquote>
-<h4 id="sigmoid函数和tanh函数两者共同的缺点"><a href="#sigmoid函数和tanh函数两者共同的缺点" class="headerlink" title="sigmoid函数和tanh函数两者共同的缺点"></a><strong>sigmoid</strong>函数和<strong>tanh</strong>函数两者共同的缺点</h4><p>在 $z$ 特别大或者特别小的情况下，导数的梯度或者函数的斜率会变得特别小，最后就会接近于0，导致降低梯度下降的速度。</p>
-<h4 id="修正线性单元的函数（ReLu）"><a href="#修正线性单元的函数（ReLu）" class="headerlink" title="修正线性单元的函数（ReLu）"></a>修正线性单元的函数（ReLu）</h4><p>公式：$a&#x3D;\max (0, z)$</p>
-<p>只要 $z$ 是正值的情况下，导数恒等于1；当 $z$ 是负值的时候，导数恒等于0；$z&#x3D;0$ 的导数是没有定义的，如果有这种情况出现，假设其导数为1或者0的效果都可以。</p>
+<h4 id="sigmoid函数和tanh函数两者共同的缺点"><strong>sigmoid</strong>函数和<strong>tanh</strong>函数两者共同的缺点</h4>
+<p>在 $z$ 特别大或者特别小的情况下，导数的梯度或者函数的斜率会变得特别小，最后就会接近于0，导致降低梯度下降的速度。</p>
+<h4 id="修正线性单元的函数（ReLu）">修正线性单元的函数（ReLu）</h4>
+<p>公式：$a=\max (0, z)$</p>
+<p>只要 $z$ 是正值的情况下，导数恒等于1；当 $z$ 是负值的时候，导数恒等于0；$z=0$ 的导数是没有定义的，如果有这种情况出现，假设其导数为1或者0的效果都可以。</p>
 <p><strong>ReLu</strong>函数相比较<strong>sigmoid</strong>函数和<strong>tanh</strong>函数的优点是：当 $z$ 是负值的时候，导数等于0。</p>
 <p>也有另一个版本的<strong>ReLu</strong>被称为<strong>Leaky ReLu</strong>：</p>
 <p>当是 $z$ 负值时，这个函数的值不是等于0，而是轻微的倾斜，如上图所示。这个函数通常比<strong>ReLu</strong>激活函数效果要好，尽管在实际中<strong>Leaky ReLu</strong>使用的并不多。</p>
-<h4 id="ReLu函数和Leaky-ReLu函数两者共同的优点"><a href="#ReLu函数和Leaky-ReLu函数两者共同的优点" class="headerlink" title="ReLu函数和Leaky ReLu函数两者共同的优点"></a><strong>ReLu</strong>函数和<strong>Leaky ReLu</strong>函数两者共同的优点</h4><ol>
+<h4 id="ReLu函数和Leaky-ReLu函数两者共同的优点"><strong>ReLu</strong>函数和<strong>Leaky ReLu</strong>函数两者共同的优点</h4>
+<ol>
 <li>在 $z$ 的区间变动很大的情况下，激活函数的导数或者激活函数的斜率都会远大于0，在程序实现就是一个<strong>if-else</strong>语句，而<strong>sigmoid</strong>函数需要进行浮点四则运算，在实践中，使用<strong>ReLu</strong>激活函数神经网络通常会比使用<strong>sigmoid</strong>或者<strong>tanh</strong>激活函数学习的更快。</li>
 <li><strong>sigmoid</strong>和<strong>tanh</strong>函数的导数在正负饱和区的梯度都会接近于0，这会造成梯度弥散，而<strong>Relu</strong>和<strong>Leaky ReLu</strong>函数大于0部分都为常数，不会产生梯度弥散现象。(同时应该注意到的是，<strong>Relu</strong>进入负半区的时候，梯度为0，神经元此时不会训练，产生所谓的稀疏性，而<strong>Leaky ReLu</strong>不会有这问题)。</li>
 <li>$z$ 在<strong>ReLu</strong>的梯度一半都是0，但是，有足够的隐藏层使得z值大于0，所以对大多数的训练数据来说学习过程仍然可以很快。</li>
 </ol>
-<h4 id="选择激活函数的经验法则"><a href="#选择激活函数的经验法则" class="headerlink" title="选择激活函数的经验法则"></a>选择激活函数的经验法则</h4><ul>
+<h4 id="选择激活函数的经验法则">选择激活函数的经验法则</h4>
+<ul>
 <li>如果输出是0、1值（二分类问题），则输出层选择<strong>sigmoid</strong>函数，然后其它的所有单元都选择<strong>Relu</strong>函数。</li>
 <li>如果在隐藏层上不确定使用哪个激活函数，那么通常会使用<strong>Relu</strong>激活函数。有时，也会使用<strong>tanh</strong>激活函数。</li>
 </ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>sigmoid</strong>激活函数：除了输出层是一个二分类问题基本不会用它。</p>
+<h4 id="总结">总结</h4>
+<p><strong>sigmoid</strong>激活函数：除了输出层是一个二分类问题基本不会用它。</p>
 <p><strong>tanh</strong>激活函数：<strong>tanh</strong>是非常优秀的，几乎适合所有场合。</p>
 <p><strong>ReLu</strong>激活函数：最常用的默认函数，，如果不确定用哪个激活函数，就使用<strong>ReLu</strong>或者<strong>Leaky ReLu</strong>。</p>
-<h3 id="为什么需要非线性函数？"><a href="#为什么需要非线性函数？" class="headerlink" title="为什么需要非线性函数？"></a>为什么需要非线性函数？</h3><p>因为如果使用线性激活函数或者叫恒等激励函数，那么神经网络只是把输入线性组合再输出。即无论你的神经网络有多少层一直在做的只是计算线性函数，所以不如直接去掉全部隐藏层。</p>
+<h3 id="为什么需要非线性函数？">为什么需要非线性函数？</h3>
+<p>因为如果使用线性激活函数或者叫恒等激励函数，那么神经网络只是把输入线性组合再输出。即无论你的神经网络有多少层一直在做的只是计算线性函数，所以不如直接去掉全部隐藏层。</p>
 <p>唯一可以用线性激活函数的通常就是输出层，除了这种情况，会在隐藏层使用的线性函数的是一些特殊情况，例如压缩等相关。除此之外，在隐藏层使用线性激活函数非常少见。</p>
-<h3 id="激活函数的导数"><a href="#激活函数的导数" class="headerlink" title="激活函数的导数"></a>激活函数的导数</h3><p>在神经网络中使用反向传播时，需要计算激活函数的斜率或者导数。对于常见的四种激活函数，求其导数如下：</p>
+<h3 id="激活函数的导数">激活函数的导数</h3>
+<p>在神经网络中使用反向传播时，需要计算激活函数的斜率或者导数。对于常见的四种激活函数，求其导数如下：</p>
 <ul>
-<li><p><strong>sigmoid activation function</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/L1_week3_10.png" alt="w600"></p>
-<p>求导公式： $\frac{d}{d z} g(z)&#x3D;\frac{1}{1+e^{-z}}\left(1-\frac{1}{1+e^{-z}}\right)&#x3D;g(z)(1-g(z))$</p>
+<li>
+<p><strong>sigmoid activation function</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="L1_week3_10.png" alt="w600"></p>
+<p>求导公式： $\frac{d}{d z} g(z)=\frac{1}{1+e^{-z}}\left(1-\frac{1}{1+e^{-z}}\right)=g(z)(1-g(z))$</p>
 <p>注意:</p>
 <ul>
-<li>当 $z&#x3D;10$ 或 $z&#x3D;-10 ； \frac{d}{d z} g(z) \approx 0$</li>
-<li>当 $z&#x3D;0 ， \frac{d}{d z} g(z)&#x3D;\mathrm{g}(\mathrm{z})(1-\mathrm{g}(\mathrm{z}))&#x3D;1 &#x2F; 4$</li>
-<li>在神经网络中 $a&#x3D;g(z) ; g(z)^{\prime}&#x3D;\frac{d}{d z} g(z)&#x3D;a(1-a)$</li>
+<li>当 $z=10$ 或 $z=-10 ； \frac{d}{d z} g(z) \approx 0$</li>
+<li>当 $z=0 ， \frac{d}{d z} g(z)=\mathrm{g}(\mathrm{z})(1-\mathrm{g}(\mathrm{z}))=1 / 4$</li>
+<li>在神经网络中 $a=g(z) ; g(z)^{\prime}=\frac{d}{d z} g(z)=a(1-a)$</li>
 </ul>
 </li>
-<li><p><strong>Tanh activation function</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/L1_week3_11.png" alt="w600"></p>
-<p>具体求导公式： $g(z)&#x3D;\tanh (z)&#x3D;\frac{e^z-e^{-z}}{e^z+e^{-z}}$ </p>
-<p>$\frac{d}{d z} g(z)&#x3D;1-(\tanh (z))^2$</p>
+<li>
+<p><strong>Tanh activation function</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="L1_week3_11.png" alt="w600"></p>
+<p>具体求导公式： $g(z)=\tanh (z)=\frac{e^z-e^{-z}}{e^z+e^{-z}}$</p>
+<p>$\frac{d}{d z} g(z)=1-(\tanh (z))^2$</p>
 <p>注意:</p>
 <ul>
-<li>当 $z&#x3D;10$ 或 $z&#x3D;-10 \frac{d}{d z} g(z) \approx 0$</li>
-<li>当 $z&#x3D;0, \frac{d}{d z} g(z)&#x3D;1-(0)&#x3D;1$</li>
+<li>当 $z=10$ 或 $z=-10 \frac{d}{d z} g(z) \approx 0$</li>
+<li>当 $z=0, \frac{d}{d z} g(z)=1-(0)=1$</li>
 </ul>
 </li>
-<li><p><strong>Rectified Linear Unit (ReLU)</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/L1_week3_12.png" alt="w600"><br>$$<br>g(z)&#x3D;\max (0, z)<br>$$<br>$$<br>g(z)^{\prime}&#x3D; \begin{cases}0 &amp; \text { if } \mathrm{z}&lt;0 \ 1 &amp; \text { if } \mathrm{z}&gt;0 \ \text { undefined } &amp; \text { if } \mathrm{z}&#x3D;0\end{cases}<br>$$</p>
-<p>注意：通常在 $z&#x3D;0$ 的时候给定其导数 1 或 0 ；当然 $z&#x3D;0$ 的情况很少。</p>
+<li>
+<p><strong>Rectified Linear Unit (ReLU)</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="L1_week3_12.png" alt="w600"><br>
+$$<br>
+g(z)=\max (0, z)<br>
+$$<br>
+$$<br>
+g(z)^{\prime}= \begin{cases}0 &amp; \text { if } \mathrm{z}&lt;0 \ 1 &amp; \text { if } \mathrm{z}&gt;0 \ \text { undefined } &amp; \text { if } \mathrm{z}=0\end{cases}<br>
+$$</p>
+<p>注意：通常在 $z=0$ 的时候给定其导数 1 或 0 ；当然 $z=0$ 的情况很少。</p>
 </li>
-<li><p><strong>Leaky linear unit (Leaky ReLU)</strong><br>$$<br>g(z)&#x3D;\max (0.01z, z)<br>$$</p>
-<p>$$<br>g(z)^{\prime}&#x3D; \begin{cases}0.01 &amp; \text { if } \mathrm{z}&lt;0 \ 1 &amp; \text { if } \mathrm{z}&gt;0 \ \text { undefined } &amp; \text { if } \mathrm{z}&#x3D;0\end{cases}<br>$$</p>
-<p>注意：通常在 $z&#x3D;0$ 的时候给定其导数 1 或 0.01 ；当然 $z&#x3D;0$ 的情况很少。</p>
+<li>
+<p><strong>Leaky linear unit (Leaky ReLU)</strong><br>
+$$<br>
+g(z)=\max (0.01z, z)<br>
+$$</p>
+<p>$$<br>
+g(z)^{\prime}= \begin{cases}0.01 &amp; \text { if } \mathrm{z}&lt;0 \ 1 &amp; \text { if } \mathrm{z}&gt;0 \ \text { undefined } &amp; \text { if } \mathrm{z}=0\end{cases}<br>
+$$</p>
+<p>注意：通常在 $z=0$ 的时候给定其导数 1 或 0.01 ；当然 $z=0$ 的情况很少。</p>
 </li>
 </ul>
-<h3 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h3><p>对于逻辑回归，把权重初始化为0当然也是可以的。但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。</p>
+<h3 id="随机初始化">随机初始化</h3>
+<p>对于逻辑回归，把权重初始化为0当然也是可以的。但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。</p>
 <p>原因：例如将偏置项 $b$ 初始化为0是合理的，但是将 $w$ 初始化为0就有问题。因为如此初始化，你会发现输入层的下一层的隐藏层的激活值都是相等的，与此同时由于隐藏层计算相同的函数，当你做反向传播时，这会导致 $\mathrm{dz}_1^{[1]}$ 和 $\mathrm{dz}_2^{[1]}$ 也会一样，对称这些隐含单元会初始化得一样，这样输出的权值也会一模一样，由此 $W^{[2]}$ 等于 [0 0] 。</p>
 <p>所以应当将 $W$ 随机初始化，在Python中应该这么做：</p>
 <ul>
@@ -748,20 +948,34 @@
 <li>通常再乘以一个小的数，例如0.01，这样就将 $W^{[1]}}$ 初始化为很小的随机数</li>
 <li>$b$ 没有这个对称的问题（<strong>symmetry breaking problem</strong>），所以可以将 $b$ 初始化为0</li>
 </ul>
-<h4 id="为什么要初始化为很小的随机数？"><a href="#为什么要初始化为很小的随机数？" class="headerlink" title="为什么要初始化为很小的随机数？"></a>为什么要初始化为很小的随机数？</h4><p>因为如果你用<strong>tanh</strong>或者<strong>sigmoid</strong>激活函数，或者说只在输出层有一个<strong>Sigmoid</strong>，如果（数值）波动太大，当你计算激活值时如果 $W$ 很大，$z$ 就会很大或者很小，因此这种情况算法可能停在<strong>tanh</strong>&#x2F;<strong>sigmoid</strong>函数的平坦的地方。<strong>这些地方梯度很小，也就意味着梯度下降会很慢，因此学习也很慢。</strong></p>
-<p>如果 $w$ 很大，那么你很可能最终停在（甚至在训练刚刚开始的时候）很大的值，这会造成<strong>tanh</strong>&#x2F;<strong>Sigmoid</strong>激活函数饱和在龟速的学习上。如果你做二分类并且你的输出单元是<strong>Sigmoid</strong>函数，那么你不会想让初始参数太大，因此这就是为什么乘上0.01或者其他一些小数是合理的尝试。对于 $W^{[2]}}$ 一样，就是<code>np.random.randn((1,2))</code>，我猜会是乘以0.01。</p>
-<h3 id="核对矩阵的维数"><a href="#核对矩阵的维数" class="headerlink" title="核对矩阵的维数"></a>核对矩阵的维数</h3><p>$w$ 的维度是 (下一层的维数，前一层的维数)，即 $w^{[l]}:\left(n^{[l]}, n^{[l-1]}\right)$ ；<br>$b$ 的维度是 (下一层的维数，1)，即:<br>$b^{[l]}:\left(n^{[l]}, 1\right)$;<br>$z^{[l]}, a^{[l]}:\left(n^{[l]}, 1\right)$;<br>$d w^{[l]}$ 和 $w^{[l]}$ 维度相同， $d b^{[l]}$ 和 $b^{[l]}$ 维度相同，且 $w$ 和 $b$ 向量化维度不变，但 $z, a$ 以及 $x$ 的维度会向量化后发生变化。</p>
-<p>向量化后:<br>$Z^{[l]}$ 可以看成由每一个单独的 $Z^{[l]}$ 叠加而得到， $Z^{[l]}&#x3D;\left(z^{[l][1]}, z^{[l][2]}, z^{[l][3]} ， \ldots, z^{[l][m]}\right)$ ， $m$ 为训练集大小，所以 $Z^{[l]}$ 的维度不再是 $\left(n^{[l]}, 1\right)$ ，而是 $\left(n^{[l]}, m\right)$ 。<br>$$<br>A^{[l]}:\left(n^{[l]}, m\right), A^{[0]}&#x3D;X&#x3D;\left(n^{[l]}, m\right)<br>$$</p>
-<h3 id="训练，验证，测试集"><a href="#训练，验证，测试集" class="headerlink" title="训练，验证，测试集"></a>训练，验证，测试集</h3><p>小数据量：70%验证集+30%测试集或60%训练+20%验证+20%测试集</p>
+<h4 id="为什么要初始化为很小的随机数？">为什么要初始化为很小的随机数？</h4>
+<p>因为如果你用<strong>tanh</strong>或者<strong>sigmoid</strong>激活函数，或者说只在输出层有一个<strong>Sigmoid</strong>，如果（数值）波动太大，当你计算激活值时如果 $W$ 很大，$z$ 就会很大或者很小，因此这种情况算法可能停在<strong>tanh</strong>/<strong>sigmoid</strong>函数的平坦的地方。<strong>这些地方梯度很小，也就意味着梯度下降会很慢，因此学习也很慢。</strong></p>
+<p>如果 $w$ 很大，那么你很可能最终停在（甚至在训练刚刚开始的时候）很大的值，这会造成<strong>tanh</strong>/<strong>Sigmoid</strong>激活函数饱和在龟速的学习上。如果你做二分类并且你的输出单元是<strong>Sigmoid</strong>函数，那么你不会想让初始参数太大，因此这就是为什么乘上0.01或者其他一些小数是合理的尝试。对于 $W^{[2]}}$ 一样，就是<code>np.random.randn((1,2))</code>，我猜会是乘以0.01。</p>
+<h3 id="核对矩阵的维数">核对矩阵的维数</h3>
+<p>$w$ 的维度是 (下一层的维数，前一层的维数)，即 $w^{[l]}:\left(n^{[l]}, n^{[l-1]}\right)$ ；<br>
+$b$ 的维度是 (下一层的维数，1)，即:<br>
+$b^{[l]}:\left(n^{[l]}, 1\right)$;<br>
+$z^{[l]}, a^{[l]}:\left(n^{[l]}, 1\right)$;<br>
+$d w^{[l]}$ 和 $w^{[l]}$ 维度相同， $d b^{[l]}$ 和 $b^{[l]}$ 维度相同，且 $w$ 和 $b$ 向量化维度不变，但 $z, a$ 以及 $x$ 的维度会向量化后发生变化。</p>
+<p>向量化后:<br>
+$Z^{[l]}$ 可以看成由每一个单独的 $Z^{[l]}$ 叠加而得到， $Z^{[l]}=\left(z^{[l][1]}, z^{[l][2]}, z^{[l][3]} ， \ldots, z^{[l][m]}\right)$ ， $m$ 为训练集大小，所以 $Z^{[l]}$ 的维度不再是 $\left(n^{[l]}, 1\right)$ ，而是 $\left(n^{[l]}, m\right)$ 。<br>
+$$<br>
+A^{[l]}:\left(n^{[l]}, m\right), A^{[0]}=X=\left(n^{[l]}, m\right)<br>
+$$</p>
+<h3 id="训练，验证，测试集">训练，验证，测试集</h3>
+<p>小数据量：70%验证集+30%测试集或60%训练+20%验证+20%测试集</p>
 <p>大数据量：98%训练集+1%验证集+1%测试集</p>
 <ul>
-<li><p>尽量确保验证集和测试集的数据来自同一分布。</p>
+<li>
+<p>尽量确保验证集和测试集的数据来自同一分布。</p>
 </li>
-<li><p>就算没有测试集也不要紧，测试集的目的是对最终所选定的神经网络系统做出无偏估计，如果不需要无偏估计，也可以不设置测试集。</p>
+<li>
+<p>就算没有测试集也不要紧，测试集的目的是对最终所选定的神经网络系统做出无偏估计，如果不需要无偏估计，也可以不设置测试集。</p>
 <p>所以如果只有验证集，没有测试集，我们要做的就是，在训练集上训练，尝试不同的模型框架，在验证集上评估这些模型，然后迭代并选出适用的模型。因为验证集中已经涵盖测试集数据，其不再提供无偏性能评估。当然，如果你不需要无偏估计，那就再好不过了。</p>
 </li>
 </ul>
-<h3 id="偏差和方差"><a href="#偏差和方差" class="headerlink" title="偏差和方差"></a>偏差和方差</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231124201106048.png" alt="image-20231124201106048"></p>
+<h3 id="偏差和方差">偏差和方差</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231124201106048.png" alt="image-20231124201106048"></p>
 <ul>
 <li>如果给这个数据集拟合一条直线，可能得到一个逻辑回归拟合，但它并不能很好地拟合该数据，这是高<strong>偏差</strong>（<strong>high bias</strong>）的情况，我们称为“欠拟合”（<strong>underfitting</strong>）。</li>
 <li>相反的如果我们拟合一个非常复杂的分类器，比如深度神经网络或含有隐藏单元的神经网络，可能就非常适用于这个数据集，但是这看起来也不是一种很好的拟合方式分类器<strong>方差</strong>较高（<strong>high variance</strong>），数据过度拟合（<strong>overfitting</strong>）。</li>
@@ -773,64 +987,75 @@
 <li>假设训练集误差是15%，但是错误率达到30%，那么此算法<strong>偏差高</strong>，因为他在训练集上结果不理想，而且<strong>方差也很高</strong>，这是方差偏差都很糟糕的情况。</li>
 </ol>
 <p>只要正则适度，通常构建一个更大的网络便可以，在不影响方差的同时减少偏差，而采用更多数据通常可以在不过多影响偏差的同时减少方差。</p>
-<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p>高方差的解决方法：</p>
+<h3 id="正则化">正则化</h3>
+<p>高方差的解决方法：</p>
 <ol>
 <li>正则化</li>
 <li>准备更多数据</li>
 </ol>
 <p>在逻辑回归函数中加入正则化：</p>
 <ul>
-<li><p>$L2$ 正则化：只需在成本函数J的后加上 $\frac{\lambda}{2 m}$ 乘以 $w$ 范数的平方，此方法称为 $L2$ 正则化。</p>
+<li>
+<p>$L2$ 正则化：只需在成本函数J的后加上 $\frac{\lambda}{2 m}$ 乘以 $w$ 范数的平方，此方法称为 $L2$ 正则化。</p>
 </li>
-<li><p>$L1$ 正则化：是正则项 $\frac{\lambda}{m}$ 乘以 $\sum_{j&#x3D;1}^{n_x}|w|$，$\sum_{j&#x3D;1}^{n_x}|w|$ 也被称为参数 $w$ 向量的 $L1$ 范数，无论分母是m还是2m，它都是一个比例常量。</p>
+<li>
+<p>$L1$ 正则化：是正则项 $\frac{\lambda}{m}$ 乘以 $\sum_{j=1}^{n_x}|w|$，$\sum_{j=1}^{n_x}|w|$ 也被称为参数 $w$ 向量的 $L1$ 范数，无论分母是m还是2m，它都是一个比例常量。</p>
 </li>
 </ul>
 <p>如果用的是 $L1$ 正则化，$w$ 最终会是稀疏的，也就是说 $w$ 向量中很多0，有人说这样有利于压缩模型，因为集合中参数均为0，存储模型所占用的内存更少。实际上，虽然 $L1$ 正则化使模型变得稀疏，却没有降低太多存储内存，所有我认为这并不是 $L1$ 正则化的目的，至少不是为了压缩模型，人们在训练网络，越来越倾向于使用 $L2$ 正则化。</p>
 <p>$λ$ 是正则化参数，我们通常使用验证集或交叉验证集来配置这个参数，我们要考虑训练集之间的权衡，把参数设置为较小值，这样可以避免过拟合。</p>
-<h4 id="使用该范数实现梯度下降呢？"><a href="#使用该范数实现梯度下降呢？" class="headerlink" title="使用该范数实现梯度下降呢？"></a>使用该范数实现梯度下降呢？</h4><p>用backprop计算出 $d W$ 的值，backprop会给出 $J$ 对 $W$ 的偏导数，实际上是 $W^{[l]}$ ，把 $W^{[l]}$ 替换为 $W^{[l]}$ 减去学习率乘以 $d W$ 。</p>
+<h4 id="使用该范数实现梯度下降呢？">使用该范数实现梯度下降呢？</h4>
+<p>用backprop计算出 $d W$ 的值，backprop会给出 $J$ 对 $W$ 的偏导数，实际上是 $W^{[l]}$ ，把 $W^{[l]}$ 替换为 $W^{[l]}$ 减去学习率乘以 $d W$ 。</p>
 <p>既然已经增加了这个正则项，现在我们要做的就是给 $d W$ 加上这一项 $\frac{\lambda}{m} W^{[l]}$，然后计算这个更新想，使用新定义的 $dW^{[l]}$，这也是 $L2$ 正则化有时被称为“<strong>权重衰减</strong>”的原因：</p>
 <p>实际上，相当于我们给矩阵 $W$ 乘以 $\left(1-a \frac{\lambda}{m}\right)$ 倍的权重，也就是用这个系数 $\left(1-a \frac{\lambda}{m}\right)$ 乘以矩阵 $W$，该系数小于1，所以被称为“权重衰减”。</p>
-<h3 id="为什么正则化有利于预防过拟合呢？"><a href="#为什么正则化有利于预防过拟合呢？" class="headerlink" title="为什么正则化有利于预防过拟合呢？"></a>为什么正则化有利于预防过拟合呢？</h3><p>直观上理解就是如果正则化 $λ$ 设置得足够大，权重矩阵 $W$ 被设置为接近于0的值，直观理解就是把多隐藏单元的权重设为0，于是基本上消除了这些隐藏单元的许多影响。</p>
+<h3 id="为什么正则化有利于预防过拟合呢？">为什么正则化有利于预防过拟合呢？</h3>
+<p>直观上理解就是如果正则化 $λ$ 设置得足够大，权重矩阵 $W$ 被设置为接近于0的值，直观理解就是把多隐藏单元的权重设为0，于是基本上消除了这些隐藏单元的许多影响。</p>
 <p>如果是这种情况，这个被大大简化了的神经网络会变成一个很小的网络，小到如同一个逻辑回归单元，可是深度却很大，它会使这个网络从过度拟合的状态更接近左图的高偏差状态。</p>
 <p>但是 $λ$ 会存在一个中间值，于是会有一个接近“Just Right”的中间状态。</p>
 <p>直观理解就是 $λ$ 增加到足够大，$W$ 会接近于0，实际上是不会发生这种情况的，我们尝试消除或至少减少许多隐藏单元的影响，最终这个网络会变得更简单，这个神经网络越来越接近逻辑回归，我们直觉上认为大量隐藏单元被完全消除了，其实不然，实际上是该神经网络的所有隐藏单元依然存在，但是<strong>它们的影响变得更小了</strong>。</p>
 <p>所以神经网络变得更简单了，貌似这样更不容易发生过拟合，因此不确定这个直觉经验是否有用，不过在编程中执行正则化时，你实际看到一些<strong>方差减少</strong>的结果。</p>
 <p>从图像上来看：</p>
 <p>假设我们用的是这样的双曲线激活函数：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231124235901071.png" alt="image-20231124235901071"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231124235901071.png" alt="image-20231124235901071"></p>
 <p>用 $g(z)$ 表示 $\tanh (z)$,那么我们发现，只要 $z$ 非常小，如果 $z$ 只涉及少量参数，这里我们利用了双曲正切函数的线性状态，只要 $z$ 可以扩展为这样的更大值或者更小值，激活函数开始变得非线性。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231124235954124.png" alt="image-20231124235954124"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231124235954124.png" alt="image-20231124235954124"></p>
 <p>即正则化参数 $λ$ 很大，激活函数的参数会相对较小，因为代价函数中的参数变大了，如果 $W$ 很小，相对 $z$ 也会很小，如上图所示，$g(z)$ 大致呈线性，每层几乎都是线性的，和线性回归函数一样。</p>
 <blockquote>
 <p>注意：如果每层都是线性的，那么整个网络就是一个线性网络，即使是一个非常深的深层网络，因具有线性激活函数的特征，最终我们只能计算线性函数。</p>
-<p>因此，<strong>它不适用于非常复杂的决策</strong>，以及过度拟合数据集的非线性决策边界，如同我们在幻灯片中看到的过度<strong>拟合高方差</strong>的情况。 </p>
+<p>因此，<strong>它不适用于非常复杂的决策</strong>，以及过度拟合数据集的非线性决策边界，如同我们在幻灯片中看到的过度<strong>拟合高方差</strong>的情况。</p>
 </blockquote>
 <p>可以看到，使用这样的代价函数对于梯度下降的每个调幅都单调递减。</p>
-<h3 id="dropout正则化"><a href="#dropout正则化" class="headerlink" title="dropout正则化"></a>dropout正则化</h3><p>除了 $L2$ 正则化，还有一个非常实用的正则化方法——“ <strong>Dropout</strong>（随机失活）”</p>
+<h3 id="dropout正则化">dropout正则化</h3>
+<p>除了 $L2$ 正则化，还有一个非常实用的正则化方法——&quot; <strong>Dropout</strong>（随机失活）&quot;</p>
 <p><strong>dropout</strong>会遍历网络的每一层，并设置消除神经网络中节点的概率，假设网络中的每一层，每个节点都以抛硬币的方式设置概率，每个节点得以保留和消除的概率都是0.5，设置完节点概率，我们会消除一些节点，然后删除掉从该节点进出的连线，最后得到一个节点更少，规模更小的网络，然后用<strong>backprop</strong>方法进行训练。</p>
-<h4 id="如何实施dropout？"><a href="#如何实施dropout？" class="headerlink" title="如何实施dropout？"></a>如何实施<strong>dropout</strong>？</h4><p>最常用的方法<strong>inverted dropout</strong>（反向随机失活）：</p>
+<h4 id="如何实施dropout？">如何实施<strong>dropout</strong>？</h4>
+<p>最常用的方法<strong>inverted dropout</strong>（反向随机失活）：</p>
 <p>首先要定义向量 $d, d^{[3]}$ 表示一个三层的<strong>dropout</strong>向量:</p>
 <p><code>d3 = np.random.rand(a3.shape[0],a3.shape[1])</code></p>
 <ol>
-<li><p>然后看它是否小于某数，我们称之为keep-prob，keep-prob是一个具体数字，上个示例中它是 0.5 ，而本例中它是 0.8 ，它表示保留某个隐藏单元的概率，此处keep-prob等于 0.8 ，它意味着<strong>消除任意一个隐藏单元的概率是 0.2</strong> ，它的作用就是生成随机矩阵，如果对 $a^{[3]}$ 进行因子分解，效果也是一样的。</p>
+<li>
+<p>然后看它是否小于某数，我们称之为keep-prob，keep-prob是一个具体数字，上个示例中它是 0.5 ，而本例中它是 0.8 ，它表示保留某个隐藏单元的概率，此处keep-prob等于 0.8 ，它意味着<strong>消除任意一个隐藏单元的概率是 0.2</strong> ，它的作用就是生成随机矩阵，如果对 $a^{[3]}$ 进行因子分解，效果也是一样的。</p>
 <blockquote>
-<p> $d^{[3]}$ 是一个矩阵，每个样本和每个隐藏单元，其中 $d^{[3]}$ 中的对应值为 1 的概率都是 0.8 ，对应为 0 的概率是 0.2 ， 随机数字小于 0.8即它等于 1 的概率是 0.8 ，等于 0 的概率是 0.2 。</p>
+<p>$d^{[3]}$ 是一个矩阵，每个样本和每个隐藏单元，其中 $d^{[3]}$ 中的对应值为 1 的概率都是 0.8 ，对应为 0 的概率是 0.2 ， 随机数字小于 0.8即它等于 1 的概率是 0.8 ，等于 0 的概率是 0.2 。</p>
 </blockquote>
 </li>
-<li><p>接下来要做的就是从第三层中获取激活函数，这里我们叫它 $a^{[3]} ， a^{[3]}$ 含有要计算的激活函数， $a^{[3]}$等于上面的 $a^{[3]}$ 乘以 $d^{[3]}$ ，<code>a3 =np.multiply(a3,d3)</code> ，这里是元素相乘，也可写为 $a 3 *&#x3D;d 3$ ，它的作用就是让 $d^{[3]}$ 中所有等于 0 的元素 (输出)，而各个元素等于 0 的概率只有 $20 %$ ，乘法运算最终把 $d^{[3]}$ 中相应元素输出，即让 $d^{[3]}$ 中0元素与 $a^{[3]}$ 中相对元素归零。</p>
+<li>
+<p>接下来要做的就是从第三层中获取激活函数，这里我们叫它 $a^{[3]} ， a^{[3]}$ 含有要计算的激活函数， $a^{[3]}$等于上面的 $a^{[3]}$ 乘以 $d^{[3]}$ ，<code>a3 =np.multiply(a3,d3)</code> ，这里是元素相乘，也可写为 $a 3 *=d 3$ ，它的作用就是让 $d^{[3]}$ 中所有等于 0 的元素 (输出)，而各个元素等于 0 的概率只有 $20 %$ ，乘法运算最终把 $d^{[3]}$ 中相应元素输出，即让 $d^{[3]}$ 中0元素与 $a^{[3]}$ 中相对元素归零。</p>
 <blockquote>
 <p>注意：在Python中实现该算法的话，$d^{[3]}$则是一个布尔型数组，值为<strong>true</strong>和<strong>false</strong>，而不是1和0，乘法运算依然有效，Python会把true和false翻译为1和0。</p>
 </blockquote>
 </li>
-<li><p>最后，我们向外扩展$d^{[3]}$，用它除以0.8，或者除以keep-prob参数</p>
-<p>下面我解释一下为什么要这么做，为方便起见，我们假设第三隐藏层上有 50 个单元或 50 个神经元，在一维上 $a^{[3]}$ 是 50 ，我们通过因子分解将它拆分成 $50 \times m$ 维的，保留和删除它们的概率分别为 $80 %$ 和 $20 %$ ，这意味着最后被删除或归零的单元平均有 $10(50 \times 20 %&#x3D;10)$ 个，现在我们看下 $z^{[4]}$ ， $z^{[4]}&#x3D;w^{[4]} a^{[3]}+b^{[4]}$ ，我们的预期是， $a^{[3]}$ 减少 $20 %$ ，也就是说 $a^{[3]}$ 中有 $20 %$ 的元素被归零，为了不影响 $z^{[4]}$ 的期望值，我们需要用 $w^{[4]} a^{[3]} &#x2F; 0.8$ ，它将会修正或弥补我们所需的那 $20 % ， a^{[3]}$ 的期望值不会变。</p>
+<li>
+<p>最后，我们向外扩展$d^{[3]}$，用它除以0.8，或者除以keep-prob参数</p>
+<p>下面我解释一下为什么要这么做，为方便起见，我们假设第三隐藏层上有 50 个单元或 50 个神经元，在一维上 $a^{[3]}$ 是 50 ，我们通过因子分解将它拆分成 $50 \times m$ 维的，保留和删除它们的概率分别为 $80 %$ 和 $20 %$ ，这意味着最后被删除或归零的单元平均有 $10(50 \times 20 %=10)$ 个，现在我们看下 $z^{[4]}$ ， $z^{[4]}=w^{[4]} a^{[3]}+b^{[4]}$ ，我们的预期是， $a^{[3]}$ 减少 $20 %$ ，也就是说 $a^{[3]}$ 中有 $20 %$ 的元素被归零，为了不影响 $z^{[4]}$ 的期望值，我们需要用 $w^{[4]} a^{[3]} / 0.8$ ，它将会修正或弥补我们所需的那 $20 % ， a^{[3]}$ 的期望值不会变。</p>
 </li>
 </ol>
 <p><strong>在测试阶段时，我们不期望输出结果是随机的</strong>，如果测试阶段应用<strong>dropout</strong>函数，预测会受到干扰。理论上，你只需要多次运行预测处理过程，每一次，不同的隐藏单元会被随机归零，预测处理遍历它们，但计算效率低，得出的结果也几乎相同，与这个不同程序产生的结果极为相似。</p>
 <blockquote>
 <p><strong>Inverted dropout</strong>函数在除以<strong>keep-prob</strong>时可以记住上一步的操作，目的是确保即使在测试阶段不执行<strong>dropout</strong>来调整数值范围，激活函数的预期结果也不会发生变化，所以没必要在测试阶段额外添加尺度参数，这与训练阶段不同。</p>
 </blockquote>
-<h4 id="为什么dropout可以通过正则化发挥如此大的作用呢？"><a href="#为什么dropout可以通过正则化发挥如此大的作用呢？" class="headerlink" title="为什么dropout可以通过正则化发挥如此大的作用呢？"></a>为什么<strong>dropout</strong>可以通过正则化发挥如此大的作用呢？</h4><p>不要依赖于任何一个特征，因为该单元的输入可能随时被清除，因此该单元通过这种方式传播下去，并为单元的四个输入增加一点权重，通过传播所有权重，<strong>dropout</strong>将产生收缩权重的平方范数的效果，和之前讲的 $L2$ 正则化类似：</p>
+<h4 id="为什么dropout可以通过正则化发挥如此大的作用呢？">为什么<strong>dropout</strong>可以通过正则化发挥如此大的作用呢？</h4>
+<p>不要依赖于任何一个特征，因为该单元的输入可能随时被清除，因此该单元通过这种方式传播下去，并为单元的四个输入增加一点权重，通过传播所有权重，<strong>dropout</strong>将产生收缩权重的平方范数的效果，和之前讲的 $L2$ 正则化类似：</p>
 <ul>
 <li>实施<strong>dropout</strong>的结果实它会压缩权重，并完成一些预防过拟合的外层正则化。</li>
 <li>$L2$ 对不同权重的衰减是不同的，却取决于激活函数倍增的大小。</li>
@@ -845,95 +1070,158 @@
 <p>牢记：<strong>dropout</strong>是一种正则化方法，它有助于预防过拟合，因此除非算法过拟合，不然我是不会使用<strong>dropout</strong>的</p>
 </blockquote>
 <p>缺点：代价函数 $J$ 不再被明确定义，每次迭代，都会随机移除一些节点，如果再三检查梯度下降的性能，实际上是很难进行复查的。定义明确的代价函数每次迭代后都会下降，因为我们所优化的代价函数实际上并没有明确定义，或者说在某种程度上很难计算</p>
-<h3 id="其他正则化方法"><a href="#其他正则化方法" class="headerlink" title="其他正则化方法"></a>其他正则化方法</h3><ol>
-<li><p>数据扩增</p>
+<h3 id="其他正则化方法">其他正则化方法</h3>
+<ol>
+<li>
+<p>数据扩增</p>
 <p>例如水平翻转图片，将其添加到训练集；随意裁剪图片，可以将原图旋转并随意放大后裁剪。</p>
 </li>
-<li><p>early stopping</p>
+<li>
+<p>early stopping</p>
 <p>验证集误差通常会先呈下降趋势，然后在某个节点处开始上升，而early stopping的作用是我们在验证集误差上升时停止训练，得到验证集误差。</p>
 <p>原因是因为还未在神经网络上运行太多迭代过程的时候，参数 $w$ 接近0，因为随机初始化 $w$ 值时，它的值可能都是较小的随机值，所以在你长期训练神经网络之前 $w$ 依然很小，在迭代过程和训练过程中 $w$ 的值会变得越来越大。所以我们应该在中间点停止迭代过程，得到一个 $w$ 值中等大小的弗罗贝尼乌斯范数。</p>
 <p><strong>缺点</strong>：early stopping是不能独立处理两个问题：一是不希望出现过拟合，二是因为提早停止梯度下降，也就停止了优化代价函数 $J$，所以代价函数 $J$ 的值可能不够小。</p>
 <p><strong>优点</strong>：只运行一次梯度下降，你可以找出 $W$ 的较小值，中间值和较大值，而无需尝试 $L2$ 正则化超级参数 $λ$ 的很多值。</p>
 </li>
 </ol>
-<h3 id="归一化输入"><a href="#归一化输入" class="headerlink" title="归一化输入"></a>归一化输入</h3><p>训练神经网络，其中一个加速训练的方法就是归一化输入。假设一个训练集有两个特征，输入特征为2维，归一化需要两个步骤：</p>
+<h3 id="归一化输入">归一化输入</h3>
+<p>训练神经网络，其中一个加速训练的方法就是归一化输入。假设一个训练集有两个特征，输入特征为2维，归一化需要两个步骤：</p>
 <ol>
-<li><p>零均值</p>
-<p>第一步是零均值化， $\mu&#x3D;\frac{1}{m} \sum_{i&#x3D;1}^m x^{(i)}$ ，它是一个向量， $x$ 等于每个训练数据 $x$ 减去 $\mu$ ，意思是移动训练集，直到它完成零均值化。</p>
+<li>
+<p>零均值</p>
+<p>第一步是零均值化， $\mu=\frac{1}{m} \sum_{i=1}^m x^{(i)}$ ，它是一个向量， $x$ 等于每个训练数据 $x$ 减去 $\mu$ ，意思是移动训练集，直到它完成零均值化。</p>
 </li>
-<li><p>归一化方差</p>
-<p>第二步是归一化方差，注意特征 $x_1$ 的方差比特征 $x_2$ 的方差要大得多，我们要做的是给 $\sigma$ 赋值， $\sigma^2&#x3D;\frac{1}{m} \sum_{i&#x3D;1}^m\left(x^{(i)}\right)^2$ ，这是节点 $y$ 的平方， $\sigma^2$ 是一个向量，它的每个特征都有方差。</p>
+<li>
+<p>归一化方差</p>
+<p>第二步是归一化方差，注意特征 $x_1$ 的方差比特征 $x_2$ 的方差要大得多，我们要做的是给 $\sigma$ 赋值， $\sigma^2=\frac{1}{m} \sum_{i=1}^m\left(x^{(i)}\right)^2$ ，这是节点 $y$ 的平方， $\sigma^2$ 是一个向量，它的每个特征都有方差。</p>
 <p>注意：我们已经完成零值均化， $\left(x^{(i)}\right)^2$ 元素 $y^2$ 就是方差，我们把所有数据除以向量 $\sigma^2$ ，最后变成下图形式：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125180632402.png" alt="image-20231125180632402"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125180632402.png" alt="image-20231125180632402"></p>
 </li>
 </ol>
 <blockquote>
 <p>提示：如果你用它来调整训练数据，那么用相同的 $\mu$ 和 $\sigma^2$ 来归一化测试集，即不论是训练数据还是测试数据，都是通过相同 $\mu$ 和 $\sigma^2$ 定义的相同数据转换，其中 $\mu$ 和 $\sigma^2$ 是由训练数据集计算得来的。</p>
 </blockquote>
-<h4 id="为什么要归一化？"><a href="#为什么要归一化？" class="headerlink" title="为什么要归一化？"></a>为什么要归一化？</h4><p>回顾所定义的代价函数：<br>$$<br>J(w, b)&#x3D;\frac{1}{m} \sum_{i&#x3D;1}^m L\left(\hat{y}^{(i)}, y^{(i)}\right)<br>$$<br>如果使用非归一化的输入特征，代价函数会是这样：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125182221337.png" alt="image-20231125182221337"></p>
+<h4 id="为什么要归一化？">为什么要归一化？</h4>
+<p>回顾所定义的代价函数：<br>
+$$<br>
+J(w, b)=\frac{1}{m} \sum_{i=1}^m L\left(\hat{y}^{(i)}, y^{(i)}\right)<br>
+$$<br>
+如果使用非归一化的输入特征，代价函数会是这样：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125182221337.png" alt="image-20231125182221337"></p>
 <p>如果特征值在不同范围，假如 $x_1$ 取值范围从 1 到 1000 ，特征 $x_2$ 的取值范围从 0 到 1 ，结果是参数 $w_1$ 和 $w_2$ 值的范围或比率将会非常不同，这些数据轴应该是 $w_1$ 和 $w_2$ ，但直观理解，我标记为 $w$ 和 $b$ ，代价函数就有点像狭长的碗一样。</p>
 <p>如果你归一化特征，代价函数平均起来更<strong>对称</strong>，如果你在上图这样的代价函数上运行梯度下降法，你必须使用一个非常小的学习率。因为如果是在这个位置，梯度下降法可能需要多次迭代过程，直到最后找到最小值。但如果函数是一个更圆的球形轮廓，<strong>那么不论从哪个位置开始，梯度下降法都能够更直接地找到最小值</strong>，你可以在梯度下降法中使用较大步长，而不需要像在上图中那样反复执行。</p>
 <blockquote>
 <p>注意：当然实际上 $w$ 是一个高维向量，所以特征在相似范围内，而不是从1到1000,0到1的范围，而是在-1到1范围内相似偏差，这使得代价函数 $J$ 优化起来更简单快速。</p>
 <p>实际上如果假设特征 $x_1$ 范围在0-1之间， $x_2$ 的范围在 -1 到 1 之间， $x_3$ 范围在1-2之间，它们是相似范围，所以会表现得很好。</p>
 </blockquote>
-<h3 id="梯度消失和梯度爆炸"><a href="#梯度消失和梯度爆炸" class="headerlink" title="梯度消失和梯度爆炸"></a>梯度消失和梯度爆炸</h3><p>梯度爆炸或梯度消失的意思就是你训练神经网络的时候，导数或坡度有时会变得非常大，或者非常小，甚至于以指数方式变小，这加大了训练的难度。</p>
-<p>假设每个权重矩阵 $W^{[l]}&#x3D;\left[\begin{array}{cc}1.5 &amp; 0 \ 0 &amp; 1.5\end{array}\right]$ ，从技术上来讲，最后一项有不同维度，可能它就是余下的权重矩阵， $y&#x3D;W^{[1]}\left[\begin{array}{cc}1.5 &amp; 0 \ 0 &amp; 1.5\end{array}\right]^{(L-1)} x$ ，因为我们假设所有矩阵都等于它，它是 1.5 倍的单位矩阵，最后的计算结果就是 $\hat{y} ， \hat{y}$ 也就是等于 $1.5^{(L-1)} x$ 。</p>
+<h3 id="梯度消失和梯度爆炸">梯度消失和梯度爆炸</h3>
+<p>梯度爆炸或梯度消失的意思就是你训练神经网络的时候，导数或坡度有时会变得非常大，或者非常小，甚至于以指数方式变小，这加大了训练的难度。</p>
+<p>假设每个权重矩阵 $W^{[l]}=\left[\begin{array}{cc}1.5 &amp; 0 \ 0 &amp; 1.5\end{array}\right]$ ，从技术上来讲，最后一项有不同维度，可能它就是余下的权重矩阵， $y=W^{[1]}\left[\begin{array}{cc}1.5 &amp; 0 \ 0 &amp; 1.5\end{array}\right]^{(L-1)} x$ ，因为我们假设所有矩阵都等于它，它是 1.5 倍的单位矩阵，最后的计算结果就是 $\hat{y} ， \hat{y}$ 也就是等于 $1.5^{(L-1)} x$ 。</p>
 <p>如果对于一个深度神经网络来说 $L$ 值较大，那么 $\hat{y}$ 的值也会非常大，实际上它呈指数级增长的，它增长的比率是 $1.5^L$ ，因此对于一个深度神经网络， $y$ 的值将爆炸式增长。</p>
 <blockquote>
 <p>综上，如果激活函数或梯度函数与 $L$ 相关的指数增长或递减，它们的值会变得极大或极小，尤其是梯度指数小于 $L$ 时，梯度下降算法的步长会非常非常小，梯度下降算法将花费很长时间来学习。</p>
 </blockquote>
-<h3 id="神经网络的权重初始化"><a href="#神经网络的权重初始化" class="headerlink" title="神经网络的权重初始化"></a>神经网络的权重初始化</h3><ol>
-<li>方法一：如果激活函数的输入特征被零均值和标准方差化，方差是1，$z$ 也会被调整到相似范围，虽没有解决问题，但确实降低了梯度消失与爆炸问题。</li>
-<li>方法二：可以给参数 $w$ 添加一个乘数参数，例如 $w^{[l]}&#x3D;n p \cdot$ random. $\operatorname{randn}($ shape $) * \operatorname{np} \cdot \operatorname{sqrt}\left(\frac{1}{n^{[l-1]}}\right)$</li>
-</ol>
-<h3 id="梯度检验"><a href="#梯度检验" class="headerlink" title="梯度检验"></a>梯度检验</h3><p>梯度检验是用它来调试或检验反向传播的实施是否正确：</p>
+<h3 id="神经网络的权重初始化">神经网络的权重初始化</h3>
 <ol>
-<li><p>将所有参数转换成一个巨大的向量数据，即将矩阵 $W$ 转换成一个向量，将所有的 $W$ 矩阵转换成向量之后，做连接运算，得到一个巨型向量 $\theta$ ，该向量表示为参数 $\theta$ 。</p>
+<li>方法一：如果激活函数的输入特征被零均值和标准方差化，方差是1，$z$ 也会被调整到相似范围，虽没有解决问题，但确实降低了梯度消失与爆炸问题。</li>
+<li>方法二：可以给参数 $w$ 添加一个乘数参数，例如 $w^{[l]}=n p \cdot$ random. $\operatorname{randn}($ shape $) * \operatorname{np} \cdot \operatorname{sqrt}\left(\frac{1}{n^{[l-1]}}\right)$</li>
+</ol>
+<h3 id="梯度检验">梯度检验</h3>
+<p>梯度检验是用它来调试或检验反向传播的实施是否正确：</p>
+<ol>
+<li>
+<p>将所有参数转换成一个巨大的向量数据，即将矩阵 $W$ 转换成一个向量，将所有的 $W$ 矩阵转换成向量之后，做连接运算，得到一个巨型向量 $\theta$ ，该向量表示为参数 $\theta$ 。</p>
 </li>
-<li><p>代价函数 $J$ 是所有 $W$ 和 $b$ 的函数，现在你得到了一个 $\theta$ 的代价函数 $J$ (即 $J(\theta)$ )。接着，你得到与 $W$ 和 $b$ 顺序相同的数据，你同样可以把 $d W^{[1]}$ 和 $d b^{[1]} \ldots . . . d W^{[l]}$ 和 $d b^{[l]}$ 转换成一个新的向量，用它们来初始化大向量 $d \theta$ ，它与 $\theta$ 具有相同维度。</p>
+<li>
+<p>代价函数 $J$ 是所有 $W$ 和 $b$ 的函数，现在你得到了一个 $\theta$ 的代价函数 $J$ (即 $J(\theta)$ )。接着，你得到与 $W$ 和 $b$ 顺序相同的数据，你同样可以把 $d W^{[1]}$ 和 $d b^{[1]} \ldots . . . d W^{[l]}$ 和 $d b^{[l]}$ 转换成一个新的向量，用它们来初始化大向量 $d \theta$ ，它与 $\theta$ 具有相同维度。</p>
 <blockquote>
 <p>注意： $d W^{[1]}$ 与 $W^{[1]}$ 具有相同维度， $d b^{[1]}$ 与 $b^{[1]}$ 具有相同维度。</p>
 </blockquote>
 </li>
-<li><p>回顾导数的定义：<br>$$<br>d \theta_{\text {approx }}[i]&#x3D;\frac{J\left(\theta_1, \theta_2, \ldots \theta_i+\varepsilon, \ldots\right)-J\left(\theta_1, \theta_2, \ldots \theta_i-\varepsilon, \ldots\right)}{2 \varepsilon}<br>$$<br>这个值 $\left(d \theta_{\text {approx }}[i]\right)$ 应该逼近 $d \theta[i]&#x3D;\frac{\partial J}{\partial \theta_i} ， d \theta[i]$ 是代价函数的偏导数，然后你需要对i每个值都执行这个运算，最后得到两个向量，得到 $d \theta$ 的逼近值 $d \theta_{\text {approx }}$ ，它与 $d \theta$ 具有相同维度，它们两个与 $\theta$ 具有相同维度，你要做的就是验证这些向量是否彼此接近。</p>
+<li>
+<p>回顾导数的定义：<br>
+$$<br>
+d \theta_{\text {approx }}[i]=\frac{J\left(\theta_1, \theta_2, \ldots \theta_i+\varepsilon, \ldots\right)-J\left(\theta_1, \theta_2, \ldots \theta_i-\varepsilon, \ldots\right)}{2 \varepsilon}<br>
+$$<br>
+这个值 $\left(d \theta_{\text {approx }}[i]\right)$ 应该逼近 $d \theta[i]=\frac{\partial J}{\partial \theta_i} ， d \theta[i]$ 是代价函数的偏导数，然后你需要对i每个值都执行这个运算，最后得到两个向量，得到 $d \theta$ 的逼近值 $d \theta_{\text {approx }}$ ，它与 $d \theta$ 具有相同维度，它们两个与 $\theta$ 具有相同维度，你要做的就是验证这些向量是否彼此接近。</p>
 </li>
-<li><p>那么如何定义两个向量是否真的接近彼此？</p>
+<li>
+<p>那么如何定义两个向量是否真的接近彼此？</p>
 <p>一般是计算这两个向量的距离：$d \theta_{\text {approx }}[i]-d \theta[i]$ 的<strong>欧几里得范数</strong>，</p>
 <p>注意这里 $\left(\left|d \theta_{\text {approx }}-d \theta\right|_2\right)$ 没有平方，它是误差平方之和，然后求平方根，得到欧式距离，然后用向量长度归一化，使用向量长度的欧几里得范数。分母只是用于预防这些向量太小或太大，分母使得这个方程式变成比率，我们实际执行这个方程式， $\varepsilon$可能为 $10^{-7}$ ，使用这个取值范围内的 $\varepsilon$ ，如果你发现计算方程式得到的值为 $10^{-7}$ 或更小，这就很好，这就意味着导数逼近很有可能是正确的，它的值非常小。</p>
 </li>
 </ol>
-<h4 id="梯度检测注意事项"><a href="#梯度检测注意事项" class="headerlink" title="梯度检测注意事项"></a>梯度检测注意事项</h4><ul>
+<h4 id="梯度检测注意事项">梯度检测注意事项</h4>
+<ul>
 <li>不要在训练中使用梯度检验，它只用于调试，因为必须使用 $W$ 和 $b$ 的反向传播来计算 $d \theta$ ，并使用反向传播来计算导数，所以梯度检验的每一个迭代过程都很慢。</li>
 <li>如果算法的梯度检验失败，要检查所有项，检查每一项，并试着找出bug。</li>
 <li>在实施梯度检验时，如果使用正则化，请注意正则项。如果使用了带有正则项的代价函数，在梯度检测时要带有正则项。</li>
 <li>梯度检验不能与<strong>dropout</strong>同时使用，因为每次迭代过程中，<strong>dropout</strong>会随机消除隐藏层单元的不同子集，难以计算代价函数。</li>
 </ul>
-<h3 id="Mini-batch梯度下降"><a href="#Mini-batch梯度下降" class="headerlink" title="Mini-batch梯度下降"></a>Mini-batch梯度下降</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125214418279.png" alt="image-20231125214418279"></p>
-<h3 id="指数加权平均数"><a href="#指数加权平均数" class="headerlink" title="指数加权平均数"></a>指数加权平均数</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125214636721.png" alt="image-20231125214636721"></p>
-<h3 id="Momentum动量梯度下降法"><a href="#Momentum动量梯度下降法" class="headerlink" title="Momentum动量梯度下降法"></a>Momentum动量梯度下降法</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125214753720.png" alt="image-20231125214753720"></p>
-<h3 id="RMSprop算法"><a href="#RMSprop算法" class="headerlink" title="RMSprop算法"></a>RMSprop算法</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125214907806.png" alt="image-20231125214907806"></p>
-<h3 id="Adam优化算法"><a href="#Adam优化算法" class="headerlink" title="Adam优化算法"></a>Adam优化算法</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125214925034.png" alt="image-20231125214925034"></p>
-<h3 id="学习率衰减与局部最优的问题"><a href="#学习率衰减与局部最优的问题" class="headerlink" title="学习率衰减与局部最优的问题"></a>学习率衰减与局部最优的问题</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125214946279.png" alt="image-20231125214946279"></p>
-<h3 id="调试处理"><a href="#调试处理" class="headerlink" title="调试处理"></a>调试处理</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125215346313.png" alt="image-20231125215346313"></p>
-<h3 id="归一化网络的激活函数"><a href="#归一化网络的激活函数" class="headerlink" title="归一化网络的激活函数"></a>归一化网络的激活函数</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125215559678.png" alt="image-20231125215559678"></p>
-<h3 id="Softmax回归以及训练一个Softmax分类器"><a href="#Softmax回归以及训练一个Softmax分类器" class="headerlink" title="Softmax回归以及训练一个Softmax分类器"></a><strong>Softmax</strong>回归以及训练一个<strong>Softmax</strong>分类器</h3><p>详见：<a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson2-week3.html#header-n154">深度学习笔记 (ai-start.com)</a></p>
-<h3 id="正交化"><a href="#正交化" class="headerlink" title="正交化"></a>正交化</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125221955305.png" alt="image-20231125221955305"></p>
-<h3 id="训练-x2F-开发-x2F-测试集细节"><a href="#训练-x2F-开发-x2F-测试集细节" class="headerlink" title="训练&#x2F;开发&#x2F;测试集细节"></a>训练&#x2F;开发&#x2F;测试集细节</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125222045933.png" alt="image-20231125222045933"></p>
-<h3 id="人的表现与偏差"><a href="#人的表现与偏差" class="headerlink" title="人的表现与偏差"></a>人的表现与偏差</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125222425760.png" alt="image-20231125222425760"></p>
-<h3 id="误差分析（Carrying-out-error-analysis）"><a href="#误差分析（Carrying-out-error-analysis）" class="headerlink" title="误差分析（Carrying out error analysis）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n4">误差分析（Carrying out error analysis）</a></h3><h3 id="清除标注错误的数据（Cleaning-up-Incorrectly-labeled-data）"><a href="#清除标注错误的数据（Cleaning-up-Incorrectly-labeled-data）" class="headerlink" title="清除标注错误的数据（Cleaning up Incorrectly labeled data）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n19">清除标注错误的数据（Cleaning up Incorrectly labeled data）</a></h3><h3 id="快速搭建你的第一个系统，并进行迭代（Build-your-first-system-quickly-then-iterate）"><a href="#快速搭建你的第一个系统，并进行迭代（Build-your-first-system-quickly-then-iterate）" class="headerlink" title="快速搭建你的第一个系统，并进行迭代（Build your first system quickly, then iterate）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n44">快速搭建你的第一个系统，并进行迭代（Build your first system quickly, then iterate）</a></h3><h3 id="使用来自不同分布的数据，进行训练和测试（Training-and-testing-on-different-distributions）"><a href="#使用来自不同分布的数据，进行训练和测试（Training-and-testing-on-different-distributions）" class="headerlink" title="使用来自不同分布的数据，进行训练和测试（Training and testing on different distributions）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n54">使用来自不同分布的数据，进行训练和测试（Training and testing on different distributions）</a></h3><h3 id="数据分布不匹配时，偏差与方差的分析（Bias-and-Variance-with-mismatched-data-distributions）"><a href="#数据分布不匹配时，偏差与方差的分析（Bias-and-Variance-with-mismatched-data-distributions）" class="headerlink" title="数据分布不匹配时，偏差与方差的分析（Bias and Variance with mismatched data distributions）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n73">数据分布不匹配时，偏差与方差的分析（Bias and Variance with mismatched data distributions）</a></h3><h3 id="处理数据不匹配问题（Addressing-data-mismatch）"><a href="#处理数据不匹配问题（Addressing-data-mismatch）" class="headerlink" title="处理数据不匹配问题（Addressing data mismatch）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n107">处理数据不匹配问题（Addressing data mismatch）</a></h3><h3 id="迁移学习（Transfer-learning）"><a href="#迁移学习（Transfer-learning）" class="headerlink" title="迁移学习（Transfer learning）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n125">迁移学习（Transfer learning）</a></h3><h3 id="多任务学习（Multi-task-learning）"><a href="#多任务学习（Multi-task-learning）" class="headerlink" title="多任务学习（Multi-task learning）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n146">多任务学习（Multi-task learning）</a></h3><h3 id="什么是端到端的深度学习？（What-is-end-to-end-deep-learning-）"><a href="#什么是端到端的深度学习？（What-is-end-to-end-deep-learning-）" class="headerlink" title="什么是端到端的深度学习？（What is end-to-end deep learning?）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n176">什么是端到端的深度学习？（What is end-to-end deep learning?）</a></h3><h3 id="是否要使用端到端的深度学习？（Whether-to-use-end-to-end-learning-）"><a href="#是否要使用端到端的深度学习？（Whether-to-use-end-to-end-learning-）" class="headerlink" title="是否要使用端到端的深度学习？（Whether to use end-to-end learning?）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n204">是否要使用端到端的深度学习？（Whether to use end-to-end learning?）</a></h3><h3 id="边缘检测示例（Edge-detection-example）"><a href="#边缘检测示例（Edge-detection-example）" class="headerlink" title="边缘检测示例（Edge detection example）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n38">边缘检测示例（Edge detection example）</a></h3><h3 id="更多边缘检测内容（More-edge-detection）"><a href="#更多边缘检测内容（More-edge-detection）" class="headerlink" title="更多边缘检测内容（More edge detection）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n111">更多边缘检测内容（More edge detection）</a></h3><h3 id="Padding填充"><a href="#Padding填充" class="headerlink" title="Padding填充"></a>Padding填充</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125224753720.png" alt="image-20231125224753720"></p>
-<h3 id="三维卷积及如何构建卷积层"><a href="#三维卷积及如何构建卷积层" class="headerlink" title="三维卷积及如何构建卷积层"></a>三维卷积及如何构建卷积层</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125224923545.png" alt="image-20231125224923545"></p>
-<h3 id="单层卷积网络（One-layer-of-a-convolutional-network）"><a href="#单层卷积网络（One-layer-of-a-convolutional-network）" class="headerlink" title="单层卷积网络（One layer of a convolutional network）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n303">单层卷积网络（One layer of a convolutional network）</a></h3><h3 id="卷积层各种标记"><a href="#卷积层各种标记" class="headerlink" title="卷积层各种标记"></a>卷积层各种标记</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125225537284.png" alt="image-20231125225537284"></p>
-<h3 id="池化层（Pooling-layers）"><a href="#池化层（Pooling-layers）" class="headerlink" title="池化层（Pooling layers）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n399">池化层（Pooling layers）</a></h3><h3 id="卷积层实例探究"><a href="#卷积层实例探究" class="headerlink" title="卷积层实例探究"></a>卷积层实例探究</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125225733948.png" alt="image-20231125225733948"></p>
-<h3 id="为什么使用卷积？（Why-convolutions-）"><a href="#为什么使用卷积？（Why-convolutions-）" class="headerlink" title="为什么使用卷积？（Why convolutions?）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n505">为什么使用卷积？（Why convolutions?）</a></h3><h3 id="残差网络"><a href="#残差网络" class="headerlink" title="残差网络"></a>残差网络</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125230300452.png" alt="image-20231125230300452"></p>
-<h3 id="网络中的网络以及-1-×-1卷积"><a href="#网络中的网络以及-1-×-1卷积" class="headerlink" title="网络中的网络以及 1 × 1卷积"></a>网络中的网络以及 1 × 1卷积</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125230341787.png" alt="image-20231125230341787"></p>
-<h3 id="Inception-网络实例与迁移学习"><a href="#Inception-网络实例与迁移学习" class="headerlink" title="Inception 网络实例与迁移学习"></a><strong>Inception</strong> 网络实例与迁移学习</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125230446985.png" alt="image-20231125230446985"></p>
-<h3 id="目标定位与特征点检测与目标检测"><a href="#目标定位与特征点检测与目标检测" class="headerlink" title="目标定位与特征点检测与目标检测"></a>目标定位与特征点检测与目标检测</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125230552398.png" alt="image-20231125230552398"></p>
-<h3 id="滑动窗口的卷积实现与YOLO算法与优化方案"><a href="#滑动窗口的卷积实现与YOLO算法与优化方案" class="headerlink" title="滑动窗口的卷积实现与YOLO算法与优化方案"></a>滑动窗口的卷积实现与YOLO算法与优化方案</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125230631775.png" alt="image-20231125230631775"></p>
-<h3 id="Bounding-Box-预测"><a href="#Bounding-Box-预测" class="headerlink" title="Bounding Box 预测"></a>Bounding Box 预测</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125230735400.png" alt="image-20231125230735400"></p>
-<h3 id="One-Shot-学习"><a href="#One-Shot-学习" class="headerlink" title="One-Shot 学习"></a><strong>One-Shot</strong> 学习</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/22/shen-du-xue-xi-ji-chu-zhi-shi-dian-hui-zong/image-20231125231225563.png" alt="image-20231125231225563"></p>
-<h3 id="特殊应用：人脸识别和神经风格转换（Special-applications-Face-recognition-amp-Neural-style-transfer）"><a href="#特殊应用：人脸识别和神经风格转换（Special-applications-Face-recognition-amp-Neural-style-transfer）" class="headerlink" title="特殊应用：人脸识别和神经风格转换（Special applications: Face recognition &amp;Neural style transfer）"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week4.html#header-n0">特殊应用：人脸识别和神经风格转换（Special applications: Face recognition &amp;Neural style transfer）</a></h3><h3 id="序列模型-Sequence-Models"><a href="#序列模型-Sequence-Models" class="headerlink" title="序列模型(Sequence Models)"></a><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson5-week1.html#%E7%AC%AC%E4%BA%94%E9%97%A8%E8%AF%BE-%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8Bsequence-models">序列模型(Sequence Models)</a></h3>
+<h3 id="Mini-batch梯度下降">Mini-batch梯度下降</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125214418279.png" alt="image-20231125214418279"></p>
+<h3 id="指数加权平均数">指数加权平均数</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125214636721.png" alt="image-20231125214636721"></p>
+<h3 id="Momentum动量梯度下降法">Momentum动量梯度下降法</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125214753720.png" alt="image-20231125214753720"></p>
+<h3 id="RMSprop算法">RMSprop算法</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125214907806.png" alt="image-20231125214907806"></p>
+<h3 id="Adam优化算法">Adam优化算法</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125214925034.png" alt="image-20231125214925034"></p>
+<h3 id="学习率衰减与局部最优的问题">学习率衰减与局部最优的问题</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125214946279.png" alt="image-20231125214946279"></p>
+<h3 id="调试处理">调试处理</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125215346313.png" alt="image-20231125215346313"></p>
+<h3 id="归一化网络的激活函数">归一化网络的激活函数</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125215559678.png" alt="image-20231125215559678"></p>
+<h3 id="Softmax回归以及训练一个Softmax分类器"><strong>Softmax</strong>回归以及训练一个<strong>Softmax</strong>分类器</h3>
+<p>详见：<a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson2-week3.html#header-n154">深度学习笔记 (ai-start.com)</a></p>
+<h3 id="正交化">正交化</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125221955305.png" alt="image-20231125221955305"></p>
+<h3 id="训练-开发-测试集细节">训练/开发/测试集细节</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125222045933.png" alt="image-20231125222045933"></p>
+<h3 id="人的表现与偏差">人的表现与偏差</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125222425760.png" alt="image-20231125222425760"></p>
+<h3 id="误差分析（Carrying-out-error-analysis）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n4">误差分析（Carrying out error analysis）</a></h3>
+<h3 id="清除标注错误的数据（Cleaning-up-Incorrectly-labeled-data）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n19">清除标注错误的数据（Cleaning up Incorrectly labeled data）</a></h3>
+<h3 id="快速搭建你的第一个系统，并进行迭代（Build-your-first-system-quickly-then-iterate）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n44">快速搭建你的第一个系统，并进行迭代（Build your first system quickly, then iterate）</a></h3>
+<h3 id="使用来自不同分布的数据，进行训练和测试（Training-and-testing-on-different-distributions）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n54">使用来自不同分布的数据，进行训练和测试（Training and testing on different distributions）</a></h3>
+<h3 id="数据分布不匹配时，偏差与方差的分析（Bias-and-Variance-with-mismatched-data-distributions）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n73">数据分布不匹配时，偏差与方差的分析（Bias and Variance with mismatched data distributions）</a></h3>
+<h3 id="处理数据不匹配问题（Addressing-data-mismatch）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n107">处理数据不匹配问题（Addressing data mismatch）</a></h3>
+<h3 id="迁移学习（Transfer-learning）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n125">迁移学习（Transfer learning）</a></h3>
+<h3 id="多任务学习（Multi-task-learning）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n146">多任务学习（Multi-task learning）</a></h3>
+<h3 id="什么是端到端的深度学习？（What-is-end-to-end-deep-learning-）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n176">什么是端到端的深度学习？（What is end-to-end deep learning?）</a></h3>
+<h3 id="是否要使用端到端的深度学习？（Whether-to-use-end-to-end-learning-）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson3-week2.html#header-n204">是否要使用端到端的深度学习？（Whether to use end-to-end learning?）</a></h3>
+<h3 id="边缘检测示例（Edge-detection-example）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n38">边缘检测示例（Edge detection example）</a></h3>
+<h3 id="更多边缘检测内容（More-edge-detection）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n111">更多边缘检测内容（More edge detection）</a></h3>
+<h3 id="Padding填充">Padding填充</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125224753720.png" alt="image-20231125224753720"></p>
+<h3 id="三维卷积及如何构建卷积层">三维卷积及如何构建卷积层</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125224923545.png" alt="image-20231125224923545"></p>
+<h3 id="单层卷积网络（One-layer-of-a-convolutional-network）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n303">单层卷积网络（One layer of a convolutional network）</a></h3>
+<h3 id="卷积层各种标记">卷积层各种标记</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125225537284.png" alt="image-20231125225537284"></p>
+<h3 id="池化层（Pooling-layers）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n399">池化层（Pooling layers）</a></h3>
+<h3 id="卷积层实例探究">卷积层实例探究</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125225733948.png" alt="image-20231125225733948"></p>
+<h3 id="为什么使用卷积？（Why-convolutions-）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week1.html#header-n505">为什么使用卷积？（Why convolutions?）</a></h3>
+<h3 id="残差网络">残差网络</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125230300452.png" alt="image-20231125230300452"></p>
+<h3 id="网络中的网络以及-1-×-1卷积">网络中的网络以及 1 × 1卷积</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125230341787.png" alt="image-20231125230341787"></p>
+<h3 id="Inception-网络实例与迁移学习"><strong>Inception</strong> 网络实例与迁移学习</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125230446985.png" alt="image-20231125230446985"></p>
+<h3 id="目标定位与特征点检测与目标检测">目标定位与特征点检测与目标检测</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125230552398.png" alt="image-20231125230552398"></p>
+<h3 id="滑动窗口的卷积实现与YOLO算法与优化方案">滑动窗口的卷积实现与YOLO算法与优化方案</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125230631775.png" alt="image-20231125230631775"></p>
+<h3 id="Bounding-Box-预测">Bounding Box 预测</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125230735400.png" alt="image-20231125230735400"></p>
+<h3 id="One-Shot-学习"><strong>One-Shot</strong> 学习</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231125231225563.png" alt="image-20231125231225563"></p>
+<h3 id="特殊应用：人脸识别和神经风格转换（Special-applications-Face-recognition-Neural-style-transfer）"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson4-week4.html#header-n0">特殊应用：人脸识别和神经风格转换（Special applications: Face recognition &amp;Neural style transfer）</a></h3>
+<h3 id="序列模型-Sequence-Models"><a target="_blank" rel="noopener" href="http://www.ai-start.com/dl2017/html/lesson5-week1.html#%E7%AC%AC%E4%BA%94%E9%97%A8%E8%AF%BE-%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8Bsequence-models">序列模型(Sequence Models)</a></h3>
+
                 
             </div>
             <hr/>

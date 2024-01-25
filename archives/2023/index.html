@@ -532,9 +532,10 @@ F12报错为：
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    残差网络（ResNet）让我们先思考一个问题：对神经网络模型添加新的层，充分训练后的模型是否只可能更有效地降低训练误差？
+                                    残差网络（ResNet）
+让我们先思考一个问题：对神经网络模型添加新的层，充分训练后的模型是否只可能更有效地降低训练误差？
 理论上，原模型解的空间只是新模型解的空间的子空间。
-也就是说，如果我们能将新添加的层训练成恒等映射 $f(x)&#x3
+也就是说，如果我们能将新添加的层训练成恒等映射 $f(x)=x$
                                 
                             </div>
                             <div class="publish-info">
@@ -595,11 +596,12 @@ F12报错为：
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    线性回归的初始实现%matplotlib inline
+                                    线性回归的初始实现
+%matplotlib inline
 import matplotlib_inline
 import torch
 from IPython import display
-from matplotlib import pyp
+from matplotlib import py
                                 
                             </div>
                             <div class="publish-info">
@@ -721,8 +723,9 @@ from matplotlib import pyp
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    在多个位置复用权重如果需要在多个位置检测相同的特征，请使用相同的权重。
-过拟合的产生通常是由于当前网络参数的数量多于学习特定数据集所需要的参数数量——这种情况下，网络有足够多的参数，以至于它可以记住训练训练集中的每一个细节，而不是对高层次的
+                                    在多个位置复用权重
+如果需要在多个位置检测相同的特征，请使用相同的权重。
+过拟合的产生通常是由于当前网络参数的数量多于学习特定数据集所需要的参数数量——这种情况下，网络有足够多的参数，以至于它可以记住训练训练集中的每一个细节，而不是对高层次
                                 
                             </div>
                             <div class="publish-info">
@@ -783,13 +786,14 @@ from matplotlib import pyp
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    什么是激活函数它是在预测时应用于一层神经元的函数。
+                                    什么是激活函数
+它是在预测时应用于一层神经元的函数。
 因为我们一直在使用一个名为relu的激活函数（如下图所示），relu函数具有将所有负数变为0的效果：
 
 
 简单来说：激活函数指的是任何可以接受一个数字并返回另一个数字的函数。
 
-要使一个函
+要使一个
                                 
                             </div>
                             <div class="publish-info">
@@ -855,10 +859,11 @@ from matplotlib import pyp
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    使用在MNIST上的三层网络import sys, numpy as np
+                                    使用在MNIST上的三层网络
+import sys, numpy as np
 from keras.datasets import mnist
 
-(x_train, y_train), (x_test, y_test) = mnist.loa
+(x_train, y_train), (x_test, y_test) = mnist.lo
                                 
                             </div>
                             <div class="publish-info">
@@ -919,11 +924,14 @@ from keras.datasets import mnist
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    反向传播交通信号灯问题神经网络如何学习整个数据集？
+                                    反向传播
+交通信号灯问题
+神经网络如何学习整个数据集？
 可以通过解读交通信号灯的含义来知道什么时候过马路是安全的。但是我们只能观察每种灯光组合和周围的人通行或止步的相关性来进行判断：
 
-准备数据如何训练一个监督神经网络？
-可以交给它两个数据集，
+准备数据
+如何训练一个监督神经网络？
+可以交给它两个数
                                 
                             </div>
                             <div class="publish-info">
@@ -984,8 +992,9 @@ from keras.datasets import mnist
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    比较本章中，我们只介绍一种简单的测量误差的方法：均方误差。
-“比较”这一步会让你知道自己的模型错了多少，但这还不足以让它真正学会，因为只是“比较”它不会告诉你为什么错了，在什么方向产生了失误，应该做什么来纠正错误。它只能给出表示“严重失误”
+                                    比较
+本章中，我们只介绍一种简单的测量误差的方法：均方误差。
+“比较”这一步会让你知道自己的模型错了多少，但这还不足以让它真正学会，因为只是“比较”它不会告诉你为什么错了，在什么方向产生了失误，应该做什么来纠正错误。它只能给出表示“严重失误
                                 
                             </div>
                             <div class="publish-info">
@@ -1046,8 +1055,10 @@ from keras.datasets import mnist
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    基本概念什么是深度学习？深度学习是机器学习方法的一个子集。深度学习是机器学习的一个子集，机器学习是一个专门研究和开发能够学习的机器的领域(有时候最终目标是获得通用人工智能)。
-深度学习在业内，深度学习被用于解决多个领域的实际任务，如计算机视
+                                    基本概念
+什么是深度学习？
+深度学习是机器学习方法的一个子集。深度学习是机器学习的一个子集，机器学习是一个专门研究和开发能够学习的机器的领域(有时候最终目标是获得通用人工智能)。
+深度学习在业内，深度学习被用于解决多个领域的实际任务，如计算
                                 
                             </div>
                             <div class="publish-info">
@@ -1109,11 +1120,12 @@ from keras.datasets import mnist
                             <div class="summary block-with-text">
                                 
                                     如今在神经网络上获得更好性能的最可靠的方法是什么？
+
 训练一个更大的神经网络
 投入更多数据
 
 这只能在一定程度上起作用，因为最终你耗尽了数据，或者最终你的网络是如此大规模导致将要用太久的时间去训练。
-所以如果你没有大量的训练集，那效果会取决于
+所以如果你没有大量的训练集，那效果会取决
                                 
                             </div>
                             <div class="publish-info">
@@ -1173,16 +1185,18 @@ from keras.datasets import mnist
                             <div class="summary block-with-text">
                                 
                                     模型量化（Q）
+
 用定点的数值运算代替浮点的数值运算。
 
 模型剪枝（P）
+
 一般指的是模型训练后进行反训练之前，或反训练之后部署之前进行剪枝，或保留模型的部分权重和结构。
 
 online：边剪枝边训练
 offline：不训练直接剪枝
 
 
-权重聚
+权
                                 
                             </div>
                             <div class="publish-info">

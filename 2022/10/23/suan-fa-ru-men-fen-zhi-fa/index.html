@@ -496,7 +496,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="分治法本质"><a href="#分治法本质" class="headerlink" title="分治法本质"></a>分治法本质</h2><blockquote>
+                <h2 id="分治法本质">分治法本质</h2>
+<blockquote>
 <p>分治算法，其本质就是将一个大规模的问题分解为若干个规模较小的相同子问题，分而治之。</p>
 </blockquote>
 <p>那么在现实生活中，什么样的问题才能使用分治法解决呢？简单来说，需要满足以下 3 个条件：</p>
@@ -505,7 +506,8 @@
 <li>子问题相互独立。</li>
 <li>子问题的解可以合并为原问题的解。</li>
 </ol>
-<h2 id="分治法解题步骤"><a href="#分治法解题步骤" class="headerlink" title="分治法解题步骤"></a>分治法解题步骤</h2><ul>
+<h2 id="分治法解题步骤">分治法解题步骤</h2>
+<ul>
 <li>分解：将要解决的问题分解为若干个规模较小、相互独立、与原问题形式相同的子问题。</li>
 <li>治理：求解各个子问题。由于各个子问题与原问题形式相同，只是规模较小而已，而当子问题划分得足够小时，就可以用较简单的方法解决。</li>
 <li>合并：按原问题的要求，将子问题的解逐层合并构成原问题的解。</li>
@@ -513,16 +515,19 @@
 <blockquote>
 <p><strong>递归</strong>是彰显分治法优势的利器。</p>
 </blockquote>
-<h2 id="二分搜索技术"><a href="#二分搜索技术" class="headerlink" title="二分搜索技术"></a>二分搜索技术</h2><h3 id="算法设计："><a href="#算法设计：" class="headerlink" title="算法设计："></a>算法设计：</h3><p>问题描述：给定 n 个元素，这些元素是<strong>有序</strong>的（假定为升序），从中查找特定元素 x。</p>
+<h2 id="二分搜索技术">二分搜索技术</h2>
+<h3 id="算法设计：">算法设计：</h3>
+<p>问题描述：给定 n 个元素，这些元素是<strong>有序</strong>的（假定为升序），从中查找特定元素 x。</p>
 <p>算法思想：将有序序列分成规模大致相等的两部分，然后取中间元素与特定查找元素 x 进行比较，如果 x 等于中间元素，则查找成功，算法终止；如果 x 小于中间元素，则在序列的前半部分继续查找，即在序列的前半部分重复分解和治理操作；否则，在序列的后半部分继续查找，即在序列的后半部分重复分解和治理操作。</p>
 <p>算法设计：用一维数组 S[]存储该有序序列，设变量 low 和 high 表示查找范围的下界和上界，middle 表示查找范围的中间位置，x 为特定的查找元素。</p>
 <ul>
-<li>初始化。令 low&#x3D;0，即指向有序数组 S[]的第一个元素；high&#x3D;n−1，即指向有序数组S[]的最后一个元素。</li>
-<li>middle&#x3D;（low+high）&#x2F;2，即指示查找范围的中间元素。</li>
+<li>初始化。令 low=0，即指向有序数组 S[]的第一个元素；high=n−1，即指向有序数组S[]的最后一个元素。</li>
+<li>middle=（low+high）/2，即指示查找范围的中间元素。</li>
 <li>判定 low≤high 是否成立，如果成立，转第 4 步，否则，算法结束。</li>
-<li>判断 x 与 S[middle]的关系。如果 x&#x3D;S[middle]，则搜索成功，算法结束；如果x&gt;S[middle]，则令 low&#x3D;middle+1；否则令 high&#x3D;middle−1，转为第 2 步。</li>
+<li>判断 x 与 S[middle]的关系。如果 x=S[middle]，则搜索成功，算法结束；如果x&gt;S[middle]，则令 low=middle+1；否则令 high=middle−1，转为第 2 步。</li>
 </ul>
-<h3 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 3-1</span>
+<h3 id="代码实现：">代码实现：</h3>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 3-1</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;cstdlib></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;algorithm></span></span>
@@ -572,29 +577,35 @@
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="算法复杂度分析："><a href="#算法复杂度分析：" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h3><p><strong>时间复杂度：</strong></p>
+<h3 id="算法复杂度分析：">算法复杂度分析：</h3>
+<p><strong>时间复杂度：</strong></p>
 <ol>
-<li><p>首先需要进行排序，调用 sort 函数，进行排序复杂度为 O(nlogn)，如果数列本身有序，那么这部分不用考虑。</p>
+<li>
+<p>首先需要进行排序，调用 sort 函数，进行排序复杂度为 O(nlogn)，如果数列本身有序，那么这部分不用考虑。</p>
 </li>
-<li><p>如果我们用 T(n)来表示 n 个有序元素的二分查找算法时间复杂度，那么：</p>
+<li>
+<p>如果我们用 T(n)来表示 n 个有序元素的二分查找算法时间复杂度，那么：</p>
 <ul>
-<li><p>当 n&#x3D;1 时，需要一次比较，T(n)&#x3D;O(1)</p>
+<li>
+<p>当 n=1 时，需要一次比较，T(n)=O(1)</p>
 </li>
-<li><p>当 n&gt;1 时，特定元素和中间位置元素比较，需要 O(1)时间，如果比较不成功，那么需要在前半部分或后半部分搜索，问题的规模缩小了一半，时间复杂度变为 T(n&#x2F;2)。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023113347212.png" alt="image-20221023113347212"></p>
+<li>
+<p>当 n&gt;1 时，特定元素和中间位置元素比较，需要 O(1)时间，如果比较不成功，那么需要在前半部分或后半部分搜索，问题的规模缩小了一半，时间复杂度变为 T(n/2)。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023113347212.png" alt="image-20221023113347212"></p>
 </li>
-<li><p>当 n&gt;1 时，可以递推求解如下。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023113358680.png" alt="image-20221023113358680"></p>
-<p>递推最终的规模为 1，令 n &#x3D; 2<sup>x</sup>，则x &#x3D; logn。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023113505382.png" alt="image-20221023113505382"></p>
+<li>
+<p>当 n&gt;1 时，可以递推求解如下。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023113358680.png" alt="image-20221023113358680"></p>
+<p>递推最终的规模为 1，令 n = 2<sup>x</sup>，则x = logn。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023113505382.png" alt="image-20221023113505382"></p>
 <p>二分查找算法的时间复杂度为 O(logn)。</p>
 </li>
 </ul>
 </li>
 </ol>
-<p><strong>空间复杂度：</strong>程序中变量占用了一些辅助空间，这些辅助空间都是常数阶的，因此空间复杂度为 O(1)。</p>
-<h3 id="优化拓展："><a href="#优化拓展：" class="headerlink" title="优化拓展："></a>优化拓展：</h3><p>在上面程序中，我们采用 BinarySearch（int n，int s[]，int x）函数来实现二分搜索，那么能不能用递归来实现呢？因为递归有自调用问题，那么就需要增加两个参数 low 和 high 来标记搜索范围的开始和结束。</p>
+<p>**空间复杂度：**程序中变量占用了一些辅助空间，这些辅助空间都是常数阶的，因此空间复杂度为 O(1)。</p>
+<h3 id="优化拓展：">优化拓展：</h3>
+<p>在上面程序中，我们采用 BinarySearch（int n，int s[]，int x）函数来实现二分搜索，那么能不能用递归来实现呢？因为递归有自调用问题，那么就需要增加两个参数 low 和 high 来标记搜索范围的开始和结束。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">recursionBS</span><span class="token punctuation">(</span><span class="token keyword">int</span> s<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token keyword">int</span> x<span class="token punctuation">,</span><span class="token keyword">int</span> low<span class="token punctuation">,</span><span class="token keyword">int</span> high<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
    <span class="token keyword">if</span><span class="token punctuation">(</span>low<span class="token operator">></span>high<span class="token punctuation">)</span>
@@ -607,37 +618,38 @@
       <span class="token keyword">else</span>
          <span class="token keyword">return</span> <span class="token function">recursionBS</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> middle<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>high<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>空间复杂度：</strong></p>
 <p>在递归算法中，每一次递归调用都需要一个栈空间存储，那么我们只需要看看有多少次调用。</p>
-<p>假设原问题的规模为 n，那么第一次递归就分为两个规模为 n&#x2F;2 的子问题，这两个子问题并不是每个都执行，只会执行其中之一。</p>
-<p>因为我们和中间值比较后，要么去前半部分查找，要么去后半部分查找；然后再把规模为 n&#x2F;2的子问题继续划分为两个规模为 n&#x2F;4 的子问题，选择其一；继续分治下去，最坏的情况会分治到只剩下一个数值，那么我们执行的节点数就是从树根到叶子所经过的节点，每一层执行一个，直到最后一层：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023120324903.png" alt="image-20221023120324903"></p>
-<p>递归调用最终的规模为 1，即 n&#x2F;2x&#x3D;1，则x&#x3D;logn。假设阴影部分是搜索经过的路径，一共经过了 logn 个节点，也就是说递归调用了 logn 次。</p>
+<p>假设原问题的规模为 n，那么第一次递归就分为两个规模为 n/2 的子问题，这两个子问题并不是每个都执行，只会执行其中之一。</p>
+<p>因为我们和中间值比较后，要么去前半部分查找，要么去后半部分查找；然后再把规模为 n/2的子问题继续划分为两个规模为 n/4 的子问题，选择其一；继续分治下去，最坏的情况会分治到只剩下一个数值，那么我们执行的节点数就是从树根到叶子所经过的节点，每一层执行一个，直到最后一层：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023120324903.png" alt="image-20221023120324903"></p>
+<p>递归调用最终的规模为 1，即 n/2x=1，则x=logn。假设阴影部分是搜索经过的路径，一共经过了 logn 个节点，也就是说递归调用了 logn 次。</p>
 <p>因此，二分搜索递归算法的空间复杂度为 O(logn)。</p>
-<h2 id="合并排序"><a href="#合并排序" class="headerlink" title="合并排序"></a>合并排序</h2><h3 id="算法设计：-1"><a href="#算法设计：-1" class="headerlink" title="算法设计："></a>算法设计：</h3><p>合并排序是采用分治策略实现对 n 个元素进行排序的算法，是分治法的一个典型应用和完美体现。它是一种平衡、简单的二分分治策略，过程大致分为：</p>
+<h2 id="合并排序">合并排序</h2>
+<h3 id="算法设计：-2">算法设计：</h3>
+<p>合并排序是采用分治策略实现对 n 个元素进行排序的算法，是分治法的一个典型应用和完美体现。它是一种平衡、简单的二分分治策略，过程大致分为：</p>
 <ul>
 <li>分解—将待排序元素分成大小大致相同的两个子序列。</li>
 <li>治理—对两个子序列进行合并排序。</li>
 <li>合并—将排好序的有序子序列进行合并，得到最终的有序序列。</li>
 </ul>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023123323025.png" alt="image-20221023123323025"></p>
-<h3 id="代码实现：-1"><a href="#代码实现：-1" class="headerlink" title="代码实现："></a>代码实现：</h3><ol>
-<li><p>合并操作：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023123323025.png" alt="image-20221023123323025"></p>
+<h3 id="代码实现：-2">代码实现：</h3>
+<ol>
+<li>
+<p>合并操作：</p>
 <p>设置 3 个工作指针 i、j、k（整型数）和一个辅助数组 B[]。其中，i 和 j 分别指向两个待排序子序列中当前待比较的元素，k 指向辅助数组 B[]中待放置元素的位置。比较 A[i]和A[j]，将较小的赋值给 B[k]，同时相应指针向后移动。如此反复，直到所有元素处理完毕。最后把辅助数组 B 中排好序的元素复制到 A 数组中：</p>
-<p>第 1 次比较 A[i]&#x3D;4 和 A[j]&#x3D;2，将较小元素 2 放入 B 数组中，j++，k++：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023124616377.png" alt="image-20221023124616377"></p>
+<p>第 1 次比较 A[i]=4 和 A[j]=2，将较小元素 2 放入 B 数组中，j++，k++：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023124616377.png" alt="image-20221023124616377"></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">while</span><span class="token punctuation">(</span>i<span class="token operator">&lt;=</span>mid <span class="token operator">&amp;&amp;</span> j<span class="token operator">&lt;=</span>high<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//按从小到大存放到辅助数组B[]中</span>
        <span class="token keyword">if</span><span class="token punctuation">(</span>A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">&lt;=</span>A<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
            B<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>A<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
        <span class="token keyword">else</span>
            B<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>A<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>当j&gt;high 了，while 循环结束，但 A 数组还剩有元素（i≤mid）怎么办呢？直接放置到 B 数组就可以了：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">while</span><span class="token punctuation">(</span>i<span class="token operator">&lt;=</span>mid<span class="token punctuation">)</span> B<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>A<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//将数组中剩下的元素放置B中</span>
    <span class="token keyword">while</span><span class="token punctuation">(</span>j<span class="token operator">&lt;=</span>high<span class="token punctuation">)</span> B<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>A<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>完整的合并程序如下：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">Merge</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> low<span class="token punctuation">,</span> <span class="token keyword">int</span> mid<span class="token punctuation">,</span> <span class="token keyword">int</span> high<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -656,7 +668,8 @@
     <span class="token keyword">delete</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>B<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>递归形式的合并排序算法</p>
+<li>
+<p>递归形式的合并排序算法</p>
 <p>将序列分为两个子序列，然后对子序列进行递归排序，再把两个已排好序的子序列合并成一个有序的序列。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">MergeSort</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> low<span class="token punctuation">,</span> <span class="token keyword">int</span> high<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -667,7 +680,8 @@
         <span class="token function">MergeSort</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> mid<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> high<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//对A[mid+1:high]中的元素合并排序</span>
         <span class="token function">Merge</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> low<span class="token punctuation">,</span> mid<span class="token punctuation">,</span> high<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//合并</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
 <p>完整代码：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 3-2</span>
@@ -715,28 +729,30 @@
     cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="算法复杂度分析：-1"><a href="#算法复杂度分析：-1" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h3><p><strong>时间复杂度：</strong></p>
+<h3 id="算法复杂度分析：-2">算法复杂度分析：</h3>
+<p><strong>时间复杂度：</strong></p>
 <ul>
 <li>分解：这一步仅仅是计算出子序列的中间位置，需要常数时间 O(1)。</li>
-<li>解决子问题：递归求解两个规模为 n&#x2F;2 的子问题，所需时间为 2T(n&#x2F;2)。</li>
+<li>解决子问题：递归求解两个规模为 n/2 的子问题，所需时间为 2T(n/2)。</li>
 <li>合并：Merge 算法可以在 O(n)的时间内完成。</li>
 </ul>
 <p>所以总运行时间为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023130510198.png" alt="image-20221023130510198"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023130510198.png" alt="image-20221023130510198"></p>
 <p>当 n&gt;1 时，可以递推求解：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023130523916.png" alt="image-20221023130523916"></p>
-<p>递推最终的规模为 1，令 n &#x3D; 2<sup>x</sup> ，则x &#x3D; logn ，那么</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023130559888.png" alt="image-20221023130559888"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023130523916.png" alt="image-20221023130523916"></p>
+<p>递推最终的规模为 1，令 n = 2<sup>x</sup> ，则x = logn ，那么</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023130559888.png" alt="image-20221023130559888"></p>
 <p>合并排序算法的时间复杂度为 O(nlogn)。</p>
 <p><strong>空间复杂度：</strong></p>
 <p>程序中变量占用了一些辅助空间，这些辅助空间都是常数阶的，每调用一个 Merge()，会分配一个适当大小的缓冲区，且退出时释放。最多分配大小为 n，所以空间复杂度为 O(n)。递归调用所使用的栈空间是O(logn)：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023130703054.png" alt="image-20221023130703054"></p>
-<p>递归调用时占用的栈空间是递归树的深度，  n &#x3D; 2<sup>x</sup> ，则 x &#x3D; logn ，递归树的深度为 logn。</p>
-<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><blockquote>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023130703054.png" alt="image-20221023130703054"></p>
+<p>递归调用时占用的栈空间是递归树的深度，  n = 2<sup>x</sup> ，则 x = logn ，递归树的深度为 logn。</p>
+<h2 id="快速排序">快速排序</h2>
+<blockquote>
 <p>它的基本思想是通过一组排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以<strong>递归</strong>进行，以此使所有数据变成有序序列。</p>
 </blockquote>
-<h3 id="算法设计：-2"><a href="#算法设计：-2" class="headerlink" title="算法设计："></a>算法设计：</h3><p>快速排序的基本思想是基于分治策略的，其算法思想如下。</p>
+<h3 id="算法设计：-3">算法设计：</h3>
+<p>快速排序的基本思想是基于分治策略的，其算法思想如下。</p>
 <ol>
 <li>分解：先从数列中取出一个元素作为基准元素。以基准元素为标准，将问题分解为两个子序列，使小于或等于基准元素的子序列在左侧，使大于基准元素的子序列在右侧。</li>
 <li>治理：对两个子序列进行快速排序。</li>
@@ -744,12 +760,15 @@
 </ol>
 <p>设当前待排序的序列为 R[low:high]，其中 low≤high，如果序列的规模足够小，则直接进行排序，否则分 3 步处理。</p>
 <ol>
-<li><p>分解：在 R[low: high]中选定一个元素 R[pivot]，以此为标准将要排序的序列划分为两个序列 R[low:pivot−1]和 R[pivot+1:high]，并使用序列 R[low:pivot−1]中所有元素的值小于等于 R[pivot]，序列 R[pivot+1:high]中所有元素均大于 R[pivot]，此时基准元素已经位于正确的位置，它无需参加后面的排序：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023225113169.png" alt="image-20221023225113169"></p>
+<li>
+<p>分解：在 R[low: high]中选定一个元素 R[pivot]，以此为标准将要排序的序列划分为两个序列 R[low:pivot−1]和 R[pivot+1:high]，并使用序列 R[low:pivot−1]中所有元素的值小于等于 R[pivot]，序列 R[pivot+1:high]中所有元素均大于 R[pivot]，此时基准元素已经位于正确的位置，它无需参加后面的排序：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023225113169.png" alt="image-20221023225113169"></p>
 </li>
-<li><p>治理：对于两个子序列 R[low:pivot−1]和 R[pivot+1:high]，分别通过递归调用快速排序算法来进行排序。</p>
+<li>
+<p>治理：对于两个子序列 R[low:pivot−1]和 R[pivot+1:high]，分别通过递归调用快速排序算法来进行排序。</p>
 </li>
-<li><p>合并：由于对 R[low:pivot−1]和 R[pivot+1:high]的排序是原地进行的，所以在R[low:pivot−1]和 R[pivot+1:high]都已经排好序后，合并步骤无需做什么，序列 R[low:high]就已经排好序了。</p>
+<li>
+<p>合并：由于对 R[low:pivot−1]和 R[pivot+1:high]的排序是原地进行的，所以在R[low:pivot−1]和 R[pivot+1:high]都已经排好序后，合并步骤无需做什么，序列 R[low:high]就已经排好序了。</p>
 </li>
 </ol>
 <blockquote>
@@ -763,9 +782,11 @@
 <li>取第一个、最后一个、中间位置元素三者之中位数。</li>
 <li>取第一个和最后一个之间位置的随机数 k（low≤k≤high），选 R[k]做基准元素。</li>
 </ul>
-<h3 id="代码实现：-2"><a href="#代码实现：-2" class="headerlink" title="代码实现："></a>代码实现：</h3><ol>
-<li><p>划分函数</p>
-<p>我们编写划分函数对原序列进行分解，分解为两个子序列，以基准元素 pivot 为界，左侧子序列都比 pivot 小，右侧子序列都比 pivot 大。先从右向左扫描，找小于等于 pivot 的数，找到后两者交换（r[i]和 r[j]交换后 i++）；再从左向右扫描，找比基准元素大的数，找到后两者交换（r[i]和 r[j]交换后 j−−）。扫描交替进行，直到 i&#x3D;j 停止，返回划分的中间位置 i。</p>
+<h3 id="代码实现：-3">代码实现：</h3>
+<ol>
+<li>
+<p>划分函数</p>
+<p>我们编写划分函数对原序列进行分解，分解为两个子序列，以基准元素 pivot 为界，左侧子序列都比 pivot 小，右侧子序列都比 pivot 大。先从右向左扫描，找小于等于 pivot 的数，找到后两者交换（r[i]和 r[j]交换后 i++）；再从左向右扫描，找比基准元素大的数，找到后两者交换（r[i]和 r[j]交换后 j−−）。扫描交替进行，直到 i=j 停止，返回划分的中间位置 i。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">Partition</span><span class="token punctuation">(</span><span class="token keyword">int</span> r<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token keyword">int</span> low<span class="token punctuation">,</span><span class="token keyword">int</span> high<span class="token punctuation">)</span><span class="token comment">//划分函数</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> i<span class="token operator">=</span>low<span class="token punctuation">,</span>j<span class="token operator">=</span>high<span class="token punctuation">,</span>pivot<span class="token operator">=</span>r<span class="token punctuation">[</span>low<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//基准元素</span>
@@ -785,7 +806,8 @@
     <span class="token keyword">return</span> i<span class="token punctuation">;</span><span class="token comment">//返回最终划分完成后基准元素所在的位置</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>快速排序递归算法</p>
+<li>
+<p>快速排序递归算法</p>
 <p>首先对原序列执行划分，得到划分的中间位置 mid，然后以中间位置为界，分别对左半部分（low，mid−1）执行快速排序，右半部分（mid+1，high）执行快速排序。递归结束的条件是 low≥high。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">QuickSort</span><span class="token punctuation">(</span><span class="token keyword">int</span> R<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token keyword">int</span> low<span class="token punctuation">,</span><span class="token keyword">int</span> high<span class="token punctuation">)</span><span class="token comment">//实现快排算法</span>
 <span class="token punctuation">&#123;</span>
@@ -799,7 +821,8 @@
         <span class="token function">QuickSort</span><span class="token punctuation">(</span>R<span class="token punctuation">,</span>low<span class="token punctuation">,</span>mid<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//左区间递归快排</span>
         <span class="token function">QuickSort</span><span class="token punctuation">(</span>R<span class="token punctuation">,</span>mid<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>high<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//右区间递归快排</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
 <p>完整代码：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 3-3</span>
@@ -855,39 +878,43 @@
     cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="算法复杂度分析：-2"><a href="#算法复杂度分析：-2" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h3><p><strong>最好时间复杂度：</strong></p>
+<h3 id="算法复杂度分析：-3">算法复杂度分析：</h3>
+<p><strong>最好时间复杂度：</strong></p>
 <ul>
 <li>分解：划分函数 Partition 需要扫描每个元素，每次扫描的元素个数不超过 n，因此时间复杂度为 O(n)。</li>
-<li>解决子问题：在最理想的情况下，每次划分将问题分解为两个规模为 n&#x2F;2 的子问题，递归求解两个规模为 n&#x2F;2 的子问题，所需时间为 2T(n&#x2F;2)。</li>
+<li>解决子问题：在最理想的情况下，每次划分将问题分解为两个规模为 n/2 的子问题，递归求解两个规模为 n/2 的子问题，所需时间为 2T(n/2)。</li>
 <li>合并：因为是原地排序，合并操作不需要时间复杂度。</li>
 </ul>
 <p>所以总运行时间为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023231955341.png" alt="image-20221023231955341"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023231955341.png" alt="image-20221023231955341"></p>
 <p>当 n&gt;1 时，可以递推求解：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023232011137.png" alt="image-20221023232011137"></p>
-<p>递推最终的规模为 1，令 n &#x3D; 2<sup>x</sup>，则x &#x3D; logn，则快速排序算法最好的时间复杂度为 O(nlogn)。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023232011137.png" alt="image-20221023232011137"></p>
+<p>递推最终的规模为 1，令 n = 2<sup>x</sup>，则x = logn，则快速排序算法最好的时间复杂度为 O(nlogn)。</p>
 <p><strong>空间复杂度：</strong></p>
 <p>程序中变量占用了一些辅助空间，这些辅助空间都是常数阶的，递归调用所使用的栈空间是 O(logn)。</p>
 <p><strong>最坏时间复杂度：</strong></p>
 <ul>
-<li><p>分解：划分函数 Partition 需要扫描每个元素，每次扫描的元素个数不超过 n，因此时间复杂度为 O(n)。</p>
+<li>
+<p>分解：划分函数 Partition 需要扫描每个元素，每次扫描的元素个数不超过 n，因此时间复杂度为 O(n)。</p>
 </li>
-<li><p>解决子问题：在最坏的情况下，每次划分将问题分解后，基准元素的左侧（或者右侧）没有元素，基准元素的另一侧为 1 个规模为 n−1 的子问题，递归求解这个规模为 n−1 的子问题，所需时间为 T(n−1)。</p>
+<li>
+<p>解决子问题：在最坏的情况下，每次划分将问题分解后，基准元素的左侧（或者右侧）没有元素，基准元素的另一侧为 1 个规模为 n−1 的子问题，递归求解这个规模为 n−1 的子问题，所需时间为 T(n−1)。</p>
 </li>
-<li><p>合并：因为是原地排序，合并操作不需要时间复杂度。</p>
+<li>
+<p>合并：因为是原地排序，合并操作不需要时间复杂度。</p>
 <p>所以总运行时间为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023233135333.png" alt="image-20221023233135333"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023233135333.png" alt="image-20221023233135333"></p>
 <p>当 n&gt;1 时，可以递推求解如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023233158324.png" alt="image-20221023233158324"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023233158324.png" alt="image-20221023233158324"></p>
 <p>快速排序算法最坏的时间复杂度为 O(n<sup>2</sup> )。</p>
 </li>
 </ul>
 <p><strong>平均时间复杂度：</strong></p>
-<p>假设我们划分后基准元素的位置在第 k（k&#x3D;1，2，…，n）个，则：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221023233714369.png" alt="image-20221023233714369"></p>
+<p>假设我们划分后基准元素的位置在第 k（k=1，2，…，n）个，则：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221023233714369.png" alt="image-20221023233714369"></p>
 <p>由归纳法可以得出，T(n)的数量级也为 O(nlogn)。快速排序算法平均情况下，时间复杂度为 O(nlogn)，递归调用所使用的栈空间也是 O(logn)。</p>
-<h3 id="优化拓展：-1"><a href="#优化拓展：-1" class="headerlink" title="优化拓展："></a>优化拓展：</h3><p>从上述算法可以看出，每次交换都是在和基准元素进行交换，实际上没必要这样做，我们的目的就是想把原序列分成以基准元素为界的两个子序列，左侧子序列小于等于基准元素，右侧子序列大于基准元素。</p>
+<h3 id="优化拓展：-2">优化拓展：</h3>
+<p>从上述算法可以看出，每次交换都是在和基准元素进行交换，实际上没必要这样做，我们的目的就是想把原序列分成以基准元素为界的两个子序列，左侧子序列小于等于基准元素，右侧子序列大于基准元素。</p>
 <p>那么有很多方法可以实现，我们可以从右向左扫描，找小于等于 pivot 的数 R[j]，然后从左向右扫描，找大于 pivot 的数 R[i]，让 R[i]和 R[j]交换，一直交替进行，直到 i 和 j 碰头为止，这时将基准元素与 R[i]交换即可。这样就完成了一次划分过程，但交换元素的个数少了很多。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">Partition2</span><span class="token punctuation">(</span><span class="token keyword">int</span> r<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token keyword">int</span> low<span class="token punctuation">,</span><span class="token keyword">int</span> high<span class="token punctuation">)</span><span class="token comment">//划分函数</span>
 <span class="token punctuation">&#123;</span>
@@ -909,42 +936,50 @@
     <span class="token function">swap</span><span class="token punctuation">(</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>r<span class="token punctuation">[</span>low<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//r[i]和r[low]交换</span>
     <span class="token keyword">return</span> i<span class="token punctuation">;</span><span class="token comment">//返回最终划分完成后基准元素所在的位置</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="大整数乘法"><a href="#大整数乘法" class="headerlink" title="大整数乘法"></a>大整数乘法</h2><blockquote>
+<h2 id="大整数乘法">大整数乘法</h2>
+<blockquote>
 <p>在解决两个大的整数相乘时，我们可以将一个大的整数乘法分而治之，将大问题变成小问题，变成简单的小数乘法再进行合并。</p>
 </blockquote>
-<h3 id="算法分析："><a href="#算法分析：" class="headerlink" title="算法分析："></a>算法分析：</h3><ul>
-<li><p>分解：首先将 2 个大整数 a（n 位）、b（m 位）分解为两部分：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025105405840.png" alt="image-20221025105405840"></p>
+<h3 id="算法分析：">算法分析：</h3>
+<ul>
+<li>
+<p>分解：首先将 2 个大整数 a（n 位）、b（m 位）分解为两部分：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025105405840.png" alt="image-20221025105405840"></p>
 <p>ah 表示大整数 a 的高位，al 表示大整数 a 的低位。bh 表示大整数 b 的高位，bl 表示大整数 b 的低位。</p>
 <p>2 个大整数 a（n 位）、b（m 位）相乘转换成了 4 个乘法运算 *ah bh、 *ah bl、 *al bh、 *al bl ，而<strong>乘数的位数变为了原来的一半</strong>。</p>
 </li>
-<li><p>求解子问题</p>
+<li>
+<p>求解子问题</p>
 <p>继续分解每个乘法运算，直到分解有一个乘数为 1 位数时停止分解，进行乘法运算并记录结果。</p>
 </li>
-<li><p>合并</p>
+<li>
+<p>合并</p>
 <p>将计算出的结果相加并回溯，求出最终结果。</p>
 </li>
 </ul>
 <p>具体如何处理呢？</p>
 <ol>
-<li><p>首先将两个大数以字符串的形式输入，转换成数字后，<strong>倒序存储</strong>在数组 s[]中，l 用来表示数的长度，c 表示次幂。两个大数的初始次幂为 0。</p>
+<li>
+<p>首先将两个大数以字符串的形式输入，转换成数字后，<strong>倒序存储</strong>在数组 s[]中，l 用来表示数的长度，c 表示次幂。两个大数的初始次幂为 0。</p>
 <blockquote>
 <p>倒序存储的原因——因为乘法加法运算中有可能产生进位，倒序存储时可以让进位存储在数组的末尾</p>
 </blockquote>
 <ul>
-<li>cp()函数：用于将一个 n 位的数分成两个 n&#x2F;2 的数并存储，记录它的长度和次幂。</li>
+<li>cp()函数：用于将一个 n 位的数分成两个 n/2 的数并存储，记录它的长度和次幂。</li>
 <li>mul()函数：用于将两个数进行相乘，不断地进行分解，直到有一个乘数为 1 位数时停止分解，进行乘法运算并记录结果。</li>
 <li>add()函数：将分解得到的数进行相加合并。</li>
 </ul>
 </li>
-<li><p>乘法运算：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025110347497.png" alt="image-20221025110347497"></p>
-<p>3 首先和 1 相乘得到 3 存储在下面数组的第 0 位；然后 3 和 4 相乘得到 12，先存储先存储 12%10&#x3D;2，然后存储进位 12&#x2F;10&#x3D;1，这样乘法运算的结果是 321，<strong>注意是倒序</strong>，实际含义是 3×41&#x3D;123；两数相乘时，结果的次幂是两个乘数次幂之和，3×10<sup>3</sup> ×41×10<sup>3</sup> &#x3D;123×10<sup>6</sup>。</p>
+<li>
+<p>乘法运算：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025110347497.png" alt="image-20221025110347497"></p>
+<p>3 首先和 1 相乘得到 3 存储在下面数组的第 0 位；然后 3 和 4 相乘得到 12，先存储先存储 12%10=2，然后存储进位 12/10=1，这样乘法运算的结果是 321，<strong>注意是倒序</strong>，实际含义是 3×41=123；两数相乘时，结果的次幂是两个乘数次幂之和，3×10<sup>3</sup> ×41×10<sup>3</sup> =123×10<sup>6</sup>。</p>
 </li>
 </ol>
-<h3 id="代码实现：-3"><a href="#代码实现：-3" class="headerlink" title="代码实现："></a>代码实现：</h3><ol>
-<li><p>数据结构</p>
+<h3 id="代码实现：-4">代码实现：</h3>
+<ol>
+<li>
+<p>数据结构</p>
 <p>将两个大数以字符串的形式输入，然后定义结构体 Node，其中 s[]数组用于存储大数，注意是倒序存储！l 用于表示长度，c 表示次幂。两个大数的初始次幂为 0。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
@@ -963,8 +998,9 @@
     <span class="token keyword">int</span> c<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span> Node<span class="token punctuation">,</span><span class="token operator">*</span>pNode<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>划分函数</p>
-<p>其中，cp()函数用于将一个 n 位的数分成两个 n&#x2F;2 的数并存储，记录它的次幂。</p>
+<li>
+<p>划分函数</p>
+<p>其中，cp()函数用于将一个 n 位的数分成两个 n/2 的数并存储，记录它的次幂。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">cp</span><span class="token punctuation">(</span>pNode src<span class="token punctuation">,</span> pNode des<span class="token punctuation">,</span> <span class="token keyword">int</span> st<span class="token punctuation">,</span> <span class="token keyword">int</span> l<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token comment">//src 表示待分解的数结点，des 表示分解后得到的数结点</span>
@@ -979,7 +1015,8 @@
 
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>乘法运算</p>
+<li>
+<p>乘法运算</p>
 <p>定义的 mul()函数用于将两个数进行相乘，不断地进行分解，<strong>直到有一个乘数为 1 位时停止</strong>，让这两个数相乘，并记录结果回溯。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">mul</span><span class="token punctuation">(</span>pNode pa<span class="token punctuation">,</span> pNode pb<span class="token punctuation">,</span> pNode ans<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -1028,7 +1065,8 @@
     <span class="token function">add</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>z<span class="token punctuation">,</span> ans<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>合并函数</p>
+<li>
+<p>合并函数</p>
 <p>add()函数将分解得到的数进行相加合并。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span>pNode pa<span class="token punctuation">,</span> pNode pb<span class="token punctuation">,</span> pNode ans<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -1068,7 +1106,8 @@
     <span class="token keyword">if</span><span class="token punctuation">(</span>cc<span class="token punctuation">)</span>
         ans<span class="token operator">-></span>s<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> cc<span class="token punctuation">;</span>
     ans<span class="token operator">-></span>l <span class="token operator">=</span> i<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
 <p>完整代码：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//program 3-4</span>
@@ -1217,30 +1256,32 @@ X*Y = A*C*10^(n+m) + A*D*10^n + B*C*10^m + B*D
     cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="算法复杂度分析：-3"><a href="#算法复杂度分析：-3" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h3><p><strong>时间复杂度：</strong></p>
+<h3 id="算法复杂度分析：-4">算法复杂度分析：</h3>
+<p><strong>时间复杂度：</strong></p>
 <p>我们假设大整数 a、b 都是 n 位数，根据分治策略， ab 相乘将转换成了 4 个乘法运算ah×bh、ah×bl、al×bh、al×bl，而<strong>乘数的位数变为了原来的一半</strong>。直到最后递归分解到其中一个乘数为 1 位为止，每次递归就会使数据规模减小为原来的一半。假设两个 n 位大整数相乘的时间复杂度为 T(n)，则：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025113307465.png" alt="image-20221025113307465"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025113307465.png" alt="image-20221025113307465"></p>
 <p>当 n&gt;1 时，可以递推求解如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025113650106.png" alt="image-20221025113650106"></p>
-<p>递推最终的规模为 1，令 n &#x3D; 2<sup>x</sup> 则x &#x3D; logn，所以大整数乘法的时间复杂度为O(n<sup>2</sup>)</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025113650106.png" alt="image-20221025113650106"></p>
+<p>递推最终的规模为 1，令 n = 2<sup>x</sup> 则x = logn，所以大整数乘法的时间复杂度为O(n<sup>2</sup>)</p>
 <p><strong>空间复杂度：</strong></p>
 <p>程序中变量占用了一些辅助空间，都是常数阶的，但合并时结点数组占用的辅助空间为 O(n)，递归调用所使用的栈空间是 O(logn)，大整数乘法的空间复杂度为O(n<sup>2</sup>)</p>
-<h3 id="优化拓展：-2"><a href="#优化拓展：-2" class="headerlink" title="优化拓展："></a>优化拓展：</h3><p>如果两个大整数都是 n 位数，那么有：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025114210441.png" alt="image-20221025114210441"></p>
+<h3 id="优化拓展：-3">优化拓展：</h3>
+<p>如果两个大整数都是 n 位数，那么有：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025114210441.png" alt="image-20221025114210441"></p>
 <p>还记得快速算出 1+2+3+…+100 的小高斯吗？这孩子长大以后更聪明，他把 4 次乘法运算变成了 3 次乘法：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025114312929.png" alt="image-20221025114312929"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025114312929.png" alt="image-20221025114312929"></p>
 <p>这样公式中，只需要进行 3 次乘法。</p>
 <p>那么时间复杂度为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025114401541.png" alt="image-20221025114401541"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025114401541.png" alt="image-20221025114401541"></p>
 <p>当 n&gt;1 时，可以递推求解如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025114416856.png" alt="image-20221025114416856"></p>
-<p>递推最终的规模为 1，令 n &#x3D; 2<sup>x</sup> ，则 x &#x3D; logn，那么有：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025114522459.png" alt="image-20221025114522459"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025114416856.png" alt="image-20221025114416856"></p>
+<p>递推最终的规模为 1，令 n = 2<sup>x</sup> ，则 x = logn，那么有：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025114522459.png" alt="image-20221025114522459"></p>
 <p>优化改进后的大整数乘法的时间复杂度从 O(n2 )降为 O(n1.59 )，这是一个巨大的改进！</p>
 <p>但是需要注意：在上面的公式中，A 和 B 必须 2<sup>n</sup> 位。很容易证明，如果不为 2<sup>n</sup>，那么 A或者 B 在分解过程中必会出现奇数，那么 a<em>c 和（（a−b）（d−c）+a</em>c+b*d）的次幂就有可能不同，无法变为 3 次乘法了，解决方法也很简单，只需要补齐位数即可，在数前（高位）补 0。</p>
-<h2 id="分治算法复杂度求解秘籍"><a href="#分治算法复杂度求解秘籍" class="headerlink" title="分治算法复杂度求解秘籍"></a>分治算法复杂度求解秘籍</h2><p>分治法的道理非常简单，就是把一个大的复杂问题分为 a（a&gt;1）个形式相同的子问题，这些子问题的规模为 n&#x2F;b，如果分解或者合并的复杂度为 f(n)，那么总的时间复杂度可以表示为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/23/suan-fa-ru-men-fen-zhi-fa/image-20221025114832010.png" alt="image-20221025114832010"></p>
+<h2 id="分治算法复杂度求解秘籍">分治算法复杂度求解秘籍</h2>
+<p>分治法的道理非常简单，就是把一个大的复杂问题分为 a（a&gt;1）个形式相同的子问题，这些子问题的规模为 n/b，如果分解或者合并的复杂度为 f(n)，那么总的时间复杂度可以表示为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221025114832010.png" alt="image-20221025114832010"></p>
 <p>上面的求解方式都是递推求解，写出其递推式，最后求出结果。</p>
 
                 

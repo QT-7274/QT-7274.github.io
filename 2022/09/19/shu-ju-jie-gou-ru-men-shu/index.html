@@ -473,7 +473,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    39 分
+                    38 分
                 </div>
                 
 
@@ -496,9 +496,11 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><h3 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h3><p>可以从集合论和图论两个角度定义树。本章从集合论的角度递归定义树，后续将从图论的角度再次定义树，读者可以体会两种定义的不同之处。</p>
+                <h2 id="树">树</h2>
+<h3 id="树的定义">树的定义</h3>
+<p>可以从集合论和图论两个角度定义树。本章从集合论的角度递归定义树，后续将从图论的角度再次定义树，读者可以体会两种定义的不同之处。</p>
 <blockquote>
-<p>树（tree）是 n（n≥0）个节点的有限集合，当 n&#x3D;0 时，为空树；n&gt;0 时，为非空树。</p>
+<p>树（tree）是 n（n≥0）个节点的有限集合，当 n=0 时，为空树；n&gt;0 时，为非空树。</p>
 </blockquote>
 <p>任意一棵非空树，满足以下两个条件：</p>
 <ol>
@@ -507,67 +509,91 @@
 </ol>
 <p>与树相关的术语：</p>
 <ul>
-<li><p><strong>节点</strong>——节点包含数据元素及若干指向子树的分支信息。</p>
+<li>
+<p><strong>节点</strong>——节点包含数据元素及若干指向子树的分支信息。</p>
 </li>
-<li><p><strong>节点的度</strong>——节点拥有的子树个数。</p>
+<li>
+<p><strong>节点的度</strong>——节点拥有的子树个数。</p>
 </li>
-<li><p><strong>树的度</strong>——树中节点的最大度数。</p>
+<li>
+<p><strong>树的度</strong>——树中节点的最大度数。</p>
 </li>
-<li><p><strong>终端节点</strong>——度为 0 的节点，又称为叶子。</p>
+<li>
+<p><strong>终端节点</strong>——度为 0 的节点，又称为叶子。</p>
 </li>
-<li><p><strong>分支节点</strong>——度大于 0 的节点。除了叶子都是分支节点。</p>
+<li>
+<p><strong>分支节点</strong>——度大于 0 的节点。除了叶子都是分支节点。</p>
 </li>
-<li><p><strong>内部节点</strong>——除了树根和叶子都是内部节点。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220919154441720.png" alt="image-20220919154441720"></p>
+<li>
+<p><strong>内部节点</strong>——除了树根和叶子都是内部节点。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220919154441720.png" alt="image-20220919154441720"></p>
 </li>
-<li><p><strong>节点的层次</strong>——从根到该节点的层数（根节点为第 1 层）。</p>
+<li>
+<p><strong>节点的层次</strong>——从根到该节点的层数（根节点为第 1 层）。</p>
 </li>
-<li><p><strong>树的深度（或高度）</strong>——指所有节点中最大的层数。例如，一棵树如图所示，根为第 1 层，根的子节点为第 2 层……该树的最大层次为 4，因此树的深度为 4。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220919160646531.png" alt="image-20220919160646531"></p>
+<li>
+<p><strong>树的深度（或高度）</strong>——指所有节点中最大的层数。例如，一棵树如图所示，根为第 1 层，根的子节点为第 2 层…该树的最大层次为 4，因此树的深度为 4。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220919160646531.png" alt="image-20220919160646531"></p>
 </li>
-<li><p><strong>路径</strong>——树中两个节点之间所经过的节点序列。</p>
+<li>
+<p><strong>路径</strong>——树中两个节点之间所经过的节点序列。</p>
 </li>
-<li><p><strong>路径长度</strong>——两节点之间路径上经过的边数。例如，一棵树如图所示，D 到 A的路径为 D—B—A，D 到 A 的路径长度为 2。由于树中没有环，因此树中任意两个节点之间的路径都是唯一的。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220919160705691.png" alt="image-20220919160705691"></p>
+<li>
+<p><strong>路径长度</strong>——两节点之间路径上经过的边数。例如，一棵树如图所示，D 到 A的路径为 D—B—A，D 到 A 的路径长度为 2。由于树中没有环，因此树中任意两个节点之间的路径都是唯一的。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220919160705691.png" alt="image-20220919160705691"></p>
 </li>
-<li><p><strong>双亲、孩子</strong>——节点的子树的根称为该节点的孩子，反之，该节点为其孩子的双亲。</p>
+<li>
+<p><strong>双亲、孩子</strong>——节点的子树的根称为该节点的孩子，反之，该节点为其孩子的双亲。</p>
 </li>
-<li><p><strong>兄弟</strong>——双亲相同的节点互称兄弟。</p>
+<li>
+<p><strong>兄弟</strong>——双亲相同的节点互称兄弟。</p>
 </li>
-<li><p><strong>堂兄弟</strong>——双亲是兄弟的节点互称堂兄弟。</p>
+<li>
+<p><strong>堂兄弟</strong>——双亲是兄弟的节点互称堂兄弟。</p>
 </li>
-<li><p><strong>祖先</strong>——从该节点到树根经过的所有节点称为该节点的祖先。</p>
+<li>
+<p><strong>祖先</strong>——从该节点到树根经过的所有节点称为该节点的祖先。</p>
 </li>
-<li><p><strong>子孙</strong>——节点的子树中的所有节点都称为该节点的子孙。</p>
+<li>
+<p><strong>子孙</strong>——节点的子树中的所有节点都称为该节点的子孙。</p>
 </li>
-<li><p><strong>有序树</strong>——节点的各子树从左至右有序，不能互换位置。</p>
+<li>
+<p><strong>有序树</strong>——节点的各子树从左至右有序，不能互换位置。</p>
 </li>
-<li><p><strong>无序树</strong>——节点各子树可互换位置。</p>
+<li>
+<p><strong>无序树</strong>——节点各子树可互换位置。</p>
 </li>
-<li><p><strong>森林</strong>——由 m（m≥0）棵不相交的树组成的集合。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220919160717545.png" alt="image-20220919160717545"></p>
+<li>
+<p><strong>森林</strong>——由 m（m≥0）棵不相交的树组成的集合。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220919160717545.png" alt="image-20220919160717545"></p>
 </li>
 </ul>
-<h3 id="树的存储结构"><a href="#树的存储结构" class="headerlink" title="树的存储结构"></a>树的存储结构</h3><h4 id="顺序存储"><a href="#顺序存储" class="headerlink" title="顺序存储"></a>顺序存储</h4><p>顺序存储采用一段连续的存储空间，因为树中节点的数据关系是一对多的逻辑关系，不仅要存储数据元素，<strong>还要存储它们之间的逻辑关系</strong>。</p>
+<h3 id="树的存储结构">树的存储结构</h3>
+<h4 id="顺序存储">顺序存储</h4>
+<p>顺序存储采用一段连续的存储空间，因为树中节点的数据关系是一对多的逻辑关系，不仅要存储数据元素，<strong>还要存储它们之间的逻辑关系</strong>。</p>
 <p>以下图为例，讲述三种顺序存储方法：双亲表示法、孩子表示法和双亲孩子表示法。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220919161018120.png" alt="image-20220919161018120"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220919161018120.png" alt="image-20220919161018120"></p>
 <ol>
-<li><p><strong>双亲表示法</strong></p>
+<li>
+<p><strong>双亲表示法</strong></p>
 <blockquote>
 <p>双亲表示法，除了存储数据元素之外，还存储其双亲节点的存储位置下标，其中“−1”表示不存在。</p>
 </blockquote>
 <p>每一个节点有两个域，即数据域 data 和双亲域 parent：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220919170529719.png" alt="image-20220919170529719"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220919170529719.png" alt="image-20220919170529719"></p>
 <p>树根 A 没有双亲，双亲记为−1，B、C、D 的双亲为 A，而 A 的存储位置下标为 0，因此，B、C、D 的双亲记为 0。同样，E、F 的双亲为 B，而 B 的存储位置下标为 1，因此，E、F 的双亲记为 1。同理，其他节点也这样存储。</p>
 </li>
-<li><p><strong>孩子表示法</strong></p>
+<li>
+<p><strong>孩子表示法</strong></p>
 <p>孩子表示法是指除了存储数据元素之外，还存储其所有孩子的存储位置下标。</p>
 <p>A 有 3 个孩子 B、C 和 D，而 B、C 和 D 的存储位置下标为 1、2 和 3，因此将 1、2 和 3 存入 A 的孩子域。同样，B 有 2 个孩子 E 和 F，而 E 和 F 的存储位置下标为 4 和 5，因此，将 4 和 5 存入 B 的孩子域。因为本题中每个节点都分配了 3 个孩子域（想一想，为什么？–树的度即节点的最大度为3），B 只有两个孩子，另一个孩子域记为−1，表示不存在。同理，其他节点也这样存储。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920112818666.png" alt="image-20220920112818666"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920112818666.png" alt="image-20220920112818666"></p>
 </li>
-<li><p><strong>双亲孩子表示法</strong></p>
-<p>双亲孩子表示法是指除了存储数据元素之外，还存储其双亲和所有孩子的存储位置下标。此方法其实就是在孩子表示法的基础上增加了一个双亲域，其他<br>的都和孩子表示法相同，是双亲表示法和孩子表示法的结合体。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920112949426.png" alt="image-20220920112949426"></p>
+<li>
+<p><strong>双亲孩子表示法</strong></p>
+<p>双亲孩子表示法是指除了存储数据元素之外，还存储其双亲和所有孩子的存储位置下标。此方法其实就是在孩子表示法的基础上增加了一个双亲域，其他<br>
+的都和孩子表示法相同，是双亲表示法和孩子表示法的结合体。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920112949426.png" alt="image-20220920112949426"></p>
 </li>
 </ol>
 <p><strong>三种方法的优缺点：</strong></p>
@@ -576,51 +602,58 @@
 <li>孩子表示法可以得到该节点的孩子，但是无法直接得到该节点的双亲，而且由于不知道每个节点到底有多少个孩子，因此只能按照树的度（树中节点的最大度）分配孩子空间，这样做可能会浪费很多空间。</li>
 <li>双亲孩子表示法是在孩子表示法的基础上，增加了一个双亲域，可以快速得到节点的双亲和孩子，其缺点和孩子表示法一样，可能浪费很多空间。</li>
 </ul>
-<h4 id="链式存储"><a href="#链式存储" class="headerlink" title="链式存储"></a>链式存储</h4><p>由于树中每个节点的孩子数量无法确定，因此在使用链式存储时，<strong>孩子指针域不确定分配多少个合适</strong>。</p>
+<h4 id="链式存储">链式存储</h4>
+<p>由于树中每个节点的孩子数量无法确定，因此在使用链式存储时，<strong>孩子指针域不确定分配多少个合适</strong>。</p>
 <p>如果采用“异构型”数据结构，每个节点的指针域个数按照节点的孩子数分配，则数据结构描述困难；如果采用每个节点都分配固定个数（如树的度）的指针域，则浪费很多空间。</p>
 <blockquote>
 <p>一种是采用<strong>邻接表</strong>的思路，将节点的所有孩子存储在一个单链表中，称为<strong>孩子链表表示法</strong>；</p>
 <p>一种是采用<strong>二叉链表</strong>的思路，左指针存储第一个孩子，右指针存储右兄弟，称为<strong>孩子兄弟表示法</strong>。</p>
 </blockquote>
 <ol>
-<li><p>孩子链表表示法</p>
+<li>
+<p>孩子链表表示法</p>
 <p>孩子链表表示法类似于邻接表，表头包含数据元素并指向第一个孩子指针，将所有孩子放入一个单链表中。</p>
 <blockquote>
 <p>在表头中，<code>data</code> 存储数据元素，<code>first</code> 为指向第 1 个孩子的指针。单链表中的节点记录<strong>该节点的下标和下一个节点的地址</strong>。</p>
 </blockquote>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920120139111.png" alt="image-20220920120139111"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920120139111.png" alt="image-20220920120139111"></p>
 <p>孩子链表表示法中，如果在表头中再增加一个双亲域 parent，则为双亲孩子链表表示法。</p>
 </li>
-<li><p>孩子兄弟表示法</p>
+<li>
+<p>孩子兄弟表示法</p>
 <blockquote>
 <p>节点除了存储数据元素之外，还有两个指针域 lchild 和 rchild，被称为二叉链表。lchild 存储第一个孩子地址，rchild 存储右兄弟地址。</p>
 </blockquote>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920121102928.png" alt="image-20220920121102928"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920121208519.png" alt="image-20220920121208519"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920121102928.png" alt="image-20220920121102928"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920121208519.png" alt="image-20220920121208519"></p>
 <blockquote>
 <p>孩子兄弟表示法的<strong>秘诀</strong>：<strong>长子当作左孩子，兄弟关系向右斜。</strong></p>
 </blockquote>
 </li>
 </ol>
-<h3 id="树、森林和二叉树的转换"><a href="#树、森林和二叉树的转换" class="headerlink" title="树、森林和二叉树的转换"></a>树、森林和二叉树的转换</h3><ol>
-<li><p><strong>树和二叉树的转换</strong></p>
+<h3 id="树、森林和二叉树的转换">树、森林和二叉树的转换</h3>
+<ol>
+<li>
+<p><strong>树和二叉树的转换</strong></p>
 <p>根据树转换为二叉链表的秘诀，可以把任何一棵树转换为二叉树：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920152155413.png" alt="image-20220920152155413"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920152319975.png" alt="image-20220920152319975"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920152155413.png" alt="image-20220920152155413"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920152319975.png" alt="image-20220920152319975"></p>
 </li>
-<li><p><strong>森林和二叉树的转换</strong></p>
+<li>
+<p><strong>森林和二叉树的转换</strong></p>
 <p>森林是由 m（m≥0）棵不相交的树组成的集合。</p>
 <p>可以把森林中的每棵树的树根看作兄弟关系，因此 3 棵树的树根 B、C 和 D 是兄弟，兄弟关系在右斜线上，其他的转换和树转二叉树一样，<strong>长子当作左孩子</strong>，<strong>兄弟关系向右斜</strong>。</p>
 <p>或者把森林中的每一棵树转换成二叉树，然后把每棵树的根节点连接在右斜线上即可。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920152500257.png" alt="image-20220920152500257"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920152500257.png" alt="image-20220920152500257"></p>
 </li>
 </ol>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920152559528.png" alt="image-20220920152559528"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920152559528.png" alt="image-20220920152559528"></p>
 <blockquote>
 <p>由于普通的树每个节点的子树个数不同，存储和运算都比较困难，因此在实际应用中，可以将树或森林转换为二叉树，然后进行存储和运算。</p>
 <p>二者存在唯一的对关系，因此不影响其结果。</p>
 </blockquote>
-<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><p>二叉树（binary tree）是 n（n≥0）个节点构成的集合，它或为空树（n&#x3D;0），或满足以下两个条件：</p>
+<h2 id="二叉树">二叉树</h2>
+<p>二叉树（binary tree）是 n（n≥0）个节点构成的集合，它或为空树（n=0），或满足以下两个条件：</p>
 <ol>
 <li><strong>有且仅有一个称为根的节点</strong>；</li>
 <li>除根节点以外，其余节点分为两个互不相交的子集 T1 和 T2，分别称为 T 的<strong>左子树</strong>和<strong>右子树</strong>，且 T1 和 T2 本身都是二叉树。</li>
@@ -630,35 +663,38 @@
 <p><strong>也就是说，二叉树中不存在度大于 2 的节点。</strong></p>
 </blockquote>
 <p>二叉树一共有 5 种形态：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920153010650.png" alt="image-20220920153010650"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920153010650.png" alt="image-20220920153010650"></p>
 <p>二叉树的结构最简单，规律性最强，因此通常被作为重点讲解。</p>
-<h3 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h3><blockquote>
+<h3 id="二叉树的性质">二叉树的性质</h3>
+<blockquote>
 <p><strong>性质 1：在二叉树的第 i 层上至多有 2<sup>(i−1)</sup>个节点。</strong></p>
 </blockquote>
 <p>因为上一层的每个节点最多有两个孩子，因此当前层最多是上一层节点数的 2 倍：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920154158302.png" alt="image-20220920154158302"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920154158302.png" alt="image-20220920154158302"></p>
 <blockquote>
 <p><strong>性质 2：深度为 k 的二叉树至多有 2<sup>k</sup>−1 个节点。</strong></p>
 </blockquote>
 <p>把每层的节点数加起来就是整棵二叉树的最大节点数:</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920154419331.png" alt="image-20220920154419331"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920154419331.png" alt="image-20220920154419331"></p>
 <blockquote>
-<p><strong>性质 3：对于任何一棵二叉树，若叶子数为 n<sub>0</sub>，度为 2 的节点数为 n<sub>2</sub>，则 n<sub>0</sub>&#x3D;n<sub>2</sub>+1。</strong></p>
+<p><strong>性质 3：对于任何一棵二叉树，若叶子数为 n<sub>0</sub>，度为 2 的节点数为 n<sub>2</sub>，则 n<sub>0</sub>=n<sub>2</sub>+1。</strong></p>
 </blockquote>
-<p><strong>证明：</strong>二叉树中的节点度数不超过 2，因此一共有 3 种节点，即度为 0、度为 1、度为 2。设二叉树总的节点数为 n，度为 0 的节点数为 n<sub>0</sub>，度为 1 的节点数为 n<sub>1</sub>，度为 2 的节点数为n<sub>2</sub>，总节点数等于 3 种节点数之和，即 n&#x3D;n<sub>0</sub> +n<sub>1</sub> +n<sub>2</sub>。</p>
-<p>而总节点数又等于“<strong>分支数 b+1</strong>”，即 n&#x3D;b+1。为什么呢？</p>
+<p>**证明：**二叉树中的节点度数不超过 2，因此一共有 3 种节点，即度为 0、度为 1、度为 2。设二叉树总的节点数为 n，度为 0 的节点数为 n<sub>0</sub>，度为 1 的节点数为 n<sub>1</sub>，度为 2 的节点数为n<sub>2</sub>，总节点数等于 3 种节点数之和，即 n=n<sub>0</sub> +n<sub>1</sub> +n<sub>2</sub>。</p>
+<p>而总节点数又等于“<strong>分支数 b+1</strong>”，即 n=b+1。为什么呢？</p>
 <p>从下向上看，每一个节点对应一个分支，<strong>只有树根没有对应分支</strong>，因此总的节点数为“分支数 b+1”：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920161555719.png" alt="image-20220920161555719"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920161555719.png" alt="image-20220920161555719"></p>
 <p>而分支数 b 怎么计算呢？</p>
-<p>从上向下看，每个度为 2 的节点产生 2 个分支，度为 1 的节点产生 1个分支，度为 0 的节点没有分支，因此分支数 b&#x3D;n<sub>1</sub> +2n<sub>2</sub>，则 n&#x3D;b+1&#x3D;n<sub>1</sub>+2n<sub>2</sub> +1。而前面已经得到 n&#x3D;n<sub>0</sub> +n<sub>1</sub> +n<sub>2</sub>，两式联合得：n<sub>0</sub> &#x3D;n<sub>2</sub> +1。</p>
+<p>从上向下看，每个度为 2 的节点产生 2 个分支，度为 1 的节点产生 1个分支，度为 0 的节点没有分支，因此分支数 b=n<sub>1</sub> +2n<sub>2</sub>，则 n=b+1=n<sub>1</sub>+2n<sub>2</sub> +1。而前面已经得到 n=n<sub>0</sub> +n<sub>1</sub> +n<sub>2</sub>，两式联合得：n<sub>0</sub> =n<sub>2</sub> +1。</p>
 <p>有两种比较特殊的二叉树：满二叉树和完全二叉树。</p>
 <ul>
-<li><p><strong>满二叉树</strong>：一棵深度为 k 且有 2<sup>k</sup> −1 个节点的二叉树。满二叉树每一层都“充满”了节点，达到最大节点数。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920162104772.png" alt="image-20220920162104772"></p>
+<li>
+<p><strong>满二叉树</strong>：一棵深度为 k 且有 2<sup>k</sup> −1 个节点的二叉树。满二叉树每一层都“充满”了节点，达到最大节点数。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920162104772.png" alt="image-20220920162104772"></p>
 </li>
-<li><p><strong>完全二叉树：</strong>除了最后一层外，每一层都是满的（达到最大节点数），最后一层节点是从左向右出现的（必须从左向右排列）。</p>
+<li>
+<p>**完全二叉树：**除了最后一层外，每一层都是满的（达到最大节点数），最后一层节点是从左向右出现的（必须从左向右排列）。</p>
 <p>深度为 k 的完全二叉树，当且仅当其每一个节点都与深度为 k 的满二叉树中编号 1～n 的节点<strong>一一对应</strong>。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920162233489.png" alt="image-20220920162233489"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920162233489.png" alt="image-20220920162233489"></p>
 <blockquote>
 <p>也就是说，如果 2 没有左孩子，就不可以有右孩子；如果 2 没有右孩子，3 不可以有左孩子。</p>
 </blockquote>
@@ -668,40 +704,45 @@
 <p><strong>性质 4：具有 n 个节点的完全二叉树的深度必为⎣log<sub>2</sub>n⎦ +1。</strong></p>
 </blockquote>
 <p>证明：假设完全二叉树的深度为 k，那么除了最后一层外，前 k−1 层都是满的，最后一层最少有一个节点，最后一层最多也可以充满节点，即 2<sup>k−1 </sup>个节点：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920163644646.png" alt="image-20220920163644646"></p>
-<p>因此，2<sup>k−1</sup>≤n≤2<sup>k</sup>−1，右边放大后，2<sup>k−1</sup>≤n&lt;2<sup>k</sup>，同时取对数，k−1≤log<sub>2</sub>n&lt;k，所以k&#x3D;⎣log<sub>2</sub>n⎦+1。其中，⎣⎦表示取下限，⎣x⎦表示小于 x 的最大整数，如⎣3.6⎦&#x3D;3。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920163644646.png" alt="image-20220920163644646"></p>
+<p>因此，2<sup>k−1</sup>≤n≤2<sup>k</sup>−1，右边放大后，2<sup>k−1</sup>≤n&lt;2<sup>k</sup>，同时取对数，k−1≤log<sub>2</sub>n&lt;k，所以k=⎣log<sub>2</sub>n⎦+1。其中，⎣⎦表示取下限，⎣x⎦表示小于 x 的最大整数，如⎣3.6⎦=3。</p>
 <blockquote>
-<p><strong>性质 5：对于完全二叉树，若从上至下、从左至右编号，则编号为 i 的节点，其左孩子编号必为 2i，其右孩子编号必为 2i +1，其双亲的编号必为 i&#x2F;2。</strong></p>
+<p><strong>性质 5：对于完全二叉树，若从上至下、从左至右编号，则编号为 i 的节点，其左孩子编号必为 2i，其右孩子编号必为 2i +1，其双亲的编号必为 i/2。</strong></p>
 </blockquote>
-<p><strong>例题 1：</strong>一棵完全二叉树有 1001 个节点，其中叶子节点的个数是多少？</p>
-<p><strong>解题思路：</strong>首先找到最后一个节点 1001 的双亲节点，其双亲节点编号为 1001&#x2F;2&#x3D;500，该节点是最后一个拥有孩子的节点，其后面全是叶子，即 1001−500&#x3D;501 个叶子。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920170039952.png" alt="image-20220920170039952"></p>
-<p><strong>例题 2：</strong>一棵完全二叉树第 6 层有 8 个叶子，则该完全二叉树最少有多少节点，最多有多少个节点？</p>
+<p>**例题 1：**一棵完全二叉树有 1001 个节点，其中叶子节点的个数是多少？</p>
+<p>**解题思路：**首先找到最后一个节点 1001 的双亲节点，其双亲节点编号为 1001/2=500，该节点是最后一个拥有孩子的节点，其后面全是叶子，即 1001−500=501 个叶子。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920170039952.png" alt="image-20220920170039952"></p>
+<p>**例题 2：**一棵完全二叉树第 6 层有 8 个叶子，则该完全二叉树最少有多少节点，最多有多少个节点？</p>
 <p><strong>解题思路：完全二叉树的叶子分布在最后一层或倒数第二层</strong>，因此该树有可能为 6 层或 7 层。</p>
-<p>节点最少的情况（6 层）：8 个叶子在最后一层，即第 6 层，前 5 层是满的。最少有 2<sup>5</sup>−1+8&#x3D;39 个节点。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920170949639.png" alt="image-20220920170949639"></p>
-<p>节点最多的情况（7 层）：8 个叶子在倒数第二层，即第 6 层，前 6 层是满的，第 7 层最少缺失了 8×2 个节点，因为第 6层的 8 个叶子如果生成孩子的话，会有 16个节点。最多有 27−1−16&#x3D;111 个节点。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920171052194.png" alt="image-20220920171052194"></p>
-<h3 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h3><h4 id="顺序存储-1"><a href="#顺序存储-1" class="headerlink" title="顺序存储"></a>顺序存储</h4><p>二叉树也可以采用顺序存储，按完全二叉树的节点层次编号，依次存放二叉树中的数据元素。</p>
+<p>节点最少的情况（6 层）：8 个叶子在最后一层，即第 6 层，前 5 层是满的。最少有 2<sup>5</sup>−1+8=39 个节点。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920170949639.png" alt="image-20220920170949639"></p>
+<p>节点最多的情况（7 层）：8 个叶子在倒数第二层，即第 6 层，前 6 层是满的，第 7 层最少缺失了 8×2 个节点，因为第 6层的 8 个叶子如果生成孩子的话，会有 16个节点。最多有 27−1−16=111 个节点。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920171052194.png" alt="image-20220920171052194"></p>
+<h3 id="二叉树的存储结构">二叉树的存储结构</h3>
+<h4 id="顺序存储-2">顺序存储</h4>
+<p>二叉树也可以采用顺序存储，按完全二叉树的节点层次编号，依次存放二叉树中的数据元素。</p>
 <p>完全二叉树很适合顺序存储方式，而普通二叉树在顺序存储时需要补充为完全二叉树，在对应完全二叉树没有孩子的位置<strong>补 0</strong>：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920171448183.png" alt="image-20220920171448183"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920171504011.png" alt="image-20220920171504011"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920171448183.png" alt="image-20220920171448183"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920171504011.png" alt="image-20220920171504011"></p>
 <blockquote>
 <p>显然，普通二叉树不适合顺序存储方式，因为有可能在补充为完全二叉树过程中，补充太多的 0，而<strong>浪费大量空间</strong>，因此普通二叉树可以使用链式存储。</p>
 </blockquote>
-<h4 id="链式存储-1"><a href="#链式存储-1" class="headerlink" title="链式存储"></a>链式存储</h4><p>二叉树采用链式存储方式：每个节点包含一个数据域，存储节点信息；还包含两个指针域，指向左右两个孩子。这种存储方式称为二叉链表：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920171945572.png" alt="image-20220920171945572"></p>
+<h4 id="链式存储-2">链式存储</h4>
+<p>二叉树采用链式存储方式：每个节点包含一个数据域，存储节点信息；还包含两个指针域，指向左右两个孩子。这种存储方式称为二叉链表：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920171945572.png" alt="image-20220920171945572"></p>
 <p>一般情况下，二叉树采用二叉链表存储即可，但是在实际问题中，如果经常需要访问双亲节点，二叉链表存储则必须从根出发查找其双亲节点，这样做非常麻烦。</p>
 <p>为了解决这一问题，<strong>可以增加一个指向双亲节点的指针域</strong>，这样每个节点就包含3 个指针域，分别指向两个孩子节点和双亲节点，还包含一个数据域，用来存储节点信息。这种存储方式称为三叉链表：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920172044758.png" alt="image-20220920172044758"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220920172134453.png" alt="image-20220920172134453"></p>
-<h3 id="二叉树的创建"><a href="#二叉树的创建" class="headerlink" title="二叉树的创建"></a>二叉树的创建</h3><p>如果对二叉树进行操作，必须先创建一棵二叉树。如何创建一棵二叉树呢？</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920172044758.png" alt="image-20220920172044758"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220920172134453.png" alt="image-20220920172134453"></p>
+<h3 id="二叉树的创建">二叉树的创建</h3>
+<p>如果对二叉树进行操作，必须先创建一棵二叉树。如何创建一棵二叉树呢？</p>
 <blockquote>
 <p>从二叉树的定义就可以看出，它是递归定义的（除了根之外，左、右子树也是一棵二叉树），因此可以用<strong>递归</strong>来创建二叉树。</p>
 </blockquote>
 <p>递归创建二叉树有两种方法，分别是询问法和补空法。</p>
 <ol>
-<li><p><strong>询问法</strong></p>
+<li>
+<p><strong>询问法</strong></p>
 <p>每次输入节点信息后，询问是否创建该节点的左子树，如果是，则递归创建其左子树，否则其左子树为空；询问是否创建该节点的右子树，如果是，则递归创建其右子树，否则其右子树为空。</p>
 <p><strong>算法步骤：</strong></p>
 <ol>
@@ -739,12 +780,13 @@
     <span class="token keyword">return</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>补空法</strong></p>
+<li>
+<p><strong>补空法</strong></p>
 <p>补空法是指如果左子树或右子树为空时，则用特殊字符补空，如“#”，然后按照根、左子树、右子树的顺序，得到先序遍历序列，根据该序列递归创建二叉树：</p>
 <p><strong>算法步骤：</strong></p>
 <ol>
 <li>输入补空后的二叉树先序遍历序列。</li>
-<li>如果 ch&#x3D;&#x3D;’#’，T&#x3D;NULL；否则创建一个新节点 T，令 T-&gt;data&#x3D;ch；递归创建 T 的左子树；递归创建 T 的右子树。</li>
+<li>如果 ch==‘#’，T=NULL；否则创建一个新节点 T，令 T-&gt;data=ch；递归创建 T 的左子树；递归创建 T 的右子树。</li>
 </ol>
 <p><strong>代码实现：</strong></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
@@ -769,14 +811,17 @@
 		<span class="token function">Createtree</span><span class="token punctuation">(</span>T<span class="token operator">-></span>lchild<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//递归创建左子树</span>
 		<span class="token function">Createtree</span><span class="token punctuation">(</span>T<span class="token operator">-></span>rchild<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//递归创建右子树</span>
 	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><blockquote>
+<h3 id="二叉树的遍历">二叉树的遍历</h3>
+<blockquote>
 <p>二叉树的遍历就是按某条搜索路径访问二叉树中的每个节点一次且只有一次。</p>
 </blockquote>
 <p>按照根的访问顺序不同，根在前面称为<strong>先序遍历</strong>（DLR），根在中间称为<strong>中序遍历</strong>（LDR），根在最后称为<strong>后序遍历</strong>（LRD）。</p>
 <p>因为树的定义本身就是递归的，因此树和二叉树的基本操作用递归算法很容易实现。</p>
-<h4 id="先序遍历："><a href="#先序遍历：" class="headerlink" title="先序遍历："></a>先序遍历：</h4><p>先序遍历是指先访问根，然后先序遍历左子树，再先序遍历右子树，即 DLR。</p>
+<h4 id="先序遍历：">先序遍历：</h4>
+<p>先序遍历是指先访问根，然后先序遍历左子树，再先序遍历右子树，即 DLR。</p>
 <p><strong>算法步骤：</strong></p>
 <p>如果二叉树为空，则空操作，否则：</p>
 <ol>
@@ -797,16 +842,19 @@
        <span class="token function">preorder</span><span class="token punctuation">(</span>T<span class="token operator">-></span>rchild<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="中序遍历："><a href="#中序遍历：" class="headerlink" title="中序遍历："></a>中序遍历：</h4><p>中序遍历是指中序遍历左子树，然后访问根，再中序遍历右子树，即 LDR。</p>
+<h4 id="中序遍历：">中序遍历：</h4>
+<p>中序遍历是指中序遍历左子树，然后访问根，再中序遍历右子树，即 LDR。</p>
 <p><strong>算法步骤：</strong></p>
 <p>如果二叉树为空，则空操作，否则：</p>
 <ol>
-<li><p>中序遍历左子树</p>
+<li>
+<p>中序遍历左子树</p>
 </li>
-<li><p>访问根节点</p>
+<li>
+<p>访问根节点</p>
 </li>
-<li><p>中序遍历右子树</p>
+<li>
+<p>中序遍历右子树</p>
 <blockquote>
 <p><strong>左子树为空或已遍历才可以访问根</strong></p>
 </blockquote>
@@ -822,16 +870,19 @@
        <span class="token function">inorder</span><span class="token punctuation">(</span>T<span class="token operator">-></span>rchild<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="后序遍历："><a href="#后序遍历：" class="headerlink" title="后序遍历："></a>后序遍历：</h4><p>后序遍历是指后序遍历左子树，后序遍历右子树，然后访问根，即 LRD。</p>
+<h4 id="后序遍历：">后序遍历：</h4>
+<p>后序遍历是指后序遍历左子树，后序遍历右子树，然后访问根，即 LRD。</p>
 <p><strong>算法步骤：</strong></p>
 <p>如果二叉树为空，则空操作，否则：</p>
 <ol>
-<li><p>后序遍历左子树</p>
+<li>
+<p>后序遍历左子树</p>
 </li>
-<li><p>后序遍历右子树</p>
+<li>
+<p>后序遍历右子树</p>
 </li>
-<li><p>访问根节点</p>
+<li>
+<p>访问根节点</p>
 <blockquote>
 <p><strong>左子树、右子树为空或已遍历才可以访问根</strong></p>
 </blockquote>
@@ -847,48 +898,58 @@
        cout<span class="token operator">&lt;&lt;</span>T<span class="token operator">-></span>data<span class="token operator">&lt;&lt;</span><span class="token string">"  "</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="投影法："><a href="#投影法：" class="headerlink" title="投影法："></a>投影法：</h4><p>如果不需要按照程序执行流程，那么只要写出二叉树的遍历序列即可，还可以使用投影法快速得到遍历序列。</p>
+<h4 id="投影法：">投影法：</h4>
+<p>如果不需要按照程序执行流程，那么只要写出二叉树的遍历序列即可，还可以使用投影法快速得到遍历序列。</p>
 <p>原图：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922122047322.png" alt="image-20220922122047322"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922122047322.png" alt="image-20220922122047322"></p>
 <ol>
-<li><p>中序遍历：</p>
+<li>
+<p>中序遍历：</p>
 <p>中序遍历就像在无风的情况下，遍历顺序为左子树、根、右子树，太阳直射，将所有的节点投影到地上</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922120407427.png" alt="image-20220922120407427"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922120407427.png" alt="image-20220922120407427"></p>
 </li>
-<li><p>先序遍历：</p>
+<li>
+<p>先序遍历：</p>
 <p>先序遍历就像在左边大风的情况下，将二叉树树枝刮向右方，且顺序为根、左子树、右子树，太阳直射，将所有的节点投影到地上</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922120828446.png" alt="image-20220922120828446"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922120828446.png" alt="image-20220922120828446"></p>
 </li>
-<li><p>后序遍历：</p>
+<li>
+<p>后序遍历：</p>
 <p>后序遍历就像在右边大风的情况下，将二叉树树枝刮向左方，且顺序为左子树、右子树、根，太阳直射，将所有的节点投影到地上</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922122118027.png" alt="image-20220922122118027"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922122118027.png" alt="image-20220922122118027"></p>
 </li>
 </ol>
-<h4 id="层次遍历："><a href="#层次遍历：" class="headerlink" title="层次遍历："></a>层次遍历：</h4><blockquote>
-<p>首先遍历第 1 层，然后第 2层……同一层按照从左向右的顺序访问，直到最后一层。</p>
+<h4 id="层次遍历：">层次遍历：</h4>
+<blockquote>
+<p>首先遍历第 1 层，然后第 2层…同一层按照从左向右的顺序访问，直到最后一层。</p>
 </blockquote>
 <p>程序是怎么实现层次遍历的呢？</p>
 <p>通过观察可以发现，先被访问的节点，其孩子也先被访问，先来先服务，因此可以用<strong>队列</strong>实现</p>
 <p>下面以下图中的二叉树为例，展示该二叉树层次遍历的过程：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922122047322.png" alt="image-20220922122047322"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922122047322.png" alt="image-20220922122047322"></p>
 <p><strong>算法步骤：</strong></p>
 <ol>
-<li><p>首先创建一个队列 Q，令树根入队。（注意：实际上是指向树根 A 的指针入队，这里为了图解方便，直接把数据入队了。）</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922122713832.png" alt="image-20220922122713832"></p>
+<li>
+<p>首先创建一个队列 Q，令树根入队。（注意：实际上是指向树根 A 的指针入队，这里为了图解方便，直接把数据入队了。）</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922122713832.png" alt="image-20220922122713832"></p>
 </li>
-<li><p>队头元素出队，输出 A，同时令 A 的孩子 B、C 入队（从左向右顺序，如果是普通树，则包含所有孩子）</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922122738214.png" alt="image-20220922122738214"></p>
+<li>
+<p>队头元素出队，输出 A，同时令 A 的孩子 B、C 入队（从左向右顺序，如果是普通树，则包含所有孩子）</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922122738214.png" alt="image-20220922122738214"></p>
 </li>
-<li><p>队头元素出队，输出 B，同时令 B 的孩子 D、E 入队：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922122809548.png" alt="image-20220922122809548"></p>
+<li>
+<p>队头元素出队，输出 B，同时令 B 的孩子 D、E 入队：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922122809548.png" alt="image-20220922122809548"></p>
 </li>
-<li><p>队头元素出队，输出 C，同时令 C 的孩子 F 入队：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922122845581.png" alt="image-20220922122845581"></p>
+<li>
+<p>队头元素出队，输出 C，同时令 C 的孩子 F 入队：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922122845581.png" alt="image-20220922122845581"></p>
 </li>
-<li><p>队头元素出队，输出 D，同时令 D 的孩子入队，D 没有孩子，什么也不做。</p>
+<li>
+<p>队头元素出队，输出 D，同时令 D 的孩子入队，D 没有孩子，什么也不做。</p>
 </li>
-<li><p>以此类推，直到队列为空，算法结束。</p>
+<li>
+<p>以此类推，直到队列为空，算法结束。</p>
 </li>
 </ol>
 <p><strong>代码步骤：</strong></p>
@@ -912,17 +973,18 @@
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="线索二叉树"><a href="#线索二叉树" class="headerlink" title="线索二叉树"></a>线索二叉树</h2><p>二叉树是非线性数据结构，而遍历序列是线性序列，二叉树遍历实际上是将一个非线性结构进行线性化的操作。</p>
+<h2 id="线索二叉树">线索二叉树</h2>
+<p>二叉树是非线性数据结构，而遍历序列是线性序列，二叉树遍历实际上是将一个非线性结构进行线性化的操作。</p>
 <p>根据线性序列的特性，除了第一个元素外，每一个节点都有唯一的前驱，除了最后一个元素外，每一个节点都有唯一的后继。而根据遍历序列的不同，每个节点的前驱和后继也不同。</p>
 <blockquote>
 <p>采用二叉链表存储时，只记录了左、右孩子的信息，无法直接得到每个节点的前驱和后继。</p>
 </blockquote>
-<h3 id="线索二叉树存储结构"><a href="#线索二叉树存储结构" class="headerlink" title="线索二叉树存储结构"></a>线索二叉树存储结构</h3><p>二叉树采用二叉链表存储时，每个节点有两个指针域。如果二叉链表有 n 个节点，则一共有 2n 个指针域，而只有 n−1 个是实指针，其余 n+1 个都是空指针，为什么呢？</p>
+<h3 id="线索二叉树存储结构">线索二叉树存储结构</h3>
+<p>二叉树采用二叉链表存储时，每个节点有两个指针域。如果二叉链表有 n 个节点，则一共有 2n 个指针域，而只有 n−1 个是实指针，其余 n+1 个都是空指针，为什么呢？</p>
 <p><strong>推导过程：</strong></p>
-<p>因为二叉树有 n−1 个分支，每个分支对应一个实指针，每一个节点对应一个分支，只有树根没有对应分支，因此分支数等于节点数减 1，即 b&#x3D;n−1。</p>
+<p>因为二叉树有 n−1 个分支，每个分支对应一个实指针，每一个节点对应一个分支，只有树根没有对应分支，因此分支数等于节点数减 1，即 b=n−1。</p>
 <p>每个分支对应一个实指针，所以有 n−1 个实指针。</p>
-<p>总的的指针数减去实指针数，即为空指针数，即 2n− (n−1)&#x3D;n+1。</p>
+<p>总的的指针数减去实指针数，即为空指针数，即 2n− (n−1)=n+1。</p>
 <blockquote>
 <p>n 个节点的二叉链表中有 n+1 个空指针，<strong>可以充分利用空指针记录节点的前驱或后继信息，从而加快查找节点前驱和后继的速度</strong>。</p>
 </blockquote>
@@ -932,35 +994,37 @@
 <p>那么怎么区分到底存储的是左孩子和右孩子，还是前驱和后继信息呢？</p>
 </blockquote>
 <p>为了避免混淆，增加两个标志域 <strong>ltag</strong> 和 <strong>rtag</strong>：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922131353508.png" alt="image-20220922131353508"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922131359613.png" alt="image-20220922131359613"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922131353508.png" alt="image-20220922131353508"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922131359613.png" alt="image-20220922131359613"></p>
 <hr>
 <p>这种带有标志域的二叉链表称为<strong>线索链表</strong>，</p>
 <p>指向前驱和后继的指针称为<strong>线索</strong>，</p>
 <p>带有线索的二叉树称为<strong>线索二叉树</strong>，</p>
 <p>以某种遍历方式将二叉树转化为线索二叉树的过程称为<strong>线索化</strong>。</p>
-<h3 id="构造线索二叉树"><a href="#构造线索二叉树" class="headerlink" title="构造线索二叉树"></a>构造线索二叉树</h3><p>每种遍历顺序不同，节点的前驱和后继也不同，因此二叉树线索化必须指明是什么遍历顺序的线索化</p>
+<h3 id="构造线索二叉树">构造线索二叉树</h3>
+<p>每种遍历顺序不同，节点的前驱和后继也不同，因此二叉树线索化必须指明是什么遍历顺序的线索化</p>
 <p>线索二叉树分为前序线索二叉树、中序线索二叉树和后序线索二叉树。</p>
 <blockquote>
 <p><strong>二叉树线索化的过程，实际上是在遍历过程中修改空指针的过程。</strong></p>
 </blockquote>
 <p>可以设置两个指针，一个指针 pre 指向刚刚访问的节点，另一个指针 p 指向当前节点。也就是说，pre 指向的节点为 p 指向的节点的前驱，反之，p 指向的节点为 pre 指向的节点的后继。</p>
 <blockquote>
-<p>在遍历的过程中，如果当前节点 p 的左孩子为空，则该节点的 lchild 指向其前驱，即 p-&gt;lchild&#x3D;pre；</p>
-<p>如果 pre节点的右孩子为空，则该节点的 rchild 指向其后继，即 pre-&gt;rchild&#x3D;p。</p>
+<p>在遍历的过程中，如果当前节点 p 的左孩子为空，则该节点的 lchild 指向其前驱，即 p-&gt;lchild=pre；</p>
+<p>如果 pre节点的右孩子为空，则该节点的 rchild 指向其后继，即 pre-&gt;rchild=p。</p>
 </blockquote>
 <p><strong>算法步骤：</strong></p>
 <ol>
 <li>指针 p 指向根节点，pre 初始化为空，pre 永远指向 p 的前驱。</li>
-<li>若 p 非空，则重复下面操作：<ul>
+<li>若 p 非空，则重复下面操作：
+<ul>
 <li>中序线索化 p 的左子树。</li>
-<li>若 p 的左子树为空，则给 p 加上左线索，即 p-&gt;ltag&#x3D;1，p 的左子树指针指向 pre（前驱），即 p-&gt;lchild&#x3D;pre；否则令 p-&gt;ltag&#x3D;0。</li>
-<li>若 pre 非空，则判断如果 pre 的右子树为空，给 pre 加上右线索，即 pre-&gt;rtag&#x3D;1，pre的右孩子指针指向 p（后继），即 pre-&gt;rchild&#x3D;p，否则令 pre-&gt;rtag&#x3D;0。</li>
+<li>若 p 的左子树为空，则给 p 加上左线索，即 p-&gt;ltag=1，p 的左子树指针指向 pre（前驱），即 p-&gt;lchild=pre；否则令 p-&gt;ltag=0。</li>
+<li>若 pre 非空，则判断如果 pre 的右子树为空，给 pre 加上右线索，即 pre-&gt;rtag=1，pre的右孩子指针指向 p（后继），即 pre-&gt;rchild=p，否则令 pre-&gt;rtag=0。</li>
 <li>p 赋值给 pre，转向 p 的右子树。</li>
 <li>中序线索化 p 的右子树。</li>
 </ul>
 </li>
-<li>处 理 最 后 一 个 节 点 ， 令 其 后 继 为 空 ， 即pre-&gt;rchild&#x3D;NULL; pre-&gt;rtag&#x3D;1。</li>
+<li>处 理 最 后 一 个 节 点 ， 令 其 后 继 为 空 ， 即pre-&gt;rchild=NULL; pre-&gt;rtag=1。</li>
 </ol>
 <hr>
 <p>注意：如果在考试当中只要求绘图，则没必要按照程序执行的过程进行线索化，可以直接写出遍历序列。</p>
@@ -968,16 +1032,20 @@
 <p><strong>根据该遍历序列的先后顺序，对所有的空指针域进行线索化，左指针为空，则令其指向前驱；右指针为空，则令其指向后继。</strong></p>
 </blockquote>
 <p>示例：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922163836111.png" alt="image-20220922163836111"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922163836111.png" alt="image-20220922163836111"></p>
 <ol>
-<li><p>首先写出二叉树的中序遍历序列，即 DBEAFGC，然后按照该遍历序列，对所有的空指针进行线索化。</p>
+<li>
+<p>首先写出二叉树的中序遍历序列，即 DBEAFGC，然后按照该遍历序列，对所有的空指针进行线索化。</p>
 </li>
-<li><p>D 的左指针为空，但在中序遍历序列中，D 是第一个元素，没有前驱，赋值为 NULL。</p>
+<li>
+<p>D 的左指针为空，但在中序遍历序列中，D 是第一个元素，没有前驱，赋值为 NULL。</p>
 </li>
-<li><p>D 的右指针为空，中序遍历序列中 D 的后继是 B，因此 D 的右指针指向 B 节点。</p>
+<li>
+<p>D 的右指针为空，中序遍历序列中 D 的后继是 B，因此 D 的右指针指向 B 节点。</p>
 </li>
-<li><p>同理，从中序遍历序列中可以很清楚地知道每个节点的前驱和后继，分别对所有节点的空指针进行线索化即可。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922164012944.png" alt="image-20220922164012944"></p>
+<li>
+<p>同理，从中序遍历序列中可以很清楚地知道每个节点的前驱和后继，分别对所有节点的空指针进行线索化即可。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922164012944.png" alt="image-20220922164012944"></p>
 </li>
 </ol>
 <p><strong>代码实现：</strong></p>
@@ -1008,12 +1076,13 @@
 		<span class="token function">InThread</span><span class="token punctuation">(</span>p<span class="token operator">-></span>rchild<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//右子树递归线索化</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="遍历线索二叉树"><a href="#遍历线索二叉树" class="headerlink" title="遍历线索二叉树"></a>遍历线索二叉树</h3><p>线索二叉树的线索记录了前驱和后继信息，因此可以利用这些信息进行遍历。下面以中序线索二叉树遍历为例，讲述遍历过程。</p>
+<h3 id="遍历线索二叉树">遍历线索二叉树</h3>
+<p>线索二叉树的线索记录了前驱和后继信息，因此可以利用这些信息进行遍历。下面以中序线索二叉树遍历为例，讲述遍历过程。</p>
 <p><strong>算法步骤：</strong></p>
 <ol>
 <li>指针 p 指向根节点。</li>
-<li>若 p 非空，则重复以下操作：<ul>
+<li>若 p 非空，则重复以下操作：
+<ul>
 <li>p 指针沿左孩子向下，找到最左节点，它是中序遍历的第一个节点；</li>
 <li>访问 p 节点；</li>
 <li>沿着右线索查找当前节点 p 的后继节点并访问，直到右线索为 0 或遍历结束。</li>
@@ -1038,24 +1107,29 @@
        p<span class="token operator">=</span>p<span class="token operator">-></span>rchild<span class="token punctuation">;</span><span class="token comment">//转向p的右子树</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>对于频繁查找前驱和后继的运算，线索二叉树优于普通二叉树。但是对于插入和删除操作，线索二叉树比普通二叉树开销大，因为除插入和删除操作外，还要修改相应的线索。</p>
-<h2 id="树和森林的遍历"><a href="#树和森林的遍历" class="headerlink" title="树和森林的遍历"></a>树和森林的遍历</h2><h3 id="树的遍历："><a href="#树的遍历：" class="headerlink" title="树的遍历："></a>树的遍历：</h3><p>树的遍历操作包括先根遍历和后根遍历两种方式。</p>
+<h2 id="树和森林的遍历">树和森林的遍历</h2>
+<h3 id="树的遍历：">树的遍历：</h3>
+<p>树的遍历操作包括先根遍历和后根遍历两种方式。</p>
 <ul>
 <li>先根遍历：如果树非空，则先访问根节点，然后按从左向右的顺序，先根遍历根节点的每一棵子树。树的先根遍历顺序与该树对应的二叉树的先序遍历顺序相同。</li>
 <li>后根遍历：如果树非空，则按从左向右的顺序，后根遍历根节点的每一棵子树，然后访问根节点。树的后根遍历顺序与该树对应的二叉树的中序遍历顺序相同。</li>
 </ul>
 <ol>
-<li><p>先根遍历</p>
-<p>先根遍历时，先访问根，然后按从左向右的顺序，先根遍历根节点的每一棵子树，第一棵子树遍历完毕，才可以遍历第二棵子树……</p>
+<li>
+<p>先根遍历</p>
+<p>先根遍历时，先访问根，然后按从左向右的顺序，先根遍历根节点的每一棵子树，第一棵子树遍历完毕，才可以遍历第二棵子树…</p>
 </li>
-<li><p>后根遍历</p>
+<li>
+<p>后根遍历</p>
 <p>后根遍历时，先按从左向右的顺序后根遍历每一棵子树，没有子树或子树已遍历完毕，才可以访问根。</p>
 </li>
 </ol>
-<h3 id="森林的遍历："><a href="#森林的遍历：" class="headerlink" title="森林的遍历："></a>森林的遍历：</h3><p>森林的遍历操作有先序遍历和中序遍历两种方式。</p>
+<h3 id="森林的遍历：">森林的遍历：</h3>
+<p>森林的遍历操作有先序遍历和中序遍历两种方式。</p>
 <ul>
-<li><p>先序遍历：</p>
+<li>
+<p>先序遍历：</p>
 <p>如果森林非空，则：</p>
 <ul>
 <li>访问第一棵树的根节点；</li>
@@ -1064,7 +1138,8 @@
 </ul>
 <p>其访问顺序与该森林对应的二叉树的先序遍历顺序相同。</p>
 </li>
-<li><p>中序遍历</p>
+<li>
+<p>中序遍历</p>
 <p>如果森林非空，则：</p>
 <ul>
 <li>中序遍历第一棵树的根节点的子树森林；</li>
@@ -1074,7 +1149,9 @@
 <p>其访问顺序与该森林对应的二叉树的中序遍历顺序相同。</p>
 </li>
 </ul>
-<h2 id="树的应用"><a href="#树的应用" class="headerlink" title="树的应用"></a>树的应用</h2><h3 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h3><p>首先考虑特殊情况，如果二叉树为空，则深度为 0；一般情况下，二叉树的深度等于二叉树左右子树的<strong>深度最大值加 1</strong>。</p>
+<h2 id="树的应用">树的应用</h2>
+<h3 id="二叉树的深度">二叉树的深度</h3>
+<p>首先考虑特殊情况，如果二叉树为空，则深度为 0；一般情况下，二叉树的深度等于二叉树左右子树的<strong>深度最大值加 1</strong>。</p>
 <p><strong>算法步骤：</strong></p>
 <ol>
 <li>如果二叉树为空，则深度为 0。</li>
@@ -1096,8 +1173,8 @@
 			<span class="token keyword">return</span> n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="二叉树的叶子数"><a href="#二叉树的叶子数" class="headerlink" title="二叉树的叶子数"></a>二叉树的叶子数</h3><p>首先考虑特殊情况，如果二叉树为空，则叶子数为 0；如果根的左、右子树都为空，则叶子数为 1；</p>
+<h3 id="二叉树的叶子数">二叉树的叶子数</h3>
+<p>首先考虑特殊情况，如果二叉树为空，则叶子数为 0；如果根的左、右子树都为空，则叶子数为 1；</p>
 <blockquote>
 <p><strong>一般情况下，二叉树的叶子数等于左子树的叶子数与右子树的叶子数之和。</strong></p>
 </blockquote>
@@ -1118,7 +1195,6 @@
         <span class="token keyword">else</span>
            <span class="token keyword">return</span> <span class="token function">LeafCount</span><span class="token punctuation">(</span>T<span class="token operator">-></span>lchild<span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">LeafCount</span><span class="token punctuation">(</span>T<span class="token operator">-></span>rchild<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//递归计算左子树和右子树的叶子数之和</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>同样，要计算二叉树的节点数，如果二叉树为空，则节点数为 0；</p>
 <blockquote>
 <p><strong>否则，二叉树的节点数等于左子树与右子树的节点数之和加 1。</strong></p>
@@ -1131,11 +1207,11 @@
     <span class="token keyword">else</span>
         <span class="token keyword">return</span> <span class="token function">NodeCount</span><span class="token punctuation">(</span>T<span class="token operator">-></span>lchild<span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">NodeCount</span><span class="token punctuation">(</span>T<span class="token operator">-></span>rchild<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">//递归计算左子树和右子树的结点数之和加1</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p><strong>此类问题只需要考虑特殊情况，例如树空、只有一个根节点等，一般情况下，直接递归即可。</strong></p>
 </blockquote>
-<h3 id="三元组创建二叉树"><a href="#三元组创建二叉树" class="headerlink" title="三元组创建二叉树"></a>三元组创建二叉树</h3><p>假设以三元组(F, C, L&#x2F;R)的形式输入一棵二叉树的诸边（其中 F 是双亲节点的标识，C是孩子节点标识，L&#x2F;R 表示 C 为 F 的左孩子或右孩子），且在输入的三元组序列中，C 是按层次顺序出现的。</p>
+<h3 id="三元组创建二叉树">三元组创建二叉树</h3>
+<p>假设以三元组(F, C, L/R)的形式输入一棵二叉树的诸边（其中 F 是双亲节点的标识，C是孩子节点标识，L/R 表示 C 为 F 的左孩子或右孩子），且在输入的三元组序列中，C 是按层次顺序出现的。</p>
 <p>设节点的标识是字符类型，F 为 NULL 时，C 为根节点标识，若 C 亦为NULL，则表示输入结束。</p>
 <p><strong>算法步骤：</strong></p>
 <ol>
@@ -1213,31 +1289,39 @@ NULL NULL L
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="遍历序列还原树"><a href="#遍历序列还原树" class="headerlink" title="遍历序列还原树"></a>遍历序列还原树</h3><p>根据遍历序列可以还原树，包括二叉树还原、树还原和森林还原 3 种。</p>
-<h4 id="二叉树还原"><a href="#二叉树还原" class="headerlink" title="二叉树还原"></a>二叉树还原</h4><p>由二叉树的前序序列和中序序列，或者中序序列和后序序列，可以唯一地还原一棵二叉树。</p>
+<h3 id="遍历序列还原树">遍历序列还原树</h3>
+<p>根据遍历序列可以还原树，包括二叉树还原、树还原和森林还原 3 种。</p>
+<h4 id="二叉树还原">二叉树还原</h4>
+<p>由二叉树的前序序列和中序序列，或者中序序列和后序序列，可以唯一地还原一棵二叉树。</p>
 <blockquote>
 <p><strong>注意：由二叉树的前序序列和后序序列不能唯一地还原一棵二叉树。</strong></p>
 </blockquote>
 <p><strong>算法步骤：</strong></p>
 <ol>
-<li><p>先序序列的第一个字符为根。</p>
+<li>
+<p>先序序列的第一个字符为根。</p>
 </li>
-<li><p>在中序序列中，以根为中心划分左右子树。</p>
+<li>
+<p>在中序序列中，以根为中心划分左右子树。</p>
 </li>
-<li><p>还原左右子树。</p>
+<li>
+<p>还原左右子树。</p>
 <ul>
-<li><p>先序序列的第一个字符 A 为根，在中序序列中以 A 为中心划分左右子树，左子树包含 DBE 三个节点，右子树包含 FGC 三个节点：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922222408128.png" alt="image-20220922222408128"></p>
+<li>
+<p>先序序列的第一个字符 A 为根，在中序序列中以 A 为中心划分左右子树，左子树包含 DBE 三个节点，右子树包含 FGC 三个节点：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922222408128.png" alt="image-20220922222408128"></p>
 </li>
-<li><p>左子树 DBE，在先序序列中的顺序为 BDE，第一个字符 B 为根，在中序序列中以 B为中心划分左右子树，左右子树只有一个节点，因此直接作为 B 的左右孩子即可：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922222418292.png" alt="image-20220922222418292"></p>
+<li>
+<p>左子树 DBE，在先序序列中的顺序为 BDE，第一个字符 B 为根，在中序序列中以 B为中心划分左右子树，左右子树只有一个节点，因此直接作为 B 的左右孩子即可：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922222418292.png" alt="image-20220922222418292"></p>
 </li>
-<li><p>右子树 FGC，在先序序列中的顺序为 CFG，第一个字符 C 为根，在中序序列中以 C为中心划分左右子树，左子树包含 FG 节点，右子树为空：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922222429323.png" alt="image-20220922222429323"></p>
+<li>
+<p>右子树 FGC，在先序序列中的顺序为 CFG，第一个字符 C 为根，在中序序列中以 C为中心划分左右子树，左子树包含 FG 节点，右子树为空：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922222429323.png" alt="image-20220922222429323"></p>
 </li>
-<li><p>左子树 FG，在先序序列中的顺序为 FG，第一个字符 F 为根，在中序序列中以 F 为中心划分左右子树，左为空，右子树只有一个节点 G，作为 F 的右孩子即可：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922222438266.png" alt="image-20220922222438266"></p>
+<li>
+<p>左子树 FG，在先序序列中的顺序为 FG，第一个字符 F 为根，在中序序列中以 F 为中心划分左右子树，左为空，右子树只有一个节点 G，作为 F 的右孩子即可：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922222438266.png" alt="image-20220922222438266"></p>
 </li>
 </ul>
 </li>
@@ -1267,16 +1351,15 @@ BiTree <span class="token function">pre_mid_createBiTree</span><span class="toke
     T<span class="token operator">-></span>rchild<span class="token operator">=</span><span class="token function">pre_mid_createBiTree</span><span class="token punctuation">(</span>pre<span class="token operator">+</span>index<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>mid<span class="token operator">+</span>index<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>len<span class="token operator">-</span>index<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//建立右子树</span>
     <span class="token keyword">return</span> T<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>代码解释：</strong></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">BiTree <span class="token function">pre_mid_createBiTree</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>pre<span class="token punctuation">,</span><span class="token keyword">char</span> <span class="token operator">*</span>mid<span class="token punctuation">,</span><span class="token keyword">int</span> len<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这个函数有 3 个参数，pre 和 mid 为指针类型，分别指向前序、中序序列的首地址；len为序列的长度。前序和中序的序列长度一定是相同的。<br>首先，先序序列的第一个字符 pre[0]为根，然后在中序序列中查找根所在的位置，用 index记录查找长度，找到后以根为中心，划分出左右子树。</p>
+<p>这个函数有 3 个参数，pre 和 mid 为指针类型，分别指向前序、中序序列的首地址；len为序列的长度。前序和中序的序列长度一定是相同的。<br>
+首先，先序序列的第一个字符 pre[0]为根，然后在中序序列中查找根所在的位置，用 index记录查找长度，找到后以根为中心，划分出左右子树。</p>
 <ul>
 <li>左子树：先序序列中的首地址为 pre+1，中序序列的首地址为 mid，长度为 index</li>
 <li>右子树：先序序列中的首地址为 pre+index+1，中序序列的首地址为 mid+index+1，长度为 len−index−1；右子树的长度为总长度减去左子树的长度，再减去根。</li>
 </ul>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/19/shu-ju-jie-gou-ru-men-shu/image-20220922225011925.png" alt="image-20220922225011925"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220922225011925.png" alt="image-20220922225011925"></p>
 <p>由二叉树的后序序列和中序序列也可以唯一确定一棵二叉树，方法和上面一样，只不过后序序列的最后一个字符为根，然后在中序序列中以根为中心划分左右子树。</p>
 <p><strong>代码实现：</strong></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">BiTree <span class="token function">pro_mid_createBiTree</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>last<span class="token punctuation">,</span><span class="token keyword">char</span> <span class="token operator">*</span>mid<span class="token punctuation">,</span><span class="token keyword">int</span> len<span class="token punctuation">)</span><span class="token comment">//后序中序还原建立二叉树</span>
@@ -1293,14 +1376,16 @@ BiTree <span class="token function">pre_mid_createBiTree</span><span class="toke
     T<span class="token operator">-></span>rchild<span class="token operator">=</span><span class="token function">pro_mid_createBiTree</span><span class="token punctuation">(</span>last<span class="token operator">+</span>index<span class="token punctuation">,</span>mid<span class="token operator">+</span>index<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>len<span class="token operator">-</span>index<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//建立右子树</span>
     <span class="token keyword">return</span> T<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>先序遍历和中序遍历还原二叉树<strong>秘籍：先序找根，中序分左右。</strong></p>
 <p>后序遍历和中序遍历还原二叉树<strong>秘籍：后序找根，中序分左右。</strong></p>
 </blockquote>
-<h4 id="树还原"><a href="#树还原" class="headerlink" title="树还原"></a>树还原</h4><p>由于树的先根遍历和后根遍历与其对应二叉树的先序遍历和中序遍历相同，因此可以根据该对应关系，先还原为二叉树，然后再把二叉树转换为树。</p>
-<h4 id="森林还原"><a href="#森林还原" class="headerlink" title="森林还原"></a>森林还原</h4><p>由于森林的先序遍历和中序遍历与其对应二叉树的先序遍历和中序遍历相同，因此可以根据该对应关系，先还原为二叉树，然后再把二叉树转换为森林。</p>
-<h3 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h3><p>哈夫曼编码的基本思想是以<strong>字符的使用频率</strong>作为权来构建一棵哈夫曼树，然后利用哈夫曼树对字符进行编码。</p>
+<h4 id="树还原">树还原</h4>
+<p>由于树的先根遍历和后根遍历与其对应二叉树的先序遍历和中序遍历相同，因此可以根据该对应关系，先还原为二叉树，然后再把二叉树转换为树。</p>
+<h4 id="森林还原">森林还原</h4>
+<p>由于森林的先序遍历和中序遍历与其对应二叉树的先序遍历和中序遍历相同，因此可以根据该对应关系，先还原为二叉树，然后再把二叉树转换为森林。</p>
+<h3 id="哈夫曼树">哈夫曼树</h3>
+<p>哈夫曼编码的基本思想是以<strong>字符的使用频率</strong>作为权来构建一棵哈夫曼树，然后利用哈夫曼树对字符进行编码。</p>
 <p>哈夫曼树是通过将所要编码的字符作为叶子节点，将该字符在文件中的使用频率作为叶子节点的权值，以自底向上的方式，做 n−1 次“合并”运算构造出来的。</p>
 <blockquote>
 <p>哈夫曼编码被广泛地应用于数据压缩，尤其是远距离通信和大容量数据存储，常用的 JPEG 图片就是采用哈夫曼编码压缩的。</p>
@@ -1311,13 +1396,14 @@ BiTree <span class="token function">pre_mid_createBiTree</span><span class="toke
 <p>哈夫曼算法采取的<strong>贪心策略是每次从树的集合中取出没有双亲且权值最小的两棵树作为左右子树</strong>，构造一棵新树，新树根节点的权值为其左右孩子节点权值之和，并将新树插入树的集合中。</p>
 <p><strong>算法步骤：</strong></p>
 <ol>
-<li>确定合适的数据结构。编写程序前需要考虑的情况如下：<ul>
+<li>确定合适的数据结构。编写程序前需要考虑的情况如下：
+<ul>
 <li>哈夫曼树中没有度为 1 的节点，则一棵有 n 个叶子节点的哈夫曼树共有 2n−1 个节点（n−1 次“合并”，每次产生一个新节点）。</li>
 <li>构成哈夫曼树后，为求编码需从叶子节点出发走一条从叶子到根的路径。</li>
 <li>译码需要从根出发走一条从根到叶子的路径。那么对每个节点而言，需要知道每个节点的权值、双亲、左孩子、右孩子和节点信息。</li>
 </ul>
 </li>
-<li>初始化。构造 n 棵节点为 n 个字符的单节点树集合 T&#x3D;{t1, t2 , t3 , …, tn}，每棵树只有一个带权的根节点，权值为该字符的使用频率。</li>
+<li>初始化。构造 n 棵节点为 n 个字符的单节点树集合 T={t1, t2 , t3 , …, tn}，每棵树只有一个带权的根节点，权值为该字符的使用频率。</li>
 <li>如果 T 中只剩下一棵树，则哈夫曼树构造成功，跳到第 6 步。否则，从集合 T 中取出没有双亲且权值最小的两棵树 t i 和 t j，将它们合并成一棵新树 zk，新树的左孩子为 t i，右孩子为 t j，zk 的权值为 t i 和 t j 的权值之和。</li>
 <li>从集合 T 中删去 t i、t j，加入 zk。</li>
 <li>重复以上第 3 步和第 4 步。</li>

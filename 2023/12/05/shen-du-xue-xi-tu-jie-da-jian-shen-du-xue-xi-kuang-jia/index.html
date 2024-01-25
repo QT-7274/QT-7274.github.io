@@ -505,25 +505,38 @@
                 <p>深度学习框架正是为了缓解这种代码复杂性而诞生。尤其是，如果你想在CPU上训练神经网络（这种硬件会带来10-100倍加速），深度学习框架可以显著减少代码复杂度（减少错误并加速开发），同时提高运行性能。</p>
 <p>框架如何简化你的代码呢？</p>
 <p>它让你不必写你本来要重复多次的代码，具体而言，深度学习框架中最有用的部分是它对自动反向传播与自动优化的支持——这些特性让你只写出模型的前向传播代码，就会使框架自动处理反向传播与权重更新。大多数框架甚至提供了常见层与损失函数的高级接口，使得写前向传播代码更容易。</p>
-<h3 id="损失函数介绍"><a href="#损失函数介绍" class="headerlink" title="损失函数介绍"></a>损失函数介绍</h3><p>通过调整网络测量误差的方式、网络层的参数数量和类型，以及应用的正则化类型来改变网络的学习过程。在深度学习研究中，所有这些技术都属于构建所谓损失函数的范畴。</p>
+<h3 id="损失函数介绍">损失函数介绍</h3>
+<p>通过调整网络测量误差的方式、网络层的参数数量和类型，以及应用的正则化类型来改变网络的学习过程。在深度学习研究中，所有这些技术都属于构建所谓损失函数的范畴。</p>
 <p><strong>神经网络并不能真正从数据中学习，它们只是使损失函数最小化。</strong></p>
 <p>之前章节学习就是调整神经网络中的权重，使误差降到0。在本节中，将从另一个角度来解释这一现象，通过选择误差的测量方式，来让神经网络学习我们感兴趣的模式：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/05/shen-du-xue-xi-tu-jie-da-jian-shen-du-xue-xi-kuang-jia/image-20231206184331841.png" alt="image-20231206184331841"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231206184331841.png" alt="image-20231206184331841"></p>
 <p>尽管神经网络架构和数据集都很相似，但误差函数却有根本的不同，也就导致了神经网络学到了截然不同的模式。</p>
-<h3 id="交叉熵介绍"><a href="#交叉熵介绍" class="headerlink" title="交叉熵介绍"></a>交叉熵介绍</h3><h4 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a>Softmax函数</h4><p>回顾下Softmax函数：Softmax函数是一种特殊的激活函数，它可以将神经网络的输出转化为一个概率分布。这意味着，对于多分类问题，Softmax函数可以将模型的原始输出转化为每个类别的预测概率。</p>
-<p>Softmax函数的公式如下：<br>$$<br>\operatorname{Softmax}\left(z_i\right)&#x3D;\frac{\exp \left(z_i\right)}{\sum_j \exp \left(z_j\right)}<br>$$</p>
+<h3 id="交叉熵介绍">交叉熵介绍</h3>
+<h4 id="Softmax函数">Softmax函数</h4>
+<p>回顾下Softmax函数：Softmax函数是一种特殊的激活函数，它可以将神经网络的输出转化为一个概率分布。这意味着，对于多分类问题，Softmax函数可以将模型的原始输出转化为每个类别的预测概率。</p>
+<p>Softmax函数的公式如下：<br>
+$$<br>
+\operatorname{Softmax}\left(z_i\right)=\frac{\exp \left(z_i\right)}{\sum_j \exp \left(z_j\right)}<br>
+$$</p>
 <blockquote>
 <p>其中， $z_i$ 是第 $\mathrm{i}$ 个输出节点的原始输出值， $z_j$ 是所有输出节点的原始输出值。公式使所有输出值的和为1，这样每个输出值就可以被解释为对应类别的预测概率。</p>
 </blockquote>
-<h4 id="交叉熵"><a href="#交叉熵" class="headerlink" title="交叉熵"></a>交叉熵</h4><p>交叉熵损失函数可以衡量模型的预测概率分布与真实概率分布之间的差异，我们通常会使用Softmax函数将神经网络的输出转化为概率分布，然后使用交叉熵损失函数来优化我们的模型，使得模型的预测概率分布尽可能接近真实的概率分布。</p>
-<p>我们可以像线性回归那样使用平方损失函数 $\left|\hat{\boldsymbol{y}}^{(i)}-\boldsymbol{y}^{(i)}\right|^2 &#x2F; 2$ 。然而，想要预测分类结果正确，我们其实并不需要预测概率完全等于标签概率。例如，在图像分类的例子里，如果 $y^{(i)}&#x3D;3$ ，那么我们只需要 $\hat{y}_3^{(i)}$ 比其他两个预测值 $\hat{y}_1^{(i)}$ 和 $\hat{y}_2^{(i)}$ 大就行了。即使 $\hat{y}_3^{(i)}$ 值为 0.6 ，不管其他两个预测值为多少，类别预测均正确。</p>
-<p>交叉熵函数的公式如下：<br>$$<br>H(P, Q)&#x3D;-\sum_i P(i) \log Q(i)<br>$$</p>
+<h4 id="交叉熵">交叉熵</h4>
+<p>交叉熵损失函数可以衡量模型的预测概率分布与真实概率分布之间的差异，我们通常会使用Softmax函数将神经网络的输出转化为概率分布，然后使用交叉熵损失函数来优化我们的模型，使得模型的预测概率分布尽可能接近真实的概率分布。</p>
+<p>我们可以像线性回归那样使用平方损失函数 $\left|\hat{\boldsymbol{y}}^{(i)}-\boldsymbol{y}^{(i)}\right|^2 / 2$ 。然而，想要预测分类结果正确，我们其实并不需要预测概率完全等于标签概率。例如，在图像分类的例子里，如果 $y^{(i)}=3$ ，那么我们只需要 $\hat{y}_3^{(i)}$ 比其他两个预测值 $\hat{y}_1^{(i)}$ 和 $\hat{y}_2^{(i)}$ 大就行了。即使 $\hat{y}_3^{(i)}$ 值为 0.6 ，不管其他两个预测值为多少，类别预测均正确。</p>
+<p>交叉熵函数的公式如下：<br>
+$$<br>
+H(P, Q)=-\sum_i P(i) \log Q(i)<br>
+$$</p>
 <blockquote>
 <p>其中， $P(i)$ 是样本的期望输出， $Q(i)$ 是样本的实际输出。这个公式表明，交叉摘刻画的是实际输出 (概率) 与期望输出 (概率) 的距离，也就是交叉摘的值越小，两个概率分布就越接近。</p>
 <p>当然，遇到一个样本有多个标签时，例如图像里含有不止一个物体时，我们并不能做这一步简化。但即便对于这种情况，交叉熵同样只关心对图像中出现的物体类别的预测概率。</p>
 </blockquote>
-<p>假设训练数据集的样本数为 $n$ ，交叉熵损失函数定义为<br>$$<br>\ell(\boldsymbol{\Theta})&#x3D;\frac{1}{n} \sum_{i&#x3D;1}^n H\left(\boldsymbol{y}^{(i)}, \hat{\boldsymbol{y}}^{(i)}\right)<br>$$</p>
-<p>其中 $\Theta$ 代表模型参数。同样地，如果每个样本只有一个标签，那么交叉摘损失可以简写成 $\ell(\Theta)&#x3D;-(1 &#x2F; n) \sum_{i&#x3D;1}^n \log \hat{y}<em>{y^{(i)}}^{(i)}$ 。从另一个角度来看，我们知道最小化 $\ell(\Theta)$ 等价于最大化 $\exp (-n \ell(\Theta))&#x3D;$ $\prod</em>{i&#x3D;1}^n \hat{y}_{y^{(i)}}^{(i)}$ ，即最小化交叉摘损失函数等价于最大化训练数据集所有标签类别的联合预测概率。</p>
+<p>假设训练数据集的样本数为 $n$ ，交叉熵损失函数定义为<br>
+$$<br>
+\ell(\boldsymbol{\Theta})=\frac{1}{n} \sum_{i=1}^n H\left(\boldsymbol{y}^{(i)}, \hat{\boldsymbol{y}}^{(i)}\right)<br>
+$$</p>
+<p>其中 $\Theta$ 代表模型参数。同样地，如果每个样本只有一个标签，那么交叉摘损失可以简写成 $\ell(\Theta)=-(1 / n) \sum_{i=1}^n \log \hat{y}<em>{y^{(i)}}^{(i)}$ 。从另一个角度来看，我们知道最小化 $\ell(\Theta)$ 等价于最大化 $\exp (-n \ell(\Theta))=$ $\prod</em>{i=1}^n \hat{y}_{y^{(i)}}^{(i)}$ ，即最小化交叉摘损失函数等价于最大化训练数据集所有标签类别的联合预测概率。</p>
 <p>例如Softmax函数的输出为 <code>[0.66, 0.24, 0.10]</code>，这个输出可以被解释为模型对每个类别的预测概率。</p>
 <p>然后，我们使用交叉熵损失函数来计算损失：</p>
 <p>交叉熵损失函数的计算过程如下：</p>
@@ -534,9 +547,10 @@
 <p>所以，交叉熵损失为 <code>0.41</code>。这个值衡量了模型的预测概率分布与真实概率分布之间的差异。我们的目标是通过优化神经网络的参数来最小化这个损失值，使得模型的预测概率分布尽可能接近真实的概率分布。</p>
 <blockquote>
 <p>为什么选交叉熵作为分类问题的损失函数，而不是传统机器学习更熟悉的均方差或者别的损失函数？</p>
-<p>详见：<a target="_blank" rel="noopener" href="https://github.com/Captain1986/CaptainBlackboard/blob/master/D%230012-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E4%BA%A4%E5%8F%89%E7%86%B5%E4%BD%9C%E4%B8%BA%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/D%230012.md">CaptainBlackboard&#x2F;D#0012-为什么选交叉熵作为分类问题的损失函数&#x2F;D#0012.md at master · Captain1986&#x2F;CaptainBlackboard (github.com)</a></p>
+<p>详见：<a target="_blank" rel="noopener" href="https://github.com/Captain1986/CaptainBlackboard/blob/master/D%230012-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E4%BA%A4%E5%8F%89%E7%86%B5%E4%BD%9C%E4%B8%BA%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E7%9A%84%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/D%230012.md">CaptainBlackboard/D#0012-为什么选交叉熵作为分类问题的损失函数/D#0012.md at master · Captain1986/CaptainBlackboard (github.com)</a></p>
 </blockquote>
-<h3 id="张量介绍"><a href="#张量介绍" class="headerlink" title="张量介绍"></a>张量介绍</h3><p><strong>张量是向量与矩阵的抽象形式。</strong></p>
+<h3 id="张量介绍">张量介绍</h3>
+<p><strong>张量是向量与矩阵的抽象形式。</strong></p>
 <p>向量是一维张量，矩阵是二维张量，而更高维的被称为n维张量。因此，搭建深度学习框架的第一件事情是创建这种基本类型，我们称之为张量（Tensor）：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
@@ -559,11 +573,11 @@ x <span class="token operator">=</span> Tensor<span class="token punctuation">(<
 
 y <span class="token operator">=</span> x <span class="token operator">+</span> x
 <span class="token keyword">print</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：它把所有数值信息都存储在一个Numpy数组（self.data）中，而且它支持一种张量操作（加法 add）。增加更多操作是相对容易：只需要在张量类中创建具有适当功能的其他函数即可。</p>
 </blockquote>
-<h4 id="PyTorch中的张量操作"><a href="#PyTorch中的张量操作" class="headerlink" title="PyTorch中的张量操作"></a>PyTorch中的张量操作</h4><p><code>Tensor</code>是这个包的核心类，如果将其属性<code>.requires_grad</code>设置为<code>True</code>，它将开始追踪(track)在其上的所有操作（这样就可以利用链式法则进行梯度传播了）。完成计算后，可以调用<code>.backward()</code>来完成所有梯度计算。此<code>Tensor</code>的梯度将累积到<code>.grad</code>属性中。</p>
+<h4 id="PyTorch中的张量操作">PyTorch中的张量操作</h4>
+<p><code>Tensor</code>是这个包的核心类，如果将其属性<code>.requires_grad</code>设置为<code>True</code>，它将开始追踪(track)在其上的所有操作（这样就可以利用链式法则进行梯度传播了）。完成计算后，可以调用<code>.backward()</code>来完成所有梯度计算。此<code>Tensor</code>的梯度将累积到<code>.grad</code>属性中。</p>
 <blockquote>
 <p>注意：<code>y.backward()</code>时，如果<code>y</code>是<strong>标量</strong>，则不需要为<code>backward()</code>传入任何参数；否则，需要传入一个与<code>y</code>同形的<code>Tensor</code>。</p>
 </blockquote>
@@ -573,9 +587,11 @@ y <span class="token operator">=</span> x <span class="token operator">+</span> 
 <p>例如：</p>
 <p>假设<code>y</code>由自变量<code>x</code>计算而来，<code>w</code>是和<code>y</code>同形的张量，则<code>y.backward(w)</code>的含义是：先计算<code>l = torch.sum(y * w)</code>，则<code>l</code>是个标量，然后求<code>l</code>对自变量<code>x</code>的导数。 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29923090">参考</a></p>
 </blockquote>
-<h5 id="detach-函数"><a href="#detach-函数" class="headerlink" title="detach() 函数"></a><code>detach()</code> 函数</h5><p>在PyTorch中，<code>detach()</code>函数返回一个新的张量，该张量从当前图中分离出来。这意味着新的张量将不会跟踪应用于当前张量的任何操作。这对于调试或创建与当前图无关的计算非常有用。</p>
+<h5 id="detach-函数"><code>detach()</code> 函数</h5>
+<p>在PyTorch中，<code>detach()</code>函数返回一个新的张量，该张量从当前图中分离出来。这意味着新的张量将不会跟踪应用于当前张量的任何操作。这对于调试或创建与当前图无关的计算非常有用。</p>
 <p>返回的张量与原始张量共享相同的存储。在它们中的任何一个上的就地修改都将被看到，并可能在正确性检查中触发错误。</p>
-<h5 id="with-torch-no-grad-函数"><a href="#with-torch-no-grad-函数" class="headerlink" title="with torch.no_grad()函数"></a><code>with torch.no_grad()</code>函数</h5><p>此外，还可以用<code>with torch.no_grad()</code>将需要关闭梯度计算的代码块包裹起来，在这个代码块中，PyTorch将不会追踪Tensor的梯度信息，这样就避免了不必要的内存消耗和计算开销。</p>
+<h5 id="with-torch-no-grad-函数"><code>with torch.no_grad()</code>函数</h5>
+<p>此外，还可以用<code>with torch.no_grad()</code>将需要关闭梯度计算的代码块包裹起来，在这个代码块中，PyTorch将不会追踪Tensor的梯度信息，这样就避免了不必要的内存消耗和计算开销。</p>
 <p>作用：</p>
 <ul>
 <li>在测试或评估模型时，可以加快运行速度，节省显存。</li>
@@ -598,8 +614,8 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
 <span class="token comment"># 使用torch.no_grad()来关闭梯度计算</span>
 <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     output <span class="token operator">=</span> model<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="Function类"><a href="#Function类" class="headerlink" title="Function类"></a><code>Function</code>类</h5><p><code>Function</code>是另外一个很重要的类。<code>Tensor</code>和<code>Function</code>互相结合就可以构建一个记录有整个计算过程的有向无环图（DAG）。每个<code>Tensor</code>都有一个<code>.grad_fn</code>属性，该属性即创建该<code>Tensor</code>的<code>Function</code>, 就是说该<code>Tensor</code>是不是通过某些运算得到的，若是，则<code>grad_fn</code>返回一个与这些运算相关的对象，否则是None。</p>
+<h5 id="Function类"><code>Function</code>类</h5>
+<p><code>Function</code>是另外一个很重要的类。<code>Tensor</code>和<code>Function</code>互相结合就可以构建一个记录有整个计算过程的有向无环图（DAG）。每个<code>Tensor</code>都有一个<code>.grad_fn</code>属性，该属性即创建该<code>Tensor</code>的<code>Function</code>, 就是说该<code>Tensor</code>是不是通过某些运算得到的，若是，则<code>grad_fn</code>返回一个与这些运算相关的对象，否则是None。</p>
 <p>例如：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">x <span class="token operator">=</span> torch<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
@@ -618,7 +634,6 @@ y <span class="token operator">=</span> x <span class="token operator">+</span> 
 <span class="token comment"># tensor([[3., 3.],</span>
 <span class="token comment">#        [3., 3.]], grad_fn=&lt;AddBackward>)</span>
 <span class="token comment"># &lt;AddBackward object at 0x1100477b8></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：x是直接创建的，所以它没有<code>grad_fn</code>, 而y是通过一个加法操作创建的，所以它有一个为<code>&lt;AddBackward&gt;</code>的<code>grad_fn</code>。</p>
 <p>像x这种直接创建的称为叶子节点，叶子节点对应的<code>grad_fn</code>是<code>None</code>。</p>
@@ -636,8 +651,8 @@ b <span class="token operator">=</span> <span class="token punctuation">(</span>
 <span class="token comment"># False</span>
 <span class="token comment"># True</span>
 <span class="token comment"># &lt;SumBackward0 object at 0x118f50cc0></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="求梯度"><a href="#求梯度" class="headerlink" title="求梯度"></a>求梯度</h5><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 再来反向传播一次，注意grad是累加的</span>
+<h5 id="求梯度">求梯度</h5>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 再来反向传播一次，注意grad是累加的</span>
 out2 <span class="token operator">=</span> x<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 out2<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>
@@ -652,7 +667,6 @@ out3<span class="token punctuation">.</span>backward<span class="token punctuati
 <span class="token comment">#        [5.5000, 5.5000]])</span>
 <span class="token comment"># tensor([[1., 1.],</span>
 <span class="token comment">#        [1., 1.]])</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：grad在反向传播过程中是累加的(accumulated)，这意味着每一次运行反向传播，梯度都会累加之前的梯度，所以一般在反向传播之前需把梯度清零。</p>
 </blockquote>
@@ -668,14 +682,13 @@ x<span class="token punctuation">.</span>data <span class="token operator">*=</s
 y<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token comment"># 更改data的值也会影响tensor的值</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>Copy to clipboardErrorCopied<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出：</p>
 <pre class="line-numbers language-none"><code class="language-none">tensor([1.])
 False
 tensor([100.], requires_grad&#x3D;True)
 tensor([2.])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="自动梯度计算（autograd）介绍"><a href="#自动梯度计算（autograd）介绍" class="headerlink" title="自动梯度计算（autograd）介绍"></a>自动梯度计算（autograd）介绍</h3><p><strong>之前，你手动做反向传播。现在，将它自动化。</strong></p>
+<h3 id="自动梯度计算（autograd）介绍">自动梯度计算（autograd）介绍</h3>
+<p><strong>之前，你手动做反向传播。现在，将它自动化。</strong></p>
 <p>计算梯度这件事情需要反向经过网络：首先要计算输出层的梯度，然后用它计算倒数第二层的梯度，以此类推，直到为所有的权重都求得正确的梯度：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
@@ -708,33 +721,35 @@ y <span class="token operator">=</span> Tensor<span class="token punctuation">(<
 
 z <span class="token operator">=</span> x <span class="token operator">+</span> y
 z<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>z<span class="token punctuation">.</span>creators<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>z<span class="token punctuation">.</span>creation_op<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-none"><code class="language-none">[1 1 1 1 1]
 [1 1 1 1 1]
 [array([1, 2, 3, 4, 5]), array([2, 2, 2, 2, 2])]
 add<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
-<li><p>每个张量有两个属性，creators是一个列表，包含创建当前张量（默认为None）用到的所有张量。因此当两个张量x和y加到一起时，z包含两个creators，即x和y。</p>
+<li>
+<p>每个张量有两个属性，creators是一个列表，包含创建当前张量（默认为None）用到的所有张量。因此当两个张量x和y加到一起时，z包含两个creators，即x和y。</p>
 </li>
-<li><p>creation_op是一个相关特性，存储了creators在创建过程中用到的指令。因此，执行z&#x3D;x+y会创建一个计算图，有三个节点（x，y和z）与两条边（z-&gt;x和z-&gt;y）。每条边都被creation_op标记为add，下图可以让你可以递归地反向传播梯度。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/05/shen-du-xue-xi-tu-jie-da-jian-shen-du-xue-xi-kuang-jia/image-20231205212517079.png" alt="image-20231205212517079"></p>
+<li>
+<p>creation_op是一个相关特性，存储了creators在创建过程中用到的指令。因此，执行z=x+y会创建一个计算图，有三个节点（x，y和z）与两条边（z-&gt;x和z-&gt;y）。每条边都被creation_op标记为add，下图可以让你可以递归地反向传播梯度。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231205212517079.png" alt="image-20231205212517079"></p>
 </li>
-<li><p>当你调用z.backward()时，它基于计算z给定函数(add)为x和y传送正确的梯度。经过加法的反向传播意味着也要在反向传播时应用加法。在这个例子中，因为只有一个梯度要加到x或y，将梯度从z复制到x和y。</p>
+<li>
+<p>当你调用z.backward()时，它基于计算z给定函数(add)为x和y传送正确的梯度。经过加法的反向传播意味着也要在反向传播时应用加法。在这个例子中，因为只有一个梯度要加到x或y，将梯度从z复制到x和y。</p>
 </li>
 </ul>
 <p>这种形式的autograd最优美的部分可能是它能很好地以递归方式工作，因为每个张量都在它的所有self.creators上调用了.backward()。</p>
-<h3 id="快速检查"><a href="#快速检查" class="headerlink" title="快速检查"></a>快速检查</h3><p>曾经我们往一个方向进行前向传播，然后经过由激活函数构成的虚拟图向后传播。</p>
+<h3 id="快速检查">快速检查</h3>
+<p>曾经我们往一个方向进行前向传播，然后经过由激活函数构成的虚拟图向后传播。</p>
 <p>你只是没有显式地把节点和边编码在一个图数据结构中，作为替代，现在我们创建了一个层（字典）列表，并手动编码了正确的前向与反向传播操作。现在，基于此搭建一个良好的接口让你可以不必再写那么多代码，这个接口让你递归地反向传播，而不用硬要手写复杂的反向传播代码。</p>
 <blockquote>
 <p>注意：在前向传播中创建的图称为<strong>动态计算图</strong>，因为它是在前向传播过程中<strong>即时</strong>创建的。这是在较新的深度学习框架（如DyNet和PyTorch）中出现的autograd类型，较老的框架（如Theano和TensorFlow）使用的是静态计算图，它是在前向传播开始之前就指定好的。</p>
 </blockquote>
-<h3 id="多次使用的张量"><a href="#多次使用的张量" class="headerlink" title="多次使用的张量"></a>多次使用的张量</h3><p>Tensor的当前版本只支持向后传播到一个变量一次。但有时，在向前传播的过程中，你会使用同一个张量（神经网络的权重）多次，因此计算图的多个部分把梯度传播到同一个张量。但是在反向传播到一个用了多次的变量（是多个孩子的父节点）时，当前的代码会计算出错误的梯度：</p>
+<h3 id="多次使用的张量">多次使用的张量</h3>
+<p>Tensor的当前版本只支持向后传播到一个变量一次。但有时，在向前传播的过程中，你会使用同一个张量（神经网络的权重）多次，因此计算图的多个部分把梯度传播到同一个张量。但是在反向传播到一个用了多次的变量（是多个孩子的父节点）时，当前的代码会计算出错误的梯度：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">a <span class="token operator">=</span> Tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 b <span class="token operator">=</span> Tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 c <span class="token operator">=</span> Tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
@@ -745,13 +760,12 @@ f <span class="token operator">=</span> d <span class="token operator">+</span> 
 f<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 b<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data <span class="token operator">==</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-none"><code class="language-none">array([False, False, False, False, False])<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>在这个例子中，变量b在创建f的过程中使用了两次。因此，它的梯度应该是两个导数的和：[2,2,2,2,2]。下面展示的是这一系列操作创建的计算图。注意：现在有两个指针指向b，所以它应当是来自e和d的梯度的和。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/05/shen-du-xue-xi-tu-jie-da-jian-shen-du-xue-xi-kuang-jia/image-20231205215528817.png" alt="image-20231205215528817"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231205215528817.png" alt="image-20231205215528817"></p>
 <p>不过当前的Tensor实现只是用前面的导数覆盖了每个导数。首先，b会得到来自d的梯度，然后它被来自e的梯度覆盖，我们需要改变梯度写入的方式。</p>
-<h4 id="升级autograd以支持多次使用的张量"><a href="#升级autograd以支持多次使用的张量" class="headerlink" title="升级autograd以支持多次使用的张量"></a>升级autograd以支持多次使用的张量</h4><p><strong>增加一个新函数，并且更新三个旧函数。</strong></p>
+<h4 id="升级autograd以支持多次使用的张量">升级autograd以支持多次使用的张量</h4>
+<p><strong>增加一个新函数，并且更新三个旧函数。</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
 <span class="token keyword">class</span> <span class="token class-name">Tensor</span> <span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -843,21 +857,23 @@ f <span class="token operator">=</span> d <span class="token operator">+</span> 
 f<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data <span class="token operator">==</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
-<li>使用条件判断一个张量有多少个子节点，如果传入的creators参数不为None，则遍历creators列表中的每个元素。对于每个元素c，检查self.id是否已经存在于c的children字典中。如果不存在，则将self.id添加到c的children字典中，并将其值设置为1；如果存在，则将c的children字典中self.id对应的值加1。 </li>
+<li>使用条件判断一个张量有多少个子节点，如果传入的creators参数不为None，则遍历creators列表中的每个元素。对于每个元素c，检查self.id是否已经存在于c的children字典中。如果不存在，则将self.id添加到c的children字典中，并将其值设置为1；如果存在，则将c的children字典中self.id对应的值加1。</li>
 <li><code>all_children_grads_accounted_for</code> 函数是检查一个张量是否从每个子节点接收了正确数量的梯度，对于每个子类的计数，如果不等于0，则说明该子类的梯度还未计算完，直接返回False；如果遍历完所有子类后都没有返回False，则说明所有子类的梯度都已经计算完，返回True。</li>
-<li>在更新后的反向传播代码中：<ul>
+<li>在更新后的反向传播代码中：
+<ul>
 <li><code>if(self.autograd)</code>：判断是否开启自动求导功能，如果开启自动求导，则执行以下代码。</li>
 <li><code>if(grad is None)</code>：如果grad参数为None，则将grad初始化为一个与self.data形状相同的全1的张量。</li>
 <li><code>if(grad_origin is not None)</code>：如果grad_origin参数不为None，则检查grad_origin的id是否在self.children中，并且对应的计数器是否为0。如果计数器为0，则抛出异常；否则将计数器减1。<strong>检查确保你可以向后传播还是在等待一个梯度；在后一种情况下，减少计数器。</strong></li>
 <li><code>if(self.grad is None)</code>：累加来自于若干个子节点的梯度，即张量的相加。</li>
 <li><code>assert grad.autograd == False</code>：使用断言grad不具有自动求导功能。</li>
-<li><code>if(self.creators is not None and (self.all_children_grads_accounted_for() or grad_origin is None))</code>：<br>判断是否进行反向传播的条件，self.creators不为None，并且所有子变量的梯度都已经计算完毕，或者grad_origin为None。</li>
+<li><code>if(self.creators is not None and (self.all_children_grads_accounted_for() or grad_origin is None))</code>：<br>
+判断是否进行反向传播的条件，self.creators不为None，并且所有子变量的梯度都已经计算完毕，或者grad_origin为None。</li>
 </ul>
 </li>
 </ul>
-<h4 id="添加更多函数支持"><a href="#添加更多函数支持" class="headerlink" title="添加更多函数支持"></a>添加更多函数支持</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<h4 id="添加更多函数支持">添加更多函数支持</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
 <span class="token keyword">class</span> <span class="token class-name">Tensor</span> <span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     
@@ -1044,8 +1060,8 @@ f <span class="token operator">=</span> d <span class="token operator">+</span> 
 f<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data <span class="token operator">==</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="使用autograd训练神经网络"><a href="#使用autograd训练神经网络" class="headerlink" title="使用autograd训练神经网络"></a>使用autograd训练神经网络</h3><p>以下是一个手写的反向传播的神经网络：</p>
+<h3 id="使用autograd训练神经网络">使用autograd训练神经网络</h3>
+<p>以下是一个手写的反向传播的神经网络：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy
 np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
 
@@ -1074,7 +1090,6 @@ weights_1_2 <span class="token operator">=</span> np<span class="token punctuati
     weights_1_2 <span class="token operator">-=</span> weight_1_2_update <span class="token operator">*</span> <span class="token number">0.1</span>
     weights_0_1 <span class="token operator">-=</span> weight_0_1_update <span class="token operator">*</span> <span class="token number">0.1</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出：</p>
 <pre class="line-numbers language-none"><code class="language-none">5.066439994622395
 0.4959907791902342
@@ -1086,7 +1101,6 @@ weights_1_2 <span class="token operator">=</span> np<span class="token punctuati
 0.17231260916265176
 0.14193744536652986
 0.11613979792168384<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>但是有了新的autograd系统，代码就简单多了。你不必维护任何临时变量（因为动态图会追踪它们），而且也不必实现任何反向传播逻辑（因为.backward()方法会处理）。这样不仅更方便，而且更不容易在反向传播代码中犯愚蠢的错误，从而减少了出现bug的可能性：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
@@ -1114,8 +1128,8 @@ w<span class="token punctuation">.</span>append<span class="token punctuation">(
         w_<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data <span class="token operator">*=</span> <span class="token number">0</span>
 
     <span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="增加自动优化"><a href="#增加自动优化" class="headerlink" title="增加自动优化"></a>增加自动优化</h4><p><strong>创建一个随机梯度下降（SGD）优化器</strong></p>
+<h4 id="增加自动优化">增加自动优化</h4>
+<p><strong>创建一个随机梯度下降（SGD）优化器</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">SGD</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> parameters<span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -1134,7 +1148,6 @@ w<span class="token punctuation">.</span>append<span class="token punctuation">(
             
             <span class="token keyword">if</span><span class="token punctuation">(</span>zero<span class="token punctuation">)</span><span class="token punctuation">:</span>
                 p<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data <span class="token operator">*=</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>如下所示，可以对前一个神经网络进一步简化，运行结果与前面一样：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy
 np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
@@ -1161,8 +1174,8 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
     optim<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
     <span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="添加神经元层类型的支持"><a href="#添加神经元层类型的支持" class="headerlink" title="添加神经元层类型的支持"></a>添加神经元层类型的支持</h3><p>进一步的工作是将新函数添加到张量并创建方便的高阶类和函数，在几乎所有的框架中，最常见的抽象可能是神经元层抽象。它把一组常用的前向传播技术打包成一个简单的API，后者可用某种.forward()方法调用前者。以下是一个简单线性层的例子：</p>
+<h3 id="添加神经元层类型的支持">添加神经元层类型的支持</h3>
+<p>进一步的工作是将新函数添加到张量并创建方便的高阶类和函数，在几乎所有的框架中，最常见的抽象可能是神经元层抽象。它把一组常用的前向传播技术打包成一个简单的API，后者可用某种.forward()方法调用前者。以下是一个简单线性层的例子：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Layer</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -1185,12 +1198,12 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
 
     <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">input</span><span class="token punctuation">.</span>mm<span class="token punctuation">(</span>self<span class="token punctuation">.</span>weight<span class="token punctuation">)</span><span class="token operator">+</span>self<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>expand<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>权重被组织成类（而且我添加了偏差权重（bias），因为这是一个真正的线性层）。你可以整体初始化这个神经元层，使得权重和偏差初始化到正确的大小，并且它总是采用正确的前向传播逻辑。</li>
 <li>创建了一个抽象类Layer，它有一个单独的getter。它可以支持更复杂的神经元层类型（比如包含其他神经元层的神经元层）。你只需要重载get_parameters()函数来控制什么样的张量之后会传到优化器（例如之前创建的SGD类）。</li>
 </ul>
-<h3 id="包含神经元层的神经元层"><a href="#包含神经元层的神经元层" class="headerlink" title="包含神经元层的神经元层"></a>包含神经元层的神经元层</h3><p><strong>神经元层也可以包含其他层。</strong></p>
+<h3 id="包含神经元层的神经元层">包含神经元层的神经元层</h3>
+<p><strong>神经元层也可以包含其他层。</strong></p>
 <p>最普遍的神经元层是一种前向传播一组神经元层的顺序层，它的每一层都把输出传给下一层作为输入：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">
 <span class="token keyword">class</span> <span class="token class-name">Sequential</span><span class="token punctuation">(</span>Layer<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -1236,8 +1249,8 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
     loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     optim<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="损失函数层"><a href="#损失函数层" class="headerlink" title="损失函数层"></a>损失函数层</h3><p><strong>有些层没有权重。</strong></p>
+<h3 id="损失函数层">损失函数层</h3>
+<p><strong>有些层没有权重。</strong></p>
 <p>你也可以把输入的函数作为神经元层。这种神经元层最普遍的版本很有可能是损失函数层，如均方误差：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MSELoss</span><span class="token punctuation">(</span>Layer<span class="token punctuation">)</span><span class="token punctuation">:</span>
     
@@ -1270,7 +1283,6 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
     loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     optim<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出：</p>
 <pre class="line-numbers language-none"><code class="language-none">[2.33428272]
 [0.06743796]
@@ -1282,12 +1294,13 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
 [0.01491699]
 [0.01153118]
 [0.00889602]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>前面若干代码例子底层做的都是相同的运算，正是autograd在执行所有的反向传播，而前向传播步骤被打包进一个个精巧的类，保证其功能以正确顺序执行。</p>
-<h3 id="如何学习一个框架"><a href="#如何学习一个框架" class="headerlink" title="如何学习一个框架"></a>如何学习一个框架</h3><p><strong>简单而言，框架就是autograd加上一组预先定义好的神经元层和优化器。</strong></p>
+<h3 id="如何学习一个框架">如何学习一个框架</h3>
+<p><strong>简单而言，框架就是autograd加上一组预先定义好的神经元层和优化器。</strong></p>
 <p>你现在已经用底下的autograd系统相当快地写出多种神经元层类型，这使得把任意的神经元层组合在一起变得相当容易。坦率地说，这是现代框架的主要特性，它消除了为前向和后向传播手写每一个操作的必要。使用框架可以极大地加快从想法向实验转化的速度，并减少代码中的bug数量。</p>
 <p>只是把框架看作与一大堆神经元层和优化器结合在一起的autograd系统可以帮助你学习它们。</p>
-<h3 id="非线性层"><a href="#非线性层" class="headerlink" title="非线性层"></a>非线性层</h3><p><strong>下面将非线性层加入Tensor，创建一些神经元层类型。</strong></p>
+<h3 id="非线性层">非线性层</h3>
+<p><strong>下面将非线性层加入Tensor，创建一些神经元层类型。</strong></p>
 <p>即将.sigmoid()和.tanh()函数添加到Tensor类中：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">sigmoid</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>autograd<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -1304,7 +1317,6 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
                           creators<span class="token operator">=</span><span class="token punctuation">[</span>self<span class="token punctuation">]</span><span class="token punctuation">,</span>
                           creation_op<span class="token operator">=</span><span class="token string">"tanh"</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>tanh<span class="token punctuation">(</span>self<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>以下代码展示了添加到 <code>Tensor.backword()</code> 方法的反向传播逻辑：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>creation_op <span class="token operator">==</span> <span class="token string">"sigmoid"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
                    ones <span class="token operator">=</span> Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>self<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -1313,7 +1325,6 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
 <span class="token keyword">if</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>creation_op <span class="token operator">==</span> <span class="token string">"tanh"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
                    ones <span class="token operator">=</span> Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>self<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
                    self<span class="token punctuation">.</span>creators<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>backward<span class="token punctuation">(</span>self<span class="token punctuation">.</span>grad <span class="token operator">*</span> <span class="token punctuation">(</span>ones <span class="token operator">-</span> <span class="token punctuation">(</span>self <span class="token operator">*</span> self<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>添加相应的类：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Tanh</span><span class="token punctuation">(</span>Layer<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -1328,7 +1339,6 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
     
     <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">input</span><span class="token punctuation">.</span>sigmoid<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>将<code>Tanh()</code>和<code>Sigmoid()</code>层放到<code>Sequential()</code>的参数列表中，而神经网络刚好知道如何用它们：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy
 np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
@@ -1353,7 +1363,6 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
     loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     optim<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-none"><code class="language-none">[1.06372865]
 [0.75148144]
 [0.57384259]
@@ -1364,9 +1373,10 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
 [0.07571169]
 [0.05837623]
 [0.04700013]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="嵌入层"><a href="#嵌入层" class="headerlink" title="嵌入层"></a>嵌入层</h3><p><strong>嵌入层把下标转换成激励信号。</strong></p>
-<h3 id="交叉熵层"><a href="#交叉熵层" class="headerlink" title="交叉熵层"></a>交叉熵层</h3><p>代码示例：</p>
+<h3 id="嵌入层">嵌入层</h3>
+<p><strong>嵌入层把下标转换成激励信号。</strong></p>
+<h3 id="交叉熵层">交叉熵层</h3>
+<p>代码示例：</p>
 <p>添加到Tensor：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">cross_entropy</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> target_indices<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
@@ -1390,7 +1400,6 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
             <span class="token keyword">return</span> out
 
         <span class="token keyword">return</span> Tensor<span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">CrossEntropyLoss</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -1398,7 +1407,6 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
     
     <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">,</span> target<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> <span class="token builtin">input</span><span class="token punctuation">.</span>cross_entropy<span class="token punctuation">(</span>target<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>进行预测与输出：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy
 np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
@@ -1426,7 +1434,6 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
     loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     optim<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出：</p>
 <pre class="line-numbers language-none"><code class="language-none">1.3885032434928422
 0.9558181509266037
@@ -1438,13 +1445,13 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
 0.22061283923954234
 0.18946427334830068
 0.16527389263866668<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这个损失函数与其他函数有一个明显的不同之处：最终的softmax与交叉熵损失的计算都在同一个类中，这种做法在深度神经网络中极为常见，几乎所有的神经网络都用这种方式工作。</p>
 <p>当你想要结束一个网络并用交叉熵训练时，可以在前向传播中忽略softmax，而调用一个会自动调用softmax的交叉熵类，前者是后者的一部分。</p>
 <blockquote>
 <p>这种一致的方式组合它们的原因是<strong>性能</strong>。在交叉熵函数中一起计算softmax和负指数相似性的梯度比在不同模块中分别对它们做前向与反向传播要快得多，这点与梯度运算的快捷算法有关。</p>
 </blockquote>
-<h3 id="递归神经网络层"><a href="#递归神经网络层" class="headerlink" title="递归神经网络层"></a>递归神经网络层</h3><p><strong>通过组合若干层，就可以在时间序列上学习。</strong></p>
+<h3 id="递归神经网络层">递归神经网络层</h3>
+<p><strong>通过组合若干层，就可以在时间序列上学习。</strong></p>
 <p>这种神经元层叫作递归层，你将用三个线性层来创建它，并且.forward()方法会接收前一个隐藏状态的输出和当前训练数据的输入。</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">RNNCell</span><span class="token punctuation">(</span>Layer<span class="token punctuation">)</span><span class="token punctuation">:</span>
     
@@ -1479,13 +1486,15 @@ optim <span class="token operator">=</span> SGD<span class="token punctuation">(
     
     <span class="token keyword">def</span> <span class="token function">init_hidden</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> Tensor<span class="token punctuation">(</span>np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>batch_size<span class="token punctuation">,</span>self<span class="token punctuation">.</span>n_hidden<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> autograd<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
-<li><p>RNN有一个状态向量，用于将信息从一个时间步骤传递到下一个时间步骤：在这个例子中，它是hidden变量，作为forward函数的输入输出变量。</p>
+<li>
+<p>RNN有一个状态向量，用于将信息从一个时间步骤传递到下一个时间步骤：在这个例子中，它是hidden变量，作为forward函数的输入输出变量。</p>
 </li>
-<li><p>RNN 还有若干不同的权重矩阵：一个把输入向量映射到隐藏向量(处理输入数据)，一个把隐藏向量映射到隐藏向量(即根据前一个隐藏向量更新当前的)，以及可能会有一个隐藏-输出层基于隐藏向量做出预测。这里的 RNNCell 实现包含了所有三种。</p>
+<li>
+<p>RNN 还有若干不同的权重矩阵：一个把输入向量映射到隐藏向量(处理输入数据)，一个把隐藏向量映射到隐藏向量(即根据前一个隐藏向量更新当前的)，以及可能会有一个隐藏-输出层基于隐藏向量做出预测。这里的 RNNCell 实现包含了所有三种。</p>
 </li>
-<li><p>self.w_ih 层是输入-隐藏层, self.w_hh 是隐藏-隐藏层, 还有 self.w_ho 是隐藏 -输出层。</p>
+<li>
+<p>self.w_ih 层是输入-隐藏层, self.w_hh 是隐藏-隐藏层, 还有 self.w_ho 是隐藏 -输出层。</p>
 <blockquote>
 <p>注意观察每种层的维度。self.w_ih 的输入大小和 self.w_ho 的输出大小都是词汇表的大小。所有其他维度都是基于参数 n_hidden 确定的。</p>
 </blockquote>

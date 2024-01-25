@@ -7,11 +7,13 @@
     <meta charset="utf-8">
     <meta name="keywords" content="神经网络剪枝初探, QT-7274">
     <meta name="description" content="剪枝
+
 如上图，我们发现函数的曲线其实已经有点过拟合了，但是如果我们去掉一些参数很小的项，那么它的泛化性就更好：
 
 即剪枝的目的：去掉一些不重要的参数，让我们的模型变得更小，计算效率更高。
 如何剪枝
-例如我们要将前一个网络剪枝成后一个网络，有">
+
+例如我们要将前一个网络剪枝成后一个网络">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -501,11 +503,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h2><p><img src="/medias/images/loading.gif" data-original="/2023/10/30/shen-jing-wang-luo-jian-zhi-chu-tan/image-20231030111206019.png" alt="image-20231030111206019"></p>
+                <h2 id="剪枝">剪枝</h2>
+<p><img src="/medias/images/loading.gif" data-original="image-20231030111206019.png" alt="image-20231030111206019"></p>
 <p>如上图，我们发现函数的曲线其实已经有点过拟合了，但是如果我们去掉一些参数很小的项，那么它的泛化性就更好：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/30/shen-jing-wang-luo-jian-zhi-chu-tan/image-20231030111316278.png" alt="image-20231030111316278"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231030111316278.png" alt="image-20231030111316278"></p>
 <p>即剪枝的目的：<strong>去掉一些不重要的参数，让我们的模型变得更小，计算效率更高。</strong></p>
-<h3 id="如何剪枝"><a href="#如何剪枝" class="headerlink" title="如何剪枝"></a>如何剪枝</h3><p><img src="/medias/images/loading.gif" data-original="/2023/10/30/shen-jing-wang-luo-jian-zhi-chu-tan/image-20231030111543398.png" alt="image-20231030111543398"></p>
+<h3 id="如何剪枝">如何剪枝</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231030111543398.png" alt="image-20231030111543398"></p>
 <p>例如我们要将前一个网络剪枝成后一个网络，有以下步骤：</p>
 <ol>
 <li>用矩阵表示系数，例如上图中最后一层全连接层，输入是4个，输出是3个，那么我们就可以用一个4 * 3的矩阵进行表示。</li>
@@ -516,10 +520,12 @@
 <p>综上所述，我们的目标就是：<strong>如何求出一个掩码矩阵？</strong></p>
 </blockquote>
 <p>numpy为我们提供了一个简单的方法：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/30/shen-jing-wang-luo-jian-zhi-chu-tan/image-20231030192019969.png" alt="image-20231030192019969"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231030192019969.png" alt="image-20231030192019969"></p>
 <p>即先求出系数矩阵的绝对值，然后告诉该函数要减掉百分之多少的枝，最好函数返回一个阈值：即小于该阈值的数都被剪掉了。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ol>
-<li><p>设置掩码，同时考虑掩码是否为空的情况：</p>
+<h3 id="代码实现">代码实现</h3>
+<ol>
+<li>
+<p>设置掩码，同时考虑掩码是否为空的情况：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">to_var</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">"""
     Automatically choose cpu or cuda
@@ -548,7 +554,8 @@
         <span class="token keyword">else</span><span class="token punctuation">:</span>
             <span class="token keyword">return</span> F<span class="token punctuation">.</span>linear<span class="token punctuation">(</span>x<span class="token punctuation">,</span> self<span class="token punctuation">.</span>weight<span class="token punctuation">,</span> self<span class="token punctuation">.</span>bias<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>关键点在于掩码矩阵如何计算：</p>
+<li>
+<p>关键点在于掩码矩阵如何计算：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">weight_prune</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> pruning_perc<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">'''
     Prune pruning_perc % weights layer-wise
@@ -569,7 +576,6 @@
             masks<span class="token punctuation">.</span>append<span class="token punctuation">(</span>pruned_inds<span class="token punctuation">.</span><span class="token builtin">float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 将掩码转换为浮点型，添加到masks列表中</span>
             idx <span class="token operator">+=</span> <span class="token number">1</span> <span class="token comment"># 索引向前</span>
     <span class="token keyword">return</span> masks<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>当然上述代码只是线性剪枝，即MLP，其他类型的以后再说。</p>
 </li>
 </ol>

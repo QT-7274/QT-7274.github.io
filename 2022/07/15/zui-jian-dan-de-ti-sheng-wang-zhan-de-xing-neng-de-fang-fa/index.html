@@ -466,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    997
+                    998
                 </div>
                 
 
@@ -496,38 +496,48 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-CDN加速"><a href="#1-CDN加速" class="headerlink" title="1.CDN加速"></a>1.CDN加速</h3><ul>
-<li><p>什么是CDN？</p>
+                <h3 id="1-CDN加速">1.CDN加速</h3>
+<ul>
+<li>
+<p>什么是CDN？</p>
 <p>CDN英文全称content delivery network，翻译过来就是内容分发网络，是一种在地理位置上分散的服务器组，这些服务器组一起工作来加速互联网内容快速传播，这些内容包括HTML页面，css、javascript文件，图像、视频等媒体文件。</p>
 <p>通俗来讲，就是CDN服务公司通过在全球各地建立很多服务器，然后当你加入他们的网络后 ，他们会缓存你的网站内容到各地服务器上，这样当访问你的网站时，他们就会从最近的缓存服务器上读取你的网站，而不需要直接访问你网站所在的服务器地址。</p>
 </li>
-<li><p>为什么强烈建议启用CDN？</p>
+<li>
+<p>为什么强烈建议启用CDN？</p>
 <p>研究表明，如果你的网站打开速度超过2s以上，那么你的客户很有可能离你而去，这一点对于商业化网站尤其重要，打开速度慢，那么将造成不可估量的损失。</p>
 <p>以本博客为例，仓库放在Github上，国内加载速度很慢，因此需要CDN加速来优化网站打开速度。</p>
 </li>
 </ul>
-<h4 id="Cloudflare-CDN"><a href="#Cloudflare-CDN" class="headerlink" title="Cloudflare CDN"></a>Cloudflare CDN</h4><p>Cloudflare是全球最大的一家主营CDN和网络安全的公司，而且配置也非常简单。</p>
-<h5 id="第一步：在Cloudflare添加你的网站"><a href="#第一步：在Cloudflare添加你的网站" class="headerlink" title="第一步：在Cloudflare添加你的网站"></a>第一步：在Cloudflare添加你的网站</h5><p>点击左侧导航栏中的<strong>网站</strong>选项，再点击右上角的<strong>添加站点</strong>按钮，输入你的域名，Cloudflare会开始扫描查询你的网站DNS配置。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/15/zui-jian-dan-de-ti-sheng-wang-zhan-de-xing-neng-de-fang-fa/image-20220715144412879.webp" alt="image-20220715144412879"></p>
+<h4 id="Cloudflare-CDN">Cloudflare CDN</h4>
+<p>Cloudflare是全球最大的一家主营CDN和网络安全的公司，而且配置也非常简单。</p>
+<h5 id="第一步：在Cloudflare添加你的网站">第一步：在Cloudflare添加你的网站</h5>
+<p>点击左侧导航栏中的<strong>网站</strong>选项，再点击右上角的<strong>添加站点</strong>按钮，输入你的域名，Cloudflare会开始扫描查询你的网站DNS配置。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220715144412879.webp" alt="image-20220715144412879"></p>
 <p>查询DNS完毕之后，会复制你的DNS记录到Cloudflare，然后点击继续按钮；接下来页面会要求你把原来的域名服务器更改为Cloudflare自己的，不改域名服务器，上面的DNS并不会生效。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/15/zui-jian-dan-de-ti-sheng-wang-zhan-de-xing-neng-de-fang-fa/image-20220715144840060.webp" alt="image-20220715144840060"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220715144840060.webp" alt="image-20220715144840060"></p>
 <p>以腾讯云为例，登录<strong>腾讯云域名注册管理控制台</strong>，进入“我的域名”页面，选择待修改的DNS域名，点击<strong>管理</strong>选项：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/15/zui-jian-dan-de-ti-sheng-wang-zhan-de-xing-neng-de-fang-fa/image-20220715145234006.webp" alt="image-20220715145234006"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220715145234006.webp" alt="image-20220715145234006"></p>
 <p>将DNS服务器修改为Cloudflare提供的两个：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/15/zui-jian-dan-de-ti-sheng-wang-zhan-de-xing-neng-de-fang-fa/image-20220715145503131.webp" alt="image-20220715145503131"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220715145503131.webp" alt="image-20220715145503131"></p>
 <p>至此，你的域名就可以在Cloudflare上管理了，在24小时域名服务器更新完成后，用户也可以通过你自己的域名访问到网站了。</p>
-<h5 id="第二步：优化性能"><a href="#第二步：优化性能" class="headerlink" title="第二步：优化性能"></a>第二步：优化性能</h5><p>在Cloudflare进入主页，点击配置好的网站，选择免费套餐，勾选以下设置：</p>
+<h5 id="第二步：优化性能">第二步：优化性能</h5>
+<p>在Cloudflare进入主页，点击配置好的网站，选择免费套餐，勾选以下设置：</p>
 <ul>
-<li><p>提高安全性</p>
+<li>
+<p>提高安全性</p>
 </li>
-<li><ul>
+<li>
+<ul>
 <li>自动 HTTPS 重写</li>
 <li>始终使用 HTTPS</li>
 </ul>
 </li>
-<li><p>优化性能</p>
+<li>
+<p>优化性能</p>
 </li>
-<li><ul>
+<li>
+<ul>
 <li>Auto Minify， 勾选html、css、js，保存</li>
 <li>Brotli，打开，保存</li>
 </ul>
@@ -535,28 +545,35 @@
 </ul>
 <p>点击左侧导航栏中的<strong>速度</strong>按钮：</p>
 <ul>
-<li><p>优化</p>
+<li>
+<p>优化</p>
 </li>
-<li><ul>
+<li>
+<ul>
 <li>Auto Minify 自动最小化 – JavaScript、CSS、HTML 全部勾选，其实这在入门设置的时候就已经勾选了，可以不需要改动</li>
 <li>Brotli – 开启， 同上</li>
 <li>Rocket Loader – 开启，可缩短包含 JavaScript 的页面的绘制时间。</li>
-<li>Railgun – 加入你得主机商在你的主机商安装了此软件，比如<a href="https://link.zhihu.com/?target=https://www.qingsongb2c.com/goto/chemicloud-hosting/">Chemicloud</a>，可以开启，</li>
+<li>Railgun – 加入你得主机商在你的主机商安装了此软件，比如<a href="https://link.zhihu.com/?target=https%3A//www.qingsongb2c.com/goto/chemicloud-hosting/">Chemicloud</a>，可以开启，</li>
 <li>AMP（Accelerated Mobile Pages即加速移动端网页的加载速度） 真实 URL – 可开启</li>
 </ul>
 </li>
-<li><p>Browser Insights（现功能在其他地方设置，有操作指导教程，跟着走就行）</p>
+<li>
+<p>Browser Insights（现功能在其他地方设置，有操作指导教程，跟着走就行）</p>
 </li>
-<li><ul>
+<li>
+<ul>
 <li>配置 – Browser Insights开启</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-图片格式与压缩技术："><a href="#2-图片格式与压缩技术：" class="headerlink" title="2.图片格式与压缩技术："></a>2.图片格式与压缩技术：</h3><ol>
-<li><p>将你网站中的文件换为.webp格式，webp是一种同时提供了有损压缩与无损压缩的图片文件格式，派生自图像编码格式VP8 。是由Google购买On2 Technologies后发展出来的格式，以BSD授权条款发布。webp可让网页图档有效进行压缩，同时又不影响图片格式兼容与实际清晰度，进而让整体网页下载速度加快。</p>
+<h3 id="2-图片格式与压缩技术：">2.图片格式与压缩技术：</h3>
+<ol>
+<li>
+<p>将你网站中的文件换为.webp格式，webp是一种同时提供了有损压缩与无损压缩的图片文件格式，派生自图像编码格式VP8 。是由Google购买On2 Technologies后发展出来的格式，以BSD授权条款发布。webp可让网页图档有效进行压缩，同时又不影响图片格式兼容与实际清晰度，进而让整体网页下载速度加快。</p>
 <p>推荐一个转换格式网站：<a target="_blank" rel="noopener" href="https://cdkm.com/cn/jpg-to-webp">JPG转WEBP - 免费在线将JPG文件转换成WEBP (cdkm.com)</a></p>
 </li>
-<li><p>无损压缩各类格式图片的网站：<a target="_blank" rel="noopener" href="https://tinypng.com/">TinyPNG – Compress WebP, PNG and JPEG images intelligently</a></p>
+<li>
+<p>无损压缩各类格式图片的网站：<a target="_blank" rel="noopener" href="https://tinypng.com/">TinyPNG – Compress WebP, PNG and JPEG images intelligently</a></p>
 </li>
 </ol>
 <p>本文仅介绍了两种最简单的加速个人网站的技巧，还有许多优化技巧，例如压缩字体，URL优化，SEO优化等，以后会更新教程。</p>

@@ -500,7 +500,10 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="ES6标准总结"><a href="#ES6标准总结" class="headerlink" title="ES6标准总结"></a>ES6标准总结</h1><h2 id="let、const、var命令"><a href="#let、const、var命令" class="headerlink" title="let、const、var命令"></a>let、const、var命令</h2><h4 id="let"><a href="#let" class="headerlink" title="let"></a>let</h4><ol>
+                <h1>ES6标准总结</h1>
+<h2 id="let、const、var命令">let、const、var命令</h2>
+<h4 id="let">let</h4>
+<ol>
 <li>声明的变量只在let命令所在的代码块内有效。</li>
 <li>声明的变量一定要在声明后使用，否则报错。</li>
 <li>只要块级作用域内存在let命令，它所声明的变量就绑定这个区域，不再受外部影响（封闭作用域）。</li>
@@ -508,40 +511,44 @@
 <li>为JavaScript新增了块级作用域，防止了内层变量覆盖外层变量或泄露为全局变量。</li>
 <li>在块级作用域之前加上do，使得块级作用域可以变为表达式，得到返回值（本质上块级作用域是一个语句，没有返回值）。</li>
 </ol>
-<h4 id="const"><a href="#const" class="headerlink" title="const"></a>const</h4><ol>
+<h4 id="const">const</h4>
+<ol>
 <li>声明一个只读的常量。一旦声明，常量的值就不能改变。</li>
 <li>一旦声明常量，就必须立即初始化，不能留到以后赋值。</li>
 <li>只在声明所在的块级作用域内有效。</li>
 <li>声明的变量一定要在声明后使用，否则报错。</li>
-<li>const实际上保证的并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。<ul>
+<li>const实际上保证的并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。
+<ul>
 <li>对于简单类型的数据（数值、字符串、布尔值〉而言，值就保存在变量指向的内存地址中，因此等同于常量。</li>
 <li>但对于复合类型的数据（主要是 对象和数组）而言，变量指向的内存地址保存的只是一个指针，const只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，这完全不能控制。</li>
 </ul>
 </li>
 </ol>
-<h4 id="var"><a href="#var" class="headerlink" title="var"></a>var</h4><p>在ES5中，顶层对象的属性和全局变量是等价的，用<code>var</code>声明的变量既是全局变量，也是顶层变量</p>
+<h4 id="var">var</h4>
+<p>在ES5中，顶层对象的属性和全局变量是等价的，用<code>var</code>声明的变量既是全局变量，也是顶层变量</p>
 <blockquote>
 <p>注意：顶层对象，在浏览器环境指的是<code>window</code>对象，在 <code>Node</code> 指的是<code>global</code>对象</p>
 </blockquote>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token comment">// 10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <ul>
-<li><p>使用<code>var</code>声明的变量存在变量提升的情况</p>
+<li>
+<p>使用<code>var</code>声明的变量存在变量提升的情况</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(a) &#x2F;&#x2F; undefined
 var a &#x3D; 20<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>在编译阶段，编译器会将其变成以下执行</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a
 console.log(a)
 a &#x3D; 20<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>使用<code>var</code>，我们能够对一个变量进行多次声明，后面声明的变量会覆盖前面的变量声明</p>
+<li>
+<p>使用<code>var</code>，我们能够对一个变量进行多次声明，后面声明的变量会覆盖前面的变量声明</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a &#x3D; 20 
 var a &#x3D; 30
 console.log(a) &#x2F;&#x2F; 30<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>⚠️在函数中使用使用<code>var</code>声明变量时候，该变量是局部的</p>
+<li>
+<p>⚠️在函数中使用使用<code>var</code>声明变量时候，该变量是局部的</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a &#x3D; 20
 function change()&#123;
     var a &#x3D; 30
@@ -549,15 +556,18 @@ function change()&#123;
 change()
 console.log(a) &#x2F;&#x2F; 20 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>⚠️而如果在函数内不使用<code>var</code>，该变量是全局的</p>
+<li>
+<p>⚠️而如果在函数内不使用<code>var</code>，该变量是全局的</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var a &#x3D; 20
 function change()&#123;
    a &#x3D; 30
 &#125;
 change()
-console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h3 id="顶层对象的属性"><a href="#顶层对象的属性" class="headerlink" title="顶层对象的属性"></a>顶层对象的属性</h3><p>在ES5中，顶层变量（在浏览器环境中指的是window对象，在Node环境中指的是global对象）&#x3D;全局变量，有以下缺点：</p>
+<h3 id="顶层对象的属性">顶层对象的属性</h3>
+<p>在ES5中，顶层变量（在浏览器环境中指的是window对象，在Node环境中指的是global对象）=全局变量，有以下缺点：</p>
 <ol>
 <li>无法在编译时就提示变量未声明的错误，只有运行时才能知道（因为全局变量可能是顶层对象的属性创造的，而属性的创造是动态的）。</li>
 <li>很容易不知不觉地就创建全局变量。</li>
@@ -566,28 +576,36 @@ console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows
 </ol>
 <p>从ES6开始，全局变量逐步与顶层对象的属性隔离：</p>
 <ol>
-<li>var命令和function命令声明的全局变量 &#x3D; 顶层对象的属性。</li>
+<li>var命令和function命令声明的全局变量 = 顶层对象的属性。</li>
 <li>let命令、const命令、class命令声明的全局变量 ≠ 顶层对象的属性。</li>
 </ol>
-<h2 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h2><p>ES6允许按照一定模式从数组和对象中提取值，然后对变量进行赋值，这被称为解构。</p>
-<h3 id="数组的解构赋值"><a href="#数组的解构赋值" class="headerlink" title="数组的解构赋值"></a>数组的解构赋值</h3><ol>
-<li><p>模式匹配——只要等号两边的模式（对应位置）相同，左边的变量就会被赋予对应的值。</p>
+<h2 id="解构">解构</h2>
+<p>ES6允许按照一定模式从数组和对象中提取值，然后对变量进行赋值，这被称为解构。</p>
+<h3 id="数组的解构赋值">数组的解构赋值</h3>
+<ol>
+<li>
+<p>模式匹配——只要等号两边的模式（对应位置）相同，左边的变量就会被赋予对应的值。</p>
 </li>
-<li><p>解构不成功，变量的值等于undefined。</p>
+<li>
+<p>解构不成功，变量的值等于undefined。</p>
 </li>
-<li><p>不完全解构，即等号左边的模式只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。</p>
+<li>
+<p>不完全解构，即等号左边的模式只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。</p>
 </li>
-<li><p>如果等号的右边不是数组（严格来说不是可遍历的结构），那么将会报错。</p>
+<li>
+<p>如果等号的右边不是数组（严格来说不是可遍历的结构），那么将会报错。</p>
 <p>因为等号右边的值或是转为对象以后不具备Iterator接口，或是本身就不具备Iterator接口。</p>
 </li>
-<li><p>解构赋值允许指定默认值。默认值生效的条件是，数组成员的属性值严格等于undefined。</p>
+<li>
+<p>解构赋值允许指定默认值。默认值生效的条件是，数组成员的属性值严格等于undefined。</p>
 <ul>
 <li>如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到时才会求值。</li>
 <li>默认值可以引用解构赋值的其他变量，但该变量必须已经声明。</li>
 </ul>
 </li>
 </ol>
-<h3 id="对象的解构赋值"><a href="#对象的解构赋值" class="headerlink" title="对象的解构赋值"></a>对象的解构赋值</h3><ol>
+<h3 id="对象的解构赋值">对象的解构赋值</h3>
+<ol>
 <li>对象的属性没有次序，变量必须与属性同名才能取到正确的值。</li>
 <li>解构赋值允许指定默认值。默认值生效的条件是，对象的属性值严格等于undefined。</li>
 <li>如果解构模式是嵌套的对象，而且子对象所在的父属性不存在，那么将会报错。</li>
@@ -595,16 +613,21 @@ console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows
 <li>解构赋值允许等号左边的模式之中不放置任何变量名。</li>
 <li>由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构。</li>
 </ol>
-<h3 id="字符串的解构赋值"><a href="#字符串的解构赋值" class="headerlink" title="字符串的解构赋值"></a>字符串的解构赋值</h3><ol>
+<h3 id="字符串的解构赋值">字符串的解构赋值</h3>
+<ol>
 <li>字符串被转换了一个类似数组的对象，所以也可以解构赋值。</li>
 <li>类似数组的对象都有一个length属性，因此还可以对这个属性进行解构赋值。</li>
 </ol>
-<h3 id="数值和布尔值的解构赋值"><a href="#数值和布尔值的解构赋值" class="headerlink" title="数值和布尔值的解构赋值"></a>数值和布尔值的解构赋值</h3><ol>
+<h3 id="数值和布尔值的解构赋值">数值和布尔值的解构赋值</h3>
+<ol>
 <li>如果等号右边是数值和布尔值，则会先转为对象。</li>
 <li>只要等号右边的值不是对象或数组，就先将其转为对象。</li>
 </ol>
-<h3 id="函数参数的解构赋值"><a href="#函数参数的解构赋值" class="headerlink" title="函数参数的解构赋值"></a>函数参数的解构赋值</h3><h3 id="圆括号问题"><a href="#圆括号问题" class="headerlink" title="圆括号问题"></a>圆括号问题</h3><ol>
-<li>只要有可能导致解构的歧义，就不得使用圆括号。<ul>
+<h3 id="函数参数的解构赋值">函数参数的解构赋值</h3>
+<h3 id="圆括号问题">圆括号问题</h3>
+<ol>
+<li>只要有可能导致解构的歧义，就不得使用圆括号。
+<ul>
 <li>变量声明语句，模式不能使用圆括号。</li>
 <li>函数参数属于变量声明，不能使用圆括号。</li>
 <li>赋值语句的模式不能使用圆括号。</li>
@@ -612,7 +635,8 @@ console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows
 </li>
 <li>可以使用圆括号的情况只有一种：赋值语句的非模式部分可以使用圆括号。</li>
 </ol>
-<h3 id="解构用途"><a href="#解构用途" class="headerlink" title="解构用途"></a>解构用途</h3><ol>
+<h3 id="解构用途">解构用途</h3>
+<ol>
 <li>交换变量的值</li>
 <li>从函数返回多个值</li>
 <li>设置函数参数</li>
@@ -621,34 +645,43 @@ console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows
 <li>遍历Map结构</li>
 <li>输入模块的指定方法</li>
 </ol>
-<h2 id="字符串的扩展"><a href="#字符串的扩展" class="headerlink" title="字符串的扩展"></a>字符串的扩展</h2><h3 id="字符的Unicode表示法"><a href="#字符的Unicode表示法" class="headerlink" title="字符的Unicode表示法"></a>字符的Unicode表示法</h3><ol>
+<h2 id="字符串的扩展">字符串的扩展</h2>
+<h3 id="字符的Unicode表示法">字符的Unicode表示法</h3>
+<ol>
 <li>JavaScript允许采用 \uxxxx 形式表示一个字符，其中 xxxx 表示字符的 Unicode 码点。但是，这种表示法只限于码点在 \u0000~\uFFFF 之间的字符。超出这个范围的字符，必须用2个双字节的形式表达。</li>
 <li>ES6允许将码点放入大括号，就能正确解读该字符。</li>
 </ol>
-<h3 id="CodePointAt"><a href="#CodePointAt" class="headerlink" title="CodePointAt()"></a>CodePointAt()</h3><ol>
+<h3 id="CodePointAt">CodePointAt()</h3>
+<ol>
 <li>JavaScript内部，字符以UTF-16的格式存储，每个字符固定为2个字节。对于那些需要4个字节存储的字符，JavaScript会认为它们是两个字符。</li>
 <li>ES6提供了codePointAt()方法，能够正确处理4个字节存储的字符，返回一个字符的码点（十进制值）。</li>
 <li>该方法定义在字符串的实例对象上。</li>
 </ol>
-<h3 id="String-fromCodePoint"><a href="#String-fromCodePoint" class="headerlink" title="String.fromCodePoint()"></a>String.fromCodePoint()</h3><ol>
+<h3 id="String-fromCodePoint">String.fromCodePoint()</h3>
+<ol>
 <li>可以识别大于 0xFFFF 的字符，弥补了String.fromCharCode方法的不足。在作用上，正好与codePointAt方法相反。</li>
 <li>该方法定义在String对象上。</li>
 </ol>
-<h3 id="字符串的遍历器接口"><a href="#字符串的遍历器接口" class="headerlink" title="字符串的遍历器接口"></a>字符串的遍历器接口</h3><ol>
+<h3 id="字符串的遍历器接口">字符串的遍历器接口</h3>
+<ol>
 <li>ES6为字符串添加了遍历器接口，使得字符串可以由for…of循环遍历。除了遍历字符串，这个遍历器最大的优点是可以识别大于0xFFFF的码点，传统的for循环无法识别这样的码点。</li>
 </ol>
-<h3 id="at"><a href="#at" class="headerlink" title="at()"></a>at()</h3><ol>
+<h3 id="at">at()</h3>
+<ol>
 <li>字符串实例的at方法，可以识别Unicode编号大于0xFFFF的字符，返回正确的字符。</li>
 </ol>
-<h3 id="normalize"><a href="#normalize" class="headerlink" title="normalize()"></a>normalize()</h3><ol>
+<h3 id="normalize">normalize()</h3>
+<ol>
 <li>ES6为字符串实例提供了normalize方法，用来将字符的不同表示方法统一为同样的形式，这称为Unicode正规化。</li>
 </ol>
-<h3 id="其余方法"><a href="#其余方法" class="headerlink" title="其余方法"></a>其余方法</h3><ol>
+<h3 id="其余方法">其余方法</h3>
+<ol>
 <li>includes()：返回布尔值，表示是否找到了参数字符串。（使用第二个参数n，针对从第n个位置到字符串结束位置之间的字符）</li>
 <li>startsWith()：返回布尔值，表示参数字符串是否在源字符串的头部。（使用第二个参数n，针对从第n个位置到字符串结束位置之间的字符）</li>
 <li>endsWith()：返回布尔值，表示参数字符串是否在源字符串的尾部。（使用第二个参数n，针对前n个字符）</li>
 </ol>
-<h3 id="repeat"><a href="#repeat" class="headerlink" title="repeat()"></a>repeat()</h3><p>返回一个新字符串，表示将原字符串重复n次。</p>
+<h3 id="repeat">repeat()</h3>
+<p>返回一个新字符串，表示将原字符串重复n次。</p>
 <ol>
 <li>参数如果是小数，会被取整。</li>
 <li>参数如果是负数或者Infinity，会报错。</li>
@@ -656,7 +689,8 @@ console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows
 <li>参数如果是NaN等同于0。</li>
 <li>参数如果是字符串，则会先转换成数字。</li>
 </ol>
-<h3 id="padStart-、padEnd"><a href="#padStart-、padEnd" class="headerlink" title="padStart()、padEnd()"></a>padStart()、padEnd()</h3><p>如果某个字符串不够指定长度，会在头部或者尾部补全。</p>
+<h3 id="padStart-、padEnd">padStart()、padEnd()</h3>
+<p>如果某个字符串不够指定长度，会在头部或者尾部补全。</p>
 <p>padStart()用于头部补全，padEnd()用于尾部补全。</p>
 <ol>
 <li>第一个参数：指定字符串的最小长度</li>
@@ -666,7 +700,8 @@ console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows
 <li>如果省略第二个参数，则会用空格来补全。</li>
 <li>可用来提示字符串格式。</li>
 </ol>
-<h3 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h3><p>增强版的字符串，用反引号（&#96;）标识。</p>
+<h3 id="模板字符串">模板字符串</h3>
+<p>增强版的字符串，用反引号（`）标识。</p>
 <ol>
 <li>可以当作普通字符串使用</li>
 <li>可以用来定义多行字符串</li>
@@ -678,24 +713,31 @@ console.log(a) &#x2F;&#x2F; 30 <span aria-hidden="true" class="line-numbers-rows
 <li>模板字符串中还能调用函数。</li>
 <li>如果模板字符串中的变量没有声明，将报错。</li>
 </ol>
-<h3 id="标签模板"><a href="#标签模板" class="headerlink" title="标签模板"></a>标签模板</h3><p>模板字符串可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。</p>
-<h3 id="String-raw"><a href="#String-raw" class="headerlink" title="String.raw()"></a>String.raw()</h3><p>该方法往往用来充当模板字符串的处理函数，返回一个反斜线都被转义（即反斜线前面再加一个反斜线）的字符串，对应于替换变量后的模板字符串。</p>
+<h3 id="标签模板">标签模板</h3>
+<p>模板字符串可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。</p>
+<h3 id="String-raw">String.raw()</h3>
+<p>该方法往往用来充当模板字符串的处理函数，返回一个反斜线都被转义（即反斜线前面再加一个反斜线）的字符串，对应于替换变量后的模板字符串。</p>
 <ol>
 <li>如果原字符串中的反斜线已经被转义，那么String.raw不会做任何处理。</li>
 <li>该方法也可以作为正常的函数使用，其第一个参数应该是一个具有raw属性的对象，且raw属性的值应该是一个数组。</li>
 </ol>
-<h3 id="模板字符串的限制"><a href="#模板字符串的限制" class="headerlink" title="模板字符串的限制"></a>模板字符串的限制</h3><p>标签模板中可以内嵌其他语言，但是模板字符串默认会将字符串转义，导致无法嵌入其他语言。</p>
+<h3 id="模板字符串的限制">模板字符串的限制</h3>
+<p>标签模板中可以内嵌其他语言，但是模板字符串默认会将字符串转义，导致无法嵌入其他语言。</p>
 <ol>
 <li>有一个解决方法是放松对标签模板里面的字符串转义的限制。如果遇到不合法的字符串转义，就返回undefined，而不是报错，且从raw属性上可以得到原始字符串（只在标签模板解析字符串时生效，非标签模板场合依然会报错。）。</li>
 </ol>
-<h2 id="正则表达式的扩展"><a href="#正则表达式的扩展" class="headerlink" title="正则表达式的扩展"></a>正则表达式的扩展</h2><h3 id="RegExp构造函数"><a href="#RegExp构造函数" class="headerlink" title="RegExp构造函数"></a>RegExp构造函数</h3><p>在ES5中，RegExp构造函数的参数有两种情况：</p>
+<h2 id="正则表达式的扩展">正则表达式的扩展</h2>
+<h3 id="RegExp构造函数">RegExp构造函数</h3>
+<p>在ES5中，RegExp构造函数的参数有两种情况：</p>
 <ol>
 <li>第一种情况：参数是字符串，这时第二个参数表示正则表达式的修饰符。</li>
 <li>第二种情况：参数是一个正则表达式，这时会返回一个原有正则表达式的拷贝。但是，此时ES5不允许使用第二个参数添加修饰符，否则会报错。</li>
 </ol>
 <p>ES6改变了这种行为。如果RegExp构造函数第一个参数是一个正则对象，那么可以使用第二个参数指定修饰符。而且，返回的正则表达式会忽略原有正则表达式的修饰符，只使用新指定的修饰符。</p>
-<h3 id="U修饰符"><a href="#U修饰符" class="headerlink" title="U修饰符"></a>U修饰符</h3><p>ES6对正则表达式添加了u修饰符，含义为“Unicode 模式”，用来正确处理大于\uFFFF的Unicode字符。也就是说，可以正确处理4个字节的UTF-16编码。</p>
-<h4 id="点字符"><a href="#点字符" class="headerlink" title="点字符"></a>点字符</h4><p><code>.</code>字符在正则表达式中的含义是除换行符以外的任意单个字符，对于码点大于0xFFFF的Unicode字符，<code>.</code>字符不能识别，必须加上u修饰符。</p>
+<h3 id="U修饰符">U修饰符</h3>
+<p>ES6对正则表达式添加了u修饰符，含义为“Unicode 模式”，用来正确处理大于\uFFFF的Unicode字符。也就是说，可以正确处理4个字节的UTF-16编码。</p>
+<h4 id="点字符">点字符</h4>
+<p><code>.</code>字符在正则表达式中的含义是除换行符以外的任意单个字符，对于码点大于0xFFFF的Unicode字符，<code>.</code>字符不能识别，必须加上u修饰符。</p>
 <p>后面的以后再写，懒得写了。</p>
 
                 

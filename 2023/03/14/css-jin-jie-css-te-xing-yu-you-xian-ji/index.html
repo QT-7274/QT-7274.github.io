@@ -500,12 +500,15 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h1><ol>
+                <h1>导航</h1>
+<ol>
 <li><a href="https://qt-7274.github.io/2023/06/23/qian-tan-css-zhong-de-xuan-ze-qi/">浅谈CSS中的选择器 | QT-7274</a></li>
 <li><a href="https://qt-7274.github.io/2023/06/24/css-xuan-ze-qi-quan-chong-ji-suan/">CSS选择器权重计算 | QT-7274 (qt7274.co)</a></li>
 </ol>
-<h2 id="CSS特性"><a href="#CSS特性" class="headerlink" title="CSS特性"></a>CSS特性</h2><p>CSS具有两大特性：继承性和层叠性。</p>
-<h3 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h3><p>CSS的继承性，是指子元素继承了父元素的某些样式特性。但不是所有属性都具有继承性。</p>
+<h2 id="CSS特性">CSS特性</h2>
+<p>CSS具有两大特性：继承性和层叠性。</p>
+<h3 id="继承性">继承性</h3>
+<p>CSS的继承性，是指子元素继承了父元素的某些样式特性。但不是所有属性都具有继承性。</p>
 <p>在CSS中，具有继承性的属性有3类：</p>
 <ul>
 <li><strong>文本相关属性</strong>：font-family、font-size、font-style、font-weight、font、line-height、text-align、text-indent、word-spacing。</li>
@@ -513,10 +516,11 @@
 <li><strong>颜色相关属性</strong>：color</li>
 </ul>
 <blockquote>
-<p>注意：<strong>a元素本身有默认的颜色样式，优先级要比继承的颜色高。</strong>如果要想改变a元素的颜色，必须选中a元素进行操作才行。当然，如果想要a元素也能继承父元素颜色的话，可以在a元素中使用“color:inherit;”来实现。</p>
+<p>注意：**a元素本身有默认的颜色样式，优先级要比继承的颜色高。**如果要想改变a元素的颜色，必须选中a元素进行操作才行。当然，如果想要a元素也能继承父元素颜色的话，可以在a元素中使用“color:inherit;”来实现。</p>
 </blockquote>
 <p>CSS的继承性，可以让我们少写很多代码，只要在父元素中定义了属性，就不需要在子元素中重复定义了，这样让CSS代码显得更加精简优雅，提高可读性和可维护性。</p>
-<h3 id="层叠性"><a href="#层叠性" class="headerlink" title="层叠性"></a>层叠性</h3><p>如果在网页中，对于同一个元素，我们重复定义了多个相同的属性时，CSS应该如何处理？</p>
+<h3 id="层叠性">层叠性</h3>
+<p>如果在网页中，对于同一个元素，我们重复定义了多个相同的属性时，CSS应该如何处理？</p>
 <p>CSS的层叠性，指的就是样式的覆盖。对于同一个元素来说，如果我们重复定义多个相同的属性，并且这些样式具有相同的权重，CSS会以最后定义的属性值为准，也就是遵循“<strong>后来者居上</strong>”原则。</p>
 <p>“后来者居上”原则必须符合以下3个条件才生效：</p>
 <ol>
@@ -524,7 +528,8 @@
 <li><strong>属性相同</strong></li>
 <li><strong>权重相同</strong></li>
 </ol>
-<h2 id="CSS优先级"><a href="#CSS优先级" class="headerlink" title="CSS优先级"></a>CSS优先级</h2><p>CSS全称层叠样式表。很多人只知道CSS是用来控制样式的，并没有深入理解“层叠”这两个字的含义。</p>
+<h2 id="CSS优先级">CSS优先级</h2>
+<p>CSS全称层叠样式表。很多人只知道CSS是用来控制样式的，并没有深入理解“层叠”这两个字的含义。</p>
 <p>“层叠”，其实指的是样式的覆盖。当样式的覆盖发生冲突时，以优先级高的为准。当“同一个元素”的“同一个样式属性”被运用上多个属性值时，我们就需要遵循一定的优先级规则来选择一个属性值了。</p>
 <p>对于样式覆盖发生的冲突，常见的共有以下5种情况：</p>
 <ol>
@@ -534,12 +539,15 @@
 <li>继承样式和指定样式冲突</li>
 <li>!important</li>
 </ol>
-<h3 id="引用方式冲突"><a href="#引用方式冲突" class="headerlink" title="引用方式冲突"></a>引用方式冲突</h3><p>CSS有3种常用的引用方式：外部样式、内部样式和行内样式。</p>
+<h3 id="引用方式冲突">引用方式冲突</h3>
+<p>CSS有3种常用的引用方式：外部样式、内部样式和行内样式。</p>
 <p>这3种引入方式的优先级如下：</p>
-<p><strong>行内样式＞（内部样式&#x3D;外部样式）</strong></p>
+<p><strong>行内样式＞（内部样式=外部样式）</strong></p>
 <p>行内样式的优先级最高，内部样式与外部样式优先级相同。如果内部样式与外部样式同时存在，则以最后引用的样式为准（“后来者居上”原则。）</p>
-<h3 id="继承方式冲突"><a href="#继承方式冲突" class="headerlink" title="继承方式冲突"></a>继承方式冲突</h3><p>如果是由于继承方式引起的冲突，则“<strong>最近的祖先元素</strong>”获胜。祖先元素，指的是当前元素的父元素等。</p>
-<h3 id="指定样式冲突"><a href="#指定样式冲突" class="headerlink" title="指定样式冲突"></a>指定样式冲突</h3><p>所谓的指定样式，指的是指定“<strong>当前元素</strong>”的样式。当直接指定的样式发生冲突，样式<strong>权重高者</strong>获胜。</p>
+<h3 id="继承方式冲突">继承方式冲突</h3>
+<p>如果是由于继承方式引起的冲突，则“<strong>最近的祖先元素</strong>”获胜。祖先元素，指的是当前元素的父元素等。</p>
+<h3 id="指定样式冲突">指定样式冲突</h3>
+<p>所谓的指定样式，指的是指定“<strong>当前元素</strong>”的样式。当直接指定的样式发生冲突，样式<strong>权重高者</strong>获胜。</p>
 <p>在CSS中，各种选择器的权重如下表所示：</p>
 <table>
 <thead>
@@ -548,7 +556,8 @@
 <th>权重</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>通配符</td>
 <td>0</td>
 </tr>
@@ -580,31 +589,40 @@
 <td>行内样式</td>
 <td>1000</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>常见的伪元素只有4个：::before、::after、::first-letter、::first-line。伪类我们经常见到，如hover、:first-child等。常见的选择器优先级如下。</p>
 <p><strong>行内样式＞id选择器＞class选择器＞元素选择器</strong></p>
 <blockquote>
 <p>注意：在CSS中，选择器的权重计算只针对指定样式（<strong>当前元素</strong>），<strong>并不能用于继承样式</strong>。</p>
 </blockquote>
-<h3 id="继承样式和指定样式冲突"><a href="#继承样式和指定样式冲突" class="headerlink" title="继承样式和指定样式冲突"></a>继承样式和指定样式冲突</h3><p><u>当继承样式和指定样式发生冲突时，指定样式获胜。</u></p>
-<h3 id="important"><a href="#important" class="headerlink" title="!important"></a>!important</h3><p>在CSS中，我们可以使用!important规则来改变样式的优先级。如果一个样式使用“!important”来声明，则这个样式会覆盖CSS中<strong>其他的任何样式</strong>声明。</p>
+<h3 id="继承样式和指定样式冲突">继承样式和指定样式冲突</h3>
+<p><u>当继承样式和指定样式发生冲突时，指定样式获胜。</u></p>
+<h3 id="important">!important</h3>
+<p>在CSS中，我们可以使用!important规则来改变样式的优先级。如果一个样式使用“!important&quot;来声明，则这个样式会覆盖CSS中<strong>其他的任何样式</strong>声明。</p>
 <p><strong>如果你想要覆盖其他所有样式，可以使用!important来实现。</strong></p>
-<h4 id="important的用法"><a href="#important的用法" class="headerlink" title="!important的用法"></a><code>!important</code>的用法</h4><p>在CSS中，<code>!important</code>有以下两种常见的使用情况。</p>
+<h4 id="important的用法"><code>!important</code>的用法</h4>
+<p>在CSS中，<code>!important</code>有以下两种常见的使用情况。</p>
 <ol>
-<li><pre><code class="css">#someId p&#123;color:red;&#125;
+<li>
+<pre><code class="language-css">#someId p&#123;color:red;&#125;
 p&#123;color:green;&#125;
 </code></pre>
 <p>这种情况下，如果不使用<code>!important</code>，则第一条样式永远比第二条样式优先级更高。</p>
 </li>
-<li><p>如果写了一些很差的行内样式，但是又想在内部样式表或外部样式表修改这个样式，这种情况下，就需要在内部样式表或外部样式表中使用<code>!important</code>来覆盖那些行内样式。</p>
+<li>
+<p>如果写了一些很差的行内样式，但是又想在内部样式表或外部样式表修改这个样式，这种情况下，就需要在内部样式表或外部样式表中使用<code>!important</code>来覆盖那些行内样式。</p>
 </li>
 </ol>
-<h4 id="如何覆盖-important"><a href="#如何覆盖-important" class="headerlink" title="如何覆盖!important"></a>如何覆盖<code>!important</code></h4><p>想要覆盖<code>!important</code>声明的样式很简单，共有两种解决方法。</p>
+<h4 id="如何覆盖-important">如何覆盖<code>!important</code></h4>
+<p>想要覆盖<code>!important</code>声明的样式很简单，共有两种解决方法。</p>
 <ol>
-<li><p>使用相同的选择器，再添加一条<code>!important</code>的CSS语句。</p>
+<li>
+<p>使用相同的选择器，再添加一条<code>!important</code>的CSS语句。</p>
 <p>不过这个CSS语句得放在后面，因为在优先级相同的情况下，后面定义的属性会覆盖前面定义的属性。</p>
 </li>
-<li><p>使用更高优先级的选择器，再添加一条<code>!important</code>的CSS语句。</p>
+<li>
+<p>使用更高优先级的选择器，再添加一条<code>!important</code>的CSS语句。</p>
 </li>
 </ol>
 <p>总而言之，对于CSS优先级的内容，主要掌握以下两条黄金定律即可：</p>

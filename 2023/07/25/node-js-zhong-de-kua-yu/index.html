@@ -6,8 +6,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Node.js中的跨域, QT-7274">
-    <meta name="description" content="什么是跨域跨域，是指浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript实施的安全限制。浏览器从一个域名的网页去请求另一个域名的资源时，出现域名、端口、协议任一不同，都属于跨域。
-同源策略限制了一下行为">
+    <meta name="description" content="什么是跨域
+跨域，是指浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript实施的安全限制。浏览器从一个域名的网页去请求另一个域名的资源时，出现域名、端口、协议任一不同，都属于跨域。
+同源策略限制了一下行">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -501,7 +502,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>跨域，是指浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript实施的安全限制。浏览器从一个域名的网页去请求另一个域名的资源时，出现域名、端口、协议任一不同，都属于跨域。</p>
+                <h2 id="什么是跨域">什么是跨域</h2>
+<p>跨域，是指浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript实施的安全限制。浏览器从一个域名的网页去请求另一个域名的资源时，出现域名、端口、协议任一不同，都属于跨域。</p>
 <p>同源策略限制了一下行为：</p>
 <p><code>Cookie</code>、<code>LocalStorage</code> 和 <code>IndexDB</code> 无法读取</p>
 <p><code>DOM</code> 和 <code>JS</code> 对象无法获取</p>
@@ -516,10 +518,10 @@
 <span class="token symbol">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>cn<span class="token operator">:</span><span class="token operator">**</span><span class="token number">8080</span><span class="token operator">**</span><span class="token operator">/</span>index<span class="token punctuation">.</span>html 调用  http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>cn<span class="token operator">/</span>server<span class="token punctuation">.</span>php  跨域<span class="token punctuation">,</span>端口不同
 
 <span class="token operator">**</span>https<span class="token operator">**</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>cn<span class="token operator">/</span>index<span class="token punctuation">.</span>html 调用  <span class="token operator">**</span>http<span class="token operator">**</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>cn<span class="token operator">/</span>server<span class="token punctuation">.</span>php  跨域<span class="token punctuation">,</span>协议不同<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="跨域资源共享CORS"><a href="#跨域资源共享CORS" class="headerlink" title="跨域资源共享CORS"></a>跨域资源共享CORS</h2><p>这是目前主流的解决方案。</p>
-<p>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。 它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。</p>
-<p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。IE8+：IE8&#x2F;9需要使用XDomainRequest对象来支持CORS。</p>
+<h2 id="跨域资源共享CORS">跨域资源共享CORS</h2>
+<p>这是目前主流的解决方案。</p>
+<p>CORS是一个W3C标准，全称是&quot;跨域资源共享&quot;（Cross-origin resource sharing）。 它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。</p>
+<p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。IE8+：IE8/9需要使用XDomainRequest对象来支持CORS。</p>
 <p>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。 因此，实现CORS通信的关键是<strong>服务器</strong>。</p>
 <p>基本只需要对<strong>服务器</strong>动手脚，前端代码跟同源时一样，也就是不跨域时一样。</p>
 <p><strong>这种方式分为两种请求：</strong></p>
@@ -533,8 +535,8 @@
 <span class="token class-name">Last</span><span class="token operator">-</span><span class="token class-name">Event</span><span class="token operator">-</span>ID
 
 <span class="token class-name">Content</span><span class="token operator">-</span><span class="token class-name">Type</span><span class="token punctuation">(</span>限于三个值：application<span class="token operator">/</span>x<span class="token operator">-</span>www<span class="token operator">-</span>form<span class="token operator">-</span>urlencoded、multipart<span class="token operator">/</span>form<span class="token operator">-</span>data、text<span class="token operator">/</span>plain<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h3><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。 下面是一个例子，浏览器发现这次跨源<code>Ajax</code>请求是简单请求，就自动在头信息之中，添加一个Origin字段。</p>
+<h3 id="简单请求">简单请求</h3>
+<p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。 下面是一个例子，浏览器发现这次跨源<code>Ajax</code>请求是简单请求，就自动在头信息之中，添加一个Origin字段。</p>
 <pre class="line-numbers language-dart" data-language="dart"><code class="language-dart">GET <span class="token operator">/</span>cors HTTP<span class="token operator">/</span><span class="token number">1.1</span>
 
 <span class="token class-name">Origin</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>api<span class="token punctuation">.</span>bob<span class="token punctuation">.</span>com
@@ -549,7 +551,6 @@
 
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。</p>
 <p>如果Origin指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。 浏览器发现，这个响应头信息没有包含Access-Control-Allow-Origin字段，就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。</p>
 <p>注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。</p>
@@ -561,9 +562,8 @@
 <span class="token class-name">Access</span><span class="token operator">-</span><span class="token class-name">Control</span><span class="token operator">-</span><span class="token class-name">Expose</span><span class="token operator">-</span><span class="token class-name">Headers</span><span class="token punctuation">:</span> <span class="token class-name">FooBar</span>
 
 <span class="token class-name">Content</span><span class="token operator">-</span><span class="token class-name">Type</span><span class="token punctuation">:</span> text<span class="token operator">/</span>html<span class="token punctuation">;</span> charset<span class="token operator">=</span>utf<span class="token operator">-</span><span class="token number">8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面的头信息之中，有三个与CORS请求相关的字段，都以Access-Control-开头</p>
-<p>**Access-Control-Allow-Origin **:该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求</p>
+<p>**Access-Control-Allow-Origin *<em>:该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个</em>，表示接受任意域名的请求</p>
 <p><strong>Access-Control-Allow-Credentials</strong>: 该字段可选。它的值是一个布尔值，表示是否允许发送<code>Cookie</code>。默认情况下，<code>cookie</code>不包括在CORS请求之中。设为<code>true</code>，即表示服务器明确许可，<code>Cookie</code>可以包含在请求中，一起发给服务器。这个值也只能设为<code>true</code>，如果服务器不要浏览器发送<code>Cookie</code>，删除该字段即可。</p>
 <p><strong>Access-Control-Expose-Headers</strong>:该字段可选。CORS请求时，<code>XMLHttpRequest</code>对象的<code>getResponseHeader()</code>方法只能拿到6个基本字段：<code>Cache-Control</code>、<code>Content-Language</code>、<code>Content-Type</code>、<code>Expires</code>、<code>Last-Modified</code>、<code>Pragma</code>。如果想拿到其他字段，就必须在<code>Access-Control-Expose-Headers</code>里面指定。</p>
 <p><strong>withCredentials 属性</strong></p>
@@ -590,7 +590,6 @@ xhr<span class="token punctuation">.</span><span class="token function-variable 
     <span class="token punctuation">&#125;</span>
 
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// jquery</span>
 
 $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -608,11 +607,11 @@ $<span class="token punctuation">.</span><span class="token function">ajax</span
         <span class="token operator">...</span>
 
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>否则，即使服务器同意发送<code>Cookie</code>，浏览器也不会发送。或者，服务器要求设置<code>Cookie</code>，浏览器也不会处理。 但是，如果省略<code>withCredentials</code>设置，有的浏览器还是会一起发送<code>Cookie</code>。这时，可以显式关闭<code>withCredentials</code>。</p>
-<p><strong>需要注意的是，如果要发送Cookie，Access-Control-Allow-Origin就不能设为星号*，必须指定明确的、与请求网页一致的域名。</strong>同时，<code>Cookie</code>依然遵循同源政策，只有用服务器域名设置的<code>Cookie</code>才会上传，其他域名的<code>Cookie</code>并不会上传，且（跨源）原网页代码中的<code>document.cookie</code>也无法读取服务器域名下的<code>Cookie</code>。</p>
-<h3 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h3><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是<code>PUT</code>或<code>DELETE</code>，或者Content-Type字段的类型是<code>application/json</code>。</p>
-<p>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）——浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
+<p>*<em>需要注意的是，如果要发送Cookie，Access-Control-Allow-Origin就不能设为星号</em>，必须指定明确的、与请求网页一致的域名。**同时，<code>Cookie</code>依然遵循同源政策，只有用服务器域名设置的<code>Cookie</code>才会上传，其他域名的<code>Cookie</code>并不会上传，且（跨源）原网页代码中的<code>document.cookie</code>也无法读取服务器域名下的<code>Cookie</code>。</p>
+<h3 id="非简单请求">非简单请求</h3>
+<p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是<code>PUT</code>或<code>DELETE</code>，或者Content-Type字段的类型是<code>application/json</code>。</p>
+<p>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为&quot;预检&quot;请求（preflight）——浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> url <span class="token operator">=</span> <span class="token string">'http://api.alice.com/cors'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">var</span> xhr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -622,8 +621,7 @@ xhr<span class="token punctuation">.</span><span class="token function">open</sp
 xhr<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">'X-Custom-Header'</span><span class="token punctuation">,</span> <span class="token string">'value'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 xhr<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>浏览器发现，这是一个非简单请求，就自动发出一个”<strong>预检</strong>“请求，要求服务器确认可以这样请求。下面是这个”预检”请求的HTTP头信息。</p>
+<p>浏览器发现，这是一个非简单请求，就自动发出一个&quot;<strong>预检</strong>&quot;请求，要求服务器确认可以这样请求。下面是这个&quot;预检&quot;请求的HTTP头信息。</p>
 <pre class="line-numbers language-dart" data-language="dart"><code class="language-dart">OPTIONS <span class="token operator">/</span>cors HTTP<span class="token operator">/</span><span class="token number">1.1</span>
 
 <span class="token class-name">Origin</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>api<span class="token punctuation">.</span>bob<span class="token punctuation">.</span>com
@@ -640,13 +638,12 @@ xhr<span class="token punctuation">.</span><span class="token function">send</sp
 
 <span class="token class-name">User</span><span class="token operator">-</span><span class="token class-name">Agent</span><span class="token punctuation">:</span> <span class="token class-name">Mozilla</span><span class="token operator">/</span><span class="token number">5.0</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>“预检”请求用的请求方法是<strong>OPTIONS</strong>，表示这个请求是用来询问的。头信息里面，关键字段是Origin，表示请求来自哪个源。</p>
-<p>除了Origin字段，”预检”<strong>请求头</strong>信息包括两个特殊字段。</p>
+<p>&quot;预检&quot;请求用的请求方法是<strong>OPTIONS</strong>，表示这个请求是用来询问的。头信息里面，关键字段是Origin，表示请求来自哪个源。</p>
+<p>除了Origin字段，&quot;预检&quot;<strong>请求头</strong>信息包括两个特殊字段。</p>
 <p><code>Access-Control-Request-Method</code>：该字段是必须的，用来列出浏览器的CORS请求会用到哪些HTTP方法，上例是PUT。</p>
 <p><code>Access-Control-Request-Headers</code>：该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header</p>
 <p><strong>预检请求的回应</strong></p>
-<p>服务器收到”预检”请求以后，检查了<code>Origin</code>、<code>Access-Control-Request-Method</code>和<code>Access-Control-Request-Headers</code>字段以后，确认允许跨源请求，就可以做出回应</p>
+<p>服务器收到&quot;预检&quot;请求以后，检查了<code>Origin</code>、<code>Access-Control-Request-Method</code>和<code>Access-Control-Request-Headers</code>字段以后，确认允许跨源请求，就可以做出回应</p>
 <pre class="line-numbers language-dart" data-language="dart"><code class="language-dart">HTTP<span class="token operator">/</span><span class="token number">1.1</span> <span class="token number">200</span> OK
 
 <span class="token class-name">Date</span><span class="token punctuation">:</span> <span class="token class-name">Mon</span><span class="token punctuation">,</span> <span class="token number">01</span> <span class="token class-name">Dec</span> <span class="token number">2008</span> <span class="token number">01</span><span class="token punctuation">:</span><span class="token number">15</span><span class="token punctuation">:</span><span class="token number">39</span> GMT
@@ -670,9 +667,8 @@ xhr<span class="token punctuation">.</span><span class="token function">send</sp
 <span class="token class-name">Connection</span><span class="token punctuation">:</span> <span class="token class-name">Keep</span><span class="token operator">-</span><span class="token class-name">Alive</span>
 
 <span class="token class-name">Content</span><span class="token operator">-</span><span class="token class-name">Type</span><span class="token punctuation">:</span> text<span class="token operator">/</span>plain<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>上面的HTTP回应中，关键的是<code>Access-Control-Allow-Origin</code>字段，表示<a target="_blank" rel="noopener" href="http://api.bob.com可以请求数据/">http://api.bob.com可以请求数据</a>。该字段也可以设为星号，表示同意任意跨源请求。</p>
-<p>如果浏览器否定了”预检”请求，会返回一个正常的HTTP回应，但是没有任何CORS相关的头信息字段。这时，浏览器就会认定，服务器不同意预检请求，因此触发一个错误，被XMLHttpRequest对象的<code>onerror</code>回调函数捕获。控制台会打印出报错信息。</p>
+<p>上面的HTTP回应中，关键的是<code>Access-Control-Allow-Origin</code>字段，表示<a target="_blank" rel="noopener" href="http://api.bob.xn--com-ys9dj4ud4z1gdcvshr3e/">http://api.bob.com可以请求数据</a>。该字段也可以设为星号，表示同意任意跨源请求。</p>
+<p>如果浏览器否定了&quot;预检&quot;请求，会返回一个正常的HTTP回应，但是没有任何CORS相关的头信息字段。这时，浏览器就会认定，服务器不同意预检请求，因此触发一个错误，被XMLHttpRequest对象的<code>onerror</code>回调函数捕获。控制台会打印出报错信息。</p>
 <p>服务器回应的其他CORS相关字段如下：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Access-Control-Allow-Methods: GET, POST, PUT
 
@@ -681,13 +677,12 @@ Access-Control-Allow-Headers: X-Custom-Header
 Access-Control-Allow-Credentials: <span class="token boolean">true</span>
 
 Access-Control-Max-Age: <span class="token number">1728000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>Access-Control-Allow-Methods</code>：该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次”预检”请求。</p>
-<p><code>Access-Control-Allow-Headers</code>：如果浏览器请求包括<code>Access-Control-Request-Headers</code>字段，则<code>Access-Control-Allow-Headers</code>字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在”预检”中请求的字段。</p>
+<p><code>Access-Control-Allow-Methods</code>：该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次&quot;预检&quot;请求。</p>
+<p><code>Access-Control-Allow-Headers</code>：如果浏览器请求包括<code>Access-Control-Request-Headers</code>字段，则<code>Access-Control-Allow-Headers</code>字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在&quot;预检&quot;中请求的字段。</p>
 <p><code>Access-Control-Allow-Credentials</code>： 该字段与简单请求时的含义相同。</p>
 <p><code>Access-Control-Max-Age</code>： 该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。</p>
 <p><strong>浏览器正常请求回应</strong></p>
-<p>一旦服务器通过了”预检”请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样，会有一个<code>Origin</code>头信息字段。服务器的回应，也都会有一个<code>Access-Control-Allow-Origin</code>头信息字段。</p>
+<p>一旦服务器通过了&quot;预检&quot;请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样，会有一个<code>Origin</code>头信息字段。服务器的回应，也都会有一个<code>Access-Control-Allow-Origin</code>头信息字段。</p>
 <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp">PUT <span class="token operator">/</span>cors HTTP<span class="token operator">/</span><span class="token number">1.1</span>
 
 Origin<span class="token punctuation">:</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span><span class="token class-name">api<span class="token punctuation">.</span>bob<span class="token punctuation">.</span>com</span>
@@ -701,15 +696,16 @@ Accept<span class="token operator">-</span>Language<span class="token punctuatio
 Connection<span class="token punctuation">:</span> keep<span class="token operator">-</span>alive
 
 User<span class="token operator">-</span>Agent<span class="token punctuation">:</span> Mozilla<span class="token operator">/</span><span class="token number">5.0</span><span class="token range operator">..</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>浏览器的正常CORS请求。上面头信息的<code>Origin</code>字段是浏览器自动添加的。下面是服务器正常的回应。</p>
 <pre class="line-numbers language-dart" data-language="dart"><code class="language-dart"><span class="token class-name">Access</span><span class="token operator">-</span><span class="token class-name">Control</span><span class="token operator">-</span><span class="token class-name">Allow</span><span class="token operator">-</span><span class="token class-name">Origin</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>api<span class="token punctuation">.</span>bob<span class="token punctuation">.</span>com
 
 <span class="token class-name">Content</span><span class="token operator">-</span><span class="token class-name">Type</span><span class="token punctuation">:</span> text<span class="token operator">/</span>html<span class="token punctuation">;</span> charset<span class="token operator">=</span>utf<span class="token operator">-</span><span class="token number">8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p><code>Access-Control-Allow-Origin</code>字段是每次回应都必定包含的</p>
-<h2 id="Node-js跨域处理"><a href="#Node-js跨域处理" class="headerlink" title="Node.js跨域处理"></a>Node.js跨域处理</h2><h3 id="设置允许域名跨域"><a href="#设置允许域名跨域" class="headerlink" title="设置允许域名跨域"></a>设置允许域名跨域</h3><ul>
-<li><p>设置允许所有域名跨域：</p>
+<h2 id="Node-js跨域处理">Node.js跨域处理</h2>
+<h3 id="设置允许域名跨域">设置允许域名跨域</h3>
+<ul>
+<li>
+<p>设置允许所有域名跨域：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var express &#x3D; require(&#39;express&#39;);
 var app &#x3D; express();
  
@@ -727,7 +723,8 @@ app.all(&quot;*&quot;,function(req,res,next)&#123;
         next();
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>设置允许多个域名跨域：</p>
+<li>
+<p>设置允许多个域名跨域：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">app.all(&quot;*&quot;,function(req,res,next)&#123;
   var orginList&#x3D;[
       &quot;http:&#x2F;&#x2F;www.bibi.com&quot;,
@@ -754,18 +751,18 @@ app.all(&quot;*&quot;,function(req,res,next)&#123;
     &#125; else &#123;
       res.sendStatus(500)
     &#125;
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h3 id="利用中间件-cors"><a href="#利用中间件-cors" class="headerlink" title="利用中间件 cors"></a>利用中间件 cors</h3><p><strong>安装</strong></p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">npm i cors -S<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<h3 id="利用中间件-cors">利用中间件 cors</h3>
+<p><strong>安装</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i cors <span class="token parameter variable">-S</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>使用方式一 ： 为所有源启用跨域</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span>  cors <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cors'</span><span class="token punctuation">)</span>
  app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">cors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
  app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">8000</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'start'</span><span class="token punctuation">)</span>
  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>使用方式二 ： 按条件配置</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"> <span class="token keyword">var</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span>
  <span class="token keyword">var</span> cors <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cors'</span><span class="token punctuation">)</span>
@@ -800,7 +797,6 @@ app.all(&quot;*&quot;,function(req,res,next)&#123;
  app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">8000</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'start'</span><span class="token punctuation">)</span>
  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

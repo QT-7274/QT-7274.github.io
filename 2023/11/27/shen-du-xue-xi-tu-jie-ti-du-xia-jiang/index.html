@@ -6,8 +6,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="《深度学习图解》梯度下降, QT-7274">
-    <meta name="description" content="比较本章中，我们只介绍一种简单的测量误差的方法：均方误差。
-“比较”这一步会让你知道自己的模型错了多少，但这还不足以让它真正学会，因为只是“比较”它不会告诉你为什么错了，在什么方向产生了失误，应该做什么来纠正错误。它只能给出表示“严重失误”">
+    <meta name="description" content="比较
+本章中，我们只介绍一种简单的测量误差的方法：均方误差。
+“比较”这一步会让你知道自己的模型错了多少，但这还不足以让它真正学会，因为只是“比较”它不会告诉你为什么错了，在什么方向产生了失误，应该做什么来纠正错误。它只能给出表示“严重失误">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -478,7 +479,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    21 分
+                    20 分
                 </div>
                 
 
@@ -501,11 +502,14 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>本章中，我们只介绍一种简单的测量误差的方法：<strong>均方误差</strong>。</p>
+                <h3 id="比较">比较</h3>
+<p>本章中，我们只介绍一种简单的测量误差的方法：<strong>均方误差</strong>。</p>
 <p><strong>“比较”这一步会让你知道自己的模型错了多少</strong>，但这还不足以让它真正学会，因为只是“比较”它不会告诉你为什么错了，在什么方向产生了失误，应该做什么来纠正错误。它只能给出表示“严重失误”“轻微失误”或“完美预测”的误差度量。</p>
-<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>本章中，我们介绍一种最流行的误差学习的方法：<strong>梯度下降</strong>。</p>
-<p><strong>“学习”告诉权重应该如何改变以降低误差。</strong>在“预测”步骤结束时，“学习”这一步会为每项权重计算一个数字，这个数字告诉我们，如果想要减少误差，权重应该向哪个方向变化。然后我们根据这个数字对权重做出相应调节，直到达到目的。</p>
-<h3 id="测量误差"><a href="#测量误差" class="headerlink" title="测量误差"></a>测量误差</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127174434112.png" alt="image-20231127174434112"></p>
+<h3 id="学习">学习</h3>
+<p>本章中，我们介绍一种最流行的误差学习的方法：<strong>梯度下降</strong>。</p>
+<p>**“学习”告诉权重应该如何改变以降低误差。**在“预测”步骤结束时，“学习”这一步会为每项权重计算一个数字，这个数字告诉我们，如果想要减少误差，权重应该向哪个方向变化。然后我们根据这个数字对权重做出相应调节，直到达到目的。</p>
+<h3 id="测量误差">测量误差</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127174434112.png" alt="image-20231127174434112"></p>
 <p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">knob_weight <span class="token operator">=</span> <span class="token number">0.5</span> <span class="token comment"># 定义一个旋钮的权重</span>
 <span class="token builtin">input</span> <span class="token operator">=</span> <span class="token number">0.5</span> <span class="token comment"># 输入值</span>
@@ -521,35 +525,43 @@ pred <span class="token operator">=</span> <span class="token builtin">input</sp
 '''</span>
 error <span class="token operator">=</span> <span class="token punctuation">(</span>pred <span class="token operator">-</span> goal_pred<span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token comment"># 计算出预测误差</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
-<li><p>goal_pred 变量是什么？</p>
+<li>
+<p>goal_pred 变量是什么？</p>
 <p>是从真实世界的某个地方得到的数字。通常情况下，这个数字很难通过直接观察获得，比如在给定温度下，“穿运动外套的人的百分比”等。</p>
 </li>
-<li><p>为什么需要对误差进行平方运算？</p>
+<li>
+<p>为什么需要对误差进行平方运算？</p>
 <p>主要原因是它能够迫使输出值为正的值在某些情况下可能是负的，这显然与真实世界中对误差的定义不同。</p>
 </li>
-<li><p>平方运算难道不会使较大的误差（&gt;1）变大而使较小的误差（&lt;1）变小吗？</p>
+<li>
+<p>平方运算难道不会使较大的误差（&gt;1）变大而使较小的误差（&lt;1）变小吗？</p>
 <p>事实证明，放大那些更大的误差和减小那些较小的误差并没有什么问题，我们会希望神经网络更关注大的错误，同时不必太在意那些小的错误。</p>
 </li>
 </ul>
-<h4 id="为什么需要测量误差？"><a href="#为什么需要测量误差？" class="headerlink" title="为什么需要测量误差？"></a>为什么需要测量误差？</h4><ul>
-<li><p><strong>测量误差能够简化问题。</strong></p>
-<p>事实证明，修改 knob_weight(节点权重)使网络正确预测 goal_forecast(预测目标)，要比修改 knob_weight 使 error&#x3D;&#x3D;0(误差为0)稍微复杂一些。将误差取到0似乎更直接。</p>
+<h4 id="为什么需要测量误差？">为什么需要测量误差？</h4>
+<ul>
+<li>
+<p><strong>测量误差能够简化问题。</strong></p>
+<p>事实证明，修改 knob_weight(节点权重)使网络正确预测 goal_forecast(预测目标)，要比修改 knob_weight 使 error==0(误差为0)稍微复杂一些。将误差取到0似乎更直接。</p>
 </li>
-<li><p><strong>在测量误差的不同方法中，误差的优先级不同。</strong></p>
+<li>
+<p><strong>在测量误差的不同方法中，误差的优先级不同。</strong></p>
 <p>如果使用均方误差来测量损失，则较大的误差将被优先考虑，而较小的会被忽略掉。训练过程能够修正你对误差的认识，放大那些较大的误差，并忽略那些较小的误差。</p>
 </li>
-<li><p><strong>为什么只需要正的误差？</strong></p>
+<li>
+<p><strong>为什么只需要正的误差？</strong></p>
 <p>我们希望能够将平均误差降到0，如果误差有正有负，那么可能会产生正负相抵平均误差为0的结果，这是我们不希望看到的。</p>
 </li>
 </ul>
-<h3 id="最简单的神经学习形式是什么？"><a href="#最简单的神经学习形式是什么？" class="headerlink" title="最简单的神经学习形式是什么？"></a>最简单的神经学习形式是什么？</h3><h4 id="冷热法"><a href="#冷热法" class="headerlink" title="冷热法"></a>冷热法</h4><p>冷热学习指的是通过<strong>扰动权重</strong>来确定向哪个方向调整可以使得误差的降低幅度最大，基于此将权重的值向那个方向移动，不断重复这个过程，直到误差趋于0。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127180957570.png" alt="image-20231127180957570"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127181004405.png" alt="image-20231127181004405"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127181016395.png" alt="image-20231127181016395"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127181023943.png" alt="image-20231127181023943"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127181456526.png" alt="image-20231127181456526"></p>
+<h3 id="最简单的神经学习形式是什么？">最简单的神经学习形式是什么？</h3>
+<h4 id="冷热法">冷热法</h4>
+<p>冷热学习指的是通过<strong>扰动权重</strong>来确定向哪个方向调整可以使得误差的降低幅度最大，基于此将权重的值向那个方向移动，不断重复这个过程，直到误差趋于0。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127180957570.png" alt="image-20231127180957570"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127181004405.png" alt="image-20231127181004405"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127181016395.png" alt="image-20231127181016395"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127181023943.png" alt="image-20231127181023943"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127181456526.png" alt="image-20231127181456526"></p>
 <p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">weight <span class="token operator">=</span> <span class="token number">0.5</span>
 <span class="token builtin">input</span> <span class="token operator">=</span> <span class="token number">0.5</span>
@@ -575,32 +587,39 @@ step_amount <span class="token operator">=</span> <span class="token number">0.0
         
     <span class="token keyword">if</span><span class="token punctuation">(</span>down_error <span class="token operator">></span> up_error<span class="token punctuation">)</span><span class="token punctuation">:</span>
         weight <span class="token operator">=</span> weight <span class="token operator">+</span> step_amount<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>缺点：正常情况下，必须重复这个过程很多次才能找到正确的权重。有些人必须训练他们的网络数周或数月，才能找到足够好的权重配置。</p>
 <p>这揭示了在神经网络中学习的本质：<strong>搜素</strong>。为了获得最佳的权重配置，我们不断进行搜索，直到网络的误差降到0（完美预测）。</p>
-<h5 id="冷热法的特点"><a href="#冷热法的特点" class="headerlink" title="冷热法的特点"></a>冷热法的特点</h5><ol>
-<li><p>它很简单</p>
+<h5 id="冷热法的特点">冷热法的特点</h5>
+<ol>
+<li>
+<p>它很简单</p>
 <p>在上一次做出预测之后，模型又进行两次预测，一次的权重稍微高一些，另一次的权重稍微低一些。然后，权重实际进行调节的量取决于哪个方向所得到的误差更小，重复这一过程足够多次，最终误差将降低到0。</p>
 </li>
-<li><p>效率低下</p>
+<li>
+<p>效率低下</p>
 <p>必须通过多次预测才能进行一次权重的更新。这似乎非常低效。</p>
 </li>
-<li><p>有时准确预测出目标是不可能的</p>
+<li>
+<p>有时准确预测出目标是不可能的</p>
 <p>给定步长大小的值，除非权重恰好分毫不差地落在距离初始权重 n倍数的步幅大小 的位置，否则最终会超出某个小于步长大小的值。</p>
 <p>这一情况发生时，网络预测的输出值就会开始在 goal_prediction 周围来回波动。</p>
 <p>所以真正问题是，<strong>即使你知道调节权重的正确方向，你也没办法知道正确的幅度</strong>。</p>
 </li>
 </ol>
-<h3 id="基于误差调节权重"><a href="#基于误差调节权重" class="headerlink" title="基于误差调节权重"></a>基于误差调节权重</h3><p>比冷热法更高级的学习形式，叫做梯度下降。该方法运行同时进行方向和幅度的计算，对权重进行调整以减少错误。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127185422948.png" alt="image-20231127185422948"></p>
+<h3 id="基于误差调节权重">基于误差调节权重</h3>
+<p>比冷热法更高级的学习形式，叫做梯度下降。该方法运行同时进行方向和幅度的计算，对权重进行调整以减少错误。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127185422948.png" alt="image-20231127185422948"></p>
 <ul>
-<li><p><strong>什么是停止调节？</strong></p>
+<li>
+<p><strong>什么是停止调节？</strong></p>
 <p>停止调节用于消除对纯净误差的第一个（也是最简单的一个）影响，往往来自于其与输入相乘造成的误差。如果输入为0，则 <code>direction_and_amount</code> 也为0。当输入为0时，模型不会进行学习，所有权重值都会产生相同的误差。</p>
 </li>
-<li><p><strong>什么是负值反转？</strong></p>
+<li>
+<p><strong>什么是负值反转？</strong></p>
 <p>通常当输入为正时，向上提升权重的值能使预测结果也向上提升。但是如果输入是负的，那么权重的调节就会突然改变方向！当输入为负时，向上提升权重的值将使预测值下降。如何解决这个问题？如果输入是负的，那么将纯误差乘以输入将改变<code>direction_and_amount</code> 的符号，即使输入是负的，我们也要确保权重朝着正确方向移动。</p>
 </li>
-<li><p><strong>什么是缩放？</strong></p>
+<li>
+<p><strong>什么是缩放？</strong></p>
 <p>从逻辑上讲，如果输入很大，则权重更新也会变得很大。这更像一种副作用，因为它经常可能失去控制，稍后我们将使用 alpha 来处理这种情况。</p>
 </li>
 </ul>
@@ -616,19 +635,20 @@ goal_pred <span class="token operator">=</span> <span class="token number">0.8</
     weight <span class="token operator">=</span> weight <span class="token operator">-</span> direction_and_amount
 
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" Prediction:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="梯度下降的一次迭代"><a href="#梯度下降的一次迭代" class="headerlink" title="梯度下降的一次迭代"></a>梯度下降的一次迭代</h3><p> <img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127191224787.png" alt="image-20231127191224787"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127191233223.png" alt="image-20231127191233223"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127191305814.png" alt="image-20231127191305814"></p>
+<h3 id="梯度下降的一次迭代">梯度下降的一次迭代</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127191224787.png" alt="image-20231127191224787"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127191233223.png" alt="image-20231127191233223"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127191305814.png" alt="image-20231127191305814"></p>
 <p>与前文的梯度下降的主要区别是新的变量 <code>delta</code>，而非直接计算 <code>direction_and_amount</code>。它是节点过高或过低的原始计量。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127191543047.png" alt="image-20231127191543047"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127191625114.png" alt="image-20231127191625114"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127191543047.png" alt="image-20231127191543047"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127191625114.png" alt="image-20231127191625114"></p>
 <p>在使用 <code>weight_delta</code> 更新权重值前，可将它乘以一个小数值 <code>alpha</code>。这可以让你控制网络的学习速度，避免过度调整。</p>
 <blockquote>
 <p>注意：这里权重更新的增量与冷热学习的结果是相同的（小幅增加）。</p>
 </blockquote>
-<h3 id="学习就是减少误差"><a href="#学习就是减少误差" class="headerlink" title="学习就是减少误差"></a>学习就是减少误差</h3><p><strong>可以修改权重以减少误差</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127221203589.png" alt="image-20231127221203589"></p>
+<h3 id="学习就是减少误差">学习就是减少误差</h3>
+<p><strong>可以修改权重以减少误差</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127221203589.png" alt="image-20231127221203589"></p>
 <ol>
 <li><strong>预测值</strong>由<strong>输入</strong>和<strong>权重</strong>决定</li>
 <li><strong>原始误差</strong>由<strong>预测值</strong>和固定值<strong>期望预测</strong>决定</li>
@@ -643,9 +663,10 @@ goal_pred <span class="token operator">=</span> <span class="token number">0.8</
 <p><strong>如果想往某个特定方向移动误差怎么办？</strong></p>
 <p>根据前一个公式中的关系，下图表示了在整个取值空间中权重所对应的误差值。</p>
 <p>黑色圆点表示了当前的 weight（权重）和 error（误差）所在的位置。</p>
-<p>下方虚线描绘出的圆圈则是我们最终想要的权重位置（此时误差 error &#x3D;&#x3D; 0）</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127223220719.png" alt="image-20231127223220719"></p>
-<h3 id="回顾学习的步骤"><a href="#回顾学习的步骤" class="headerlink" title="回顾学习的步骤"></a>回顾学习的步骤</h3><p>代码示例：</p>
+<p>下方虚线描绘出的圆圈则是我们最终想要的权重位置（此时误差 error == 0）</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127223220719.png" alt="image-20231127223220719"></p>
+<h3 id="回顾学习的步骤">回顾学习的步骤</h3>
+<p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">weight<span class="token punctuation">,</span> goal_pred<span class="token punctuation">,</span> <span class="token builtin">input</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token number">1.1</span><span class="token punctuation">)</span>
 <span class="token keyword">for</span> iteration <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     
@@ -655,43 +676,44 @@ goal_pred <span class="token operator">=</span> <span class="token number">0.8</
     weight_delta <span class="token operator">=</span> delta <span class="token operator">*</span> <span class="token builtin">input</span>
     weight <span class="token operator">=</span> weight <span class="token operator">-</span> weight_delta
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" Prediction:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">Error<span class="token punctuation">:</span><span class="token number">0.6400000000000001</span> Prediction<span class="token punctuation">:</span><span class="token number">0.0</span> Weight_Delta<span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">0.8800000000000001</span>
 Error<span class="token punctuation">:</span><span class="token number">0.02822400000000005</span> Prediction<span class="token punctuation">:</span><span class="token number">0.9680000000000002</span> Weight_Delta<span class="token punctuation">:</span><span class="token number">0.1848000000000002</span>
 Error<span class="token punctuation">:</span><span class="token number">0.0012446784000000064</span> Prediction<span class="token punctuation">:</span><span class="token number">0.76472</span> Weight_Delta<span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">0.0388080000000001</span>
 Error<span class="token punctuation">:</span><span class="token number">5.4890317439999896e-05</span> Prediction<span class="token punctuation">:</span><span class="token number">0.8074088</span> Weight_Delta<span class="token punctuation">:</span><span class="token number">0.008149679999999992</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127223952870.png" alt="image-20231127223952870"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127224014805.png" alt="image-20231127224014805"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127224209168.png" alt="image-20231127224209168"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127224216239.png" alt="image-20231127224216239"></p>
-<h3 id="导数与梯度下降的关系"><a href="#导数与梯度下降的关系" class="headerlink" title="导数与梯度下降的关系"></a>导数与梯度下降的关系</h3><p>导数的两种解释方式：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127223952870.png" alt="image-20231127223952870"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127224014805.png" alt="image-20231127224014805"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127224209168.png" alt="image-20231127224209168"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127224216239.png" alt="image-20231127224216239"></p>
+<h3 id="导数与梯度下降的关系">导数与梯度下降的关系</h3>
+<p>导数的两种解释方式：</p>
 <ol>
 <li>将它理解成函数中的一个变量在你移动另一个变量时是如何变化的。</li>
 <li>导数是直线或曲线上一点的斜率。</li>
 </ol>
 <p>如下图，离我们要找到的目标权重越远，斜率就越大：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127225248840.png" alt="image-20231127225248840"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127225248840.png" alt="image-20231127225248840"></p>
 <blockquote>
 <p>对于任何函数，你都可以选择两个变量，计算出当你更改其中一个变量时，另一个变量发生了多大的变化。</p>
 </blockquote>
 <p>为使得误差减小，我们尽力去寻找权重应该变化的方向和幅度，我们可以用导数来确定权重和误差之间的关系。这种学习（寻找误差最小值）称为梯度下降法。</p>
-<h3 id="梯度爆炸情况"><a href="#梯度爆炸情况" class="headerlink" title="梯度爆炸情况"></a>梯度爆炸情况</h3><p>如果修改输入值，但仍然试着让算法预测出0.8，结果如下：</p>
+<h3 id="梯度爆炸情况">梯度爆炸情况</h3>
+<p>如果修改输入值，但仍然试着让算法预测出0.8，结果如下：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">Error<span class="token punctuation">:</span><span class="token number">0.03999999999999998</span> Prediction<span class="token punctuation">:</span><span class="token number">1.0</span> Weight_Delta<span class="token punctuation">:</span><span class="token number">0.3999999999999999</span>
 Error<span class="token punctuation">:</span><span class="token number">0.3599999999999998</span> Prediction<span class="token punctuation">:</span><span class="token number">0.20000000000000018</span> Weight_Delta<span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1.1999999999999997</span>
 Error<span class="token punctuation">:</span><span class="token number">3.2399999999999984</span> Prediction<span class="token punctuation">:</span><span class="token number">2.5999999999999996</span> Weight_Delta<span class="token punctuation">:</span><span class="token number">3.599999999999999</span>
 Error<span class="token punctuation">:</span><span class="token number">29.159999999999986</span> Prediction<span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">4.599999999999999</span> Weight_Delta<span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">10.799999999999997</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>预测的结果爆炸了！它们从负数变成正数，又从正数变成负数，来回往复，但离真正的答案越来越远。<strong>对权重的每次更新都会造成过度修正</strong>。</p>
-<h4 id="过渡修正的可视化"><a href="#过渡修正的可视化" class="headerlink" title="过渡修正的可视化"></a>过渡修正的可视化</h4><p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127231134343.png" alt="image-20231127231134343"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127231144308.png" alt="image-20231127231144308"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127231157105.png" alt="image-20231127231157105"></p>
+<h4 id="过渡修正的可视化">过渡修正的可视化</h4>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127231134343.png" alt="image-20231127231134343"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127231144308.png" alt="image-20231127231144308"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127231157105.png" alt="image-20231127231157105"></p>
 <p>那么为什么神经网络的输出会爆炸呢？</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231127231247371.png" alt="image-20231127231247371"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127231247371.png" alt="image-20231127231247371"></p>
 <p>误差的激增是由于输入变大了。回顾一下我们更新权重的方法：<code>weight = weight - (input * (pred - goal_pred))</code></p>
-<p>如果输入足够大，即使误差很小，也会使权重的增量很大。<strong>当你的权重增量很大而误差的量很小的时候，网络就会矫枉过正。</strong>如果新的误差更大，网络就会尝试着更多地纠正错误，这就导致了发散。</p>
-<h4 id="引入α"><a href="#引入α" class="headerlink" title="引入α"></a>引入α</h4><p><strong>这是防止过度修正权重的最简单的方法。</strong></p>
+<p>如果输入足够大，即使误差很小，也会使权重的增量很大。**当你的权重增量很大而误差的量很小的时候，网络就会矫枉过正。**如果新的误差更大，网络就会尝试着更多地纠正错误，这就导致了发散。</p>
+<h4 id="引入α">引入α</h4>
+<p><strong>这是防止过度修正权重的最简单的方法。</strong></p>
 <p>当你矫枉过正的时候，新的导数的大小甚至比开始时还要大（导数的绝对值会变得更大），这使得我们下一步更加远离目标，神经网络会持续这样发散下去。</p>
 <p>我们的解决方案就是将权值的增量乘以一个系数，让它变得更小，大多数情况下，这个方法表现为将权值增量乘以一个<strong>介于0和1之间的实数</strong>，称为α。</p>
 <blockquote>
@@ -714,7 +736,6 @@ alpha <span class="token operator">=</span> <span class="token number">0.1</span
     weight <span class="token operator">=</span> weight <span class="token operator">-</span> <span class="token punctuation">(</span>alpha <span class="token operator">*</span> derivative<span class="token punctuation">)</span>
     
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Error:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" Prediction:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出为：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">Error<span class="token punctuation">:</span><span class="token number">0.03999999999999998</span> Prediction<span class="token punctuation">:</span><span class="token number">1.0</span>
 Error<span class="token punctuation">:</span><span class="token number">0.0144</span> Prediction<span class="token punctuation">:</span><span class="token number">0.92</span>
@@ -736,18 +757,18 @@ Error<span class="token punctuation">:</span><span class="token number">3.183464
 Error<span class="token punctuation">:</span><span class="token number">1.1460471998340758e-09</span> Prediction<span class="token punctuation">:</span><span class="token number">0.8000338533188895</span>
 Error<span class="token punctuation">:</span><span class="token number">4.125769919393652e-10</span> Prediction<span class="token punctuation">:</span><span class="token number">0.8000203119913337</span>
 Error<span class="token punctuation">:</span><span class="token number">1.485277170987127e-10</span> Prediction<span class="token punctuation">:</span><span class="token number">0.8000121871948003</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="多输入梯度下降"><a href="#多输入梯度下降" class="headerlink" title="多输入梯度下降"></a>多输入梯度下降</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128171416576.png" alt="image-20231128171416576"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128171448304.png" alt="image-20231128171448304"></p>
+<h3 id="多输入梯度下降">多输入梯度下降</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128171416576.png" alt="image-20231128171416576"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128171448304.png" alt="image-20231128171448304"></p>
 <p>直到生成输出节点上的 <code>delta</code> 之前，单输入和多输入梯度下降的算法都是相同的。但存在以下的问题：当只有一个权重时，我们只需要一个输入，以生成一个 <code>weight_delta</code>（权重增量）。现在你有三个权重，如何生成三个  <code>weight_delta</code> 呢？</p>
 <blockquote>
 <p><code>delta</code> 的定义：在当前的训练实例中，用于衡量你所希望的当前节点的值的变化，以便完美地预测结果。</p>
 <p><code>weight_delta</code> 的定义：一项基于导数的对权重移动的方向和数量的估计，目标是降低 node_delta，需要考虑关于缩放、负值反转、条件停止的处理。</p>
 </blockquote>
 <p><strong>因为每项权重都有一个唯一的输入，并共享一个 <code>delta</code>，我们可以使用每个权值的输入乘以 <code>delta</code>，来创建对应的 <code>weight_delta</code>。</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128172927675.png" alt="image-20231128172927675"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128173015006.png" alt="image-20231128173015006"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128173032716.png" alt="image-20231128173032716"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128172927675.png" alt="image-20231128172927675"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128173015006.png" alt="image-20231128173015006"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128173032716.png" alt="image-20231128173032716"></p>
 <p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">neural_network</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span> weights<span class="token punctuation">)</span><span class="token punctuation">:</span>
   out <span class="token operator">=</span> <span class="token number">0</span>
@@ -794,7 +815,6 @@ weights <span class="token operator">=</span> <span class="token punctuation">[<
 
   <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>weights<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     weights<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-=</span>alpha<span class="token operator">*</span>weight_deltas<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出为：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">Iteration<span class="token punctuation">:</span><span class="token number">1</span>
 Pred<span class="token punctuation">:</span><span class="token number">0.8600000000000001</span>
@@ -819,22 +839,23 @@ Delta<span class="token punctuation">:</span><span class="token operator">-</spa
 Weights<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.239346125</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.02736100000000008</span><span class="token punctuation">]</span>
 Weight_Deltas<span class="token punctuation">:</span>
 <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.017717842187500006</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.032709862500000006</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：大部分的学习（权重改变）都是在<strong>输入值最大</strong>的权重上进行的，因为输入能够显著地改变斜率。</p>
 <p>因此，当数据集具有这样的特征时，为了鼓励学习的过程用到所有的权重，我们需要引入一个名为标准化的子领域。基于斜率的显著差异，我们必须将 α 设置得比预想中的还要低（0.01而不是0.1）。</p>
 </blockquote>
-<h4 id="单项权重冻结"><a href="#单项权重冻结" class="headerlink" title="单项权重冻结"></a>单项权重冻结</h4><p>以上的代码还包括了单项权重冻结，其中权重项a永远不会调整 <code>weight_deltas[0] = 0</code></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128180000616.png" alt="image-20231128180000616"></p>
+<h4 id="单项权重冻结">单项权重冻结</h4>
+<p>以上的代码还包括了单项权重冻结，其中权重项a永远不会调整 <code>weight_deltas[0] = 0</code></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128180000616.png" alt="image-20231128180000616"></p>
 <p>但你会惊讶地发现，权重a仍然慢慢滑向U形曲线底部。这是因为这条曲线是每个单独权重对于全局误差所产生的影响的度量。因此误差是共享的，当一项权重到达U形曲线底部时，所有权重都会到达U形曲线底部。</p>
-<p>首先，如果你使权重项b和c达到了收敛（误差为0），然后尝试训练权重a，则a不会移动：因为误差已经为0，error&#x3D;0，也就意味着 <code>weight_delta</code> 为0。</p>
+<p>首先，如果你使权重项b和c达到了收敛（误差为0），然后尝试训练权重a，则a不会移动：因为误差已经为0，error=0，也就意味着 <code>weight_delta</code> 为0。</p>
 <blockquote>
 <p>这揭示了神经网络潜在的一项负面特性：权重项a可能对应着重要的输入数据，会对预测结果产生举足轻重的影响，但如果网络在训练数据集中意外找到了一种不需要它也可以准确预测的情况，那么权重a将不再对预测结果产生任何影响。</p>
 </blockquote>
 <blockquote>
 <p>注意：图表中曲率是由训练数据决定的。因为误差由训练数据决定，任何网络的权重都可以任意取值，但是给定任意特定权重的设置后，则误差值百分之百由数据决定。</p>
 </blockquote>
-<h3 id="多输出梯度下降"><a href="#多输出梯度下降" class="headerlink" title="多输出梯度下降"></a>多输出梯度下降</h3><p>代码示例：</p>
+<h3 id="多输出梯度下降">多输出梯度下降</h3>
+<p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># Instead of predicting just </span>
 <span class="token comment"># whether the team won or lost, </span>
 <span class="token comment"># now we're also predicting whether</span>
@@ -887,11 +908,11 @@ alpha <span class="token operator">=</span> <span class="token number">0.1</span
     
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Weights:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>weights<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Weight Deltas:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>weight_deltas<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="多输入和多输出的梯度下降"><a href="#多输入和多输出的梯度下降" class="headerlink" title="多输入和多输出的梯度下降"></a>多输入和多输出的梯度下降</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128183627282.png" alt="image-20231128183627282"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128183648880.png" alt="image-20231128183648880"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128183753662.png" alt="image-20231128183753662"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128183818329.png" alt="image-20231128183818329"></p>
+<h3 id="多输入和多输出的梯度下降">多输入和多输出的梯度下降</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128183627282.png" alt="image-20231128183627282"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128183648880.png" alt="image-20231128183648880"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128183753662.png" alt="image-20231128183753662"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128183818329.png" alt="image-20231128183818329"></p>
 <p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">            <span class="token comment">#toes %win #fans</span>
 weights <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token comment">#hurt?</span>
@@ -939,7 +960,6 @@ delta <span class="token operator">=</span> <span class="token punctuation">[</s
 <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     error<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>pred<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> true<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span>
     delta<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> pred<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> true<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 <span class="token keyword">def</span> <span class="token function">outer_prod</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
     
@@ -956,34 +976,39 @@ weight_deltas <span class="token operator">=</span> outer_prod<span class="token
 <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>weights<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>weights<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         weights<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">-=</span> alpha <span class="token operator">*</span> weight_deltas<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="这些权重都学习到了什么？"><a href="#这些权重都学习到了什么？" class="headerlink" title="这些权重都学习到了什么？"></a>这些权重都学习到了什么？</h3><p>每个权重都试图减少误差，但总的来看它们学到了什么呢？</p>
+<h3 id="这些权重都学习到了什么？">这些权重都学习到了什么？</h3>
+<p>每个权重都试图减少误差，但总的来看它们学到了什么呢？</p>
 <p>以MNIST手写数据集为例，有一个脚本MNISTPreprocessor可以用于预处理它：</p>
 <ol>
-<li><p>它可以将前1000张图片及其对应的标签加载到两个名为images（图像）和labels（标签）的NumPy矩阵中。</p>
+<li>
+<p>它可以将前1000张图片及其对应的标签加载到两个名为images（图像）和labels（标签）的NumPy矩阵中。</p>
 <blockquote>
 <p>图像是二维的，那么如何才能将其输入到一维的神经网络呢？</p>
 <p><strong>压平</strong>。先抽出第一行像素，将它与第二行首尾相连，然后是第三行，以此类推，直到得到一个一维的像素列表。</p>
 </blockquote>
 </li>
-<li><p>下图代表MNIST分类神经网络，唯一与之前的神经网络的区别是输入和输出的数量增加了很多：这个网络有784个输入（每个对应着28×28的图像中的一个像素）和10个输出（每个对应着0-9之间可能出现的一个数字）。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128184854703.png" alt="image-20231128184854703"></p>
+<li>
+<p>下图代表MNIST分类神经网络，唯一与之前的神经网络的区别是输入和输出的数量增加了很多：这个网络有784个输入（每个对应着28×28的图像中的一个像素）和10个输出（每个对应着0-9之间可能出现的一个数字）。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128184854703.png" alt="image-20231128184854703"></p>
 </li>
-<li><p>如果这个网络能够完美地预测，它将接收图像的像素值（比如数字2，像下图中的这个），然后在正确的输出位置（第三个位置，因为我们从0开始数）预测出1，在其他位置预测出0。</p>
+<li>
+<p>如果这个网络能够完美地预测，它将接收图像的像素值（比如数字2，像下图中的这个），然后在正确的输出位置（第三个位置，因为我们从0开始数）预测出1，在其他位置预测出0。</p>
 <p>如果它能对数据集中的每一个图像都正确地做到这一点，那么误差将不存在：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128193509867.png" alt="image-20231128193509867"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128193509867.png" alt="image-20231128193509867"></p>
 </li>
-<li><p>权重可视化</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128194430439.png" alt="image-20231128194430439"></p>
+<li>
+<p>权重可视化</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128194430439.png" alt="image-20231128194430439"></p>
 <p>每个输出节点都有一条权重边，与每个输入节点(像素)相连接。例如，上图中，所呈现的2这个节点上有784个输入权重，每个权重都将数字2和图像中对应的像素相连接。</p>
 <p>如果权重值比较高，那么模型认为对应的像素和数字2的相关度会比较高；如果权重值非常低（负数），那么说明神经网络认为对应的像素和数字2的相关度非常低，甚至可能是负相关。</p>
 <p>如果将权重画成一个和输入数据形状相同的图像，可以看到对应某个特殊的输出节点，哪些像素具有最高的相关性。</p>
-<p>示例中，在我们的示例中，这两张图像分别使用输出2和输出1所对应的权重创建，我们可以依稀发现，在图像中分别出现了一个非常模糊的2和1。<strong>明亮的区域表示高权重，阴暗的区域表示权重为负值。中性的颜色表示对应的权重为0。</strong>这说明，神经网络在一般情况下能够知道2和1的形状。</p>
+<p>示例中，在我们的示例中，这两张图像分别使用输出2和输出1所对应的权重创建，我们可以依稀发现，在图像中分别出现了一个非常模糊的2和1。**明亮的区域表示高权重，阴暗的区域表示权重为负值。中性的颜色表示对应的权重为0。**这说明，神经网络在一般情况下能够知道2和1的形状。</p>
 </li>
-<li><p>点积（加权和）可视化</p>
+<li>
+<p>点积（加权和）可视化</p>
 <p>为什么神经网络能知道2和1的形状？</p>
 <p>考虑下面的这个例子：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/27/shen-du-xue-xi-tu-jie-ti-du-xia-jiang/image-20231128194607364.png" alt="image-20231128194607364"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231128194607364.png" alt="image-20231128194607364"></p>
 <p>a和b中的每个元素相乘，在本例中会生成一个全0向量。这个向量的和也是0。为什么？<strong>因为这两个向量没有任何共同点。</strong></p>
 <blockquote>
 <p>点积是对两个向量之间相似性的松散度量。</p>

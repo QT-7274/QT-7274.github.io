@@ -7,12 +7,15 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Vue核心 计算属性和侦听属性, QT-7274">
     <meta name="description" content="计算属性
+
+
 使用场景：要用的属性不存在，需要通过已有属性计算得来。
 
 对于Vue而言，简单来说data配置项中的就是属性。因此计算属性名并不在data中存在，但它必须由data中的属性计算得来，否则Vue检测不到涉及属性的变化。
 
 
-底层原理">
+
+底">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -506,21 +509,26 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h2><ol>
-<li><p>使用场景：要用的属性不存在，需要通过<strong>已有属性</strong>计算得来。</p>
+                <h2 id="计算属性">计算属性</h2>
+<ol>
+<li>
+<p>使用场景：要用的属性不存在，需要通过<strong>已有属性</strong>计算得来。</p>
 <blockquote>
 <p>对于Vue而言，简单来说data配置项中的就是属性。因此计算属性名并不在data中存在，但它必须由data中的属性计算得来，否则Vue检测不到涉及属性的变化。</p>
 </blockquote>
 </li>
-<li><p>底层原理：底层借助了<code>Object.defineproperty()</code>方法提供的<code>getter</code>和<code>setter</code>方法。</p>
+<li>
+<p>底层原理：底层借助了<code>Object.defineproperty()</code>方法提供的<code>getter</code>和<code>setter</code>方法。</p>
 </li>
-<li><p><code>get</code>函数何时执行？</p>
+<li>
+<p><code>get</code>函数何时执行？</p>
 <ul>
 <li>初次读取会执行一次、</li>
 <li>当<strong>依赖的数据发生改变时</strong>会被再次调用。</li>
 </ul>
 </li>
-<li><p>优势：与<code>methods</code>实现相比，<strong>内部有缓存机制</strong>，效率更高（计算属性的<code>get</code>只会被执行一次），调试方便。</p>
+<li>
+<p>优势：与<code>methods</code>实现相比，<strong>内部有缓存机制</strong>，效率更高（计算属性的<code>get</code>只会被执行一次），调试方便。</p>
 </li>
 </ol>
 <blockquote>
@@ -561,17 +569,22 @@
 				&#125;
 			&#125;
 		&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="侦听属性"><a href="#侦听属性" class="headerlink" title="侦听属性"></a>侦听属性</h2><ol>
-<li><p>使用场景：当被侦听的属性变化时，回调函数自动调用，进行相关操作。</p>
+<h2 id="侦听属性">侦听属性</h2>
+<ol>
+<li>
+<p>使用场景：当被侦听的属性变化时，回调函数自动调用，进行相关操作。</p>
 </li>
-<li><p>侦听的属性必须存在，才能进行监视，既可以侦听<code>data</code>，也可以侦听计算属性。</p>
+<li>
+<p>侦听的属性必须存在，才能进行监视，既可以侦听<code>data</code>，也可以侦听计算属性。</p>
 </li>
-<li><p>配置项属性<code>immediate: false</code>，改为<code>true</code>，则初始化调用一次<code>handler(newValue, oldValue)</code>。</p>
+<li>
+<p>配置项属性<code>immediate: false</code>，改为<code>true</code>，则初始化调用一次<code>handler(newValue, oldValue)</code>。</p>
 </li>
-<li><p>侦听有两种写法：</p>
+<li>
+<p>侦听有两种写法：</p>
 <ul>
-<li><p>创建Vue时传入<code>watch: &#123;&#125;</code>配置</p>
+<li>
+<p>创建Vue时传入<code>watch: &#123;&#125;</code>配置</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">watch:&#123;
 		&#x2F;&#x2F;正常写法
 		isHot:&#123;
@@ -587,7 +600,8 @@
 		&#125; *&#x2F;
 			&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>通过<code>vm.$watch()</code>侦听</p>
+<li>
+<p>通过<code>vm.$watch()</code>侦听</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;正常写法
 	vm.$watch(&#39;isHot&#39;,&#123;
 		immediate:true, &#x2F;&#x2F;初始化时让handler调用一下
@@ -599,17 +613,20 @@
 &#x2F;&#x2F;简写
 	&#x2F;* vm.$watch(&#39;isHot&#39;,(newValue,oldValue)&#x3D;&gt;&#123;
 		console.log(&#39;isHot被修改了&#39;,newValue,oldValue,this)
-	&#125;) *&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+	&#125;) *&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 </li>
-<li><p>如何选择：</p>
+<li>
+<p>如何选择：</p>
 <ol>
 <li>如果在创建Vue实例时，就知道要侦听什么属性，就直接使用watch配置项。</li>
 <li>创建实例的时候不知道监测谁，后续根据用户的行为发现需要监视某个属性，就使用 <code>vm.$watch()</code> 。</li>
 </ol>
 </li>
 </ol>
-<h3 id="深度侦听"><a href="#深度侦听" class="headerlink" title="深度侦听"></a>深度侦听</h3><ol>
+<h3 id="深度侦听">深度侦听</h3>
+<ol>
 <li>Vue中的<code>watch</code>默认不监测对象内部值的改变（一层）</li>
 <li>在<code>watch</code>中配置<code>deep: true</code>可以监测对象内部值的改变（多层）</li>
 </ol>
@@ -620,18 +637,22 @@
 <li>使用<code>watch</code>时根据监视数据的具体结构，决定是否采用深度监视。</li>
 </ul>
 </blockquote>
-<h2 id="计算属性VS侦听属性"><a href="#计算属性VS侦听属性" class="headerlink" title="计算属性VS侦听属性"></a>计算属性VS侦听属性</h2><ul>
+<h2 id="计算属性VS侦听属性">计算属性VS侦听属性</h2>
+<ul>
 <li><code>computed</code>能完成的功能，<code>watch</code>都可以完成。</li>
 <li><code>watch</code>能完成的功能，<code>computed</code>不一定能完成，例如<code>watch</code>可以执行异步操作。</li>
 </ul>
 <blockquote>
 <p>注意：</p>
 <ul>
-<li><p><strong>所有被Vue管理的函数，最好写成普通函数</strong>，这样<code>this</code>的指向才是<code>vm</code>或组件实例对象。</p>
+<li>
+<p><strong>所有被Vue管理的函数，最好写成普通函数</strong>，这样<code>this</code>的指向才是<code>vm</code>或组件实例对象。</p>
 </li>
-<li><p><strong>所有不被Vue管理的函数</strong>（定时器的回调函数、<code>Ajax</code>回调函数、<code>Promise</code>回调函数），<strong>最好写成箭头函数</strong>，这样<code>this</code>的指向才是<code>vm</code>或组件实例对象。</p>
+<li>
+<p><strong>所有不被Vue管理的函数</strong>（定时器的回调函数、<code>Ajax</code>回调函数、<code>Promise</code>回调函数），<strong>最好写成箭头函数</strong>，这样<code>this</code>的指向才是<code>vm</code>或组件实例对象。</p>
 </li>
-<li><p>目前为止最好使用普通函数的情况：</p>
+<li>
+<p>目前为止最好使用普通函数的情况：</p>
 <p>(因为vue所管理的，若使用箭头函数会改变this的指向)</p>
 <ol>
 <li>配置在methods中的。</li>

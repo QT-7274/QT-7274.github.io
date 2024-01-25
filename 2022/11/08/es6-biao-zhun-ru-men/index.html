@@ -500,13 +500,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><blockquote>
+                <h2 id="序">序</h2>
+<blockquote>
 <p>为什么选择ES6的Promise？——Promise能比较好地解决<strong>异步嵌套</strong>问题，ES6代表前端的未来，涉及很多现代编程语言概念中很流行的部分，让前端程序员的代码更加优美并且能够向前兼容。</p>
 </blockquote>
-<h3 id="ES6和JS的关系"><a href="#ES6和JS的关系" class="headerlink" title="ES6和JS的关系"></a>ES6和JS的关系</h3><blockquote>
+<h3 id="ES6和JS的关系">ES6和JS的关系</h3>
+<blockquote>
 <p>ECMAScript和JavaScript的关系是，前者是后者的规格，后者是前者的 一 种实现。</p>
 </blockquote>
-<h2 id="let和const命令"><a href="#let和const命令" class="headerlink" title="let和const命令"></a>let和const命令</h2><h3 id="let命令"><a href="#let命令" class="headerlink" title="let命令"></a>let命令</h3><h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>ES6中的let命令用法类似于var，但是<strong>所声明的变量只在let命令所在的代码块内生效</strong>：</p>
+<h2 id="let和const命令">let和const命令</h2>
+<h3 id="let命令">let命令</h3>
+<h4 id="基本用法">基本用法</h4>
+<p>ES6中的let命令用法类似于var，但是<strong>所声明的变量只在let命令所在的代码块内生效</strong>：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
 	<span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 	<span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
@@ -514,7 +519,6 @@
 
 a <span class="token comment">// ReferenceError: a is not defined.</span>
 b <span class="token comment">// 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>for循环的计数器就很适合使用let命令：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token comment">// 如果此处使用var变量，则a[6]为10</span>
@@ -525,12 +529,13 @@ b <span class="token comment">// 1</span><span aria-hidden="true" class="line-nu
 <span class="token punctuation">&#125;</span>
 
 a<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 6</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>原因如下：</p>
 <ul>
-<li><p>如果变量 i 是用var声明的，则该变量在全局范围内都有效，全局只有一个变量 i，每一次循环i的值都会发生变化。也就是说，所有数组 a 的成员中的 i 指向的都是同 一个 i ，导致运行时输出的是最后一轮的 i 值，也就是 10 。</p>
+<li>
+<p>如果变量 i 是用var声明的，则该变量在全局范围内都有效，全局只有一个变量 i，每一次循环i的值都会发生变化。也就是说，所有数组 a 的成员中的 i 指向的都是同 一个 i ，导致运行时输出的是最后一轮的 i 值，也就是 10 。</p>
 </li>
-<li><p>如果变量 i 是用let声明的，则当前i只在本轮循环中有效，所以每一次循环 i 都是一个新的变量，所以最终输出6</p>
+<li>
+<p>如果变量 i 是用let声明的，则当前i只在本轮循环中有效，所以每一次循环 i 都是一个新的变量，所以最终输出6</p>
 <blockquote>
 <p>如果每一轮循环的变量 i 都是重新声明的，那么它怎么知道上一轮的循环的值从而计算出本轮循环的值呢？</p>
 <p>JavaScript引擎内部会<strong>记住</strong>上一次循环的值，初始化本轮的 i 值时，就在上一轮的循环中计算。</p>
@@ -546,12 +551,13 @@ a<span class="token punctuation">[</span><span class="token number">6</span><spa
 <span class="token comment">// abc</span>
 <span class="token comment">// abc</span>
 <span class="token comment">// abc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="不存在变量提升"><a href="#不存在变量提升" class="headerlink" title="不存在变量提升"></a>不存在变量提升</h4><ul>
+<h4 id="不存在变量提升">不存在变量提升</h4>
+<ul>
 <li>var命令会出现变量提升现象，即变量可以在声明前使用，值为undefined。</li>
 <li><strong>let所声明的变量一定要在声明后使用</strong></li>
 </ul>
-<h4 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h4><blockquote>
+<h4 id="暂时性死区">暂时性死区</h4>
+<blockquote>
 <p>只要块级作用域存在let命令，它所声明的变量就“<strong>绑定</strong>”这个区域，不受外部影响：</p>
 </blockquote>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> tmp <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
@@ -559,12 +565,10 @@ a<span class="token punctuation">[</span><span class="token number">6</span><spa
 	tmp <span class="token operator">=</span> <span class="token string">'abc'</span><span class="token punctuation">;</span> <span class="token comment">// ReferenceError</span>
 	<span class="token keyword">let</span> tmp<span class="token punctuation">;</span> <span class="token comment">// let的声明导致tmp变量绑定这个作用域</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>总之，在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上称为“<strong>暂时性死区</strong>”（temporal deadzone，简称TDZ）。</p>
 <p>“暂时性死区”也意味着 typeof 不再是一个百分之百的安全操作。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">typeof</span> x<span class="token punctuation">;</span> <span class="token comment">// ReferenceError</span>
 <span class="token keyword">let</span> x<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>上面的代码中，变量x使用let命令声明，所以在声明之前都属于x的“死区”，只要用到该变量就会报错。</p>
 <p>几种较为隐蔽的“死区”：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//1.</span>
@@ -578,8 +582,8 @@ a<span class="token punctuation">[</span><span class="token number">6</span><spa
 <span class="token comment">// 报错</span>
 <span class="token keyword">let</span> x <span class="token operator">=</span> x<span class="token punctuation">;</span>
 <span class="token comment">// ReferenceError:x is not defined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h4><p><strong>let不允许在相同作用域内重复声明同一个变量。</strong></p>
+<h4 id="不允许重复声明">不允许重复声明</h4>
+<p><strong>let不允许在相同作用域内重复声明同一个变量。</strong></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 报错</span>
 <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
@@ -590,8 +594,9 @@ a<span class="token punctuation">[</span><span class="token number">6</span><spa
 <span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">let</span> arg <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><h4 id="ES6的块级作用域"><a href="#ES6的块级作用域" class="headerlink" title="ES6的块级作用域"></a>ES6的块级作用域</h4><ol>
+<h3 id="块级作用域">块级作用域</h3>
+<h4 id="ES6的块级作用域">ES6的块级作用域</h4>
+<ol>
 <li><strong>外层作用域无法读取内层作用域的变量</strong></li>
 <li><strong>内层作用域可以定义外层作用域的同名变量</strong></li>
 </ol>
@@ -607,8 +612,8 @@ a<span class="token punctuation">[</span><span class="token number">6</span><spa
 	<span class="token keyword">let</span> tmp <span class="token operator">=</span> <span class="token operator">...</span><span class="token punctuation">;</span>
 	<span class="token operator">...</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="块级作用域与函数声明"><a href="#块级作用域与函数声明" class="headerlink" title="块级作用域与函数声明"></a>块级作用域与函数声明</h4><p>ES6引入了块级作用域，明确<strong>允许在块级作用域之中声明函数</strong>。</p>
+<h4 id="块级作用域与函数声明">块级作用域与函数声明</h4>
+<p>ES6引入了块级作用域，明确<strong>允许在块级作用域之中声明函数</strong>。</p>
 <p>ES6规定，在块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。</p>
 <blockquote>
 <p>注意：在ES6浏览器中，块级作用域内声明函数的行为类似于var声明变量！</p>
@@ -620,19 +625,20 @@ a<span class="token punctuation">[</span><span class="token number">6</span><spa
 		<span class="token keyword">return</span> a<span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：ES6的块级作用域允许声明函数的规则<strong>只在使用大括号的情况下成立</strong>，如果没用使用大括号则会报错！</p>
 </blockquote>
-<h4 id="do表达式"><a href="#do表达式" class="headerlink" title="do表达式"></a>do表达式</h4><p>本质上，块级作用域是一个语句，将多个操作封装在一起，没用返回值。即在外部无法获取块级作用域内部变量的值。</p>
+<h4 id="do表达式">do表达式</h4>
+<p>本质上，块级作用域是一个语句，将多个操作封装在一起，没用返回值。即在外部无法获取块级作用域内部变量的值。</p>
 <p>现在有一个提案，使得块级作用域可以变为表达式，即可以返回值，方法就是在<strong>块级作用域之前加上do语句</strong>，使它变为do表达式：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token keyword">do</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">let</span> t <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	t <span class="token operator">*</span> t <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span class="token comment">// 变量x会得到整个块级作用域的返回值</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="const命令"><a href="#const命令" class="headerlink" title="const命令"></a>const命令</h3><h4 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h4><blockquote>
+<h3 id="const命令">const命令</h3>
+<h4 id="基本用法-2">基本用法</h4>
+<blockquote>
 <p>const声明一个只读的常量，一旦声明，常量的值就不能改变。</p>
 <p>————这意味着，const一旦声明常量，就<strong>必须立即进行初始化</strong>，不能留到以后赋值。</p>
 </blockquote>
@@ -641,7 +647,8 @@ a<span class="token punctuation">[</span><span class="token number">6</span><spa
 <li>const命令声明的常量也不会提升，同样存在暂存性死区，只能在声明后使用。</li>
 <li>const声明常量和let一样，不可重复声明</li>
 </ul>
-<h4 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h4><p>const实际上保证的并不是变量的值不得改动，而是变量指向的<strong>那个内存地址</strong>不得改动。</p>
+<h4 id="本质">本质</h4>
+<p>const实际上保证的并不是变量的值不得改动，而是变量指向的<strong>那个内存地址</strong>不得改动。</p>
 <p>对于简单类型的数据（数值、字符串、布尔值）而言，值就保存在变量指向的内存地址中，因此等同于常量。</p>
 <p>但对于复合类型的数据（主要是对象和数组）而言，变量指向的内存地址保存的<strong>只是一个指针</strong>，const只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，这完全不能控制。——因此声明一个对象为常量时必须非常小心。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
@@ -652,7 +659,6 @@ foo<span class="token punctuation">.</span>prop <span class="token comment">// 1
 
 <span class="token comment">// 将foo指向另一个对象，就会报错</span>
 foo <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token comment">// TypeError: "foo" is read-only</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：不可变的只是这个对象的地址，即不能把foo指向另一个地址，但对象本身是可变的，所以依然可以为其添加新属性。</p>
 </blockquote>
@@ -662,7 +668,6 @@ foo <span class="token operator">=</span> <span class="token punctuation">&#123;
 <span class="token comment">// 常规模式时，下面一行不起作用，因为该对象被冻结</span>
 <span class="token comment">// 严格模式时，改行会报错</span>
 foo<span class="token punctuation">.</span>prop <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>除了将对象本身冻结，对象的属性也应该冻结。下面是一个将对象彻底冻结的函数。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">constantize</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
     Object<span class="token punctuation">.</span><span class="token function">freeze</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -672,8 +677,8 @@ foo<span class="token punctuation">.</span>prop <span class="token operator">=</
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="ES6声明变量的六种方法"><a href="#ES6声明变量的六种方法" class="headerlink" title="ES6声明变量的六种方法"></a>ES6声明变量的六种方法</h4><ul>
+<h4 id="ES6声明变量的六种方法">ES6声明变量的六种方法</h4>
+<ul>
 <li>var命令</li>
 <li>function命令</li>
 <li>let命令</li>
@@ -681,7 +686,8 @@ foo<span class="token punctuation">.</span>prop <span class="token operator">=</
 <li>import命令</li>
 <li>class命令</li>
 </ul>
-<h3 id="顶层对象的属性"><a href="#顶层对象的属性" class="headerlink" title="顶层对象的属性"></a>顶层对象的属性</h3><p>顶层对象在浏览器环境中指的是window对象，在Node环境中指的是global对象。在ES5中，顶层对象的属性与全局变量是等价的。</p>
+<h3 id="顶层对象的属性">顶层对象的属性</h3>
+<p>顶层对象在浏览器环境中指的是window对象，在Node环境中指的是global对象。在ES5中，顶层对象的属性与全局变量是等价的。</p>
 <p>顶层对象的属性与全局变量相关，被认为是JavaScript语言中最大的设计败笔之一 ：</p>
 <ol>
 <li>无法在编译时就提示变量未声明的错误，只有在运行时才能知道（因为全局变量可能是顶层对象的属性创造的，而属性的创造是动态的）。</li>
@@ -703,8 +709,8 @@ window<span class="token punctuation">.</span>a <span class="token comment">// 1
 
 <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 window<span class="token punctuation">.</span>b <span class="token comment">// undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="global对象"><a href="#global对象" class="headerlink" title="global对象"></a>global对象</h3><p>ES5的顶层对象本身也是一个问题，因为它在各种实现中是不统一的。</p>
+<h3 id="global对象">global对象</h3>
+<p>ES5的顶层对象本身也是一个问题，因为它在各种实现中是不统一的。</p>
 <ul>
 <li><strong>在浏览器中，顶层对象是window，但 Node 和 Web Worker 没有 window。</strong></li>
 <li>在浏览器和Web Worker中，self也指向顶层对象，但是Node没有self。</li>
@@ -714,7 +720,7 @@ window<span class="token punctuation">.</span>b <span class="token comment">// u
 <ul>
 <li>在全局环境中，this 会返回顶层对象。<strong>但是，在 Node 模块和 ES6模块中，this返回的是当前模块。</strong></li>
 <li>对于函数中的 this，如果函数不是作为对象的方法运行，而是单纯作为函数运行，this会指向顶层对象。但是，严格模式下，this会返回 undefined。</li>
-<li>不管是严格模式，还是普通模式，<code>new Function (&#39;return this&#39;) ()</code>总会返回全局对象。但是，如果浏览器用了 CSP（内容安全政策），那么eval、new Function 这些方法都可能无法使用。</li>
+<li>不管是严格模式，还是普通模式，<code>new Function ('return this') ()</code>总会返回全局对象。但是，如果浏览器用了 CSP（内容安全政策），那么eval、new Function 这些方法都可能无法使用。</li>
 </ul>
 <p>现有一个提案，在语言标准的局面引入 <code>global</code> 作为顶层对象。也就是说，<code>global</code> 都是存在的，都可以拿到顶层对象。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// CommonJS的写法</span>
@@ -722,7 +728,6 @@ window<span class="token punctuation">.</span>b <span class="token comment">// u
 
 <span class="token comment">// ES6模块的写法</span>
 <span class="token keyword">import</span> shim <span class="token keyword">from</span> <span class="token string">'system.global/shim'</span><span class="token punctuation">;</span> <span class="token function">shim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面的代码可以保证，在各种环境中global对象都是存在的。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// CommonJS的写法</span>
 <span class="token keyword">var</span> global <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'system.global'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -730,9 +735,11 @@ window<span class="token punctuation">.</span>b <span class="token comment">// u
 <span class="token comment">// ES6模块的写法</span>
 <span class="token keyword">import</span> getGlobal <span class="token keyword">from</span> <span class="token string">'system.global'</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> global <span class="token operator">=</span> <span class="token function">getGlobal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面的代码将顶层对象放入变量global中。</p>
-<h2 id="变量的解构赋值"><a href="#变量的解构赋值" class="headerlink" title="变量的解构赋值"></a>变量的解构赋值</h2><h3 id="数组的结构赋值"><a href="#数组的结构赋值" class="headerlink" title="数组的结构赋值"></a>数组的结构赋值</h3><h4 id="基本用法-2"><a href="#基本用法-2" class="headerlink" title="基本用法"></a>基本用法</h4><ul>
+<h2 id="变量的解构赋值">变量的解构赋值</h2>
+<h3 id="数组的结构赋值">数组的结构赋值</h3>
+<h4 id="基本用法-3">基本用法</h4>
+<ul>
 <li>ES6语法可以从数组中提取值，按照对应位置对变量赋值：</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>bar<span class="token punctuation">]</span><span class="token punctuation">,</span> baz<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -742,21 +749,18 @@ window<span class="token punctuation">.</span>b <span class="token comment">// u
 <span class="token keyword">let</span> <span class="token punctuation">[</span>head<span class="token punctuation">,</span> <span class="token operator">...</span>tail<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 head <span class="token comment">// 1</span>
 tail <span class="token comment">// [2, 3, 4]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>本质上这种写法属于<strong>模式匹配</strong>，只要等号两边的模式相同，左边的变量就会赋予对应的值。</p>
 <ul>
 <li>如果解构不成功，变量的值就等于undefined。</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> <span class="token punctuation">[</span>bar<span class="token punctuation">,</span> foo<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <ul>
 <li>另一种情况是不完全解构，即等号左边的模式<strong>只匹配一部分的等号右边的数组</strong>，这种情况下，解构依然可以成功。</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token punctuation">[</span>x<span class="token punctuation">,</span> y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 x <span class="token comment">// 1</span>
 y <span class="token comment">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>如果等号的右边不是数组（或者严格说不是可遍历的结构）那么将会报错：</li>
 </ul>
@@ -764,19 +768,18 @@ y <span class="token comment">// 2</span><span aria-hidden="true" class="line-nu
 <span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token constant">NAN</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面的语句都会报错，因为等号右边的值或是转为对象以后不具备Iterator接口，或是本身就不具备Iterator接口。</p>
 <p>对于Set结构，也可以使用数组的解构赋值——<strong>事实上，只要某种数据结构具有Iterator接口，都可以采用数组形式的解构赋值。</strong></p>
-<h4 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h4><ul>
+<h4 id="默认值">默认值</h4>
+<ul>
 <li>解构赋值允许指定默认值：</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token punctuation">[</span>foo <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 foo <span class="token comment">// true</span>
 <span class="token keyword">let</span> <span class="token punctuation">[</span>x<span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token string">'b'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// x = 'a', y = 'b'</span>
 <span class="token keyword">let</span> <span class="token punctuation">[</span>x<span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token string">'b'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token keyword">undefined</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// x = 'a', y = 'b'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
-<p>注意：ES6内部使用严格相等运算符（&#x3D;&#x3D;&#x3D;）判断一个位置是否有值。所以，如果一个数组成员不严格等于<code>undefined</code>，默认值是不会生效的。</p>
+<p>注意：ES6内部使用严格相等运算符（===）判断一个位置是否有值。所以，如果一个数组成员不严格等于<code>undefined</code>，默认值是不会生效的。</p>
 </blockquote>
 <p>例如：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">undefined</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -784,7 +787,6 @@ x <span class="token comment">// 1</span>
 
 <span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">null</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 x <span class="token comment">// null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面的代码中，如果一个数组成员是null，默认值就不会生效，因为null不严格等于undefined</p>
 <ul>
 <li>如果默认值是一个表达式，那么这个表达式是<strong>惰性求值</strong>的，<strong>即只有在用到时才会求值</strong>。</li>
@@ -794,7 +796,6 @@ x <span class="token comment">// null</span><span aria-hidden="true" class="line
 <span class="token punctuation">&#125;</span>
 
 <span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>上面的代码中，因为x能取到值，所以函数f根本不会执行。上面的代码等价如下：</li>
 </ul>
@@ -804,7 +805,6 @@ x <span class="token comment">// null</span><span aria-hidden="true" class="line
 <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
 	x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>默认值可以引用解构赋值的其他变量，<strong>但该变量必须已经声明</strong>。</li>
 </ul>
@@ -812,8 +812,8 @@ x <span class="token comment">// null</span><span aria-hidden="true" class="line
 <span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">=</span> x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// x=2; y=2</span>
 <span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">=</span> x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// x=1; y=2</span>
 <span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> y<span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token comment">// ReferenceError</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="对象的解构赋值"><a href="#对象的解构赋值" class="headerlink" title="对象的解构赋值"></a>对象的解构赋值</h3><p>解构不仅可以用于数组，还可以用于对象。</p>
+<h3 id="对象的解构赋值">对象的解构赋值</h3>
+<p>解构不仅可以用于数组，还可以用于对象。</p>
 <blockquote>
 <p>对象的解构和数组有一个重要的不同——</p>
 <p>数组的元素是按次序排列的，变量的取值是由它的位置决定的；</p>
@@ -822,17 +822,14 @@ x <span class="token comment">// null</span><span aria-hidden="true" class="line
 <p>如果变量名和属性名不一致，必须写成下面这样：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">foo</span><span class="token operator">:</span> baz <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">foo</span><span class="token operator">:</span> <span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token literal-property property">bar</span><span class="token operator">:</span> <span class="token string">'bbb'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 baz <span class="token comment">// 'aaa'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>实际上，对象的赋值解解构是下面形式的简写：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">foo</span><span class="token operator">:</span> foo<span class="token punctuation">,</span> <span class="token literal-property property">bar</span><span class="token operator">:</span> bar <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">foo</span><span class="token operator">:</span> <span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token literal-property property">bar</span><span class="token operator">:</span> <span class="token string">'bbb'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <blockquote>
 <p>也就是说，对象的解构赋值的内部机制是先找到同名属性，然后再赋值给对应的变量。<strong>真正被赋值的是后者，而不是前者。</strong></p>
 </blockquote>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">foo</span><span class="token operator">:</span> baz <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">foo</span><span class="token operator">:</span> <span class="token string">'aaa'</span><span class="token punctuation">,</span> <span class="token literal-property property">bar</span><span class="token operator">:</span> <span class="token string">'bbb'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 baz <span class="token comment">// "aaa"</span>
 foo <span class="token comment">// error: foo is not defined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>上面的代码中，foo是匹配的模式，baz才是变量。真正被赋值的是变量baz，而不是模式foo。</p>
 <ul>
 <li>与数组一样，解构也可以用于嵌套结构的对象。</li>
@@ -844,57 +841,57 @@ foo <span class="token comment">// error: foo is not defined</span><span aria-hi
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> x<span class="token punctuation">;</span>
 <span class="token punctuation">&#123;</span>x<span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token comment">// SyntaxError: syntax error</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>这是因为JavaScript引擎会将 {x} 理解成一个代码块，从而发生语法错误。只有不将大括号写在行首，避免JavaScript将其解释为代码块，才能解决这个问题：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> x<span class="token punctuation">;</span>
 <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>x<span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>关于圆括号与赋值结构的关系，参见下文：</p>
 <p>解构赋值允许等号左边的模式之中不放置任何变量名：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token string">'abc'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>上面的表达式虽然毫无意义，但可以执行。</p>
 <p>对象的解构赋值可以很方便地将现有对象的方法赋值到某个变量。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token punctuation">&#123;</span> log<span class="token punctuation">,</span> sin<span class="token punctuation">,</span> cos <span class="token punctuation">&#125;</span> <span class="token operator">=</span> Math<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>上面的代码将Math对象的对数、正弦、余弦三个方法赋值到对应的变量上，使用起来就方便很多。</p>
 <p>由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构。</p>
-<h3 id="字符串的解构赋值"><a href="#字符串的解构赋值" class="headerlink" title="字符串的解构赋值"></a>字符串的解构赋值</h3><ul>
+<h3 id="字符串的解构赋值">字符串的解构赋值</h3>
+<ul>
 <li>字符串可以解构赋值，因为此时<strong>字符串被转换成了一个类似数组的对象</strong>。</li>
 <li>类似数组的对象都有一个length对象，因此还可以对这个属性进行解构赋值。</li>
 </ul>
-<h3 id="数值和布尔值的解构赋值"><a href="#数值和布尔值的解构赋值" class="headerlink" title="数值和布尔值的解构赋值"></a>数值和布尔值的解构赋值</h3><p>解构赋值时，如果等号右边是<strong>数值</strong>和<strong>布尔值</strong>，则会先转为对象。</p>
+<h3 id="数值和布尔值的解构赋值">数值和布尔值的解构赋值</h3>
+<p>解构赋值时，如果等号右边是<strong>数值</strong>和<strong>布尔值</strong>，则会先转为对象。</p>
 <blockquote>
 <p>赋值解构的规则是：<strong>只要等号右边的值不是对象或数组，就先将其转为对象。</strong></p>
 <p>由于undefined和null无法转换为对象，所以对它们进行解构赋值时会报错。</p>
 </blockquote>
-<h3 id="函数参数的解构赋值"><a href="#函数参数的解构赋值" class="headerlink" title="函数参数的解构赋值"></a>函数参数的解构赋值</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">[</span>x<span class="token punctuation">,</span> y<span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+<h3 id="函数参数的解构赋值">函数参数的解构赋值</h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">[</span>x<span class="token punctuation">,</span> y<span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">return</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面的代码中，函数add的参数表面上是一个数组，但在传入参数的那一刻，数组参数就被解构成变量x和y，对于函数内部的代码来说，它们能感受到的参数就是x和y。</p>
 <p>另一个例子：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// [3, 7]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h3 id="圆括号问题"><a href="#圆括号问题" class="headerlink" title="圆括号问题"></a>圆括号问题</h3><p>解构赋值虽然很方便，但是解析起来并不容易。对于编译器来说，一个式子到底是模式还是表达式，没有办法从一开始就知道，必须解析到（或解析不到）等号才能知道。<br>由此带来的问题是，如果模式中出现圆括号该怎么处理？</p>
+<h3 id="圆括号问题">圆括号问题</h3>
+<p>解构赋值虽然很方便，但是解析起来并不容易。对于编译器来说，一个式子到底是模式还是表达式，没有办法从一开始就知道，必须解析到（或解析不到）等号才能知道。<br>
+由此带来的问题是，如果模式中出现圆括号该怎么处理？</p>
 <blockquote>
 <p>ES6的规则是，只要有可能导致解构的歧义，就<strong>不得使用圆括号</strong>。</p>
 </blockquote>
-<h4 id="不能使用圆括号的情况"><a href="#不能使用圆括号的情况" class="headerlink" title="不能使用圆括号的情况"></a>不能使用圆括号的情况</h4><ol>
+<h4 id="不能使用圆括号的情况">不能使用圆括号的情况</h4>
+<ol>
 <li>变量声明语句</li>
 <li>函数参数</li>
 <li>赋值语句的模式，即将整个模式放在圆括号中（而非将整个赋值语句放在圆括号中）</li>
 </ol>
-<h4 id="可以使用圆括号的情况"><a href="#可以使用圆括号的情况" class="headerlink" title="可以使用圆括号的情况"></a>可以使用圆括号的情况</h4><blockquote>
+<h4 id="可以使用圆括号的情况">可以使用圆括号的情况</h4>
+<blockquote>
 <p>可以使用圆括号的情况只有 一 种 ： 赋值语句的<strong>非模式部分</strong>可以使用圆括号。</p>
 </blockquote>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">p</span><span class="token operator">:</span> <span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">[</span><span class="token punctuation">(</span>parseInt<span class="token punctuation">.</span>prop<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

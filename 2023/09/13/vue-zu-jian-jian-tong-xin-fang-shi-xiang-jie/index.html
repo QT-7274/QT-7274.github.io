@@ -500,14 +500,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、组件间通信的概念"><a href="#一、组件间通信的概念" class="headerlink" title="一、组件间通信的概念"></a>一、组件间通信的概念</h2><p>开始之前，我们把<strong>组件间通信</strong>这个词进行拆分</p>
+                <h2 id="一、组件间通信的概念">一、组件间通信的概念</h2>
+<p>开始之前，我们把<strong>组件间通信</strong>这个词进行拆分</p>
 <ul>
 <li>组件</li>
 <li>通信</li>
 </ul>
 <p>都知道组件是<code>vue</code>最强大的功能之一，<code>vue</code>中每一个<code>.vue</code>我们都可以视之为一个组件通信指的是发送者通过某种媒体以某种格式来传递信息到收信者以达到某个目的。广义上，任何信息的交通都是通信<strong>组件间通信</strong>即指组件(<code>.vue</code>)通过某种方式来传递信息以达到某个目的举个栗子我们在使用<code>UI</code>框架中的<code>table</code>组件，可能会往<code>table</code>组件中传入某些数据，这个本质就形成了组件之间的通信</p>
-<h2 id="二、组件间通信解决了什么"><a href="#二、组件间通信解决了什么" class="headerlink" title="二、组件间通信解决了什么"></a>二、组件间通信解决了什么</h2><p><code>vue</code>中，每个组件之间的都有<strong>独自的作用域</strong>，组件间的数据是无法共享的但实际开发工作中我们常常需要让组件之间共享数据，这也是组件通信的目的要让它们互相之间能进行通讯，这样才能构成一个有机的完整系统。</p>
-<h2 id="三、组件间通信的分类"><a href="#三、组件间通信的分类" class="headerlink" title="三、组件间通信的分类"></a>三、组件间通信的分类</h2><p>组件间通信的分类可以分成以下</p>
+<h2 id="二、组件间通信解决了什么">二、组件间通信解决了什么</h2>
+<p><code>vue</code>中，每个组件之间的都有<strong>独自的作用域</strong>，组件间的数据是无法共享的但实际开发工作中我们常常需要让组件之间共享数据，这也是组件通信的目的要让它们互相之间能进行通讯，这样才能构成一个有机的完整系统。</p>
+<h2 id="三、组件间通信的分类">三、组件间通信的分类</h2>
+<p>组件间通信的分类可以分成以下</p>
 <ul>
 <li>父子组件之间的通信</li>
 <li>兄弟组件之间的通信</li>
@@ -515,8 +518,9 @@
 <li>非关系组件间之间的通信</li>
 </ul>
 <p>关系图：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/13/vue-zu-jian-jian-tong-xin-fang-shi-xiang-jie/85b92400-3aca-11eb-ab90-d9ae814b240d.png" alt="img"></p>
-<h2 id="四、组件间通信的方案"><a href="#四、组件间通信的方案" class="headerlink" title="四、组件间通信的方案"></a>四、组件间通信的方案</h2><p>整理<code>vue</code>中8种常规的通信方案</p>
+<p><img src="/medias/images/loading.gif" data-original="85b92400-3aca-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<h2 id="四、组件间通信的方案">四、组件间通信的方案</h2>
+<p>整理<code>vue</code>中8种常规的通信方案</p>
 <ol>
 <li>通过 props 传递</li>
 <li>通过 $emit 触发自定义事件</li>
@@ -527,7 +531,8 @@
 <li>Provide 与 Inject</li>
 <li>Vuex</li>
 </ol>
-<h3 id="props传递数据"><a href="#props传递数据" class="headerlink" title="props传递数据"></a>props传递数据</h3><p><img src="/medias/images/loading.gif" data-original="/2023/09/13/vue-zu-jian-jian-tong-xin-fang-shi-xiang-jie/8f80a670-3aca-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<h3 id="props传递数据">props传递数据</h3>
+<p><img src="/medias/images/loading.gif" data-original="8f80a670-3aca-11eb-ab90-d9ae814b240d.png" alt="img"></p>
 <ul>
 <li>适用场景：父组件传递数据给子组件</li>
 <li>子组件设置<code>props</code>属性，定义接收父组件传递过来的参数</li>
@@ -544,26 +549,25 @@
        <span class="token literal-property property">require</span><span class="token operator">:</span><span class="token boolean">true</span> <span class="token comment">// age属性必须传递  </span>
     <span class="token punctuation">&#125;</span>  
 <span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>Father.vue</code>组件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>Children name<span class="token operator">=</span><span class="token string">"jack"</span> age<span class="token operator">=</span><span class="token number">18</span> <span class="token operator">/</span><span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="emit-触发自定义事件"><a href="#emit-触发自定义事件" class="headerlink" title="$emit 触发自定义事件"></a>$emit 触发自定义事件</h3><ul>
+<h3 id="emit-触发自定义事件">$emit 触发自定义事件</h3>
+<ul>
 <li>适用场景：子组件传递数据给父组件</li>
 <li>子组件通过<code>$emit触发</code>自定义事件，<code>$emit</code>第二个参数为传递的数值</li>
 <li>父组件绑定监听器获取到子组件传递过来的参数</li>
 </ul>
 <p><code>Children.vue</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'add'</span><span class="token punctuation">,</span> good<span class="token punctuation">)</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p><code>Father.vue</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>Children @add<span class="token operator">=</span><span class="token string">"cartAdd($event)"</span> <span class="token operator">/</span><span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><ul>
+<h3 id="ref">ref</h3>
+<ul>
 <li>父组件在使用子组件的时候设置<code>ref</code></li>
 <li>父组件通过设置子组件<code>ref</code>来获取数据</li>
 </ul>
-<h3 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h3><ul>
+<h3 id="EventBus">EventBus</h3>
+<ul>
 <li>使用场景：兄弟组件传值</li>
 <li>创建一个中央事件总线<code>EventBus</code></li>
 <li>兄弟组件通过<code>$emit</code>触发自定义事件，<code>$emit</code>第二个参数为传递的数值</li>
@@ -589,7 +593,6 @@
 <span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>$bus <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Bus</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 将$bus挂载到vue实例的原型上  </span>
 <span class="token comment">// 另一种方式  </span>
 <span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>$bus <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Vue已经实现了Bus的功能  </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在发送方组件中，使用 <code>$emit</code> 来触发一个自定义事件，并传递需要传递的数据：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123; EventBus &#125; from &#39;.&#x2F;event-bus.js&#39;;
 
@@ -601,7 +604,6 @@ export default &#123;
     &#125;
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>最后，在接收方组件中，使用 $on 来监听该自定义事件，并处理接收到的数据：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123; EventBus &#125; from &#39;.&#x2F;event-bus.js&#39;;
 
@@ -618,19 +620,19 @@ export default &#123;
     &#125;
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="parent-或-root"><a href="#parent-或-root" class="headerlink" title="$parent 或 $root"></a>$parent 或 $root</h3><ul>
+<h3 id="parent-或-root">$parent 或 $root</h3>
+<ul>
 <li>通过共同祖辈<code>$parent</code>或者<code>$root</code>搭建通信桥连</li>
 </ul>
 <p>兄弟组件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>$parent<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'add'</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>add<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>另一个兄弟组件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>$parent<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'add'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="attrs-与-listeners"><a href="#attrs-与-listeners" class="headerlink" title="$attrs 与 $listeners"></a>$attrs 与 $listeners</h3><ul>
+<h3 id="attrs-与-listeners">$attrs 与 $listeners</h3>
+<ul>
 <li>适用场景：祖先传递数据给子孙</li>
-<li>设置批量向下传属性<code>$attrs</code>和 <code>$listeners</code><ul>
+<li>设置批量向下传属性<code>$attrs</code>和 <code>$listeners</code>
+<ul>
 <li><code>$attrs</code>：包含了父作用域中<strong>不被 prop 所识别（且获取）的特性绑定（class 和 style 除外）</strong>。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定（class 和 style 除外），并且可以通过 <code>v-bind=&quot;$attrs&quot;</code> 传入内部组件。通常配合 <code>inheritAttrs</code> 选项一起使用。</li>
 <li><code>$listeners</code>：包含了父作用域中的（不含 <code>.native</code> 修饰器的）<code>v-on</code> <strong>事件监听器</strong>。它可以通过 <code>v-on=&quot;$listeners&quot;</code> 传入内部组件。</li>
 </ul>
@@ -658,7 +660,6 @@ export default &#123;
   &#125;
 &#125;;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>然后，在子组件中，我们可以使用 <code>$attrs</code> 来访问父组件传递的非props属性，使用 <code>$listeners</code> 来注册父组件传递的事件监听器：</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
   &lt;div&gt;
@@ -674,14 +675,15 @@ export default &#123;
   &#125;
 &#125;;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="provide-与-inject"><a href="#provide-与-inject" class="headerlink" title="provide 与 inject"></a>provide 与 inject</h3><ul>
+<h3 id="provide-与-inject">provide 与 inject</h3>
+<ul>
 <li>在祖先组件定义<code>provide</code>属性，返回传递的值</li>
 <li>在后代组件通过<code>inject</code>接收组件传递过来的值</li>
 </ul>
 <ol>
-<li><p>祖先组件中通过 <code>provider</code> 来提供变量，然后在子孙组件中通过 <code>inject</code> 来注入变量。</p>
-<p><code>provide</code> &#x2F; <code>inject</code> API 主要解决了跨级组件间的通信问题，而不需要在每个中间组件中显式地传递。不过它的使用场景，主要是子组件获取上级组件的状态，跨级组件间建立了一种主动提供与依赖注入的关系。</p>
+<li>
+<p>祖先组件中通过 <code>provider</code> 来提供变量，然后在子孙组件中通过 <code>inject</code> 来注入变量。</p>
+<p><code>provide</code> / <code>inject</code> API 主要解决了跨级组件间的通信问题，而不需要在每个中间组件中显式地传递。不过它的使用场景，主要是子组件获取上级组件的状态，跨级组件间建立了一种主动提供与依赖注入的关系。</p>
 <p>代码示例：</p>
 <p>首先，在父组件中，我们可以使用 <code>provide</code> 来提供数据给子孙组件：</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
@@ -697,7 +699,6 @@ export default &#123;
   &#125;
 &#125;;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在上面的示例中，我们使用 <code>provide</code> 来提供一个名为 <code>parentData</code> 的数据给子孙组件。</p>
 <p>然后，在孙子组件中，我们可以使用 <code>inject</code> 来注入父组件提供的数据：</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
@@ -710,34 +711,37 @@ export default &#123;
 export default &#123;
   inject: [&#39;parentData&#39;]
 &#125;;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h3 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h3><ul>
+<h3 id="vuex">vuex</h3>
+<ul>
 <li>Vuex的状态存储是响应式的。当 Vue 组件从 <code>store</code> 中读取状态的时候，若 <code>store</code> 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</li>
 <li>改变 <code>store</code> 中的状态的唯一途径就是显式地提交（<code>commit</code>）<code>mutation</code>。这样使得我们可以方便地跟踪每一个状态的变化。</li>
 </ul>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<h3 id="小结">小结</h3>
+<ul>
 <li>父子关系的组件数据传递选择 <code>props</code> 与 <code>$emit</code>进行传递，也可选择<code>ref</code></li>
 <li>兄弟关系的组件数据传递可选择<code>$bus</code>，其次可以选择<code>$parent</code>进行传递</li>
 <li>祖先与后代组件数据传递可选择<code>attrs</code>与<code>listeners</code>或者 <code>Provide</code>与 <code>Inject</code></li>
 <li>复杂关系的组件数据传递可以通过<code>vuex</code>存放共享的变量</li>
 </ul>
-<h2 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h2><p><code>Observable</code> 翻译过来我们可以理解成<strong>可观察的</strong></p>
+<h2 id="Observable">Observable</h2>
+<p><code>Observable</code> 翻译过来我们可以理解成<strong>可观察的</strong></p>
 <p>我们先来看一下其在<code>Vue</code>中的定义</p>
 <blockquote>
 <p><code>Vue.observable</code>，让一个对象变成响应式数据。<code>Vue</code> 内部会用它来处理 <code>data</code> 函数返回的对象</p>
 </blockquote>
 <p>返回的对象可以直接用于渲染函数和计算属性内，并且会在发生变更时触发相应的更新。也可以作为最小化的跨组件状态存储器</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">observable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">count</span> <span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>其作用等同于</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">new</span> <span class="token class-name">vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">count</span> <span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <blockquote>
 <p>在 <code>Vue 2.x</code> 中，被传入的对象会直接被 <code>Vue.observable</code> 变更，它和被返回的对象是同一个对象</p>
 <p>在 <code>Vue 3.x</code> 中，则会返回一个可响应的代理，而对源对象直接进行变更仍然是不可响应的</p>
 </blockquote>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>在非父子组件通信时，可以使用通常的<code>bus</code>或者使用<code>vuex</code>，但是实现的功能不是太复杂，而使用上面两个又有点繁琐。这时，<code>observable</code>就是一个很好的选择</p>
+<h3 id="使用场景">使用场景</h3>
+<p>在非父子组件通信时，可以使用通常的<code>bus</code>或者使用<code>vuex</code>，但是实现的功能不是太复杂，而使用上面两个又有点繁琐。这时，<code>observable</code>就是一个很好的选择</p>
 <p>创建一个<code>js</code>文件</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 引入vue
 import Vue from &#39;vue
@@ -755,7 +759,6 @@ export let mutations &#x3D; &#123;
     state.age &#x3D; age
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在<code>.vue</code>文件中直接使用即可</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;template&gt;
   &lt;div&gt;
@@ -782,8 +785,8 @@ export default &#123;
     setAge: mutations.setAge
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p>源码位置：src\core\observer\index.js</p>
+<h3 id="原理分析">原理分析</h3>
+<p>源码位置：src\core\observer\index.js</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">observe</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">value</span><span class="token operator">:</span> any<span class="token punctuation">,</span> <span class="token literal-property property">asRootData</span><span class="token operator">:</span> <span class="token operator">?</span>boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> Observer <span class="token operator">|</span> <span class="token keyword">void</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isObject</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token operator">||</span> value <span class="token keyword">instanceof</span> <span class="token class-name">VNode</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span>
@@ -807,7 +810,6 @@ export default &#123;
   <span class="token punctuation">&#125;</span>
   <span class="token keyword">return</span> ob
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>Observer</code>类</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Observer</span> <span class="token punctuation">&#123;</span>
     <span class="token literal-property property">value</span><span class="token operator">:</span> any<span class="token punctuation">;</span>
@@ -831,7 +833,6 @@ export default &#123;
             <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">walk</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
         <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>walk</code>函数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">walk</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">obj</span><span class="token operator">:</span> Object</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">const</span> keys <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
@@ -840,7 +841,6 @@ export default &#123;
         <span class="token function">defineReactive</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> keys<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>defineReactive</code>方法</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">defineReactive</span> <span class="token punctuation">(</span>
   <span class="token parameter"><span class="token literal-property property">obj</span><span class="token operator">:</span> Object<span class="token punctuation">,</span>

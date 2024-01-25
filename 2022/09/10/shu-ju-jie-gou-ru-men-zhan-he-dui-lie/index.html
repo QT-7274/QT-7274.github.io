@@ -496,20 +496,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><blockquote>
-<p><strong>后进先出（Last In First Out，LIFO）</strong>的线性序列，称为“栈”。栈也是一种线性表，只不过它是操作受限的线性表，只能在一端进出操作。</p>
+                <h2 id="栈">栈</h2>
+<blockquote>
+<p>**后进先出（Last In First Out，LIFO）**的线性序列，称为“栈”。栈也是一种线性表，只不过它是操作受限的线性表，只能在一端进出操作。</p>
 <p>进出的一端称为栈顶（top），另一端称为栈底（base）。栈可以用顺序存储，也可以用链式存储，分别称为顺序栈和链栈。</p>
 </blockquote>
-<h3 id="顺序栈："><a href="#顺序栈：" class="headerlink" title="顺序栈："></a>顺序栈：</h3><p>顺序栈需要两个指针，base 指向栈底，top 指向栈顶。栈定义好了之后，还要先定义一个最大的分配空间，顺序结构都是如此，需要预先分配<br>空间。</p>
+<h3 id="顺序栈：">顺序栈：</h3>
+<p>顺序栈需要两个指针，base 指向栈底，top 指向栈顶。栈定义好了之后，还要先定义一个最大的分配空间，顺序结构都是如此，需要预先分配<br>
+空间。</p>
 <blockquote>
 <p>注意：栈只能在一端操作，后进先出，是人为规定的，也就是说<strong>不允许在中间查找、取值、插入、删除等操作</strong>。</p>
 </blockquote>
 <p>顺序栈本身是顺序存储的，有人就想：我偏要从中间取一个元素，不行吗？那肯定可以，但是这样做，就不是栈了。</p>
-<h4 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h4><ol>
+<h4 id="初始化：">初始化：</h4>
+<ol>
 <li>初始化一个空栈，动态分配 Maxsize 大小的空间，用 S.top 和 S.base 指向该空间的基地址</li>
 <li>注意判断空间分配是否成功</li>
 </ol>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220910165857429.png" alt="image-20220910165857429"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220910165857429.png" alt="image-20220910165857429"></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
@@ -527,8 +531,8 @@
 	S<span class="token punctuation">.</span>top<span class="token operator">=</span>S<span class="token punctuation">.</span>base<span class="token punctuation">;</span>  <span class="token comment">//top初始为base，空栈</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="入栈："><a href="#入栈：" class="headerlink" title="入栈："></a>入栈：</h4><p>入栈前要判断是否栈满，如果栈已满，则入栈失败；否则将元素放入栈顶，栈顶指针向上移动一个位置（top++）。</p>
+<h4 id="入栈：">入栈：</h4>
+<p>入栈前要判断是否栈满，如果栈已满，则入栈失败；否则将元素放入栈顶，栈顶指针向上移动一个位置（top++）。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">Push</span><span class="token punctuation">(</span>SqStack <span class="token operator">&amp;</span>S<span class="token punctuation">,</span><span class="token keyword">int</span> e<span class="token punctuation">)</span> <span class="token comment">// 插入元素e为新的栈顶元素</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>S<span class="token punctuation">.</span>top<span class="token operator">-</span>S<span class="token punctuation">.</span>base<span class="token operator">==</span>Maxsize<span class="token punctuation">)</span> <span class="token comment">//栈满</span>
@@ -536,13 +540,15 @@
 	<span class="token operator">*</span><span class="token punctuation">(</span>S<span class="token punctuation">.</span>top<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">=</span>e<span class="token punctuation">;</span> <span class="token comment">//元素e压入栈顶，然后栈顶指针加1，等价于*S.top=e; S.top++;</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="出栈："><a href="#出栈：" class="headerlink" title="出栈："></a>出栈：</h4><p>出栈前要判断是否栈空，如果栈是空的，则出栈失败；否则将栈顶元素暂存给一个变量，栈顶指针向下移动一个位置（top−−）。</p>
+<h4 id="出栈：">出栈：</h4>
+<p>出栈前要判断是否栈空，如果栈是空的，则出栈失败；否则将栈顶元素暂存给一个变量，栈顶指针向下移动一个位置（top−−）。</p>
 <ol>
-<li><p>栈顶元素所在的位置实际上是 S.top −1，因此把该元素取出来，暂存在变量 e 中，然后 S.top 指针向下移动一个位置。</p>
+<li>
+<p>栈顶元素所在的位置实际上是 S.top −1，因此把该元素取出来，暂存在变量 e 中，然后 S.top 指针向下移动一个位置。</p>
 </li>
-<li><p>因此<strong>可以先移动一个位置</strong>，即− −S.top，然后再取元素。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220910170541077.png" alt="image-20220910170541077"></p>
+<li>
+<p>因此<strong>可以先移动一个位置</strong>，即− −S.top，然后再取元素。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220910170541077.png" alt="image-20220910170541077"></p>
 </li>
 </ol>
 <blockquote>
@@ -556,8 +562,8 @@
 	e<span class="token operator">=</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">--</span>S<span class="token punctuation">.</span>top<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//栈顶指针减1，将栈顶元素赋给e</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="取栈顶元素："><a href="#取栈顶元素：" class="headerlink" title="取栈顶元素："></a>取栈顶元素：</h4><p>取栈顶元素和出栈不同。取栈顶元素只是把栈顶元素复制一份，栈顶指针未移动，栈内元素个数未变。</p>
+<h4 id="取栈顶元素：">取栈顶元素：</h4>
+<p>取栈顶元素和出栈不同。取栈顶元素只是把栈顶元素复制一份，栈顶指针未移动，栈内元素个数未变。</p>
 <p>而出栈是指栈顶指针向下移动一个位置，栈内不再包含这个元素。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">GetTop</span><span class="token punctuation">(</span>SqStack S<span class="token punctuation">)</span> <span class="token comment">//返回S的栈顶元素，栈顶指针不变</span>
 <span class="token punctuation">&#123;</span>
@@ -566,10 +572,11 @@
     <span class="token keyword">else</span>
         <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="链栈："><a href="#链栈：" class="headerlink" title="链栈："></a>链栈：</h3><p>链栈每个节点的地址是不连续的，只需要一个栈顶指针即可。</p>
+<h3 id="链栈：">链栈：</h3>
+<p>链栈每个节点的地址是不连续的，只需要一个栈顶指针即可。</p>
 <p>链栈的每个节点都包含两个域：数据域和指针域。是不是和单链表一模一样？可以把链栈看作一个不带头节点的单链表，但只能在头部进行插入、删除、取值等操作，不可以在中间和尾部操作。</p>
-<h4 id="初始化：-1"><a href="#初始化：-1" class="headerlink" title="初始化："></a>初始化：</h4><p>初始化一个空的链栈是不需要头节点的，因此只需要让栈顶指针为空即可。</p>
+<h4 id="初始化：-2">初始化：</h4>
+<p>初始化一个空的链栈是不需要头节点的，因此只需要让栈顶指针为空即可。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
@@ -583,17 +590,19 @@
 	S<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="入栈：-1"><a href="#入栈：-1" class="headerlink" title="入栈："></a>入栈：</h4><p>入栈是将新元素节点压入栈顶。因为链栈中第一个节点为栈顶，因此将新元素节点插到第一个节点的前面，然后修改栈顶指针指向新节点即可。</p>
+<h4 id="入栈：-2">入栈：</h4>
+<p>入栈是将新元素节点压入栈顶。因为链栈中第一个节点为栈顶，因此将新元素节点插到第一个节点的前面，然后修改栈顶指针指向新节点即可。</p>
 <ol>
-<li><p>生成新节点。入栈前要创建一个新节点，将元素 e 存入该节点的数据域。</p>
+<li>
+<p>生成新节点。入栈前要创建一个新节点，将元素 e 存入该节点的数据域。</p>
 </li>
-<li><p>将新元素节点插到第一个节点的前面，然后修改栈顶指针指向新节点。</p>
+<li>
+<p>将新元素节点插到第一个节点的前面，然后修改栈顶指针指向新节点。</p>
 <ul>
-<li>p-&gt;next&#x3D;S：将 S 的地址赋值给 p 的指针域，即新节点 p 的 next 指针指向 S。</li>
-<li>S&#x3D;p：修改新的栈顶指针为 p。</li>
+<li>p-&gt;next=S：将 S 的地址赋值给 p 的指针域，即新节点 p 的 next 指针指向 S。</li>
+<li>S=p：修改新的栈顶指针为 p。</li>
 </ul>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220910182149962.png" alt="image-20220910182149962"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220910182149962.png" alt="image-20220910182149962"></p>
 </li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">Push</span><span class="token punctuation">(</span>LinkStack <span class="token operator">&amp;</span>S<span class="token punctuation">,</span><span class="token keyword">int</span> e<span class="token punctuation">)</span> <span class="token comment">//在栈顶插入元素e</span>
@@ -605,12 +614,12 @@
 	S<span class="token operator">=</span>p<span class="token punctuation">;</span>    <span class="token comment">//修改栈顶指针为p</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="出栈：-1"><a href="#出栈：-1" class="headerlink" title="出栈："></a>出栈：</h4><p>出栈就是把栈顶元素删除，让栈顶指针指向下一个节点，然后释放该节点空间。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220910183055312.png" alt="image-20220910183055312"></p>
+<h4 id="出栈：-2">出栈：</h4>
+<p>出栈就是把栈顶元素删除，让栈顶指针指向下一个节点，然后释放该节点空间。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220910183055312.png" alt="image-20220910183055312"></p>
 <ul>
-<li>p&#x3D;S：将 S 的地址赋值给 p，即 p 指向栈顶元素节点。</li>
-<li>S&#x3D;S-&gt;next：将 S 的后继节点的地址赋值给 S，即 S 指向它的后继节点。</li>
+<li>p=S：将 S 的地址赋值给 p，即 p 指向栈顶元素节点。</li>
+<li>S=S-&gt;next：将 S 的后继节点的地址赋值给 S，即 S 指向它的后继节点。</li>
 <li>delete p：最后释放 p 指向的节点空间，即 delete p。</li>
 </ul>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">Pop</span><span class="token punctuation">(</span>LinkStack <span class="token operator">&amp;</span>S<span class="token punctuation">,</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>e<span class="token punctuation">)</span> <span class="token comment">//删除S的栈顶元素，用e保存其值</span>
@@ -624,8 +633,8 @@
 	<span class="token keyword">delete</span> p<span class="token punctuation">;</span>  <span class="token comment">//释放原栈顶元素的空间</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="取栈顶元素：-1"><a href="#取栈顶元素：-1" class="headerlink" title="取栈顶元素："></a>取栈顶元素：</h4><p>取栈顶元素和出栈不同，取栈顶元素只是把栈顶元素复制一份，栈顶指针并没有改变。而出栈是指删除栈顶元素，栈顶指针指向了下一个元素。</p>
+<h4 id="取栈顶元素：-2">取栈顶元素：</h4>
+<p>取栈顶元素和出栈不同，取栈顶元素只是把栈顶元素复制一份，栈顶指针并没有改变。而出栈是指删除栈顶元素，栈顶指针指向了下一个元素。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">GetTop</span><span class="token punctuation">(</span>LinkStack S<span class="token punctuation">)</span> <span class="token comment">//返回S的栈顶元素，不修改栈顶指针</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>S<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token comment">//栈非空</span>
@@ -633,39 +642,47 @@
     <span class="token keyword">else</span>
         <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>顺序栈和链栈的所有基本操作都只需要常数时间，所以在时间效率上难分伯仲。</p>
 <p>在空间效率方面，顺序栈需要预先分配固定长度的空间，有可能造成空间浪费或溢出；链栈每次只分配一个节点，除非没有内存，否则不会出现溢出，但是每个节点需要一个指针域，结构性开销增加。</p>
 <p>因此，如果<strong>元素个数变化较大，可以采用链栈</strong>；反之，可以采用顺序栈。在实际应用中，顺序栈比链栈应用更广泛。</p>
 </blockquote>
-<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><blockquote>
-<p>这种<strong>先进先出（First In First Out，FIFO）</strong>的线性序列，称为“队列”。队列也是一种线性表，只不过它是操作受限的线性表，只能在两端操作：一端进，一端出。</p>
+<h2 id="队列">队列</h2>
+<blockquote>
+<p>这种**先进先出（First In First Out，FIFO）**的线性序列，称为“队列”。队列也是一种线性表，只不过它是操作受限的线性表，只能在两端操作：一端进，一端出。</p>
 <p>进的一端称为队尾（rear），出的一端称为队头（front）。</p>
 </blockquote>
-<h3 id="顺序队列："><a href="#顺序队列：" class="headerlink" title="顺序队列："></a>顺序队列：</h3><p>队列的顺序存储采用一段连续的空间存储数据元素，并用两个整型变量记录队头和队尾元素的下标。顺序队列定义好了之后，还要先定义一个最大的分配空间，顺序结构都是如此，需要预先分配空间。</p>
+<h3 id="顺序队列：">顺序队列：</h3>
+<p>队列的顺序存储采用一段连续的空间存储数据元素，并用两个整型变量记录队头和队尾元素的下标。顺序队列定义好了之后，还要先定义一个最大的分配空间，顺序结构都是如此，需要预先分配空间。</p>
 <blockquote>
 <p>注意：队列只能在一端进、一端出，<strong>不允许在中间查找、取值、插入、删除等操作</strong>，先进先出是人为规定的，如果破坏此规则，就不是队列了。</p>
 </blockquote>
-<h4 id="入队和出队操作："><a href="#入队和出队操作：" class="headerlink" title="入队和出队操作："></a>入队和出队操作：</h4><ol>
-<li><p>开始时为空队，Q.front &#x3D; Q.rear:</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911172051098.png" alt="image-20220911172051098"></p>
+<h4 id="入队和出队操作：">入队和出队操作：</h4>
+<ol>
+<li>
+<p>开始时为空队，Q.front = Q.rear:</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911172051098.png" alt="image-20220911172051098"></p>
 </li>
-<li><p>元素进队，放入队尾 Q.rear 的位置，然后 Q.rear 后移一位：</p>
+<li>
+<p>元素进队，放入队尾 Q.rear 的位置，然后 Q.rear 后移一位：</p>
 </li>
 </ol>
-<p>   <img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911172109380.png" alt="image-20220911172109380"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911172109380.png" alt="image-20220911172109380"></p>
 <ol start="3">
-<li><p>元素出队，队头 Q.front 后移一位：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911172134406.png" alt="image-20220911172134406"></p>
+<li>
+<p>元素出队，队头 Q.front 后移一位：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911172134406.png" alt="image-20220911172134406"></p>
 </li>
-<li><p>若此时队尾 Q.rear 已经超过了数组的最大下标，无法再进队，但是前面有空间却出现了队满的情况，这种情况称为“假溢出”：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911172240405.png" alt="image-20220911172240405"></p>
+<li>
+<p>若此时队尾 Q.rear 已经超过了数组的最大下标，无法再进队，但是前面有空间却出现了队满的情况，这种情况称为“假溢出”：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911172240405.png" alt="image-20220911172240405"></p>
 </li>
-<li><p>为了解决“假溢出”，此时已经超过了数组的最大下标，即 Q.rear+1&#x3D;Maxsize（最大空间数 6），那么如果前面有空闲，Q.rear 可以转向前面下标为 0 的位置：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911172256567.png" alt="image-20220911172256567"></p>
+<li>
+<p>为了解决“假溢出”，此时已经超过了数组的最大下标，即 Q.rear+1=Maxsize（最大空间数 6），那么如果前面有空闲，Q.rear 可以转向前面下标为 0 的位置：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911172256567.png" alt="image-20220911172256567"></p>
 </li>
-<li><p>当队列空间存满时，出现一个问题Q.front&#x3D;Q.rear，这和队空的条件一模一样，无法区分到底是队空，还是队满。有两种解决方法：</p>
+<li>
+<p>当队列空间存满时，出现一个问题Q.front=Q.rear，这和队空的条件一模一样，无法区分到底是队空，还是队满。有两种解决方法：</p>
 <ul>
 <li>一种办法是设置一个标志，标记队空和队满。</li>
 <li>另一种办法是浪费一个空间，当队尾 Q.rear 的下一个位置 Q.front 时，就认为是队满。</li>
@@ -673,22 +690,26 @@
 </li>
 </ol>
 <p>上述到达尾部又向前存储的队列称为循环队列，<strong>为了避免“假溢出”，顺序队列通常采用循环队列</strong>。</p>
-<h3 id="循环队列："><a href="#循环队列：" class="headerlink" title="循环队列："></a>循环队列：</h3><h4 id="队空："><a href="#队空：" class="headerlink" title="队空："></a>队空：</h4><p>无论队头和队尾在什么位置，只要 Q.rear 和 Q.front 指向同一个位置，就认为是队空。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911173711877.png" alt="image-20220911173711877"></p>
+<h3 id="循环队列：">循环队列：</h3>
+<h4 id="队空：">队空：</h4>
+<p>无论队头和队尾在什么位置，只要 Q.rear 和 Q.front 指向同一个位置，就认为是队空。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911173711877.png" alt="image-20220911173711877"></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Q<span class="token punctuation">.</span>front <span class="token operator">==</span> Q<span class="token punctuation">.</span>rear<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="队满："><a href="#队满：" class="headerlink" title="队满："></a>队满：</h4><p>在此采用浪费一个空间的方法，当队尾 Q.rear 的下一个位置 Q.front 时，就认为是队满。</p>
-<h5 id="临界状态："><a href="#临界状态：" class="headerlink" title="临界状态："></a>临界状态：</h5><p>但是 Q.rear 向后移动一个位置（Q.rear+1）后，很有可能超出了数组的最大下标，这时它的下一个位置应该为 0:</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911174340821.png" alt="image-20220911174340821"></p>
-<p>队列的最大空间为 Maxsize，当 Q.rear&#x3D;Maxsize−1 时，Q.rear+1&#x3D;Maxsize。而根据循环队列的规则，Q.rear 的下一个位置为 0 才对，怎么才能变成 0 呢？</p>
-<p>可以考虑<strong>取余运算</strong>，即(Q.rear+1)%Maxsize&#x3D;0。而此时 Q.front&#x3D;0，即(Q.rear+1)%Maxsize&#x3D;Q.front，此时为队满的临界状态。</p>
-<h5 id="一般状态："><a href="#一般状态：" class="headerlink" title="一般状态："></a>一般状态：</h5><p>假如最大空间数 Maxsize&#x3D;100，当 Q.rear&#x3D;1 时，Q.rear+1&#x3D;2。取余后，(Q.rear+1)%Maxsize&#x3D;2，而此时 Q.front&#x3D;2，即(Q.rear+1)%Maxsize&#x3D;Q.front。</p>
+<h4 id="队满：">队满：</h4>
+<p>在此采用浪费一个空间的方法，当队尾 Q.rear 的下一个位置 Q.front 时，就认为是队满。</p>
+<h5 id="临界状态：">临界状态：</h5>
+<p>但是 Q.rear 向后移动一个位置（Q.rear+1）后，很有可能超出了数组的最大下标，这时它的下一个位置应该为 0:</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911174340821.png" alt="image-20220911174340821"></p>
+<p>队列的最大空间为 Maxsize，当 Q.rear=Maxsize−1 时，Q.rear+1=Maxsize。而根据循环队列的规则，Q.rear 的下一个位置为 0 才对，怎么才能变成 0 呢？</p>
+<p>可以考虑<strong>取余运算</strong>，即(Q.rear+1)%Maxsize=0。而此时 Q.front=0，即(Q.rear+1)%Maxsize=Q.front，此时为队满的临界状态。</p>
+<h5 id="一般状态：">一般状态：</h5>
+<p>假如最大空间数 Maxsize=100，当 Q.rear=1 时，Q.rear+1=2。取余后，(Q.rear+1)%Maxsize=2，而此时 Q.front=2，即(Q.rear+1)%Maxsize=Q.front。</p>
 <p>队满的一般状态也可以采用此公式判断队满。因为一个不大于 Maxsize 的数与 Maxsize 取余运算，结果仍然是该数本身，所以一般状态下，取余运算没有任何影响。</p>
-<p><strong>只有在临界状态（Q.rear+1&#x3D;Maxsize）下，取余运算(Q.rear+1)%Maxsize 才会变为 0。</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911175419957.png" alt="image-20220911175419957"></p>
+<p><strong>只有在临界状态（Q.rear+1=Maxsize）下，取余运算(Q.rear+1)%Maxsize 才会变为 0。</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911175419957.png" alt="image-20220911175419957"></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>rear<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span>Maxsize <span class="token operator">==</span> Q<span class="token punctuation">.</span>front<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="初始化：-2"><a href="#初始化：-2" class="headerlink" title="初始化："></a>初始化：</h4><p>首先分配一个大小为 Maxsize 的空间，然后令 Q.front&#x3D;Q.rear&#x3D;0，即队头和队尾为 0，队列为空。</p>
+<h4 id="初始化：-3">初始化：</h4>
+<p>首先分配一个大小为 Maxsize 的空间，然后令 Q.front=Q.rear=0，即队头和队尾为 0，队列为空。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">Maxsize</span> <span class="token expression"><span class="token number">100</span></span></span>
@@ -706,9 +727,9 @@
 	Q<span class="token punctuation">.</span>front<span class="token operator">=</span>Q<span class="token punctuation">.</span>rear<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//头指针和尾指针置为零，队列为空</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="入队："><a href="#入队：" class="headerlink" title="入队："></a>入队：</h4><p>入队时，首先将元素 x 放入 Q.rear 所指空间，然后 Q.rear 后移一位。</p>
-<p>当 Q.rear 后移一位时，为了处理临界状态（Q.rear+1&#x3D;Maxsize），需要加 1 后取余运算。</p>
+<h4 id="入队：">入队：</h4>
+<p>入队时，首先将元素 x 放入 Q.rear 所指空间，然后 Q.rear 后移一位。</p>
+<p>当 Q.rear 后移一位时，为了处理临界状态（Q.rear+1=Maxsize），需要加 1 后取余运算。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//循环队列的入队</span>
 <span class="token keyword">bool</span> <span class="token function">EnQueue</span><span class="token punctuation">(</span>SqQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span><span class="token keyword">int</span> e<span class="token punctuation">)</span><span class="token comment">//将元素e放入Q的队尾</span>
 <span class="token punctuation">&#123;</span>
@@ -718,9 +739,9 @@
 	Q<span class="token punctuation">.</span>rear<span class="token operator">=</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>rear<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span>Maxsize<span class="token punctuation">;</span> <span class="token comment">//队尾指针加1</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="出队："><a href="#出队：" class="headerlink" title="出队："></a>出队：</h4><p>先用变量保存队头元素，然后队头 Q.front 后移一位。</p>
-<p>当 Q.front 后移一位时，为了处理临界状态（Q.front+1&#x3D;Maxsize），需要加 1后取余运算。</p>
+<h4 id="出队：">出队：</h4>
+<p>先用变量保存队头元素，然后队头 Q.front 后移一位。</p>
+<p>当 Q.front 后移一位时，为了处理临界状态（Q.front+1=Maxsize），需要加 1后取余运算。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//循环队列的出队</span>
 <span class="token keyword">bool</span> <span class="token function">DeQueue</span><span class="token punctuation">(</span>SqQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>e<span class="token punctuation">)</span> <span class="token comment">//删除Q的队头元素，用e返回其值</span>
 <span class="token punctuation">&#123;</span>
@@ -730,8 +751,8 @@
 	Q<span class="token punctuation">.</span>front<span class="token operator">=</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span>Maxsize<span class="token punctuation">;</span> <span class="token comment">//队头指针加1</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="取队头元素："><a href="#取队头元素：" class="headerlink" title="取队头元素："></a>取队头元素：</h4><p>取队头元素时，只是把队头元素数据复制一份即可，并未改变队头位置，因此队列中的内容没有改变。</p>
+<h4 id="取队头元素：">取队头元素：</h4>
+<p>取队头元素时，只是把队头元素数据复制一份即可，并未改变队头位置，因此队列中的内容没有改变。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//取循环队列的队头元素</span>
 <span class="token keyword">int</span> <span class="token function">GetHead</span><span class="token punctuation">(</span>SqQueue Q<span class="token punctuation">)</span><span class="token comment">//返回Q的队头元素，不修改队头指针</span>
 <span class="token punctuation">&#123;</span>
@@ -739,19 +760,23 @@
 		<span class="token keyword">return</span> Q<span class="token punctuation">.</span>base<span class="token punctuation">[</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="队列元素个数计算："><a href="#队列元素个数计算：" class="headerlink" title="队列元素个数计算："></a>队列元素个数计算：</h4><p>循环队列中的内容实际上为 Q.front～Q.rear−1 这一区间的数据元素，<strong>但是不可以直接用两个下标相减得到。因为队列是循环的</strong>，所以存在两种情况。</p>
+<h4 id="队列元素个数计算：">队列元素个数计算：</h4>
+<p>循环队列中的内容实际上为 Q.front～Q.rear−1 这一区间的数据元素，<strong>但是不可以直接用两个下标相减得到。因为队列是循环的</strong>，所以存在两种情况。</p>
 <ul>
-<li><p>Q.rear≥Q.front:</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911183047358.png" alt="image-20220911183047358"></p>
+<li>
+<p>Q.rear≥Q.front:</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911183047358.png" alt="image-20220911183047358"></p>
 </li>
-<li><p>Q.rear&lt;Q.front:</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911183539299.png" alt="image-20220911183539299"></p>
+<li>
+<p>Q.rear&lt;Q.front:</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911183539299.png" alt="image-20220911183539299"></p>
 </li>
 </ul>
-<p>此时，Q.rear&#x3D;4，Q.front&#x3D;Maxsize−2，Q.rear-Q.front&#x3D;6−Maxsize。但是我们可以看到循环队列中的元素实际上为 6 个，那怎么办呢？当两者之差为负数时，可以将差值加上 Maxsize计算元素个数，即 Q.rear−Q.front+Maxsize&#x3D;6−Maxsize+Maxsize&#x3D;6，元素个数为 6。</p>
+<p>此时，Q.rear=4，Q.front=Maxsize−2，Q.rear-Q.front=6−Maxsize。但是我们可以看到循环队列中的元素实际上为 6 个，那怎么办呢？当两者之差为负数时，可以将差值加上 Maxsize计算元素个数，即 Q.rear−Q.front+Maxsize=6−Maxsize+Maxsize=6，元素个数为 6。</p>
 <blockquote>
-<p>因此，在计算元素个数时，可以分两种情况判断。<br>1）<strong>Q.rear≥Q.front：元素个数为 Q.rear−Q.front。</strong><br>2）<strong>Q.rear&lt;Q.front：元素个数为 Q.rear−Q.front+Maxsize。</strong></p>
+<p>因此，在计算元素个数时，可以分两种情况判断。<br>
+1）<strong>Q.rear≥Q.front：元素个数为 Q.rear−Q.front。</strong><br>
+2）<strong>Q.rear&lt;Q.front：元素个数为 Q.rear−Q.front+Maxsize。</strong></p>
 </blockquote>
 <p>也可以采用取余的方法把两种情况巧妙地统一为一个语句:</p>
 <blockquote>
@@ -759,18 +784,20 @@
 <p>%Maxsize 是为了防止 Q.rear-Q.front 为正数的情况，</p>
 <p>+Maxsize 是为了防止 Q.rear-Q.front为负数的情况</p>
 </blockquote>
-<h4 id="求队列的长度："><a href="#求队列的长度：" class="headerlink" title="求队列的长度："></a>求队列的长度：</h4><p>通过前面的分析，我们已经知道循环队列中元素个数为：(Q.rear−Q.front+Maxsize)%Maxsize，循环队列中元素个数即为循环队列的长度。</p>
+<h4 id="求队列的长度：">求队列的长度：</h4>
+<p>通过前面的分析，我们已经知道循环队列中元素个数为：(Q.rear−Q.front+Maxsize)%Maxsize，循环队列中元素个数即为循环队列的长度。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//循环队列的长度</span>
 <span class="token keyword">int</span> <span class="token function">QueueLength</span><span class="token punctuation">(</span>SqQueue Q<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token keyword">return</span> <span class="token punctuation">(</span>Q<span class="token punctuation">.</span>rear<span class="token operator">-</span>Q<span class="token punctuation">.</span>front<span class="token operator">+</span>Maxsize<span class="token punctuation">)</span><span class="token operator">%</span>Maxsize<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="链队列："><a href="#链队列：" class="headerlink" title="链队列："></a>链队列：</h3><p>链队列类似一个单链表，需要两个指针 front 和 rear 分别指向队头和队尾。从队头出队，从队尾入队，为了出队时删除元素方便，可以增加一个头节点。</p>
+<h3 id="链队列：">链队列：</h3>
+<p>链队列类似一个单链表，需要两个指针 front 和 rear 分别指向队头和队尾。从队头出队，从队尾入队，为了出队时删除元素方便，可以增加一个头节点。</p>
 <blockquote>
 <p><strong>注意：链队列需要头节点</strong></p>
 </blockquote>
-<h4 id="初始化：-3"><a href="#初始化：-3" class="headerlink" title="初始化："></a>初始化：</h4><p>链队列的初始化，即创建一个头节点，头指针和尾指针指向头节点。</p>
+<h4 id="初始化：-4">初始化：</h4>
+<p>链队列的初始化，即创建一个头节点，头指针和尾指针指向头节点。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
@@ -790,15 +817,17 @@
 	Q<span class="token punctuation">.</span>front<span class="token operator">=</span>Q<span class="token punctuation">.</span>rear<span class="token operator">=</span><span class="token keyword">new</span> Qnode<span class="token punctuation">;</span> <span class="token comment">//创建头结点，头指针和尾指针指向头结点</span>
 	Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="入队：-1"><a href="#入队：-1" class="headerlink" title="入队："></a>入队：</h4><ol>
-<li><p>先创建一个新节点，将元素 e 存入该节点的数值域。</p>
+<h4 id="入队：-2">入队：</h4>
+<ol>
+<li>
+<p>先创建一个新节点，将元素 e 存入该节点的数值域。</p>
 </li>
-<li><p>然后将新节点插入队尾，尾指针后移。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911221232441.png" alt="image-20220911221232441"></p>
+<li>
+<p>然后将新节点插入队尾，尾指针后移。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911221232441.png" alt="image-20220911221232441"></p>
 <ul>
-<li>Q.rear-&gt;next&#x3D;s：把 s 节点的地址赋值给队列尾节点的 next 域，即尾节点的 next 指针指向 s。</li>
-<li>Q.rear&#x3D;s：把 s 节点的地址赋值给尾指针，即尾指针指向 s，尾指针永远指向队尾。</li>
+<li>Q.rear-&gt;next=s：把 s 节点的地址赋值给队列尾节点的 next 域，即尾节点的 next 指针指向 s。</li>
+<li>Q.rear=s：把 s 节点的地址赋值给尾指针，即尾指针指向 s，尾指针永远指向队尾。</li>
 </ul>
 </li>
 </ol>
@@ -812,13 +841,15 @@
 	Q<span class="token punctuation">.</span>rear<span class="token operator">-></span>next<span class="token operator">=</span>s<span class="token punctuation">;</span><span class="token comment">//新元素插入队尾</span>
 	Q<span class="token punctuation">.</span>rear<span class="token operator">=</span>s<span class="token punctuation">;</span>     <span class="token comment">//队尾指针后移</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="出队：-1"><a href="#出队：-1" class="headerlink" title="出队："></a>出队：</h4><p>出队相当于删除第一个数据元素，即将第一个数据元素节点跳过去。</p>
+<h4 id="出队：-2">出队：</h4>
+<p>出队相当于删除第一个数据元素，即将第一个数据元素节点跳过去。</p>
 <ol>
-<li><p>首先用 p 指针指向第一个数据节点，然后跳过该节点，即 Q.front-&gt;next&#x3D;p-&gt;next。</p>
+<li>
+<p>首先用 p 指针指向第一个数据节点，然后跳过该节点，即 Q.front-&gt;next=p-&gt;next。</p>
 </li>
-<li><p><strong>若队列中只有一个元素，删除后需要修改队尾指针。</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220911222148596.png" alt="image-20220911222148596"></p>
+<li>
+<p><strong>若队列中只有一个元素，删除后需要修改队尾指针。</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220911222148596.png" alt="image-20220911222148596"></p>
 </li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//链队列的出队</span>
@@ -835,8 +866,8 @@
 	<span class="token keyword">delete</span> p<span class="token punctuation">;</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="取队头元素：-1"><a href="#取队头元素：-1" class="headerlink" title="取队头元素："></a>取队头元素：</h4><p>队头实际上是 Q.front-&gt;next 指向的节点，即第一个数据节点，队头元素就是将该节点的数据域存储的元素。</p>
+<h4 id="取队头元素：-2">取队头元素：</h4>
+<p>队头实际上是 Q.front-&gt;next 指向的节点，即第一个数据节点，队头元素就是将该节点的数据域存储的元素。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//取循环队列的队头元素</span>
 <span class="token keyword">int</span> <span class="token function">GetHead</span><span class="token punctuation">(</span>LinkQueue Q<span class="token punctuation">)</span><span class="token comment">//返回Q的队头元素，不修改队头指针</span>
 <span class="token punctuation">&#123;</span>
@@ -844,15 +875,18 @@
 		<span class="token keyword">return</span> Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token operator">-></span>data<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="栈和队列的应用："><a href="#栈和队列的应用：" class="headerlink" title="栈和队列的应用："></a>栈和队列的应用：</h2><h3 id="数制的转换："><a href="#数制的转换：" class="headerlink" title="数制的转换："></a>数制的转换：</h3><p><strong>题目：</strong>将一个十进制数 n 转换为二进制数。</p>
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>十进制数转换为二进制，可以采用辗转相除、取余数的方法得到。例如十进制数 11 转二进制。先求余数 11%2&#x3D;1，求商 11&#x2F;2&#x3D;5，然后用商 5 再求余数，求商，直到商为 0，结束。</p>
+<h2 id="栈和队列的应用：">栈和队列的应用：</h2>
+<h3 id="数制的转换：">数制的转换：</h3>
+<p>**题目：**将一个十进制数 n 转换为二进制数。</p>
+<h4 id="思路：">思路：</h4>
+<p>十进制数转换为二进制，可以采用辗转相除、取余数的方法得到。例如十进制数 11 转二进制。先求余数 11%2=1，求商 11/2=5，然后用商 5 再求余数，求商，直到商为 0，结束。</p>
 <p>先求出的余数是二进制数的低位，后求出的余数是二进制数的高位，将得到的余数逆序输出就是所要的二进制数，即 11 的二进制数为 1011。如何将余数逆序输出呢？</p>
 <p><strong>逆序输出正好符合栈的先入后出性质，因此可以借助栈来实现。</strong></p>
-<h4 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h4><ol>
+<h4 id="步骤：">步骤：</h4>
+<ol>
 <li>初始化一个栈 S。</li>
-<li>如果 n!&#x3D;0，将 n%2 入栈 S，更新 n&#x3D;n&#x2F;2。</li>
-<li>重复运行第 2 步，直到 n&#x3D;0 为止。</li>
+<li>如果 n!=0，将 n%2 入栈 S，更新 n=n/2。</li>
+<li>重复运行第 2 步，直到 n=0 为止。</li>
 <li>如果栈不空，弹出栈顶元素 e，输出 e，直到栈空。</li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
@@ -876,14 +910,17 @@
         cout<span class="token operator">&lt;&lt;</span>e<span class="token operator">&lt;&lt;</span><span class="token string">"\t"</span><span class="token punctuation">;</span><span class="token comment">//输出栈顶元素</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="算法复杂度分析："><a href="#算法复杂度分析：" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>每次取余后除以 2，n 除以 2 多少次变为 1，那么第一个 while 语句就执行多少次。假设执行 x 次，则 n&#x2F;2x&#x3D;1，x&#x3D;log2n。因此，时间复杂度为 O(log2n)，使用的栈空间大小也是 log2n，空间复杂度也为 O(log 2n)。</p>
-<h3 id="回文判定："><a href="#回文判定：" class="headerlink" title="回文判定："></a>回文判定：</h3><p><strong>题目：</strong>回文是指正读反读均相同的字符序列，如“abba”和“abcscba”均是回文，也就是说字符串沿中心线对称。试写一个算法判定给定的字符串是否为回文。</p>
-<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><p><strong>回文是中心对称的，可以将字符串前一半入栈，然后，栈中元素和字符串后一半进行比较。</strong>即将第一个出栈元素和后一半串中第一个字符比较，若相等，则再将出栈一个元素与后一个字符比较……直到栈空为止，则字符序列是回文。</p>
-<h4 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h4><ol>
+<h4 id="算法复杂度分析：">算法复杂度分析：</h4>
+<p>每次取余后除以 2，n 除以 2 多少次变为 1，那么第一个 while 语句就执行多少次。假设执行 x 次，则 n/2x=1，x=log2n。因此，时间复杂度为 O(log2n)，使用的栈空间大小也是 log2n，空间复杂度也为 O(log 2n)。</p>
+<h3 id="回文判定：">回文判定：</h3>
+<p>**题目：**回文是指正读反读均相同的字符序列，如“abba”和“abcscba”均是回文，也就是说字符串沿中心线对称。试写一个算法判定给定的字符串是否为回文。</p>
+<h4 id="思路：-2">思路：</h4>
+<p>**回文是中心对称的，可以将字符串前一半入栈，然后，栈中元素和字符串后一半进行比较。**即将第一个出栈元素和后一半串中第一个字符比较，若相等，则再将出栈一个元素与后一个字符比较…直到栈空为止，则字符序列是回文。</p>
+<h4 id="步骤：-2">步骤：</h4>
+<ol>
 <li>初始化一个栈S。</li>
 <li>求字符串长度，将前面一半的字符依次入栈 S。</li>
-<li>如果栈不空，弹出栈顶元素 e，与字符串后一半元素比较。<strong>若 n 为奇数，则跳过中心点，比较中心点后面的元素。</strong>如果元素相等，则继续比较直到栈空，返回 true；如果元素不等，返回 false。</li>
+<li>如果栈不空，弹出栈顶元素 e，与字符串后一半元素比较。**若 n 为奇数，则跳过中心点，比较中心点后面的元素。**如果元素相等，则继续比较直到栈空，返回 true；如果元素不等，返回 false。</li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;cstring></span></span>
@@ -913,35 +950,45 @@
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="算法复杂度分析：-1"><a href="#算法复杂度分析：-1" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>如果字符串长度为 n，将前一半入栈，后一半依次和出栈元素比较，相当于扫描了整个字符串，因此时间复杂度为 O(n)，使用的栈空间大小是 n&#x2F;2，空间复杂度也为 O(n)。</p>
-<h3 id="双端队列："><a href="#双端队列：" class="headerlink" title="双端队列："></a>双端队列：</h3><p><strong>题目：</strong>设计一个数据结构，使其具有栈和队列两种特性。</p>
-<h4 id="思路：-2"><a href="#思路：-2" class="headerlink" title="思路："></a>思路：</h4><p>栈是后进先出，队列是先进先出，如何具有这两种特性呢？<br>栈是在一端进出，队列是在一端进、另一端出，能否设计两端都可以进出呢？</p>
+<h4 id="算法复杂度分析：-2">算法复杂度分析：</h4>
+<p>如果字符串长度为 n，将前一半入栈，后一半依次和出栈元素比较，相当于扫描了整个字符串，因此时间复杂度为 O(n)，使用的栈空间大小是 n/2，空间复杂度也为 O(n)。</p>
+<h3 id="双端队列：">双端队列：</h3>
+<p>**题目：**设计一个数据结构，使其具有栈和队列两种特性。</p>
+<h4 id="思路：-3">思路：</h4>
+<p>栈是后进先出，队列是先进先出，如何具有这两种特性呢？<br>
+栈是在一端进出，队列是在一端进、另一端出，能否设计两端都可以进出呢？</p>
 <blockquote>
 <p>允许两端都可以进行入队和出队的队列，就是双端队列</p>
 </blockquote>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912114829664.png" alt="image-20220912114829664"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912114829664.png" alt="image-20220912114829664"></p>
 <p>循环队列表示的双端队列，可以用环形形象地表达出来。双端队列和普通循环队列的区别如图所示。</p>
 <p>双端队列包括前端和后端，可以从前端进入、前端出队、后端进队、后端出队。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912115334112.png" alt="image-20220912115334112"></p>
-<h4 id="步骤：-2"><a href="#步骤：-2" class="headerlink" title="步骤："></a>步骤：</h4><ol>
-<li><p>入队</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912115334112.png" alt="image-20220912115334112"></p>
+<h4 id="步骤：-3">步骤：</h4>
+<ol>
+<li>
+<p>入队</p>
 <ul>
-<li><p>前端进队时，先令 Q.front 前移一位，再将元素放入 Q.front 的位置，a、b、c 依次从前端进队。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912121125792.png" alt="image-20220912121125792"></p>
+<li>
+<p>前端进队时，先令 Q.front 前移一位，再将元素放入 Q.front 的位置，a、b、c 依次从前端进队。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912121125792.png" alt="image-20220912121125792"></p>
 </li>
-<li><p>后端进队时，先将元素放入 Q.rear 的位置，再令 Q.rear 后移一位，d 从后端进队。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912121141406.png" alt="image-20220912121141406"></p>
+<li>
+<p>后端进队时，先将元素放入 Q.rear 的位置，再令 Q.rear 后移一位，d 从后端进队。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912121141406.png" alt="image-20220912121141406"></p>
 </li>
 </ul>
 </li>
-<li><p>出队</p>
+<li>
+<p>出队</p>
 <ul>
-<li><p>从后端出队，先令 Q.rear 前移一位，再将 Q.rear 位置元素取出。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912121220588.png" alt="image-20220912121220588"></p>
+<li>
+<p>从后端出队，先令 Q.rear 前移一位，再将 Q.rear 位置元素取出。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912121220588.png" alt="image-20220912121220588"></p>
 </li>
-<li><p>从前端出队，先将 Q.front 位置元素取出，再令 Q.front 后移一位。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912121233284.png" alt="image-20220912121233284"></p>
+<li>
+<p>从前端出队，先将 Q.front 位置元素取出，再令 Q.front 后移一位。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912121233284.png" alt="image-20220912121233284"></p>
 </li>
 </ul>
 </li>
@@ -950,7 +997,8 @@
 <p><strong>后端进、前端出</strong>或者<strong>前端进、后端出</strong>体现了先进先出的特点，符合<strong>队列</strong>的特性。</p>
 <p><strong>后端进、后端出</strong>或者<strong>前端进、前端出</strong>体现了后进先出的特点，符合<strong>栈</strong>的特性。</p>
 </blockquote>
-<h5 id="初始化：-4"><a href="#初始化：-4" class="headerlink" title="初始化："></a>初始化：</h5><p>初始化时，头指针和尾指针置为零，双端队列为空。</p>
+<h5 id="初始化：-5">初始化：</h5>
+<p>初始化时，头指针和尾指针置为零，双端队列为空。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
@@ -967,8 +1015,8 @@
 <span class="token punctuation">&#123;</span>
 	Q<span class="token punctuation">.</span>front<span class="token operator">=</span>Q<span class="token punctuation">.</span>rear<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//头指针和尾指针置为零，队列为空</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="判队满："><a href="#判队满：" class="headerlink" title="判队满："></a>判队满：</h5><p>当队尾后移一位等于队头，表明队满。队尾后移一位即 Q.rear+1，加 1 后有可能等于Maxsize，此时下一个位置为 0，因此为处理临界状态，需要与 Maxsize 取余运算。</p>
+<h5 id="判队满：">判队满：</h5>
+<p>当队尾后移一位等于队头，表明队满。队尾后移一位即 Q.rear+1，加 1 后有可能等于Maxsize，此时下一个位置为 0，因此为处理临界状态，需要与 Maxsize 取余运算。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//判队满</span>
 <span class="token keyword">bool</span> <span class="token function">isFull</span><span class="token punctuation">(</span>DuQueue Q<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -977,8 +1025,8 @@
     <span class="token keyword">else</span>
        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="尾进："><a href="#尾进：" class="headerlink" title="尾进："></a>尾进：</h5><p>尾部进队，即后端进队时，先将元素放入 Q.rear 位置，然后 Q.rear 后移一位，后移时为处理边界情况，需要加 1 后模 Maxsize 取余。</p>
+<h5 id="尾进：">尾进：</h5>
+<p>尾部进队，即后端进队时，先将元素放入 Q.rear 位置，然后 Q.rear 后移一位，后移时为处理边界情况，需要加 1 后模 Maxsize 取余。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> <span class="token comment">//尾进</span>
 <span class="token keyword">bool</span> <span class="token function">push_back</span><span class="token punctuation">(</span>DuQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -988,8 +1036,8 @@
     Q<span class="token punctuation">.</span>rear<span class="token operator">=</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>rear<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span>Maxsize<span class="token punctuation">;</span><span class="token comment">//向后移动一位</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="尾出："><a href="#尾出：" class="headerlink" title="尾出："></a>尾出：</h5><p>尾部出队，即后端出队时，先将 Q.rear 前移一位，然后取出元素。前移一位即 Q.rear−1，当 Q.rear 为 0 时，Q.rear−1 为负值，因此加上 Maxsize，正好是 Maxsize−1 的位置。那么，Q.rear−1 为正值时，加上 Maxsize 就超过了下标范围，需要模 Maxsize 取余。</p>
+<h5 id="尾出：">尾出：</h5>
+<p>尾部出队，即后端出队时，先将 Q.rear 前移一位，然后取出元素。前移一位即 Q.rear−1，当 Q.rear 为 0 时，Q.rear−1 为负值，因此加上 Maxsize，正好是 Maxsize−1 的位置。那么，Q.rear−1 为正值时，加上 Maxsize 就超过了下标范围，需要模 Maxsize 取余。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//尾出</span>
 <span class="token keyword">bool</span> <span class="token function">pop_back</span><span class="token punctuation">(</span>DuQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span>ElemType <span class="token operator">&amp;</span>x<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -999,8 +1047,8 @@
     x<span class="token operator">=</span>Q<span class="token punctuation">.</span>base<span class="token punctuation">[</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//取数据</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="头进："><a href="#头进：" class="headerlink" title="头进："></a>头进：</h5><p>头部进队，即前端进队时，先将 Q.front 前移一位，然后将元素先放入 Q.front 位置。队头前移一位即 Q.front−1，前移时为处理边界情况，需要加 Maxsize 再模 Maxsize 取余。</p>
+<h5 id="头进：">头进：</h5>
+<p>头部进队，即前端进队时，先将 Q.front 前移一位，然后将元素先放入 Q.front 位置。队头前移一位即 Q.front−1，前移时为处理边界情况，需要加 Maxsize 再模 Maxsize 取余。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"> <span class="token comment">//头进</span>
 <span class="token keyword">bool</span> <span class="token function">push_front</span><span class="token punctuation">(</span>DuQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -1010,8 +1058,8 @@
     Q<span class="token punctuation">.</span>base<span class="token punctuation">[</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">]</span><span class="token operator">=</span>e<span class="token punctuation">;</span> <span class="token comment">//后放入</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="头出："><a href="#头出：" class="headerlink" title="头出："></a>头出：</h5><p>头部进队，即前端出队时，先取出元素，然后 Q.front 后移一位，即 Q.front+1，后移时为处理边界情况，需要模 Maxsize 取余。</p>
+<h5 id="头出：">头出：</h5>
+<p>头部进队，即前端出队时，先取出元素，然后 Q.front 后移一位，即 Q.front+1，后移时为处理边界情况，需要模 Maxsize 取余。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//头出</span>
 <span class="token keyword">bool</span> <span class="token function">pop_front</span><span class="token punctuation">(</span>DuQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span>ElemType <span class="token operator">&amp;</span>x<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -1021,8 +1069,8 @@
     Q<span class="token punctuation">.</span>front<span class="token operator">=</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span>Maxsize<span class="token punctuation">;</span><span class="token comment">//向后移动一位</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="取队头："><a href="#取队头：" class="headerlink" title="取队头："></a>取队头：</h5><p>取队头是指将 Q.front 位置的元素取出来，Q.front 未改变。</p>
+<h5 id="取队头：">取队头：</h5>
+<p>取队头是指将 Q.front 位置的元素取出来，Q.front 未改变。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//取队头</span>
 <span class="token keyword">bool</span> <span class="token function">get_front</span><span class="token punctuation">(</span>DuQueue Q<span class="token punctuation">,</span>ElemType <span class="token operator">&amp;</span>x<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -1031,8 +1079,8 @@
     x<span class="token operator">=</span>Q<span class="token punctuation">.</span>base<span class="token punctuation">[</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//取队头数据;</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="取队尾："><a href="#取队尾：" class="headerlink" title="取队尾："></a>取队尾：</h5><p><strong>因为 Q.rear 指针永远指向空</strong>，因此取队尾时，取 Q.rear 前面的那个位置，要想得到前面位置，为处理边界情况，需要加 Maxsize 再模 Maxsize取余。</p>
+<h5 id="取队尾：">取队尾：</h5>
+<p><strong>因为 Q.rear 指针永远指向空</strong>，因此取队尾时，取 Q.rear 前面的那个位置，要想得到前面位置，为处理边界情况，需要加 Maxsize 再模 Maxsize取余。</p>
 <blockquote>
 <p><strong>注意：取队尾时，尾指针不移动。</strong></p>
 </blockquote>
@@ -1044,15 +1092,15 @@
     x<span class="token operator">=</span>Q<span class="token punctuation">.</span>base<span class="token punctuation">[</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>rear<span class="token operator">-</span><span class="token number">1</span><span class="token operator">+</span>Maxsize<span class="token punctuation">)</span><span class="token operator">%</span>Maxsize<span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="求长度："><a href="#求长度：" class="headerlink" title="求长度："></a>求长度：</h5><p>和普通循环队列求长度的方法一样，都是求从队头到队尾之间的元素个数。因为循环队列减法有可能有负值，因此需要加 Maxsize 再模 Maxsize 取余。</p>
+<h5 id="求长度：">求长度：</h5>
+<p>和普通循环队列求长度的方法一样，都是求从队头到队尾之间的元素个数。因为循环队列减法有可能有负值，因此需要加 Maxsize 再模 Maxsize 取余。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//求长度</span>
 <span class="token keyword">int</span> <span class="token function">length</span><span class="token punctuation">(</span>DuQueue Q<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span>Q<span class="token punctuation">.</span>rear<span class="token operator">-</span>Q<span class="token punctuation">.</span>front<span class="token operator">+</span>Maxsize<span class="token punctuation">)</span><span class="token operator">%</span>Maxsize<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="遍历："><a href="#遍历：" class="headerlink" title="遍历："></a>遍历：</h5><p>双端队列的遍历，即从头到尾输出整个队列中的元素，在输出过程中，队头和队尾并不移动，因此<strong>借助一个暂时变量即可</strong>。</p>
+<h5 id="遍历：">遍历：</h5>
+<p>双端队列的遍历，即从头到尾输出整个队列中的元素，在输出过程中，队头和队尾并不移动，因此<strong>借助一个暂时变量即可</strong>。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//从头到尾输出整个队列元素（遍历）</span>
 <span class="token keyword">void</span> <span class="token function">traverse</span><span class="token punctuation">(</span>DuQueue Q<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -1069,38 +1117,45 @@
      <span class="token punctuation">&#125;</span>
      cout<span class="token operator">&lt;&lt;</span>endl<span class="token operator">&lt;&lt;</span><span class="token string">"traverse is over!"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p><strong>技巧：后移时，加 1 模 Maxsize；前移时，减 1 加 Maxsize 再模 Maxsize。</strong></p>
 </blockquote>
 <ol>
-<li><p>输出受限的双端队列</p>
+<li>
+<p>输出受限的双端队列</p>
 <p>允许在一端进队和出队，另一端只允许进队，这样的双端队列称为输出受限的双端队列。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912164028211.png" alt="image-20220912164028211"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912164110581.png" alt="image-20220912164110581"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912164028211.png" alt="image-20220912164028211"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912164110581.png" alt="image-20220912164110581"></p>
 </li>
-<li><p>输入受限的双端队列</p>
+<li>
+<p>输入受限的双端队列</p>
 <p>允许在一端进队和出队，另一端只允许出队，这样的双端队列称为输入受限的双端队列。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912164121646.png" alt="image-20220912164121646"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912164134580.png" alt="image-20220912164134580"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912164121646.png" alt="image-20220912164121646"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912164134580.png" alt="image-20220912164134580"></p>
 </li>
 </ol>
-<h2 id="栈和队列学习技巧："><a href="#栈和队列学习技巧：" class="headerlink" title="栈和队列学习技巧："></a>栈和队列学习技巧：</h2><h3 id="栈和队列的比较："><a href="#栈和队列的比较：" class="headerlink" title="栈和队列的比较："></a>栈和队列的比较：</h3><p><img src="/medias/images/loading.gif" data-original="/2022/09/10/shu-ju-jie-gou-ru-men-zhan-he-dui-lie/image-20220912164341735.png" alt="image-20220912164341735"></p>
-<h3 id="栈解题技巧："><a href="#栈解题技巧：" class="headerlink" title="栈解题技巧："></a>栈解题技巧：</h3><ol>
-<li>栈顶指针所指位置<ul>
+<h2 id="栈和队列学习技巧：">栈和队列学习技巧：</h2>
+<h3 id="栈和队列的比较：">栈和队列的比较：</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20220912164341735.png" alt="image-20220912164341735"></p>
+<h3 id="栈解题技巧：">栈解题技巧：</h3>
+<ol>
+<li>栈顶指针所指位置
+<ul>
 <li>在顺序栈中，栈顶指针指向的是栈顶元素的上一个位置，即空位置，取栈顶元素时要取*(S.top−1)才可以</li>
-<li>入栈时，先把元素放入栈顶位置，然后栈顶指针后移，即*S.top++&#x3D;e。</li>
-<li>出栈时，栈顶指针前移，用变量暂存栈顶元素，即 e&#x3D;−−S.top。</li>
+<li>入栈时，先把元素放入栈顶位置，然后栈顶指针后移，即*S.top++=e。</li>
+<li>出栈时，栈顶指针前移，用变量暂存栈顶元素，即 e=−−S.top。</li>
 </ul>
 </li>
 <li>出栈只是栈顶指针移动，空间元素仍然存在，但下次入栈时会覆盖</li>
-<li>本文以动态分配为例，静态分配的情况处理方式不同<ul>
-<li>静态分配是使用一个固定长度的数组存储数据，然后用一个 int 型的变量 top 指向栈顶，top 实际上是数组的下标。当栈空时，S.top&#x3D;0。</li>
-<li>入栈时，先把元素放入栈顶位置，然后栈顶指针后移，即 S.data[S.top++]&#x3D;e。</li>
-<li>出栈时，栈顶指针前移，用变量暂存栈顶元素，即 e&#x3D;S.data[−−S.top]。</li>
+<li>本文以动态分配为例，静态分配的情况处理方式不同
+<ul>
+<li>静态分配是使用一个固定长度的数组存储数据，然后用一个 int 型的变量 top 指向栈顶，top 实际上是数组的下标。当栈空时，S.top=0。</li>
+<li>入栈时，先把元素放入栈顶位置，然后栈顶指针后移，即 S.data[S.top++]=e。</li>
+<li>出栈时，栈顶指针前移，用变量暂存栈顶元素，即 e=S.data[−−S.top]。</li>
 </ul>
 </li>
-<li>栈和队列的灵活运用：<ul>
+<li>栈和队列的灵活运用：
+<ul>
 <li>栈具有后进先出的特性，可以利用此特性解决如<strong>逆序输出</strong>、<strong>括号匹配</strong>等问题。由于栈只能在一端操作，插入、删除都是在栈顶进行，不需要移动元素，因此大多使用顺序栈。</li>
 <li>队列具有先进先出的特性，可以利用此特性解决一系列<strong>排队</strong>、<strong>先到先得</strong>等问题。在确定队列长度范围的情况下，大多使用循环队列。如果队列长度变化较大，则使用链队。</li>
 </ul>

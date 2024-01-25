@@ -500,37 +500,44 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-下载数据集并进行本地训练的标准流程"><a href="#1-下载数据集并进行本地训练的标准流程" class="headerlink" title="1.下载数据集并进行本地训练的标准流程"></a>1.下载数据集并进行本地训练的标准流程</h3><ol>
-<li><p>克隆github项目</p>
+                <h3 id="1-下载数据集并进行本地训练的标准流程">1.下载数据集并进行本地训练的标准流程</h3>
+<ol>
+<li>
+<p>克隆github项目</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/theAIGuysCode/OIDv4_ToolKit 
-pip <span class="token function">install</span> -r requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><p>下载数据集</p>
+<li>
+<p>下载数据集</p>
 <p>数据集网站为<a target="_blank" rel="noopener" href="https://storage.googleapis.com/openimages/web/index.html">https://storage.googleapis.com/openimages/web/index.html</a></p>
 <p>搜索对应的类别，这里以Lion为例，下载训练集200张：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Lion --type_csv train --limit <span class="token number">200</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader <span class="token parameter variable">--classes</span> Lion <span class="token parameter variable">--type_csv</span> train <span class="token parameter variable">--limit</span> <span class="token number">200</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
-<li><p>注意：若某个类别有两个单词组成，单词间使用下划线代替：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Bell_pepper --type_csv train --limit <span class="token number">400</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li>
+<p>注意：若某个类别有两个单词组成，单词间使用下划线代替：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader <span class="token parameter variable">--classes</span> Bell_pepper <span class="token parameter variable">--type_csv</span> train <span class="token parameter variable">--limit</span> <span class="token number">400</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>注意：若想同时训练多个类别，可通过如下代码将多个类别移动至同一类别：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader --classes Aircraft Weapon --type_csv <span class="token builtin class-name">test</span> --limit <span class="token number">100</span> --multiclasses <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>
+<p>注意：若想同时训练多个类别，可通过如下代码将多个类别移动至同一类别：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py downloader <span class="token parameter variable">--classes</span> Aircraft Weapon <span class="token parameter variable">--type_csv</span> <span class="token builtin class-name">test</span> <span class="token parameter variable">--limit</span> <span class="token number">100</span> <span class="token parameter variable">--multiclasses</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ul>
 </li>
-<li><p>数据预处理</p>
-<p>下载后的数据存储在OID&#x2F;Dataset&#x2F;train&#x2F;，每个类别的文件包括对应的image和label，对应的label为txt文件，打开后为：</p>
+<li>
+<p>数据预处理</p>
+<p>下载后的数据存储在OID/Dataset/train/，每个类别的文件包括对应的image和label，对应的label为txt文件，打开后为：</p>
 <pre class="line-numbers language-none"><code class="language-none">Lion 48.0 268.23846499999996 972.8 561.4438100000001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>的label为txt文件，打开后为：</p>
 <pre class="line-numbers language-none"><code class="language-none">Lion 48.0 268.23846499999996 972.8 561.4438100000001<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>但目前的label格式并不能直接拿来放在yolov5中训练，需要转换成yolov5接受的格式</p>
 <ol>
-<li><p>打开classes.txt，将里面的内容改为需要转换的类别：</p>
+<li>
+<p>打开classes.txt，将里面的内容改为需要转换的类别：</p>
 <p>在本例中，修改为：Lion</p>
 </li>
-<li><p>运行指令<code>python convert_annotations.py</code>,转换label格式。<br>代码如下：</p>
+<li>
+<p>运行指令<code>python convert_annotations.py</code>,转换label格式。<br>
+代码如下：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
 <span class="token keyword">import</span> cv2
 <span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
@@ -609,10 +616,12 @@ DIRS <span class="token operator">=</span> os<span class="token punctuation">.</
                         os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">"Label"</span><span class="token punctuation">)</span>
                 os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
                 os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span>
-        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+        os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
 </li>
-<li><p>移动标签位置</p>
+<li>
+<p>移动标签位置</p>
 <p>数据预处理后，txt和jpg文件是放在一个文件夹下的，仍然不是yolov5要求的文件格式，即label，image文件夹分开存放。首先删除Label文件夹中的文件，但不要删除Label文件夹；</p>
 <p>运行代码：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
@@ -626,31 +635,34 @@ FileList <span class="token operator">=</span> <span class="token builtin">list<
 
 <span class="token keyword">for</span> <span class="token builtin">file</span> <span class="token keyword">in</span> FileList<span class="token punctuation">:</span>       <span class="token comment"># 这个的意思是，遍历所有找出的txt文件，并复制到另一个文件夹中</span>
     shutil<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span>q<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>此时将Lion文件夹下的txt文件复制到Label文件夹下，将Label文件夹重命名为label，复制出来到与yolov5项目同一目录级别的文件夹下；接着同上处理img文件，复制出来放在与label文件夹同一级别的目录中，最终目录格式：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105312819.webp"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220525105312819.webp" alt=""></p>
 <ul>
-<li><p>注意：如果使用shutil的move()剪切方法会报错，具体原因据说是shutil的源码bug，目前仍然没有修复，所以只能用这种比较麻烦的方法构成所需目录。</p>
+<li>
+<p>注意：如果使用shutil的move()剪切方法会报错，具体原因据说是shutil的源码bug，目前仍然没有修复，所以只能用这种比较麻烦的方法构成所需目录。</p>
 </li>
-<li><p>注意，要在train同一目录下创建data.yaml文件，内容参考其他data.yaml文件。</p>
+<li>
+<p>注意，要在train同一目录下创建data.yaml文件，内容参考其他data.yaml文件。</p>
 </li>
-<li><p>注意：如果要得到正确的训练结果，还需要下载同类别的validation文件，张数约为训练集的百分之20，用以上方法整理到与train文件夹同一目录下，test文件同理，最终目录结构：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105701317.webp"></p>
+<li>
+<p>注意：如果要得到正确的训练结果，还需要下载同类别的validation文件，张数约为训练集的百分之20，用以上方法整理到与train文件夹同一目录下，test文件同理，最终目录结构：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220525105701317.webp" alt=""></p>
 </li>
 </ul>
 <p>lion_detect是我自己创建放几张网上找的图片用来测试的。</p>
 </li>
-<li><p>开始训练</p>
+<li>
+<p>开始训练</p>
 <p>打开yolov5 6.1项目，设置训练参数：</p>
 </li>
 </ol>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525105912373.webp"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220525105912373.webp" alt=""></p>
 <p>​		点击train.py文件运行，开始训练，训练完成后打开detect.py文件，设置参数：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110031198.webp"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220525110031198.webp" alt=""></p>
 <p>​		其中best.pt是训练后最好的权重，用以检测。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110313235.webp"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220525110313235.webp" alt=""></p>
 <p>​		我们对比一下官方自带的训练集的检测结果：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/shi-yong-yolo5-jin-xing-shu-ju-xun-lian/image-20220525110334725.webp"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220525110334725.webp" alt=""></p>
 
                 
             </div>

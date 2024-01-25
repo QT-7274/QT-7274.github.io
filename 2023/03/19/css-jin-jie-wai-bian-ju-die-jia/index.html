@@ -500,12 +500,16 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="外边距叠加"><a href="#外边距叠加" class="headerlink" title="外边距叠加"></a>外边距叠加</h1><p>外边距叠加，又称“margin叠加”，指的是当两个垂直外边距相遇时，这两个外边距将会合并成一个外边距。</p>
+                <h1>外边距叠加</h1>
+<p>外边距叠加，又称“margin叠加”，指的是当两个垂直外边距相遇时，这两个外边距将会合并成一个外边距。</p>
 <p>其中，<strong>叠加之后的外边距高度，等于发生叠加之前的两个外边距中的<u>最大值</u></strong></p>
 <p>外边距叠加有三种情况：同级元素、父级元素、空元素</p>
-<h2 id="同级元素"><a href="#同级元素" class="headerlink" title="同级元素"></a>同级元素</h2><p>当一个元素出现在另一个元素上面的时候，第1个元素的<strong>下边距</strong>（margin-bottom）将会与第2个元素的<strong>上边距</strong>（margin-top）发生合并。</p>
-<h2 id="父子元素"><a href="#父子元素" class="headerlink" title="父子元素"></a>父子元素</h2><p>当一个元素包含在另外一个元素中时（呈父子关系），假如没有padding或border把外边距分隔开，父元素和子元素的<strong>相邻上下外边距</strong>也会发生合并。</p>
-<h2 id="空元素"><a href="#空元素" class="headerlink" title="空元素"></a>空元素</h2><p>空元素，指的是没有子元素或者没有文字内容的元素，当一个空元素有上下外边距时，如果没有border或padding，则元素的上外边距与下外边距就会合并。如果空元素的外边距碰到另外一个元素的外边距，它们也会发生合并。</p>
+<h2 id="同级元素">同级元素</h2>
+<p>当一个元素出现在另一个元素上面的时候，第1个元素的<strong>下边距</strong>（margin-bottom）将会与第2个元素的<strong>上边距</strong>（margin-top）发生合并。</p>
+<h2 id="父子元素">父子元素</h2>
+<p>当一个元素包含在另外一个元素中时（呈父子关系），假如没有padding或border把外边距分隔开，父元素和子元素的<strong>相邻上下外边距</strong>也会发生合并。</p>
+<h2 id="空元素">空元素</h2>
+<p>空元素，指的是没有子元素或者没有文字内容的元素，当一个空元素有上下外边距时，如果没有border或padding，则元素的上外边距与下外边距就会合并。如果空元素的外边距碰到另外一个元素的外边距，它们也会发生合并。</p>
 <p>注意：</p>
 <ol>
 <li><strong>水平外边距，永远不会有叠加，水平外边距指的是margin-left和margin-right。</strong></li>

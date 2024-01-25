@@ -500,47 +500,58 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="使用Vite创建Vue项目："><a href="#使用Vite创建Vue项目：" class="headerlink" title="使用Vite创建Vue项目："></a>使用Vite创建Vue项目：</h3><ol>
-<li><p>在全局安装好node.js环境的前提下，切换到你想要创建项目的目录下，终端输入命令：</p>
+                <h3 id="使用Vite创建Vue项目：">使用Vite创建Vue项目：</h3>
+<ol>
+<li>
+<p>在全局安装好node.js环境的前提下，切换到你想要创建项目的目录下，终端输入命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> init vite@latest<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>Vite在安装项目时不会主动安装依赖，所以需要手动安装：</p>
+<li>
+<p>Vite在安装项目时不会主动安装依赖，所以需要手动安装：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>启动项目：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>
+<p>启动项目：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ol>
-<h3 id="Vite3-0更新内容："><a href="#Vite3-0更新内容：" class="headerlink" title="Vite3.0更新内容："></a>Vite3.0更新内容：</h3><p>2022年7月，Vite3.0版本正式发布，有以下更新内容：</p>
+<h3 id="Vite3-0更新内容：">Vite3.0更新内容：</h3>
+<p>2022年7月，Vite3.0版本正式发布，有以下更新内容：</p>
 <ol>
-<li><p><strong>CLI的更新</strong>：</p>
+<li>
+<p><strong>CLI的更新</strong>：</p>
 <p>在执行 vite 命令启动项目时，终端的界面和之前会有所不同，而更重要的是，为了避免 Vite 开发服务的端口和别的应用冲突，默认的端口号从之前的 3000 变成了 <strong>5173</strong>。</p>
 </li>
-<li><p><strong>开箱即用的 WebSocket 连接策略</strong>：</p>
+<li>
+<p><strong>开箱即用的 WebSocket 连接策略</strong>：</p>
 <p>Vite 2 中有存在一个痛点，即在存在代理的情况下(比如 Web IDE)需要我们手动配置 WebSocket 使 HMR 生效。目前 Vite 内置了一套更加完善的 WebSocket 连接策略，自动满足更多场景的 HMR 需求。</p>
 </li>
-<li><p><strong>服务冷启动性能提升</strong>：</p>
+<li>
+<p><strong>服务冷启动性能提升</strong>：</p>
 <p>Vite 3.0 在服务冷启动方面做了非常多的工作，来最大程度提升项目启动的速度。</p>
 <p>首先我们来盘点一下 Vite 2.x 阶段服务冷启动的一些问题。</p>
 <p>从 Vite 2.0 到 2.9 版本之前，Vite 会在服务启动之前进行依赖预构建，也就是使用 Esbuild 将项目中使用到的依赖扫描出来(Scan)，然后分别进行一次打包(Optimize)。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/08/19/shi-yong-vite-kuai-su-jian-li-yi-ge-vue-xiang-mu/c3cfb6a684fa99a5c3041509de0efe32d14316.png"></p>
+<p><img src="/medias/images/loading.gif" data-original="c3cfb6a684fa99a5c3041509de0efe32d14316.png" alt=""></p>
 <p>这样会造成两个问题：</p>
 <blockquote>
 <ul>
 <li>依赖预构建会阻塞 Dev Server 启动，但其实不阻塞的情况下，Dev Server 也可以正常启动。</li>
-<li>当某些 Vite 插件手动注入了 import 语句，比如调用babel-plugin-import 添加import Button from ‘antd&#x2F;lib&#x2F;button’，就会导致 Vite 的二次预构建，因为antd&#x2F;lib&#x2F;button 的引入代码由 Vite 插件注入，属于 Dev Server 运行时发现的依赖，冷启动阶段无法扫描到。</li>
+<li>当某些 Vite 插件手动注入了 import 语句，比如调用babel-plugin-import 添加import Button from ‘antd/lib/button’，就会导致 Vite 的二次预构建，因为antd/lib/button 的引入代码由 Vite 插件注入，属于 Dev Server 运行时发现的依赖，冷启动阶段无法扫描到。</li>
 </ul>
 </blockquote>
 <p>所谓的二次预构建包含两个步骤，一是需要将所有的依赖全量预构建，二是由于依赖更新，页面需要进行 reload，加载最新的依赖代码。这样会导致 Dev Server 性能明显下降，尤其是在新增依赖较多的场景下，很容易出现浏览器卡住的情况。因此二次预构建也是需要极力避免的。当时 vite-plugin-optimize-persist就是为了解决二次预构建带来的问题，通过持久化的方式记录 Dev Server 运行时扫描到的依赖，从而让首次预构建便可以感知到，避免二次预构建的发生。</p>
 <p>到了 2.9 版本，Vite 将预构建的逻辑做了一次整体的重构，最后的效果是下面这样的：</p>
 <ul>
-<li><p>Dev Server 启动后预构建(Optimize 阶段)在后台执行，也就是预构建不再阻塞 Dev Server 的启动，只需要等待 Scan 阶段完成，不过通常这个阶段的开销非常小。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/08/19/shi-yong-vite-kuai-su-jian-li-yi-ge-vue-xiang-mu/321e2ec83707448c7ff3914fd6007c66cec4bc.png"></p>
+<li>
+<p>Dev Server 启动后预构建(Optimize 阶段)在后台执行，也就是预构建不再阻塞 Dev Server 的启动，只需要等待 Scan 阶段完成，不过通常这个阶段的开销非常小。</p>
+<p><img src="/medias/images/loading.gif" data-original="321e2ec83707448c7ff3914fd6007c66cec4bc.png" alt=""></p>
 </li>
-<li><p>如果某些依赖是 Dev Server 运行时才发现的，那么 Vite 会尽可能地复用已有预构建产物，尽量不进行 page reload。</p>
+<li>
+<p>如果某些依赖是 Dev Server 运行时才发现的，那么 Vite 会尽可能地复用已有预构建产物，尽量不进行 page reload。</p>
 </li>
 </ul>
 <p>那问题就完全解决了吗？其实并不是，在某些场景下，Vite 仍然不可避免地需要二次预构建。如下面的这个例子：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/08/19/shi-yong-vite-kuai-su-jian-li-yi-ge-vue-xiang-mu/b8775ee25f447b0377145799ba9b0d9b29fbdd.png"></p>
+<p><img src="/medias/images/loading.gif" data-original="b8775ee25f447b0377145799ba9b0d9b29fbdd.png" alt=""></p>
 <p>A 和 B 都是项目的第三方依赖，它们也同时依赖 C。那么当 Vite 预构建 A 的时候，将会 A 和 C 一起进行打包。但 Vite 在运行时发现了依赖 B，而 A 和 B 需要共享 C 的代码，这样 C 的代码可能就会被抽离成一个公共的 chunk，因此之前 A 的预构建产物可能就发生变化了，那么此时 Vite 必须要强制刷新页面，让浏览器使用最新的预构建产物。这仍然是一个二次预构建(所有依赖再次打包 + page reload)的过程。</p>
 <p>总体而言，2.9 版本解决了预构建阻塞服务启动的问题，但并没有完全解决二次预构建的问题。</p>
 <p>但在 Vite 3.0，二次预构建的问题也得到了根本的解决。那 Vite 3.0 是如何做到的呢？</p>
@@ -553,43 +564,45 @@
 </ul>
 </blockquote>
 </li>
-<li><p><strong>import.meta.glob 语法更新</strong>：</p>
+<li>
+<p><strong>import.meta.glob 语法更新</strong>：</p>
 <ol>
-<li><p>Vite 3.0 中重写对 import.meta.glob 的实现进行了重写，支持了更加灵活的 glob 语法，增加了如下的一些特性：</p>
+<li>
+<p>Vite 3.0 中重写对 import.meta.glob 的实现进行了重写，支持了更加灵活的 glob 语法，增加了如下的一些特性：</p>
 <ul>
 <li>多种模式匹配：</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"./dir/*.js"</span><span class="token punctuation">,</span> <span class="token string">"./another/*.js"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <ul>
 <li>否定模式(!)：</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"./dir/*.js"</span><span class="token punctuation">,</span> <span class="token string">"!**/bar.js"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <ul>
 <li>命名导入，可以更好地做到 Tree Shaking：</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span><span class="token string">"./dir/*.js"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">"setup"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <ul>
 <li>自定义 query 参数：</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span><span class="token string">"./dir/*.js"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">query</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">custom</span><span class="token operator">:</span> <span class="token string">"data"</span> <span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <ul>
 <li>指定 eager 模式，替换掉原来import.meta.globEager：</li>
 </ul>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span><span class="token string">"./dir/*.js"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">eager</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span><span class="token string">"./dir/*.js"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">eager</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ol>
 </li>
-<li><p><strong>SSR 产物默认使用 ESM 格式</strong>：</p>
+<li>
+<p><strong>SSR 产物默认使用 ESM 格式</strong>：</p>
 <p>在当下的社区生态中，众多 SSR 框架已经在使用 ESM 格式作为默认的产物格式。Vite 3.0 也积极拥抱社区，支持 SSR 构建默认打包出 ESM 格式的产物。</p>
 </li>
-<li><p><strong>Relative Base 支持</strong>：</p>
+<li>
+<p><strong>Relative Base 支持</strong>：</p>
 <p>Vite 3.0 正式支持 Relative Base(即配置base: ‘’)，主要用于构建时无法确定 base 地址的场景。</p>
 </li>
-<li><p><strong>更细粒度的 base 配置</strong>：</p>
-<p>在某些场景下，我们需要将不同的资源部署到不同的 CDN 上，比如将图片部署到单独的 CDN，和 JS&#x2F;CSS 的部署服务区分开来。但 2.x 的版本仅支持统一的部署域名，即base 配置。在 3.0 中，你可以通过 renderBuiltUrl 进行更细粒度的配置：</p>
+<li>
+<p><strong>更细粒度的 base 配置</strong>：</p>
+<p>在某些场景下，我们需要将不同的资源部署到不同的 CDN 上，比如将图片部署到单独的 CDN，和 JS/CSS 的部署服务区分开来。但 2.x 的版本仅支持统一的部署域名，即base 配置。在 3.0 中，你可以通过 renderBuiltUrl 进行更细粒度的配置：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
   <span class="token literal-property property">experimental</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
     <span class="token literal-property property">renderBuiltUrl</span><span class="token operator">:</span> <span class="token punctuation">(</span>filename<span class="token operator">:</span> string<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">hostType</span><span class="token operator">:</span> <span class="token string">'js'</span> <span class="token operator">|</span> <span class="token string">'css'</span> <span class="token operator">|</span> <span class="token string">'html'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
@@ -602,12 +615,14 @@
   <span class="token punctuation">&#125;</span>
   <span class="token comment">//目前该配置项还不稳定 ，可能会在之后的 minor 版本修改。具体文档见 https://vitejs.dev/guide/build.html#advanced-base-options</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>Esbuild 预构建用于生产环境</strong>：</p>
-<p>这应该是 Vite 架构上非常大的一个改动: 将原来仅仅用于开发阶段的依赖预构建功能应用在生产环境。在 Vite 2.x 中，开发阶段使用 Esbuild 来打包依赖，而在生产环境使用 Rollup 进行打包，用 @rollupjs&#x2F;plugin-commonjs 来处理 cjs 的依赖，这样做会导致依赖处理的不一致问题，造成一些生产构建中的 bug。</p>
+<li>
+<p><strong>Esbuild 预构建用于生产环境</strong>：</p>
+<p>这应该是 Vite 架构上非常大的一个改动: 将原来仅仅用于开发阶段的依赖预构建功能应用在生产环境。在 Vite 2.x 中，开发阶段使用 Esbuild 来打包依赖，而在生产环境使用 Rollup 进行打包，用 @rollupjs/plugin-commonjs 来处理 cjs 的依赖，这样做会导致依赖处理的不一致问题，造成一些生产构建中的 bug。</p>
 <p>但 Vite 3.0 中支持通过配置将 Esbulid 预构建同时用于开发环境和生产环境，仅添加optimizeDeps.disabled: false 的配置即可。不过这个改动确实比较大，Vite 团队不打算将此作为 v3 的正式更新内容，而是一个实验性质的功能，不会默认开启。</p>
 <p>顺便提一句，Rollup 将在接下来的几个月发布 v3 的大版本，要知道，Rollup 2.0 发布至今已经过去 2 年多的时间了，无论是 Rollup 还是 Vite 来讲，这都是一次非常重大的变更。由于 Vite 的架构非常依赖 Rollup，在 Rollup 发布 v3 之后，Vite 也将跟随着发布 Vite 的第 4 个 major 版本。所以，Vite 4.0 的到来也不远啦：）</p>
 </li>
-<li><p><strong>仓库内部的变化</strong>：</p>
+<li>
+<p><strong>仓库内部的变化</strong>：</p>
 <p>除了本身功能上的演进，Vite 的仓库本身也产生了不少的变化，从中我们也能了解到社区的一些动向:</p>
 <ul>
 <li>不再支持 Nodejs 12，需要 Node.js 14.18+ 的版本。</li>
@@ -616,7 +631,7 @@
 <li>包管理器 pnpm 迁移至 v7。</li>
 <li>不管是Vite 本身的包还是 E2E 中测试的项目，都在 package.json 中声明type: “module”，即 Pure ESM 包，对外提供 ESM 格式的产物，将社区 Pure ESM 的趋势又推动了一步。</li>
 <li>官方所有的 Vite 插件都采用unbuild(新一代库构建工具) 进行构建，pluin-vue-jsx 和plugin-legacy 均迁移到了 TS 上。</li>
-<li>包体积优化。3.0 进一步优化 Vite 本身的产物和 node_modules 体积，将terser 和node-forge 的依赖移除，让用户进行按需安装(node-forge 的功能是实现 https 证书生成，可用@vitejs&#x2F;plugin-basic-ssl 插件替代)，效果如下：</li>
+<li>包体积优化。3.0 进一步优化 Vite 本身的产物和 node_modules 体积，将terser 和node-forge 的依赖移除，让用户进行按需安装(node-forge 的功能是实现 https 证书生成，可用@vitejs/plugin-basic-ssl 插件替代)，效果如下：</li>
 </ul>
 <table>
 <thead>
@@ -626,7 +641,8 @@
 <th>Install Size</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Vite 2.9.14</td>
 <td>4.38MB</td>
 <td>19.1MB</td>
@@ -641,7 +657,8 @@
 <td>-30%</td>
 <td>-7%</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>不得不说在自身包体积的优化方面， Vite 对于还是做的很细致的，这也是很多库开发者忽视的一点，有时候加个插件就得安装动辄上百 MB 的依赖，导致项目的 node_modules 最后变得非常臃肿，此时不妨学习一下 Vite 是怎么优化自身体积的。</p>
 </li>
 </ol>

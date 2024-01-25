@@ -6,8 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="《深度学习图解》基本概念与前向传播, QT-7274">
-    <meta name="description" content="基本概念什么是深度学习？深度学习是机器学习方法的一个子集。深度学习是机器学习的一个子集，机器学习是一个专门研究和开发能够学习的机器的领域(有时候最终目标是获得通用人工智能)。
-深度学习在业内，深度学习被用于解决多个领域的实际任务，如计算机视">
+    <meta name="description" content="基本概念
+什么是深度学习？
+深度学习是机器学习方法的一个子集。深度学习是机器学习的一个子集，机器学习是一个专门研究和开发能够学习的机器的领域(有时候最终目标是获得通用人工智能)。
+深度学习在业内，深度学习被用于解决多个领域的实际任务，如计算">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -501,12 +503,16 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="什么是深度学习？"><a href="#什么是深度学习？" class="headerlink" title="什么是深度学习？"></a>什么是深度学习？</h3><p><strong>深度学习是机器学习方法的一个子集</strong>。深度学习是机器学习的一个子集，机器学习是一个专门研究和开发能够学习的机器的领域(有时候最终目标是获得通用人工智能)。</p>
+                <h2 id="基本概念">基本概念</h2>
+<h3 id="什么是深度学习？">什么是深度学习？</h3>
+<p><strong>深度学习是机器学习方法的一个子集</strong>。深度学习是机器学习的一个子集，机器学习是一个专门研究和开发能够学习的机器的领域(有时候最终目标是获得通用人工智能)。</p>
 <p>深度学习在业内，深度学习被用于解决多个领域的实际任务，如计算机视觉(图像)、自然语言处理(文本)和自动语音识别(音频)。简而言之，深度学习是机器学习工具箱中众多方法的子集。</p>
-<h3 id="什么是机器学习？"><a href="#什么是机器学习？" class="headerlink" title="什么是机器学习？"></a>什么是机器学习？</h3><p>简而言之，机器观察某项任务中存在的模式，并试图以某种直接或间接的方式模仿它：</p>
+<h3 id="什么是机器学习？">什么是机器学习？</h3>
+<p>简而言之，机器观察某项任务中存在的模式，并试图以某种直接或间接的方式模仿它：</p>
 <p>机器学习的主要类型：</p>
 <ul>
-<li>有监督的：可以直接模仿两个数据集之间的模式。它总是尝试获取一个输入数据集并将其转换为对应的输出数据集：<ul>
+<li>有监督的：可以直接模仿两个数据集之间的模式。它总是尝试获取一个输入数据集并将其转换为对应的输出数据集：
+<ul>
 <li>使用图像的像素来检测猫存在与否</li>
 <li>使用你喜欢的电影来预测你可能喜欢的电影</li>
 <li>使用人们所说的话来预测他们是高兴还是难过</li>
@@ -515,25 +521,31 @@
 <li>使用新闻数据预测明天的股价</li>
 </ul>
 </li>
-<li>无监督的：它总是尝试获取一个输入数据集并将其转换为对应的输出数据集，但是得到的数据集不是已知的。你只需要告诉一个无监督算法“在这些数据中找到某种模式，然后告诉我它是什么。”<ul>
+<li>无监督的：它总是尝试获取一个输入数据集并将其转换为对应的输出数据集，但是得到的数据集不是已知的。你只需要告诉一个无监督算法“在这些数据中找到某种模式，然后告诉我它是什么。”
+<ul>
 <li>将数据集进行聚类：用数字对一系列数据点进行相应的标记，因为算法不会告诉你每个类别具体是什么含义。</li>
 </ul>
 </li>
 </ul>
 <p>机器学习也可分为参数学习和非参数学习：<strong>试错学习</strong>与<strong>计数和概率</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231126205145425.png" alt="image-20231126205145425"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231126205145425.png" alt="image-20231126205145425"></p>
 <p>如上图，实际上存在四种不同类型的算法，关于监督特性（有监督的或无监督的）的部分主要关注被学习的模式的类型，而参数特性（参数的或非参数的）则主要关注存储学习参数的方式，即关注学习的方法。</p>
 <ul>
 <li>参数学习：特征是具有固定数量的参数；倾向于使用试错法。</li>
 <li>非参数学习：参数数量是无限的（由数据决定）；倾向于使用计数法。</li>
 </ul>
-<h4 id="参数学习"><a href="#参数学习" class="headerlink" title="参数学习"></a>参数学习</h4><h5 id="监督参数学习"><a href="#监督参数学习" class="headerlink" title="监督参数学习"></a>监督参数学习</h5><p>使用旋钮进行试错学习，即这项机器学习是通过把旋钮转到不同角度来完成的。</p>
+<h4 id="参数学习">参数学习</h4>
+<h5 id="监督参数学习">监督参数学习</h5>
+<p>使用旋钮进行试错学习，即这项机器学习是通过把旋钮转到不同角度来完成的。</p>
 <ol>
-<li><p>例如想预测(波士顿)红袜队赢得世界系列赛的概率，那么这个模型首先需要—些已知数据(如体育方面的统计数据，包括球队的输赢记录或每个球员脚趾的平均数量)并基于此做出预测(如98%胜率)。</p>
+<li>
+<p>例如想预测(波士顿)红袜队赢得世界系列赛的概率，那么这个模型首先需要—些已知数据(如体育方面的统计数据，包括球队的输赢记录或每个球员脚趾的平均数量)并基于此做出预测(如98%胜率)。</p>
 </li>
-<li><p>接下来，模型将观察红袜队是否真的赢了。当知道红袜队是否获胜后, 机器学习算法会更新这些旋钮，以便下次看到同样或类似的输入数据时，做出更准确的预测。</p>
+<li>
+<p>接下来，模型将观察红袜队是否真的赢了。当知道红袜队是否获胜后, 机器学习算法会更新这些旋钮，以便下次看到同样或类似的输入数据时，做出更准确的预测。</p>
 </li>
-<li><p>如果球队的输贏记录是一个很好的预测依据，也许它会调高“输赢记录”对应的旋钮。相反，如果球员的平均脚趾数量不是一个好的预测依据，它可能会调低“平均脚趾数”对应的旋钮。这就是参数模型的学习方法!</p>
+<li>
+<p>如果球队的输贏记录是一个很好的预测依据，也许它会调高“输赢记录”对应的旋钮。相反，如果球员的平均脚趾数量不是一个好的预测依据，它可能会调低“平均脚趾数”对应的旋钮。这就是参数模型的学习方法!</p>
 <blockquote>
 <p>注意：</p>
 <ol>
@@ -545,13 +557,16 @@
 </ol>
 <p>下面，我们把监督参数学习分解为三个步骤：</p>
 <ol>
-<li><p><strong>预测</strong></p>
+<li>
+<p><strong>预测</strong></p>
 <p>收集体育统计数据，把它们传给机器，并对红袜队获胜的可能性做出预测。</p>
 </li>
-<li><p><strong>与真值进行比较</strong></p>
+<li>
+<p><strong>与真值进行比较</strong></p>
 <p>将预测结果（98%）与你关心的结果（红袜队是否获胜）进行比较。即如果模型预测结果为0，那么它就能完美地预测红袜队即将到来的失败（目前的预测值是98%）。</p>
 </li>
-<li><p><strong>学习模式</strong></p>
+<li>
+<p><strong>学习模式</strong></p>
 <p>通过研究模型生成的结果错了多少（98%）以及预测时的输入数据是什么来调整旋钮。模型学习算法会试着转动旋钮，以在给定的输入数据下做出更准确的预测。</p>
 <p>理论上，下次这个模型看到相同的输入数据时，预测的值将低于98%。</p>
 <blockquote>
@@ -559,29 +574,36 @@
 </blockquote>
 </li>
 </ol>
-<h5 id="无监督参数学习"><a href="#无监督参数学习" class="headerlink" title="无监督参数学习"></a>无监督参数学习</h5><p>无监督参数学习用的方法非常类似。无监督学习是对数据进行分组，那么无监督参数学习就是使用旋钮对数据进行分组。</p>
+<h5 id="无监督参数学习">无监督参数学习</h5>
+<p>无监督参数学习用的方法非常类似。无监督学习是对数据进行分组，那么无监督参数学习就是使用旋钮对数据进行分组。</p>
 <p>但这种情况下，它通常为每个类别都设置了几个旋钮，每个旋钮都反映了输入数据到那个特定类别的相似度(这是笼统的描述，也会存在一定例外和细微差别)。让我们看一个示例，假设你希望将下列数据分成三组：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231126214512846.png" alt="image-20231126214512846"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231126214512846.png" alt="image-20231126214512846"></p>
 <p>根据这一数据集，我已经确定了三个类别，也希望参数模型能够找到它们。借助于不同的字体颜色和底色，不妨用组1、组2和组3来标识它们。现在，让我们将第一个数据点传到训练好的无监督模型中，如下所示。注意，最大概率会映射到组1。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231126214850899.png" alt="image-20231126214850899"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231126214850899.png" alt="image-20231126214850899"></p>
 <p>每个组的模型都尝试将输入数据转换为 0 到 1 之间的数字，告诉我们输入数据属于该组的概率。从更高抽象层次看，它们都致力于调整参数以将输入数据转换为标签。</p>
-<h4 id="非参数学习"><a href="#非参数学习" class="headerlink" title="非参数学习"></a>非参数学习</h4><p><strong>即基于计数的方法</strong>。</p>
+<h4 id="非参数学习">非参数学习</h4>
+<p><strong>即基于计数的方法</strong>。</p>
 <p>非参数学习是一类参数个数以数据为基础(而不是预先定义好)的算法。这通常适用于以某种方式计数作为输入的方法，因为非参数学习能够根据数据中存在的具体项目数量相应增加参数的数量。</p>
-<p>例如，在监督学习中，一个非参数模型会记录某一种特定颜色的街灯导致汽车“行驶”的次数。只需要在计算数个样本之<br>后，这个模型就能预测出中间的灯光总是导致汽车行驶(100%的概率)，而右边的灯光只是有时导致汽车行驶(比如说50%概率)。</p>
+<p>例如，在监督学习中，一个非参数模型会记录某一种特定颜色的街灯导致汽车“行驶”的次数。只需要在计算数个样本之<br>
+后，这个模型就能预测出中间的灯光总是导致汽车行驶(100%的概率)，而右边的灯光只是有时导致汽车行驶(比如说50%概率)。</p>
 <blockquote>
 <p>注意：这个模型将有三个参数:表示每种颜色的灯亮的同时，汽车行驶的次数(可能除以总观察次数)的三个计数。如果有5个灯，就会有5项计数(5个参数)。</p>
 </blockquote>
 <p>这个简单模型被归类为非参数模型的原因是，<strong>模型参数的数量会根据数据(在本例中，是灯的数量)而变化</strong>。这与从一组设定好的参数开始学习的参数模型恰恰相反，更重要的是，参数模型中的参数数量可多可少，纯粹由训练模型的科学家自由裁量（与数据无关）。</p>
 <p>其实大多数参数模型仍然需要基于数据中的类别数的某种输入。即使参数模型也会受到数据中的类别数的影响，即使它的参数数量并非显式地由计数模式确定。</p>
-<h2 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h2><h3 id="什么是预测"><a href="#什么是预测" class="headerlink" title="什么是预测"></a>什么是预测</h3><p>我们将深入研究的第一步：预测。</p>
+<h2 id="前向传播">前向传播</h2>
+<h3 id="什么是预测">什么是预测</h3>
+<p>我们将深入研究的第一步：预测。</p>
 <ol>
-<li><p>数据</p>
+<li>
+<p>数据</p>
 <p>一次处理的数据点的数量对网络的形态有很大影响。如何确定一次处理的数据点的数量？答案取决于你是否认为神经网络可以通过你提供的这批数据变得更精确。</p>
 <blockquote>
 <p>注意：神经网络总是需要你提供足够的信息：足够的信息指的是人类为了做出相同的预测可能需要的信息量。</p>
 </blockquote>
 </li>
-<li><p>本例中这个拥有一项权重的网络一次接受一个数据点（棒球队球员脚趾数目的平均值），然后输出一个预测结果（它是否认为球队会赢）。</p>
+<li>
+<p>本例中这个拥有一项权重的网络一次接受一个数据点（棒球队球员脚趾数目的平均值），然后输出一个预测结果（它是否认为球队会赢）。</p>
 </li>
 </ol>
 <p>代码示例：</p>
@@ -598,18 +620,18 @@ number_of_toes <span class="token operator">=</span> <span class="token punctuat
 <span class="token builtin">input</span> <span class="token operator">=</span> number_of_toes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
 pred <span class="token operator">=</span> neural_network<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span>weight<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>注意：</p>
 <ol>
 <li>本例中，信息是比赛前所统计的棒球队球员脚趾的平均数量。神经网络除了当前的实例，不能记住任何信息。之后将会学习到如何通过同时提供多个输入，给神经网络一个“短期记忆”。</li>
 <li>神经网络中的权重值的理解，可以将它作为网络的输入和预测之间敏感度的度量。如果权重非常高，那么即使最小的输入也可以对预测结果产生非常大的影响！反之亦然。</li>
 <li>神经网络不仅可以预测正数，还可以预测负数，甚至将负数作为输入。也许你想预测人们今天穿外套的概率。如果温度是-10℃，那么一个负的权重（-8.9）将会预测出人们穿外套是高概率事件。</li>
 </ol>
-<h3 id="使用多个输入进行预测"><a href="#使用多个输入进行预测" class="headerlink" title="使用多个输入进行预测"></a>使用多个输入进行预测</h3><p>如果能一次性给网络提供更多的信息，而不仅仅是每个球员的平均脚趾数，结果会是怎样？理论上，该网络应该能够做出更准确的预测。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127122046825.png" alt="image-20231127122046825"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127122054496.png" alt="image-20231127122054496"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127122224333.png" alt="image-20231127122224333"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127122231198.png" alt="image-20231127122231198"></p>
+<h3 id="使用多个输入进行预测">使用多个输入进行预测</h3>
+<p>如果能一次性给网络提供更多的信息，而不仅仅是每个球员的平均脚趾数，结果会是怎样？理论上，该网络应该能够做出更准确的预测。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127122046825.png" alt="image-20231127122046825"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127122054496.png" alt="image-20231127122054496"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127122224333.png" alt="image-20231127122224333"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127122231198.png" alt="image-20231127122231198"></p>
 <p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">w_sum</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">assert</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">len</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 确保 a 和 b 的长度相等</span>
@@ -644,7 +666,6 @@ nfans <span class="token operator">=</span> <span class="token punctuation">[</s
 pred <span class="token operator">=</span> neural_network<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span>weights<span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这个神经网络做了什么？</p>
 <blockquote>
 <p><strong>它将三个输入乘以三项权重，并对它们求和，得到加权和。</strong></p>
@@ -656,9 +677,10 @@ pred <span class="token operator">=</span> neural_network<span class="token punc
 <li>事实证明，当想要涉及多组数字的运算时，向量是特别有用的。</li>
 </ul>
 </blockquote>
-<h4 id="如何粗略理解权重含义？"><a href="#如何粗略理解权重含义？" class="headerlink" title="如何粗略理解权重含义？"></a>如何粗略理解权重含义？</h4><p>假设在执行加权和，而这些 if 语句后面跟着的 then 可以抽象地理解为 then give high score（然后就可以获得更高得分）：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127124339798.png" alt="image-20231127124339798"></p>
-<p>注意：最后一行中，weights[0]&#x3D;0.5 表示对应的 input[0] 必须更大，以补偿较小的权重。</p>
+<h4 id="如何粗略理解权重含义？">如何粗略理解权重含义？</h4>
+<p>假设在执行加权和，而这些 if 语句后面跟着的 then 可以抽象地理解为 then give high score（然后就可以获得更高得分）：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127124339798.png" alt="image-20231127124339798"></p>
+<p>注意：最后一行中，weights[0]=0.5 表示对应的 input[0] 必须更大，以补偿较小的权重。</p>
 <p>那么神经网络做出预测，这意味着什么？<strong>意味着网络根据输入和权重的相似程度给出相应的分数。</strong></p>
 <p>上例中：</p>
 <ul>
@@ -666,7 +688,8 @@ pred <span class="token operator">=</span> neural_network<span class="token punc
 <li>而影响最大的输入数据为 wlrec，因为它的权重为0.2；</li>
 <li>但是产生较高得分的主导因素是队员脚趾的平均数量（ntoes），不是因为它的权重最大，而是因为这项输入与权重的乘积是目前为止最高的。</li>
 </ul>
-<h4 id="Numpy操作"><a href="#Numpy操作" class="headerlink" title="Numpy操作"></a>Numpy操作</h4><p>对于创建向量和执行常见函数（如点积运算）来说，它的代码效率很高，比使用for循环高得多。</p>
+<h4 id="Numpy操作">Numpy操作</h4>
+<p>对于创建向量和执行常见函数（如点积运算）来说，它的代码效率很高，比使用for循环高得多。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 weights <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
@@ -685,20 +708,22 @@ nfans <span class="token operator">=</span> np<span class="token punctuation">.<
 pred <span class="token operator">=</span> neural_network<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span>weights<span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="使用多个输入和输出进行预测"><a href="#使用多个输入和输出进行预测" class="headerlink" title="使用多个输入和输出进行预测"></a>使用多个输入和输出进行预测</h3><p>基于给定的多个输入，神经网络可以对多个输出进行预测。</p>
+<h3 id="使用多个输入和输出进行预测">使用多个输入和输出进行预测</h3>
+<p>基于给定的多个输入，神经网络可以对多个输出进行预测。</p>
 <ol>
-<li><p>它对输入数据执行三次独立的加权和操作，产生三个预测结果。</p>
+<li>
+<p>它对输入数据执行三次独立的加权和操作，产生三个预测结果。</p>
 <p>将这个神经网络想象成三个独立的点积操作，针对输入分别做三次独立的求加权和。每个输出节点都会针对输入节点进行自己的加权和操作，并做出相应预测。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127165132371.png" alt="image-20231127165132371"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127165217917.png" alt="image-20231127165217917"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127165132371.png" alt="image-20231127165132371"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127165217917.png" alt="image-20231127165217917"></p>
 </li>
-<li><p>其中和之前不相同的是该函数对每一行权重进行遍历（每一行都是向量），并使用加权和函数进行预测。实际上它连续执行了三个加权和，然后将结果存储在一个向量中：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127165428152.png" alt="image-20231127165428152"></p>
+<li>
+<p>其中和之前不相同的是该函数对每一行权重进行遍历（每一行都是向量），并使用加权和函数进行预测。实际上它连续执行了三个加权和，然后将结果存储在一个向量中：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127165428152.png" alt="image-20231127165428152"></p>
 </li>
 </ol>
 <blockquote>
-<p>注意：更正式的定义是将权重存储&#x2F;处理为列向量，而不是行向量。</p>
+<p>注意：更正式的定义是将权重存储/处理为列向量，而不是行向量。</p>
 </blockquote>
 <p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">            <span class="token comment">#toes %win #fans</span>
@@ -745,10 +770,10 @@ nfans <span class="token operator">=</span> <span class="token punctuation">[</s
 pred <span class="token operator">=</span> neural_network<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span>weights<span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="与预测结果进一步预测"><a href="#与预测结果进一步预测" class="headerlink" title="与预测结果进一步预测"></a>与预测结果进一步预测</h3><p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127170708127.png" alt="image-20231127170708127"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127170716685.png" alt="image-20231127170716685"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/26/shen-du-xue-xi-tu-jie-ji-ben-gai-nian-yu-qian-xiang-chuan-bo/image-20231127170909239.png" alt="image-20231127170909239"></p>
+<h3 id="与预测结果进一步预测">与预测结果进一步预测</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127170708127.png" alt="image-20231127170708127"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127170716685.png" alt="image-20231127170716685"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231127170909239.png" alt="image-20231127170909239"></p>
 <p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">            <span class="token comment">#toes %win #fans</span>
 ih_wgt <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">#hid[0]</span>
@@ -778,8 +803,8 @@ nfans <span class="token operator">=</span> <span class="token punctuation">[</s
 pred <span class="token operator">=</span> neural_network<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span>weights<span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="Numpy操作-1"><a href="#Numpy操作-1" class="headerlink" title="Numpy操作"></a>Numpy操作</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<h4 id="Numpy操作-2">Numpy操作</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
 <span class="token comment">#toes %win #fans # 表示输入层到隐藏层的权重矩阵</span>
 ih_wgt <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token comment"># 矩阵的行表示隐藏层的神经元，列表示输入层的特征</span>
@@ -812,8 +837,8 @@ nfans <span class="token operator">=</span> np<span class="token punctuation">.<
 
 pred <span class="token operator">=</span> neural_network<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">,</span>weights<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>pred<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>为了预测，神经网络对输入重复执行加权求和操作。</strong></p>
+<h2 id="总结">总结</h2>
+<p><strong>为了预测，神经网络对输入重复执行加权求和操作。</strong></p>
 
                 
             </div>

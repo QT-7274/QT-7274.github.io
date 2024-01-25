@@ -6,8 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="力扣常用算法汇总, QT-7274">
-    <meta name="description" content="力扣1207  独一无二的出现次数前端题目判断一个字符串中出现次数最多的字符，并统计次数。例如var s = &amp;#39;aaabbbcccaaabbbdaaabbbbbbbbb&amp;#39;
-思路用 Map存储字符和对应的次数，首次出现次数为 ">
+    <meta name="description" content="力扣
+1207  独一无二的出现次数
+前端题目
+判断一个字符串中出现次数最多的字符，并统计次数。例如var s = &#39;aaabbbcccaaabbbdaaabbbbbbbbb&#39;
+思路
+用 Map存储字符和对应的次数，首次出现次数为 0 + ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -471,14 +475,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    12.5k
+                    12.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    52 分
+                    51 分
                 </div>
                 
 
@@ -501,8 +505,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="力扣"><a href="#力扣" class="headerlink" title="力扣"></a>力扣</h2><h3 id="1207-独一无二的出现次数"><a href="#1207-独一无二的出现次数" class="headerlink" title="1207  独一无二的出现次数"></a>1207  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-number-of-occurrences/description/">独一无二的出现次数</a></h3><h4 id="前端题目"><a href="#前端题目" class="headerlink" title="前端题目"></a>前端题目</h4><p>判断一个字符串中出现次数最多的字符，并统计次数。例如<code>var s = &#39;aaabbbcccaaabbbdaaabbbbbbbbb&#39;</code></p>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>用 <code>Map</code>存储字符和对应的次数，首次出现次数为 0 + 1，后续出现则累加，最后找出最大值：</p>
+                <h2 id="力扣">力扣</h2>
+<h3 id="1207-独一无二的出现次数">1207  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-number-of-occurrences/description/">独一无二的出现次数</a></h3>
+<h4 id="前端题目">前端题目</h4>
+<p>判断一个字符串中出现次数最多的字符，并统计次数。例如<code>var s = 'aaabbbcccaaabbbdaaabbbbbbbbb'</code></p>
+<h5 id="思路">思路</h5>
+<p>用 <code>Map</code>存储字符和对应的次数，首次出现次数为 0 + 1，后续出现则累加，最后找出最大值：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token parameter">s</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">let</span> maxValue <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> maxString <span class="token operator">=</span> <span class="token string">''</span>
@@ -528,12 +536,14 @@
 <span class="token punctuation">&#125;</span>
 
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token string">'aaadsadasxxxxxxxvbbbbsadsaxxxxx'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="力扣题目"><a href="#力扣题目" class="headerlink" title="力扣题目"></a>力扣题目</h4><p>给你一个整数数组 <code>arr</code>，请你帮忙统计数组中每个数的出现次数。</p>
+<h4 id="力扣题目">力扣题目</h4>
+<p>给你一个整数数组 <code>arr</code>，请你帮忙统计数组中每个数的出现次数。</p>
 <p>如果每个数的出现次数都是独一无二的，就返回 <code>true</code>；否则返回 <code>false</code>。</p>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>同上，技巧在于<strong>如何判断出现次数是独一无二的</strong>（这次不是找最大值）—— 使用 <code>Set</code> 去重：</p>
+<h5 id="思路-2">思路</h5>
+<p>同上，技巧在于<strong>如何判断出现次数是独一无二的</strong>（这次不是找最大值）—— 使用 <code>Set</code> 去重：</p>
 <ul>
-<li><p>第一次我忘了 <code>Set</code> 可以直接使用<code>.size</code>获取长度，我将其转换为数组之后获取了数组的长度；同时我还使用了 <code>Array.from</code>又遍历了一次 <code>Map</code>，只为了获取 <code>Map</code> 的值，这样代码显得有些冗余：</p>
+<li>
+<p>第一次我忘了 <code>Set</code> 可以直接使用<code>.size</code>获取长度，我将其转换为数组之后获取了数组的长度；同时我还使用了 <code>Array.from</code>又遍历了一次 <code>Map</code>，只为了获取 <code>Map</code> 的值，这样代码显得有些冗余：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">uniqueOccurrences</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">let</span> frequencyMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> item <span class="token keyword">of</span> arr<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -544,7 +554,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
      <span class="token keyword">return</span> value_array<span class="token punctuation">.</span>length <span class="token operator">===</span> set_array<span class="token punctuation">.</span>length
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>第二次我提前准备了一个数组，并通过解构赋值将 <code>Map</code> 的值添加进去，代码简洁多了：</p>
+<li>
+<p>第二次我提前准备了一个数组，并通过解构赋值将 <code>Map</code> 的值添加进去，代码简洁多了：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var uniqueOccurrences &#x3D; function(arr) &#123;
     let frequencyMap &#x3D; new Map()
     let valueArray &#x3D; []
@@ -556,13 +567,16 @@ console<span class="token punctuation">.</span><span class="token function">log<
     return valueArray.length &#x3D;&#x3D;&#x3D; occurrenceSet.size
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>也可以用对象完成：</p>
+<li>
+<p>也可以用对象完成：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let check &#x3D; &#123;&#125;;
 for (let item of arr) check[item] !&#x3D; null ? check[item]++ : check[item] &#x3D; 1;
-return Object.values(check).length &#x3D;&#x3D;&#x3D; new Set(Object.values(check)).size<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+return Object.values(check).length &#x3D;&#x3D;&#x3D; new Set(Object.values(check)).size<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/li-kou-chang-yong-suan-fa-hui-zong/image-20230916001252644.png" alt="image-20230916001252644"></p>
-<h2 id="滑动窗口相关题目"><a href="#滑动窗口相关题目" class="headerlink" title="滑动窗口相关题目"></a>滑动窗口相关题目</h2><p><strong>滑动窗口算法的代码框架</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20230916001252644.png" alt="image-20230916001252644"></p>
+<h2 id="滑动窗口相关题目">滑动窗口相关题目</h2>
+<p><strong>滑动窗口算法的代码框架</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 注意：javascript 代码由 chatGPT🤖 根据我的 cpp 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
 &#x2F;&#x2F; 本代码还未经过力扣测试，仅供参考，如有疑惑，可以参照我写的 cpp 代码对比查看。
 
@@ -598,21 +612,23 @@ var slidingWindow &#x3D; function(s) &#123;
         &#125;
     &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>其中两处 <code>...</code> 表示的更新窗口数据的地方，到时候你直接往里面填就行了</strong>。</p>
 <p>而且，这两个 <code>...</code> 处的操作分别是扩大和缩小窗口的更新操作，等会你会发现它们操作是完全对称的。</p>
-<p>另外，虽然滑动窗口代码框架中有一个嵌套的 while 循环，但算法的时间复杂度依然是 <code>O(N)</code>，其中 <code>N</code> 是输入字符串&#x2F;数组的长度。</p>
-<p>为什么呢？简单说，指针 <code>left, right</code> 不会回退（它们的值只增不减），所以字符串&#x2F;数组中的每个元素都只会进入窗口一次，然后被移出窗口一次，不会说有某些元素多次进入和离开窗口，所以算法的时间复杂度就和字符串&#x2F;数组的长度成正比。后文 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/di-ling-zh-bfe1b/suan-fa-sh-05f25/">算法时空复杂度分析实用指南</a> 有具体讲时间复杂度的估算，这里就不展开了。</p>
-<h3 id="模板套路"><a href="#模板套路" class="headerlink" title="模板套路"></a>模板套路</h3><ol>
+<p>另外，虽然滑动窗口代码框架中有一个嵌套的 while 循环，但算法的时间复杂度依然是 <code>O(N)</code>，其中 <code>N</code> 是输入字符串/数组的长度。</p>
+<p>为什么呢？简单说，指针 <code>left, right</code> 不会回退（它们的值只增不减），所以字符串/数组中的每个元素都只会进入窗口一次，然后被移出窗口一次，不会说有某些元素多次进入和离开窗口，所以算法的时间复杂度就和字符串/数组的长度成正比。后文 <a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/di-ling-zh-bfe1b/suan-fa-sh-05f25/">算法时空复杂度分析实用指南</a> 有具体讲时间复杂度的估算，这里就不展开了。</p>
+<h3 id="模板套路">模板套路</h3>
+<ol>
 <li><strong>什么时候应该移动 <code>right</code> 扩大窗口？窗口加入字符时，应该更新哪些数据？</strong></li>
 <li><strong>什么时候窗口应该暂停扩大，开始移动 <code>left</code> 缩小窗口？从窗口移出字符时，应该更新哪些数据？</strong></li>
 <li><strong>我们要的结果应该在扩大窗口时还是缩小窗口时进行更新？</strong></li>
 </ol>
-<h3 id="76-最小覆盖子串"><a href="#76-最小覆盖子串" class="headerlink" title="76  最小覆盖子串"></a>76  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/description/">最小覆盖子串</a></h3><p>给你一个字符串 <code>s</code> 、一个字符串 <code>t</code> 。返回 <code>s</code> 中涵盖 <code>t</code> 所有字符的最小子串。如果 <code>s</code> 中不存在涵盖 <code>t</code> 所有字符的子串，则返回空字符串 <code>&quot;&quot;</code> 。</p>
+<h3 id="76-最小覆盖子串">76  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/description/">最小覆盖子串</a></h3>
+<p>给你一个字符串 <code>s</code> 、一个字符串 <code>t</code> 。返回 <code>s</code> 中涵盖 <code>t</code> 所有字符的最小子串。如果 <code>s</code> 中不存在涵盖 <code>t</code> 所有字符的子串，则返回空字符串 <code>&quot;&quot;</code> 。</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wtcaE1/">LCR 016. 无重复字符的最长子串</a></p>
 </blockquote>
-<h4 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h4><ol>
+<h4 id="思路-3">思路</h4>
+<ol>
 <li>我们在字符串 <code>S</code> 中使用双指针中的左右指针技巧，初始化 <code>left = right = 0</code>，把索引<strong>左闭右开</strong>区间 <code>[left, right)</code> 称为一个「窗口」。</li>
 <li>我们先不断地增加 <code>right</code> 指针扩大窗口 <code>[left, right)</code>，<strong>直到窗口中的字符串符合要求（包含了 <code>T</code> 中的所有字符）</strong>。</li>
 <li>此时，我们停止增加 <code>right</code>，转而不断增加 <code>left</code> 指针缩小窗口 <code>[left, right)</code>，<strong>直到窗口中的字符串不再符合要求</strong>（不包含 <code>T</code> 中的所有字符了）。同时，每次增加 <code>left</code>，我们都要更新一轮结果。</li>
@@ -674,13 +690,14 @@ var slidingWindow &#x3D; function(s) &#123;
     &#x2F;&#x2F; 返回最小覆盖子串
     return len &#x3D;&#x3D;&#x3D; Infinity ? &#39;&#39; : s.substring(start,len + start);
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="567-字符串的排列"><a href="#567-字符串的排列" class="headerlink" title="567  字符串的排列"></a>567  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutation-in-string/description/">字符串的排列</a></h3><p>给你两个字符串 <code>s1</code> 和 <code>s2</code> ，写一个函数来判断 <code>s2</code> 是否包含 <code>s1</code> 的排列。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<h3 id="567-字符串的排列">567  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutation-in-string/description/">字符串的排列</a></h3>
+<p>给你两个字符串 <code>s1</code> 和 <code>s2</code> ，写一个函数来判断 <code>s2</code> 是否包含 <code>s1</code> 的排列。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
 <p>换句话说，<code>s1</code> 的排列之一是 <code>s2</code> 的 <strong>子串</strong> 。</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/MPnaiL/">LCR 014. 字符串的排列</a></p>
 </blockquote>
-<h4 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h4><blockquote>
+<h4 id="思路-4">思路</h4>
+<blockquote>
 <p>注意：输入的 <code>s1</code> 是可以包含重复字符的，所以这个题难度不小。</p>
 </blockquote>
 <p>这种题目，是明显的滑动窗口算法，<strong>相当给你一个 <code>S</code> 和一个 <code>T</code>，请问你 <code>S</code> 中是否存在一个子串，包含 <code>T</code> 中所有字符且不包含其他字符</strong>？</p>
@@ -722,11 +739,12 @@ var slidingWindow &#x3D; function(s) &#123;
     &#x2F;&#x2F; 未找到符合条件的子串
     return false;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ol>
-<li><p>本题移动 <code>left</code> 缩小窗口的时机是窗口大小大于 <code>t.size()</code> 时，因为排列嘛，显然<strong>长度应该是一样的</strong>。</p>
+<li>
+<p>本题移动 <code>left</code> 缩小窗口的时机是窗口大小大于 <code>t.size()</code> 时，因为排列嘛，显然<strong>长度应该是一样的</strong>。</p>
 </li>
-<li><p>当发现 <code>valid == need.size()</code> 时，就说明窗口中就是一个合法的排列，所以立即返回 <code>true</code>。</p>
+<li>
+<p>当发现 <code>valid == need.size()</code> 时，就说明窗口中就是一个合法的排列，所以立即返回 <code>true</code>。</p>
 <p>至于如何处理窗口的扩大和缩小，和最小覆盖子串完全相同。</p>
 </li>
 </ol>
@@ -737,7 +755,8 @@ var slidingWindow &#x3D; function(s) &#123;
 <li><code>while (right - left &gt;= s1.length)</code> 不能改为 <code>while (right - left &gt;= need.size)</code>，因为这两个值只有在  <code>s1</code>  中的所有字符都是不同的情况下才会相等。也就是说，如果  <code>s1</code>  中没有重复的字符，那么  <code>need.size</code>  就等于  <code>s1.length</code> 。   但是，如果  <code>s1</code>  中有重复的字符，那么  <code>need.size</code>  就会小于  <code>s1.length</code> 。因为  <code>need.size</code>  只计算不同字符的种类数，而不考虑每个字符的重复次数。</li>
 </ol>
 </blockquote>
-<h3 id="438-找到字符串中所有字母异位词"><a href="#438-找到字符串中所有字母异位词" class="headerlink" title="438 找到字符串中所有字母异位词"></a>438 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/description/">找到字符串中所有字母异位词</a></h3><p>给定两个字符串 <code>s</code> 和 <code>p</code>，找到 <code>s</code> 中所有 <code>p</code> 的 <strong>异位词</strong> 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。</p>
+<h3 id="438-找到字符串中所有字母异位词">438 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/description/">找到字符串中所有字母异位词</a></h3>
+<p>给定两个字符串 <code>s</code> 和 <code>p</code>，找到 <code>s</code> 中所有 <code>p</code> 的 <strong>异位词</strong> 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。</p>
 <p><strong>异位词</strong> 指由相同字母重排列形成的字符串（包括相同的字符串）。</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/VabMRr/">LCR 015. 找到字符串中所有字母异位词</a></p>
@@ -782,9 +801,9 @@ var slidingWindow &#x3D; function(s) &#123;
   &#125;
   return indexArray
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>跟寻找字符串的排列一样，只是找到一个合法异位词（排列）之后将起始索引加入 <code>res</code> 即可。</p>
-<h3 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3 无重复字符的最长子串"></a>3 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/">无重复字符的最长子串</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
+<h3 id="3-无重复字符的最长子串">3 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/">无重复字符的最长子串</a></h3>
+<p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
 <blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/">剑指 Offer 48. 最长不含重复字符的子字符串</a></li>
@@ -819,28 +838,34 @@ var slidingWindow &#x3D; function(s) &#123;
     &#125;
    return res
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这就是变简单了，连 <code>need</code> 和 <code>valid</code> 都不需要，而且更新窗口内数据也只需要简单的更新计数器 <code>window</code> 即可。</p>
 <p>当 <code>window[c]</code> 值大于 1 时，说明窗口中存在重复字符，不符合条件，就该移动 <code>left</code> 缩小窗口了嘛。</p>
 <p>唯一需要注意的是，在哪里更新结果 <code>res</code> 呢？我们要的是最长无重复子串，哪一个阶段可以保证窗口中的字符串是没有重复的呢？</p>
 <p>这里和之前不一样，要在收缩窗口完成后更新 <code>res</code>，因为窗口收缩的 while 条件是存在重复元素，换句话说收缩完成后一定保证窗口中没有重复嘛。</p>
-<h2 id="双指针（数组）"><a href="#双指针（数组）" class="headerlink" title="双指针（数组）"></a>双指针（数组）</h2><p>左右指针：两个指针相向而行或者相背而行</p>
+<h2 id="双指针（数组）">双指针（数组）</h2>
+<p>左右指针：两个指针相向而行或者相背而行</p>
 <p>快慢指针：就是两个指针同向而行，一快一慢。</p>
 <p>在数组中并没有真正意义上的指针，但我们可以把索引当做数组中的指针，这样也可以在数组中施展双指针技巧。</p>
-<h3 id="快慢指针技巧"><a href="#快慢指针技巧" class="headerlink" title="快慢指针技巧"></a>快慢指针技巧</h3><p><strong>数组问题中比较常见的快慢指针技巧，是让你原地修改数组</strong>。</p>
-<h4 id="26-删除有序数组中的重复项"><a href="#26-删除有序数组中的重复项" class="headerlink" title="26 删除有序数组中的重复项"></a>26 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/">删除有序数组中的重复项</a></h4><p>给你一个 <strong>非严格递增排列</strong> 的数组 <code>nums</code> ，请你**<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95"> 原地</a>** 删除重复出现的元素，使每个元素 <strong>只出现一次</strong> ，返回删除后数组的新长度。元素的 <strong>相对顺序</strong> 应该保持 <strong>一致</strong> 。然后返回 <code>nums</code> 中唯一元素的个数。</p>
+<h3 id="快慢指针技巧">快慢指针技巧</h3>
+<p><strong>数组问题中比较常见的快慢指针技巧，是让你原地修改数组</strong>。</p>
+<h4 id="26-删除有序数组中的重复项">26 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/">删除有序数组中的重复项</a></h4>
+<p>给你一个 <strong>非严格递增排列</strong> 的数组 <code>nums</code> ，请你**<a target="_blank" rel="noopener" href="http://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95"> 原地</a>** 删除重复出现的元素，使每个元素 <strong>只出现一次</strong> ，返回删除后数组的新长度。元素的 <strong>相对顺序</strong> 应该保持 <strong>一致</strong> 。然后返回 <code>nums</code> 中唯一元素的个数。</p>
 <p>考虑 <code>nums</code> 的唯一元素的数量为 <code>k</code> ，你需要做以下事情确保你的题解可以被通过：</p>
 <ul>
 <li>更改数组 <code>nums</code> ，使 <code>nums</code> 的前 <code>k</code> 个元素包含唯一元素，并按照它们最初在 <code>nums</code> 中出现的顺序排列。<code>nums</code> 的其余元素与 <code>nums</code> 的大小不重要。</li>
 <li>返回 <code>k</code> 。</li>
 </ul>
-<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h5><p>由于数组已经排序，所以重复的元素一定连在一起，找出它们并不难。但如果毎找到一个重复元素就立即原地删除它，由于数组中删除元素涉及数据搬移，整个时间复杂度是会达到 <code>O(N^2)</code>。</p>
+<h5 id="思路-5">思路</h5>
+<p>由于数组已经排序，所以重复的元素一定连在一起，找出它们并不难。但如果毎找到一个重复元素就立即原地删除它，由于数组中删除元素涉及数据搬移，整个时间复杂度是会达到 <code>O(N^2)</code>。</p>
 <ul>
-<li><p>我们让慢指针 <code>slow</code> 走在后面，快指针 <code>fast</code> 走在前面探路。</p>
+<li>
+<p>我们让慢指针 <code>slow</code> 走在后面，快指针 <code>fast</code> 走在前面探路。</p>
 </li>
-<li><p>找到一个不重复的元素就让 <code>slow</code> 前进一步并赋值给 <code>slow</code> 。</p>
+<li>
+<p>找到一个不重复的元素就让 <code>slow</code> 前进一步并赋值给 <code>slow</code> 。</p>
 </li>
-<li><p>这样，就保证了 <code>nums[0..slow]</code> 都是无重复的元素，当 <code>fast</code> 指针遍历完整个数组 <code>nums</code> 后，<code>nums[0..slow]</code> 就是整个数组去重之后的结果。</p>
+<li>
+<p>这样，就保证了 <code>nums[0..slow]</code> 都是无重复的元素，当 <code>fast</code> 指针遍历完整个数组 <code>nums</code> 后，<code>nums[0..slow]</code> 就是整个数组去重之后的结果。</p>
 <blockquote>
 <p>注意：不能先赋值给 <code>slow</code> 再让 <code>slow</code> 前进一步，因为slow的前进是在判断前后指针对应的值不重复再执行的，也就是说当前的<code>slow</code> 已经是去重后的，如果先赋值后移动会覆盖当前slow的值，造成数值丢失。</p>
 </blockquote>
@@ -864,11 +889,12 @@ var removeDuplicates &#x3D; function(nums) &#123;
     &#x2F;&#x2F; 数组长度为索引 + 1
     return slow + 1;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="27-移除元素"><a href="#27-移除元素" class="headerlink" title="27 移除元素"></a>27 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/description/">移除元素</a></h4><p>给你一个数组 <code>nums</code> 和一个值 <code>val</code>，你需要 <strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a></strong> 移除所有数值等于 <code>val</code> 的元素，并返回移除后数组的新长度。</p>
+<h4 id="27-移除元素">27 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/description/">移除元素</a></h4>
+<p>给你一个数组 <code>nums</code> 和一个值 <code>val</code>，你需要 <strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a></strong> 移除所有数值等于 <code>val</code> 的元素，并返回移除后数组的新长度。</p>
 <p>不要使用额外的数组空间，你必须仅使用 <code>O(1)</code> 额外空间并 <strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地 </a>修改输入数组</strong>。</p>
 <p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
-<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h5><p>如果 <code>fast</code> 遇到值为 <code>val</code> 的元素，则直接跳过，否则就赋值给 <code>slow</code> 指针，并让 <code>slow</code> 前进一步。</p>
+<h5 id="思路-6">思路</h5>
+<p>如果 <code>fast</code> 遇到值为 <code>val</code> 的元素，则直接跳过，否则就赋值给 <code>slow</code> 指针，并让 <code>slow</code> 前进一步。</p>
 <blockquote>
 <p>注意：这里是先给 <code>nums[slow]</code> 赋值然后再给 <code>slow++</code>，因为此题只有 fast 和不动的 val 比较，当比较不成功后，说明此时的fast对应的值应当保存，即赋值给 <code>slow</code>。如果先让 <code>slow</code> 前进一步，指向了下一个位置，但这个位置的值仍然是原来的值，没有被比较，有可能这个值就是 val 的值。</p>
 </blockquote>
@@ -884,10 +910,11 @@ var removeDuplicates &#x3D; function(nums) &#123;
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> slow<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="283-移动零"><a href="#283-移动零" class="headerlink" title="283 移动零"></a>283 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/description/">移动零</a></h4><p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<h4 id="283-移动零">283 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/description/">移动零</a></h4>
+<p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
 <p><strong>请注意</strong> ，必须在不复制数组的情况下原地对数组进行操作。</p>
-<h5 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h5><ul>
+<h5 id="思路-7">思路</h5>
+<ul>
 <li>移除 <code>nums</code> 中的所有 0</li>
 <li>然后再把后面的元素都赋值为 0 即可。</li>
 </ul>
@@ -912,9 +939,10 @@ var moveZeroes &#x3D; function(nums) &#123;
         nums[p] &#x3D; 0;
     &#125;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="83-删除排序链表中的重复元素"><a href="#83-删除排序链表中的重复元素" class="headerlink" title="83 删除排序链表中的重复元素"></a>83 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/">删除排序链表中的重复元素</a></h4><p>给定一个已排序的链表的头 <code>head</code> ， <em>删除所有重复的元素，使每个元素只出现一次</em> 。返回 <em>已排序的链表</em> 。</p>
-<h5 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h5><p>和数组去重是一模一样的，唯一的区别是把数组赋值操作变成操作指针而已</p>
+<h4 id="83-删除排序链表中的重复元素">83 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/">删除排序链表中的重复元素</a></h4>
+<p>给定一个已排序的链表的头 <code>head</code> ， <em>删除所有重复的元素，使每个元素只出现一次</em> 。返回 <em>已排序的链表</em> 。</p>
+<h5 id="思路-8">思路</h5>
+<p>和数组去重是一模一样的，唯一的区别是把数组赋值操作变成操作指针而已</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var deleteDuplicates &#x3D; function(head) &#123;
     if (head &#x3D;&#x3D;&#x3D; null) return null;
@@ -933,15 +961,17 @@ var moveZeroes &#x3D; function(nums) &#123;
     slow.next &#x3D; null;
     return head;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="滑动指针技巧"><a href="#滑动指针技巧" class="headerlink" title="滑动指针技巧"></a>滑动指针技巧</h3><p><strong>二分查找</strong></p>
+<h3 id="滑动指针技巧">滑动指针技巧</h3>
+<p><strong>二分查找</strong></p>
 <p>后续讲解。</p>
 <p><strong>两数之和</strong></p>
-<h4 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167 两数之和 II - 输入有序数组"></a>167 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/">两数之和 II - 输入有序数组</a></h4><p>给你一个下标从 <strong>1</strong> 开始的整数数组 <code>numbers</code> ，该数组已按 <strong>非递减顺序排列</strong> ，请你从数组中找出满足相加之和等于目标数 <code>target</code> 的两个数。如果设这两个数分别是 <code>numbers[index1]</code> 和 <code>numbers[index2]</code> ，则 <code>1 &lt;= index1 &lt; index2 &lt;= numbers.length</code> 。</p>
+<h4 id="167-两数之和-II-输入有序数组">167 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/">两数之和 II - 输入有序数组</a></h4>
+<p>给你一个下标从 <strong>1</strong> 开始的整数数组 <code>numbers</code> ，该数组已按 <strong>非递减顺序排列</strong> ，请你从数组中找出满足相加之和等于目标数 <code>target</code> 的两个数。如果设这两个数分别是 <code>numbers[index1]</code> 和 <code>numbers[index2]</code> ，则 <code>1 &lt;= index1 &lt; index2 &lt;= numbers.length</code> 。</p>
 <p>以长度为 2 的整数数组 <code>[index1, index2]</code> 的形式返回这两个整数的下标 <code>index1</code> 和 <code>index2</code>。</p>
 <p>你可以假设每个输入 <strong>只对应唯一的答案</strong> ，而且你 <strong>不可以</strong> 重复使用相同的元素。</p>
 <p>你所设计的解决方案必须只使用常量级的额外空间。</p>
-<h5 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a>思路</h5><p>只要数组有序，就应该想到双指针技巧。这道题的解法有点类似二分查找，通过调节 <code>left</code> 和 <code>right</code> 就可以调整 <code>sum</code> 的大小：</p>
+<h5 id="思路-9">思路</h5>
+<p>只要数组有序，就应该想到双指针技巧。这道题的解法有点类似二分查找，通过调节 <code>left</code> 和 <code>right</code> 就可以调整 <code>sum</code> 的大小：</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var twoSum &#x3D; function(nums, target) &#123;
     &#x2F;&#x2F; 一左一右两个指针相向而行
@@ -959,9 +989,9 @@ var moveZeroes &#x3D; function(nums) &#123;
     &#125;
     return [-1, -1];
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>反转数组</strong></p>
-<h4 id="344-反转字符串"><a href="#344-反转字符串" class="headerlink" title="344 反转字符串"></a>344 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/description/">反转字符串</a></h4><p>代码示例：</p>
+<h4 id="344-反转字符串">344 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/description/">反转字符串</a></h4>
+<p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseString &#x3D; function(s) &#123;
     &#x2F;&#x2F; 一左一右两个指针相向而行
     let left &#x3D; 0,
@@ -975,9 +1005,10 @@ var moveZeroes &#x3D; function(nums) &#123;
         right--;
     &#125;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>回文串判断</strong></p>
-<h4 id="5-最长回文子串"><a href="#5-最长回文子串" class="headerlink" title="5 最长回文子串"></a>5 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/description/">最长回文子串</a></h4><h5 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h5><p>找回文串的难点在于，回文串的的长度可能是奇数也可能是偶数，解决该问题的核心是<strong>从中心向两端扩散的双指针技巧</strong>。</p>
+<h4 id="5-最长回文子串">5 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/description/">最长回文子串</a></h4>
+<h5 id="思路-10">思路</h5>
+<p>找回文串的难点在于，回文串的的长度可能是奇数也可能是偶数，解决该问题的核心是<strong>从中心向两端扩散的双指针技巧</strong>。</p>
 <p>如果回文串的长度为奇数，则它有一个中心字符；如果回文串的长度为偶数，则可以认为它有两个中心字符。所以我们可以先实现这样一个函数：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 在 s 中寻找以 s[l] 和 s[r] 为中心的最长回文串
 var palindrome &#x3D; function(s, l, r) &#123;
@@ -991,14 +1022,12 @@ var palindrome &#x3D; function(s, l, r) &#123;
     &#x2F;&#x2F; 返回以 s[l] 和 s[r] 为中心的最长回文串
     return s.substring(l + 1, r);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这样，如果输入相同的 <code>l</code> 和 <code>r</code>，就相当于寻找长度为奇数的回文串，如果输入相邻的 <code>l</code> 和 <code>r</code>，则相当于寻找长度为偶数的回文串。</p>
 <p>那么回到最长回文串的问题，解法的大致思路就是：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> <span class="token number">0</span> <span class="token operator">&lt;=</span> i <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
     找到以 s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> 为中心的回文串
     找到以 s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> 和 s<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> 为中心的回文串
     更新答案<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>翻译成代码，就可以解决最长回文子串这个问题：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">
 var longestPalindrome &#x3D; function(s) &#123;
@@ -1022,14 +1051,15 @@ function palindrome(s, left, right) &#123;
     &#125;
     return s.substring(left + 1, right);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：之前的左右指针都是从两端向中间相向而行，而回文子串问题则是让左右指针从中心向两端扩展。</p>
 </blockquote>
-<h4 id="88-合并两个有序数组"><a href="#88-合并两个有序数组" class="headerlink" title="88 合并两个有序数组"></a>88 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-sorted-array/description/">合并两个有序数组</a></h4><p>给你两个按 <strong>非递减顺序</strong> 排列的整数数组 <code>nums1</code> 和 <code>nums2</code>，另有两个整数 <code>m</code> 和 <code>n</code> ，分别表示 <code>nums1</code> 和 <code>nums2</code> 中的元素数目。</p>
+<h4 id="88-合并两个有序数组">88 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-sorted-array/description/">合并两个有序数组</a></h4>
+<p>给你两个按 <strong>非递减顺序</strong> 排列的整数数组 <code>nums1</code> 和 <code>nums2</code>，另有两个整数 <code>m</code> 和 <code>n</code> ，分别表示 <code>nums1</code> 和 <code>nums2</code> 中的元素数目。</p>
 <p>请你 <strong>合并</strong> <code>nums2</code> 到 <code>nums1</code> 中，使合并后的数组同样按 <strong>非递减顺序</strong> 排列。</p>
-<p><strong>注意：</strong>最终，合并后数组不应由函数返回，而是存储在数组 <code>nums1</code> 中。为了应对这种情况，<code>nums1</code> 的初始长度为 <code>m + n</code>，其中前 <code>m</code> 个元素表示应合并的元素，后 <code>n</code> 个元素为 <code>0</code> ，应忽略。<code>nums2</code> 的长度为 <code>n</code> 。</p>
-<h5 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h5><p>对于单链表来说，我们直接用双指针从头开始合并即可，但对于数组来说会出问题。因为题目让我直接把结果存到 <code>nums1</code> 中，而 <code>nums1</code> 的开头有元素，如果我们无脑复制单链表的逻辑，会覆盖掉 <code>nums1</code> 的原始元素，导致错误。</p>
+<p>**注意：**最终，合并后数组不应由函数返回，而是存储在数组 <code>nums1</code> 中。为了应对这种情况，<code>nums1</code> 的初始长度为 <code>m + n</code>，其中前 <code>m</code> 个元素表示应合并的元素，后 <code>n</code> 个元素为 <code>0</code> ，应忽略。<code>nums2</code> 的长度为 <code>n</code> 。</p>
+<h5 id="思路-11">思路</h5>
+<p>对于单链表来说，我们直接用双指针从头开始合并即可，但对于数组来说会出问题。因为题目让我直接把结果存到 <code>nums1</code> 中，而 <code>nums1</code> 的开头有元素，如果我们无脑复制单链表的逻辑，会覆盖掉 <code>nums1</code> 的原始元素，导致错误。</p>
 <p>但 <code>nums1</code> 后面是空的呀，所以这道题需要我们稍微变通一下：<strong>将双指针初始化在数组的尾部，然后从后向前进行合并</strong>，这样即便覆盖了 <code>nums1</code> 中的元素，这些元素也必然早就被用过了（因为 <code>m</code> 一定不大于 <code>nums1</code> 的长度），不会影响答案的正确性。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var merge &#x3D; function(nums1, m, nums2, n) &#123;
@@ -1056,10 +1086,11 @@ function palindrome(s, left, right) &#123;
         p--;
     &#125;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="415-字符串相加"><a href="#415-字符串相加" class="headerlink" title="415 字符串相加"></a>415 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-strings/description/">字符串相加</a></h4><p>给定两个字符串形式的非负整数 <code>num1</code> 和<code>num2</code> ，计算它们的和并同样以字符串形式返回。</p>
+<h4 id="415-字符串相加">415 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-strings/description/">字符串相加</a></h4>
+<p>给定两个字符串形式的非负整数 <code>num1</code> 和<code>num2</code> ，计算它们的和并同样以字符串形式返回。</p>
 <p>你不能使用任何內建的用于处理大整数的库（比如 <code>BigInteger</code>）， 也不能直接将输入的字符串转换为整数形式。</p>
-<h5 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h5><ul>
+<h5 id="思路-12">思路</h5>
+<ul>
 <li>创建双指针，从后向前移动，将每一次指针对应的值转换为数值后，相加的值保存在新数组中。</li>
 <li>注意：相加的值需要考虑进位的问题，即进位数要保留给下一次相加。</li>
 <li>注意：需要考虑两个字符串位数不同的问题，需要用0来补位</li>
@@ -1091,11 +1122,12 @@ function palindrome(s, left, right) &#123;
     &#x2F;&#x2F; 将结果数组转换为字符串并返回
     return array.join(&#39;&#39;);
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/description/">两数之和</a></h4><p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
+<h4 id="1-两数之和">1 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/description/">两数之和</a></h4>
+<p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
 <p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
 <p>你可以按任意顺序返回答案。</p>
-<h5 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a>思路</h5><ul>
+<h5 id="思路-13">思路</h5>
+<ul>
 <li>两数之和问题和167题基本相同，需要先进行排序，再用滑动指针求和</li>
 <li>注意：因为题目要求我们返回元素的索引，而排序会破坏元素的原始索引，所以要记录值和原始索引的映射。</li>
 <li>注意：不能直接对原数组使用 <code>sort</code> 排序，这样会改变原数组的结构。</li>
@@ -1124,15 +1156,17 @@ function palindrome(s, left, right) &#123;
         return []
 
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="括号相关问题"><a href="#括号相关问题" class="headerlink" title="括号相关问题"></a>括号相关问题</h2><h3 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20 有效的括号"></a>20 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/description/">有效的括号</a></h3><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;&#123;&#39;</code>，<code>&#39;&#125;&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串 <code>s</code> ，判断字符串是否有效。</p>
+<h2 id="括号相关问题">括号相关问题</h2>
+<h3 id="20-有效的括号">20 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/description/">有效的括号</a></h3>
+<p>给定一个只包括 <code>'('</code>，<code>')'</code>，<code>'&#123;'</code>，<code>'&#125;'</code>，<code>'['</code>，<code>']'</code> 的字符串 <code>s</code> ，判断字符串是否有效。</p>
 <p>有效字符串需满足：</p>
 <ol>
 <li>左括号必须用相同类型的右括号闭合。</li>
 <li>左括号必须以正确的顺序闭合。</li>
 <li>每个右括号都有一个对应的相同类型的左括号。</li>
 </ol>
-<h4 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a>思路</h4><ul>
+<h4 id="思路-14">思路</h4>
+<ul>
 <li>栈是一种先进后出的数据结构，处理括号问题的时候尤其有用。遇到左括号就入栈，遇到右括号就去栈中寻找最近的左括号，看是否匹配。</li>
 <li>匹配的规则：在栈的长度合法的情况下，检查栈的顶部元素，如果匹配就出栈，否则继续循环。</li>
 </ul>
@@ -1160,8 +1194,8 @@ function leftOf(c) &#123;
     if (c &#x3D;&#x3D;&#x3D; &#39;)&#39;) return &#39;(&#39;;
     return &#39;[&#39;;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="921-使括号有效的最少添加"><a href="#921-使括号有效的最少添加" class="headerlink" title="921 使括号有效的最少添加"></a>921 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/description/">使括号有效的最少添加</a></h3><p>只有满足下面几点之一，括号字符串才是有效的：</p>
+<h3 id="921-使括号有效的最少添加">921 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-add-to-make-parentheses-valid/description/">使括号有效的最少添加</a></h3>
+<p>只有满足下面几点之一，括号字符串才是有效的：</p>
 <ul>
 <li>它是一个空字符串，或者</li>
 <li>它可以被写成 <code>AB</code> （<code>A</code> 与 <code>B</code> 连接）, 其中 <code>A</code> 和 <code>B</code> 都是有效字符串，或者</li>
@@ -1172,7 +1206,8 @@ function leftOf(c) &#123;
 <li>例如，如果 <code>s = &quot;()))&quot;</code> ，你可以插入一个开始括号为 <code>&quot;(()))&quot;</code> 或结束括号为 <code>&quot;())))&quot;</code> 。</li>
 </ul>
 <p>返回 <em>为使结果字符串 <code>s</code> 有效而必须添加的最少括号数</em>。</p>
-<h4 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a>思路</h4><p><strong>以左括号为基准，通过维护对右括号的需求数 <code>need</code>，来计算最小的插入次数</strong></p>
+<h4 id="思路-15">思路</h4>
+<p><strong>以左括号为基准，通过维护对右括号的需求数 <code>need</code>，来计算最小的插入次数</strong></p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 注意：javascript 代码由 chatGPT🤖 根据我的 cpp 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
 &#x2F;&#x2F; 本代码不保证正确性，仅供参考。如有疑惑，可以参照我写的 cpp 代码对比查看。
@@ -1204,26 +1239,29 @@ var minAddToMakeValid &#x3D; function(s) &#123;
     
     return res + need;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ol>
-<li><p><strong>当 <code>need == -1</code> 的时候意味着什么</strong>？</p>
+<li>
+<p><strong>当 <code>need == -1</code> 的时候意味着什么</strong>？</p>
 <p>因为只有遇到右括号 <code>)</code> 的时候才会 <code>need--</code>，<code>need == -1</code> 意味着右括号太多了，所以需要插入左括号（ <code>res</code> 记录）。</p>
 <p>比如说 <code>s = &quot;))&quot;</code> 这种情况，需要插入 2 个左括号，使得 <code>s</code> 变成 <code>&quot;()()&quot;</code>，才是一个有效括号串。</p>
 </li>
-<li><p>**算法为什么返回 <code>res + need</code>**？</p>
+<li>
+<p><strong>算法为什么返回 <code>res + need</code></strong>？</p>
 <p>因为 <code>res</code> 记录的左括号的插入次数，<code>need</code> 记录了右括号的需求，当 for 循环结束后，若 <code>need</code> 不为 0，那么就意味着右括号还不够，需要插入。</p>
 <p>比如说 <code>s = &quot;))(&quot;</code> 这种情况，插入 2 个左括号之后，还要再插入 1 个右括号，使得 <code>s</code> 变成 <code>&quot;()()()&quot;</code>，才是一个有效括号串。</p>
 </li>
 </ol>
-<h3 id="1541-平衡括号字符串的最少插入次数"><a href="#1541-平衡括号字符串的最少插入次数" class="headerlink" title="1541 平衡括号字符串的最少插入次数"></a>1541 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-insertions-to-balance-a-parentheses-string/description/">平衡括号字符串的最少插入次数</a></h3><p>给你一个括号字符串 <code>s</code> ，它只包含字符 <code>&#39;(&#39;</code> 和 <code>&#39;)&#39;</code> 。一个括号字符串被称为平衡的当它满足：</p>
+<h3 id="1541-平衡括号字符串的最少插入次数">1541 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-insertions-to-balance-a-parentheses-string/description/">平衡括号字符串的最少插入次数</a></h3>
+<p>给你一个括号字符串 <code>s</code> ，它只包含字符 <code>'('</code> 和 <code>')'</code> 。一个括号字符串被称为平衡的当它满足：</p>
 <ul>
-<li>任何左括号 <code>&#39;(&#39;</code> 必须对应两个连续的右括号 <code>&#39;))&#39;</code> 。</li>
-<li>左括号 <code>&#39;(&#39;</code> 必须在对应的连续两个右括号 <code>&#39;))&#39;</code> 之前。</li>
+<li>任何左括号 <code>'('</code> 必须对应两个连续的右括号 <code>'))'</code> 。</li>
+<li>左括号 <code>'('</code> 必须在对应的连续两个右括号 <code>'))'</code> 之前。</li>
 </ul>
 <p>比方说 <code>&quot;())&quot;</code>， <code>&quot;())(())))&quot;</code> 和 <code>&quot;(())())))&quot;</code> 都是平衡的， <code>&quot;)()&quot;</code>， <code>&quot;()))&quot;</code> 和 <code>&quot;(()))&quot;</code> 都是不平衡的。</p>
-<p>你可以在任意位置插入字符 ‘(‘ 和 ‘)’ 使字符串平衡。</p>
+<p>你可以在任意位置插入字符 ‘(’ 和 ‘)’ 使字符串平衡。</p>
 <p>请你返回让 <code>s</code> 平衡的最少插入次数。</p>
-<h4 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a>思路</h4><ul>
+<h4 id="思路-16">思路</h4>
+<ul>
 <li><strong>核心思路还是和刚才一样，通过一个 <code>need</code> 变量记录对右括号的需求数，根据 <code>need</code> 的变化来判断是否需要插入</strong>。</li>
 <li><strong>首先，类似第一题，当 <code>need == -1</code> 时，意味着我们遇到一个多余的右括号，显然需要插入一个左括号。但是和第一题不同的是，此时我们已经遇到一个多余的右括号，所以还需要一个右括号才能满足平衡，所以此时 <code>need = 1</code>。</strong></li>
 <li><strong>注意：由上述得知左括号有时会出现奇数个右括号的需求，需要插入一个右括号。因为一个左括号需要两个右括号嘛，右括号的需求必须是偶数，这一点也是本题的难点。</strong></li>
@@ -1260,14 +1298,14 @@ var minAddToMakeValid &#x3D; function(s) &#123;
 
     return res + need;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509 斐波那契数"></a>509 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/description/">斐波那契数</a></h3><p>1.<strong>暴力递归</strong></p>
+<h2 id="动态规划">动态规划</h2>
+<h3 id="509-斐波那契数">509 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/description/">斐波那契数</a></h3>
+<p>1.<strong>暴力递归</strong></p>
 <p>斐波那契数列的数学形式就是递归的，写成代码就是这样：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">fib</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token constant">N</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">N</span> <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">||</span> <span class="token constant">N</span> <span class="token operator">===</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token function">fib</span><span class="token punctuation">(</span><span class="token constant">N</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fib</span><span class="token punctuation">(</span><span class="token constant">N</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这个算法的时间复杂度为二者相乘，即 O(2^n)，指数级别，爆炸。</p>
 <p>观察递归树，很明显发现了算法低效的原因：存在大量重复计算，比如 <code>f(18)</code> 被计算了两次，而且你可以看到，以 <code>f(18)</code> 为根的这个递归树体量巨大，多算一遍，会耗费巨大的时间。更何况，还不止 <code>f(18)</code> 这一个节点被重复计算，所以这个算法及其低效。</p>
 <p>2.<strong>带备忘录的递归解法</strong></p>
@@ -1289,7 +1327,6 @@ var dp &#x3D; function(memo, n) &#123;
     memo[n] &#x3D; dp(memo, n - 1) + dp(memo, n - 2);
     return memo[n];
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>3、<code>dp</code> 数组的迭代（递推）解法</strong></p>
 <p>有了上一步「备忘录」的启发，我们可以把这个「备忘录」独立出来成为一张表，通常叫做 DP table，在这张表上完成「自底向上」的推算岂不美哉！</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var fib &#x3D; function(N) &#123;
@@ -1304,8 +1341,8 @@ var dp &#x3D; function(memo, n) &#123;
 
     return dp[N];
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="322-零钱兑换"><a href="#322-零钱兑换" class="headerlink" title="322 零钱兑换"></a>322 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/description/">零钱兑换</a></h3><p>给你一个整数数组 <code>coins</code> ，表示不同面额的硬币；以及一个整数 <code>amount</code> ，表示总金额。</p>
+<h3 id="322-零钱兑换">322 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/description/">零钱兑换</a></h3>
+<p>给你一个整数数组 <code>coins</code> ，表示不同面额的硬币；以及一个整数 <code>amount</code> ，表示总金额。</p>
 <p>计算并返回可以凑成总金额所需的 <strong>最少的硬币个数</strong> 。如果没有任何一种硬币组合能组成总金额，返回 <code>-1</code> 。</p>
 <p>你可以认为每种硬币的数量是无限的。</p>
 <p>1.<strong>暴力递归</strong></p>
@@ -1332,7 +1369,6 @@ var dp &#x3D; function(memo, n) &#123;
 
     <span class="token keyword">return</span> res <span class="token operator">==</span> <span class="token number">Infinity</span> <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">:</span> res<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>2.<strong>带备忘录的递归</strong></p>
 <p>类似之前斐波那契数列的例子，只需要稍加修改，就可以通过备忘录消除子问题：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var coinChange &#x3D; function(coins, amount) &#123;
@@ -1360,7 +1396,6 @@ var dp &#x3D; function(memo, n) &#123;
 
     return dp(coins, amount);
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>3.<strong>dp 数组的迭代解法</strong></p>
 <p>当然，我们也可以自底向上使用 dp table 来消除重叠子问题，关于「状态」「选择」和 base case 与之前没有区别，<code>dp</code> 数组的定义和刚才 <code>dp</code> 函数类似，也是把「状态」，也就是目标金额作为变量。不过 <code>dp</code> 函数体现在函数参数，而 <code>dp</code> 数组体现在数组索引：</p>
 <p><strong><code>dp</code> 数组的定义：当目标金额为 <code>i</code> 时，至少需要 <code>dp[i]</code> 枚硬币凑出</strong>。</p>
@@ -1389,10 +1424,11 @@ var coinChange &#x3D; function(coins, amount) &#123;
     &#125;
     return (dp[amount] &#x3D;&#x3D; amount + 1) ? -1 : dp[amount];
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70 爬楼梯"></a>70 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/description/">爬楼梯</a></h3><p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
+<h3 id="70-爬楼梯">70 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/description/">爬楼梯</a></h3>
+<p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
 <p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<h4 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a>思路</h4><p>爬到第 <code>n</code> 级台阶的方法个数等于爬到 <code>n - 1</code> 的方法个数和爬到 <code>n - 2</code> 的方法个数之和。</p>
+<h4 id="思路-17">思路</h4>
+<p>爬到第 <code>n</code> 级台阶的方法个数等于爬到 <code>n - 1</code> 的方法个数和爬到 <code>n - 2</code> 的方法个数之和。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var climbStairs &#x3D; function(n) &#123;
 
@@ -1414,10 +1450,11 @@ const dp &#x3D; function(memo, n)
     return memo[n]
 
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="53-最大子数组和"><a href="#53-最大子数组和" class="headerlink" title="53 最大子数组和"></a>53 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/description/">最大子数组和</a></h3><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<h3 id="53-最大子数组和">53 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/description/">最大子数组和</a></h3>
+<p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
 <p><strong>子数组</strong> 是数组中的一个连续部分。</p>
-<h4 id="滑动窗口解法"><a href="#滑动窗口解法" class="headerlink" title="滑动窗口解法"></a>滑动窗口解法</h4><p>滑动窗口算法就是专门处理子串&#x2F;子数组问题的，想用滑动窗口算法，先问自己几个问题：</p>
+<h4 id="滑动窗口解法">滑动窗口解法</h4>
+<p>滑动窗口算法就是专门处理子串/子数组问题的，想用滑动窗口算法，先问自己几个问题：</p>
 <ol>
 <li>什么时候应该扩大窗口？</li>
 <li>什么时候应该缩小窗口？</li>
@@ -1445,30 +1482,28 @@ const dp &#x3D; function(memo, n)
     &#125;
     return maxSum;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>特殊情况：就是 <code>nums</code> 中全是负数的时候，此时算法是可以得到正确答案的。</li>
 <li>一般情况：<code>nums</code> 中有正有负，这种情况下元素和最大的那个子数组一定是以<strong>正数</strong>开头的（<strong>以负数开头的话，把这个负数去掉，就可以得到和更大的子数组了，与假设相矛盾</strong>）那么此时我们需要穷举所有以正数开头的子数组，计算他们的元素和，找到元素和最大的那个子数组。</li>
 </ul>
-<h4 id="动态规划解法"><a href="#动态规划解法" class="headerlink" title="动态规划解法"></a>动态规划解法</h4><p>解决这个问题还可以用动态规划技巧解决，但是 <code>dp</code> 数组的定义比较特殊。按照我们常规的动态规划思路，一般是这样定义 <code>dp</code> 数组：</p>
-<p>**<code>nums[0..i]</code> 中的「最大的子数组和」为 <code>dp[i]</code>**。</p>
+<h4 id="动态规划解法">动态规划解法</h4>
+<p>解决这个问题还可以用动态规划技巧解决，但是 <code>dp</code> 数组的定义比较特殊。按照我们常规的动态规划思路，一般是这样定义 <code>dp</code> 数组：</p>
+<p><strong><code>nums[0..i]</code> 中的「最大的子数组和」为 <code>dp[i]</code></strong>。</p>
 <p>如果这样定义的话，整个 <code>nums</code> 数组的「最大子数组和」就是 <code>dp[n-1]</code>。如何找状态转移方程呢？按照数学归纳法，假设我们知道了 <code>dp[i-1]</code>，如何推导出 <code>dp[i]</code> 呢？</p>
 <p><strong>实际上是不行的，因为子数组一定是连续的，按照我们当前 <code>dp</code> 数组定义，并不能保证 <code>nums[0..i]</code> 中的最大子数组与 <code>nums[i+1]</code> 是相邻的</strong>，也就没办法从 <code>dp[i]</code> 推导出 <code>dp[i+1]</code>。</p>
 <p>所以说我们这样定义 <code>dp</code> 数组是不正确的，无法得到合适的状态转移方程。对于这类子数组问题，我们就要重新定义 <code>dp</code> 数组的含义：</p>
-<p>**以 <code>nums[i]</code> 为结尾的「最大子数组和」为 <code>dp[i]</code>**。</p>
+<p><strong>以 <code>nums[i]</code> 为结尾的「最大子数组和」为 <code>dp[i]</code></strong>。</p>
 <p>这种定义之下，想得到整个 <code>nums</code> 数组的「最大子数组和」，不能直接返回 <code>dp[n-1]</code>，而需要遍历整个 <code>dp</code> 数组：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var res &#x3D; Number.MIN_VALUE;
 for (var i &#x3D; 0; i &lt; n; i++) &#123;
     res &#x3D; Math.max(res, dp[i]);
 &#125;
 return res;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>依然使用数学归纳法来找状态转移关系：假设我们已经算出了 <code>dp[i-1]</code>，如何推导出 <code>dp[i]</code> 呢？</p>
 <p>可以做到，<code>dp[i]</code> 有两种「选择」，要么与前面的相邻子数组连接，形成一个和更大的子数组；要么不与前面的子数组连接，自成一派，自己作为一个子数组。</p>
 <p>如何选择？既然要求「最大子数组和」，当然选择结果更大的那个啦：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 要么自成一派，要么和前面的子数组合并
 var dp[i] &#x3D; Math.max(nums[i], nums[i] + dp[i - 1]);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var maxSubArray &#x3D; function(nums) &#123;
     var n &#x3D; nums.length;
@@ -1489,47 +1524,52 @@ var dp[i] &#x3D; Math.max(nums[i], nums[i] + dp[i - 1]);<span aria-hidden="true"
     &#125;
     return res;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="递归反转整个链表"><a href="#递归反转整个链表" class="headerlink" title="递归反转整个链表"></a>递归反转整个链表</h3><h4 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></h4><p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/li-kou-chang-yong-suan-fa-hui-zong/title.png" alt="img"></p>
+<h3 id="递归反转整个链表">递归反转整个链表</h3>
+<h4 id="206-反转链表">206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></h4>
+<p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
+<p><img src="/medias/images/loading.gif" data-original="title.png" alt="img"></p>
 <p><strong>注意这里的索引是从 1 开始的</strong>。迭代的思路大概是：先用一个 for 循环找到第 <code>m</code> 个位置，然后再用一个 for 循环将 <code>m</code> 和 <code>n</code> 之间的元素反转。但是我们的递归解法不用一个 for 循环，纯递归实现反转。</p>
-<h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a>思路</h5><ol>
-<li><p>反转函数的作用</p>
+<h5 id="思路-18">思路</h5>
+<ol>
+<li>
+<p>反转函数的作用</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var last &#x3D; reverseList(head.next)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>根据刚才的函数定义，来弄清楚这段代码会产生什么结果：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/li-kou-chang-yong-suan-fa-hui-zong/2.jpg" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="2.jpg" alt="img"></p>
 <p>这个 <code>reverse(head.next)</code> 执行完成后，整个链表就成了这样：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/li-kou-chang-yong-suan-fa-hui-zong/3.jpg" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="3.jpg" alt="img"></p>
 </li>
-<li><p>修改反转后链表的头部指针</p>
+<li>
+<p>修改反转后链表的头部指针</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">head.next.next &#x3D; head;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/li-kou-chang-yong-suan-fa-hui-zong/4.jpg" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="4.jpg" alt="img"></p>
 </li>
-<li><p>修改头指针的指向</p>
+<li>
+<p>修改头指针的指向</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var setNextNodeToNull &#x3D; function(head) &#123;
     head.next &#x3D; null;
     return last;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/li-kou-chang-yong-suan-fa-hui-zong/5.jpg" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="5.jpg" alt="img"></p>
 </li>
-<li><p>递归函数要有 base case</p>
+<li>
+<p>递归函数要有 base case</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var setNextNodeToNull &#x3D; function(head) &#123;
     head.next &#x3D; null;
     return last;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>意思是如果链表为空或者只有一个节点的时候，反转结果就是它自己，直接返回即可。</p>
 </li>
-<li><p>反转后的链表末尾要指向 null</p>
+<li>
+<p>反转后的链表末尾要指向 null</p>
 <blockquote>
 <p>当链表递归反转之后，新的头结点是 <code>last</code>，而之前的 <code>head</code> 变成了最后一个节点，别忘了链表的末尾要指向 null：</p>
 </blockquote>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var next &#x3D; null;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var next &#x3D; null;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ol>
-<h3 id="反转链表前N个节点"><a href="#反转链表前N个节点" class="headerlink" title="反转链表前N个节点"></a>反转链表前N个节点</h3><p><img src="/medias/images/loading.gif" data-original="/2023/09/15/li-kou-chang-yong-suan-fa-hui-zong/6.jpg" alt="img"></p>
+<h3 id="反转链表前N个节点">反转链表前N个节点</h3>
+<p><img src="/medias/images/loading.gif" data-original="6.jpg" alt="img"></p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var successor &#x3D; null; &#x2F;&#x2F; 后驱节点
 
@@ -1549,13 +1589,15 @@ function reverseN(head, n) &#123;
     return last;
 
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ol>
-<li><p>base case 变为 <code>n == 1</code>，反转一个元素，就是它本身，同时<strong>要记录后驱节点</strong>。</p>
+<li>
+<p>base case 变为 <code>n == 1</code>，反转一个元素，就是它本身，同时<strong>要记录后驱节点</strong>。</p>
 </li>
-<li><p>刚才我们直接把 <code>head.next</code> 设置为 null，因为整个链表反转后原来的 <code>head</code> 变成了整个链表的最后一个节点。但现在 <code>head</code> 节点在递归反转之后不一定是最后一个节点了，所以要记录后驱 <code>successor</code>（第 <code>n + 1</code> 个节点），反转之后将 <code>head</code> 连接上。</p>
+<li>
+<p>刚才我们直接把 <code>head.next</code> 设置为 null，因为整个链表反转后原来的 <code>head</code> 变成了整个链表的最后一个节点。但现在 <code>head</code> 节点在递归反转之后不一定是最后一个节点了，所以要记录后驱 <code>successor</code>（第 <code>n + 1</code> 个节点），反转之后将 <code>head</code> 连接上。</p>
 </li>
-<li><p>举例：</p>
+<li>
+<p>举例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
 当我们有一个链表：1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; null，并调用reverseN(head, 3)函数进行反转。 
  
@@ -1601,11 +1643,14 @@ last &#x3D; 3
  
 这样，我们成功地反转了链表中的前3个节点。
 
-**&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+**&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h3 id="反转链表的一部分"><a href="#反转链表的一部分" class="headerlink" title="反转链表的一部分"></a>反转链表的一部分</h3><p>现在解决我们最开始提出的问题，给一个索引区间 <code>[m, n]</code>（索引从 1 开始），仅仅反转区间中的链表元素。</p>
+<h3 id="反转链表的一部分">反转链表的一部分</h3>
+<p>现在解决我们最开始提出的问题，给一个索引区间 <code>[m, n]</code>（索引从 1 开始），仅仅反转区间中的链表元素。</p>
 <ol>
-<li><p>首先，如果 <code>m == 1</code>，就相当于反转链表开头的 <code>n</code> 个元素嘛，也就是我们刚才实现的功能：</p>
+<li>
+<p>首先，如果 <code>m == 1</code>，就相当于反转链表开头的 <code>n</code> 个元素嘛，也就是我们刚才实现的功能：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseBetween &#x3D; function(head, m, n) &#123;
     &#x2F;&#x2F; 基线条件，如果m为1，则相当于反转前n个节点
     if (m &#x3D;&#x3D; 1) &#123;
@@ -1614,7 +1659,8 @@ last &#x3D; 3
     &#x2F;&#x2F; ...
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>如果 <code>m != 1</code> 怎么办？如果我们把 <code>head</code> 的索引视为 1，那么我们是想从第 <code>m</code> 个元素开始反转对吧；如果把 <code>head.next</code> 的索引视为 1 呢？那么相对于 <code>head.next</code>，反转的区间应该是从第 <code>m - 1</code> 个元素开始的；那么对于 <code>head.next.next</code> 呢……</p>
+<li>
+<p>如果 <code>m != 1</code> 怎么办？如果我们把 <code>head</code> 的索引视为 1，那么我们是想从第 <code>m</code> 个元素开始反转对吧；如果把 <code>head.next</code> 的索引视为 1 呢？那么相对于 <code>head.next</code>，反转的区间应该是从第 <code>m - 1</code> 个元素开始的；那么对于 <code>head.next.next</code> 呢……</p>
 </li>
 </ol>
 <p>代码示例：</p>
@@ -1628,8 +1674,8 @@ last &#x3D; 3
     head.next &#x3D; reverseBetween(head.next, m - 1, n - 1);
     return head;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="92-反转链表-II"><a href="#92-反转链表-II" class="headerlink" title="92 反转链表 II"></a>92 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list-ii/description/">反转链表 II</a></h4><p>给你单链表的头指针 <code>head</code> 和两个整数 <code>left</code> 和 <code>right</code> ，其中 <code>left &lt;= right</code> 。请你反转从位置 <code>left</code> 到位置 <code>right</code> 的链表节点，返回 <strong>反转后的链表</strong> 。</p>
+<h4 id="92-反转链表-II">92 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list-ii/description/">反转链表 II</a></h4>
+<p>给你单链表的头指针 <code>head</code> 和两个整数 <code>left</code> 和 <code>right</code> ，其中 <code>left &lt;= right</code> 。请你反转从位置 <code>left</code> 到位置 <code>right</code> 的链表节点，返回 <strong>反转后的链表</strong> 。</p>
 
                 
             </div>

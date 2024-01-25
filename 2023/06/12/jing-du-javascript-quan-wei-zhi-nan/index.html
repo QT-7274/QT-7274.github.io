@@ -500,7 +500,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="第2章词法结构"><a href="#第2章词法结构" class="headerlink" title="第2章词法结构"></a>第2章词法结构</h2><p>所谓词法结构指的是： <strong>如何使用这门语言编写程序</strong> 的方式。</p>
+                <h2 id="第2章词法结构">第2章词法结构</h2>
+<p>所谓词法结构指的是： <strong>如何使用这门语言编写程序</strong> 的方式。</p>
 <p><code>JavaScript</code> 的词法结构主要包含了 5 个部分：</p>
 <ol>
 <li>注释</li>
@@ -509,66 +510,72 @@
 <li><code>Unicode</code></li>
 <li>分号</li>
 </ol>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p><code>JavaScript</code> 的注释分为两大类，一共有三种写法：</p>
+<h3 id="注释">注释</h3>
+<p><code>JavaScript</code> 的注释分为两大类，一共有三种写法：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612191101753.png" alt="image-20230612191101753" style="zoom:50%;" />
-
 <p>上图的第一种为 <strong>单行注释</strong>，剩下的两种为 <strong>多行注释</strong>。</p>
 <p>这里有一个小点大家注意，第三种注释方式配合 <code>VS Code</code> 可以让我们在使用 <code>js</code> 函数获得对应的注释提示：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612191150938.png" alt="image-20230612191150938" style="zoom:50%;" />
-
-<h3 id="可选的分号"><a href="#可选的分号" class="headerlink" title="可选的分号"></a>可选的分号</h3><p>我们知道在 <code>JS</code> 中分号并不是一个强制必须要有的东西，并且根据现在企业开发的标准，很多时候是 <strong>不允许</strong> 写结尾分号的。</p>
+<h3 id="可选的分号">可选的分号</h3>
+<p>我们知道在 <code>JS</code> 中分号并不是一个强制必须要有的东西，并且根据现在企业开发的标准，很多时候是 <strong>不允许</strong> 写结尾分号的。</p>
 <p>这种不允许在某些情况下，可能会导致一些错误。比如：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612172032215.png" alt="image-20230612172032215" style="zoom:50%;" />
-
 <p>这样的代码，一旦我们通过格式化处理，那么就会被合并被一行：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612172044225.png" alt="image-20230612172044225" style="zoom:50%;" />
-
 <p>所以，此时我们就增加一些 <strong>“防御性”</strong> 的分号，避免这种情况出现：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612172058260.png" alt="image-20230612172058260" style="zoom:50%;" />
-
 <p>另外有一个小的细节点需要注意，那就是 <strong>一定不能在return、break或continue等关键字后加入《换行符》</strong>，这里作者给我们列举了实例：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612172119386.png" alt="image-20230612172119386" style="zoom:50%;" />
-
-<h2 id="第3章-类型、值和变量"><a href="#第3章-类型、值和变量" class="headerlink" title="第3章 类型、值和变量"></a>第3章 类型、值和变量</h2><p>在 <code>JS</code> 中类型一般被分为两大类：</p>
+<h2 id="第3章-类型、值和变量">第3章 类型、值和变量</h2>
+<p>在 <code>JS</code> 中类型一般被分为两大类：</p>
 <ol>
 <li>简单数据类型：作者称其为 <strong>原始类型</strong></li>
 <li>复杂数据类型：作者称其为 <strong>特殊类型</strong></li>
 </ol>
 <p>整个第三章中，所讲解的主要就是这两大类型的内容。</p>
-<h3 id="原始类型"><a href="#原始类型" class="headerlink" title="原始类型"></a>原始类型</h3><p>首先咱们先来看原始类型，整个原始类型包含了 7 种类型的值： <code>number、string、boolean、null、undefined、symbol、bigint</code>。</p>
+<h3 id="原始类型">原始类型</h3>
+<p>首先咱们先来看原始类型，整个原始类型包含了 7 种类型的值： <code>number、string、boolean、null、undefined、symbol、bigint</code>。</p>
 <p>这 7 种数据类型我们不会一个一个都去讲，我们主要来看其中 5 个。</p>
 <ol>
-<li>首先是 <code>number</code>：在 <code>JS</code> 中，无论是整数还是小数都被称为 <code>number</code> 类型。但是大家要注意的是：**<code>JS</code> 中无法精确表示浮点数**。比如：<code>0.3 - 0.2</code> 是不等于 <code>0.1</code> 的。所以说 <code>JS</code> 无法进行精确地浮点数表示。</li>
-<li>接下来是 <code>null</code> 和 <code>undefined</code>：这两个值在 <code>JS</code> 中都被称为是 <strong>假性值</strong>。但是它们也有不太一样的地方。<code>null</code> 是一个特殊值，通常被用来表示 <strong>某个值不存在</strong>，它是一个 <code>object</code> 类型，我们可以使用 <code>typeof null === &#39;object&#39;</code>  来进行测试。</li>
-<li>而 <code>undefined</code> 它表示一个 “更深层次的不存在”，当我们定义一个变量但不进行赋值时，那么这个变量默认是 <code>undefined</code>。<code>undefined</code> 是一个单独的类型，我们可以使用 <code>typeof undefined === &#39;undefined&#39;</code> 来进行测试。</li>
-<li>最后是 <code>symbol</code> 和 <code>bigint</code>：这两个都是 <code>ES6</code> 之后新增的数据类型。其中 <code>symbol</code> 表示 <strong>唯一的值</strong>。我们可以通过 <code>symbol</code> 得到一个<strong>永远都不会重复</strong>的结果 <code>Symbol(&#39;a&#39;) === Symbol(&#39;a&#39;) // false</code> 。 </li>
+<li>首先是 <code>number</code>：在 <code>JS</code> 中，无论是整数还是小数都被称为 <code>number</code> 类型。但是大家要注意的是：<strong><code>JS</code> 中无法精确表示浮点数</strong>。比如：<code>0.3 - 0.2</code> 是不等于 <code>0.1</code> 的。所以说 <code>JS</code> 无法进行精确地浮点数表示。</li>
+<li>接下来是 <code>null</code> 和 <code>undefined</code>：这两个值在 <code>JS</code> 中都被称为是 <strong>假性值</strong>。但是它们也有不太一样的地方。<code>null</code> 是一个特殊值，通常被用来表示 <strong>某个值不存在</strong>，它是一个 <code>object</code> 类型，我们可以使用 <code>typeof null === 'object'</code>  来进行测试。</li>
+<li>而 <code>undefined</code> 它表示一个 “更深层次的不存在”，当我们定义一个变量但不进行赋值时，那么这个变量默认是 <code>undefined</code>。<code>undefined</code> 是一个单独的类型，我们可以使用 <code>typeof undefined === 'undefined'</code> 来进行测试。</li>
+<li>最后是 <code>symbol</code> 和 <code>bigint</code>：这两个都是 <code>ES6</code> 之后新增的数据类型。其中 <code>symbol</code> 表示 <strong>唯一的值</strong>。我们可以通过 <code>symbol</code> 得到一个<strong>永远都不会重复</strong>的结果 <code>Symbol('a') === Symbol('a') // false</code> 。</li>
 <li>而 <code>bigint</code> 表示的是 <strong>大数字</strong>。默认情况下 <code>JS</code> 中的 <code>number</code> 类型只能表示 <code>-2^53 -- 2^53</code> 之间，超过这个范围就无法精准表示了。所以 <code>ES</code> 推出了 <code>bigint</code> 来表示大数字。使用 <code>bigint</code> 非常简单，只需要在 **大数字后面加上 n ** 就可以了，同时需要注意 <code>bigint</code> 只能是 <strong>整数</strong>，另外 <code>bigint</code> 不能与 <code>number</code> 进行算术运算。</li>
 </ol>
-<h3 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h3><p>接下来我们来看特殊类型。 <code>JS</code> 中的特殊类型只有一个，那就是 <code>object</code>。或者说：在 <code>JS</code> 所有不属于原始类型的都是特殊类型。</p>
+<h3 id="特殊类型">特殊类型</h3>
+<p>接下来我们来看特殊类型。 <code>JS</code> 中的特殊类型只有一个，那就是 <code>object</code>。或者说：在 <code>JS</code> 所有不属于原始类型的都是特殊类型。</p>
 <p>比如：<code>Array</code>、<code>Object</code>、<code>Function</code>、<code>Set</code> 等等</p>
 <p>这些特殊类型我们会在 <code>第六章 - 第九章</code> 再去进行详细讲解。</p>
-<h2 id="第4章-表达式与操作符"><a href="#第4章-表达式与操作符" class="headerlink" title="第4章 表达式与操作符"></a>第4章 表达式与操作符</h2><h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><blockquote>
-<p> <strong>在 JS 中你的每一行语句，都可以被称为是一个表达式。</strong></p>
+<h2 id="第4章-表达式与操作符">第4章 表达式与操作符</h2>
+<h3 id="表达式">表达式</h3>
+<blockquote>
+<p><strong>在 JS 中你的每一行语句，都可以被称为是一个表达式。</strong></p>
 </blockquote>
-<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><h4 id="条件式调用"><a href="#条件式调用" class="headerlink" title="条件式调用"></a>条件式调用</h4><p>首先是 <strong>条件式调用</strong>：在我们的日常开发中，如果一个对象为 <strong>假性值</strong>，那么当我们获取这个对象的属性时，会得到一个错误：</p>
+<h3 id="操作符">操作符</h3>
+<h4 id="条件式调用">条件式调用</h4>
+<p>首先是 <strong>条件式调用</strong>：在我们的日常开发中，如果一个对象为 <strong>假性值</strong>，那么当我们获取这个对象的属性时，会得到一个错误：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612172916349.png" alt="image-20230612172916349" style="zoom:50%;" />
-
 <p>为了解决这样的问题，在 <code>ES2020</code> 中提供了一个新的语法 <strong>条件式调用</strong>，可以让我们避免这种错误：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612172928143.png" alt="image-20230612172928143" style="zoom:50%;" />
-
 <p>在 <code>obj</code> 后面加上一个 <code>?</code>，如果 <code>obj</code> 为假性值，则会得到一个 <code>undefined</code>。而不会抛出异常。</p>
-<h4 id="in-操作符"><a href="#in-操作符" class="headerlink" title="in 操作符"></a>in 操作符</h4><p><code>in</code> 操作符用来判断 <strong>左侧值是否是右侧对象的属性名</strong>，返回一个 <code>boolean</code> 类型的值。</p>
-<h4 id="instanceof-操作符"><a href="#instanceof-操作符" class="headerlink" title="instanceof 操作符"></a>instanceof 操作符</h4><p><code>instanceof</code> 操作符用来判断 <strong>左侧值是否是右侧类的实例</strong>，返回一个 <code>boolean</code> 类型的值。</p>
-<h4 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h4><p><code>typeof 操作符</code> 我们在前面使用过，它可以用来 <strong>判断一个值的类型</strong>。它可以判断的所有类型如下表所示：</p>
+<h4 id="in-操作符">in 操作符</h4>
+<p><code>in</code> 操作符用来判断 <strong>左侧值是否是右侧对象的属性名</strong>，返回一个 <code>boolean</code> 类型的值。</p>
+<h4 id="instanceof-操作符">instanceof 操作符</h4>
+<p><code>instanceof</code> 操作符用来判断 <strong>左侧值是否是右侧类的实例</strong>，返回一个 <code>boolean</code> 类型的值。</p>
+<h4 id="typeof-操作符">typeof 操作符</h4>
+<p><code>typeof 操作符</code> 我们在前面使用过，它可以用来 <strong>判断一个值的类型</strong>。它可以判断的所有类型如下表所示：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612173011302.png" alt="image-20230612173011302" style="zoom:50%;" />
-
-<h4 id="delete-操作符"><a href="#delete-操作符" class="headerlink" title="delete 操作符"></a>delete 操作符</h4><p><code>delete</code> 操作符可以用来 <strong>删除一个对象或数组的指定属性或元素</strong>：</p>
+<h4 id="delete-操作符">delete 操作符</h4>
+<p><code>delete</code> 操作符可以用来 <strong>删除一个对象或数组的指定属性或元素</strong>：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612173034357.png" alt="image-20230612173034357" style="zoom:50%;" />
-
-<h4 id="eval-函数（操作符）"><a href="#eval-函数（操作符）" class="headerlink" title="eval() 函数（操作符）"></a>eval() 函数（操作符）</h4><p><code>eval() </code> 是一个函数，但是在这里作者把它作为操作符来进行讲解。</p>
+<h4 id="eval-函数（操作符）">eval() 函数（操作符）</h4>
+<p><code>eval() </code> 是一个函数，但是在这里作者把它作为操作符来进行讲解。</p>
 <p><code>eval() </code> 可以接收一个 <strong>字符串</strong>，这个字符串应该是一段表达式。然后 <code>JS引擎</code> 会把这段字符串当做 <code>JavaScript</code> 代码来进行执行。</p>
-<h4 id="先定义操作符"><a href="#先定义操作符" class="headerlink" title="?? 先定义操作符"></a>?? 先定义操作符</h4><p><code>?? 先定义操作符</code> 有点类似于  <code>|| 操作符</code>。但是不同的地方在于 <code>|| 操作符</code>  中 <code>数字 0</code> 会被作为假性值判断为假，但是在 <code>?? 先定义操作符</code> 中 <code>数字 0 </code> 会被作为真来进行处理。</p>
-<h2 id="第5章-语句"><a href="#第5章-语句" class="headerlink" title="第5章 语句"></a>第5章 语句</h2><p>循环语句</p>
+<h4 id="先定义操作符">?? 先定义操作符</h4>
+<p><code>?? 先定义操作符</code> 有点类似于  <code>|| 操作符</code>。但是不同的地方在于 <code>|| 操作符</code>  中 <code>数字 0</code> 会被作为假性值判断为假，但是在 <code>?? 先定义操作符</code> 中 <code>数字 0 </code> 会被作为真来进行处理。</p>
+<h2 id="第5章-语句">第5章 语句</h2>
+<p>循环语句</p>
 <blockquote>
 <p>循环语句指的是 <strong>包含循环的语句</strong>。在 <code>JS</code> 中可以产生循环功能的语法非常多，比如：<code>while、do/while、for</code> 这三个都是基本的循环语法，这里咱们不去详细说。</p>
 <p>除此之外，还有一些 <code>ES6</code> 之后新增的循环方式：</p>
@@ -587,10 +594,11 @@
 <p><code>throw</code>：表示抛出一个异常，通常情况下，这会终止程序的执行。</p>
 <p><code>try/catch/finally</code>：可以捕获异常。当 <code>try</code> 中的代码块出现异常时，代码会进入 <code>catch</code> 执行，最终无论结果如何都会执行 <code>finally</code>。</p>
 </blockquote>
-<h2 id="第6章-对象"><a href="#第6章-对象" class="headerlink" title="第6章 对象"></a>第6章 对象</h2><p>在 <code>JS</code> 中，对象是一个属性的 <strong>无序集合</strong>，所有用 <code>&#123;&#125; </code> 包裹，并且包含 <code>key:value</code> 结构的值都是一个对象。</p>
+<h2 id="第6章-对象">第6章 对象</h2>
+<p>在 <code>JS</code> 中，对象是一个属性的 <strong>无序集合</strong>，所有用 <code>&#123;&#125; </code> 包裹，并且包含 <code>key:value</code> 结构的值都是一个对象。</p>
 <p>想要创建一个对象的话，一共有三种方式：</p>
 <ul>
-<li>对象字面量：这是最常用的一种方式 <code>const obj = &#123; name: &#39;张三&#39; &#125;</code></li>
+<li>对象字面量：这是最常用的一种方式 <code>const obj = &#123; name: '张三' &#125;</code></li>
 <li>new 创建：利用 <code>Object</code> 构造函数，配合 <code>new</code> 关键字，创建对象实例 <code>const obj = new Object</code></li>
 <li>原型创建：通过 <code>Object.create</code> 方法创建对象实例</li>
 </ul>
@@ -614,35 +622,46 @@
 <p>除此之外，<code>JS</code> 还提供了序列化的方法，所谓的序列化指的是 <strong>把对象的状态转换为字符串的过程，之后可以从中恢复对象的状态</strong> 。在 JS 中，可以通过 <code>JSON.parse</code> 和 <code>JSON.stringify</code> 来完成对象的序列化过程。</p>
 <p>最后就是 <strong>对象字面量扩展语法</strong>，这些扩展方法有些可能比较冷僻，但是有的确实在日常开发中存在一些价值，所以我们这里需要拿出来一些时间来说一下。</p>
 <ul>
-<li><p>首先是 <strong>简写属性</strong>：这种语法是开发中非常常见的语法，<strong>当 <code>key 和 value</code> 为相同的名称时，可以简写</strong>。</p>
+<li>
+<p>首先是 <strong>简写属性</strong>：这种语法是开发中非常常见的语法，<strong>当 <code>key 和 value</code> 为相同的名称时，可以简写</strong>。</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612173658238.png" alt="image-20230612173658238" style="zoom:50%;" />
 </li>
-<li><p>其次是 <strong>计算的属性名</strong>：有些时候我们可能期望使用变量来作为对象的<code>key</code>，此时就需要用到这种计算的属性名。</p>
+<li>
+<p>其次是 <strong>计算的属性名</strong>：有些时候我们可能期望使用变量来作为对象的<code>key</code>，此时就需要用到这种计算的属性名。</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612173711768.png" alt="image-20230612173711768" style="zoom:50%;" />
 </li>
-<li><p>然后是 <strong>简写方法</strong>：这个也是非常常见的一种写法。常见到很多同学都不认为这是一种简写的写法。</p>
+<li>
+<p>然后是 <strong>简写方法</strong>：这个也是非常常见的一种写法。常见到很多同学都不认为这是一种简写的写法。</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612173721850.png" alt="image-20230612173721850" style="zoom:50%;" />
 </li>
-<li><p>最后是 <strong>属性的获取方法与设置方法</strong>：我们可以通过 <code>set</code> 和 <code>get</code> 表示来标记一个对象的方法，这样这个方法就可以像调用属性一样进行调用了。<code>vue3</code> 中的 <code>ref</code> 就是通过这种方式实现的响应性。</p>
-<img src="/medias/images/loading.gif" data-original="image-20230612173734002.png" alt="image-20230612173734002" style="zoom:50%;" /></li>
+<li>
+<p>最后是 <strong>属性的获取方法与设置方法</strong>：我们可以通过 <code>set</code> 和 <code>get</code> 表示来标记一个对象的方法，这样这个方法就可以像调用属性一样进行调用了。<code>vue3</code> 中的 <code>ref</code> 就是通过这种方式实现的响应性。</p>
+<img src="/medias/images/loading.gif" data-original="image-20230612173734002.png" alt="image-20230612173734002" style="zoom:50%;" />
+</li>
 </ul>
-<h2 id="第7章-数组"><a href="#第7章-数组" class="headerlink" title="第7章 数组"></a>第7章 数组</h2><p><code>JS</code> 提供了两个 <strong>工厂方法</strong> 来创建数组：</p>
+<h2 id="第7章-数组">第7章 数组</h2>
+<p><code>JS</code> 提供了两个 <strong>工厂方法</strong> 来创建数组：</p>
 <ul>
-<li><p>第一个是 <code>Array.of()</code>：可以通过 <strong>可变数量的参数</strong> 创建一个新的 <code>Array</code> 实例，而不需要考虑参数的数量或类型。</p>
+<li>
+<p>第一个是 <code>Array.of()</code>：可以通过 <strong>可变数量的参数</strong> 创建一个新的 <code>Array</code> 实例，而不需要考虑参数的数量或类型。</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612174333706.png" alt="image-20230612174333706" style="zoom:50%;" />
 </li>
-<li><p>第二个是 <code>Array.from()</code>：这个方法的主要价值是可以把 <strong>把类数组转化为真实数组</strong>。关于类数组我们会在下面讲解到</p>
-<img src="/medias/images/loading.gif" data-original="image-20230612174345691.png" alt="image-20230612174345691" style="zoom:50%;" /></li>
+<li>
+<p>第二个是 <code>Array.from()</code>：这个方法的主要价值是可以把 <strong>把类数组转化为真实数组</strong>。关于类数组我们会在下面讲解到</p>
+<img src="/medias/images/loading.gif" data-original="image-20230612174345691.png" alt="image-20230612174345691" style="zoom:50%;" />
+</li>
 </ul>
 <p>想要添加或者删除数组元素的话，这里咱们各列举三种方式：</p>
 <ul>
-<li>添加<ul>
+<li>添加
+<ul>
 <li><code>Array.prototype.push()</code>：把指定元素添加对数组的最后</li>
 <li><code>Array.prototype.unshift()</code>：把指定元素添加到数组的最前</li>
-<li><code>arr[1] = &#39;xx&#39;</code>：把指定元素添加到数组的指定位置</li>
+<li><code>arr[1] = 'xx'</code>：把指定元素添加到数组的指定位置</li>
 </ul>
 </li>
-<li>删除<ul>
+<li>删除
+<ul>
 <li><code>Array.prototype.pop()</code>：从数组的最后删除元素</li>
 <li><code>Array.prototype.shift()</code>：从数组的最前删除元素</li>
 <li><code>delete 操作符</code>：删除数组指定位置元素</li>
@@ -651,8 +670,10 @@
 </ul>
 <p>对于数组迭代的话，我们日常开发中常用的其实只有两种：</p>
 <ul>
-<li>传统 <code>for</code> 循环：<img src="/medias/images/loading.gif" data-original="image-20230612174446241.png" alt="image-20230612174446241" style="zoom:50%;" /></li>
-<li><code>forEach</code> 循环：<br><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-javascript-quan-wei-zhi-nan/image-20230612174455484.png" alt="image-20230612174455484"></li>
+<li>传统 <code>for</code> 循环：<br>
+<img src="/medias/images/loading.gif" data-original="image-20230612174446241.png" alt="image-20230612174446241" style="zoom:50%;" /></li>
+<li><code>forEach</code> 循环：<br>
+<img src="/medias/images/loading.gif" data-original="image-20230612174455484.png" alt="image-20230612174455484"></li>
 </ul>
 <p>在 <code>JS</code> 中存在一个特殊的数组概念，叫做 <strong>类数组对象</strong>。在 <code>JS</code> 中，所有的数组都拥有如下四个特性：</p>
 <ul>
@@ -662,72 +683,82 @@
 <li>④ <code>Array.isArray()</code>对数组返回<code>true</code></li>
 </ul>
 <p>而类数组，虽然也具备 <code>length</code> 属性，但是却没有以上这四个特性。比如：<code>arguments</code>。如果想要把类数组对象转化为数组对象，可以使用我们之前提到的 <code>Array.from()</code> 方法</p>
-<h2 id="第8章函数"><a href="#第8章函数" class="headerlink" title="第8章函数"></a>第8章函数</h2><p>函数包含参数的概念，参数分为 <strong>形参</strong> 和 <strong>实参</strong> 。其中 <strong>形参</strong> 表示 <strong>定义函数时指定的参数</strong>。 <strong>实参</strong> 表示 <strong>调用函数时传递的参数</strong>。在 <code>JS</code> 中实参和形参并 <strong>不需要</strong> 是一一对应的，同时函数调用也不对传入的实参进行任何类型检查。那么这样的一个动态的形式，在 <code>JS</code> 中就被分为了 <code>5</code> 个概念：</p>
+<h2 id="第8章函数">第8章函数</h2>
+<p>函数包含参数的概念，参数分为 <strong>形参</strong> 和 <strong>实参</strong> 。其中 <strong>形参</strong> 表示 <strong>定义函数时指定的参数</strong>。 <strong>实参</strong> 表示 <strong>调用函数时传递的参数</strong>。在 <code>JS</code> 中实参和形参并 <strong>不需要</strong> 是一一对应的，同时函数调用也不对传入的实参进行任何类型检查。那么这样的一个动态的形式，在 <code>JS</code> 中就被分为了 <code>5</code> 个概念：</p>
 <ul>
-<li><p>可选形参与默认值：这样的代码表示，如果没有传入 <code>a</code> 形参，那么 <code>a</code> 默认为 <code>[]</code></p>
+<li>
+<p>可选形参与默认值：这样的代码表示，如果没有传入 <code>a</code> 形参，那么 <code>a</code> 默认为 <code>[]</code></p>
 <img src="/medias/images/loading.gif" data-original="image-20230612175022888.png" alt="image-20230612175022888" style="zoom:50%;" />
 </li>
-<li><p>剩余形参与可变长度实参列表：可以通过 <code>...</code> 的形式来获取所有的剩余实参。在这里 <code>rest = [10, 100, 2, 3, 1000, 4, 5, 6]</code></p>
+<li>
+<p>剩余形参与可变长度实参列表：可以通过 <code>...</code> 的形式来获取所有的剩余实参。在这里 <code>rest = [10, 100, 2, 3, 1000, 4, 5, 6]</code></p>
 <img src="/medias/images/loading.gif" data-original="image-20230612175044195.png" alt="image-20230612175044195" style="zoom:50%;" />
 </li>
-<li><p><code>Arguments</code> 对象：表示或许所有的实参，它是一个伪数组，可以通过 <code>Array.from</code> 方法转化为真实数组</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-javascript-quan-wei-zhi-nan/image-20230612175102465.png" alt="image-20230612175102465"></p>
+<li>
+<p><code>Arguments</code> 对象：表示或许所有的实参，它是一个伪数组，可以通过 <code>Array.from</code> 方法转化为真实数组</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20230612175102465.png" alt="image-20230612175102465"></p>
 </li>
-<li><p>在函数调用中使用扩展操作符：在实参中可以使用扩展运算符，这表示把数组所有的元素作为一个一个的实参单独传入</p>
+<li>
+<p>在函数调用中使用扩展操作符：在实参中可以使用扩展运算符，这表示把数组所有的元素作为一个一个的实参单独传入</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612175122564.png" alt="image-20230612175122564" style="zoom:50%;" />
 </li>
-<li><p>把函数实参解构为形参：函数的形参可以直接进行解构</p>
-<img src="/medias/images/loading.gif" data-original="image-20230612175136561.png" alt="image-20230612175136561" style="zoom:50%;" /></li>
+<li>
+<p>把函数实参解构为形参：函数的形参可以直接进行解构</p>
+<img src="/medias/images/loading.gif" data-original="image-20230612175136561.png" alt="image-20230612175136561" style="zoom:50%;" />
+</li>
 </ul>
 <p>函数内部可以嵌套函数，如果 <strong>一个函数访问了其它函数作用域中才有的变量</strong>，那么这个函数可以叫做 <strong>闭包函数</strong>。闭包是在面试时的一个常见概念，需要大家能够掌握。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-javascript-quan-wei-zhi-nan/image-20230612175235324.png" alt="image-20230612175235324"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20230612175235324.png" alt="image-20230612175235324"></p>
 <p>对于函数而言，它除了可以被调用之外，还拥有自己的 <strong>属性</strong> 和 <strong>方法</strong>。</p>
 <ul>
-<li><p>属性：函数的属性有很多，咱们这里主要说三个</p>
+<li>
+<p>属性：函数的属性有很多，咱们这里主要说三个</p>
 <ul>
 <li><code>length</code> 属性：形参的个数</li>
 <li><code>name</code> 属性：定义函数时使用的名字</li>
 <li><code>prototype</code> 属性：获取原型对象</li>
 </ul>
 </li>
-<li><p>方法</p>
+<li>
+<p>方法</p>
 <ul>
-<li><p><code>call()、apply()</code>：这两个是函数的典型方法。<code>call()</code>和<code>apply()</code>允许间接调用一个函数，就像这个函数是某个其他 <strong>对象</strong> 的方法一样，同时会把该函数中的 <code>this</code> 修改为当前对象。</p>
+<li>
+<p><code>call()、apply()</code>：这两个是函数的典型方法。<code>call()</code>和<code>apply()</code>允许间接调用一个函数，就像这个函数是某个其他 <strong>对象</strong> 的方法一样，同时会把该函数中的 <code>this</code> 修改为当前对象。</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612190335748.png" alt="image-20230612190335748" style="zoom:50%;" />
 </li>
-<li><p><code>bind()</code>：在函数 <code>f</code> 上调用 <code>bind()</code> 方法并传入对象 <code>o</code>，则这个方法会返回一个新函数。同时它也会修改函数 <code>f</code> 中的 <code>this</code> 指向</p>
+<li>
+<p><code>bind()</code>：在函数 <code>f</code> 上调用 <code>bind()</code> 方法并传入对象 <code>o</code>，则这个方法会返回一个新函数。同时它也会修改函数 <code>f</code> 中的 <code>this</code> 指向</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612190346634.png" alt="image-20230612190346634" style="zoom:50%;" />
 </li>
-<li><p><code>toString()</code> 方法：返回一个符合函数声明语句的字符串</p>
+<li>
+<p><code>toString()</code> 方法：返回一个符合函数声明语句的字符串</p>
 </li>
-<li><p><code>Function()</code> 构造函数：使用 Function() 构造函数可以用来 创建新函数</p>
-<img src="/medias/images/loading.gif" data-original="image-20230612190355559.png" alt="image-20230612190355559" style="zoom:50%;" /></li>
+<li>
+<p><code>Function()</code> 构造函数：使用 Function() 构造函数可以用来 创建新函数</p>
+<img src="/medias/images/loading.gif" data-original="image-20230612190355559.png" alt="image-20230612190355559" style="zoom:50%;" />
+</li>
 </ul>
 <p>最后如果一个函数 <strong>接收一个函数参数，并返回一个新函数</strong> 的话，那么这个函数可以被叫做 <strong>高阶函数</strong></p>
-<img src="/medias/images/loading.gif" data-original="image-20230612190407357.png" alt="image-20230612190407357" style="zoom:50%;" /></li>
+<img src="/medias/images/loading.gif" data-original="image-20230612190407357.png" alt="image-20230612190407357" style="zoom:50%;" />
+</li>
 </ul>
-<h2 id="第9章-类"><a href="#第9章-类" class="headerlink" title="第9章 类"></a>第9章 类</h2><p>首先 <code>JS</code> 中把 <strong>可以让一组对象在同一个原型对象中继承属性</strong> 的东西称之为 <strong>类</strong>。比如，我们可以简单的通过 <code>Object.create() 创建实例</code> ，那此时 <code>Object</code> 其实就可以被称为一个类。</p>
+<h2 id="第9章-类">第9章 类</h2>
+<p>首先 <code>JS</code> 中把 <strong>可以让一组对象在同一个原型对象中继承属性</strong> 的东西称之为 <strong>类</strong>。比如，我们可以简单的通过 <code>Object.create() 创建实例</code> ，那此时 <code>Object</code> 其实就可以被称为一个类。</p>
 <p>在 <code>ES6</code> 之前，类以构造函数的形式进行呈现，所谓构造函数其实就是一个 <strong>首字母大写的普通函数</strong>：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612190420015.png" alt="image-20230612190420015" style="zoom:50%;" />
-
 <p>因为它是一个普通函数，所以它既可以通过 <strong>构造函数</strong> 的形式，配合 <code>new</code> 进行使用。也可以直接调用使用。如果我们想要判断当前的函数是否是通过 <code>new</code> 关键字使用的，那么可以通过 <code>new.target</code> 来进行判定“：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612190431804.png" alt="image-20230612190431804" style="zoom:50%;" />
-
 <p>通过构造函数得到的实例，可以利用 <code>instanceof</code> 关键字进行判定</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612190441808.png" alt="image-20230612190441808" style="zoom:50%;" />
-
 <p>在 <code>ES6</code> 之后，<code>ES</code> 推出了  <code>class</code> 的语法，利用 <code>class</code> 语法可以直接创建类，而不需要在像之前通过构造函数进行创建了。我们可以使用 <code>class</code> 重写 <code>Range</code> 类：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612190450512.png" alt="image-20230612190450512" style="zoom:50%;" />
-
 <p>有了 <code>class</code> 之后，如果想要实现继承，那么就非常简单了，可以直接通过 <code>extends 实现继承</code>：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612190459918.png" alt="image-20230612190459918" style="zoom:50%;" />
-
-<p>利用 <code>static</code> 关键字，可以为类设置静态方法：静态方法是作为构造函数而非原型对象的属性定义的。 </p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/06/12/jing-du-javascript-quan-wei-zhi-nan/image-20230612190507402.png" alt="image-20230612190507402"></p>
+<p>利用 <code>static</code> 关键字，可以为类设置静态方法：静态方法是作为构造函数而非原型对象的属性定义的。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20230612190507402.png" alt="image-20230612190507402"></p>
 <p>以上代码通过：<code>Range.parse()</code> 调用</p>
 <p>因为 <code>class</code> 本质上依然是 <strong>原型继承</strong> 的机制，所以我们可以通过 <code>prototype</code> 属性来为已有的类添加方法：</p>
 <img src="/medias/images/loading.gif" data-original="image-20230612180421423.png" alt="image-20230612180421423" style="zoom:50%;" />
-
 <blockquote>
 <p>视频出处：【(旧)一小时读完《JavaScript权威指南（第7版）》上】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ts4y1N7S2/?share_source=copy_web&amp;vd_source=a9f0fd4630ebe41da19ca2c83eb295e6">https://www.bilibili.com/video/BV1Ts4y1N7S2/?share_source=copy_web&amp;vd_source=a9f0fd4630ebe41da19ca2c83eb295e6</a></p>
 <p>视频文档出处：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7211422882252947515">https://juejin.cn/post/7211422882252947515</a></p>

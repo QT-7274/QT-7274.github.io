@@ -500,7 +500,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><code>Tree shaking</code> 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 <code>Dead code elimination</code></p>
+                <h2 id="概念">概念</h2>
+<p><code>Tree shaking</code> 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 <code>Dead code elimination</code></p>
 <p>简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码</p>
 <p>如果把代码打包比作制作蛋糕，传统的方式是把鸡蛋（带壳）全部丢进去搅拌，然后放入烤箱，最后把（没有用的）蛋壳全部挑选并剔除出去</p>
 <p>而<code>treeshaking</code>则是一开始就把有用的蛋白蛋黄（import）放入搅拌，最后直接作出蛋糕</p>
@@ -509,19 +510,19 @@
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
  
 Vue<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>而<code>Vue3</code>源码引入<code>tree shaking</code>特性，将全局 API 进行分块。如果您不使用其某些功能，它们将不会包含在您的基础包中</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123; nextTick, observable &#125; from &#39;vue&#39;
  
 nextTick(() &#x3D;&gt; &#123;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><code>Tree shaking</code>是基于<code>ES6</code>模板语法（<code>import</code>与<code>exports</code>），主要是借助<code>ES6</code>模块的静态编译思想，在编译时就能确定模块的依赖关系，以及输入和输出的变量</p>
+<h2 id="实现">实现</h2>
+<p><code>Tree shaking</code>是基于<code>ES6</code>模板语法（<code>import</code>与<code>exports</code>），主要是借助<code>ES6</code>模块的静态编译思想，在编译时就能确定模块的依赖关系，以及输入和输出的变量</p>
 <p><code>Tree shaking</code>无非就是做了两件事：</p>
 <ul>
 <li>编译阶段利用<code>ES6 Module</code>判断哪些模块已经加载</li>
 <li>判断那些模块和变量未被使用或者引用，进而删除对应代码</li>
 </ul>
-<h3 id="Vue2-项目"><a href="#Vue2-项目" class="headerlink" title="Vue2 项目"></a>Vue2 项目</h3><p>组件中使用<code>data</code>属性</p>
+<h3 id="Vue2-项目">Vue2 项目</h3>
+<p>组件中使用<code>data</code>属性</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;script&gt;
     export default &#123;
         data: () &#x3D;&gt; (&#123;
@@ -529,9 +530,8 @@ nextTick(() &#x3D;&gt; &#123;&#125;)<span aria-hidden="true" class="line-numbers
         &#125;),
     &#125;;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>对项目进行打包，体积如下图</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/14/vue3-0-zhong-treeshaking-te-xing/6bd2aff0-6097-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="6bd2aff0-6097-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <p>为组件设置其他属性（<code>compted</code>、<code>watch</code>）</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
     <span class="token function-variable function">data</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -548,10 +548,10 @@ nextTick(() &#x3D;&gt; &#123;&#125;)<span aria-hidden="true" class="line-numbers
             <span class="token keyword">this</span><span class="token punctuation">.</span>answer <span class="token operator">=</span> <span class="token string">'xxxx'</span>
         <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>再一次打包，发现打包出来的体积并没有变化</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/14/vue3-0-zhong-treeshaking-te-xing/7c29e260-6097-11eb-ab90-d9ae814b240d.png" alt="img"></p>
-<h3 id="Vue3-项目"><a href="#Vue3-项目" class="headerlink" title="Vue3 项目"></a>Vue3 项目</h3><p>组件中简单使用</p>
+<p><img src="/medias/images/loading.gif" data-original="7c29e260-6097-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<h3 id="Vue3-项目">Vue3 项目</h3>
+<p>组件中简单使用</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> reactive<span class="token punctuation">,</span> defineComponent <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
   <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -563,9 +563,8 @@ nextTick(() &#x3D;&gt; &#123;&#125;)<span aria-hidden="true" class="line-numbers
     <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>将项目进行打包</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/14/vue3-0-zhong-treeshaking-te-xing/95df0000-6097-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="95df0000-6097-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <p>在组件中引入<code>computed</code>和<code>watch</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> reactive<span class="token punctuation">,</span> defineComponent<span class="token punctuation">,</span> computed<span class="token punctuation">,</span> watch <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -590,10 +589,10 @@ nextTick(() &#x3D;&gt; &#123;&#125;)<span aria-hidden="true" class="line-numbers
     <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>再次对项目进行打包，可以看到在引入<code>computer</code>和<code>watch</code>之后，项目整体体积变大了</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/14/vue3-0-zhong-treeshaking-te-xing/b36a7a00-6097-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>通过<code>Tree shaking</code>，<code>Vue3</code>给我们带来的好处是：</p>
+<p><img src="/medias/images/loading.gif" data-original="b36a7a00-6097-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<h2 id="作用">作用</h2>
+<p>通过<code>Tree shaking</code>，<code>Vue3</code>给我们带来的好处是：</p>
 <ul>
 <li>减少程序体积（更小）</li>
 <li>减少程序执行时间（更快）</li>

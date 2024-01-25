@@ -500,7 +500,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="第二章：块级作用域声明：-let-和-const"><a href="#第二章：块级作用域声明：-let-和-const" class="headerlink" title="第二章：块级作用域声明： let 和 const"></a>第二章：块级作用域声明： let 和 const</h2><h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>对于现在的 <code>JavaScript</code> 来说，声明变量的方式一共有三种：</p>
+                <h2 id="第二章：块级作用域声明：-let-和-const">第二章：块级作用域声明： let 和 const</h2>
+<h3 id="变量声明">变量声明</h3>
+<p>对于现在的 <code>JavaScript</code> 来说，声明变量的方式一共有三种：</p>
 <blockquote>
 <ul>
 <li><code>var</code>：变量，会跳出块级作用域</li>
@@ -508,41 +510,42 @@
 <li><code>const</code>：常量，不会跳出块级作用域</li>
 </ul>
 </blockquote>
-<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>什么是块级作用域？</p>
+<h3 id="块级作用域">块级作用域</h3>
+<p>什么是块级作用域？</p>
 <blockquote>
 <p>所谓块级作用域指的是 <strong>两个大括号中间的内容</strong>，比如 <code>for 循环、if、函数</code> 只要存在 <code>&#123;&#125;</code> 那么都会生成块级作用域。</p>
 </blockquote>
 <p>除了块级作用域之外，<code>var</code> 和 <code>let、const</code> 在特性上也有一些区别。这个区别主要体现在两个方面 <strong>变量提升、暂时性死区（<code>TDZ</code>）</strong></p>
-<h3 id="变量提升与暂时性死区"><a href="#变量提升与暂时性死区" class="headerlink" title="变量提升与暂时性死区"></a>变量提升与暂时性死区</h3><p>咱们先来看变量提升。对于 <code>var</code> 声明的变量而言，会存在变量提升的概念，也就是可以 <strong>先使用、后定义</strong>，咱么来看这段代码：</p>
+<h3 id="变量提升与暂时性死区">变量提升与暂时性死区</h3>
+<p>咱们先来看变量提升。对于 <code>var</code> 声明的变量而言，会存在变量提升的概念，也就是可以 <strong>先使用、后定义</strong>，咱么来看这段代码：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(msg) &#x2F;&#x2F; undefined （并不会报错）
 var msg &#x3D; &#39;hello world&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>在这段代码中，<code>msg</code> 变量先被使用，后声明。虽然打印了 <code>undefined</code>，但是它并不会报错。</p>
 <p>原因是因为，以上代码会被编译为以下形式：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var msg
 console.log(msg) &#x2F;&#x2F; undefined
 msg &#x3D; &#39;hello world&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>即 <strong>msg 变量的定义会被提升到最前面</strong>。而这种形式就叫做 <strong>变量提升</strong>。</p>
 <p>但是如果我们使用 <code>let 或 const</code> 来代替 <code>var</code> 的话，因为 <code>let、const</code> 不具备变量提升，所以就会抛出对应的错误：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(msg2); &#x2F;&#x2F; Uncaught ReferenceError: Cannot access &#39;msg2&#39; before initialization
 let msg2 &#x3D; &#39;hello word&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>而这样的错误，就被叫做 <strong>暂时性死区（ temporal dead zone，简称TDZ ）。</strong></p>
-<h3 id="旧习换新"><a href="#旧习换新" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>这里的旧习换新主要包含两点：</p>
+<h3 id="旧习换新">旧习换新</h3>
+<p>这里的旧习换新主要包含两点：</p>
 <ul>
-<li>第一点是 **不要使用 <code>var</code>，改用 <code>let</code> 和 <code>const</code>**：因为无论是 <strong>跳出块级作用域也好，还是变量提升也好</strong>，在标准图灵完备的编程语言中，都不是一个应该具备的特性。</li>
+<li>第一点是 <strong>不要使用 <code>var</code>，改用 <code>let</code> 和 <code>const</code></strong>：因为无论是 <strong>跳出块级作用域也好，还是变量提升也好</strong>，在标准图灵完备的编程语言中，都不是一个应该具备的特性。</li>
 <li>第二点是 <strong>缩小变量的作用域，从而提升可维护性</strong>：想要理解这句话，可能需要具备一定的编程经验。如果大家不是很理解的话，那么可以想象一下 <strong>一万行代码的文件和一百行代码的文件</strong> 哪个更好维护？我们始终需要谨记 <strong>代码越少，越容易维护</strong>。所以 <strong>缩小你的作用域空间，减少逻辑的复杂度。</strong></li>
 </ul>
-<h2 id="第三章：函数的新特性"><a href="#第三章：函数的新特性" class="headerlink" title="第三章：函数的新特性"></a>第三章：函数的新特性</h2><p>函数作为 <code>JavaScript 世界</code> 的 <strong>一等公民</strong>，是我们在实际项目开发中，无时无刻不在使用的东西。</p>
+<h2 id="第三章：函数的新特性">第三章：函数的新特性</h2>
+<p>函数作为 <code>JavaScript 世界</code> 的 <strong>一等公民</strong>，是我们在实际项目开发中，无时无刻不在使用的东西。</p>
 <p>在这一章中，咱们主要从 <strong>参数、this 指向、构造函数</strong> 这三个方面来去说明函数的新特性。</p>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>函数的参数分为两种 <strong>形参、实参</strong>。所谓形参指的是 <strong>定义函数时指定的形式参数</strong>。所谓实参指的是 <strong>调用函数时，传递的实际参数。</strong></p>
-<p>而在定义形参时，我们可以通过 <strong>赋值符 &#x3D;</strong> 的形式，为形参指定 <strong>默认值</strong>。这表示 <strong>如果没有传递对应的实参，则该形参默认为该值</strong></p>
+<h3 id="参数">参数</h3>
+<p>函数的参数分为两种 <strong>形参、实参</strong>。所谓形参指的是 <strong>定义函数时指定的形式参数</strong>。所谓实参指的是 <strong>调用函数时，传递的实际参数。</strong></p>
+<p>而在定义形参时，我们可以通过 <strong>赋值符 =</strong> 的形式，为形参指定 <strong>默认值</strong>。这表示 <strong>如果没有传递对应的实参，则该形参默认为该值</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn(name &#x3D; &#39;张三&#39;) &#123;
   console.log(name); &#x2F;&#x2F; 张三
 &#125;
 fn()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这个默认值可以为 <strong>任意的单一表达式</strong>，比如我们可以指定一个 <strong>立即执行的箭头函数</strong>，那么此时默认值会为该函数的值：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 箭头函数：() &#x3D;&gt; &#39;李四&#39;
 &#x2F;&#x2F; (() &#x3D;&gt; &#39;李四&#39;)() 表示立即执行的箭头函数
@@ -550,10 +553,10 @@ function fn(name &#x3D; (() &#x3D;&gt; &#39;李四&#39;)()) &#123;
   console.log(name);
 &#125;
 fn()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在 <code>JavaScript</code> 中，函数的实参和形参并不要求是一一对应的。也就是说 <strong>实参的数量可以超过形参的数量</strong>。那么在这种情况下，如果我们想要获取到 <strong>多余的实参</strong>，一共有两种方式：</p>
 <ul>
-<li><p>第一种是传统的 <code>arguments </code>，但是它并不是通用的，<strong>在箭头函数中无法使用</strong></p>
+<li>
+<p>第一种是传统的 <code>arguments </code>，但是它并不是通用的，<strong>在箭头函数中无法使用</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn(name) &#123;
   console.log(arguments); &#x2F;&#x2F; [&#39;张三&#39;, 30, &#39;男&#39;, callee: ƒ, Symbol(Symbol.iterator): ƒ]
 &#125;
@@ -564,7 +567,8 @@ const fn &#x3D; (name) &#x3D;&gt; &#123;
 
 fn(&#39;张三&#39;, 30, &#39;男&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>第二种是 <code>ES6 之后</code> 新增的 <strong>“rest” 参数</strong>，它是通用的，表示 <strong>接收所有的剩余参数</strong></p>
+<li>
+<p>第二种是 <code>ES6 之后</code> 新增的 <strong>“rest” 参数</strong>，它是通用的，表示 <strong>接收所有的剩余参数</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn(name, ...args) &#123;
   console.log(args); &#x2F;&#x2F; [30, &#39;男&#39;]
 &#125;
@@ -573,18 +577,22 @@ const fn &#x3D; (name, ...args) &#x3D;&gt; &#123;
   console.log(args); &#x2F;&#x2F; [30, &#39;男&#39;]
 &#125;
 
-fn(&#39;张三&#39;, 30, &#39;男&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+fn(&#39;张三&#39;, 30, &#39;男&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h3 id="this-指向"><a href="#this-指向" class="headerlink" title="this 指向"></a>this 指向</h3><p>针对 <code>this</code> 指向，指的是 <strong>普通函数和箭头函数</strong> 下的 <code>this</code> 指向问题。</p>
+<h3 id="this-指向">this 指向</h3>
+<p>针对 <code>this</code> 指向，指的是 <strong>普通函数和箭头函数</strong> 下的 <code>this</code> 指向问题。</p>
 <p>这应该是一个 <strong>面试</strong> 时的高频问点。当大家遇到这样的问题时，大多数时候只需要从三个方面进行回答即可：</p>
 <ul>
-<li><p>首先第一个方面是 <strong>普通函数的 this 指向</strong>：针对于普通函数而言，<code>this</code> 指向<span style="color: red">调用方</span></p>
+<li>
+<p>首先第一个方面是 <strong>普通函数的 this 指向</strong>：针对于普通函数而言，<code>this</code> 指向<span style="color: red">调用方</span></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn() &#123;
   console.log(this); &#x2F;&#x2F; window
 &#125;
 fn() &#x2F;&#x2F; window.fn()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>然后是箭头函数：针对于箭头函数而言，不会修改 <code>this</code> 指向，即 <strong>this 指向上层作用域中的 this</strong> </p>
+<li>
+<p>然后是箭头函数：针对于箭头函数而言，不会修改 <code>this</code> 指向，即 <strong>this 指向上层作用域中的 this</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
   name: &#39;张三&#39;,
   fn() &#123;
@@ -598,7 +606,8 @@ fn() &#x2F;&#x2F; window.fn()<span aria-hidden="true" class="line-numbers-rows">
 &#125;
 person.fn()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>最后是 <code>call、apply、bind</code> 这三个 <code>API</code>：它们都可以在 <strong>普通函数</strong> 中修改 <code>this</code> 指向，<code>this</code> 指向它们的第一个参数</p>
+<li>
+<p>最后是 <code>call、apply、bind</code> 这三个 <code>API</code>：它们都可以在 <strong>普通函数</strong> 中修改 <code>this</code> 指向，<code>this</code> 指向它们的第一个参数</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
   name: &#39;张三&#39;
 &#125;
@@ -613,9 +622,11 @@ function fn2() &#123;
 
 fn.apply(person)
 fn2.call(person)
-fn.bind(person)()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+fn.bind(person)()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>构造函数通常指 <strong>首字母大写的普通函数</strong> 。也就是说：<span style="color: red"><strong>箭头函数永远不可以作为构造函数使用</strong></span></p>
+<h3 id="构造函数">构造函数</h3>
+<p>构造函数通常指 <strong>首字母大写的普通函数</strong> 。也就是说：<span style="color: red"><strong>箭头函数永远不可以作为构造函数使用</strong></span></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Person(name) &#123;
   &#x2F;&#x2F; this 指向实例对象
   this.name &#x3D; name
@@ -630,18 +641,20 @@ const Person2 &#x3D; (name) &#x3D;&gt; &#123;
 &#125;
 const p2 &#x3D; new Person2(&#39;张三&#39;)
 console.log(p2); &#x2F;&#x2F; Uncaught TypeError: Person2 is not a constructor<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="旧习换新-1"><a href="#旧习换新-1" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>这一章的旧习换新主要包含四点内容，也是对本章重点内容的总结：</p>
+<h3 id="旧习换新-2">旧习换新</h3>
+<p>这一章的旧习换新主要包含四点内容，也是对本章重点内容的总结：</p>
 <ul>
 <li>首选是关于箭头函数和普通函数的使用场景： <strong>不想修改 this 指向时，使用箭头函数。需要改变 this 的指向时，使用普通函数</strong></li>
 <li>其次是关于参数默认值：<strong>使用参数默认值，而不要使用代码为参数赋初始值</strong></li>
 <li>第三是关于剩余参数： <strong>使用 rest 参数替代 arguments 关键字</strong> 来获取剩余参数</li>
 </ul>
-<h2 id="第四章：类"><a href="#第四章：类" class="headerlink" title="第四章：类"></a>第四章：类</h2><p>针对于第四章而言，从名字到内容都非常的纯粹，一个字 <strong>类</strong>。</p>
+<h2 id="第四章：类">第四章：类</h2>
+<p>针对于第四章而言，从名字到内容都非常的纯粹，一个字 <strong>类</strong>。</p>
 <p>那么对于这一章的内容，让我们从一个问题开始：我们常说 <strong>JavaScript 实际上没有类，只是用原型来模拟了类？是这样的吗？</strong></p>
 <p>答案是 <strong>当然不是</strong>。其实从 <code>ES2015</code> 之后，<code>ECMAScript</code> 标准为 <code>JavaScript</code> 提供了 <strong>类</strong> 的概念。它并不是原型的模拟，只是 <strong>可以用原型来模拟类而已</strong>。</p>
 <p>那么下面咱们就来看看 <code>ES2015</code> 之后的 <strong>类语法</strong></p>
-<h3 id="类语法"><a href="#类语法" class="headerlink" title="类语法"></a>类语法</h3><p>类语法分为 <strong>创建</strong> 和 <strong>使用</strong> 两部分。</p>
+<h3 id="类语法">类语法</h3>
+<p>类语法分为 <strong>创建</strong> 和 <strong>使用</strong> 两部分。</p>
 <p>咱们先来看类的创建：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const fnName &#x3D; &#39;fn&#39; + Math.floor(Math.random() * 1000)
 class Color &#123;
@@ -680,7 +693,6 @@ class Color &#123;
     return &#96;动态方法名为：$&#123;fnName&#125;&#96;
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在这段代码中，我们通过类语法 <code>class</code> 创建了一个类 <code>Color</code>，这里大家注意，根据规范 <strong>类名首字母应该大写</strong>。这里的代码我已经写好了注释，大家可以在这里暂停来查看下对应的代码内容。</p>
 <p>而如果想要使用类的话，那么必须要通过 <code>new</code> 关键字来进行使用：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const c &#x3D; new Color(30, 144, 255)
@@ -688,14 +700,15 @@ console.log(c[fnName]()); &#x2F;&#x2F; 动态方法名为：fn275
 console.log(c.toString()); &#x2F;&#x2F; 重写的原型方法：rgb(30, 144, 255)
 console.log(c.rgb); &#x2F;&#x2F; rgb(30, 144, 255)
 console.log(Color.fromCss(255, 255, 255)); &#x2F;&#x2F; Color &#123;r: 255, g: 255, b: 255&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="类继承"><a href="#类继承" class="headerlink" title="类继承"></a>类继承</h3><p>继承在编程语言中是一个非常常见的概念，在 <code>ES6</code> 之前想要完成继承，那么多数情况下需要使用 <strong>原型继承</strong> 的方式。而原型继承有很多种，比如：<strong>组合式继承、原型式继承、寄生式继承、寄生式组合继承 ……</strong> 很多种方式。</p>
+<h3 id="类继承">类继承</h3>
+<p>继承在编程语言中是一个非常常见的概念，在 <code>ES6</code> 之前想要完成继承，那么多数情况下需要使用 <strong>原型继承</strong> 的方式。而原型继承有很多种，比如：<strong>组合式继承、原型式继承、寄生式继承、寄生式组合继承 …</strong> 很多种方式。</p>
 <p>但是在实际开发中，如果我们直接使用类语法的话，那么想要实现继承就非常容易了。只需要使用到一个关键字 <code>extends</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class SubColor extends Color &#123;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="super-关键字"><a href="#super-关键字" class="headerlink" title="super 关键字"></a>super 关键字</h3><p>而除了 <code>extends</code> 之外，类继承的时候还有另外一个关键字 <code>super</code>。 <code>super</code> 关键字可以用来 <strong>处理与父类相关的事情</strong>。</p>
+<h3 id="super-关键字">super 关键字</h3>
+<p>而除了 <code>extends</code> 之外，类继承的时候还有另外一个关键字 <code>super</code>。 <code>super</code> 关键字可以用来 <strong>处理与父类相关的事情</strong>。</p>
 <p>它的使用场景主要有两个：</p>
-<h4 id="作为函数使用"><a href="#作为函数使用" class="headerlink" title="作为函数使用"></a>作为函数使用</h4><p><code>super</code> 关键字可以直接作为函数进行使用。比如：在构造函数中使用时，<code>super</code> 可以直接调用父类的构造函数，在通常情况下 <span style='color: red'><strong>这是一个必须的操作</strong></span></p>
+<h4 id="作为函数使用">作为函数使用</h4>
+<p><code>super</code> 关键字可以直接作为函数进行使用。比如：在构造函数中使用时，<code>super</code> 可以直接调用父类的构造函数，在通常情况下 <span style='color: red'><strong>这是一个必须的操作</strong></span></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class SubColor extends Color &#123;
   constructor(r &#x3D; 0, g &#x3D; 0, b &#x3D; 0, a &#x3D; 1) &#123;
     &#x2F;&#x2F; 触发父类的构造函数
@@ -703,8 +716,8 @@ console.log(Color.fromCss(255, 255, 255)); &#x2F;&#x2F; Color &#123;r: 255, g: 
     this.a &#x3D; a
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="作为属性查询使用"><a href="#作为属性查询使用" class="headerlink" title="作为属性查询使用"></a>作为属性查询使用</h4><p><code>super</code> 关键字可以用来 <strong>访问一个对象字面或类的 [[Prototype]] 的方法和属性</strong>。比如：我们可以在静态方法中利用 <code>super</code> 访问父类的静态方法</p>
+<h4 id="作为属性查询使用">作为属性查询使用</h4>
+<p><code>super</code> 关键字可以用来 <strong>访问一个对象字面或类的 [[Prototype]] 的方法和属性</strong>。比如：我们可以在静态方法中利用 <code>super</code> 访问父类的静态方法</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class SubColor extends Color &#123;
   static fromCss(r, g, b, a &#x3D; 1) &#123;
     &#x2F;&#x2F; 通过 super 调用父类的静态方法
@@ -716,8 +729,8 @@ console.log(Color.fromCss(255, 255, 255)); &#x2F;&#x2F; Color &#123;r: 255, g: 
 &#x2F;&#x2F; 子类重写的 formCss。result &#x3D; &#123;color: red&#125; + &#123;fontSize: 20px&#125;
 console.log(Color.fromCss(255, 255, 255));
 console.log(SubColor.fromCss(255, 255, 255, 1)); &#x2F;&#x2F; SubColor &#123;r: 255, g: 255, b: 255, a: 1&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="new-target"><a href="#new-target" class="headerlink" title="new.target"></a>new.target</h3><p>对于类而言，最后一个需要大家关注的概念就是 <code>new.target</code>。</p>
+<h3 id="new-target">new.target</h3>
+<p>对于类而言，最后一个需要大家关注的概念就是 <code>new.target</code>。</p>
 <p><strong><code>new.target</code></strong> 属性允许你 <strong>检测函数或构造方法是否是通过 new 运算符被调用的，并且可以返回一个指向构造方法或函数的引用</strong>。</p>
 <p>我们可以利用它来判断 <strong>当前触发构造函数时是通过哪个类来触发的</strong> ，这在 <strong>多层继承判断来源时会非常有用</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Color &#123;
@@ -735,9 +748,10 @@ class SubColor extends Color &#123;
 new Color() &#x2F;&#x2F; new.target: 指向 Color
 
 new SubColor() &#x2F;&#x2F; new.target: 指向 SubColor<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="旧习换新-2"><a href="#旧习换新-2" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>这里的旧习换新环节，就比较简单了，只有一点： <strong>实际开发中，通过 <code>class</code> 来完成类的构建和继承。</strong></p>
-<h2 id="第五章：对象的新特性"><a href="#第五章：对象的新特性" class="headerlink" title="第五章：对象的新特性"></a>第五章：对象的新特性</h2><p>接下来我们来看对象在 <code>ES6</code> 之后的新特性。</p>
+<h3 id="旧习换新-3">旧习换新</h3>
+<p>这里的旧习换新环节，就比较简单了，只有一点： <strong>实际开发中，通过 <code>class</code> 来完成类的构建和继承。</strong></p>
+<h2 id="第五章：对象的新特性">第五章：对象的新特性</h2>
+<p>接下来我们来看对象在 <code>ES6</code> 之后的新特性。</p>
 <p>对象在我们日常开发中使用的场景是非常多的，所以这一章中的很多新特性大家或多或少的应该都有一些了解。我挑选了几个日常开发中最常用的语法，来给大家进行下分享。</p>
 <p>首先是  <strong>可计算的属性名</strong>。</p>
 <p>有些时候，我们可能希望 <strong>对象的 <code>key</code> 是一个不确定的唯一值。</strong> 比如：世界上每一个人都是唯一的，所以 <code>person</code> 对象应该具备一个唯一的 <code>“特性”</code> ，那么我们就可以通过这种方式来进行表示</p>
@@ -748,7 +762,6 @@ const person &#x3D; &#123;
   [key]: key
 &#125;
 console.log(person); &#x2F;&#x2F; &#123;name: &#39;张三&#39;, Symbol(key): Symbol(key)&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在这段代码中，我们利用 <code>Symbol</code> 构建了一个 <code>key</code>，然后利用 <code>[key]</code> 作为 <code>person</code> 的<code>唯一 key 名</code>。</p>
 <p>同时，为了方便对象字面量的编写，<code>ES6</code> 之后提供了 <strong>属性简写</strong> 的语法： <strong>当 key 和 value 拥有同样的变量名时，那么可以进行简写</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const name &#x3D; &#39;张三&#39;
@@ -756,7 +769,6 @@ const person &#x3D; &#123;
   &#x2F;&#x2F; name: name
   name
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>属性简写</strong> 是我们在日常开发中非常常用的一种方式。</p>
 <p>除了属性简写之后，还有另外一个新特性也是我们在日常开发中非常常见的，那就是 <strong>展开运算符</strong>。</p>
 <p>展开运算符以 <code>...</code> 的形式进行表示，可以用在对象的展开和合并的多个场景中：</p>
@@ -767,10 +779,8 @@ console.log(...names); &#x2F;&#x2F; 张三 李四 王五
 
 &#x2F;&#x2F; 合并
 console.log([&#39;赵六&#39;, ...names]); &#x2F;&#x2F;[&#39;赵六&#39;, &#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="旧习换新-3"><a href="#旧习换新-3" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>最后是对象的旧习换新环节，这个环节的内容比较多，主要有 5 个：</p>
+<h3 id="旧习换新-4">旧习换新</h3>
+<p>最后是对象的旧习换新环节，这个环节的内容比较多，主要有 5 个：</p>
 <ol>
 <li>当你需要一个动态的 <code>key</code> 时，可以通过可计算的属性名直接创建该对象</li>
 <li>多使用属性的简写，以此来简化对象构建的过程</li>
@@ -778,8 +788,10 @@ console.log([&#39;赵六&#39;, ...names]); &#x2F;&#x2F;[&#39;赵六&#39;, &#39;�
 <li><code>Symbol</code> 可以构建一个唯一值。 使用 <code>Symbol</code> 作为 <code>key</code> 名，可以避免属性名冲突</li>
 <li>最后是关于实例的原型，之前访问实例的原型时多通过 <code>__proto__</code> 访问。现在可以通过 <code>Object.setPrototypeOf、Object.getPrototypeOf</code> 来直接访问原型</li>
 </ol>
-<h2 id="第六章：可迭代对象、迭代器、生成器"><a href="#第六章：可迭代对象、迭代器、生成器" class="headerlink" title="第六章：可迭代对象、迭代器、生成器"></a>第六章：可迭代对象、迭代器、生成器</h2><p>从这一章的名字就可以看出来，这一章中主要讲了三个东西 <code>可迭代对象、迭代器、生成器</code>。本章的内容在我们日常的业务项目开发中其实用的不是特别多，并且很多时候有更习惯的替代方案。但是在面试中，确有可能经常被问到，所以不妨一听。</p>
-<h3 id="可迭代对象、迭代器"><a href="#可迭代对象、迭代器" class="headerlink" title="可迭代对象、迭代器"></a>可迭代对象、迭代器</h3><p>首先咱们先来看可迭代对象、迭代器。想要了解这两个东西，咱们需要先搞清楚他们的概念：</p>
+<h2 id="第六章：可迭代对象、迭代器、生成器">第六章：可迭代对象、迭代器、生成器</h2>
+<p>从这一章的名字就可以看出来，这一章中主要讲了三个东西 <code>可迭代对象、迭代器、生成器</code>。本章的内容在我们日常的业务项目开发中其实用的不是特别多，并且很多时候有更习惯的替代方案。但是在面试中，确有可能经常被问到，所以不妨一听。</p>
+<h3 id="可迭代对象、迭代器">可迭代对象、迭代器</h3>
+<p>首先咱们先来看可迭代对象、迭代器。想要了解这两个东西，咱们需要先搞清楚他们的概念：</p>
 <blockquote>
 <p>迭代器：所谓迭代器指的是 <strong>一个具有 next 方法的对象</strong>。也就是说，从 <strong>理论上</strong>，只要一个对象具备 <code>next</code> 方法，那么它就是迭代器。这里大家注意：<strong>迭代器可以应用在数组中，却 不可以 应用在普通对象中</strong></p>
 <p>可迭代对象：而可迭代对象指的是 <strong>可以通过标准方法获取迭代器，以遍历其内容的对象</strong>。</p>
@@ -801,7 +813,6 @@ const person &#x3D; &#123;
 for (const iterator of person) &#123;
   console.log(iterator);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>而显示迭代器被叫做 <code>Symbol.iterator</code>，每个数组都包含一个 <code>Symbol.iterator</code> 的属性，可以利用该属性获取显示迭代器，它拥有 <strong>显示</strong> 的 <code>next</code> 方法：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const names &#x3D; [&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;]
 const it &#x3D; names[Symbol.iterator]()
@@ -820,23 +831,25 @@ console.log(it.next()); &#x2F;&#x2F; &#123;value: undefined, done: true&#125;
 &#x2F;&#x2F; for (const iterator of person) &#123;
 &#x2F;&#x2F;   console.log(iterator);
 &#x2F;&#x2F; &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>而针对于对象而言，咱们也说过 <strong>普通对象默认不可迭代</strong>。不可迭代的原因其实是因为 <strong>缺少 Symbol.iterator 属性</strong>。所以如果我们希望让普通对象可迭代的话，那么可以通过以下两步来完成：</p>
 <ul>
 <li>为对象添加 <code>Symbol.iterator</code> 属性，返回 <code>iterator</code> 迭代器对象</li>
 <li><code>iterator</code> 迭代器对象中包含 <code>next</code> 方法</li>
 </ul>
 <p>因为在实际开发中使用场景不多，所以其中具体的代码咱们就不在这里说了。</p>
-<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><p>虽然迭代器是一个有用的工具，但由于需要显式地维护其内部状态，因此需要谨慎地创建。生成器函数提供了一个强大的选择：<strong>它允许你定义一个包含自有迭代算法的函数，同时它可以自动维护自己的状态</strong>。所以我们可以 <strong>利用生成器得到一个迭代器对象（<code>Generator</code> 符合 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols#%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%8D%8F%E8%AE%AE">可迭代协议</a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8D%8F%E8%AE%AE">迭代器协议</a>），同时该迭代器对象同样会拥有 <code>next</code> 方法</strong>。</p>
+<h3 id="生成器">生成器</h3>
+<p>虽然迭代器是一个有用的工具，但由于需要显式地维护其内部状态，因此需要谨慎地创建。生成器函数提供了一个强大的选择：<strong>它允许你定义一个包含自有迭代算法的函数，同时它可以自动维护自己的状态</strong>。所以我们可以 <strong>利用生成器得到一个迭代器对象（<code>Generator</code> 符合 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols#%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%8D%8F%E8%AE%AE">可迭代协议</a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8D%8F%E8%AE%AE">迭代器协议</a>），同时该迭代器对象同样会拥有 <code>next</code> 方法</strong>。</p>
 <p>那么咱们搞明白 <strong>生成器与迭代器</strong> 的关系之后，下面咱们来看下 <strong>生成器</strong> 的语法。</p>
 <p>想要创建并使用生成器的话，一共分为三步：</p>
 <ol>
-<li><p>生成器被称为 <strong>生成器函数</strong>，所以想要构建一个生成器，那么必须要构建一个函数：</p>
+<li>
+<p>生成器被称为 <strong>生成器函数</strong>，所以想要构建一个生成器，那么必须要构建一个函数：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 通过在 function 后面增加一个 * 来标记当前函数为生成器函数
 function* simple() &#123;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>生成器内部包含 <strong>暂停迭代</strong> 的功能，这个暂停是配合 <code>next</code> 方法进行使用的</p>
+<li>
+<p>生成器内部包含 <strong>暂停迭代</strong> 的功能，这个暂停是配合 <code>next</code> 方法进行使用的</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function* simple() &#123;
   for (let i &#x3D; 0; i &lt; 3; i++) &#123;
     &#x2F;&#x2F; 使用 yield 控制暂停迭代
@@ -844,11 +857,13 @@ function* simple() &#123;
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>调用生成器函数，可以得到一个迭代器对象，通过 <code>next</code> 方法控制 <strong>迭代过程</strong></p>
+<li>
+<p>调用生成器函数，可以得到一个迭代器对象，通过 <code>next</code> 方法控制 <strong>迭代过程</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const s &#x3D; simple()
 s.next() &#x2F;&#x2F; 0
 s.next() &#x2F;&#x2F; 1
-s.next() &#x2F;&#x2F; 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+s.next() &#x2F;&#x2F; 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
 <p>同时对于生成器而言，它还可以 <strong>传递参数（消费值）</strong>，咱们来看这个例子：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function* add() &#123;
@@ -874,16 +889,17 @@ console.log(result);
 &#x2F;&#x2F; 第二次输入值
 result &#x3D; gen.next(7)
 console.log(result);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <img src="/medias/images/loading.gif" data-original="image-20230625185609320.png" alt="image-20230625185609320" style="zoom:50%;" />
-
-<h3 id="旧习换新-4"><a href="#旧习换新-4" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>就像我们开始所说的一样，在实际企业开发中生成器与自定义迭代器其实使用率并不高，所以这里的旧习换新只有一个：</p>
+<h3 id="旧习换新-5">旧习换新</h3>
+<p>就像我们开始所说的一样，在实际企业开发中生成器与自定义迭代器其实使用率并不高，所以这里的旧习换新只有一个：</p>
 <ul>
-<li><strong>利用 DOM 的可迭代特性，通过 for….of… 进行循环</strong>。比如在通过 <code>querySelectAll</code> 获取 <code>DOM</code> 的伪数组之后，伪数组虽然没有办法直接 <code>forEach</code>，但是可以利用隐式迭代器 <code>for of</code> 完成循环操作</li>
+<li><strong>利用 DOM 的可迭代特性，通过 for…of… 进行循环</strong>。比如在通过 <code>querySelectAll</code> 获取 <code>DOM</code> 的伪数组之后，伪数组虽然没有办法直接 <code>forEach</code>，但是可以利用隐式迭代器 <code>for of</code> 完成循环操作</li>
 </ul>
-<h2 id="第七章：解构"><a href="#第七章：解构" class="headerlink" title="第七章：解构"></a>第七章：解构</h2><p>关于对象相关的最后一部分就是 <strong>解构</strong> 了。解构应该是日常开发中非常常用的语法。其目的是为了 <strong>从数据结构中快速提取对应的内容</strong></p>
+<h2 id="第七章：解构">第七章：解构</h2>
+<p>关于对象相关的最后一部分就是 <strong>解构</strong> 了。解构应该是日常开发中非常常用的语法。其目的是为了 <strong>从数据结构中快速提取对应的内容</strong></p>
 <p>解构分为两部分：对象解构 和 数组解构。</p>
-<h3 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h3><p>当对对象进行解构时，需要 <strong>配合 大括号 完成，大括号中放入需要提取的字段名，同时该字段名会作为新的变量名被创建</strong></p>
+<h3 id="对象解构">对象解构</h3>
+<p>当对对象进行解构时，需要 <strong>配合 大括号 完成，大括号中放入需要提取的字段名，同时该字段名会作为新的变量名被创建</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
   name: &#39;张三&#39;,
   age: 30
@@ -893,7 +909,6 @@ console.log(result);<span aria-hidden="true" class="line-numbers-rows"><span></s
 &#x2F;&#x2F; 以 key 的形式，获取指定属性
 const &#123; name &#125; &#x3D; person &#x2F;&#x2F; const name &#x3D; person.name
 console.log(name); &#x2F;&#x2F; 张三<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>而当 <strong>对象呈嵌套形式时</strong>，同样可以利用 <strong>嵌套解构</strong> 的形式进行结构：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
   name: &#39;曹操&#39;,
@@ -914,15 +929,14 @@ console.log(name); &#x2F;&#x2F; 张三<span aria-hidden="true" class="line-numbe
 &#x2F;&#x2F; &#123; children: [caoPi] &#125; 表示从 children 中获取第一个元素，命名为 caoPi
 const &#123; children: [caoPi] &#125; &#x3D; person
 console.log(caoPi); &#x2F;&#x2F; &#123;name: &#39;曹丕&#39;, age: 35&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h3><p>而对于数组的解构，需要 <strong>配合 中括号 完成，</strong>中括号中 <strong>按照下标的顺序，依次写入新的变量名</strong></p>
+<h3 id="数组解构">数组解构</h3>
+<p>而对于数组的解构，需要 **配合 中括号 完成，**中括号中 <strong>按照下标的顺序，依次写入新的变量名</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
 
 &#x2F;&#x2F; 以中括号的形式来结构对象
 &#x2F;&#x2F; 中括号定义变量名
 const [v1, v2, v3] &#x3D; arr &#x2F;&#x2F; const v1 &#x3D; arr[0], v2 &#x3D; arr[1], v3 &#x3D; arr[2]
 console.log(v1, v2, v3); &#x2F;&#x2F; &#39;a&#39;, &#39;b&#39;, &#39;c&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>同时，对于数组解构而言，也可以通过 <code>“rest” 语法</code> 直接获取 <strong>剩余元素，剩余元素会被赋值给新的数组</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const arr &#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
 
@@ -931,12 +945,13 @@ console.log(v1, v2, v3); &#x2F;&#x2F; &#39;a&#39;, &#39;b&#39;, &#39;c&#39;<span
 &#x2F;&#x2F; “rest” 语法... 表示剩余所有组成新数组
 const [v1, ...v2] &#x3D; arr &#x2F;&#x2F; const v1 &#x3D; arr[0], v2 &#x3D; [arr[1], arr[2]]
 console.log(v1, v2); &#x2F;&#x2F; &#39;a&#39;,  [&#39;b&#39;, &#39;c&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="旧习换新-5"><a href="#旧习换新-5" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>解构是日常开发中常用的语法，但是本身比较简单。只要大家在以后的开发中多使用解构语法，就会发现它本质上是一个非常简单的东西。</p>
-<h2 id="第八章：Promise"><a href="#第八章：Promise" class="headerlink" title="第八章：Promise"></a>第八章：Promise</h2><p>接下来咱们来看第八章、第九章关于异步处理的部分。</p>
+<h3 id="旧习换新-6">旧习换新</h3>
+<p>解构是日常开发中常用的语法，但是本身比较简单。只要大家在以后的开发中多使用解构语法，就会发现它本质上是一个非常简单的东西。</p>
+<h2 id="第八章：Promise">第八章：Promise</h2>
+<p>接下来咱们来看第八章、第九章关于异步处理的部分。</p>
 <p>说道异步，肯定有很多小伙伴直接想到的就是 <code>Promise</code>。 没有 <code>Promise</code> 是 <code>ES6</code> 之后专门用来处理异步的解决方案。但是要注意：</p>
 <blockquote>
-<p> <code>Promise</code> <strong>本身并不执行任何操作，它只是一种观察异步操作结果的方案</strong>。</p>
+<p><code>Promise</code> <strong>本身并不执行任何操作，它只是一种观察异步操作结果的方案</strong>。</p>
 </blockquote>
 <p>在 <code>Promise</code> 内部对整个异步的操作分为 <strong>三种状态</strong>，对应 <strong>三种结果</strong>。而语法分为 <strong>定义</strong> 和 <strong>使用</strong> 两部分。其中三种状态发生在定义阶段，三种结果发生在使用阶段。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function reload(b) &#123;
@@ -966,7 +981,6 @@ p2.then((data) &#x3D;&gt; &#123;
 &#125;).finally(() &#x3D;&gt; &#123;
   console.log(&#39;p2已敲定&#39;);
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>同时，对于 <code>Promise</code> 而言，它支持链式调用的方式。只要在 <code>.then</code> 中 <code>return</code> 了内容，那么 <code>return</code> 的内容就会被封装为 <code>Promise.resolve</code> ，从而可以继续 <code>.then</code>:</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const p1 &#x3D; reload(true)
 p1.then((data) &#x3D;&gt; &#123;
@@ -979,9 +993,10 @@ p1.then((data) &#x3D;&gt; &#123;
   console.log(data);
   console.log(&#39;三次结束&#39;);
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="旧习换新-6"><a href="#旧习换新-6" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>对于 <code>Promise</code> 来说，现在在开发中的使用已经非常普遍了。所以当大家以后遇到异步问题时，应该首先考虑 <code>Promise</code></p>
-<h2 id="第九章：异步函数、迭代器、生成器"><a href="#第九章：异步函数、迭代器、生成器" class="headerlink" title="第九章：异步函数、迭代器、生成器"></a>第九章：异步函数、迭代器、生成器</h2><p><code>Promise</code> 可以帮助我们处理异步操作，但是从上面的代码我们可以看出，在 <code>Promise</code> 的 <strong>使用</strong> 阶段，代码的复杂度其实并不低。</p>
+<h3 id="旧习换新-7">旧习换新</h3>
+<p>对于 <code>Promise</code> 来说，现在在开发中的使用已经非常普遍了。所以当大家以后遇到异步问题时，应该首先考虑 <code>Promise</code></p>
+<h2 id="第九章：异步函数、迭代器、生成器">第九章：异步函数、迭代器、生成器</h2>
+<p><code>Promise</code> 可以帮助我们处理异步操作，但是从上面的代码我们可以看出，在 <code>Promise</code> 的 <strong>使用</strong> 阶段，代码的复杂度其实并不低。</p>
 <p>所以在 <code>ES7</code> 之后，<code>TC39</code> 推出了 <strong>异步函数</strong> 的概念，以解决 <code>Promise</code> 使用的复杂度问题。</p>
 <p>想要定义异步函数，那么需要通过 <code>async</code> 关键字来进行定义，在异步函数中，可以通过 <code>await</code> 关键字来 <strong>让异步操作，变为同步的写法</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function reload1() &#123;
@@ -1029,7 +1044,6 @@ async function start() &#123;
 
 const p &#x3D; start()
 console.log(p); &#x2F;&#x2F; promise<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在使用 <code>async/await</code> 时，默认情况下返回值是 <code>.then</code> 的内容，如果想要捕获异常，那么需要通过 <code>try...catch...</code> 来完成。</p>
 <p>同时对于异步函数来说，也可以配合生成器进行使用，得到 <strong>异步生成器函数</strong>。这种异步生成器，在需要 <strong>手动控制多个异步请求的顺序以及结果的时候，会有些用处</strong>，如果大家没有这方面的需求，只需要有个印象就可以了。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; async 函数必然返回 promise
@@ -1057,7 +1071,6 @@ async function getData() &#123;
 &#125;
 
 getData()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在以上代码的 <code>getData()</code> 方法中，我们通过 <code>fetchInSeries</code> 方法得到了一个迭代器 <code>g</code> ，然后利用 <code>while</code> 循环的方式进行了迭代。</p>
 <p>而整个迭代的过程可以进一步的简写，利用 <code>for await of</code> 语法，会更加轻松</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async function getData() &#123;
@@ -1066,24 +1079,26 @@ getData()<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
     console.log(value);
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="旧习换新-7"><a href="#旧习换新-7" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>使用 <code>async、await</code> 配合 <code>promise</code> 处理异步请求，是在当前阶段开发中非常常见的一种场景。当大家遇到异步请求时，那么首先应该想到的就是 <code>Promise + async\await</code>。</p>
-<h2 id="第十章：模板字面量、标签函数和新的字符串特性"><a href="#第十章：模板字面量、标签函数和新的字符串特性" class="headerlink" title="第十章：模板字面量、标签函数和新的字符串特性"></a>第十章：模板字面量、标签函数和新的字符串特性</h2><p>从第十章开始，到第十四章为止，这五个章节主要是对传统技术的升级。</p>
+<h3 id="旧习换新-8">旧习换新</h3>
+<p>使用 <code>async、await</code> 配合 <code>promise</code> 处理异步请求，是在当前阶段开发中非常常见的一种场景。当大家遇到异步请求时，那么首先应该想到的就是 <code>Promise + async\await</code>。</p>
+<h2 id="第十章：模板字面量、标签函数和新的字符串特性">第十章：模板字面量、标签函数和新的字符串特性</h2>
+<p>从第十章开始，到第十四章为止，这五个章节主要是对传统技术的升级。</p>
 <p>以第十章为例，传统技术下，想要拼接字符串与变量，那么一般需要通过 <strong>+ 运算符</strong> 进行隐式转换。而 <code>ES6</code> 之后，提供了 <strong>模板字符串</strong> 的概念：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const msg &#x3D; &#39;world&#39;
 console.log(&#96;hello $&#123;msg&#125;&#96;); &#x2F;&#x2F; hello world<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>处理之外，还提供了一些新的字符串方法。</p>
 <p>以及通过 <code>for of</code> 隐式迭代器对字符串进行迭代操作。</p>
-<h3 id="旧习换新-8"><a href="#旧习换新-8" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>这一章的内容中，对我们日常开发和面试有用的内容其实比较少，里面还包含一些对我们没有什么用处的东西，比如 <code>Unicode 的改进</code>，这些我就略过了，如果大家对 <code>Unicode</code> 感兴趣的话，可以去看一下书中的内容。</p>
-<h2 id="第十一章：新数组特性、类型化数组"><a href="#第十一章：新数组特性、类型化数组" class="headerlink" title="第十一章：新数组特性、类型化数组"></a>第十一章：新数组特性、类型化数组</h2><p>对于第十一章来说，和第十章其实非常的类似。第十一章主要讲解的是 <code>Array 数组的改进</code>。内容主要就是两部分。</p>
+<h3 id="旧习换新-9">旧习换新</h3>
+<p>这一章的内容中，对我们日常开发和面试有用的内容其实比较少，里面还包含一些对我们没有什么用处的东西，比如 <code>Unicode 的改进</code>，这些我就略过了，如果大家对 <code>Unicode</code> 感兴趣的话，可以去看一下书中的内容。</p>
+<h2 id="第十一章：新数组特性、类型化数组">第十一章：新数组特性、类型化数组</h2>
+<p>对于第十一章来说，和第十章其实非常的类似。第十一章主要讲解的是 <code>Array 数组的改进</code>。内容主要就是两部分。</p>
 <p>第一部分是对于 <code>Array</code> 数组的新增方法。</p>
 <p>第二部分是 <strong>类型化数组</strong>。</p>
 <p>对于很多小伙伴来说，类型化数组的概念大家可能是第一次听到。但是大家应该知道 <strong>JavaScript 中传统的 “数组” 并不是真正的数组，而是一个对象。</strong> 所以在 <code>ES6</code> 之后，<code>TC39</code> 提出了一个新的概念就是 <strong>类型化数组</strong>，不同的类型化数组可以存储不同的值，但是在日常的使用中，我们可能很少会主动使用这个东西。</p>
-<h3 id="旧习换新-9"><a href="#旧习换新-9" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>数组的新增方法，在日常开发中是非常有用的。所以以上我们所列举出来的方法大家一定去 <code>MDN</code> 上看一下，至少做到有个印象。</p>
-<h2 id="第十二章：Map-和-Set"><a href="#第十二章：Map-和-Set" class="headerlink" title="第十二章：Map 和 Set"></a>第十二章：Map 和 Set</h2><p>上面两章的内容相对都比较简单。但是接下来的 <code>Map</code> 和 <code>Set</code> 可能对于很多小伙伴来说是 <strong>“盲区”</strong>。</p>
+<h3 id="旧习换新-10">旧习换新</h3>
+<p>数组的新增方法，在日常开发中是非常有用的。所以以上我们所列举出来的方法大家一定去 <code>MDN</code> 上看一下，至少做到有个印象。</p>
+<h2 id="第十二章：Map-和-Set">第十二章：Map 和 Set</h2>
+<p>上面两章的内容相对都比较简单。但是接下来的 <code>Map</code> 和 <code>Set</code> 可能对于很多小伙伴来说是 <strong>“盲区”</strong>。</p>
 <p>这一章一共讲到了 <code>4个</code> 新的接口：<code>Map、Set、WeakMap、WeakSet</code>。</p>
 <p>咱么先来看 <code>Map</code>。<code>Map</code> 是 <strong>以 键\值对 的形式存储数据的对象，其中键值对可以是任何值</strong>。乍一看可能和 <strong>普通对象</strong> 没有什么区别，但是大家需要注意的是 <strong>普通对象的 key 只能是 字符串</strong>。 而 <strong>Map 对象的 key 可以是任意值</strong>。</p>
 <p>也就是说虽然存储方式相同，但是可存储的内容确实大大不同的。</p>
@@ -1105,7 +1120,6 @@ console.log(m.size);
 for (const [key, value] of m) &#123;
   console.log(key, value);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>而对于 <code>Set</code> 而言，它与数组有些类似，但是不同的地方在于 <strong><code>Set</code> 存储唯一值，也就是元素不可以重复。</strong></p>
 <p>同样它的语法和传统的 <code>Array</code> 也有较大的区别：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 创建
@@ -1124,21 +1138,22 @@ console.log(s.size);
 for (const value of s) &#123;
   console.log(value);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>而对于 <code>Map</code> 和 <code>Set</code> 来说，都提供了一个 <code>Weak</code> 版，叫做 <code>WeakMap</code> 和 <code>WeakSet</code>。</p>
-<p> <code>WeakMap</code> 和 <code>WeakSet</code>与 <code>Map</code> 和 <code>Set</code> 的区别主要体现在三个地方：</p>
+<p><code>WeakMap</code> 和 <code>WeakSet</code>与 <code>Map</code> 和 <code>Set</code> 的区别主要体现在三个地方：</p>
 <ul>
 <li>首先第一个地方是 <strong>值为弱引用</strong> ，这意味着它并不会影响垃圾回收。</li>
 <li>同时因为是弱引用，所以 <strong>值不会保存在内存中</strong>，这个就比较好理解了。</li>
 <li>最后就是 <strong>不可迭代</strong>。</li>
 </ul>
-<h3 id="旧习换新-10"><a href="#旧习换新-10" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>最后就是旧习换新。</p>
+<h3 id="旧习换新-11">旧习换新</h3>
+<p>最后就是旧习换新。</p>
 <ul>
 <li>首先：如果你要以键值对的形式保存数据，同时 <code>Key</code> 非字符串，那么此时可以考虑使用 <code>Map</code></li>
 <li>其次：<code>Set</code> 对象可以存储唯一值，这在数组去重的场景下会非常有用</li>
 <li>最后：如果你希望 <code>key</code> 跟随变量的销毁而被回收时，那么可以使用 <code>WeakMap</code> 或 <code>WeakSet</code></li>
 </ul>
-<h2 id="第十三章：模块"><a href="#第十三章：模块" class="headerlink" title="第十三章：模块"></a>第十三章：模块</h2><p>第十三章主要讲解的就是模块化的概念。任何的模块化都会被分成两部分 <strong>导入</strong> 和 <strong>导出</strong>。</p>
+<h2 id="第十三章：模块">第十三章：模块</h2>
+<p>第十三章主要讲解的就是模块化的概念。任何的模块化都会被分成两部分 <strong>导入</strong> 和 <strong>导出</strong>。</p>
 <p>而目前在前端领域，主要的模块化方式有两个 <code>ESM</code> 和 <code>CJS</code> 。</p>
 <p>所以说咱们在这一章中要学习的就是：</p>
 <ul>
@@ -1146,24 +1161,25 @@ for (const value of s) &#123;
 <li><code>CJS</code> 的导入、导出</li>
 </ul>
 <p>一个四个环节。</p>
-<p>那么首先我们先来看 <code>ESM</code>。所谓 <code>ESM</code> 指的是 <strong>ES2015 之后新增的标准模块化方案 <code>ES Module</code><strong>。它相对复杂一点，分为 <strong>直接导出</strong>、</strong>按需导出</strong>、<strong>直接导入</strong>、<strong>按需导入</strong> 一共四部分。<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules">直达链接</a>。</p>
-<p>除了这标准的四部分之后，有时候在 <code>EMS</code> 中可能还会涉及到 <strong>导入同时导出</strong> 的场景，如果想要导入并导出，那么可以通过 <code>export &#123;xx&#125; from &#39;./xx&#39;</code> 的方式进行。</p>
+<p>那么首先我们先来看 <code>ESM</code>。所谓 <code>ESM</code> 指的是 <strong>ES2015 之后新增的标准模块化方案 <code>ES Module</code></strong>。它相对复杂一点，分为 <strong>直接导出</strong>、<strong>按需导出</strong>、<strong>直接导入</strong>、<strong>按需导入</strong> 一共四部分。<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules">直达链接</a>。</p>
+<p>除了这标准的四部分之后，有时候在 <code>EMS</code> 中可能还会涉及到 <strong>导入同时导出</strong> 的场景，如果想要导入并导出，那么可以通过 <code>export &#123;xx&#125; from './xx'</code> 的方式进行。</p>
 <p>第二个是 <code>CJS</code>。<code>CJS</code> 的逻辑与 <code>ESM</code> 相同，甚至更加简单。只是语法上会稍有不同。<code>CJS</code> 不存在按需的概念，所以只有导入和导出两部分。<a target="_blank" rel="noopener" href="https://nodejs.org/docs/latest/api/modules.html">文档直达链接</a></p>
 <p>除了 <code>CJS</code> 和 <code>EMS</code> 之外，还有一些其他的模块化方案，比如 <code>UMD</code>，<code>AMD</code>、<code>CMD</code> 等等。这些模块化方案在应用层开发中很少见，所以咱们不做讨论。</p>
-<h3 id="旧习换新-11"><a href="#旧习换新-11" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>最后就是旧习换新环节。</p>
+<h3 id="旧习换新-12">旧习换新</h3>
+<p>最后就是旧习换新环节。</p>
 <p>其实对于模块化的问题，在现在的企业开发中已经是非常常见的了。无论是 <code>EMS</code> 还是 <code>CJS</code> 都已经得到了广泛的应用。所以这一章的内容，对于大多数小伙伴来说，应该都没有太大的难度才对。</p>
-<h2 id="第十四章：反射和代理"><a href="#第十四章：反射和代理" class="headerlink" title="第十四章：反射和代理"></a>第十四章：反射和代理</h2><p>看完模块化之后，下面咱们来看下反射和代理的概念。其中反射代表的是 <code>Reflect</code>，代理代表的是 <code>Proxy</code>。我第一次接触它们两个是在 <code>Vue 3</code> 中接触到的。</p>
+<h2 id="第十四章：反射和代理">第十四章：反射和代理</h2>
+<p>看完模块化之后，下面咱们来看下反射和代理的概念。其中反射代表的是 <code>Reflect</code>，代理代表的是 <code>Proxy</code>。我第一次接触它们两个是在 <code>Vue 3</code> 中接触到的。</p>
 <p>这两个 <code>API</code> 多数情况下应该是配合使用的，任意一个单独拿出来，在复杂场景中都意义不大。</p>
 <p>所以说我们在介绍这两个 <code>API</code> 的时候会先介绍它们两个的作用，然后再把它们两个合起来去说。</p>
-<p>那么咱们先来看 <code>反射对象（Reflect）</code> 。它 <strong>提供了《对象基本操作的各种方法，比如：获取和设置属性值、获取和设置对象的原型、从对象中删除属性…》</strong> 等等……</p>
+<p>那么咱们先来看 <code>反射对象（Reflect）</code> 。它 <strong>提供了《对象基本操作的各种方法，比如：获取和设置属性值、获取和设置对象的原型、从对象中删除属性…》</strong> 等等…</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
   name: &#39;张三&#39;
 &#125;
 
 console.log(person.name) &#x2F;&#x2F; 张三
 console.log(Reflect.get(person, &#39;name&#39;)) &#x2F;&#x2F; 张三<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在这段代码中，我们可以利用 <code>Reflect.get(person, &#39;name&#39;)</code> 方法，获取到 <code>person</code> 对象下 <code>name</code> 属性的值。</p>
+<p>在这段代码中，我们可以利用 <code>Reflect.get(person, 'name')</code> 方法，获取到 <code>person</code> 对象下 <code>name</code> 属性的值。</p>
 <p>但是肯定有很多小伙伴看到这就说了 <strong>这有啥用啊？</strong> 我们完全可以通过 <code>person.name</code> 来获取啊。</p>
 <p>所以 <code>Reflect</code> 的真正有意义的使用，就需要配合 <code>Proxy</code> 进行了。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
@@ -1202,7 +1218,6 @@ const p &#x3D; new Proxy(person, &#123;
 p.name &#x3D; &#39;李四&#39; &#x2F;&#x2F; 触发 set。注意：只有修改 proxy 实例才会触发 set
 
 console.log(p.name) &#x2F;&#x2F; 触发 get。注意：只有通过 proxy 实例才会触发 get<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在这段代码中，我们通过 <code>Proxy</code> 代理了 <code>person</code> 的 <code>getter</code> 行为和 <code>setter</code> 行为。从而可以监听到 <code>person</code> 的赋值操作和输出操作。</p>
 <p>那么下面我们来看 <code>Proxy</code> 配合 <code>Reflect</code> 的场景，这个场景可能稍微有一些复杂，需要大家在搞明白 <code>Proxy</code> 和 <code>Reflect</code> 之后再查看：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const person &#x3D; &#123;
@@ -1226,18 +1241,22 @@ const proxy &#x3D; new Proxy(person, &#123;
 &#125;)
 
 console.log(proxy.fullName)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在上面的这段代码中，我们为 <code>person</code> 提供了一个 <code>get fullName() </code> 的属性方法，当 <code>fullName</code> 被触发时，它应该存在 <strong>三次 <code>getter</code> 行为</strong>，即： <strong>fullName、lastName、firstName</strong>。</p>
 <p>但是如果我们在 <code>get</code> 监听中，使用 <code>target[key]</code> 的方式，那么这三次的 <code>getter</code> 行为只会被监听一次。原因是因为 <code>fullName</code> 中的 <code>this</code> 指向 <code>person</code>，而不会指向 <code>proxy 实例</code>。</p>
 <p>所以我们需要通过 <code>Reflect.get</code> 来完成这个行为。 <code>Reflect.get</code> 的第三个参数可以控制 <code>fullName</code> 的 <code>this</code> 指向，使其指向 <code>receiver</code>，也就是  <code>proxy 实例</code>。</p>
-<h3 id="旧习换新-12"><a href="#旧习换新-12" class="headerlink" title="旧习换新"></a>旧习换新</h3><p>如果大家从事业务开发，那么 <code>Proxy</code> 和 <code>Reflect</code> 使用的场景应该并不多。而如果有一天，你需要监听某个对象的 <code>getter</code> 或者 <code>setter</code> 动作了，那么可以直接通过 <code>Proxy</code> 来完成。</p>
-<h2 id="第十五章：正则表达式"><a href="#第十五章：正则表达式" class="headerlink" title="第十五章：正则表达式"></a>第十五章：正则表达式</h2><p>基本上每一本 <code>JavaScript</code> 的书籍都会包含一个 <strong>正则表达式</strong> 的环节，但是讲道理在日常的开发中 <strong>正则表达式</strong> 的使用不足以让我们花费大量的时间，同时书中的那些内容也不足以支撑复杂场景的 <strong>正则表达式</strong> 使用。</p>
+<h3 id="旧习换新-13">旧习换新</h3>
+<p>如果大家从事业务开发，那么 <code>Proxy</code> 和 <code>Reflect</code> 使用的场景应该并不多。而如果有一天，你需要监听某个对象的 <code>getter</code> 或者 <code>setter</code> 动作了，那么可以直接通过 <code>Proxy</code> 来完成。</p>
+<h2 id="第十五章：正则表达式">第十五章：正则表达式</h2>
+<p>基本上每一本 <code>JavaScript</code> 的书籍都会包含一个 <strong>正则表达式</strong> 的环节，但是讲道理在日常的开发中 <strong>正则表达式</strong> 的使用不足以让我们花费大量的时间，同时书中的那些内容也不足以支撑复杂场景的 <strong>正则表达式</strong> 使用。</p>
 <p>在本书的第十五章中，我摘抄出了 <strong>3 个新增的正则标记符</strong>，为大家提供参考。</p>
-<h2 id="第十六章：共享内存"><a href="#第十六章：共享内存" class="headerlink" title="第十六章：共享内存"></a>第十六章：共享内存</h2><p>作者在书中说道： <strong>绝大多数的开发者并不需要在线程之间共享内存。</strong>  作者说的很对，所以我们这里不会花费篇章来说这个问题。如果你需要，那么可以看下书中讲解的内容。</p>
-<h2 id="第十七章：其他特性"><a href="#第十七章：其他特性" class="headerlink" title="第十七章：其他特性"></a>第十七章：其他特性</h2><p>第十七章的其他特性，主要呈现了一些单一、不成系统的特性。这些特性虽然大多都比较简单，但是有些在日常开发中还是比较有用的。</p>
+<h2 id="第十六章：共享内存">第十六章：共享内存</h2>
+<p>作者在书中说道： <strong>绝大多数的开发者并不需要在线程之间共享内存。</strong>  作者说的很对，所以我们这里不会花费篇章来说这个问题。如果你需要，那么可以看下书中讲解的内容。</p>
+<h2 id="第十七章：其他特性">第十七章：其他特性</h2>
+<p>第十七章的其他特性，主要呈现了一些单一、不成系统的特性。这些特性虽然大多都比较简单，但是有些在日常开发中还是比较有用的。</p>
 <p>我从中抽出来了对我们日常开发有价值的新特性，咱们一起来看一下：</p>
 <ul>
-<li><p><strong>BigInt</strong>：<code>BigInt</code> 主要用来处理大数字问题：</p>
+<li>
+<p><strong>BigInt</strong>：<code>BigInt</code> 主要用来处理大数字问题：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; BigInt：处理大数字（大于 2^53 - 1 的整数）问题
 const bigNum &#x3D; 900719925474099596
 console.log(bigNum); &#x2F;&#x2F; 9867273627366328000  数值错误
@@ -1246,13 +1265,15 @@ console.log(bigNum); &#x2F;&#x2F; 9867273627366328000  数值错误
 const bigIntObj &#x3D; 900719925474099596n &#x2F;&#x2F; 加上 n 表示 bigint
 console.log(bigIntObj.toString()); &#x2F;&#x2F; 900719925474099596<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>新的整数字面量语法（二进制、八进制）</strong>：主要针对二进制、八进制</p>
+<li>
+<p><strong>新的整数字面量语法（二进制、八进制）</strong>：主要针对二进制、八进制</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 二进制 0b 开头
 console.log(0b1000); &#x2F;&#x2F; 8
 &#x2F;&#x2F; 八进制 0o 开头
 console.log(0o17); &#x2F;&#x2F; 15<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>省略 catch 绑定的异常</strong></p>
+<li>
+<p><strong>省略 catch 绑定的异常</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 省略 catch 绑定的异常
 try &#123;
   JSON.parse(&#39;abc&#39;)
@@ -1260,14 +1281,17 @@ try &#123;
   console.log(&#39;不需要为 catch(err) &#123;...&#125;&#39;);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>新的 Math 方法</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/06/24/jing-du-shen-ru-li-jie-xian-dai-javascript/image-20230627142003717.png" alt="image-20230627142003717"></p>
+<li>
+<p><strong>新的 Math 方法</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20230627142003717.png" alt="image-20230627142003717"></p>
 </li>
-<li><p><strong>取幂运算符</strong></p>
+<li>
+<p><strong>取幂运算符</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 取幂运算符 **
 console.log(2 ** 3); &#x2F;&#x2F; 2 * 2 * 2 &#x3D; 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>空值合并</strong></p>
+<li>
+<p><strong>空值合并</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 空值合并 ??
 const num &#x3D; 0 &#x2F;&#x2F; 0 是一个正常的数值，但是在 JavaScript 中 0 参与逻辑运算会被当做 “假”
 &#x2F;&#x2F; 利用逻辑或的逻辑中断特性
@@ -1277,7 +1301,8 @@ console.log(num || 300); &#x2F;&#x2F; 300
 &#x2F;&#x2F; 利用空值合并：?? 前面的值只有为 null 或者 undefined 才会被认为 “假”
 console.log(num ?? 300); &#x2F;&#x2F; 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>可选链</strong></p>
+<li>
+<p><strong>可选链</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 可选链 xx?.xx  
 const person &#x3D; &#123;
   name: &#39;张三&#39;
@@ -1285,9 +1310,12 @@ const person &#x3D; &#123;
 &#x2F;&#x2F; console.log(person.child.name); &#x2F;&#x2F; child 为 undefined，所以报错 Cannot read properties of undefined (reading &#39;name&#39;)
 
 &#x2F;&#x2F; 利用可选链，如果 ? 前面为 null 或者 undefined ，则逻辑短路
-console.log(person.child?.name); &#x2F;&#x2F; undefined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+console.log(person.child?.name); &#x2F;&#x2F; undefined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h2 id="第十八章：即将推出的类特性"><a href="#第十八章：即将推出的类特性" class="headerlink" title="第十八章：即将推出的类特性"></a>第十八章：即将推出的类特性</h2><h2 id="第十九章：展望未来"><a href="#第十九章：展望未来" class="headerlink" title="第十九章：展望未来"></a>第十九章：展望未来</h2><p>最后的十八和十九章，对我们现在而言意义就不大了。里面很多的特性现在并不支持，在实际开发中使用的场景也非常有限。</p>
+<h2 id="第十八章：即将推出的类特性">第十八章：即将推出的类特性</h2>
+<h2 id="第十九章：展望未来">第十九章：展望未来</h2>
+<p>最后的十八和十九章，对我们现在而言意义就不大了。里面很多的特性现在并不支持，在实际开发中使用的场景也非常有限。</p>
 <p>如果你对这些东西比较感兴趣的话，那么可以看一下。否则意义不大。</p>
 <blockquote>
 <p>视频出处：【一小时读完《深入理解现代 JavaScript》，彻底掌握 ES6 之后 JavaScript 新特性！】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1qD4y1G7YK/?share_source=copy_web&amp;vd_source=a9f0fd4630ebe41da19ca2c83eb295e6">https://www.bilibili.com/video/BV1qD4y1G7YK/?share_source=copy_web&amp;vd_source=a9f0fd4630ebe41da19ca2c83eb295e6</a></p>

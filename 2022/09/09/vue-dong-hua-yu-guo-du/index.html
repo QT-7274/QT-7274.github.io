@@ -500,56 +500,73 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="使用CSS-keyframes实现动画"><a href="#使用CSS-keyframes实现动画" class="headerlink" title="使用CSS keyframes实现动画"></a>使用CSS keyframes实现动画</h2><blockquote>
+                <h2 id="使用CSS-keyframes实现动画">使用CSS keyframes实现动画</h2>
+<blockquote>
 <p>animation: [name] [duration] [timing-function] [delay] [iteration-count] [direction] [fill-mode]</p>
 </blockquote>
 <ul>
-<li><p>name：用于给@keyframes指定动画名称</p>
+<li>
+<p>name：用于给@keyframes指定动画名称</p>
 </li>
-<li><p>duration：用于标记一个动画完成周期所需时间，非必填，默认0s</p>
+<li>
+<p>duration：用于标记一个动画完成周期所需时间，非必填，默认0s</p>
 </li>
-<li><p>timing-function：用于描述一个动画数值变化方式，非必填，默认ease</p>
+<li>
+<p>timing-function：用于描述一个动画数值变化方式，非必填，默认ease</p>
 <ul>
-<li><p>linear:表示值变化均匀，匀速播放动画。</p>
+<li>
+<p>linear:表示值变化均匀，匀速播放动画。</p>
 </li>
-<li><p>ease:默认参数。表示值变化以低速率开始，逐渐加快，直到结束前速率降低。</p>
+<li>
+<p>ease:默认参数。表示值变化以低速率开始，逐渐加快，直到结束前速率降低。</p>
 </li>
-<li><p>ease-in:表示值变化以低速率开始，平均速率过渡，结尾戛然而止。</p>
+<li>
+<p>ease-in:表示值变化以低速率开始，平均速率过渡，结尾戛然而止。</p>
 </li>
-<li><p>ease-out:表示值变化以平均速率开始，以低速率缓慢结尾。</p>
+<li>
+<p>ease-out:表示值变化以平均速率开始，以低速率缓慢结尾。</p>
 </li>
-<li><p>ease-in-out:表示值变化以低速率开始和结尾。</p>
+<li>
+<p>ease-in-out:表示值变化以低速率开始和结尾。</p>
 </li>
-<li><p>steps(int,start|end):表示将值区间按一定数量隔开，每段时间间隔中值保持不变。第一个参数为整型，第二个参数为字符串。</p>
+<li>
+<p>steps(int,start|end):表示将值区间按一定数量隔开，每段时间间隔中值保持不变。第一个参数为整型，第二个参数为字符串。</p>
 <ul>
-<li><p>int:间隔数量，数量越小效果越明显。</p>
+<li>
+<p>int:间隔数量，数量越小效果越明显。</p>
 </li>
-<li><p>start|end:字符串参数，start为从值区间头部开始计算，end为从值区间尾部开始计算。</p>
+<li>
+<p>start|end:字符串参数，start为从值区间头部开始计算，end为从值区间尾部开始计算。</p>
 </li>
-<li><p>举例：值区间[0,99]，参数steps(4,start|end)，start或end。</p>
-<p>将0<del>99分为四段，分别为0</del>24，25<del>49，50</del>74，75~99。</p>
+<li>
+<p>举例：值区间[0,99]，参数steps(4,start|end)，start或end。</p>
+<p>将0~99分为四段，分别为0~24，25~49，50~74，75~99。</p>
 <p>首先值以匀速从0开始向99变化。当为start时，值一旦在0~24开始变化，开始于此段的头部值0，则立刻输出该段结尾值24，等待时间推动值变化进入下一段。</p>
 <p>当为end时，值一旦在0~24开始变化，由于未触发此段的尾部值24，故一直保持输出该段的头部值0，等待时间推动值变化进入下一段。</p>
 </li>
 </ul>
 </li>
-<li><p>cubic-bezier(p1x,p1y,p2x,p2y):表示值变化v-t图遵循贝塞尔曲线图形。</p>
+<li>
+<p>cubic-bezier(p1x,p1y,p2x,p2y):表示值变化v-t图遵循贝塞尔曲线图形。</p>
 <ul>
-<li>在二维直角坐标系中，首先有P0(p0x,p0y)，此时p0x&#x3D;0，p0y&#x3D;0，即原点，此点固定不变。其次有P3(p3x,p3y)，此时p3x&#x3D;1,p3y&#x3D;1，此点固定不变。</li>
+<li>在二维直角坐标系中，首先有P0(p0x,p0y)，此时p0x=0，p0y=0，即原点，此点固定不变。其次有P3(p3x,p3y)，此时p3x=1,p3y=1，此点固定不变。</li>
 <li>最后有两自由点P1(p1x,p1y)、P2(p2x,p2y)，由P0P1组成一条贝塞尔辅助线，由P2P3组成另一条贝塞尔辅助线，在这两条辅助线的作用下生成一条贝塞尔曲线，此曲线即值变化速度曲线v-t图，其中负值代表方向。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>delay：用于标记一个动画完成周期所需时间，非必填，默认0s</p>
+<li>
+<p>delay：用于标记一个动画完成周期所需时间，非必填，默认0s</p>
 </li>
-<li><p>iteration-count：用于描述一个动画循环次数，非必填，默认0s，不设置则不使用循环播放效果</p>
+<li>
+<p>iteration-count：用于描述一个动画循环次数，非必填，默认0s，不设置则不使用循环播放效果</p>
 <ul>
 <li>整型：表示播放次数。</li>
 <li>infinite:字符串，表示无限循环播放。</li>
 </ul>
 </li>
-<li><p>direction：用于设置是否循环往复播放动画，非必填，默认normal</p>
+<li>
+<p>direction：用于设置是否循环往复播放动画，非必填，默认normal</p>
 <ul>
 <li>normal:默认参数。动画正常播放，不进行循环往复操作。</li>
 <li>reverse:动画反向播放。</li>
@@ -559,7 +576,8 @@
 <li>inherit:动画设置为父元素属性。</li>
 </ul>
 </li>
-<li><p>fill-mode：用于在动画不播放时（处于延时或完成的状态）设置动画的位置，非必填，<strong>样式可以分为在animation外部的初始样式，以及在keyframes中定义的动画样式。</strong></p>
+<li>
+<p>fill-mode：用于在动画不播放时（处于延时或完成的状态）设置动画的位置，非必填，<strong>样式可以分为在animation外部的初始样式，以及在keyframes中定义的动画样式。</strong></p>
 <ul>
 <li>none:默认参数。在动画不播放时不对动画产生任何作用。</li>
 <li>forwards:在动画结束时应用动画样式效果，在动画延时中应用初始样式效果。</li>
@@ -613,41 +631,47 @@
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="使用CSS-Transition实现动画"><a href="#使用CSS-Transition实现动画" class="headerlink" title="使用CSS Transition实现动画"></a>使用CSS Transition实现动画</h2><blockquote>
+<h2 id="使用CSS-Transition实现动画">使用CSS Transition实现动画</h2>
+<blockquote>
 <p>Transition强调过渡，即一个元素从一个状态进入另一个状态的过程；而keyframes强调动画的运动轨迹，可设置中间状态改变动画轨迹。</p>
 </blockquote>
-<h3 id="transform参数："><a href="#transform参数：" class="headerlink" title="transform参数："></a>transform参数：</h3><ol>
-<li><p>translate ( n px )：</p>
-<p><strong>一个值：</strong>transform:translate(100px)，表示水平方向移动的位移，等同于translateX(100px)</p>
+<h3 id="transform参数：">transform参数：</h3>
+<ol>
+<li>
+<p>translate ( n px )：</p>
+<p>**一个值：**transform:translate(100px)，表示水平方向移动的位移，等同于translateX(100px)</p>
 <p>translateX(x):沿 X 轴位移</p>
 <p>translateY(y):沿 Y 轴位移</p>
 <p>translateZ(z):沿 Z 轴位移</p>
 <p><strong>两个值：</strong> transform:translate(100px, 200px)，第一个表示水平方向移动的位移，第二个表示垂直方向移动的位移</p>
 <p>translate(x,y) :沿 X Y 轴位移</p>
-<p><strong>三个值：</strong>translate3d(10px,20px,10px)，表示3D三个方向移动的位移，顺序为X,Y,Z</p>
+<p>**三个值：**translate3d(10px,20px,10px)，表示3D三个方向移动的位移，顺序为X,Y,Z</p>
 </li>
-<li><p>rotate ( n deg )：</p>
-<p><strong>以角度(deg)为单位，正数是顺时针旋转，负数是逆时针旋转</strong> </p>
+<li>
+<p>rotate ( n deg )：</p>
+<p><strong>以角度(deg)为单位，正数是顺时针旋转，负数是逆时针旋转</strong></p>
 <p>rotate():2D旋转</p>
 <p>rotateX():沿着X轴3D旋转</p>
 <p>rotateY():沿着Y轴3D旋转</p>
 <p>rotateZ():沿着Z轴3D旋转.要在其父级配合transform-style: preserve-3d;使用</p>
 <p>rotate3D(x,y,z,n deg): 3D旋转，接受四个参数，x,y,z介于0-1之间，n是旋转的度数。元素围绕着xyz在空间中确定的唯一坐标点和原点之间的连线旋转指定的角度。</p>
 </li>
-<li><p>scale ( n )：</p>
-<p><strong>一个值：</strong>transform: scale(1) ，表示水平跟垂直方向同时放大1倍</p>
-<p><strong>两个值：</strong>transform: scale(1,2)，第一个参数表示水平方向的缩放比例，第二个参数表示垂直方向的缩放比例，等同于scaleX (1)和 scaleY(2)</p>
-<p><strong>三个值：</strong>scale3d(0.5,0.3,0.4)，表示3D三个方向缩放的比例，顺序为X,Y,Z轴</p>
+<li>
+<p>scale ( n )：</p>
+<p>**一个值：**transform: scale(1) ，表示水平跟垂直方向同时放大1倍</p>
+<p>**两个值：**transform: scale(1,2)，第一个参数表示水平方向的缩放比例，第二个参数表示垂直方向的缩放比例，等同于scaleX (1)和 scaleY(2)</p>
+<p>**三个值：**scale3d(0.5,0.3,0.4)，表示3D三个方向缩放的比例，顺序为X,Y,Z轴</p>
 <p>数值为负时为缩小</p>
 </li>
-<li><p>skew ( n deg )：</p>
-<p><strong>一个值：</strong>transform:skew(10deg)，表示水平方向的倾斜角度，等同于skewX(10deg)</p>
+<li>
+<p>skew ( n deg )：</p>
+<p>**一个值：**transform:skew(10deg)，表示水平方向的倾斜角度，等同于skewX(10deg)</p>
 <p>skewX:表示水平方向的倾斜角度</p>
 <p>skewY：表示垂直方向的倾斜角度</p>
-<p><strong>两个值：</strong>transform:skew(10deg,20deg)，第一个参数表示水平方向的倾斜角度，第二个参数表示垂直方向的倾斜角度</p>
+<p>**两个值：**transform:skew(10deg,20deg)，第一个参数表示水平方向的倾斜角度，第二个参数表示垂直方向的倾斜角度</p>
 </li>
-<li><p>transform-origin：</p>
+<li>
+<p>transform-origin：</p>
 </li>
 </ol>
 <blockquote>
@@ -655,8 +679,10 @@
 </blockquote>
 <p><strong>有两个参数：第一个表示距离元素左上角水平方向的距离，第二个表示距离元素左上角垂直方向的距离。</strong></p>
 <p><strong>第一个参数可以设置为left、center、right，第二个参数可以设置为top、center、bottom。</strong></p>
-<h3 id="transition参数："><a href="#transition参数：" class="headerlink" title="transition参数："></a>transition参数：</h3><ol>
-<li>transition-property：定过渡或动态模拟的css属性，也就是指定究竟是哪个属性要执行动画效果。<ul>
+<h3 id="transition参数：">transition参数：</h3>
+<ol>
+<li>transition-property：定过渡或动态模拟的css属性，也就是指定究竟是哪个属性要执行动画效果。
+<ul>
 <li>none：没有属性会获得过渡效果。</li>
 <li>all：所有属性都将获得过渡效果。</li>
 <li>property：定义应用过渡效果的 CSS 属性名称列表，列表以逗号分隔。</li>
@@ -684,7 +710,6 @@
 <span class="token selector">.box:hover</span> <span class="token punctuation">&#123;</span>
   <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">scale</span><span class="token punctuation">(</span>1.25<span class="token punctuation">)</span> <span class="token function">skewY</span><span class="token punctuation">(</span>-20deg<span class="token punctuation">)</span> <span class="token function">rotateY</span><span class="token punctuation">(</span>20deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

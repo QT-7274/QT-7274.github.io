@@ -496,16 +496,21 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h2><h3 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h3><ul>
-<li><p>静态分配</p>
+                <h2 id="线性表">线性表</h2>
+<h3 id="顺序表">顺序表</h3>
+<ul>
+<li>
+<p>静态分配</p>
 <p>顺序表最简单的方法是使用一个定长数组data[]存储数据，最大空间为 Maxsize，用 length记录实际的元素个数，即顺序表的长度。</p>
 </li>
-<li><p>动态分配</p>
+<li>
+<p>动态分配</p>
 <p>在程序运行过程中，根据需要动态分配一段连续的空间（大小为 Maxsize），用 elem 记录该空间的基地址（首地址），用 length 记录实际的元素个数，即顺序表的长度。</p>
 <p>采用动态存储方法，在运算过程中，如果发生溢出，可以另外开辟一块更大的存储空间，用以替换原来的存储空间，从而达到扩充存储空间的目的。</p>
 </li>
 </ul>
-<h4 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h4><p>分配Maxsize空间，<strong>注意判断分配失败的情况</strong>：</p>
+<h4 id="初始化：">初始化：</h4>
+<p>分配Maxsize空间，<strong>注意判断分配失败的情况</strong>：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
@@ -524,10 +529,10 @@
     L<span class="token punctuation">.</span>length<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>				<span class="token comment">//空表长度为0</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="创建："><a href="#创建：" class="headerlink" title="创建："></a>创建：</h4><ol>
+<h4 id="创建：">创建：</h4>
+<ol>
 <li>注意判断顺序表是否已满。</li>
-<li>将数据 x 存入顺序表的第 i 个位置，即 L.elem[i]&#x3D;x，然后 i++。</li>
+<li>将数据 x 存入顺序表的第 i 个位置，即 L.elem[i]=x，然后 i++。</li>
 <li>注意顺序表长度增加1。</li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">CreateList</span><span class="token punctuation">(</span>SqList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span> <span class="token comment">//创建一个顺序表L</span>
@@ -548,14 +553,14 @@
 	<span class="token punctuation">&#125;</span>
    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="取值："><a href="#取值：" class="headerlink" title="取值："></a>取值：</h4><p>顺序表中的<strong>任何一个元素都可以立即被找到</strong>，称为随机存取方式。</p>
+<h4 id="取值：">取值：</h4>
+<p>顺序表中的<strong>任何一个元素都可以立即被找到</strong>，称为随机存取方式。</p>
 <p>由于下标是从 0 开始的，因此第 i 个元素，其下标为 i−1，即对应元素为 L.elem[i−1]</p>
 <blockquote>
 <p>注意：位序是指第几个元素，<strong>位序和下标差1</strong>。</p>
 </blockquote>
 <p>注意判断i值的合理性。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906155828274.png" alt="image-20220906155828274"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906155828274.png" alt="image-20220906155828274"></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">GetElem</span><span class="token punctuation">(</span>SqList L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">||</span>i<span class="token operator">></span>L<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
@@ -563,8 +568,8 @@
 	e<span class="token operator">=</span>L<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>   <span class="token comment">//第i-1的单元存储着第i个数据</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="查找："><a href="#查找：" class="headerlink" title="查找："></a>查找：</h4><p>在顺序表中查找一个元素 e，可以从第一个元素开始顺序查找，<strong>依次比较每一个元素值</strong>。如果相等，则返回元素位置（位序，即第几个元素）；如果查找整个顺序表都没找到，则返回−1。</p>
+<h4 id="查找：">查找：</h4>
+<p>在顺序表中查找一个元素 e，可以从第一个元素开始顺序查找，<strong>依次比较每一个元素值</strong>。如果相等，则返回元素位置（位序，即第几个元素）；如果查找整个顺序表都没找到，则返回−1。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">LocateELem</span><span class="token punctuation">(</span>SqList L<span class="token punctuation">,</span><span class="token keyword">int</span> x<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>L<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
@@ -572,18 +577,22 @@
 		  	<span class="token keyword">return</span> i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">//第几个元素，例如第5个元素，下标其实为4</span>
 	<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="算法复杂度分析："><a href="#算法复杂度分析：" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h5><ul>
-<li><p>最好情况：如果元素正好在第一个位置，比较一次查找成功，时间复杂度为 O(1)。</p>
+<h5 id="算法复杂度分析：">算法复杂度分析：</h5>
+<ul>
+<li>
+<p>最好情况：如果元素正好在第一个位置，比较一次查找成功，时间复杂度为 O(1)。</p>
 </li>
-<li><p>最坏情况：如果元素正好在最后一个位置，比较 n 次查找成功，时间复杂度为 O(n)。</p>
+<li>
+<p>最坏情况：如果元素正好在最后一个位置，比较 n 次查找成功，时间复杂度为 O(n)。</p>
 </li>
-<li><p>平均情况：如果查找的元素在第一个位置需要比较 1 次，第二个位置需要比较 2次……最后一个位置需要比较 n 次。如果该元素在第 i 个位置，则需要比较 i 次，把每种情况比较次数乘以其查找概率 pi 并求和，即为平均时间复杂度。如果查找概率均等，即每个关键字的查找概率均为 1&#x2F;n，则平均时间复杂度为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906160600617.png" alt="image-20220906160600617"></p>
-<p>因此，假设每个关键字查找的概率均等，顺序表查找算法的平均时间复杂度为 **O(n)**。</p>
+<li>
+<p>平均情况：如果查找的元素在第一个位置需要比较 1 次，第二个位置需要比较 2次…最后一个位置需要比较 n 次。如果该元素在第 i 个位置，则需要比较 i 次，把每种情况比较次数乘以其查找概率 pi 并求和，即为平均时间复杂度。如果查找概率均等，即每个关键字的查找概率均为 1/n，则平均时间复杂度为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906160600617.png" alt="image-20220906160600617"></p>
+<p>因此，假设每个关键字查找的概率均等，顺序表查找算法的平均时间复杂度为 <strong>O(n)</strong>。</p>
 </li>
 </ul>
-<h4 id="插入："><a href="#插入：" class="headerlink" title="插入："></a>插入：</h4><p>在顺序表中第 i 个位置之前插入一个元素 e，需要从最后一个元素开始，<strong>后移一位</strong>，直到把第 i 个元素也后移一位，然后把 e 放入第 i 个位置。</p>
+<h4 id="插入：">插入：</h4>
+<p>在顺序表中第 i 个位置之前插入一个元素 e，需要从最后一个元素开始，<strong>后移一位</strong>，直到把第 i 个元素也后移一位，然后把 e 放入第 i 个位置。</p>
 <ol>
 <li>注意判断位置i是否合法（<strong>1≤i≤L.length+1</strong>）。</li>
 <li>注意判断顺序表的存储空间是否已满。</li>
@@ -601,11 +610,12 @@
 	L<span class="token punctuation">.</span>length<span class="token operator">++</span><span class="token punctuation">;</span>		     	<span class="token comment">//表长增1</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="算法复杂度分析：-1"><a href="#算法复杂度分析：-1" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h5><p>可以在第 1 个位置之前插入，也可以在第 2 个位置之前……第 n 个位置之前，第 n+1 个位置之前插入，一共有 n+1 种情况，每种情况移动元素的个数是 n−i+1。把每种情况移动次数乘以其插入概率 p i 并求和，即为平均时间复杂度。如果插入概率均等，即每个位置的插入概率均为 1&#x2F;(n+1)，则平均时间复杂度为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906161747867.png" alt="image-20220906161747867"></p>
-<p>因此，假设每个位置插入的概率均等，顺序表插入算法平均时间复杂度为 **O(n)**。</p>
-<h4 id="删除："><a href="#删除：" class="headerlink" title="删除："></a>删除：</h4><p>在顺序表中删除第 i 个元素，需要把该元素暂存到变量 e 中，然后从 i+1 个元素<strong>开始前移.</strong>…..直到把第 n 个元素也前移一位，即可完成删除操作。</p>
+<h5 id="算法复杂度分析：-2">算法复杂度分析：</h5>
+<p>可以在第 1 个位置之前插入，也可以在第 2 个位置之前…第 n 个位置之前，第 n+1 个位置之前插入，一共有 n+1 种情况，每种情况移动元素的个数是 n−i+1。把每种情况移动次数乘以其插入概率 p i 并求和，即为平均时间复杂度。如果插入概率均等，即每个位置的插入概率均为 1/(n+1)，则平均时间复杂度为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906161747867.png" alt="image-20220906161747867"></p>
+<p>因此，假设每个位置插入的概率均等，顺序表插入算法平均时间复杂度为 <strong>O(n)</strong>。</p>
+<h4 id="删除：">删除：</h4>
+<p>在顺序表中删除第 i 个元素，需要把该元素暂存到变量 e 中，然后从 i+1 个元素<strong>开始前移.</strong>…直到把第 n 个元素也前移一位，即可完成删除操作。</p>
 <ol>
 <li>注意判断位置i是否合法（<strong>1≤i≤L.length+1</strong>）。</li>
 <li>将欲删除的元素保存在 e 中。</li>
@@ -622,17 +632,24 @@
    L<span class="token punctuation">.</span>length<span class="token operator">--</span><span class="token punctuation">;</span> <span class="token comment">//表长减1</span>
    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="算法复杂度分析：-2"><a href="#算法复杂度分析：-2" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h5><p>顺序表元素删除一共有 n 种情况，每种情况移动元素的个数是 n−i。把每种情况移动次数乘以其删除概率 p i 并求和，即为平均时间复杂度。假设删除每个元素的概率均等，即每个元素的删除概率均为 1&#x2F;n，则平均时间复杂度为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906162308243.png" alt="image-20220906162308243"></p>
-<p>因此，假设每个元素删除的概率均等，顺序表删除算法平均时间复杂度为 **O(n)**。</p>
-<h3 id="顺序表的优点和缺点："><a href="#顺序表的优点和缺点：" class="headerlink" title="顺序表的优点和缺点："></a>顺序表的优点和缺点：</h3><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><p>操作简单，存储密度高，<strong>可以随机存取</strong>，只需要 O(1)的时间就可以取出第 i 个元素。</p>
-<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><p>需要预先分配最大空间，最大空间数估计过大或过小会造成空间浪费或溢出。<strong>插入和删除操作需要移动大量元素</strong>。</p>
-<h3 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h3><p>可以给每个元素附加一个指针域，指向下一个元素的存储位置，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906165619151.png" alt="image-20220906165619151"></p>
-<p>每个节点包含两个域：<strong>数据域</strong>和<strong>指针域</strong>。<strong>数据域存储数据元素，指针域存储下一个节点的地址</strong>，因此指针指向的类型也是节点类型。每个指针都指向下一个<br>节点，都是朝一个方向的，这样的链表称为单向链表或单链表。</p>
-<p>只要给这个单链表设置一个头指针，这个链表中的每个节点就都可以找到了。有时为了操作方便，还会给链表增加一个不存放数据的头节点（也可以存放表长等信<br>息）。</p>
-<h4 id="初始化：-1"><a href="#初始化：-1" class="headerlink" title="初始化："></a>初始化：</h4><ol>
+<h5 id="算法复杂度分析：-3">算法复杂度分析：</h5>
+<p>顺序表元素删除一共有 n 种情况，每种情况移动元素的个数是 n−i。把每种情况移动次数乘以其删除概率 p i 并求和，即为平均时间复杂度。假设删除每个元素的概率均等，即每个元素的删除概率均为 1/n，则平均时间复杂度为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906162308243.png" alt="image-20220906162308243"></p>
+<p>因此，假设每个元素删除的概率均等，顺序表删除算法平均时间复杂度为 <strong>O(n)</strong>。</p>
+<h3 id="顺序表的优点和缺点：">顺序表的优点和缺点：</h3>
+<h4 id="优点：">优点：</h4>
+<p>操作简单，存储密度高，<strong>可以随机存取</strong>，只需要 O(1)的时间就可以取出第 i 个元素。</p>
+<h4 id="缺点：">缺点：</h4>
+<p>需要预先分配最大空间，最大空间数估计过大或过小会造成空间浪费或溢出。<strong>插入和删除操作需要移动大量元素</strong>。</p>
+<h3 id="单链表">单链表</h3>
+<p>可以给每个元素附加一个指针域，指向下一个元素的存储位置，如图所示：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906165619151.png" alt="image-20220906165619151"></p>
+<p>每个节点包含两个域：<strong>数据域</strong>和<strong>指针域</strong>。<strong>数据域存储数据元素，指针域存储下一个节点的地址</strong>，因此指针指向的类型也是节点类型。每个指针都指向下一个<br>
+节点，都是朝一个方向的，这样的链表称为单向链表或单链表。</p>
+<p>只要给这个单链表设置一个头指针，这个链表中的每个节点就都可以找到了。有时为了操作方便，还会给链表增加一个不存放数据的头节点（也可以存放表长等信<br>
+息）。</p>
+<h4 id="初始化：-2">初始化：</h4>
+<ol>
 <li>创建头节点，<strong>令其指针域为空</strong>。</li>
 <li>注意判断生成节点失败的情况。</li>
 </ol>
@@ -652,34 +669,38 @@
 	L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>   <span class="token comment">//头结点的指针域置空</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="创建：-1"><a href="#创建：-1" class="headerlink" title="创建："></a>创建：</h4><h5 id="头插法："><a href="#头插法：" class="headerlink" title="头插法："></a>头插法：</h5><blockquote>
+<h4 id="创建：-2">创建：</h4>
+<h5 id="头插法：">头插法：</h5>
+<blockquote>
 <p>头插法是指每次把新节点插到头节点之后，<strong>其创建的单链表和数据输入顺序正好相反</strong>，因此也称为逆序建表。</p>
 </blockquote>
 <ol>
-<li><p>初始化链表后，创建新节点，把元素1放入新节点数据域：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906170511493.png" alt="image-20220906170511493"></p>
+<li>
+<p>初始化链表后，创建新节点，把元素1放入新节点数据域：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906170511493.png" alt="image-20220906170511493"></p>
 </li>
-<li><p>头插操作，插入 头节点的后面：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906170546723.png" alt="image-20220906170546723"></p>
+<li>
+<p>头插操作，插入 头节点的后面：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906170546723.png" alt="image-20220906170546723"></p>
 </li>
-<li><p>同理插入元素2，插入头节点的后面：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906170601300.png" alt="image-20220906170601300"></p>
+<li>
+<p>同理插入元素2，插入头节点的后面：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906170601300.png" alt="image-20220906170601300"></p>
 <blockquote>
 <p>赋值语句的两端：<strong>等号的右侧是节点的地址</strong>，<strong>等号的左侧是节点的指针域</strong>。</p>
 </blockquote>
 <ol>
-<li>s-&gt;next&#x3D;L-&gt;next：L-&gt;next 存储的是下一个节点地址“9630”，将该地址赋值给 s-&gt;next指针域，即 s 节点的 next 指针指向 1 节点。</li>
-<li>L-&gt;next&#x3D;s：将 s 节点的地址“2046”赋值给 L-&gt;next 指针域，即 L 节点的 next 指针指向 s 节点。</li>
+<li>s-&gt;next=L-&gt;next：L-&gt;next 存储的是下一个节点地址“9630”，将该地址赋值给 s-&gt;next指针域，即 s 节点的 next 指针指向 1 节点。</li>
+<li>L-&gt;next=s：将 s 节点的地址“2046”赋值给 L-&gt;next 指针域，即 L 节点的 next 指针指向 s 节点。</li>
 </ol>
 <p><strong>为什么要先修改后面那个指针呢？</strong></p>
 <p>因为一旦修改了 L 节点的指针域指向 s，那么原来 L 节点后面的节点就找不到了，因此修改指针是有顺序的。</p>
 <blockquote>
 <p>修改指针的顺序原则：<strong>先修改没有指针标记的那一端</strong></p>
 </blockquote>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906171402128.png" alt="image-20220906171402128"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906171402128.png" alt="image-20220906171402128"></p>
 <p>如果要插入节点的两端都有标记，例如，再定义一个指针 q 指向 L 节点后面的节点，那么先修改哪个指针都无所谓了：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906171436712.png" alt="image-20220906171436712"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906171436712.png" alt="image-20220906171436712"></p>
 </li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">CreateList_H</span><span class="token punctuation">(</span>LinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token comment">//前插法创建单链表</span>
@@ -701,21 +722,23 @@
 		L<span class="token operator">-></span>next<span class="token operator">=</span>s<span class="token punctuation">;</span> <span class="token comment">//将新结点s插入到头结点之后</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="尾插法："><a href="#尾插法：" class="headerlink" title="尾插法："></a>尾插法：</h5><blockquote>
+<h5 id="尾插法：">尾插法：</h5>
+<blockquote>
 <p>尾插法每次把新节点链接到链表的尾部，<strong>其创建的单链表和数据输入顺序一致</strong>。</p>
 </blockquote>
 <ol>
-<li><p>初始化链表后，创建新节点，把元素1放入新节点数据域并插入到尾结点的后面：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906201103508.png" alt="image-20220906201103508"></p>
+<li>
+<p>初始化链表后，创建新节点，把元素1放入新节点数据域并插入到尾结点的后面：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906201103508.png" alt="image-20220906201103508"></p>
 <ol>
-<li>s-&gt;next&#x3D;NULL：s 节点的指针域置空。</li>
-<li>r-&gt;next&#x3D;s：将 s 节点的地址赋值给 r 节点的指针域，即将新节点 s 插入尾节点 r 之后。</li>
-<li>r&#x3D;s：将 s 节点的地址赋值给 r，即 r 指向新的尾节点 s。</li>
+<li>s-&gt;next=NULL：s 节点的指针域置空。</li>
+<li>r-&gt;next=s：将 s 节点的地址赋值给 r 节点的指针域，即将新节点 s 插入尾节点 r 之后。</li>
+<li>r=s：将 s 节点的地址赋值给 r，即 r 指向新的尾节点 s。</li>
 </ol>
 </li>
-<li><p>输入数据元素 2，创建新节点，把元素 2 放入新节点数据域，插入到尾节点的后面：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906201742129.png" alt="image-20220906201742129"></p>
+<li>
+<p>输入数据元素 2，创建新节点，把元素 2 放入新节点数据域，插入到尾节点的后面：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906201742129.png" alt="image-20220906201742129"></p>
 </li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">CreateList_R</span><span class="token punctuation">(</span>LinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token comment">//尾插法创建单链表</span>
@@ -739,27 +762,32 @@
 		r<span class="token operator">=</span>s<span class="token punctuation">;</span><span class="token comment">//r指向新的尾结点s</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="取值：-1"><a href="#取值：-1" class="headerlink" title="取值："></a>取值：</h4><p>单链表的取值不像顺序表那样可以随机访问任何一个元素，单链表只有头指针，各个节点的物理地址是不连续的。</p>
+<h4 id="取值：-2">取值：</h4>
+<p>单链表的取值不像顺序表那样可以随机访问任何一个元素，单链表只有头指针，各个节点的物理地址是不连续的。</p>
 <blockquote>
 <p>要想找到第 i 个节点，就必须<strong>从第一个节点开始按顺序向后找</strong>，一直找到第 i 个节点。</p>
 </blockquote>
 <blockquote>
-<p>注意：<strong>链表的头指针不可随意改动！</strong>一个链表是由头指针来标识的，一旦头指针改动或丢失，这个链表就不完整或找不到了。如果需要用指针移动，可定义一个指针变量进行移动。</p>
+<p>注意：**链表的头指针不可随意改动！**一个链表是由头指针来标识的，一旦头指针改动或丢失，这个链表就不完整或找不到了。如果需要用指针移动，可定义一个指针变量进行移动。</p>
 </blockquote>
 <ol>
-<li><p>先定义一个 p 指针，指向第一个元素节点，用 j 作为计数器，j&#x3D;1。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906203132220.png" alt="image-20220906203132220"></p>
+<li>
+<p>先定义一个 p 指针，指向第一个元素节点，用 j 作为计数器，j=1。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906203132220.png" alt="image-20220906203132220"></p>
 </li>
-<li><p>如果 p 不为空且 j&lt;i，则 p 指向 p 的下一个节点，然后 j 加 1，即：p&#x3D;p-&gt;next; j++。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906203150910.png" alt="image-20220906203150910"></p>
+<li>
+<p>如果 p 不为空且 j&lt;i，则 p 指向 p 的下一个节点，然后 j 加 1，即：p=p-&gt;next; j++。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906203150910.png" alt="image-20220906203150910"></p>
 </li>
-<li><p>直到 p 为空或者 j&#x3D;i 停止。p 为空，说明没有数到 i，链表就结束了，即不存在第 i个节点；j&#x3D;i，说明找到了第 i 个节点。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906203203024.png" alt="image-20220906203203024"></p>
+<li>
+<p>直到 p 为空或者 j=i 停止。p 为空，说明没有数到 i，链表就结束了，即不存在第 i个节点；j=i，说明找到了第 i 个节点。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906203203024.png" alt="image-20220906203203024"></p>
 </li>
-<li><p>如果i值不合法，也需要进行判断。</p>
+<li>
+<p>如果i值不合法，也需要进行判断。</p>
 </li>
-<li><p><strong>注意每一步的条件因素</strong>。</p>
+<li>
+<p><strong>注意每一步的条件因素</strong>。</p>
 </li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">GetElem_L</span><span class="token punctuation">(</span>LinkList L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>e<span class="token punctuation">)</span><span class="token comment">//单链表的取值</span>
@@ -780,8 +808,8 @@
 	e<span class="token operator">=</span>p<span class="token operator">-></span>data<span class="token punctuation">;</span> <span class="token comment">//取第i个结点的数据域</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="查找：-1"><a href="#查找：-1" class="headerlink" title="查找："></a>查找：</h4><p>在一个单链表中查找是否存在元素 e，可以定义一个 p 指针，指向第一个元素节点，比较 p 指向节点的数据域是否等于 e。</p>
+<h4 id="查找：-2">查找：</h4>
+<p>在一个单链表中查找是否存在元素 e，可以定义一个 p 指针，指向第一个元素节点，比较 p 指向节点的数据域是否等于 e。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">LocateElem_L</span><span class="token punctuation">(</span>LinkList L<span class="token punctuation">,</span> <span class="token keyword">int</span> e<span class="token punctuation">)</span> <span class="token comment">//按值查找</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token comment">//在带头结点的单链表L中查找值为e的元素</span>
@@ -793,26 +821,31 @@
         <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">//查找失败p为NULL</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="插入：-1"><a href="#插入：-1" class="headerlink" title="插入："></a>插入：</h4><p>如果要在第 i 个节点之前插入一个元素，则必须先找到第 i−1 个节点。</p>
+<h4 id="插入：-2">插入：</h4>
+<p>如果要在第 i 个节点之前插入一个元素，则必须先找到第 i−1 个节点。</p>
 <blockquote>
 <p>单链表只有一个指针域，是向后操作的，不可以向前操作。<strong>如果直接找到第 i 个节点，就无法向前操作，把新节点插入第 i 个节点之前</strong>。</p>
 </blockquote>
 <p>实际上，在第 i 个节点之前插入一个元素相当于在第 i−1 个节点之后插入一个元素，因此先找到第 i−1 个节点，然后将新节点插在其后面即可。</p>
 <ol>
-<li><p>定义一个 p 指针，指向头节点，用 j 作为计数器，<strong>j&#x3D;0</strong>。</p>
+<li>
+<p>定义一个 p 指针，指向头节点，用 j 作为计数器，<strong>j=0</strong>。</p>
 </li>
-<li><p>如果 p 不为空且 j&lt;i−1，则 p 指向 p 的下一个节点，然后 j 加 1，即：p&#x3D;p-&gt;next; j++。</p>
+<li>
+<p>如果 p 不为空且 j&lt;i−1，则 p 指向 p 的下一个节点，然后 j 加 1，即：p=p-&gt;next; j++。</p>
 </li>
-<li><p>直到 p 为空或 j &gt;&#x3D;i−1 停止。</p>
+<li>
+<p>直到 p 为空或 j &gt;=i−1 停止。</p>
 </li>
-<li><p>p 为空，说明没有数到 i−1，链表就结束了，即 i＞n+1，i 值不合法；j &gt;i−1 说明 i＜1，此时 i 值不合法，返回 false。如果 j&#x3D;i−1，说明找到了第 i−1 个节点。</p>
+<li>
+<p>p 为空，说明没有数到 i−1，链表就结束了，即 i＞n+1，i 值不合法；j &gt;i−1 说明 i＜1，此时 i 值不合法，返回 false。如果 j=i−1，说明找到了第 i−1 个节点。</p>
 </li>
-<li><p>将新节点插到第 i−1 个节点之后。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906204151314.png" alt="image-20220906204151314"></p>
+<li>
+<p>将新节点插到第 i−1 个节点之后。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906204151314.png" alt="image-20220906204151314"></p>
 <ol>
-<li>s-&gt;next&#x3D;p-&gt;next：将 p 节点后面的节点地址赋值给 s 节点的指针域，即 s 节点的 next 指针指向 p 后面的节点。</li>
-<li>p-&gt;next&#x3D;s：将 s 节点的地址赋值给 p 节点的指针域，即 p 节点的 next 指针指向 s 节点。</li>
+<li>s-&gt;next=p-&gt;next：将 p 节点后面的节点地址赋值给 s 节点的指针域，即 s 节点的 next 指针指向 p 后面的节点。</li>
+<li>p-&gt;next=s：将 s 节点的地址赋值给 p 节点的指针域，即 p 节点的 next 指针指向 s 节点。</li>
 </ol>
 <p>前面讲的前插法建链表，就是每次将新节点插到头节点之后，现在是将新节点插到第 i−1 个节点之后。</p>
 </li>
@@ -837,9 +870,9 @@
 	p<span class="token operator">-></span>next<span class="token operator">=</span>s<span class="token punctuation">;</span>       <span class="token comment">//将结点p的指针域指向结点s</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="删除：-1"><a href="#删除：-1" class="headerlink" title="删除："></a>删除：</h4><p>删除一个节点，实际上是把这个节点跳过去。根据单向链表向后操作的特性，要想跳过第 i 个节点，就<strong>必须先找到第 i−1 个节点</strong>，否则是无法跳过去的。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220906204522573.png" alt="image-20220906204522573"></p>
+<h4 id="删除：-2">删除：</h4>
+<p>删除一个节点，实际上是把这个节点跳过去。根据单向链表向后操作的特性，要想跳过第 i 个节点，就<strong>必须先找到第 i−1 个节点</strong>，否则是无法跳过去的。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220906204522573.png" alt="image-20220906204522573"></p>
 <ul>
 <li>注意保存被删节点。</li>
 <li>注意释放空间。</li>
@@ -863,10 +896,11 @@
 	<span class="token keyword">delete</span> q<span class="token punctuation">;</span>        <span class="token comment">//释放被删除结点的空间</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="双向链表："><a href="#双向链表：" class="headerlink" title="双向链表："></a>双向链表：</h3><p>单链表只能向后操作，不可以向前操作。为了向前、向后操作方便，可以给每个元素附加两个指针域，一个存储前一个元素的地址，另一个存储下一个元素的地址。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909215632955.png" alt="image-20220909215632955"></p>
-<h4 id="初始化：-2"><a href="#初始化：-2" class="headerlink" title="初始化："></a>初始化：</h4><ol>
+<h3 id="双向链表：">双向链表：</h3>
+<p>单链表只能向后操作，不可以向前操作。为了向前、向后操作方便，可以给每个元素附加两个指针域，一个存储前一个元素的地址，另一个存储下一个元素的地址。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220909215632955.png" alt="image-20220909215632955"></p>
+<h4 id="初始化：-3">初始化：</h4>
+<ol>
 <li>创建头节点，不存储数据。</li>
 <li>令头节点前后两个指针域均为空。</li>
 </ol>
@@ -886,21 +920,29 @@
 	L<span class="token operator">-></span>prior<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>   <span class="token comment">//头结点的两个指针域置空</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="创建：-2"><a href="#创建：-2" class="headerlink" title="创建："></a>创建：</h4><h5 id="头插法：-1"><a href="#头插法：-1" class="headerlink" title="头插法："></a>头插法：</h5><ol>
-<li><p>将新节点插入到头节点的后面：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909220959282.png" alt="image-20220909220959282"></p>
-</li>
-<li><p>创建新节点并继续插入到头节点的后面：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909221129893.png" alt="image-20220909221129893"></p>
+<h4 id="创建：-3">创建：</h4>
+<h5 id="头插法：-2">头插法：</h5>
 <ol>
-<li><p>s-&gt;next&#x3D;L-&gt;next：将 L 节点后面的节点（后继）地址赋值给 s 节点的指针域，即 s 节点的 next 指针指向 L 的后继节点。</p>
+<li>
+<p>将新节点插入到头节点的后面：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220909220959282.png" alt="image-20220909220959282"></p>
 </li>
-<li><p>L-&gt;next-&gt;prior&#x3D;s：将 s 节点的地址赋值给 L 的后继节点的 prior 指针域，即 L 的后继节点的 prior 指针指向 s 节点。<br><strong>注意这一步要先判断L-next是否为null。</strong></p>
+<li>
+<p>创建新节点并继续插入到头节点的后面：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220909221129893.png" alt="image-20220909221129893"></p>
+<ol>
+<li>
+<p>s-&gt;next=L-&gt;next：将 L 节点后面的节点（后继）地址赋值给 s 节点的指针域，即 s 节点的 next 指针指向 L 的后继节点。</p>
 </li>
-<li><p>s-&gt;prior&#x3D;L：将 L 节点的地址赋值给 s 节点的 prior 指针域，即 s 节点的 prior 指针指向 L 节点。</p>
+<li>
+<p>L-&gt;next-&gt;prior=s：将 s 节点的地址赋值给 L 的后继节点的 prior 指针域，即 L 的后继节点的 prior 指针指向 s 节点。<br>
+<strong>注意这一步要先判断L-next是否为null。</strong></p>
 </li>
-<li><p>L-&gt;next&#x3D;s：将 s 节点的地址赋值给 L 节点的指针域，即 L 节点的 next 指针指向 s 节点。</p>
+<li>
+<p>s-&gt;prior=L：将 L 节点的地址赋值给 s 节点的 prior 指针域，即 s 节点的 prior 指针指向 L 节点。</p>
+</li>
+<li>
+<p>L-&gt;next=s：将 s 节点的地址赋值给 L 节点的指针域，即 L 节点的 next 指针指向 s 节点。</p>
 <blockquote>
 <p><strong>实际上，只需要将④语句放在最后修改即可，①②③语句顺序无要求。</strong></p>
 </blockquote>
@@ -930,9 +972,10 @@
         L<span class="token operator">-></span>next<span class="token operator">=</span>s<span class="token punctuation">;</span> <span class="token comment">//将新结点s插入到头结点之后</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="尾插法：-1"><a href="#尾插法：-1" class="headerlink" title="尾插法："></a>尾插法：</h5><p>尾插法建双向链表和尾插法建单链表类似，需要有一个尾指针，不再赘述。</p>
-<h4 id="取值：-2"><a href="#取值：-2" class="headerlink" title="取值："></a>取值：</h4><p>双向链表的取值、查找和单链表的一样，此处不再赘述。</p>
+<h5 id="尾插法：-2">尾插法：</h5>
+<p>尾插法建双向链表和尾插法建单链表类似，需要有一个尾指针，不再赘述。</p>
+<h4 id="取值：-3">取值：</h4>
+<p>双向链表的取值、查找和单链表的一样，此处不再赘述。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">GetElem_L</span><span class="token punctuation">(</span>DuLinkList L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>e<span class="token punctuation">)</span><span class="token comment">//双向链表的取值</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token comment">//在带头结点的双向链表L中查找第i个元素</span>
@@ -951,8 +994,8 @@
 	e<span class="token operator">=</span>p<span class="token operator">-></span>data<span class="token punctuation">;</span> <span class="token comment">//取第i个结点的数据域</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="查找：-2"><a href="#查找：-2" class="headerlink" title="查找："></a>查找：</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">LocateElem_L</span><span class="token punctuation">(</span>DuLinkList L<span class="token punctuation">,</span><span class="token keyword">int</span> e<span class="token punctuation">)</span> <span class="token comment">//按值查找</span>
+<h4 id="查找：-3">查找：</h4>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">LocateElem_L</span><span class="token punctuation">(</span>DuLinkList L<span class="token punctuation">,</span><span class="token keyword">int</span> e<span class="token punctuation">)</span> <span class="token comment">//按值查找</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token comment">//在带头结点的双向链表L中查找值为e的元素</span>
 	DuLinkList p<span class="token punctuation">;</span>
@@ -963,17 +1006,17 @@
         <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">//查找失败p为NULL</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="插入：-2"><a href="#插入：-2" class="headerlink" title="插入："></a>插入：</h4><p>双向链表因为有两个指针，可以向前后两个方向操作，<strong>直接找到第 i 个节点，就可以把新节点插入第 i 个节点之前。</strong></p>
+<h4 id="插入：-3">插入：</h4>
+<p>双向链表因为有两个指针，可以向前后两个方向操作，<strong>直接找到第 i 个节点，就可以把新节点插入第 i 个节点之前。</strong></p>
 <blockquote>
 <p>注意：这里假设第 i 个节点是存在的，如果第 i 个节点不存在，而第 i−1 个节点存在，还是需要找到第 i−1 个节点，将新节点插入第 i−1 个节点之后，</p>
 </blockquote>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909223237857.png" alt="image-20220909223237857"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220909223237857.png" alt="image-20220909223237857"></p>
 <ol>
-<li>p-&gt;prior-&gt;next&#x3D;s：s 节点的地址赋值给 p 的前驱节点的 next 指针域，即 p 的前驱的next 指针指向 s。</li>
-<li>s-&gt;prior&#x3D;p-&gt;prior：p 的前驱的地址赋值给 s 节点的 prior 指针域，即 s 节点的 prior 指针指向 p 的前驱。</li>
-<li>s-&gt;next&#x3D;p：p 节点的地址赋值给 s 节点的 next 指针域，即 s 节点的 next 指针指向 p 节点。</li>
-<li>p-&gt;prior&#x3D;s：s 节点的地址赋值给 p 节点的 prior 指针域，即 p 节点的 prior 指针指向 s 节点。</li>
+<li>p-&gt;prior-&gt;next=s：s 节点的地址赋值给 p 的前驱节点的 next 指针域，即 p 的前驱的next 指针指向 s。</li>
+<li>s-&gt;prior=p-&gt;prior：p 的前驱的地址赋值给 s 节点的 prior 指针域，即 s 节点的 prior 指针指向 p 的前驱。</li>
+<li>s-&gt;next=p：p 节点的地址赋值给 s 节点的 next 指针域，即 s 节点的 next 指针指向 p 节点。</li>
+<li>p-&gt;prior=s：s 节点的地址赋值给 p 节点的 prior 指针域，即 p 节点的 prior 指针指向 s 节点。</li>
 </ol>
 <p>因为 p 的前驱无标记，<strong>一旦修改了 p 节点的 prior 指针，p 的前驱就找不到了</strong>，因此，最后修改这个指针。只需要将④语句放在最后修改即可，①②③语句顺序无要求。</p>
 <blockquote>
@@ -1001,13 +1044,15 @@
 	p<span class="token operator">-></span>prior<span class="token operator">=</span>s<span class="token punctuation">;</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="删除：-2"><a href="#删除：-2" class="headerlink" title="删除："></a>删除：</h4><p>双向链表只要直接找到第 i 个节点，然后修改指针即可：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220909224117840.png" alt="image-20220909224117840"></p>
+<h4 id="删除：-3">删除：</h4>
+<p>双向链表只要直接找到第 i 个节点，然后修改指针即可：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220909224117840.png" alt="image-20220909224117840"></p>
 <ol>
-<li><p>p-&gt;prior-&gt;next&#x3D;p-&gt;next：将 p 的后继节点的地址赋值给 p 的前驱节点的 next 指针域。即 p 的前驱节点的 next 指针指向 p 的后继节点。</p>
+<li>
+<p>p-&gt;prior-&gt;next=p-&gt;next：将 p 的后继节点的地址赋值给 p 的前驱节点的 next 指针域。即 p 的前驱节点的 next 指针指向 p 的后继节点。</p>
 </li>
-<li><p>p-&gt;next-&gt;prior &#x3D;p-&gt;prior：将 p 的前驱节点的地址赋值给 p 的后继节点的 prior 指针域，即 p 的后继节点的 prior 指针指向 p 的前驱节点。此项修改的前提是 p 的后继节点存在，如果不存在，则不需要此项修改。</p>
+<li>
+<p>p-&gt;next-&gt;prior =p-&gt;prior：将 p 的前驱节点的地址赋值给 p 的后继节点的 prior 指针域，即 p 的后继节点的 prior 指针指向 p 的前驱节点。此项修改的前提是 p 的后继节点存在，如果不存在，则不需要此项修改。</p>
 <blockquote>
 <p>删除节点修改指针没有顺序，先修改哪个都可以。</p>
 </blockquote>
@@ -1033,28 +1078,38 @@
 	<span class="token keyword">delete</span> p<span class="token punctuation">;</span>        <span class="token comment">//释放被删除结点的空间</span>
 	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="循环链表："><a href="#循环链表：" class="headerlink" title="循环链表："></a>循环链表：</h3><p>如果从当前节点开始，无法访问该节点前面的节点，而最后一个节点的指针指向头节点，形成一个环，就可以从任何一个节点出发，访问所有的节点，这就是循环链表。</p>
+<h3 id="循环链表：">循环链表：</h3>
+<p>如果从当前节点开始，无法访问该节点前面的节点，而最后一个节点的指针指向头节点，形成一个环，就可以从任何一个节点出发，访问所有的节点，这就是循环链表。</p>
 <blockquote>
 <p>循环链表和普通链表的区别就是最后一个节点的后继指向了头节点，还要让头节点的前驱指向最后一个节点。</p>
 </blockquote>
-<h3 id="链表的优点和缺点："><a href="#链表的优点和缺点：" class="headerlink" title="链表的优点和缺点："></a>链表的优点和缺点：</h3><h4 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h4><p>链表是动态存储，不需要预先分配最大空间；<strong>插入删除不需要移动元素</strong>。</p>
-<h4 id="缺点：-1"><a href="#缺点：-1" class="headerlink" title="缺点："></a>缺点：</h4><p>每次动态分配一个节点，每个节点的地址是不连续的，需要有指针域记录下一个节点的地址，指针域需要占用一个 int 的空间，因此<strong>存储密度低</strong>（数据所占空间&#x2F;节点所占总空间）。</p>
+<h3 id="链表的优点和缺点：">链表的优点和缺点：</h3>
+<h4 id="优点：-2">优点：</h4>
+<p>链表是动态存储，不需要预先分配最大空间；<strong>插入删除不需要移动元素</strong>。</p>
+<h4 id="缺点：-2">缺点：</h4>
+<p>每次动态分配一个节点，每个节点的地址是不连续的，需要有指针域记录下一个节点的地址，指针域需要占用一个 int 的空间，因此<strong>存储密度低</strong>（数据所占空间/节点所占总空间）。</p>
 <p><strong>存取元素必须从头到尾按顺序查找，属于顺序存取。</strong></p>
-<h2 id="线性表的应用"><a href="#线性表的应用" class="headerlink" title="线性表的应用"></a>线性表的应用</h2><h3 id="合并有序顺序表："><a href="#合并有序顺序表：" class="headerlink" title="合并有序顺序表："></a>合并有序顺序表：</h3><p><strong>题目：</strong>将两个有序（非递减）顺序表 La 和 Lb 合并为一个新的有序（非递减）顺序表。</p>
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><ol>
+<h2 id="线性表的应用">线性表的应用</h2>
+<h3 id="合并有序顺序表：">合并有序顺序表：</h3>
+<p>**题目：**将两个有序（非递减）顺序表 La 和 Lb 合并为一个新的有序（非递减）顺序表。</p>
+<h4 id="思路：">思路：</h4>
+<ol>
 <li>首先创建一个顺序表 Lc，其长度为 La 和 Lb 的长度之和。</li>
 <li>然后从 La 和 Lb 中分别取数，比较其大小，将较小者放入 Lc 中，一直进行下去，直到其中一个顺序表 La 或 Lb 中的数取完为止。</li>
 <li>把未取完的数再依次取出放入 Lc 中即可。</li>
 </ol>
-<h4 id="解题："><a href="#解题：" class="headerlink" title="解题："></a>解题：</h4><ol>
-<li><p>设置 3 个工作指针：i、j、k（其实是整型数）。其中，i 和 j 分别指向 La 和 Lb 中当前待比较的元素，k 指向 Lc 中待放置元素的位置</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220910095920854.png" alt="image-20220910095920854"></p>
+<h4 id="解题：">解题：</h4>
+<ol>
+<li>
+<p>设置 3 个工作指针：i、j、k（其实是整型数）。其中，i 和 j 分别指向 La 和 Lb 中当前待比较的元素，k 指向 Lc 中待放置元素的位置</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220910095920854.png" alt="image-20220910095920854"></p>
 </li>
-<li><p>比较 La.elem[i]和 Lb.elem[j]，将较小的赋值给 Lc.elem[k]，同时相应指针向后移动。如此反复，直到顺序表 La 或 Lb 中的数取完为止。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220910100100150.png" alt="image-20220910100100150"></p>
+<li>
+<p>比较 La.elem[i]和 Lb.elem[j]，将较小的赋值给 Lc.elem[k]，同时相应指针向后移动。如此反复，直到顺序表 La 或 Lb 中的数取完为止。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220910100100150.png" alt="image-20220910100100150"></p>
 </li>
-<li><p>把 La 或 Lb中未取完的数依次取出，放入 Lc 中即可</p>
+<li>
+<p>把 La 或 Lb中未取完的数依次取出，放入 Lc 中即可</p>
 </li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
@@ -1081,25 +1136,32 @@
 	<span class="token keyword">while</span><span class="token punctuation">(</span>j<span class="token operator">&lt;</span>Lb<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token comment">//Lb有剩余，依次将Lb的剩余元素插入Lc表的最后</span>
 		Lc<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>k<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>Lb<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="算法复杂度分析：-3"><a href="#算法复杂度分析：-3" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>合并操作需要将 La 和 Lb 中的每一个元素取出放入 Lc 中，如果 La 和 Lb 的长度分别为 m、n，那么合并操作时间复杂度为 O(m+n) 空间复杂度也为 O(m+n)</p>
-<h3 id="合并有序链表："><a href="#合并有序链表：" class="headerlink" title="合并有序链表："></a>合并有序链表：</h3><p><strong>题目：</strong>将两个有序（非递减）单链表 La 和 Lb 合并为一个新的有序（非递减）单链表。</p>
-<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><p>链表合并不需要再创建空间，只需要“穿针引线”，把两个单链表中的节点按非递减的顺序串联起来即可。</p>
+<h4 id="算法复杂度分析：-4">算法复杂度分析：</h4>
+<p>合并操作需要将 La 和 Lb 中的每一个元素取出放入 Lc 中，如果 La 和 Lb 的长度分别为 m、n，那么合并操作时间复杂度为 O(m+n) 空间复杂度也为 O(m+n)</p>
+<h3 id="合并有序链表：">合并有序链表：</h3>
+<p>**题目：**将两个有序（非递减）单链表 La 和 Lb 合并为一个新的有序（非递减）单链表。</p>
+<h4 id="思路：-2">思路：</h4>
+<p>链表合并不需要再创建空间，只需要“穿针引线”，把两个单链表中的节点按非递减的顺序串联起来即可。</p>
 <blockquote>
 <p>注意：单链表的头指针不可以移动，一旦头指针丢失，就找不到该单链表了，因此需要辅助指针。</p>
 </blockquote>
-<h4 id="解题：-1"><a href="#解题：-1" class="headerlink" title="解题："></a>解题：</h4><ol>
-<li><p>设置 3 个辅助指针 p、q、r，p 和 q 分别指向 La 和 Lb 链表的当前比较位置，新链表头指针 Lc 指向 La，当作合并后的头节点。r 指向 Lc 的当前最后一个节点，利用 r 指针“穿针引线”：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/06/shu-ju-jie-gou-ru-men-xian-xing-biao/image-20220910102955699.png" alt="image-20220910102955699"></p>
+<h4 id="解题：-2">解题：</h4>
+<ol>
+<li>
+<p>设置 3 个辅助指针 p、q、r，p 和 q 分别指向 La 和 Lb 链表的当前比较位置，新链表头指针 Lc 指向 La，当作合并后的头节点。r 指向 Lc 的当前最后一个节点，利用 r 指针“穿针引线”：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220910102955699.png" alt="image-20220910102955699"></p>
 </li>
-<li><p>穿针引线。比较元素大小，将较小元素用 r 指针串起来。</p>
+<li>
+<p>穿针引线。比较元素大小，将较小元素用 r 指针串起来。</p>
 </li>
-<li><p>第 1 次比较，p-&gt;data&#x3D;4 &gt; q-&gt;data&#x3D;2，用 r 指针将 q 节点串起来。串联剩余部分，直到其中一个指针为空。</p>
+<li>
+<p>第 1 次比较，p-&gt;data=4 &gt; q-&gt;data=2，用 r 指针将 q 节点串起来。串联剩余部分，直到其中一个指针为空。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">r<span class="token operator">-></span>next<span class="token operator">=</span>q<span class="token punctuation">;</span> <span class="token comment">//把 q 节点的地址赋值给 r 的 next 指针域，即 r 的 next 指针指向 q</span>
 r<span class="token operator">=</span>q<span class="token punctuation">;</span> <span class="token comment">//r 指针指向 Lc 的当前尾节点</span>
 q<span class="token operator">=</span>q<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//q 指针向后移动，等待处理下一个节点</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>若 p 指针不为空，用 r 指针将 p 串连起来，即 r-&gt;next&#x3D;p;。注意这里只是把这个指针连上即可，剩余的节点不需要再处理。释放 Lb 节点空间，即 delete Lb。</p>
+<li>
+<p>若 p 指针不为空，用 r 指针将 p 串连起来，即 r-&gt;next=p;。注意这里只是把这个指针连上即可，剩余的节点不需要再处理。释放 Lb 节点空间，即 delete Lb。</p>
 </li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">mergelinklist</span><span class="token punctuation">(</span>LinkList La<span class="token punctuation">,</span>LinkList Lb<span class="token punctuation">,</span>LinkList <span class="token operator">&amp;</span>Lc<span class="token punctuation">)</span>
@@ -1127,23 +1189,29 @@ q<span class="token operator">=</span>q<span class="token operator">-></span>nex
     r<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token operator">?</span>p<span class="token operator">:</span>q<span class="token punctuation">;</span><span class="token comment">//相当于if(p) r->next=p; else r->next=q;</span>
     <span class="token keyword">delete</span> Lb<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="算法复杂度分析：-4"><a href="#算法复杂度分析：-4" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>链表合并不需要再创建空间，只需要穿针引线，把两个单链表中的节点按非递减的顺序串联起来即可。因此在最坏的情况下，需要串联每一个节点，如果 La 和 Lb 的长度分别为 m、n 时间复杂度为 O(m+n) 空间复杂度为 O(1)</p>
-<h3 id="就地逆置单链表："><a href="#就地逆置单链表：" class="headerlink" title="就地逆置单链表："></a>就地逆置单链表：</h3><p><strong>题目：</strong>将带有头节点的单链表就地逆置。即元素的顺序逆转，而辅助空间复杂度为 O(1)。</p>
-<h4 id="思路：-2"><a href="#思路：-2" class="headerlink" title="思路："></a>思路：</h4><p>头插法创建单链表得到的序列正好是逆序，那么我们就利用<strong>头插法建表</strong>的思路，实现就地逆置。</p>
+<h4 id="算法复杂度分析：-5">算法复杂度分析：</h4>
+<p>链表合并不需要再创建空间，只需要穿针引线，把两个单链表中的节点按非递减的顺序串联起来即可。因此在最坏的情况下，需要串联每一个节点，如果 La 和 Lb 的长度分别为 m、n 时间复杂度为 O(m+n) 空间复杂度为 O(1)</p>
+<h3 id="就地逆置单链表：">就地逆置单链表：</h3>
+<p>**题目：**将带有头节点的单链表就地逆置。即元素的顺序逆转，而辅助空间复杂度为 O(1)。</p>
+<h4 id="思路：-3">思路：</h4>
+<p>头插法创建单链表得到的序列正好是逆序，那么我们就利用<strong>头插法建表</strong>的思路，实现就地逆置。</p>
 <blockquote>
 <p>注意：在修改指针之前，一定要用一个辅助指针记录断点，否则后面这一部分就会遗失，再也找不到了。</p>
 </blockquote>
-<h4 id="解题：-2"><a href="#解题：-2" class="headerlink" title="解题："></a>解题：</h4><ol>
-<li><p>首先用 p 指针指向第一个元素节点，然后将头节点的 next 域置空。</p>
+<h4 id="解题：-3">解题：</h4>
+<ol>
+<li>
+<p>首先用 p 指针指向第一个元素节点，然后将头节点的 next 域置空。</p>
 </li>
-<li><p>将 p 节点用头插法插入链表 L 中，插入之前用 q 指针记录断点。</p>
+<li>
+<p>将 p 节点用头插法插入链表 L 中，插入之前用 q 指针记录断点。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">q<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">// q 指向 p 的下一个节点，记录断点</span>
 p<span class="token operator">-></span>next<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token comment">//将 L 的下一个节点地址赋值给 p 的 next 域</span>
 L<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span> <span class="token comment">//将 p 节点地址赋值给 L 的 next 域</span>
 p<span class="token operator">=</span>q<span class="token punctuation">;</span> <span class="token comment">//p 指向 q</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>p 指针为空，算法停止，单链表就地逆置完毕。</p>
+<li>
+<p>p 指针为空，算法停止，单链表就地逆置完毕。</p>
 </li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">reverselinklist</span><span class="token punctuation">(</span>LinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span>
@@ -1159,11 +1227,14 @@ p<span class="token operator">=</span>q<span class="token punctuation">;</span> 
         p<span class="token operator">=</span>q<span class="token punctuation">;</span><span class="token comment">//指针后移，p指向q；</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="算法复杂度分析：-5"><a href="#算法复杂度分析：-5" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
-<h3 id="查找链表的中间节点："><a href="#查找链表的中间节点：" class="headerlink" title="查找链表的中间节点："></a>查找链表的中间节点：</h3><p><strong>题目：</strong>带有头节点的单链表 L，设计一个尽可能高效的算法求 L 中的中间节点。</p>
-<h4 id="思路：-3"><a href="#思路：-3" class="headerlink" title="思路："></a>思路：</h4><p>此类题型可以使用快慢指针来解决。一个快指针，一个慢指针，快指针走两步，慢指针走一步。当快指针指向结尾的时候，慢指针刚好指向中间节点。</p>
-<h4 id="解题：-3"><a href="#解题：-3" class="headerlink" title="解题："></a>解题：</h4><p>放置两个小青蛙，一个跳得远，一次走两块石头；一个跳得近，一次走一块石头。当快青蛙走到终点时，慢青蛙正好走到中间。</p>
+<h4 id="算法复杂度分析：-6">算法复杂度分析：</h4>
+<p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
+<h3 id="查找链表的中间节点：">查找链表的中间节点：</h3>
+<p>**题目：**带有头节点的单链表 L，设计一个尽可能高效的算法求 L 中的中间节点。</p>
+<h4 id="思路：-4">思路：</h4>
+<p>此类题型可以使用快慢指针来解决。一个快指针，一个慢指针，快指针走两步，慢指针走一步。当快指针指向结尾的时候，慢指针刚好指向中间节点。</p>
+<h4 id="解题：-4">解题：</h4>
+<p>放置两个小青蛙，一个跳得远，一次走两块石头；一个跳得近，一次走一块石头。当快青蛙走到终点时，慢青蛙正好走到中间。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">LinkList <span class="token function">findmiddle</span><span class="token punctuation">(</span>LinkList L<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     LinkList p<span class="token punctuation">,</span>q<span class="token punctuation">;</span>
@@ -1177,10 +1248,12 @@ p<span class="token operator">=</span>q<span class="token punctuation">;</span> 
     <span class="token keyword">return</span> q<span class="token punctuation">;</span><span class="token comment">//返回中间结点指针</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="算法复杂度分析：-6"><a href="#算法复杂度分析：-6" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
-<h4 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h4><p>如何在单链表中查找倒数第 k 个节点？</p>
-<p>仍然可以使用快慢指针，慢指针不要动，快指针先走 <strong>k−1</strong> 步，然后<strong>两个指针一起以同样的速度走</strong>。当快指针走到终点时，慢指针正好停留在倒数第 k 个节点，为什么呢？<br><strong>因为它们之间的距离始终保持 k−1。</strong></p>
+<h4 id="算法复杂度分析：-7">算法复杂度分析：</h4>
+<p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
+<h4 id="思考：">思考：</h4>
+<p>如何在单链表中查找倒数第 k 个节点？</p>
+<p>仍然可以使用快慢指针，慢指针不要动，快指针先走 <strong>k−1</strong> 步，然后<strong>两个指针一起以同样的速度走</strong>。当快指针走到终点时，慢指针正好停留在倒数第 k 个节点，为什么呢？<br>
+<strong>因为它们之间的距离始终保持 k−1。</strong></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">LinkList <span class="token function">findk</span><span class="token punctuation">(</span>LinkList L<span class="token punctuation">,</span><span class="token keyword">int</span> k<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     LinkList p<span class="token punctuation">,</span>q<span class="token punctuation">;</span>
@@ -1197,15 +1270,18 @@ p<span class="token operator">=</span>q<span class="token punctuation">;</span> 
     <span class="token keyword">else</span>
         <span class="token keyword">return</span> q<span class="token punctuation">;</span><span class="token comment">//返回中间结点指针</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="算法复杂度分析：-7"><a href="#算法复杂度分析：-7" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
+<h4 id="算法复杂度分析：-8">算法复杂度分析：</h4>
+<p>算法对单链表进行了一趟扫描，如果 L 的长度为 n，则时间复杂度为 O(n) 没有使用其他辅助空间，只是几个辅助指针变量，因此空间复杂度为 O(1)</p>
 <p>用快慢指针还可以解决很多问题，例如判断链表是否有环，判断两个链表是否相交等。</p>
-<h3 id="删除链表中的重复元素："><a href="#删除链表中的重复元素：" class="headerlink" title="删除链表中的重复元素："></a>删除链表中的重复元素：</h3><p><strong>题目：</strong>用单链表保存 m 个整数，节点的结构为(data,next)，且|data|≤n(n 为正整数)。现要求设计一个时间复杂度尽可能高效的算法，对于链表中 data 的绝对值相等的节点，仅保留第一次出现的节点而删除其余绝对值相等的节点。</p>
-<h4 id="思路：-4"><a href="#思路：-4" class="headerlink" title="思路："></a>思路：</h4><p>本题数据大小有范围限制，因此可以设置一个辅助数组记录该数据是否已出现，如果已出现，则删除；如果未出现，则标记。一趟扫描即可完成。</p>
-<h4 id="解题：-4"><a href="#解题：-4" class="headerlink" title="解题："></a>解题：</h4><ol>
+<h3 id="删除链表中的重复元素：">删除链表中的重复元素：</h3>
+<p>**题目：**用单链表保存 m 个整数，节点的结构为(data,next)，且|data|≤n(n 为正整数)。现要求设计一个时间复杂度尽可能高效的算法，对于链表中 data 的绝对值相等的节点，仅保留第一次出现的节点而删除其余绝对值相等的节点。</p>
+<h4 id="思路：-5">思路：</h4>
+<p>本题数据大小有范围限制，因此可以设置一个辅助数组记录该数据是否已出现，如果已出现，则删除；如果未出现，则标记。一趟扫描即可完成。</p>
+<h4 id="解题：-5">解题：</h4>
+<ol>
 <li>设置一个辅助数组 flag[]，因为 n 为正整数，不包括 0，所以 0 空间不用。需要分配 n+1 个辅助空间，初始化时都为 0，表示这些数还未出现过，</li>
-<li>设置 p 指针指向头节点，检查第一个数据元素是否已出现过。令 x&#x3D;abs(p-&gt;next-&gt;data)，如果已出现过（flag[x]&#x3D;1），则删除该节点；如果该节点数据元素未出现过，则标记 flag[x]&#x3D;1，p 指针向后移动，直到处理完毕。</li>
-<li>abs(p-&gt;next-&gt;data)&#x3D;5，读取 flag[5]&#x3D;0，说明该节点数据元素未出现过，标记 flag[5]&#x3D;1，p 指针向后移动。</li>
+<li>设置 p 指针指向头节点，检查第一个数据元素是否已出现过。令 x=abs(p-&gt;next-&gt;data)，如果已出现过（flag[x]=1），则删除该节点；如果该节点数据元素未出现过，则标记 flag[x]=1，p 指针向后移动，直到处理完毕。</li>
+<li>abs(p-&gt;next-&gt;data)=5，读取 flag[5]=0，说明该节点数据元素未出现过，标记 flag[5]=1，p 指针向后移动。</li>
 <li>p-&gt;next 为空，算法停止。对于链表中 data 的绝对值相等的节点，仅保留第一次出现的节点而删除其余绝对值相等的节点。</li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">Deleterep</span><span class="token punctuation">(</span>LinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token comment">//删除重复元素</span>
@@ -1234,15 +1310,19 @@ p<span class="token operator">=</span>q<span class="token punctuation">;</span> 
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">delete</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>flag<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="算法复杂度分析：-8"><a href="#算法复杂度分析：-8" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h4><p>根据题意，单链表中保存 m 个绝对值小于等于 n 的整数，因此链表元素个数为 m，算法从头到尾扫描了一遍链表，时间复杂度为 O(m) 采用了辅助数组 flag[]，因为 n 为正整数，不包括 0，所以 0 空间不用，需要分配 n+1 个辅助空间，因此空间时间复杂度为 O(n)</p>
-<h2 id="线性表学习技巧"><a href="#线性表学习技巧" class="headerlink" title="线性表学习技巧"></a>线性表学习技巧</h2><h3 id="顺序表和链表的比较："><a href="#顺序表和链表的比较：" class="headerlink" title="顺序表和链表的比较："></a>顺序表和链表的比较：</h3><p><img src="/medias/images/loading.gif" data-original="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-%E7%BA%BF%E6%80%A7%E8%A1%A8/image-20220910113841323.png" alt="image-20220910113841323"></p>
-<h3 id="顺序表解题技巧："><a href="#顺序表解题技巧：" class="headerlink" title="顺序表解题技巧："></a>顺序表解题技巧：</h3><ul>
+<h4 id="算法复杂度分析：-9">算法复杂度分析：</h4>
+<p>根据题意，单链表中保存 m 个绝对值小于等于 n 的整数，因此链表元素个数为 m，算法从头到尾扫描了一遍链表，时间复杂度为 O(m) 采用了辅助数组 flag[]，因为 n 为正整数，不包括 0，所以 0 空间不用，需要分配 n+1 个辅助空间，因此空间时间复杂度为 O(n)</p>
+<h2 id="线性表学习技巧">线性表学习技巧</h2>
+<h3 id="顺序表和链表的比较：">顺序表和链表的比较：</h3>
+<p><img src="/medias/images/loading.gif" data-original="%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-%E7%BA%BF%E6%80%A7%E8%A1%A8/image-20220910113841323.png" alt="image-20220910113841323"></p>
+<h3 id="顺序表解题技巧：">顺序表解题技巧：</h3>
+<ul>
 <li><strong>位序和下标差 1，第 i 个元素的下标为 i−1。</strong></li>
 <li><strong>交换元素、有序合并需要借助辅助空间。</strong></li>
 <li><strong>交换元素、有序合并需要借助辅助空间。</strong></li>
 </ul>
-<h3 id="链表解题技巧："><a href="#链表解题技巧：" class="headerlink" title="链表解题技巧："></a>链表解题技巧：</h3><ul>
+<h3 id="链表解题技巧：">链表解题技巧：</h3>
+<ul>
 <li>赋值语句两端的含义：<strong>等号的右侧是节点的地址，等号的左侧是节点的指针域</strong></li>
 <li>修改指针的顺序：<strong>先修改没有指针标记的那一端</strong></li>
 <li>建立链表的两种方法：<strong>头插法、尾插法。头插法是逆序建表，尾插法是正序建表</strong></li>

@@ -7,11 +7,12 @@
     <meta charset="utf-8">
     <meta name="keywords" content="尚品汇-增删改查与ElementUI的技巧应用, QT-7274">
     <meta name="description" content="添加表格数据
+
 为按钮添加修改状态的点击事件：
 &amp;lt;el-button
      type&amp;#x3D;&amp;quot;primary&amp;quot;
      icon&amp;#x3D;&amp;quot;el-icon-plus&amp;quot;
-     sty">
+     st">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -509,7 +510,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="添加表格数据"><a href="#添加表格数据" class="headerlink" title="添加表格数据"></a>添加表格数据</h2><p><img src="/medias/images/loading.gif" data-original="/2023/08/14/shang-pin-hui-zeng-shan-gai-cha-yu-elementui-de-ji-qiao-ying-yong/image-20230814224520994.png" alt="image-20230814224520994"></p>
+                <h2 id="添加表格数据">添加表格数据</h2>
+<p><img src="/medias/images/loading.gif" data-original="image-20230814224520994.png" alt="image-20230814224520994"></p>
 <p>为按钮添加修改状态的点击事件：</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-button
      type&#x3D;&quot;primary&quot;
@@ -557,8 +559,8 @@
      &#x2F;&#x2F;清除数据
      this.tmForm &#x3D; &#123; tmName: &quot;&quot;, logoUrl: &quot;&quot; &#125;;
    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="多级数据的添加"><a href="#多级数据的添加" class="headerlink" title="多级数据的添加"></a>多级数据的添加</h3><p>例如要添加三级分类的数据，按钮点击时除了三级分类id和等级外均为空数据：</p>
+<h3 id="多级数据的添加">多级数据的添加</h3>
+<p>例如要添加三级分类的数据，按钮点击时除了三级分类id和等级外均为空数据：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;添加属性按钮的回调
     addAttr() &#123;
       &#x2F;&#x2F;切换table显示与隐藏
@@ -575,7 +577,6 @@
       &#125;;
     &#125;,
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>通过标识符展示添加数据的页面：</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!-- 添加属性|修改属性的结构 --&gt;
       &lt;div v-show&#x3D;&quot;!isShowTable&quot;&gt;
@@ -639,14 +640,16 @@
         &lt;el-button type&#x3D;&quot;primary&quot; @click&#x3D;&quot;addOrUpdateAttr&quot; :disabled&#x3D;&quot;attrInfo.attrValueList.length&lt;1&quot;&gt;保存&lt;&#x2F;el-button&gt;
         &lt;el-button @click&#x3D;&quot;isShowTable &#x3D; true&quot;&gt;取消&lt;&#x2F;el-button&gt;
       &lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>注意细节：</p>
 <ol>
-<li><p><code>:disabled=&quot;!attrInfo.attrName&quot;</code>只有属性名有值的时候，才可以继续添加属性值。</p>
+<li>
+<p><code>:disabled=&quot;!attrInfo.attrName&quot;</code>只有属性名有值的时候，才可以继续添加属性值。</p>
 </li>
-<li><p><img src="/medias/images/loading.gif" data-original="/2023/08/14/shang-pin-hui-zeng-shan-gai-cha-yu-elementui-de-ji-qiao-ying-yong/image-20230815171228733.png" alt="image-20230815171228733">为达到<code>span</code>与<code>input</code>进行来回的切换，使用row.flag属性进行控制。</p>
+<li>
+<p><img src="/medias/images/loading.gif" data-original="image-20230815171228733.png" alt="image-20230815171228733">为达到<code>span</code>与<code>input</code>进行来回的切换，使用row.flag属性进行控制。</p>
 </li>
-<li><p><code>@blur</code>和<code>@keyup.native.enter</code>是事件监听器，分别在输入框失去焦点和按下回车键时触发<code>toLook</code>方法，并将<code>row</code>作为参数传递给<code>toLook</code>方法。<code>:ref</code>指令将当前输入框的索引值作为引用，可以在其他地方通过<code>this.$refs[index]</code>来获取该输入框的实例。</p>
+<li>
+<p><code>@blur</code>和<code>@keyup.native.enter</code>是事件监听器，分别在输入框失去焦点和按下回车键时触发<code>toLook</code>方法，并将<code>row</code>作为参数传递给<code>toLook</code>方法。<code>:ref</code>指令将当前输入框的索引值作为引用，可以在其他地方通过<code>this.$refs[index]</code>来获取该输入框的实例。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//添加属性值回调</span>
     <span class="token function">addAttrValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
       <span class="token comment">//向属性值的数组里面添加元素</span>
@@ -685,9 +688,11 @@
       <span class="token comment">// row：形参是当前用户添加的最新的属性值</span>
       <span class="token comment">// 当前编辑模式变为查看模式【让input消失，显示span】</span>
       row<span class="token punctuation">.</span>flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h2 id="修改表格数据"><a href="#修改表格数据" class="headerlink" title="修改表格数据"></a>修改表格数据</h2><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!-- 
+<h2 id="修改表格数据">修改表格数据</h2>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!-- 
          表格组件 
          data:表格组件将来需要展示的数据------数组类型
          border：是给表格添加边框
@@ -739,7 +744,6 @@
       &#x2F;&#x2F;也就是tmForm存储即为服务器返回品牌信息
       this.tmForm &#x3D; &#123; ...row &#125;;
     &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>可以观察到，添加与修改使用了同一个弹出框，即实现这两个功能时都需要<code>this.dialogFormVisible = true;</code>。</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!--
      对话框
@@ -814,8 +818,8 @@
        &#125;
      &#125;);
    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;图片上传之前 应用于:before-upload属性
+<h3 id="图片上传">图片上传</h3>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;图片上传之前 应用于:before-upload属性
    beforeAvatarUpload(file) &#123;
      const isJPG &#x3D; file.type &#x3D;&#x3D;&#x3D; &quot;image&#x2F;jpeg&quot;;
      const isLt2M &#x3D; file.size &#x2F; 1024 &#x2F; 1024 &lt; 2;
@@ -835,8 +839,8 @@
      &#x2F;&#x2F;收集品牌图片数据，因为将来需要带给服务器，即添加|修改操作需要将表单数据作为参数
      this.tmForm.logoUrl &#x3D; res.data;
    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="照片墙"><a href="#照片墙" class="headerlink" title="照片墙"></a>照片墙</h4><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-form-item label&#x3D;&quot;SPU图片&quot;&gt;
+<h4 id="照片墙">照片墙</h4>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-form-item label&#x3D;&quot;SPU图片&quot;&gt;
         &lt;!-- 上传图片：action图片上传的地址  list-type: 文件列表的类型 
          file-list：照片墙需要展示的数据【数组：数组里面的元素务必要有name、url属性】
          on-preview：图片预览功能
@@ -856,7 +860,6 @@
           &lt;img width&#x3D;&quot;100%&quot; :src&#x3D;&quot;dialogImageUrl&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;
         &lt;&#x2F;el-dialog&gt;
       &lt;&#x2F;el-form-item&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 <span class="token comment">//收集SPU图片的信息</span>
         <span class="token literal-property property">spuImageList</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -891,8 +894,8 @@
       <span class="token comment">//收集图片的信息</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>spuImageList <span class="token operator">=</span> fileList<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="多级数据的修改"><a href="#多级数据的修改" class="headerlink" title="多级数据的修改"></a>多级数据的修改</h3><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-table-column prop&#x3D;&quot;prop&quot; label&#x3D;&quot;操作&quot; width&#x3D;&quot;150&quot;&gt;
+<h3 id="多级数据的修改">多级数据的修改</h3>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-table-column prop&#x3D;&quot;prop&quot; label&#x3D;&quot;操作&quot; width&#x3D;&quot;150&quot;&gt;
             &lt;template slot-scope&#x3D;&quot;&#123; row, $index &#125;&quot;&gt;
               &lt;el-button
                 type&#x3D;&quot;warning&quot;
@@ -915,7 +918,6 @@
                 style&#x3D;&quot;display: block&quot;
                 &gt;&#123;&#123; row.valueName &#125;&#125;&lt;&#x2F;span
               &gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;修改某一个属性
     updateAttr(row) &#123;
       &#x2F;&#x2F;isShowTable变为false
@@ -945,7 +947,6 @@
         this.$refs[index].focus();
       &#125;);
     &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;保存按钮：进行添加属性或者修改属性的操作
     async addOrUpdateAttr()&#123;
       &#x2F;&#x2F;整理参数:1,如果用户添加很多属性值，且属性值为空的不应该提交给服务器
@@ -972,14 +973,14 @@
       &#125;
 
     &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>注意细节：</p>
 <ol>
 <li>对象与数组嵌套时，考虑深拷贝。</li>
 <li>添加响应式数据需要用到<code>this.$set()</code></li>
 <li>元素切换时，重绘重排需要时间，所以需要考虑节点渲染完毕。</li>
 </ol>
-<h2 id="删除表格数据"><a href="#删除表格数据" class="headerlink" title="删除表格数据"></a>删除表格数据</h2><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;删除品牌的操作
+<h2 id="删除表格数据">删除表格数据</h2>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;删除品牌的操作
     deleteTradeMark(row) &#123;
       &#x2F;&#x2F;弹框
       this.$confirm(&#96;你确定删除$&#123;row.tmName&#125;?&#96;, &quot;提示&quot;, &#123;
@@ -1009,13 +1010,13 @@
           &#125;);
         &#125;);
     &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>注意细节：<code>this.getPageList(this.list.length&gt;1?this.page:this.page-1)</code>;这是因为<code>getPageList</code>函数参数默认为<code>page=1</code>，考虑以下情况：</p>
 <ul>
 <li>删除了当前页面非最后一条数据，此时<code>page</code>为当前页面的<code>page</code>，请求数据后仍然显示当前页面的所有数据。</li>
 <li>删除了当前页面最后一条数据，此时<code>page</code>为当前页面的<code>page-1</code>，请求数据后显示上一页的数据，即回到上一页。</li>
 </ul>
-<h2 id="分页器"><a href="#分页器" class="headerlink" title="分页器"></a>分页器</h2><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!-- 
+<h2 id="分页器">分页器</h2>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;!-- 
      分页器 
      当前第几页、数据总条数、每一页展示条数、连续页码数
      @size-change&#x3D;&quot;handleSizeChange&quot;
@@ -1065,8 +1066,8 @@
      this.limit &#x3D; limit;
      this.getPageList();
    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="三级分类联动"><a href="#三级分类联动" class="headerlink" title="三级分类联动"></a>三级分类联动</h2><p>注册全局组件：</p>
+<h2 id="三级分类联动">三级分类联动</h2>
+<p>注册全局组件：</p>
 <p><code>src\components\CategorySelect\index.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
   &lt;div&gt;
@@ -1120,9 +1121,9 @@
     &lt;&#x2F;el-form&gt;
   &lt;&#x2F;div&gt;
 &lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ol>
-<li><p>获取一级分类数据：不需要携带参数</p>
+<li>
+<p>获取一级分类数据：不需要携带参数</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;获取一级分类数据的方法
     async getCategory1List() &#123;
       &#x2F;&#x2F;获取一级分类的请求：不需要携带参数
@@ -1132,7 +1133,8 @@
       &#125;
     &#125;,     <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>获取一级分类数据后，再根据一级分类的id获取二级分类。</p>
+<li>
+<p>获取一级分类数据后，再根据一级分类的id获取二级分类。</p>
 <blockquote>
 <p>注意在发起请求前要<strong>清空数据</strong>，否则二级分类和一级分类的对应关系会发生混乱。</p>
 </blockquote>
@@ -1171,7 +1173,8 @@
       &#x2F;&#x2F;获取三级分类的id
       const &#123; category3Id &#125; &#x3D; this.cForm;
       this.$emit(&quot;getCategoryId&quot;, &#123; categoryId: category3Id, level: 3 &#125;);
-    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
 <p><code>src\views\product\Attr\index.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-card style&#x3D;&quot;margin: 20px 0px&quot;&gt;
@@ -1195,7 +1198,6 @@
        this.getAttrList();
      &#125;
    &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//获取平台属性的数据</span>
     <span class="token comment">//当用户确定三级分类的数据时候，可以向服务器发请求获取平台属性进行展示</span>
     <span class="token keyword">async</span> <span class="token function">getAttrList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -1211,8 +1213,8 @@
         <span class="token keyword">this</span><span class="token punctuation">.</span>attrList <span class="token operator">=</span> result<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
       <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="表格展示"><a href="#表格展示" class="headerlink" title="表格展示"></a>表格展示</h3><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;div v-show&#x3D;&quot;isShowTable&quot;&gt;
+<h3 id="表格展示">表格展示</h3>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;div v-show&#x3D;&quot;isShowTable&quot;&gt;
        &lt;el-button
          type&#x3D;&quot;primary&quot;
          icon&#x3D;&quot;el-icon-plus&quot;
@@ -1254,12 +1256,13 @@
          &lt;&#x2F;el-table-column&gt;
        &lt;&#x2F;el-table&gt;
      &lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li><code>isShowTable</code>属性控制表格的显示与否，即在添加|修改属性时需要隐藏，此时三种级别的分类也进入不可修改的状态。</li>
 <li>每条属性可能有多条属性值，即在<code>el-tag</code>标签中再次循环。</li>
 </ul>
-<h2 id="上架下架状态切换"><a href="#上架下架状态切换" class="headerlink" title="上架下架状态切换"></a>上架下架状态切换</h2><h2 id="抽屉效果"><a href="#抽屉效果" class="headerlink" title="抽屉效果"></a>抽屉效果</h2>
+<h2 id="上架下架状态切换">上架下架状态切换</h2>
+<h2 id="抽屉效果">抽屉效果</h2>
+
                 
             </div>
             <hr/>

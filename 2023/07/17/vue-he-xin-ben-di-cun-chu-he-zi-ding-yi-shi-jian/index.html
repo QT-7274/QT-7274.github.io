@@ -6,10 +6,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Vue核心 本地存储和自定义事件, QT-7274">
-    <meta name="description" content="WebStorage浏览器通过Window.sessionStorage和Window.localStorage属性来实现本地存储机制
+    <meta name="description" content="WebStorage
+浏览器通过Window.sessionStorage和Window.localStorage属性来实现本地存储机制
 相关DPI
 
-xxxStorage.seItem(&amp;#39;key&amp;#39;, &amp;#39;value&amp;#">
+xxxStorage.seItem(&#39;key&#39;, &#39;value&#39;) 该方法接受一个键和值">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -473,7 +474,7 @@ xxxStorage.seItem(&amp;#39;key&amp;#39;, &amp;#39;value&amp;#">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    553
+                    536
                 </div>
                 
 
@@ -503,12 +504,13 @@ xxxStorage.seItem(&amp;#39;key&amp;#39;, &amp;#39;value&amp;#">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="WebStorage"><a href="#WebStorage" class="headerlink" title="WebStorage"></a>WebStorage</h2><p>浏览器通过<code>Window.sessionStorage</code>和<code>Window.localStorage</code>属性来实现本地存储机制</p>
+                <h2 id="WebStorage">WebStorage</h2>
+<p>浏览器通过<code>Window.sessionStorage</code>和<code>Window.localStorage</code>属性来实现本地存储机制</p>
 <p>相关DPI</p>
 <ul>
-<li><code>xxxStorage.seItem(&#39;key&#39;, &#39;value&#39;)</code> 该方法接受一个键和值作为参数，会把键值对添加到存储中，如果键名存在，则更新其对应的值。</li>
-<li><code>xxxStorage.getItem(&#39;key&#39;)</code>该方法接受一个键名作为参数，返回键名对应的值。</li>
-<li><code>xxxStorage.removeItem(&#39;key&#39;)</code>该方法接受一个键名作为参数，并把该键名从存储中删除。</li>
+<li><code>xxxStorage.seItem('key', 'value')</code> 该方法接受一个键和值作为参数，会把键值对添加到存储中，如果键名存在，则更新其对应的值。</li>
+<li><code>xxxStorage.getItem('key')</code>该方法接受一个键名作为参数，返回键名对应的值。</li>
+<li><code>xxxStorage.removeItem('key')</code>该方法接受一个键名作为参数，并把该键名从存储中删除。</li>
 <li><code>xxxStorage.clear()</code>该方法会清空存储中的所有数据</li>
 </ul>
 <p>注意：</p>
@@ -518,15 +520,19 @@ xxxStorage.seItem(&amp;#39;key&amp;#39;, &amp;#39;value&amp;#">
 <li><code>xxxStorage.getItem(xxx)</code>如果xxx对应的<code>value</code>获取不到，那么<code>getItem()</code>的返回值是<code>null</code></li>
 <li><code>JSON.parse(null)</code>的结果依然是<code>null</code></li>
 </ul>
-<h2 id="组件的自定义事件"><a href="#组件的自定义事件" class="headerlink" title="组件的自定义事件"></a>组件的自定义事件</h2><ol>
-<li><p>一种组件间通信的方式，适用于：<strong>子组件 &#x3D;&#x3D;&gt; 父组件</strong></p>
+<h2 id="组件的自定义事件">组件的自定义事件</h2>
+<ol>
+<li>
+<p>一种组件间通信的方式，适用于：<strong>子组件 ==&gt; 父组件</strong></p>
 </li>
-<li><p>使用场景：<strong>子组件</strong>想给<strong>父组件</strong>传数据，那么就要在<strong>父组件中给子组件绑定自定义事件</strong>（事件的回调在A中）</p>
+<li>
+<p>使用场景：<strong>子组件</strong>想给<strong>父组件</strong>传数据，那么就要在<strong>父组件中给子组件绑定自定义事件</strong>（事件的回调在A中）</p>
 </li>
-<li><p>绑定自定义事件</p>
+<li>
+<p>绑定自定义事件</p>
 <ul>
 <li>第一种方式，在父组件中<code>&lt;Demo @事件名=&quot;方法&quot; /&gt;</code>或<code>&lt;Demo v-on: 事件名=&quot;方法&quot; /&gt;</code></li>
-<li>第二种方式，在父组件中<code>this.$refs.demo.$on(&#39;事件名&#39;, 方法)</code></li>
+<li>第二种方式，在父组件中<code>this.$refs.demo.$on('事件名', 方法)</code></li>
 <li>若想让自定义事件只能触发一次，可以使用<code>once</code>修饰符，或<code>$once</code>方法</li>
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>Demo ref<span class="token operator">=</span><span class="token string">"demo"</span> <span class="token operator">/</span><span class="token operator">></span>
@@ -535,14 +541,17 @@ xxxStorage.seItem(&amp;#39;key&amp;#39;, &amp;#39;value&amp;#">
 	<span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>demo<span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'uestc'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>test<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>触发自定义事件<code>this.$emit(&#39;事件名&#39;, 数据)</code></p>
+<li>
+<p>触发自定义事件<code>this.$emit('事件名', 数据)</code></p>
 </li>
-<li><p>解绑自定义事件<code>this.$off(&#39;事件名&#39;)</code>，同时解绑多个自定义事件时，需要用[]形式。解绑所有自定义事件时，直接传入一个空数组。</p>
+<li>
+<p>解绑自定义事件<code>this.$off('事件名')</code>，同时解绑多个自定义事件时，需要用[]形式。解绑所有自定义事件时，直接传入一个空数组。</p>
 </li>
-<li><p>组件上也可以绑定DOM事件，需要使用native修饰符<code>@click.native=&quot;show&quot;</code></p>
+<li>
+<p>组件上也可以绑定DOM事件，需要使用native修饰符<code>@click.native=&quot;show&quot;</code></p>
 </li>
 </ol>
-<p>注意：通过<code>this.$refs.demo.$on(&#39;事件名&#39;, 回调函数)</code>绑定自定义事件时，回调函数要么配置在<code>methods</code>中，要么用箭头函数，否则<code>this</code>指向会出问题。回调函数中的<code>this</code>指向调用该事件的<code>vc</code>对象。</p>
+<p>注意：通过<code>this.$refs.demo.$on('事件名', 回调函数)</code>绑定自定义事件时，回调函数要么配置在<code>methods</code>中，要么用箭头函数，否则<code>this</code>指向会出问题。回调函数中的<code>this</code>指向调用该事件的<code>vc</code>对象。</p>
 
                 
             </div>

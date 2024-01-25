@@ -500,12 +500,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="响应性基础：Proxy"><a href="#响应性基础：Proxy" class="headerlink" title="响应性基础：Proxy"></a>响应性基础：Proxy</h2><blockquote>
+                <h2 id="响应性基础：Proxy">响应性基础：Proxy</h2>
+<blockquote>
 <p>Proxy是ES6中新添加的特性，用于给一个对象创建代理，用来拦截对象的操作。这样可以添加额外的业务逻辑或对原对象进行保护。</p>
 </blockquote>
 <p>拦截方法参考：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/09/vue-bei-hou-ji-zhi/image-20220909103853546.png" alt="image-20220909103853546"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/09/vue-bei-hou-ji-zhi/image-20220909103911409.png" alt="image-20220909103911409"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220909103853546.png" alt="image-20220909103853546"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220909103911409.png" alt="image-20220909103911409"></p>
 <p>示例：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
   <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
@@ -534,8 +535,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">// 访问原始对象</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="实现一个响应性示例（简化版）："><a href="#实现一个响应性示例（简化版）：" class="headerlink" title="实现一个响应性示例（简化版）："></a>实现一个响应性示例（简化版）：</h3><blockquote>
+<h3 id="实现一个响应性示例（简化版）：">实现一个响应性示例（简化版）：</h3>
+<blockquote>
 <p>目标：在修改对象的属性后，自动更新原对象的属性。</p>
 </blockquote>
 <p>基础原理：</p>
@@ -566,7 +567,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
   reactiveObj<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>封装一部分后：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> observers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeakMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -619,7 +619,6 @@ observers<span class="token punctuation">.</span><span class="token function">se
   reactiveObj<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>最后完整封装：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> observers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WeakMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -689,10 +688,10 @@ observers<span class="token punctuation">.</span><span class="token function">se
   reactiveObj<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Virtual-DOM：Vue-渲染机制的核心"><a href="#Virtual-DOM：Vue-渲染机制的核心" class="headerlink" title="Virtual DOM：Vue 渲染机制的核心"></a>Virtual DOM：Vue 渲染机制的核心</h2><p>因为使用Vue编写的程序，经常因为响应性的变化而重新渲染视图，如果直接操作真实的DOM，会是比较耗时的操作。这是因为需要找到某个节点，并将其换为新的节点，这样会触发浏览器的重新布局和重绘流程，对性能会有影响。</p>
+<h2 id="Virtual-DOM：Vue-渲染机制的核心">Virtual DOM：Vue 渲染机制的核心</h2>
+<p>因为使用Vue编写的程序，经常因为响应性的变化而重新渲染视图，如果直接操作真实的DOM，会是比较耗时的操作。这是因为需要找到某个节点，并将其换为新的节点，这样会触发浏览器的重新布局和重绘流程，对性能会有影响。</p>
 <p>VirtualDOM的结构：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/09/vue-bei-hou-ji-zhi/image-20220909111405303.png" alt="image-20220909111405303"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220909111405303.png" alt="image-20220909111405303"></p>
 <p>Vue有渲染工具，会将虚拟的DOM转换为真实的DOM，在节点变化后，会根据算法调整节点顺序或更换节点。这种比对算法Vue中称为Patch，其他框架有称为diff或reconciliation。</p>
 <blockquote>
 <p>对于静态的DOM元素，Vue会保存这些节点，后续使用时会直接使用之前的节点；</p>

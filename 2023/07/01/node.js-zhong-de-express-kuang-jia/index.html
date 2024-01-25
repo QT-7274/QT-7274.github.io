@@ -500,24 +500,23 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Express-介绍"><a href="#Express-介绍" class="headerlink" title="Express 介绍"></a>Express 介绍</h2><blockquote>
+                <h2 id="Express-介绍">Express 介绍</h2>
+<blockquote>
 <p>express 是一个基于 Node.js 平台的极简、灵活的 WEB 应用开发框架，官方网址： <a target="_blank" rel="noopener" href="https://www.expressjs.com.cn/">https://www.expressjs.com.cn/</a></p>
 </blockquote>
 <p>简单来说，express 是一个封装好的工具包，封装了很多功能，便于我们开发 WEB 应用(HTTP 服务)</p>
-<h2 id="Express安装方式"><a href="#Express安装方式" class="headerlink" title="Express安装方式"></a>Express安装方式</h2><p>Express的安装可直接使用<code>npm</code>包管理器上的项目，在安装npm之前可先安装淘宝镜像：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npmmirror.com&#x2F;
+<h2 id="Express安装方式">Express安装方式</h2>
+<p>Express的安装可直接使用<code>npm</code>包管理器上的项目，在安装npm之前可先安装淘宝镜像：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> cnpm <span class="token parameter variable">--registry</span><span class="token operator">=</span>https://registry.npmmirror.com/
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>这样我们使用<code>cnpm</code>的来代替<code>npm</code>，这使得下载速度提高很多；其次你需要在你项目目录下运行以下指令来初始化<code>npm</code>，期间所有提示按<code>enter</code>键即可，这会生成<code>package.json</code>，它是用于描述项目文件的。</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">cnpm init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cnpm init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>再输入</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">cnpm install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cnpm <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这下项目目录中又会多出一个叫<code>node_modules</code>文件夹，里面是<code>node.js</code>为我们提供的模块，当然现在没有。接下来便是真正的安装Express了，执行：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">cnpm install express --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="Express运行原理"><a href="#Express运行原理" class="headerlink" title="Express运行原理"></a>Express运行原理</h2><p><strong>底层：http模块</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cnpm <span class="token function">install</span> express <span class="token parameter variable">--save</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Express运行原理">Express运行原理</h2>
+<p><strong>底层：http模块</strong></p>
 <p>Express框架建立在node.js内置的http模块上。http模块生成服务器的原始代码如下</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"http"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -528,7 +527,6 @@
 
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span> <span class="token string">"localhost"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>Express框架的核心是对http模块的再包装。上面的代码用Express改写如下</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -539,9 +537,10 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>Express框架等于在http模块之上，加了一个中间层</p>
-<h2 id="Express-路由"><a href="#Express-路由" class="headerlink" title="Express 路由"></a>Express 路由</h2><h3 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由"></a>什么是路由</h3><blockquote>
+<h2 id="Express-路由">Express 路由</h2>
+<h3 id="什么是路由">什么是路由</h3>
+<blockquote>
 <p>官方定义： <span style="color:red">路由确定了应用程序如何响应客户端对特定端点的请求</span></p>
 <p>路由表示应用程序端点 (URI) 的定义以及响应客户端请求的方式。它包含一个请求方时（<code>methods</code>）、路径（<code>path</code>）和路由匹配时的函数（<code>callback</code>）</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">methods</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span>callback<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -566,8 +565,8 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
     </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="all方法和HTTP动词方法"><a href="#all方法和HTTP动词方法" class="headerlink" title="all方法和HTTP动词方法"></a>all方法和HTTP动词方法</h3><p>针对不同的请求，Express提供了use方法的一些别名。比如，上面代码也可以用别名的形式来写</p>
+<h3 id="all方法和HTTP动词方法">all方法和HTTP动词方法</h3>
+<p>针对不同的请求，Express提供了use方法的一些别名。比如，上面代码也可以用别名的形式来写</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"http"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -591,20 +590,25 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 
 http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">1337</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <ul>
-<li><p>上面代码的<code>all</code>方法表示，所有请求都必须通过该中间件，参数中的“*”表示对所有路径有效。<code>get</code>方法则是只有GET动词的HTTP请求通过该中间件，它的第一个参数是请求的路径。由于<code>get</code>方法的回调函数<strong>没有调用<code>next</code>方法</strong>，所以只要有一个中间件被调用了，后面的中间件就不会再被调用了</p>
+<li>
+<p>上面代码的<code>all</code>方法表示，所有请求都必须通过该中间件，参数中的“*”表示对所有路径有效。<code>get</code>方法则是只有GET动词的HTTP请求通过该中间件，它的第一个参数是请求的路径。由于<code>get</code>方法的回调函数<strong>没有调用<code>next</code>方法</strong>，所以只要有一个中间件被调用了，后面的中间件就不会再被调用了</p>
 </li>
-<li><p>除了get方法以外，Express还提供post、put、delete方法，即HTTP动词都是Express的方法</p>
+<li>
+<p>除了get方法以外，Express还提供post、put、delete方法，即HTTP动词都是Express的方法</p>
 </li>
-<li><p>这些方法的第一个参数，都是请求的路径。除了绝对匹配以外，Express允许模式匹配</p>
+<li>
+<p>这些方法的第一个参数，都是请求的路径。除了绝对匹配以外，Express允许模式匹配</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/hello/:who"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token string">"Hello, "</span> <span class="token operator">+</span> req<span class="token punctuation">.</span>params<span class="token punctuation">.</span>who <span class="token operator">+</span> <span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 </blockquote>
-<h3 id="路径匹配"><a href="#路径匹配" class="headerlink" title="路径匹配"></a>路径匹配</h3><h4 id="字符串路径"><a href="#字符串路径" class="headerlink" title="字符串路径"></a>字符串路径</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 匹配根路径的请求
+<h3 id="路径匹配">路径匹配</h3>
+<h4 id="字符串路径">字符串路径</h4>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 匹配根路径的请求
 app.get(&#39;&#x2F;&#39;, function (req, res) &#123;
   res.send(&#39;root&#39;);
 &#125;);
@@ -619,8 +623,8 @@ app.get(&#39;&#x2F;random.text&#39;, function (req, res) &#123;
   res.send(&#39;random.text&#39;);
 &#125;);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="字符串模式路径"><a href="#字符串模式路径" class="headerlink" title="字符串模式路径"></a>字符串模式路径</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 匹配 acd 和 abcd
+<h4 id="字符串模式路径">字符串模式路径</h4>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 匹配 acd 和 abcd
 app.get(&#39;&#x2F;ab?cd&#39;, function(req, res) &#123;
   res.send(&#39;ab?cd&#39;);
 &#125;);
@@ -639,8 +643,8 @@ app.get(&#39;&#x2F;ab*cd&#39;, function(req, res) &#123;
 app.get(&#39;&#x2F;ab(cd)?e&#39;, function(req, res) &#123;
  res.send(&#39;ab(cd)?e&#39;);
 &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="正则表达式路径"><a href="#正则表达式路径" class="headerlink" title="正则表达式路径"></a>正则表达式路径</h4><p>使用正则表达式的路由路径示例：</p>
+<h4 id="正则表达式路径">正则表达式路径</h4>
+<p>使用正则表达式的路由路径示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 匹配任何路径中含有 a 的路径：
 app.get(&#x2F;a&#x2F;, function(req, res) &#123;
   res.send(&#39;&#x2F;a&#x2F;&#39;);
@@ -650,12 +654,10 @@ app.get(&#x2F;a&#x2F;, function(req, res) &#123;
 app.get(&#x2F;.*fly$&#x2F;, function(req, res) &#123;
   res.send(&#39;&#x2F;.*fly$&#x2F;&#39;);
 &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以为请求处理提供多个回调函数，其行为类似中间件。唯一的区别是这些回调函数有可能调用 <code>next(&#39;route&#39;)</code>方法而略过其他路由回调函数。可以利用该机制为路由定义前提条件，如果在现有路径上继续执行没有意义，则可将控制权交给剩下的路径。</p>
+<p>可以为请求处理提供多个回调函数，其行为类似中间件。唯一的区别是这些回调函数有可能调用 <code>next('route')</code>方法而略过其他路由回调函数。可以利用该机制为路由定义前提条件，如果在现有路径上继续执行没有意义，则可将控制权交给剩下的路径。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/example/a'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'Hello from A!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>使用多个回调函数处理路由（记得指定 <code>next</code> 对象）：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/example/b'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'response will be sent by the next function ...'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -663,7 +665,6 @@ app.get(&#x2F;.*fly$&#x2F;, function(req, res) &#123;
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'Hello from B!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>使用回调函数数组处理路由：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">cb0</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'CB0'</span><span class="token punctuation">)</span>
@@ -681,15 +682,16 @@ app.get(&#x2F;.*fly$&#x2F;, function(req, res) &#123;
 
 app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/example/c'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>cb0<span class="token punctuation">,</span> cb1<span class="token punctuation">,</span> cb2<span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="response对象"><a href="#response对象" class="headerlink" title="response对象"></a>response对象</h2><table>
+<h2 id="response对象">response对象</h2>
+<table>
 <thead>
 <tr>
 <th>方法</th>
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/en/4x/api.html#res.download">res.download()open in new window</a></td>
 <td>提示要下载的文件。</td>
 </tr>
@@ -725,10 +727,12 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 <td><a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/en/4x/api.html#res.sendStatus">res.sendStatus（）open in new window</a></td>
 <td>设置响应状态代码，并将其字符串表示形式发送为响应正文。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>例：</p>
 <ol>
-<li><p><strong>response.redirect方法</strong></p>
+<li>
+<p><strong>response.redirect方法</strong></p>
 <blockquote>
 <p>response.redirect方法允许网址的重定向</p>
 </blockquote>
@@ -736,22 +740,26 @@ app<span class="token punctuation">.</span><span class="token function">get</spa
 response.redirect(&quot;http:&#x2F;&#x2F;www.example.com&quot;);
 response.redirect(301, &quot;http:&#x2F;&#x2F;www.example.com&quot;); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>response.sendFile方法</strong></p>
+<li>
+<p><strong>response.sendFile方法</strong></p>
 <blockquote>
 <p>response.sendFile方法用于发送文件</p>
 </blockquote>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">response.sendFile(&quot;&#x2F;path&#x2F;to&#x2F;anime.mp4&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p><strong>response.render方法</strong></p>
+<li>
+<p><strong>response.render方法</strong></p>
 <blockquote>
 <p>response.render方法用于渲染网页模板。</p>
 </blockquote>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;  使用render方法，将message变量传入index模板，渲染成HTML网页
 app.get(&quot;&#x2F;&quot;, function(request, response) &#123;
   response.render(&quot;index&quot;, &#123; message: &quot;Hello World&quot; &#125;);
-&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h2 id="路线处理程序"><a href="#路线处理程序" class="headerlink" title="路线处理程序"></a>路线处理程序</h2><p>您可以提供行为类似于<a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/en/guide/using-middleware.html">中间件</a>多个回调函数来处理请求。唯一的例外是这些回调可能会调用<code>next(&#39;route&#39;)</code>以绕过其余的路由回调。您可以使用此机制在路由上施加先决条件，然后在没有理由继续使用当前路由的情况下将控制权传递给后续路由。</p>
+<h2 id="路线处理程序">路线处理程序</h2>
+<p>您可以提供行为类似于<a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/en/guide/using-middleware.html">中间件</a>多个回调函数来处理请求。唯一的例外是这些回调可能会调用<code>next('route')</code>以绕过其余的路由回调。您可以使用此机制在路由上施加先决条件，然后在没有理由继续使用当前路由的情况下将控制权传递给后续路由。</p>
 <p>多个回调函数可以处理一条路由（确保指定了<code>next</code>对象）。例如：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">app.get(&#39;&#x2F;example&#x2F;b&#39;, function (req, res, next) &#123;
   console.log(&#39;the response will be sent by the next function ...&#39;)
@@ -759,7 +767,6 @@ app.get(&quot;&#x2F;&quot;, function(request, response) &#123;
 &#125;, function (req, res) &#123;
   res.send(&#39;Hello from B!&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>混合使用函数和函数数组处理路由：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const fun1 &#x3D; (req, res, next) &#x3D;&gt; &#123;
   &#x2F;&#x2F; 验证用户token过期, cookie过期
@@ -782,8 +789,8 @@ app.get(&#39;&#x2F;home&#39;, [fun1, fun2]);
 app.get(&#39;&#x2F;list&#39;, fun1, (req, res) &#x3D;&gt; &#123;
   res.send(&#39;list&#39;);
 &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>Express是一个自身功能极简，完全是由路由和中间件构成一个的 web 开发框架：从本质上来说，一个 Express 应用就是在调用各种中间件。</p>
+<h2 id="中间件">中间件</h2>
+<p>Express是一个自身功能极简，完全是由路由和中间件构成一个的 web 开发框架：从本质上来说，一个 Express 应用就是在调用各种中间件。</p>
 <p>中间件（Middleware） 是一个函数，它可以访问请求对象（<code>request object (req)</code>）, 响应对象（<code>response object (res)</code>）, 和 web 应用中处于请求-响应循环流程中的中间件，一般被命名为 <code>next</code> 的变量。</p>
 <p>中间件的功能包括：</p>
 <ul>
@@ -802,7 +809,8 @@ app.get(&#39;&#x2F;list&#39;, fun1, (req, res) &#x3D;&gt; &#123;
 <li>第三方中间件</li>
 </ul>
 <p>使用可选则挂载路径，可在应用级别或路由级别装载中间件。另外，你还可以同时装在一系列中间件函数，从而在一个挂载点上创建一个子中间件栈</p>
-<h3 id="应用级中间件"><a href="#应用级中间件" class="headerlink" title="应用级中间件"></a>应用级中间件</h3><p>应用级中间件绑定到 app 对象 使用 <code>app.use()</code> 和 <code>app.method()</code>， 其中， <code>method</code>是需要处理的 HTTP 请求的方法，例如 <code>GET</code>, <code>PUT</code>, <code>POST</code>等等，全部小写。例如：</p>
+<h3 id="应用级中间件">应用级中间件</h3>
+<p>应用级中间件绑定到 app 对象 使用 <code>app.use()</code> 和 <code>app.method()</code>， 其中， <code>method</code>是需要处理的 HTTP 请求的方法，例如 <code>GET</code>, <code>PUT</code>, <code>POST</code>等等，全部小写。例如：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> indexRouter <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./route/indexRouter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> LoginRouter <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./route/LoginRouter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -825,8 +833,9 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 <span class="token comment">//然后再进入这个中间件找/a</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>indexRouter<span class="token punctuation">)</span><span class="token punctuation">;</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">,</span> LoginRouter<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="路由级中间件"><a href="#路由级中间件" class="headerlink" title="路由级中间件"></a>路由级中间件</h3><h4 id="app-route"><a href="#app-route" class="headerlink" title="app.route()"></a><code>app.route()</code></h4><p>您可以使用来为路由路径创建可链接的路由处理程序<code>app.route()</code>。由于路径是在单个位置指定的，因此创建模块化路由非常有帮助，减少冗余和错别字也很有帮助。有关路由的更多信息，请参见：<a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/en/4x/api.html#router">Router（）文档</a>。</p>
+<h3 id="路由级中间件">路由级中间件</h3>
+<h4 id="app-route"><code>app.route()</code></h4>
+<p>您可以使用来为路由路径创建可链接的路由处理程序<code>app.route()</code>。由于路径是在单个位置指定的，因此创建模块化路由非常有帮助，减少冗余和错别字也很有帮助。有关路由的更多信息，请参见：<a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/en/4x/api.html#router">Router（）文档</a>。</p>
 <p>这是使用定义的链式路由处理程序的示例<code>app.route()</code>。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">app.route(&#39;&#x2F;book&#39;)
   .get(function (req, res) &#123;
@@ -838,13 +847,12 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
   .put(function (req, res) &#123;
     res.send(&#39;Update the book&#39;)
   &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="快速路由器"><a href="#快速路由器" class="headerlink" title="快速路由器"></a>快速路由器</h4><p>路由级中间件和应用级中间件一样，只是它绑定的对象为 <code>express.Router()</code>。</p>
+<h4 id="快速路由器">快速路由器</h4>
+<p>路由级中间件和应用级中间件一样，只是它绑定的对象为 <code>express.Router()</code>。</p>
 <p>使用<code>express.Router</code>该类创建模块化的，可安装的路由处理程序。一个<code>Router</code>实例是一个完整的中间件和路由系统; 因此，它通常被称为“迷你应用程序”。</p>
 <p>以下示例将路由器创建为模块，在其中加载中间件功能，定义一些路由，并将路由器模块安装在主应用程序的路径上。</p>
 <p><code>home.js</code>在app目录中创建一个名为以下内容的路由器文件：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var router &#x3D; express.Router()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var app &#x3D; express()
 var router &#x3D; express.Router()
 
@@ -881,13 +889,12 @@ router.get(&#39;&#x2F;user&#x2F;:id&#39;, function (req, res, next) &#123;
 &#125;)
 
 module.exports&#x3D;  router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>然后，在应用程序中加载路由器模块：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var indexRouter &#x3D; require(&#39;.&#x2F;home&#39;)
 &#x2F;&#x2F; ...
 app.use(&#39;&#x2F;home&#39;, index)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="router-route方法"><a href="#router-route方法" class="headerlink" title="router.route方法"></a><code>router.route</code>方法</h4><blockquote>
+<h4 id="router-route方法"><code>router.route</code>方法</h4>
+<blockquote>
 <p><code>router</code>实例对象的<code>route</code>方法，可以接受访问路径作为参数</p>
 </blockquote>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> router <span class="token operator">=</span> express<span class="token punctuation">.</span><span class="token function">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -904,34 +911,33 @@ router<span class="token punctuation">.</span><span class="token function">route
 	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports<span class="token operator">=</span>  router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="错误处理中间件"><a href="#错误处理中间件" class="headerlink" title="错误处理中间件"></a>错误处理中间件</h3><p>错误处理中间件和其他中间件定义类似，只是要使用 4 个参数，而不是 3 个，其签名如下： (err, req, res, next)。</p>
+<h3 id="错误处理中间件">错误处理中间件</h3>
+<p>错误处理中间件和其他中间件定义类似，只是要使用 4 个参数，而不是 3 个，其签名如下： (err, req, res, next)。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;上面的中间件都没有匹配就会走这里
 app.use(function(err, req, res, next) &#123;
   console.error(err.stack)
      &#x2F;&#x2F;send的状态码默认是200
   res.status(500).send(&#39;error&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="内置的中间件"><a href="#内置的中间件" class="headerlink" title="内置的中间件"></a>内置的中间件</h3><p><code>express.static</code>是 Express 唯一内置的中间件。它基于 <code>serve-static</code>，负责在 Express 应用中提托管静态资源。每个应用可有多个静态目录。</p>
+<h3 id="内置的中间件">内置的中间件</h3>
+<p><code>express.static</code>是 Express 唯一内置的中间件。它基于 <code>serve-static</code>，负责在 Express 应用中提托管静态资源。每个应用可有多个静态目录。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'public'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'uploads'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'files'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="第三方中间件"><a href="#第三方中间件" class="headerlink" title="第三方中间件"></a>第三方中间件</h3><p>安装所需功能的 node 模块，并在应用中加载，可以在应用级加载，也可以在路由级加载。</p>
+<h3 id="第三方中间件">第三方中间件</h3>
+<p>安装所需功能的 node 模块，并在应用中加载，可以在应用级加载，也可以在路由级加载。</p>
 <p>下面的例子安装并加载了一个解析 <code>cookie</code> 的中间件： <code>cookie-parser</code></p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ npm install cookie-parser<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> cookie-parser<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> cookieParser <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cookie-parser'</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 加载用于解析 cookie 的中间件</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">cookieParser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h2><h3 id="req-query"><a href="#req-query" class="headerlink" title="req.query"></a><code>req.query</code></h3><p><code>req.query()</code>可以用来获取接口请求中拼接<code>?</code>后面的参数，主要用于<code>get</code>请求，<code>post</code>请求也适用。<code>req.query()</code>被Express原生支持，并且会自动将参数转换为对象形式返回。请求：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">http:&#x2F;&#x2F;localhost:5050&#x2F;server?p&#x3D;user&amp;q&#x3D;password<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<h2 id="获取参数">获取参数</h2>
+<h3 id="req-query"><code>req.query</code></h3>
+<p><code>req.query()</code>可以用来获取接口请求中拼接<code>?</code>后面的参数，主要用于<code>get</code>请求，<code>post</code>请求也适用。<code>req.query()</code>被Express原生支持，并且会自动将参数转换为对象形式返回。请求：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">http://localhost:5050/server?p<span class="token operator">=</span>user<span class="token operator">&amp;</span><span class="token assign-left variable">q</span><span class="token operator">=</span>password<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>express接口：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let express &#x3D; require(&#39;express&#39;)
 let server &#x3D; express()
@@ -942,11 +948,10 @@ server.get(&#39;&#x2F;server&#39;,(req,resp)&#x3D;&gt;&#123;
 server.listen(5050,()&#x3D;&gt;&#123;
     console.log(&#39;服务器已就绪&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="req-params"><a href="#req-params" class="headerlink" title="req.params"></a><code>req.params</code></h3><p><code>req.params()</code>有些特殊，它适用于在url链接上传递数据参数。</p>
+<h3 id="req-params"><code>req.params</code></h3>
+<p><code>req.params()</code>有些特殊，它适用于在url链接上传递数据参数。</p>
 <p>请求：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">http:&#x2F;&#x2F;localhost:5050&#x2F;nums&#x2F;1000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">http://localhost:5050/nums/1000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>express接口：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let express &#x3D; require(&#39;express&#39;)
 let server &#x3D; express();
@@ -957,8 +962,8 @@ server.get(&#39;&#x2F;nums&#x2F;:num&#39;, (req, resp) &#x3D;&gt; &#123;
 server.listen(5050, () &#x3D;&gt;&#123;
 	 console.log(&#39;服务器已就绪&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="req-body"><a href="#req-body" class="headerlink" title="req.body"></a><code>req.body</code></h3><p><code>req.body()</code>被原生express所支持,可以直接使用<code>req.body()</code>获取<code>post</code>请求的表单数据。</p>
+<h3 id="req-body"><code>req.body</code></h3>
+<p><code>req.body()</code>被原生express所支持,可以直接使用<code>req.body()</code>获取<code>post</code>请求的表单数据。</p>
 <p>请求：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fecth(&#39;http:&#x2F;&#x2F;localhost:5050&#x2F;people&#39;,&#123;
     method: &#39;post&#39;,
@@ -967,7 +972,6 @@ server.listen(5050, () &#x3D;&gt;&#123;
     &#125;,
     body:&#123;name: &#39;zhangsan&#39;, age: 15&#125;
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>express接口：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const express &#x3D; require(&#39;express&#39;);
 const server &#x3D; express();
@@ -982,38 +986,35 @@ server.post(&#39;&#x2F;people&#39;, (req, resp) &#x3D;&gt; &#123;
 &#125;)
 server.listen(5050, () &#x3D;&gt; console.log(&#39;服务器已就绪&#39;))
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Express托管静态文件"><a href="#Express托管静态文件" class="headerlink" title="Express托管静态文件"></a>Express托管静态文件</h2><p>通过 Express 内置的 <code>express.static</code> 可以方便地托管静态文件，例如图片、CSS、JavaScript 文件等。</p>
+<h2 id="Express托管静态文件">Express托管静态文件</h2>
+<p>通过 Express 内置的 <code>express.static</code> 可以方便地托管静态文件，例如图片、CSS、JavaScript 文件等。</p>
 <p>将静态资源文件所在的目录作为参数传递给 <code>express.static</code> 中间件就可以提供静态资源文件的访问了。例如，假设在 public 目录放置了图片、CSS 和 JavaScript 文件，你就可以：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//直接将public里的index.html当成/的网页</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'public'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>现在，public 目录下面的文件就可以访问了。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span>images<span class="token operator">/</span>kitten<span class="token punctuation">.</span>jpg
 <span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span>css<span class="token operator">/</span>style<span class="token punctuation">.</span>css
 <span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span>js<span class="token operator">/</span>app<span class="token punctuation">.</span>js
 <span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span>images<span class="token operator">/</span>bg<span class="token punctuation">.</span>png
 <span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span>hello<span class="token punctuation">.</span>html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>所有文件的路径都是相对于存放目录的，因此，存放静态文件的目录名不会出现在 URL 中。</p>
 </blockquote>
 <p>如果你的静态资源存放在多个目录下面，你可以多次调用 <code>express.static</code> 中间件：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'public'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'files'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>访问静态资源文件时，<code>express.static</code> 中间件会根据目录添加的顺序查找所需的文件。</p>
 <p>如果你希望所有通过 <code>express.static</code> 访问的文件都存放在一个“虚拟（virtual）”目录（即目录根本不存在）下面，可以通过为静态资源目录指定一个挂载路径的方式来实现，如下所示：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/static'</span><span class="token punctuation">,</span> express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'public'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>现在，你就可以通过带有 “&#x2F;static” 前缀的地址来访问 public 目录下面的文件了。</p>
+<p>现在，你就可以通过带有 “/static” 前缀的地址来访问 public 目录下面的文件了。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span>images<span class="token operator">/</span>kitten<span class="token punctuation">.</span>jpg
 <span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span>css<span class="token operator">/</span>style<span class="token punctuation">.</span>css
 <span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span>js<span class="token operator">/</span>app<span class="token punctuation">.</span>js
 <span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span>images<span class="token operator">/</span>bg<span class="token punctuation">.</span>png
 <span class="token literal-property property">http</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3000</span><span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span>hello<span class="token punctuation">.</span>html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="express处理文件上传"><a href="#express处理文件上传" class="headerlink" title="express处理文件上传"></a>express处理文件上传</h2><h3 id="formidable模块"><a href="#formidable模块" class="headerlink" title="formidable模块"></a>formidable模块</h3><blockquote>
+<h2 id="express处理文件上传">express处理文件上传</h2>
+<h3 id="formidable模块">formidable模块</h3>
+<blockquote>
 <p>官方文档：<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/formidable">formidable - npm (npmjs.com)</a></p>
 </blockquote>
 <p>对于express框架的官方示例代码：</p>
@@ -1050,7 +1051,6 @@ app.post(&#39;&#x2F;api&#x2F;upload&#39;, (req, res, next) &#x3D;&gt; &#123;
 app.listen(3000, () &#x3D;&gt; &#123;
   console.log(&#39;Server listening on http:&#x2F;&#x2F;localhost:3000 ...&#39;);
 &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

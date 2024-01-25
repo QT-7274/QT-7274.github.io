@@ -500,7 +500,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="MongoDB数据库下载安装与启动"><a href="#MongoDB数据库下载安装与启动" class="headerlink" title="MongoDB数据库下载安装与启动"></a><code>MongoDB</code>数据库下载安装与启动</h2><p>下载地址： <a href="https://gitee.com/link?target=https://www.mongodb.com/try/download/community">https://www.mongodb.com/try/download/community</a></p>
+                <h2 id="MongoDB数据库下载安装与启动"><code>MongoDB</code>数据库下载安装与启动</h2>
+<p>下载地址： <a href="https://gitee.com/link?target=https%3A%2F%2Fwww.mongodb.com%2Ftry%2Fdownload%2Fcommunity">https://www.mongodb.com/try/download/community</a></p>
 <p>配置步骤如下:</p>
 <ol>
 <li>将压缩包移动到 <code>C:\Program Files</code> 下，然后解压</li>
@@ -511,59 +512,82 @@
 </ol>
 <p>修改<code>mongodb</code>数据库位置</p>
 <ol>
-<li><p>首先创建数据库目录，例如<code>d:\data</code>。然后运行命令：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">mongod -dbpath d:&#x2F;data<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li>
+<p>首先创建数据库目录，例如<code>d:\data</code>。然后运行命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mongod <span class="token parameter variable">-dbpath</span> d:/data<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>配置文件方式，在任意位置创建一个配置文件，例如<code>c:\mongodb\conf</code>的目录下创建一个名为<code>master.cfg</code>的文件，内容为<code>dbpath=d:\data</code>，然后运行命令：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">mongod -config c:\mongodb\conf\master.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>
+<p>配置文件方式，在任意位置创建一个配置文件，例如<code>c:\mongodb\conf</code>的目录下创建一个名为<code>master.cfg</code>的文件，内容为<code>dbpath=d:\data</code>，然后运行命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mongod <span class="token parameter variable">-config</span> c:<span class="token punctuation">\</span>mongodb<span class="token punctuation">\</span>conf<span class="token punctuation">\</span>master.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ol>
-<h2 id="命令行交互"><a href="#命令行交互" class="headerlink" title="命令行交互"></a>命令行交互</h2><h3 id="数据库命令"><a href="#数据库命令" class="headerlink" title="数据库命令"></a>数据库命令</h3><ol>
-<li><p>显示所有的数据库</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">show dbs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="命令行交互">命令行交互</h2>
+<h3 id="数据库命令">数据库命令</h3>
+<ol>
+<li>
+<p>显示所有的数据库</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">show dbs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>切换到指定的数据库，如果数据库不存在会自动创建数据库</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">use 数据库名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li>
+<p>切换到指定的数据库，如果数据库不存在会自动创建数据库</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">use 数据库名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>显示当前所在的数据库</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li>
+<p>显示当前所在的数据库</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">db<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>删除当前数据库</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">use 库名
-db.dropDatabase()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>
+<p>删除当前数据库</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">use 库名
+db.dropDatabase<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h3 id="集合命令"><a href="#集合命令" class="headerlink" title="集合命令"></a>集合命令</h3><ol>
-<li><p>创建集合</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.createCollection(&#39;集合名称&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="集合命令">集合命令</h3>
+<ol>
+<li>
+<p>创建集合</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">db.createCollection<span class="token punctuation">(</span><span class="token string">'集合名称'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>显示当前数据库中的所有集合</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">show collections<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li>
+<p>显示当前数据库中的所有集合</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">show collections<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>删除某个集合</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.drop()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li>
+<p>删除某个集合</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">db.集合名.drop<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>重命名集合</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.renameCollection(&#39;newName&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>
+<p>重命名集合</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">db.集合名.renameCollection<span class="token punctuation">(</span><span class="token string">'newName'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ol>
-<h3 id="文档命令"><a href="#文档命令" class="headerlink" title="文档命令"></a>文档命令</h3><ol>
-<li><p>插入文档</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.insert(文档对象);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="文档命令">文档命令</h3>
+<ol>
+<li>
+<p>插入文档</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">db.集合名.insert<span class="token punctuation">(</span>文档对象<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>查询文档</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.find(查询条件)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<li>
+<p>查询文档</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">db.集合名.find<span class="token punctuation">(</span>查询条件<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>_id 是 mongodb 自动生成的唯一编号，用来唯一标识文档</p>
 </li>
-<li><p>更新文档</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.update(查询条件,新的文档)
-db.集合名.update(&#123;name:&#39;张三&#39;&#125;,&#123;$set:&#123;age:19&#125;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<li>
+<p>更新文档</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">db.集合名.update<span class="token punctuation">(</span>查询条件,新的文档<span class="token punctuation">)</span>
+db.集合名.update<span class="token punctuation">(</span><span class="token punctuation">&#123;</span>name:<span class="token string">'张三'</span><span class="token punctuation">&#125;</span>,<span class="token punctuation">&#123;</span><span class="token variable">$set</span>:<span class="token punctuation">&#123;</span>age:19<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><p>删除文档</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">db.集合名.remove(查询条件)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>
+<p>删除文档</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">db.集合名.remove<span class="token punctuation">(</span>查询条件<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ol>
-<h2 id="mongoose简介"><a href="#mongoose简介" class="headerlink" title="mongoose简介"></a><code>mongoose</code>简介</h2><ol>
+<h2 id="mongoose简介"><code>mongoose</code>简介</h2>
+<ol>
 <li><code>Mongoose</code>是一个让我们可以通过<code>Node</code>来操作<code>MongoDB</code>的模块。</li>
 <li><code>Mongoose</code>是一个对象文档模型(ODM)库,它对<code>Node</code>原生的<code>MongoDB</code>模块进行了进一步的优化封装，并提供了更多的功能。在大多数情况下，它被用来把结构化的模式应用到一个<code>MongoDB</code>集合，并提供了验证和类型转换等好处。</li>
-<li>mongoose中的对象：<ul>
+<li>mongoose中的对象：
+<ul>
 <li><code>Schema</code> 模式对象（<code>Schema</code>对象定义约束了数据库中的文档结构）</li>
 <li><code>Model</code> 模型对象（<code>Model</code>对象作为集合中的所有文档的表示，相当于<code>MongoDB</code>数据库中的集合<code>collection</code>）</li>
 <li><code>Document</code> 文档对象（<code>Document</code>表示集合中的具体文档，相当于集合中的一个具体的文档）</li>
@@ -574,16 +598,16 @@ db.集合名.update(&#123;name:&#39;张三&#39;&#125;,&#123;$set:&#123;age:19&#1
 <blockquote>
 <ol>
 <li>可以为文档创建一个模式结构(Schema)</li>
-<li>可以对模型中的对象&#x2F;文档进行验证</li>
+<li>可以对模型中的对象/文档进行验证</li>
 <li>数据可以通过类型转换转换为对象模型</li>
 <li>可以使用中间件来应用业务逻辑挂钩</li>
 <li>比Node原生的MongoDB驱动更容易</li>
 </ol>
 </blockquote>
 <p><strong>安装</strong></p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">npm i -S mongoose<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p><code>config/db.config.js</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i <span class="token parameter variable">-S</span> mongoose<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="连接数据库">连接数据库</h2>
+<p><code>config/db.config.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 1.引入mongoose</span>
 <span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"mongoose"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -611,15 +635,17 @@ mongoose<span class="token punctuation">.</span>connection<span class="token pun
 
 <span class="token comment">// 4.断开数据库连接(一般不用)</span>
 mongooes<span class="token punctuation">.</span><span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：<code>MongoDB</code>数据库，一般情况下，只需要连接一次，连接一次后，除非项目停止服务器关闭，否则连接一般不会断开</p>
 </blockquote>
-<h2 id="创建模式对象和模型对象"><a href="#创建模式对象和模型对象" class="headerlink" title="创建模式对象和模型对象"></a>创建模式对象和模型对象</h2><p>数据库中的 <code>Schema</code>，为数据库对象的集合。<code>schema</code> 是 <code>mongoose</code> 里会用到的一种数据模式，可以理解为表结构的定义；每个 <code>schema</code> 会映射到 <code>mongodb</code> 中的一个 <code>collection</code>，它不具备操作数据库的能力。</p>
+<h2 id="创建模式对象和模型对象">创建模式对象和模型对象</h2>
+<p>数据库中的 <code>Schema</code>，为数据库对象的集合。<code>schema</code> 是 <code>mongoose</code> 里会用到的一种数据模式，可以理解为表结构的定义；每个 <code>schema</code> 会映射到 <code>mongodb</code> 中的一个 <code>collection</code>，它不具备操作数据库的能力。</p>
 <ul>
-<li><p>每个 <code>schema</code> 都会映射到一个 <code>MongoDB</code> <code>collection</code> 并定义这个 <code>collection</code> 里的文档结构</p>
+<li>
+<p>每个 <code>schema</code> 都会映射到一个 <code>MongoDB</code> <code>collection</code> 并定义这个 <code>collection</code> 里的文档结构</p>
 </li>
-<li><p>支持的字段类型</p>
+<li>
+<p>支持的字段类型</p>
 <table>
 <thead>
 <tr>
@@ -627,7 +653,8 @@ mongooes<span class="token punctuation">.</span><span class="token function">dis
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>String</td>
 <td>定义字符串</td>
 </tr>
@@ -659,7 +686,8 @@ mongooes<span class="token punctuation">.</span><span class="token function">dis
 <td>Array</td>
 <td>定义数组</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
 </ul>
 <p><code>model/UserModel.js</code></p>
@@ -692,8 +720,9 @@ mongooes<span class="token punctuation">.</span><span class="token function">dis
 
 module<span class="token punctuation">.</span>exports  <span class="token operator">=</span> UserModel 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="文档新增"><a href="#文档新增" class="headerlink" title="文档新增"></a>文档新增</h2><h3 id="save"><a href="#save" class="headerlink" title="save()"></a><code>save()</code></h3><p>操作的是文档</p>
+<h2 id="文档新增">文档新增</h2>
+<h3 id="save"><code>save()</code></h3>
+<p>操作的是文档</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
 const UserModel &#x3D; require(&#39;..&#x2F;model&#x2F;UserModel&#39;);
@@ -711,8 +740,8 @@ new UserModel(&#123;name:&quot;小明&quot;,age:18&#125;).save((err,docs) &#x3D;
         &#x2F;&#x2F;&#123; _id: 6017bd1cf4cc8544d8ed2a8a, name: &#39;小明&#39;, age: 18, __v: 0 &#125;
     &#125;
 &#125;)   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="create"><a href="#create" class="headerlink" title="create()"></a><code>create()</code></h3><p>操作的是模型</p>
+<h3 id="create"><code>create()</code></h3>
+<p>操作的是模型</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
 const UserModel &#x3D; require(&#39;..&#x2F;model&#x2F;UserModel&#39;);
@@ -730,8 +759,8 @@ UserModel.create(&#123;name:&quot;小明&quot;,age:18&#125;,&#123;name:&quot;小
 &#x2F;&#x2F;Model.createMany(doc, [callback]);		创建多个对象
 &#x2F;&#x2F;	-doc是需要插入的文档
 &#x2F;&#x2F;	-callback(err) 是回调函数，可以用来提示是否创建成功了<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="insertMany"><a href="#insertMany" class="headerlink" title="insertMany()"></a><code>insertMany()</code></h3><p>操作的是模型</p>
+<h3 id="insertMany"><code>insertMany()</code></h3>
+<p>操作的是模型</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">UserModel.insertMany(&#123;name:&quot;小明&quot;,age:18&#125;,&#123;name:&quot;小芳&quot;,age:14&#125;,(err,docs) &#x3D;&gt; &#123;
    if(!err)&#123;
         console.log(docs)
@@ -739,8 +768,9 @@ UserModel.create(&#123;name:&quot;小明&quot;,age:18&#125;,&#123;name:&quot;小
            &#123; _id: 6017befb5c36d64d08b72577, name: &#39;小芳&#39;, grades: 94, __v: 0 &#125;]*&#x2F;
     &#125;
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="文档查询"><a href="#文档查询" class="headerlink" title="文档查询"></a>文档查询</h2><h3 id="find"><a href="#find" class="headerlink" title="find()"></a><code>find()</code></h3><p>代码示例：</p>
+<h2 id="文档查询">文档查询</h2>
+<h3 id="find"><code>find()</code></h3>
+<p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
 mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err) &#x3D;&gt; &#123;
     if(!err)&#123;
@@ -794,8 +824,8 @@ mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err
         &#x2F;*[&#123; _id: 6017c455ba09d355a49ec8eb, name: &#39;小红&#39;, grades: 52, __v: 0 &#125;*&#x2F;
     &#125;
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="findById"><a href="#findById" class="headerlink" title="findById()"></a><code>findById()</code></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
+<h3 id="findById"><code>findById()</code></h3>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
 mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err) &#x3D;&gt; &#123;
     if(!err)&#123;
         var schema &#x3D; new mongoose.Schema(&#123;name:String,grades:Number&#125;)
@@ -837,8 +867,8 @@ mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err
     &#125;
 &#125;)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="findOne"><a href="#findOne" class="headerlink" title="findOne()"></a><code>findOne()</code></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
+<h3 id="findOne"><code>findOne()</code></h3>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mongoose &#x3D; require(&#39;mongoose&#39;)
 mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err) &#x3D;&gt; &#123;
     if(!err)&#123;
         var schema &#x3D; new mongoose.Schema(&#123;name:String,grades:Number&#125;)
@@ -868,8 +898,8 @@ mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,(err
          &#x2F;&#x2F;&#123; _id: 6017befb5c36d64d08b72577 &#125;
     &#125;
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="复杂查询-where"><a href="#复杂查询-where" class="headerlink" title="复杂查询$where"></a>复杂查询<code>$where</code></h3><p><code>$where</code> 可以使用任意的 JavaScript 作为查询的一部分，包含JavaScript 表达式的字符串或者函数</p>
+<h3 id="复杂查询-where">复杂查询<code>$where</code></h3>
+<p><code>$where</code> 可以使用任意的 JavaScript 作为查询的一部分，包含JavaScript 表达式的字符串或者函数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -903,52 +933,52 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="常用查询条件">常用查询条件</h3>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token variable">$or</span>　　　　 或关系
 
-<h3 id="常用查询条件"><a href="#常用查询条件" class="headerlink" title="常用查询条件"></a>常用查询条件</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$or　　　　 或关系
+<span class="token variable">$nor</span>　　　 或关系取反
 
-$nor　　　 或关系取反
+<span class="token variable">$gt</span>　　　　 大于
 
-$gt　　　　 大于
+<span class="token variable">$gte</span>　　　 大于等于
 
-$gte　　　 大于等于
+<span class="token variable">$lt</span>　　　　 小于
 
-$lt　　　　 小于
+<span class="token variable">$lte</span>　　　 小于等于
 
-$lte　　　 小于等于
+<span class="token variable">$ne</span>　　　　 不等于
 
-$ne　　　　 不等于
+<span class="token variable">$in</span>　　　　 在多个值范围内
 
-$in　　　　 在多个值范围内
+<span class="token variable">$nin</span>　　　 不在多个值范围内
 
-$nin　　　 不在多个值范围内
+<span class="token variable">$all</span>　　　 匹配数组中多个值
 
-$all　　　 匹配数组中多个值
+<span class="token variable">$regex</span>　　 正则，用于模糊查询
 
-$regex　　 正则，用于模糊查询
+<span class="token variable">$size</span>　　　 匹配数组大小
 
-$size　　　 匹配数组大小
+<span class="token variable">$maxDistance</span>　 范围查询，距离（基于LBS）
 
-$maxDistance　 范围查询，距离（基于LBS）
+<span class="token variable">$mod</span>　　　　 取模运算
 
-$mod　　　　 取模运算
+<span class="token variable">$near</span>　　　 邻域查询，查询附近的位置（基于LBS）
 
-$near　　　 邻域查询，查询附近的位置（基于LBS）
+<span class="token variable">$exists</span>　　 字段是否存在
 
-$exists　　 字段是否存在
+<span class="token variable">$elemMatch</span>　 匹配内数组内的元素
 
-$elemMatch　 匹配内数组内的元素
+<span class="token variable">$within</span>　　　 范围查询（基于LBS）
 
-$within　　　 范围查询（基于LBS）
+<span class="token variable">$box</span>　　　　 范围查询，矩形范围（基于LBS）
 
-$box　　　　 范围查询，矩形范围（基于LBS）
+<span class="token variable">$center</span>　　　 范围醒询，圆形范围（基于LBS）
 
-$center　　　 范围醒询，圆形范围（基于LBS）
+<span class="token variable">$centerSphere</span>　范围查询，球形范围（基于LBS）
 
-$centerSphere　范围查询，球形范围（基于LBS）
-
-$slice　　　　 查询字段集合中的元素（比如从第几个之后，第N到第M个元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="特定类型查询"><a href="#特定类型查询" class="headerlink" title="特定类型查询"></a>特定类型查询</h3><p><strong>方法</strong></p>
+<span class="token variable">$slice</span>　　　　 查询字段集合中的元素（比如从第几个之后，第N到第M个元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="特定类型查询">特定类型查询</h3>
+<p><strong>方法</strong></p>
 <table>
 <thead>
 <tr>
@@ -956,7 +986,8 @@ $slice　　　　 查询字段集合中的元素（比如从第几个之后，�
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>sort</td>
 <td>排序</td>
 </tr>
@@ -984,7 +1015,8 @@ $slice　　　　 查询字段集合中的元素（比如从第几个之后，�
 <td>distinct</td>
 <td>去重</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <blockquote>
 <p><code>exec()</code> 和 <code>then()</code></p>
 <p>两者返回的都是 <code>promise</code> 对象 <code>exec</code> 一般用于独立的动作一次性执行， <code>then</code> 则用于连续性的动作。从其方法名也可以区别它们的用法，<code>exec</code>就是执行的意思，<code>then</code>就是然后怎么怎么， <code>exec</code>和<code>then</code>的参数是有所不同的，前者是 <code>callback(err,doc)</code>，后者则是 <code>resolved(doc),rejected(err)</code></p>
@@ -1031,30 +1063,37 @@ stuModel.find().distinct(&#39;grades&#39;,(err,distinct)&#x3D;&gt;&#123;
   console.log(distinct)
   &#x2F;&#x2F;[ 46, 52, 60, 76, 78, 94 ]
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="文档更新"><a href="#文档更新" class="headerlink" title="文档更新"></a>文档更新</h2><h3 id="update"><a href="#update" class="headerlink" title="update()"></a><code>update()</code></h3><ul>
-<li><p><code>Model.update(conditions, doc, [options], [callback])</code></p>
+<h2 id="文档更新">文档更新</h2>
+<h3 id="update"><code>update()</code></h3>
+<ul>
+<li>
+<p><code>Model.update(conditions, doc, [options], [callback])</code></p>
 </li>
-<li><p>参数</p>
+<li>
+<p>参数</p>
 <p><code>conditions</code>：查询条件</p>
 <p><code>doc</code>：需要修改的数据（插入的数据）</p>
 <p><code>[options]</code>：控制选项</p>
 <blockquote>
-<p><code>safe (boolean)</code>： 默认为<code>true</code>，安全模式。 </p>
-<p><code>upsert (boolean)</code>： 默认为<code>false</code>。如果不存在则创建新记录。 </p>
-<p><code>multi (boolean)</code>： 默认为<code>false</code>。是否更新多个查询记录。 </p>
-<p><code>runValidators</code>： 如果值为<code>true</code>，执行Validation验证。 </p>
-<p><code>setDefaultsOnInsert</code>： 如果<code>upsert</code>选项为<code>true</code>，在新建时插入文档定义的默认值。 </p>
-<p><code>strict (boolean)</code>： 以<code>strict</code>模式进行更新。 </p>
+<p><code>safe (boolean)</code>： 默认为<code>true</code>，安全模式。</p>
+<p><code>upsert (boolean)</code>： 默认为<code>false</code>。如果不存在则创建新记录。</p>
+<p><code>multi (boolean)</code>： 默认为<code>false</code>。是否更新多个查询记录。</p>
+<p><code>runValidators</code>： 如果值为<code>true</code>，执行Validation验证。</p>
+<p><code>setDefaultsOnInsert</code>： 如果<code>upsert</code>选项为<code>true</code>，在新建时插入文档定义的默认值。</p>
+<p><code>strict (boolean)</code>： 以<code>strict</code>模式进行更新。</p>
 <p><code>overwrite (boolean)</code>： 默认为<code>false</code>。禁用<code>update-only</code>模式，允许覆盖记录。</p>
 </blockquote>
 </li>
-<li><p>[callback]：回调函数</p>
+<li>
+<p>[callback]：回调函数</p>
 </li>
-<li><p>若设置了查询条件，当数据库不满足时默认什么也不发生</p>
+<li>
+<p>若设置了查询条件，当数据库不满足时默认什么也不发生</p>
 </li>
-<li><p><strong><code>update()</code> 方法中的回调函数不能省略，否则数据不会更新，当回调无有用信息时可以使用<code>exec()</code>简化</strong></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">stuModel<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'小明'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token literal-property property">$set</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">test</span><span class="token operator">:</span><span class="token number">34</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>
+<p><strong><code>update()</code> 方法中的回调函数不能省略，否则数据不会更新，当回调无有用信息时可以使用<code>exec()</code>简化</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">stuModel<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'小明'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token literal-property property">$set</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">test</span><span class="token operator">:</span><span class="token number">34</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ul>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;第一步，引入mongoose
@@ -1078,16 +1117,18 @@ mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,err&
 	 &#x2F;&#x2F;6017befb5c36d64d08b72576	小明	68	0	34
   &#125;
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="updateOne"><a href="#updateOne" class="headerlink" title="updateOne()"></a><code>updateOne()</code></h3><ul>
+<h3 id="updateOne"><code>updateOne()</code></h3>
+<ul>
 <li><code>Model.updateOne(conditions, doc, [options], [callback])</code></li>
 <li>与<code>update()</code>相似，唯一区别为 <code>updateOne()</code> 默认更新一个文档，即使设置<code>&#123;multi:true&#125;</code>也只更新一个文档</li>
 </ul>
-<h3 id="updateMany"><a href="#updateMany" class="headerlink" title="updateMany()"></a><code>updateMany()</code></h3><ul>
+<h3 id="updateMany"><code>updateMany()</code></h3>
+<ul>
 <li><code>Model.updateMany(conditions, doc, [options], [callback])</code></li>
 <li>与<code>update()</code>相似，唯一区别为<code>updateMany()</code>默认更新多个文档，即使设置<code>&#123;multi:false&#125;</code>也无法只更新一个文档</li>
 </ul>
-<h3 id="find-save"><a href="#find-save" class="headerlink" title="find()+save()"></a><code>find()</code>+<code>save()</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+<h3 id="find-save"><code>find()</code>+<code>save()</code></h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">,</span><span class="token parameter">err</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
      <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token literal-property property">grades</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token literal-property property">test</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">type</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token keyword">default</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
@@ -1110,8 +1151,8 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="findOne-save"><a href="#findOne-save" class="headerlink" title="findOne()+save()"></a><code>findOne()</code>+<code>save()</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+<h3 id="findOne-save"><code>findOne()</code>+<code>save()</code></h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">,</span><span class="token parameter">err</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
      <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token literal-property property">grades</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token literal-property property">test</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token literal-property property">type</span><span class="token operator">:</span>Number<span class="token punctuation">,</span><span class="token keyword">default</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
@@ -1128,10 +1169,13 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="findOneAndUpdate"><a href="#findOneAndUpdate" class="headerlink" title="findOneAndUpdate()"></a><code>findOneAndUpdate()</code></h3><p><code>Model.findOneAndUpdate([conditions], [update], [options], [callback])</code></p>
-<h3 id="findByIdAndUpdate"><a href="#findByIdAndUpdate" class="headerlink" title="findByIdAndUpdate()"></a><code>findByIdAndUpdate()</code></h3><p><code>Model.findByIdAndUpdate([conditions], [update], [options], [callback])</code></p>
-<h2 id="文档删除"><a href="#文档删除" class="headerlink" title="文档删除"></a>文档删除</h2><h3 id="deleteOne"><a href="#deleteOne" class="headerlink" title="deleteOne()"></a><code>deleteOne()</code></h3><p><code>Model</code>的<code>deleteOne()</code>：</p>
+<h3 id="findOneAndUpdate"><code>findOneAndUpdate()</code></h3>
+<p><code>Model.findOneAndUpdate([conditions], [update], [options], [callback])</code></p>
+<h3 id="findByIdAndUpdate"><code>findByIdAndUpdate()</code></h3>
+<p><code>Model.findByIdAndUpdate([conditions], [update], [options], [callback])</code></p>
+<h2 id="文档删除">文档删除</h2>
+<h3 id="deleteOne"><code>deleteOne()</code></h3>
+<p><code>Model</code>的<code>deleteOne()</code>：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">,</span><span class="token parameter">err</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -1144,7 +1188,6 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>文档的<code>deleteOne()</code>：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const mongoose &#x3D; require(&#39;mongoose&#39;)
 mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,err&#x3D;&gt;&#123;
@@ -1163,32 +1206,38 @@ mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;,err&
     &#125;)
   &#125;
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="findOneAndRemove"><a href="#findOneAndRemove" class="headerlink" title="findOneAndRemove()"></a><code>findOneAndRemove()</code></h3><ul>
+<h3 id="findOneAndRemove"><code>findOneAndRemove()</code></h3>
+<ul>
 <li>删除符合条件的一条数据</li>
 <li><code>Model.findOneAndRemove(conditions, [options], [callback])</code></li>
 <li>回调不可省略，但可以使用<code>exec()</code>简写</li>
 </ul>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">stuModel.findOneAndRemove(&#123;name:&#x2F;差生&#x2F;&#125;).exec()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="findByIdAndRemove"><a href="#findByIdAndRemove" class="headerlink" title="findByIdAndRemove()"></a><code>findByIdAndRemove()</code></h3><ul>
+<h3 id="findByIdAndRemove"><code>findByIdAndRemove()</code></h3>
+<ul>
 <li>通过id删除数据（id是唯一的）</li>
 <li><code>Model.findByIdAndRemove(conditions, [options], [callback])</code></li>
 <li>回调不可省略，但可以使用 <code>exec()</code> 简写</li>
 </ul>
-<h2 id="前后钩子"><a href="#前后钩子" class="headerlink" title="前后钩子"></a>前后钩子</h2><ul>
-<li><p>前后钩子即 <code>pre()</code> 和 <code>post()</code> 方法（中间件）</p>
+<h2 id="前后钩子">前后钩子</h2>
+<ul>
+<li>
+<p>前后钩子即 <code>pre()</code> 和 <code>post()</code> 方法（中间件）</p>
 </li>
-<li><p>中间件在<code>schema</code>上指定，类似静态方法或实例方法等</p>
+<li>
+<p>中间件在<code>schema</code>上指定，类似静态方法或实例方法等</p>
 </li>
-<li><p>可以在执行以下操作时设置前后钩子</p>
+<li>
+<p>可以在执行以下操作时设置前后钩子</p>
 <blockquote>
 <p><code>init</code> <code>validate</code> <code>save</code> <code>remove</code> <code>count</code> <code>find</code> <code>findOne</code> <code>findOneAndRemove</code> <code>findOneAndUpdate</code> <code>insertMany</code> <code>update</code></p>
 </blockquote>
 </li>
-<li><p><code>pre()</code>：在执行某些操作前执行</p>
+<li>
+<p><code>pre()</code>：在执行某些操作前执行</p>
 </li>
-<li><p><code>post()</code>：在执行某些操作前后执行，不可以使用<code>next()</code></p>
+<li>
+<p><code>post()</code>：在执行某些操作前后执行，不可以使用<code>next()</code></p>
 </li>
 </ul>
 <p>代码示例：</p>
@@ -1220,8 +1269,9 @@ stuModel.find(function(err,docs)&#123;
 我是post方法2
 &#123;test: 34, _id: 6017befb5c36d64d08b72576,name: &#39;小明&#39;,grades: 78,__v: 0&#125;
 *&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="文档验证"><a href="#文档验证" class="headerlink" title="文档验证"></a>文档验证</h2><h3 id="required"><a href="#required" class="headerlink" title="required"></a><code>required</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name设置为必填字段，如果没有name字段，文档将不被保存，且出现错误提示</span>
+<h2 id="文档验证">文档验证</h2>
+<h3 id="required"><code>required</code></h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name设置为必填字段，如果没有name字段，文档将不被保存，且出现错误提示</span>
 <span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -1240,8 +1290,8 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
 <span class="token comment">//报错：name: Path `name` is required.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="default"><a href="#default" class="headerlink" title="default"></a><code>default</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//设置age字段的默认值为18，如果不设置age字段，则会取默认值</span>
+<h3 id="default"><code>default</code></h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//设置age字段的默认值为18，如果不设置age字段，则会取默认值</span>
 <span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -1260,8 +1310,8 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
 <span class="token comment">//&#123; age: 18, _id: 6018f3bd7e51343e6c4f212b, name: '李雷', __v: 0 &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="min-max"><a href="#min-max" class="headerlink" title="min max"></a><code>min</code> <code>max</code></h3><p>只适用于数字</p>
+<h3 id="min-max"><code>min</code> <code>max</code></h3>
+<p>只适用于数字</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;将age的取值范围设置为[0,10]。如果age取值为20，文档将不被保存，且出现错误提示
 const mongoose &#x3D; require(&#39;mongoose&#39;)
 mongoose.connect(&#39;mongodb:&#x2F;&#x2F;localhost:27017&#x2F;student&#39;)
@@ -1282,8 +1332,8 @@ new stuModel(&#123;name:&#39;李雷&#39;,age:20&#125;).save((err,doc)&#x3D;&gt;&
 &#125;)
 
 &#x2F;&#x2F;age: Path &#96;age&#96; (20) is more than maximum allowed value (18).<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="match"><a href="#match" class="headerlink" title="match"></a><code>match</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name的match设置为必须存在'01'字符。如果name不存在'01'，文档将不被保存，且出现错误提示</span>
+<h3 id="match"><code>match</code></h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name的match设置为必须存在'01'字符。如果name不存在'01'，文档将不被保存，且出现错误提示</span>
 <span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -1299,8 +1349,8 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
 <span class="token comment">//name: Path `name` is invalid (李雷).</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="enum"><a href="#enum" class="headerlink" title="enum"></a><code>enum</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name的枚举取值设置为['zs','ls','ww']，如果name不在枚举范围内取值，文档将不被保存，且出现错误提示</span>
+<h3 id="enum"><code>enum</code></h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//将name的枚举取值设置为['zs','ls','ww']，如果name不在枚举范围内取值，文档将不被保存，且出现错误提示</span>
 <span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -1316,8 +1366,8 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
 <span class="token comment">//name: ValidatorError: `lss` is not a valid enum value for path `name`.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="validate"><a href="#validate" class="headerlink" title="validate"></a><code>validate</code></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//定义名字name的长度必须在4个字符以上</span>
+<h3 id="validate"><code>validate</code></h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//定义名字name的长度必须在4个字符以上</span>
 <span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
 mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mongodb://localhost:27017/student'</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> Schema <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -1340,7 +1390,6 @@ mongoose<span class="token punctuation">.</span><span class="token function">con
 <span class="token punctuation">&#125;</span>
 
 <span class="token comment">//name: Validator failed for path `name` with value `abcd`</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

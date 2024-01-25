@@ -470,14 +470,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.1k
+                    5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    21 分
+                    20 分
                 </div>
                 
 
@@ -500,30 +500,37 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a><font color='#3498db'>更新记录</font></h3><ul>
+                <h3 id="font-color-3498db-更新记录-font"><font color='#3498db'>更新记录</font></h3>
+<ul>
 <li>2023-09-11：vue3.0 特性的更新，分别在[Vue3.0中的响应式原理]和[其他改变]章节中。</li>
 <li>2023-09-14：补充[Vue3.0中的响应式原理]章节，补充Vue3中的Composition API的优势。</li>
 </ul>
-<h1 id="常用Composition-API"><a href="#常用Composition-API" class="headerlink" title="常用Composition API"></a>常用Composition API</h1><p>官方文档: <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/composition-api-introduction.html">https://v3.cn.vuejs.org/guide/composition-api-introduction.html</a></p>
+<h1>常用Composition API</h1>
+<p>官方文档: <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/composition-api-introduction.html">https://v3.cn.vuejs.org/guide/composition-api-introduction.html</a></p>
 <p><code>Compositon API</code>将某个逻辑关注点相关的代码全都放在一个函数里，这样当需要修改一个功能时，就不再需要在文件中跳来跳去。</p>
-<h3 id="❗优势"><a href="#❗优势" class="headerlink" title="❗优势"></a>❗优势</h3><ul>
+<h3 id="❗优势">❗优势</h3>
+<ul>
 <li>在逻辑组织和逻辑复用方面，<code>Composition API</code>是优于<code>Options API</code></li>
 <li>因为<code>Composition API</code>几乎是函数，会有更好的类型推断。</li>
 <li><code>Composition API</code>对 <code>tree-shaking</code> 友好，代码也更容易压缩</li>
 <li><code>Composition API</code>中见不到<code>this</code>的使用，减少了<code>this</code>指向不明的情况</li>
 <li>如果是小型组件，可以继续使用<code>Options API</code>，也是十分友好的</li>
 </ul>
-<h2 id="setup"><a href="#setup" class="headerlink" title="setup"></a>setup</h2><ol>
+<h2 id="setup">setup</h2>
+<ol>
 <li>理解：Vue3.0中一个新的配置项，值为一个函数。</li>
 <li>setup是所有<strong>Composition API（组合API）</strong>“表演的舞台”。</li>
 <li>组件中所用到的：数据、方法等等，均要配置在setup中。</li>
-<li>setup函数的两种返回值：<ol>
+<li>setup函数的两种返回值：
+<ol>
 <li>若返回一个对象，则对象中的属性、方法, 在模板中均可以直接使用。（重点关注！）</li>
 <li>若返回一个渲染函数：则可以自定义渲染内容。（了解）</li>
 </ol>
 </li>
-<li>注意点：<ol>
-<li>尽量不要与Vue2.x配置混用<ul>
+<li>注意点：
+<ol>
+<li>尽量不要与Vue2.x配置混用
+<ul>
 <li>Vue2.x配置（data、methods、computed…）中<strong>可以访问到</strong>setup中的属性、方法。</li>
 <li>但在setup中<strong>不能访问到</strong>Vue2.x配置（data、methods、computed…）。</li>
 <li>如果有重名，setup优先。</li>
@@ -533,10 +540,13 @@
 </ol>
 </li>
 </ol>
-<h2 id="ref函数"><a href="#ref函数" class="headerlink" title="ref函数"></a>ref函数</h2><ul>
-<li><p>作用: 定义一个响应式的数据</p>
+<h2 id="ref函数">ref函数</h2>
+<ul>
+<li>
+<p>作用: 定义一个响应式的数据</p>
 </li>
-<li><p>语法:</p>
+<li>
+<p>语法:</p>
 <p><code>const xxx = ref(initValue)</code></p>
 <ul>
 <li>创建一个包含响应式数据的<strong>引用对象（reference对象，简称ref对象）</strong>。</li>
@@ -544,7 +554,8 @@
 <li>模板中读取数据: 不需要.value，直接：<code>&lt;div&gt;&#123;&#123;xxx&#125;&#125;&lt;/div&gt;</code></li>
 </ul>
 </li>
-<li><p>备注：</p>
+<li>
+<p>备注：</p>
 <ul>
 <li>接收的数据可以是：基本类型、也可以是对象类型。</li>
 <li>基本类型的数据：响应式依然是靠<code>Object.defineProperty()</code>的<code>get</code>与<code>set</code>完成的。</li>
@@ -552,23 +563,29 @@
 </ul>
 </li>
 </ul>
-<h2 id="reactive函数"><a href="#reactive函数" class="headerlink" title="reactive函数"></a>reactive函数</h2><ul>
+<h2 id="reactive函数">reactive函数</h2>
+<ul>
 <li>作用: 定义一个<strong>对象类型</strong>的响应式数据（基本类型不要用它，要用<code>ref</code>函数）</li>
 <li>语法：<code>const 代理对象= reactive(源对象)</code>接收一个对象（或数组），返回一个<strong>代理对象（Proxy的实例对象，简称proxy对象）</strong></li>
 <li>reactive定义的响应式数据是“深层次的”。</li>
 <li>内部基于 ES6 的 Proxy 实现，通过代理对象操作源对象内部数据进行操作。</li>
 </ul>
-<h2 id="❗Vue3-0中的响应式原理"><a href="#❗Vue3-0中的响应式原理" class="headerlink" title="❗Vue3.0中的响应式原理"></a>❗Vue3.0中的响应式原理</h2><h3 id="vue2-x的响应式"><a href="#vue2-x的响应式" class="headerlink" title="vue2.x的响应式"></a>vue2.x的响应式</h3><p>实现原理：</p>
+<h2 id="❗Vue3-0中的响应式原理">❗Vue3.0中的响应式原理</h2>
+<h3 id="vue2-x的响应式">vue2.x的响应式</h3>
+<p>实现原理：</p>
 <ul>
-<li><p>get</p>
+<li>
+<p>get</p>
 <p>属性的 getter 函数，当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的this并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值</p>
 </li>
-<li><p>set</p>
+<li>
+<p>set</p>
 <p>属性的 setter 函数，当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象。默认为 undefined</p>
 </li>
 </ul>
 <ol>
-<li><p>对象类型：通过<code>Object.defineProperty()</code>对属性的读取、修改进行拦截（数据劫持）。</p>
+<li>
+<p>对象类型：通过<code>Object.defineProperty()</code>对属性的读取、修改进行拦截（数据劫持）。</p>
 <p>代码示例：</p>
 <p>定义一个响应式函数<code>defineReactive</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -589,14 +606,12 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>调用<code>defineReactive</code>，数据发生变化触发<code>update</code>方法，实现数据响应式</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 <span class="token function">defineReactive</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> <span class="token string">'foo'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
 <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
     obj<span class="token punctuation">.</span>foo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLocaleTimeString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在对象存在多个<code>key</code>情况下，需要进行遍历</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">observe</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span> <span class="token operator">||</span> obj <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -606,7 +621,6 @@
         <span class="token function">defineReactive</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> key<span class="token punctuation">,</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>如果存在嵌套对象的情况，还需要在<code>defineReactive</code>中进行递归</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">defineReactive</span><span class="token punctuation">(</span><span class="token parameter">obj<span class="token punctuation">,</span> key<span class="token punctuation">,</span> val</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token function">observe</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span>
@@ -623,7 +637,6 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>当给<code>key</code>赋值为对象的时候，还需要在<code>set</code>属性中进行递归</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">set</span><span class="token punctuation">(</span>newVal<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>newVal <span class="token operator">!==</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -631,7 +644,6 @@
         <span class="token function">notifyUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上述例子能够实现对一个对象的基本响应式，但仍然存在诸多问题：</p>
 <blockquote>
 <p>存在问题：</p>
@@ -642,7 +654,8 @@
 </ul>
 </blockquote>
 </li>
-<li><p>数组类型：通过重写更新数组的一系列方法来实现拦截。（对数组的变更方法进行了包裹）。</p>
+<li>
+<p>数组类型：通过重写更新数组的一系列方法来实现拦截。（对数组的变更方法进行了包裹）。</p>
 <blockquote>
 <p>存在问题：</p>
 <ul>
@@ -652,17 +665,23 @@
 </blockquote>
 </li>
 </ol>
-<h3 id="Vue3-0的响应式"><a href="#Vue3-0的响应式" class="headerlink" title="Vue3.0的响应式"></a>Vue3.0的响应式</h3><p>实现原理:</p>
+<h3 id="Vue3-0的响应式">Vue3.0的响应式</h3>
+<p>实现原理:</p>
 <ul>
-<li><p>通过<code>Proxy</code>（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等（直接监听<strong>整个对象</strong>）。</p>
+<li>
+<p>通过<code>Proxy</code>（代理）: 拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等（直接监听<strong>整个对象</strong>）。</p>
 </li>
-<li><p>通过<code>Reflect</code>（反射）: 对源对象的属性进行操作。</p>
+<li>
+<p>通过<code>Reflect</code>（反射）: 对源对象的属性进行操作。</p>
 </li>
-<li><p>MDN文档中描述的Proxy与Reflect：</p>
+<li>
+<p>MDN文档中描述的Proxy与Reflect：</p>
 <ul>
-<li><p>Proxy：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy</a></p>
+<li>
+<p>Proxy：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy</a></p>
 </li>
-<li><p>Reflect：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect</a></p>
+<li>
+<p>Reflect：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect</a></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">new Proxy(data, &#123;
     &#x2F;&#x2F; 拦截读取属性值
     get (target, prop) &#123;
@@ -678,7 +697,8 @@
     &#125;
 &#125;)
 
-proxy.name &#x3D; &#39;tom&#39;   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+proxy.name &#x3D; &#39;tom&#39;   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 </li>
 </ul>
@@ -702,7 +722,6 @@ proxy.name &#x3D; &#39;tom&#39;   <span aria-hidden="true" class="line-numbers-r
 <span class="token punctuation">&#125;</span>
 <span class="token comment">// 在  get  拦截器中，使用  Reflect.get  获取  target  对象中对应  key  的值，并打印出获取的信息。 </span>
 <span class="token comment">// 如果获取的值  res  是对象类型，则递归调用  reactive  函数将其转换为响应式对象，否则直接返回  res 。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>此外：</p>
 <ul>
 <li><code>Proxy</code>可以直接监听数组的变化（<code>push</code>、<code>shift</code>、<code>splice</code>）</li>
@@ -719,32 +738,40 @@ proxy.name &#x3D; &#39;tom&#39;   <span aria-hidden="true" class="line-numbers-r
 <li>不可变的 observable：我们可以创建值的”不可变“版本（即使是嵌套属性），除非系统在内部暂时将其“解禁”。这个机制可用于冻结 prop 传递或 Vuex 状态树以外的变化。</li>
 <li>更好的调试功能：我们可以使用新的 renderTracked 和 renderTriggered 钩子精准地跟踪组件在什么时候以及为什么重新渲染。</li>
 </ul>
-<h2 id="reactive对比ref"><a href="#reactive对比ref" class="headerlink" title="reactive对比ref"></a>reactive对比ref</h2><ul>
-<li>从定义数据角度对比：<ul>
+<h2 id="reactive对比ref">reactive对比ref</h2>
+<ul>
+<li>从定义数据角度对比：
+<ul>
 <li>ref用来定义：<strong>基本类型数据</strong>。</li>
 <li>reactive用来定义：<strong>对象（或数组）类型数据</strong>。</li>
 <li>备注：ref也可以用来定义<strong>对象（或数组）类型数据</strong>, 它内部会自动通过<code>reactive</code>转为<strong>代理对象</strong>。</li>
 </ul>
 </li>
-<li>从原理角度对比：<ul>
+<li>从原理角度对比：
+<ul>
 <li>ref通过<code>Object.defineProperty()</code>的<code>get</code>与<code>set</code>来实现响应式（数据劫持）。</li>
 <li>reactive通过使用<strong>Proxy</strong>来实现响应式（数据劫持）, 并通过<strong>Reflect</strong>操作<strong>源对象</strong>内部的数据。</li>
 </ul>
 </li>
-<li>从使用角度对比：<ul>
+<li>从使用角度对比：
+<ul>
 <li>ref定义的数据：操作数据<strong>需要</strong><code>.value</code>，读取数据时模板中直接读取<strong>不需要</strong><code>.value</code>。</li>
 <li>reactive定义的数据：操作数据与读取数据：<strong>均不需要</strong><code>.value</code>。</li>
 </ul>
 </li>
 </ul>
-<h2 id="setup的两个注意点"><a href="#setup的两个注意点" class="headerlink" title="setup的两个注意点"></a>setup的两个注意点</h2><ul>
-<li>setup执行的时机<ul>
+<h2 id="setup的两个注意点">setup的两个注意点</h2>
+<ul>
+<li>setup执行的时机
+<ul>
 <li>在beforeCreate之前执行一次，this是undefined。</li>
 </ul>
 </li>
-<li>setup的参数<ul>
+<li>setup的参数
+<ul>
 <li>props：值为对象，包含：组件外部传递过来，且组件内部声明接收了的属性。</li>
-<li>context：上下文对象<ul>
+<li>context：上下文对象
+<ul>
 <li>attrs: 值为对象，包含：组件外部传递过来，但没有在props配置中声明的属性, 相当于 <code>this.$attrs</code>。</li>
 <li>slots: 收到的插槽内容, 相当于 <code>this.$slots</code>。</li>
 <li>emit: 分发自定义事件的函数, 相当于 <code>this.$emit</code>。</li>
@@ -753,10 +780,14 @@ proxy.name &#x3D; &#39;tom&#39;   <span aria-hidden="true" class="line-numbers-r
 </ul>
 </li>
 </ul>
-<h2 id="计算属性与监视"><a href="#计算属性与监视" class="headerlink" title="计算属性与监视"></a>计算属性与监视</h2><h3 id="computed函数"><a href="#computed函数" class="headerlink" title="computed函数"></a>computed函数</h3><ul>
-<li><p>与Vue2.x中computed配置功能一致</p>
+<h2 id="计算属性与监视">计算属性与监视</h2>
+<h3 id="computed函数">computed函数</h3>
+<ul>
+<li>
+<p>与Vue2.x中computed配置功能一致</p>
 </li>
-<li><p>写法</p>
+<li>
+<p>写法</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123;computed&#125; from &#39;vue&#39;
 
 setup()&#123;
@@ -776,12 +807,16 @@ setup()&#123;
             person.lastName &#x3D; nameArr[1]
         &#125;
     &#125;)
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h3 id="watch函数"><a href="#watch函数" class="headerlink" title="watch函数"></a>watch函数</h3><ul>
-<li><p>与Vue2.x中watch配置功能一致</p>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>两个小“坑”：</p>
+</ul>
+<h3 id="watch函数">watch函数</h3>
+<ul>
+<li>
+<p>与Vue2.x中watch配置功能一致</p>
+</li>
+<li>
+<p>两个小“坑”：</p>
 <ul>
 <li>监视reactive定义的响应式数据时：oldValue无法正确获取、强制开启了深度监视（deep配置失效）。</li>
 <li>监视reactive定义的响应式数据中某个属性时：deep配置有效。</li>
@@ -817,14 +852,19 @@ watch([()&#x3D;&gt;person.job,()&#x3D;&gt;person.name],(newValue,oldValue)&#x3D;
 &#x2F;&#x2F;特殊情况
 watch(()&#x3D;&gt;person.job,(newValue,oldValue)&#x3D;&gt;&#123;
     console.log(&#39;person的job变化了&#39;,newValue,oldValue)
-&#125;,&#123;deep:true&#125;) &#x2F;&#x2F;此处由于监视的是reactive素定义的对象中的某个属性，所以deep配置有效<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&#125;,&#123;deep:true&#125;) &#x2F;&#x2F;此处由于监视的是reactive素定义的对象中的某个属性，所以deep配置有效<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h3 id="watchEffect函数"><a href="#watchEffect函数" class="headerlink" title="watchEffect函数"></a>watchEffect函数</h3><ul>
-<li><p>watch的套路是：既要指明监视的属性，也要指明监视的回调。</p>
+<h3 id="watchEffect函数">watchEffect函数</h3>
+<ul>
+<li>
+<p>watch的套路是：既要指明监视的属性，也要指明监视的回调。</p>
 </li>
-<li><p>watchEffect的套路是：不用指明监视哪个属性，监视的回调中用到哪个属性，那就监视哪个属性。</p>
+<li>
+<p>watchEffect的套路是：不用指明监视哪个属性，监视的回调中用到哪个属性，那就监视哪个属性。</p>
 </li>
-<li><p>watchEffect有点像computed：</p>
+<li>
+<p>watchEffect有点像computed：</p>
 <ul>
 <li>但computed注重的计算出来的值（回调函数的返回值），所以必须要写返回值。</li>
 <li>而watchEffect更注重的是过程（回调函数的函数体），所以不用写返回值。</li>
@@ -834,63 +874,77 @@ watchEffect(()&#x3D;&gt;&#123;
     const x1 &#x3D; sum.value
     const x2 &#x3D; person.age
     console.log(&#39;watchEffect配置的回调执行了&#39;)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p><img src="/medias/images/loading.gif" data-original="/2023/08/30/vue3-xin-te-xing/image-20230830173938976.png" alt="image-20230830173938976"></p>
+<h2 id="生命周期">生命周期</h2>
+<p><img src="/medias/images/loading.gif" data-original="image-20230830173938976.png" alt="image-20230830173938976"></p>
 <ul>
-<li>Vue3.0中可以继续使用Vue2.x中的生命周期钩子，但有有两个被更名：<ul>
+<li>Vue3.0中可以继续使用Vue2.x中的生命周期钩子，但有有两个被更名：
+<ul>
 <li><code>beforeDestroy</code>改名为 <code>beforeUnmount</code></li>
 <li><code>destroyed</code>改名为 <code>unmounted</code></li>
 </ul>
 </li>
-<li>Vue3.0也提供了 Composition API 形式的生命周期钩子，与Vue2.x中钩子对应关系如下：<ul>
-<li><code>beforeCreate</code>&#x3D;&#x3D;&#x3D;&gt;<code>setup()</code></li>
-<li><code>created</code>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>setup()</code></li>
-<li><code>beforeMount</code> &#x3D;&#x3D;&#x3D;&gt;<code>onBeforeMount</code></li>
-<li><code>mounted</code>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>onMounted</code></li>
-<li><code>beforeUpdate</code>&#x3D;&#x3D;&#x3D;&gt;<code>onBeforeUpdate</code></li>
-<li><code>updated</code> &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>onUpdated</code></li>
-<li><code>beforeUnmount</code> &#x3D;&#x3D;&gt;<code>onBeforeUnmount</code></li>
-<li><code>unmounted</code> &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>onUnmounted</code></li>
+<li>Vue3.0也提供了 Composition API 形式的生命周期钩子，与Vue2.x中钩子对应关系如下：
+<ul>
+<li><code>beforeCreate</code>===&gt;<code>setup()</code></li>
+<li><code>created</code>=======&gt;<code>setup()</code></li>
+<li><code>beforeMount</code> ===&gt;<code>onBeforeMount</code></li>
+<li><code>mounted</code>=======&gt;<code>onMounted</code></li>
+<li><code>beforeUpdate</code>===&gt;<code>onBeforeUpdate</code></li>
+<li><code>updated</code> =======&gt;<code>onUpdated</code></li>
+<li><code>beforeUnmount</code> ==&gt;<code>onBeforeUnmount</code></li>
+<li><code>unmounted</code> =====&gt;<code>onUnmounted</code></li>
 </ul>
 </li>
 <li>仔细观察两个流程图头部可以看出，Vue3先将<code>el</code>挂载了之后再进行的<code>beforeCreate</code>,而Vue2是<code>created</code>之后进行判断是否挂载<code>el</code>，如果没，则流程终止，<code>beforeCreate</code>和<code>created</code>俩个钩子冗余使用，因此Vue3进行了优化的。</li>
 <li>注意：之前说到过setup执行的时机：在<code>beforeCreate</code>之前执行一次。由此可理解为何组合式生命周期钩子中的<code>beforeCreate</code>和<code>created</code>会被<code>setup</code>代替。</li>
 </ul>
-<h2 id="自定义hook函数"><a href="#自定义hook函数" class="headerlink" title="自定义hook函数"></a>自定义hook函数</h2><ul>
+<h2 id="自定义hook函数">自定义hook函数</h2>
+<ul>
 <li>什么是hook？—— 本质是一个函数，把setup函数中使用的Composition API进行了封装。</li>
 <li>类似于vue2.x中的mixin。</li>
 <li>自定义hook的优势: 复用代码, 让setup中的逻辑更清楚易懂。</li>
 </ul>
-<h2 id="toRef"><a href="#toRef" class="headerlink" title="toRef"></a>toRef</h2><ul>
+<h2 id="toRef">toRef</h2>
+<ul>
 <li>作用：创建一个 ref 对象，其value值指向另一个对象中的某个属性。</li>
-<li>语法：<code>const name = toRef(person,&#39;name&#39;)</code></li>
+<li>语法：<code>const name = toRef(person,'name')</code></li>
 <li>应用: 要将响应式对象中的某个属性<strong>单独提供给外部使用时</strong>。</li>
 <li>扩展：<code>toRefs</code> 与<code>toRef</code>功能一致，但可以批量创建多个 ref 对象，语法：<code>toRefs(person)</code></li>
 </ul>
-<h1 id="其它Composition-API"><a href="#其它Composition-API" class="headerlink" title="其它Composition API"></a>其它Composition API</h1><h2 id="shallowReactive-与-shallowRef"><a href="#shallowReactive-与-shallowRef" class="headerlink" title="shallowReactive 与 shallowRef"></a>shallowReactive 与 shallowRef</h2><ul>
+<h1>其它Composition API</h1>
+<h2 id="shallowReactive-与-shallowRef">shallowReactive 与 shallowRef</h2>
+<ul>
 <li>shallowReactive：只处理对象最外层属性的响应式（浅响应式）。</li>
 <li>shallowRef：只处理基本数据类型的响应式, 不进行对象的响应式处理。</li>
-<li>什么时候使用?<ul>
-<li>如果有一个对象数据，结构比较深, 但变化时只是外层属性变化 &#x3D;&#x3D;&#x3D;&gt; shallowReactive。</li>
-<li>如果有一个对象数据，后续功能不会修改该对象中的属性，而是生新的对象来替换 &#x3D;&#x3D;&#x3D;&gt; shallowRef。</li>
+<li>什么时候使用?
+<ul>
+<li>如果有一个对象数据，结构比较深, 但变化时只是外层属性变化 ===&gt; shallowReactive。</li>
+<li>如果有一个对象数据，后续功能不会修改该对象中的属性，而是生新的对象来替换 ===&gt; shallowRef。</li>
 </ul>
 </li>
 </ul>
-<h2 id="readonly-与-shallowReadonly"><a href="#readonly-与-shallowReadonly" class="headerlink" title="readonly 与 shallowReadonly"></a>readonly 与 shallowReadonly</h2><ul>
+<h2 id="readonly-与-shallowReadonly">readonly 与 shallowReadonly</h2>
+<ul>
 <li>readonly: 让一个响应式数据变为只读的（深只读）。</li>
 <li>shallowReadonly：让一个响应式数据变为只读的（浅只读）。</li>
 <li>应用场景: 不希望数据(尤其是这个数据是来自与其他组件时)被修改时。</li>
 </ul>
-<h2 id="toRaw-与-markRaw"><a href="#toRaw-与-markRaw" class="headerlink" title="toRaw 与 markRaw"></a>toRaw 与 markRaw</h2><ul>
-<li>toRaw：<ul>
+<h2 id="toRaw-与-markRaw">toRaw 与 markRaw</h2>
+<ul>
+<li>toRaw：
+<ul>
 <li>作用：将一个由<code>reactive</code>生成的<strong>响应式对象</strong>转为<strong>普通对象</strong>。</li>
 <li>使用场景：用于读取响应式对象对应的普通对象，对这个普通对象的所有操作，不会引起页面更新。</li>
 </ul>
 </li>
-<li>markRaw：<ul>
+<li>markRaw：
+<ul>
 <li>作用：标记一个对象，使其永远不会再成为响应式对象。</li>
-<li>应用场景:<ol>
+<li>应用场景:
+<ol>
 <li>有些值不应被设置为响应式的，例如复杂的第三方类库等。</li>
 <li>当渲染具有不可变数据源的大列表时，跳过响应式转换可以提高性能。</li>
 </ol>
@@ -898,10 +952,13 @@ watchEffect(()&#x3D;&gt;&#123;
 </ul>
 </li>
 </ul>
-<h2 id="customRef"><a href="#customRef" class="headerlink" title="customRef"></a>customRef</h2><ul>
-<li><p>作用：创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。</p>
+<h2 id="customRef">customRef</h2>
+<ul>
+<li>
+<p>作用：创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。</p>
 </li>
-<li><p>实现防抖效果：</p>
+<li>
+<p>实现防抖效果：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;template&gt;
 	&lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;keyword&quot;&gt;
 	&lt;h3&gt;&#123;&#123;keyword&#125;&#125;&lt;&#x2F;h3&gt;
@@ -939,16 +996,22 @@ watchEffect(()&#x3D;&gt;&#123;
 			&#125;
 		&#125;
 	&#125;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h2 id="provide-与-inject"><a href="#provide-与-inject" class="headerlink" title="provide 与 inject"></a>provide 与 inject</h2><ul>
-<li><p>作用：实现<strong>祖与后代组件间</strong>通信</p>
+<h2 id="provide-与-inject">provide 与 inject</h2>
+<ul>
+<li>
+<p>作用：实现<strong>祖与后代组件间</strong>通信</p>
 </li>
-<li><p>套路：父组件有一个 <code>provide</code> 选项来提供数据，后代组件有一个 <code>inject</code> 选项来开始使用这些数据</p>
+<li>
+<p>套路：父组件有一个 <code>provide</code> 选项来提供数据，后代组件有一个 <code>inject</code> 选项来开始使用这些数据</p>
 </li>
-<li><p>具体写法：</p>
+<li>
+<p>具体写法：</p>
 <ol>
-<li><p>祖组件中：</p>
+<li>
+<p>祖组件中：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">setup()&#123;
     ......
     let car &#x3D; reactive(&#123;name:&#39;奔驰&#39;,price:&#39;40万&#39;&#125;)
@@ -956,30 +1019,39 @@ watchEffect(()&#x3D;&gt;&#123;
     ......
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>后代组件中：</p>
+<li>
+<p>后代组件中：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">setup(props,context)&#123;
     ......
     const car &#x3D; inject(&#39;car&#39;)
     return &#123;car&#125;
     ......
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
 </li>
 </ul>
-<h2 id="响应式数据的判断"><a href="#响应式数据的判断" class="headerlink" title="响应式数据的判断"></a>响应式数据的判断</h2><ul>
+<h2 id="响应式数据的判断">响应式数据的判断</h2>
+<ul>
 <li>isRef: 检查一个值是否为一个 ref 对象</li>
 <li>isReactive: 检查一个对象是否是由 <code>reactive</code> 创建的响应式代理</li>
 <li>isReadonly: 检查一个对象是否是由 <code>readonly</code> 创建的只读代理</li>
 <li>isProxy: 检查一个对象是否是由 <code>reactive</code> 或者 <code>readonly</code> 方法创建的代理</li>
 </ul>
-<h1 id="Composition-API-的优势"><a href="#Composition-API-的优势" class="headerlink" title="Composition API 的优势"></a>Composition API 的优势</h1><h2 id="Options-API-存在的问题"><a href="#Options-API-存在的问题" class="headerlink" title="Options API 存在的问题"></a>Options API 存在的问题</h2><p>使用传统OptionsAPI中，新增或者修改一个需求，就需要分别在data，methods，computed里修改 。</p>
-<h2 id="Composition-API-的优势-1"><a href="#Composition-API-的优势-1" class="headerlink" title="Composition API 的优势"></a>Composition API 的优势</h2><p>我们可以更加优雅的组织我们的代码，函数。让相关功能的代码更加有序的组织在一起。</p>
-<h1 id="新的组件"><a href="#新的组件" class="headerlink" title="新的组件"></a>新的组件</h1><h2 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h2><ul>
+<h1>Composition API 的优势</h1>
+<h2 id="Options-API-存在的问题">Options API 存在的问题</h2>
+<p>使用传统OptionsAPI中，新增或者修改一个需求，就需要分别在data，methods，computed里修改 。</p>
+<h2 id="Composition-API-的优势">Composition API 的优势</h2>
+<p>我们可以更加优雅的组织我们的代码，函数。让相关功能的代码更加有序的组织在一起。</p>
+<h1>新的组件</h1>
+<h2 id="Fragment">Fragment</h2>
+<ul>
 <li>在Vue2中: 组件必须有一个根标签</li>
 <li>在Vue3中: 组件可以没有根标签, 内部会将多个标签包含在一个Fragment虚拟元素中</li>
 <li>好处: 减少标签层级, 减小内存占用</li>
 </ul>
-<h2 id="Teleport"><a href="#Teleport" class="headerlink" title="Teleport"></a>Teleport</h2><p>什么是Teleport？—— <code>Teleport</code> 是一种能够将我们的<strong>组件html结构</strong>移动到指定位置的技术。</p>
+<h2 id="Teleport">Teleport</h2>
+<p>什么是Teleport？—— <code>Teleport</code> 是一种能够将我们的<strong>组件html结构</strong>移动到指定位置的技术。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;teleport to&#x3D;&quot;移动位置&quot;&gt;
 	&lt;div v-if&#x3D;&quot;isShow&quot; class&#x3D;&quot;mask&quot;&gt;
 		&lt;div class&#x3D;&quot;dialog&quot;&gt;
@@ -988,17 +1060,21 @@ watchEffect(()&#x3D;&gt;&#123;
 		&lt;&#x2F;div&gt;
 	&lt;&#x2F;div&gt;
 &lt;&#x2F;teleport&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Suspense"><a href="#Suspense" class="headerlink" title="Suspense"></a>Suspense</h2><ul>
-<li><p>等待异步组件时渲染一些额外内容，让应用有更好的用户体验</p>
-</li>
-<li><p>使用步骤：</p>
+<h2 id="Suspense">Suspense</h2>
 <ul>
-<li><p>异步引入组件</p>
+<li>
+<p>等待异步组件时渲染一些额外内容，让应用有更好的用户体验</p>
+</li>
+<li>
+<p>使用步骤：</p>
+<ul>
+<li>
+<p>异步引入组件</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import &#123;defineAsyncComponent&#125; from &#39;vue&#39;
 const Child &#x3D; defineAsyncComponent(()&#x3D;&gt;import(&#39;.&#x2F;components&#x2F;Child.vue&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><p>使用<code>Suspense</code>包裹组件，并配置好<code>default</code> 与 <code>fallback</code></p>
+<li>
+<p>使用<code>Suspense</code>包裹组件，并配置好<code>default</code> 与 <code>fallback</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;template&gt;
     &lt;div class&#x3D;&quot;app&quot;&gt;
         &lt;h3&gt;我是App组件&lt;&#x2F;h3&gt;
@@ -1011,14 +1087,19 @@ const Child &#x3D; defineAsyncComponent(()&#x3D;&gt;import(&#39;.&#x2F;component
             &lt;&#x2F;template&gt;
         &lt;&#x2F;Suspense&gt;
     &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 </li>
 </ul>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="全局API的转移"><a href="#全局API的转移" class="headerlink" title="全局API的转移"></a>全局API的转移</h2><ul>
-<li><p>Vue 2.x 有许多全局 API 和配置。</p>
+<h1>其他</h1>
+<h2 id="全局API的转移">全局API的转移</h2>
 <ul>
-<li><p>例如：注册全局组件、注册全局指令等。</p>
+<li>
+<p>Vue 2.x 有许多全局 API 和配置。</p>
+<ul>
+<li>
+<p>例如：注册全局组件、注册全局指令等。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;注册全局组件
 Vue.component(&#39;MyButton&#39;, &#123;
   data: () &#x3D;&gt; (&#123;
@@ -1030,23 +1111,30 @@ Vue.component(&#39;MyButton&#39;, &#123;
 &#x2F;&#x2F;注册全局指令
 Vue.directive(&#39;focus&#39;, &#123;
   inserted: el &#x3D;&gt; el.focus()
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 </li>
-<li><p>Vue3.0中对这些API做出了调整：</p>
+<li>
+<p>Vue3.0中对这些API做出了调整：</p>
 <ul>
-<li><p>将全局的API，即：<code>Vue.xxx</code>调整到应用实例（<code>app</code>）上</p>
-<p>| 2.x 全局 API（<code>Vue</code>） | 3.x 实例 API (<code>app</code>) | | ————————- | ——————————————- | | Vue.config.xxxx | app.config.xxxx | | Vue.config.productionTip | <strong>移除</strong> | | Vue.component | app.component | | Vue.directive | app.directive | | Vue.mixin | app.mixin | | Vue.use | app.use | | Vue.prototype | app.config.globalProperties |</p>
+<li>
+<p>将全局的API，即：<code>Vue.xxx</code>调整到应用实例（<code>app</code>）上</p>
+<p>| 2.x 全局 API（<code>Vue</code>） | 3.x 实例 API (<code>app</code>) | | ------------------------- | ------------------------------------------- | | Vue.config.xxxx | app.config.xxxx | | Vue.config.productionTip | <strong>移除</strong> | | Vue.component | app.component | | Vue.directive | app.directive | | Vue.mixin | app.mixin | | Vue.use | app.use | | Vue.prototype | app.config.globalProperties |</p>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="其他改变"><a href="#其他改变" class="headerlink" title="其他改变"></a>其他改变</h2><ul>
-<li><p>data选项应始终被声明为一个函数。</p>
-</li>
-<li><p>过度类名的更改：</p>
+<h2 id="其他改变">其他改变</h2>
 <ul>
-<li><p>Vue2.x写法</p>
+<li>
+<p>data选项应始终被声明为一个函数。</p>
+</li>
+<li>
+<p>过度类名的更改：</p>
+<ul>
+<li>
+<p>Vue2.x写法</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.v-enter,
 .v-leave-to</span> <span class="token punctuation">&#123;</span>
   <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
@@ -1056,7 +1144,8 @@ Vue.directive(&#39;focus&#39;, &#123;
   <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>Vue3.x写法</p>
+<li>
+<p>Vue3.x写法</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.v-enter-from,
 .v-leave-to</span> <span class="token punctuation">&#123;</span>
   <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
@@ -1065,37 +1154,47 @@ Vue.directive(&#39;focus&#39;, &#123;
 <span class="token selector">.v-leave-from,
 .v-enter-to</span> <span class="token punctuation">&#123;</span>
   <span class="token property">opacity</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 </li>
-<li><p><strong>移除</strong>keyCode作为 v-on 的修饰符，同时也不再支持<code>config.keyCodes</code></p>
+<li>
+<p><strong>移除</strong>keyCode作为 v-on 的修饰符，同时也不再支持<code>config.keyCodes</code></p>
 </li>
-<li><p><strong>移除</strong><code>v-on.native</code>修饰符</p>
+<li>
+<p><strong>移除</strong><code>v-on.native</code>修饰符</p>
 <ul>
-<li><p>父组件中绑定事件</p>
+<li>
+<p>父组件中绑定事件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>my<span class="token operator">-</span>component
   v<span class="token operator">-</span>on<span class="token operator">:</span>close<span class="token operator">=</span><span class="token string">"handleComponentEvent"</span>
   v<span class="token operator">-</span>on<span class="token operator">:</span>click<span class="token operator">=</span><span class="token string">"handleNativeClickEvent"</span>
 <span class="token operator">/</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>子组件中声明自定义事件</p>
+<li>
+<p>子组件中声明自定义事件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script<span class="token operator">></span>
   <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
     <span class="token literal-property property">emits</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'close'</span><span class="token punctuation">]</span>
   <span class="token punctuation">&#125;</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 </li>
-<li><p><strong>移除</strong>过滤器（filter）</p>
+<li>
+<p><strong>移除</strong>过滤器（filter）</p>
 <blockquote>
 <p>过滤器虽然这看起来很方便，但它需要一个自定义语法，打破大括号内表达式是 “只是 JavaScript” 的假设，这不仅有学习成本，而且有实现成本！建议用方法调用或计算属性去替换过滤器。</p>
 </blockquote>
 </li>
-<li><p>支持自定义渲染器，从而使得 weex 可以通过自定义渲染器的方式来扩展，而不是直接 fork 源码来改的方式。</p>
+<li>
+<p>支持自定义渲染器，从而使得 weex 可以通过自定义渲染器的方式来扩展，而不是直接 fork 源码来改的方式。</p>
 </li>
-<li><p>支持 Fragment（多个根节点）和 Protal（在 dom 其他部分渲染组件内容）组件，针对一些特殊的场景做了处理。</p>
+<li>
+<p>支持 Fragment（多个根节点）和 Protal（在 dom 其他部分渲染组件内容）组件，针对一些特殊的场景做了处理。</p>
 </li>
-<li><p>基于 treeshaking 优化，提供了更多的内置功能。</p>
+<li>
+<p>基于 treeshaking 优化，提供了更多的内置功能。</p>
 </li>
 </ul>
 

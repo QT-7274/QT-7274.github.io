@@ -500,39 +500,49 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Buffer（缓冲器）"><a href="#Buffer（缓冲器）" class="headerlink" title="Buffer（缓冲器）"></a>Buffer（缓冲器）</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>Buffer 是一个类似于数组的 <code>对象</code> ，用于表示固定长度的字节序列</p>
+                <h2 id="Buffer（缓冲器）">Buffer（缓冲器）</h2>
+<h3 id="概念">概念</h3>
+<p>Buffer 是一个类似于数组的 <code>对象</code> ，用于表示固定长度的字节序列</p>
 <p>Buffer 本质是一段内存空间，专门用来处理 <code>二进制数据</code> 。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/06/27/node.js-chang-yong-mo-kuai-xiang-jie/e63bd2526bce2f0bbc003f3d0e122915459d9f2b.png" alt="image-20230320173023659"></p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<p><img src="/medias/images/loading.gif" data-original="e63bd2526bce2f0bbc003f3d0e122915459d9f2b.png" alt="image-20230320173023659"></p>
+<h3 id="特点">特点</h3>
+<ol>
 <li>Buffer 大小固定且无法调整</li>
 <li>Buffer 性能较好，可以直接对计算机内存进行操作</li>
 <li>每个元素的大小为 1 字节（byte）</li>
 </ol>
-<p><img src="/medias/images/loading.gif" data-original="/2023/06/27/node.js-chang-yong-mo-kuai-xiang-jie/1f67ed9e1b8884786dafcc4deb804f96234af9f4.png" alt="image-20230320173043532"></p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="创建Buffer"><a href="#创建Buffer" class="headerlink" title="创建Buffer"></a>创建Buffer</h4><p>Node.js 中创建 Buffer 的方式主要如下几种：</p>
+<p><img src="/medias/images/loading.gif" data-original="1f67ed9e1b8884786dafcc4deb804f96234af9f4.png" alt="image-20230320173043532"></p>
+<h3 id="使用">使用</h3>
+<h4 id="创建Buffer">创建Buffer</h4>
+<p>Node.js 中创建 Buffer 的方式主要如下几种：</p>
 <ol>
-<li><p><code>Buffer.alloc</code></p>
+<li>
+<p><code>Buffer.alloc</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 创建了一个长度为 10 字节的 Buffer，相当于申请了 10 字节的内存空间，每个字节的值为 0
 let buf_1 &#x3D; Buffer.alloc(10) &#x2F;&#x2F;&#x3D;&gt;结果为&lt;Buffer 00 00 00 00 00 00 00 00 00 00&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><p><code>Buffer.allocUnsafe</code></p>
+<li>
+<p><code>Buffer.allocUnsafe</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 创建了一个长度为 10 字节的 Buffer，buffer 中可能存在旧数据，可能会影响执行结果，所以叫 unsafe ，但是效率比 alloc 高
 let buf_2 &#x3D; Buffer.allocUnsafe(10)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><p><code>Buffer.from</code></p>
+<li>
+<p><code>Buffer.from</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 通过字符串创建 Buffer
 let buf_3 &#x3D; Buffer.from(&#39;hello&#39;)
 &#x2F;&#x2F; 通过数组创建 Buffer
-let buf_4 &#x3D; Buffer.from([105, 108, 111, 118, 101, 121, 111, 117])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+let buf_4 &#x3D; Buffer.from([105, 108, 111, 118, 101, 121, 111, 117])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h4 id="Buffer与字符串的转化"><a href="#Buffer与字符串的转化" class="headerlink" title="Buffer与字符串的转化"></a>Buffer与字符串的转化</h4><blockquote>
+<h4 id="Buffer与字符串的转化">Buffer与字符串的转化</h4>
+<blockquote>
 <p>我们可以借助 <code>toString</code> 方法将 Buffer 转为字符串</p>
 </blockquote>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let buf_4 &#x3D; Buffer.from([105, 108, 111, 118, 101, 121, 111, 117])
 console.log(buf_4.toString()) &#x2F;&#x2F;&#x3D;&gt;iloveyou<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>**注意: **<code>toString</code> 默认是按照 <code>utf-8</code> 编码方式进行转换的</p>
-<h4 id="Buffer-的读写"><a href="#Buffer-的读写" class="headerlink" title="Buffer 的读写"></a>Buffer 的读写</h4><blockquote>
+<h4 id="Buffer-的读写">Buffer 的读写</h4>
+<blockquote>
 <p>Buffer 可以直接通过 <code>[]</code> 的方式对数据进行处理。</p>
 </blockquote>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let buf_3 &#x3D; Buffer.from(&#39;hello&#39;)
@@ -542,7 +552,6 @@ console.log(buf_3[1]) &#x2F;&#x2F;&#x3D;&gt;101
 buf_3[1] &#x3D; 97
 &#x2F;&#x2F;查看字符串结果
 console.log(buf_3.toString()) &#x2F;&#x2F;&#x3D;&gt;hallo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p><strong>注意:</strong></p>
 <ol>
@@ -550,7 +559,8 @@ console.log(buf_3.toString()) &#x2F;&#x2F;&#x3D;&gt;hallo<span aria-hidden="true
 <li>一个 <code>utf-8</code> 的字符 一般 占3个字节</li>
 </ol>
 </blockquote>
-<h2 id="fs模块"><a href="#fs模块" class="headerlink" title="fs模块"></a>fs模块</h2><blockquote>
+<h2 id="fs模块">fs模块</h2>
+<blockquote>
 <p>fs 全称为 <code>file system</code> ，称之为 <code>文件系统</code> ，是 Node.js 中的 <code>内置模块</code> ，可以对计算机中的磁盘进行操作。</p>
 </blockquote>
 <p>本章节会介绍如下几个操作：</p>
@@ -562,7 +572,8 @@ console.log(buf_3.toString()) &#x2F;&#x2F;&#x3D;&gt;hallo<span aria-hidden="true
 <li>文件夹操作</li>
 <li>查看资源状态</li>
 </ol>
-<h3 id="文件写入"><a href="#文件写入" class="headerlink" title="文件写入"></a>文件写入</h3><blockquote>
+<h3 id="文件写入">文件写入</h3>
+<blockquote>
 <p>文件写入就是将 数据 保存到 文件 中，我们可以使用如下几个方法来实现该效果</p>
 </blockquote>
 <table>
@@ -572,7 +583,8 @@ console.log(buf_3.toString()) &#x2F;&#x2F;&#x3D;&gt;hallo<span aria-hidden="true
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>writeFile</td>
 <td>异步写入</td>
 </tr>
@@ -581,15 +593,17 @@ console.log(buf_3.toString()) &#x2F;&#x2F;&#x3D;&gt;hallo<span aria-hidden="true
 <td>同步写入</td>
 </tr>
 <tr>
-<td>appendFile &#x2F; appendFileSync</td>
+<td>appendFile / appendFileSync</td>
 <td>追加写入</td>
 </tr>
 <tr>
 <td>createWriteStream</td>
 <td>流式写入</td>
 </tr>
-</tbody></table>
-<h4 id="writeFile-异步写入"><a href="#writeFile-异步写入" class="headerlink" title="writeFile 异步写入"></a>writeFile 异步写入</h4><p><strong>语法</strong>： <code>fs.writeFile(file, data[, options], callback)</code></p>
+</tbody>
+</table>
+<h4 id="writeFile-异步写入">writeFile 异步写入</h4>
+<p><strong>语法</strong>： <code>fs.writeFile(file, data[, options], callback)</code></p>
 <p><strong>参数说明</strong>：</p>
 <ul>
 <li>file 文件名</li>
@@ -611,8 +625,8 @@ fs.writeFile(&#39;.&#x2F;座右铭.txt&#39;, &#39;三人行，必有我师焉。
     &#125;
     console.log(&#39;写入成功&#39;)  
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="writeFileSync-同步写入"><a href="#writeFileSync-同步写入" class="headerlink" title="writeFileSync 同步写入"></a>writeFileSync 同步写入</h4><p><strong>语法:</strong> <code>fs.writeFileSync(file, data[, options])</code></p>
+<h4 id="writeFileSync-同步写入">writeFileSync 同步写入</h4>
+<p><strong>语法:</strong> <code>fs.writeFileSync(file, data[, options])</code></p>
 <p>参数与 <code>fs.writeFile</code> 大体一致，只是没有 callback 参数</p>
 <p><strong>返回值：</strong><code>undefined</code></p>
 <p>代码示例：</p>
@@ -621,7 +635,6 @@ fs.writeFile(&#39;.&#x2F;座右铭.txt&#39;, &#39;三人行，必有我师焉。
 &#125;catch(e)&#123;
     console.log(e)
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>Node.js 中的磁盘操作是由其他 <code>线程</code> 完成的，结果的处理有两种模式:</p>
 <ul>
@@ -629,13 +642,13 @@ fs.writeFile(&#39;.&#x2F;座右铭.txt&#39;, &#39;三人行，必有我师焉。
 <li>异步处理 JavaScript 主线程 <code>不会等待</code> 其线程的执行结果，直接执行后续的主线程代码，<code>效率较好</code></li>
 </ul>
 </blockquote>
-<h4 id="appendFile-x2F-appendFileSync-追加写入"><a href="#appendFile-x2F-appendFileSync-追加写入" class="headerlink" title="appendFile &#x2F; appendFileSync 追加写入"></a>appendFile &#x2F; appendFileSync 追加写入</h4><blockquote>
+<h4 id="appendFile-appendFileSync-追加写入">appendFile / appendFileSync 追加写入</h4>
+<blockquote>
 <p><code>appendFile</code> 作用是在文件尾部追加内容，<code>appendFile</code> 语法与 <code>writeFile</code> 语法完全相同</p>
 </blockquote>
 <p><strong>语法</strong>:</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fs.appendFile(file, data[, options], callback)
 fs.appendFileSync(file, data[, options])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><strong>返回值</strong>：二者都为 <code>undefined</code></p>
 <p>实例代码：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fs.append(&#39;.&#x2F;座右铭.txt&#39;, &#39;则其善者而从之，其不善者而改之。&#39;, err &#x3D;&gt;&#123;
@@ -644,8 +657,8 @@ fs.appendFileSync(file, data[, options])<span aria-hidden="true" class="line-num
 &#125;)
 
 fs.appendFileSync(&#39;.&#x2F;座右铭.txt&#39;,&#39;\r\n温故而知新，可以为师矣&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="createWriteStream-流式写入"><a href="#createWriteStream-流式写入" class="headerlink" title="createWriteStream 流式写入"></a>createWriteStream 流式写入</h4><p><strong>语法</strong>：<code>fs.createWriteStream(path[, options])</code></p>
+<h4 id="createWriteStream-流式写入">createWriteStream 流式写入</h4>
+<p><strong>语法</strong>：<code>fs.createWriteStream(path[, options])</code></p>
 <p><strong>参数说明</strong>：</p>
 <ul>
 <li><code>path</code> 文件路径</li>
@@ -663,12 +676,12 @@ ws.write(&#39;为有源头活水来\r\n&#39;)
 
 &#x2F;&#x2F;关闭写入流，表明已没有数据要被写入可写流
 ws.end()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>程序打开一个文件是需要消耗资源的，流式写入可以减少打开关闭文件的次数。</p>
 <p>流式写入方式适用于 大文件写入或者频繁写入的场景，<code>writeFile</code>适合于写入频率较低的场景</p>
 </blockquote>
-<h4 id="写入文件的场景"><a href="#写入文件的场景" class="headerlink" title="写入文件的场景"></a>写入文件的场景</h4><p><code>文件写入</code> 在计算机中是一个非常常见的操作，下面的场景都用到了文件写入</p>
+<h4 id="写入文件的场景">写入文件的场景</h4>
+<p><code>文件写入</code> 在计算机中是一个非常常见的操作，下面的场景都用到了文件写入</p>
 <ul>
 <li>下载文件</li>
 <li>安装软件</li>
@@ -679,7 +692,8 @@ ws.end()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
 <blockquote>
 <p>当 需要持久化保存数据 的时候，应该想到 <code>文件写入</code></p>
 </blockquote>
-<h3 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h3><blockquote>
+<h3 id="文件读取">文件读取</h3>
+<blockquote>
 <p>文件读取顾名思义，就是通过程序从文件中取出其中的数据，我们可以使用如下几种方式：</p>
 </blockquote>
 <table>
@@ -689,7 +703,8 @@ ws.end()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>readFile</td>
 <td>异步读取</td>
 </tr>
@@ -701,8 +716,10 @@ ws.end()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
 <td>createReadStream</td>
 <td>流式读取</td>
 </tr>
-</tbody></table>
-<h4 id="readFile-异步读取"><a href="#readFile-异步读取" class="headerlink" title="readFile 异步读取"></a>readFile 异步读取</h4><p><strong>语法</strong>: <code>fs.readFile(path[, options], callback)</code></p>
+</tbody>
+</table>
+<h4 id="readFile-异步读取">readFile 异步读取</h4>
+<p><strong>语法</strong>: <code>fs.readFile(path[, options], callback)</code></p>
 <p><strong>参数说明</strong>：</p>
 <ul>
 <li>path 文件路径</li>
@@ -722,8 +739,8 @@ fs.readFile(&#39;.&#x2F;座右铭.txt&#39;, &#39;uft-8&#39;, (error,data) &#x3D;
     if(err) throw err
     console.log(data)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="readFileSync-同步读取"><a href="#readFileSync-同步读取" class="headerlink" title="readFileSync 同步读取"></a>readFileSync 同步读取</h4><p><strong>语法：</strong><code>fs.readFileSync(path[, options])</code></p>
+<h4 id="readFileSync-同步读取">readFileSync 同步读取</h4>
+<p><strong>语法：</strong><code>fs.readFileSync(path[, options])</code></p>
 <p><strong>参数说明：</strong></p>
 <ul>
 <li>path 文件路径</li>
@@ -733,8 +750,8 @@ fs.readFile(&#39;.&#x2F;座右铭.txt&#39;, &#39;uft-8&#39;, (error,data) &#x3D;
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let data &#x3D; fs.readFileSync(&#39;.&#x2F;座右铭.txt&#39;)
 let data &#x3D; fs.readFileSync(&#39;.&#x2F;座右铭.txt&#39;, &#39;utf-8&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="createReadStream-流式读取"><a href="#createReadStream-流式读取" class="headerlink" title="createReadStream 流式读取"></a>createReadStream 流式读取</h4><p><strong>语法：</strong><code>fs.createReadStream(path[, options])</code></p>
+<h4 id="createReadStream-流式读取">createReadStream 流式读取</h4>
+<p><strong>语法：</strong><code>fs.createReadStream(path[, options])</code></p>
 <p><strong>参数说明：</strong></p>
 <ul>
 <li>path 文件路径</li>
@@ -756,14 +773,13 @@ re.on(&#39;data&#39;, chunk &#x3D;&gt;&#123;
 re.on(&#39;end&#39;, () &#x3D;&gt;&#123;
     console.log(&#39;读取完毕&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="文件移动与重命名"><a href="#文件移动与重命名" class="headerlink" title="文件移动与重命名"></a>文件移动与重命名</h3><blockquote>
+<h3 id="文件移动与重命名">文件移动与重命名</h3>
+<blockquote>
 <p>在 Node.js 中，我们可以使用 <code>rename</code> 或 <code>renameSync</code> 来移动或重命名 <code>文件或文件夹</code></p>
 </blockquote>
 <p><strong>语法：</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fs.rename(oldPath, newPath, callback)
 fs.renameSync(oldPath, newPath)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><strong>参数说明：</strong></p>
 <ul>
 <li>oldPath 文件当前的路径</li>
@@ -777,15 +793,14 @@ fs.renameSync(oldPath, newPath)<span aria-hidden="true" class="line-numbers-rows
 &#125;)
 
 fs.renameSync(&#39;.&#x2F;座右铭.txt&#39;, &#39;.&#x2F;论语&#x2F;.我的座右铭.txt&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>注</strong>: 如果还是移动到当前路径，但是修改了名字，就是重命名了</p>
-<h3 id="文件删除"><a href="#文件删除" class="headerlink" title="文件删除"></a>文件删除</h3><blockquote>
+<h3 id="文件删除">文件删除</h3>
+<blockquote>
 <p>在 Node.js 中，我们可以使用 <code>unlink</code> 或 <code>unlinkSync</code> 来删除文件</p>
 </blockquote>
 <p><strong>语法:</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fs.unlink(path, callback)
 fs.unlinkSync(path)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><strong>参数说明</strong>：</p>
 <ul>
 <li>path 文件路径</li>
@@ -811,8 +826,8 @@ fs.rm(&#39;.&#x2F;论语.txt&#39;, err &#x3D;&gt; &#123;
   &#125;
   console.log(&#39;删除成功&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="文件夹操作"><a href="#文件夹操作" class="headerlink" title="文件夹操作"></a>文件夹操作</h3><blockquote>
+<h3 id="文件夹操作">文件夹操作</h3>
+<blockquote>
 <p>借助 Node.js 的能力，我们可以对文件夹进行 <code>创建</code> 、<code>读取</code> 、<code>删除</code> 等操作</p>
 </blockquote>
 <table>
@@ -822,26 +837,28 @@ fs.rm(&#39;.&#x2F;论语.txt&#39;, err &#x3D;&gt; &#123;
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>mkdir &#x2F; mkdirSync</td>
+<tbody>
+<tr>
+<td>mkdir / mkdirSync</td>
 <td>创建文件夹</td>
 </tr>
 <tr>
-<td>readdir &#x2F; readdirSync</td>
+<td>readdir / readdirSync</td>
 <td>读取文件夹</td>
 </tr>
 <tr>
-<td>rmdir &#x2F; rmdirSync</td>
+<td>rmdir / rmdirSync</td>
 <td>删除文件夹</td>
 </tr>
-</tbody></table>
-<h3 id="mkdir-创建文件夹"><a href="#mkdir-创建文件夹" class="headerlink" title="mkdir 创建文件夹"></a>mkdir 创建文件夹</h3><blockquote>
+</tbody>
+</table>
+<h3 id="mkdir-创建文件夹">mkdir 创建文件夹</h3>
+<blockquote>
 <p>在 Node.js 中，我们可以使用 <code>mkdir</code> 或 <code>mkdirSync</code> 来创建文件夹</p>
 </blockquote>
 <p><strong>语法</strong>:</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fs.mkdir(path[, options], callback)
 fs.mkdirSync(path[, options])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><strong>参数说明</strong>：</p>
 <ul>
 <li>path 文件夹路径</li>
@@ -863,14 +880,13 @@ fs.mkdir(&#39;.&#x2F;1&#x2F;2&#x2F;3&#39;, &#123;recursive: true&#125;, err &#x3
 
 &#x2F;&#x2F; 递归同步创建文件夹
 fs.mkdirSync(&#39;.&#x2F;x&#x2F;y&#x2F;z&#39;, &#123;recursive: true&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="readdir-读取文件夹"><a href="#readdir-读取文件夹" class="headerlink" title="readdir 读取文件夹"></a>readdir 读取文件夹</h3><blockquote>
+<h3 id="readdir-读取文件夹">readdir 读取文件夹</h3>
+<blockquote>
 <p>在 Node.js 中，我们可以使用 <code>readdir</code> 或 <code>readdirSync</code> 来读取文件夹</p>
 </blockquote>
 <p><strong>语法：</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fs.readdir(path[, options], callback)
 fs.readdirSync(path[, options])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><strong>参数说明：</strong></p>
 <ul>
 <li>path 文件夹路径</li>
@@ -886,14 +902,13 @@ fs.readdir(&#39;.&#x2F;论语&#39;, (err, data) &#x3D;&gt; &#123;
 &#x2F;&#x2F; 同步读取 
 let data &#x3D; fs.readdirSync(&#39;.&#x2F;论语&#39;)
 console.log(data)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="rmdir-删除文件夹"><a href="#rmdir-删除文件夹" class="headerlink" title="rmdir 删除文件夹"></a>rmdir 删除文件夹</h3><blockquote>
+<h3 id="rmdir-删除文件夹">rmdir 删除文件夹</h3>
+<blockquote>
 <p>在 Node.js 中，我们可以使用 <code>rmdir</code> 或 <code>rmdirSync</code> 来删除文件夹</p>
 </blockquote>
 <p><strong>语法</strong>：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fs.rmdir(path[, options], callback)
 fs.redirSync(path[, options])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><strong>参数说明</strong>：</p>
 <ul>
 <li>path 文件夹路径</li>
@@ -926,14 +941,13 @@ fs.rm(&#39;.&#x2F;a&#39;, &#123; recursive: true &#125;, err &#x3D;&gt; &#123;
   &#125;
   console.log(&#39;删除成功&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="查看资源状态"><a href="#查看资源状态" class="headerlink" title="查看资源状态"></a>查看资源状态</h3><blockquote>
+<h3 id="查看资源状态">查看资源状态</h3>
+<blockquote>
 <p>在 Node.js 中，我们可以使用 <code>stat</code> 或 <code>statSync</code> 来查看资源的详细信息</p>
 </blockquote>
 <p><strong>语法</strong>：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">fs.stat(path[, options], callback)
 fs.statSync(path[, options])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><strong>参数说明</strong>：</p>
 <ul>
 <li>path 文件夹路径</li>
@@ -949,7 +963,6 @@ fs.stat(&#39;&#x2F;data.txt&#39;, (err, data) &#x3D;&gt;&#123;
 &#125;)
 &#x2F;&#x2F; 同步获取状态
 let data &#x3D; fs.statSync(&#39;.&#x2F;data.txt&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><strong>结果值对象结构</strong>：</p>
 <ul>
 <li>size 文件体积</li>
@@ -957,17 +970,20 @@ let data &#x3D; fs.statSync(&#39;.&#x2F;data.txt&#39;)<span aria-hidden="true" c
 <li>mtime 最后修改时间</li>
 <li>isFile 检测是否为文件</li>
 <li>isDirectory 检测是否为文件夹</li>
-<li>….</li>
+<li>…</li>
 </ul>
-<h3 id="相对路径问题"><a href="#相对路径问题" class="headerlink" title="相对路径问题"></a>相对路径问题</h3><p>fs 模块对资源进行操作时，路径的写法有两种：</p>
+<h3 id="相对路径问题">相对路径问题</h3>
+<p>fs 模块对资源进行操作时，路径的写法有两种：</p>
 <ul>
-<li>相对路径<ul>
+<li>相对路径
+<ul>
 <li><code>./座右铭.txt</code> 当前目录下的 座右铭.txt</li>
 <li><code>座右铭.txt</code> 等效于上面的写法</li>
 <li><code>../座右铭.txt</code> 当前目录的上一级目录中的 座右铭.txt</li>
 </ul>
 </li>
-<li>绝对路径<ul>
+<li>绝对路径
+<ul>
 <li><code>D:/Program Files</code> windows 系统下的绝对路径</li>
 <li><code>/user/bin</code> Linux 系统下的绝对路径</li>
 </ul>
@@ -977,17 +993,18 @@ let data &#x3D; fs.statSync(&#39;.&#x2F;data.txt&#39;)<span aria-hidden="true" c
 <p>相对路径中所谓的 <code>当前目录</code> ，指的是 <code>命名行的工作目录</code> ，而并非是文件的所在目录</p>
 <p>所以当命名行的工作目录与文件所在目录不一致时，会出现一些 Bug</p>
 </blockquote>
-<h3 id="dirname"><a href="#dirname" class="headerlink" title="_dirname"></a>_dirname</h3><p><code>__dirname</code> 与 <code>require</code> 类似，都是 Node.js 环境中的 ‘全局’ 变量</p>
+<h3 id="dirname">_dirname</h3>
+<p><code>__dirname</code> 与 <code>require</code> 类似，都是 Node.js 环境中的 ‘全局’ 变量</p>
 <p><code>__dirname</code> 保存着 当前文件夹所在目录的绝对路径，可以使用 <code>__dirname</code> 与文件名拼接成绝对路径</p>
 <p>代码示例:</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;&#x3D;&gt;__dirname + &#39;&#x2F;data.txt&#39;  &#x3D;&#x3D;&#x3D; &#39;D:\\Desktop\\Node\\code\\03-fs模块&#x2F;data.txt&#39;
 let data &#x3D; fs.readFileSync(__dirname + &#39;&#x2F;data.txt&#39;)
 console.log(data) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p><strong>使用 fs 模块的时候，尽量使用 <code>__dirname</code> 路径转换为绝对路径，这样可以避免相对路径产生的 Bug</strong></p>
 </blockquote>
-<h2 id="path模块"><a href="#path模块" class="headerlink" title="path模块"></a>path模块</h2><blockquote>
+<h2 id="path模块">path模块</h2>
+<blockquote>
 <p><code>path</code> 模块提供了 <code>操作路径</code> 的功能，我们将介绍如下几个较为常用的几个 API：</p>
 </blockquote>
 <table>
@@ -997,7 +1014,8 @@ console.log(data) <span aria-hidden="true" class="line-numbers-rows"><span></spa
 <th><strong>说明</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>path.resolve</td>
 <td>拼接规范的绝对路径 <code>常用</code></td>
 </tr>
@@ -1021,7 +1039,8 @@ console.log(data) <span aria-hidden="true" class="line-numbers-rows"><span></spa
 <td>path.extname</td>
 <td>获得路径的扩展名</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>代码示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 导入 fs 模块
 const fs &#x3D; require(&#39;fs&#39;)
@@ -1054,9 +1073,11 @@ console.log(path.dirname(pathname))
 
 &#x2F;&#x2F; 获取路径的拓展名
 console.log(path.extname(pathname))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="http模块"><a href="#http模块" class="headerlink" title="http模块"></a>http模块</h2><h3 id="创建-HTTP-服务"><a href="#创建-HTTP-服务" class="headerlink" title="创建 HTTP 服务"></a>创建 <strong>HTTP</strong> 服务</h3><p>使用 nodejs 创建 HTTP 服务</p>
-<h4 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//1. 导入 http 模块</span>
+<h2 id="http模块">http模块</h2>
+<h3 id="创建-HTTP-服务">创建 <strong>HTTP</strong> 服务</h3>
+<p>使用 nodejs 创建 HTTP 服务</p>
+<h4 id="操作步骤">操作步骤</h4>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//1. 导入 http 模块</span>
 <span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
@@ -1072,74 +1093,82 @@ console.log(path.extname(pathname))<span aria-hidden="true" class="line-numbers-
 server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">9000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
 	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'服务已经启动, 端口 9000 监听中...'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p><code>http.createServer</code> 里的回调函数的执行时机： <span style="color:red">当接收到 HTTP 请求的时候，就会执行</span></p>
 </blockquote>
-<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
-<li><p>命令行 <code>ctrl + c</code> 停止服务</p>
+<h4 id="注意事项">注意事项</h4>
+<ol>
+<li>
+<p>命令行 <code>ctrl + c</code> 停止服务</p>
 </li>
-<li><p>当服务启动后，更新代码 <span style="color:red">必须重启服务才能生效</span></p>
+<li>
+<p>当服务启动后，更新代码 <span style="color:red">必须重启服务才能生效</span></p>
 </li>
-<li><p>响应内容中文乱码的解决办法</p>
+<li>
+<p>响应内容中文乱码的解决办法</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 设置响应头</span>
 response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">'content-type'</span><span class="token punctuation">,</span><span class="token string">'text/html;charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><p>端口号被占用</p>
+<li>
+<p>端口号被占用</p>
 <p><code>Error: listen EADDRINUSE: address already in use :::9000</code></p>
 <p>1）关闭当前正在运行监听端口的服务 （ <span style="color:red">使用较多</span> ）</p>
 <p>2）修改其他端口号</p>
 </li>
-<li><p><code>HTTP</code> 协议<span style="color:red">默认端口</span>是 <code>80</code> 。<code>HTTPS</code> 协议的<span style="color:red">默认端口</span>是 <code>443</code>, HTTP 服务开发常用端口有 <code>3000</code>，<code>8080</code>，<code>8090</code>，<code>9000</code> 等</p>
+<li>
+<p><code>HTTP</code> 协议<span style="color:red">默认端口</span>是 <code>80</code> 。<code>HTTPS</code> 协议的<span style="color:red">默认端口</span>是 <code>443</code>, HTTP 服务开发常用端口有 <code>3000</code>，<code>8080</code>，<code>8090</code>，<code>9000</code> 等</p>
 </li>
 </ol>
 <blockquote>
 <p>如果端口被其他程序占用，可以使用 <span style="color:red">资源监视器</span> 找到占用端口的程序，然后使用 <span style="color:red">任务管理器</span> 关闭对应的程序</p>
 </blockquote>
-<h3 id="获取-HTTP-请求报文"><a href="#获取-HTTP-请求报文" class="headerlink" title="获取 HTTP 请求报文"></a>获取 HTTP 请求报文</h3><table>
+<h3 id="获取-HTTP-请求报文">获取 HTTP 请求报文</h3>
+<table>
 <thead>
 <tr>
-<th align="left">含义</th>
-<th align="left">语法</th>
-<th align="left">重点掌握</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">语法</th>
+<th style="text-align:left">重点掌握</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">请求方法</td>
-<td align="left"><code>request.method</code></td>
-<td align="left">*****</td>
+<tbody>
+<tr>
+<td style="text-align:left">请求方法</td>
+<td style="text-align:left"><code>request.method</code></td>
+<td style="text-align:left">*****</td>
 </tr>
 <tr>
-<td align="left">请求版本</td>
-<td align="left"><code>request.httpVersion</code></td>
-<td align="left"></td>
+<td style="text-align:left">请求版本</td>
+<td style="text-align:left"><code>request.httpVersion</code></td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
-<td align="left">请求路径</td>
-<td align="left"><code>request.url</code></td>
-<td align="left">*****</td>
+<td style="text-align:left">请求路径</td>
+<td style="text-align:left"><code>request.url</code></td>
+<td style="text-align:left">*****</td>
 </tr>
 <tr>
-<td align="left">URL 路径</td>
-<td align="left"><code>require(&#39;url&#39;).parse(request.url).pathname</code></td>
-<td align="left">*****</td>
+<td style="text-align:left">URL 路径</td>
+<td style="text-align:left"><code>require('url').parse(request.url).pathname</code></td>
+<td style="text-align:left">*****</td>
 </tr>
 <tr>
-<td align="left">URL 查询字符串</td>
-<td align="left"><code>require(&#39;url&#39;).parse(request.url,  true).query</code></td>
-<td align="left">*****</td>
+<td style="text-align:left">URL 查询字符串</td>
+<td style="text-align:left"><code>require('url').parse(request.url,  true).query</code></td>
+<td style="text-align:left">*****</td>
 </tr>
 <tr>
-<td align="left">请求头</td>
-<td align="left"><code>request.headers</code></td>
-<td align="left">*****</td>
+<td style="text-align:left">请求头</td>
+<td style="text-align:left"><code>request.headers</code></td>
+<td style="text-align:left">*****</td>
 </tr>
 <tr>
-<td align="left">请求体</td>
-<td align="left">request.on(‘data’, function(chunk){})<br>request.on(‘end’, function(){})</td>
-<td align="left"></td>
+<td style="text-align:left">请求体</td>
+<td style="text-align:left">request.on(‘data’, function(chunk){})<br>request.on(‘end’, function(){})</td>
+<td style="text-align:left"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 1. 导入 http 模块
 const http &#x3D; require(&#39;http&#39;)
 
@@ -1160,15 +1189,15 @@ const server &#x3D; http.createServer((request, response) &#x3D;&gt; &#123;
 server.listen(9000, () &#x3D;&gt; &#123;
   console.log(&#39;服务已经启动...&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>注意事项：</strong> </p>
+<p><strong>注意事项：</strong></p>
 <ol>
 <li><code>request.url</code> 只能获取路径以及查询字符串，无法获取 URL 中的域名以及协议的内容</li>
 <li><code>request.headers</code> 将请求信息转化成一个对象，并将属性名都转化成了『小写』</li>
 <li>关于路径：如果访问网站的时候，只填写了 IP 地址或者是域名信息，此时请求的路径为『 <code>/</code> 』</li>
 <li>关于 <code>favicon.ico</code>：这个请求是属于浏览器自动发送的请求</li>
 </ol>
-<h4 id="提取-http-报文中-url的路径-与-查询字符串"><a href="#提取-http-报文中-url的路径-与-查询字符串" class="headerlink" title="提取 http 报文中 url的路径 与 查询字符串"></a>提取 http 报文中 url的路径 与 查询字符串</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 导入 http 模块
+<h4 id="提取-http-报文中-url的路径-与-查询字符串">提取 http 报文中 url的路径 与 查询字符串</h4>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 导入 http 模块
 const http &#x3D; require(&#39;http&#39;)
 
 &#x2F;&#x2F; 创建服务对象
@@ -1188,16 +1217,18 @@ const server &#x3D; http.createServer((request, response) &#x3D;&gt; &#123;
 server.listen(9000, () &#x3D;&gt; &#123;
   console.log(&#39;服务已经启动...&#39;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="/2023/06/27/node.js-chang-yong-mo-kuai-xiang-jie/image-20230630230206865.png" alt="image-20230630230206865"></p>
-<h3 id="设置-HTTP-响应报文"><a href="#设置-HTTP-响应报文" class="headerlink" title="设置 HTTP 响应报文"></a>设置 <strong>HTTP</strong> 响应报文</h3><h2 id=""><a href="#" class="headerlink" title=""></a></h2><table>
+<p><img src="/medias/images/loading.gif" data-original="image-20230630230206865.png" alt="image-20230630230206865"></p>
+<h3 id="设置-HTTP-响应报文">设置 <strong>HTTP</strong> 响应报文</h3>
+<h2 id=""></h2>
+<table>
 <thead>
 <tr>
 <th>作用</th>
 <th>语法</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>设置响应状态码</td>
 <td>response.statusCode</td>
 </tr>
@@ -1213,7 +1244,8 @@ server.listen(9000, () &#x3D;&gt; &#123;
 <td>设置响应体</td>
 <td>response.write(‘xx’)<br/>response.end(‘xxx’)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 1. 设置响应状态码
 response.statusCode &#x3D; 203
 &#x2F;&#x2F; 2. 响应状态的描述
@@ -1224,7 +1256,6 @@ response.setHeader(&#39;content-type&#39;, &#39;text&#x2F;html;charset&#x3D;utf-
 response.setHeader(&#39;myHeader&#39;, &#39;test test&#39;)
 &#x2F;&#x2F; 设置多个同名的响应头
 response.setHeader(&#39;test&#39;, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; write 和 end 的两种使用情况：
 &#x2F;&#x2F; 1. write 和 end 的结合使用 响应体相对分散
 response.write(&#39;xx&#39;);
@@ -1234,9 +1265,10 @@ response.end(); &#x2F;&#x2F;每一个请求，在处理的时候必须要执行 
 
 &#x2F;&#x2F;2. 单独使用 end 方法 响应体相对集中
 response.end(&#39;xxx&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="网页中的-URL"><a href="#网页中的-URL" class="headerlink" title="网页中的 URL"></a>网页中的 <strong>URL</strong></h3><p>网页中的 URL 主要分为两大类：<code>相对路径</code> 与 <code>绝对路径</code></p>
-<h4 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h4><p>绝对路径可靠性强，而且相对容易理解，在项目中运用较多</p>
+<h3 id="网页中的-URL">网页中的 <strong>URL</strong></h3>
+<p>网页中的 URL 主要分为两大类：<code>相对路径</code> 与 <code>绝对路径</code></p>
+<h4 id="绝对路径">绝对路径</h4>
+<p>绝对路径可靠性强，而且相对容易理解，在项目中运用较多</p>
 <table>
 <thead>
 <tr>
@@ -1244,20 +1276,23 @@ response.end(&#39;xxx&#39;);<span aria-hidden="true" class="line-numbers-rows"><
 <th>特点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><a target="_blank" rel="noopener" href="http://atguigu.com/web">http://atguigu.com/w eb</a></td>
 <td>直接向目标资源发送请求，容易理解。网站的外链会用到此形式</td>
 </tr>
 <tr>
-<td>&#x2F;&#x2F;atguigu.com&#x2F;web</td>
+<td><a target="_blank" rel="noopener" href="//atguigu.com/web">//atguigu.com/web</a></td>
 <td>与页面 URL 的协议拼接形成完整 URL 再发送请求。大型网站用的比较多</td>
 </tr>
 <tr>
-<td>&#x2F;web</td>
+<td>/web</td>
 <td>与页面 URL 的协议、主机名、端口拼接形成完整 URL 再发送请求。中小型网站</td>
 </tr>
-</tbody></table>
-<h4 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h4><p>相对路径在发送请求时，需要与当前页面 URL 路径进行 <code>计算</code> ，得到完整 URL 后，再发送请求，学习阶段用的较多</p>
+</tbody>
+</table>
+<h4 id="相对路径">相对路径</h4>
+<p>相对路径在发送请求时，需要与当前页面 URL 路径进行 <code>计算</code> ，得到完整 URL 后，再发送请求，学习阶段用的较多</p>
 <p>例如当前网页 url 为 <a target="_blank" rel="noopener" href="http://www.atguigu.com/course/h5.html">http://www.atguigu.com/course/h5.html</a></p>
 <table>
 <thead>
@@ -1266,28 +1301,31 @@ response.end(&#39;xxx&#39;);<span aria-hidden="true" class="line-numbers-rows"><
 <th>最终的 <strong>URL</strong></th>
 </tr>
 </thead>
-<tbody><tr>
-<td>.&#x2F;css&#x2F;app.css</td>
+<tbody>
+<tr>
+<td>./css/app.css</td>
 <td><a target="_blank" rel="noopener" href="http://www.atguigu.com/course/css/app.css">http://www.atguigu.com/course/css/app.css</a></td>
 </tr>
 <tr>
-<td>js&#x2F;app.js</td>
+<td>js/app.js</td>
 <td><a target="_blank" rel="noopener" href="http://www.atguigu.com/course/js/app.js">http://www.atguigu.com/course/js/app.js</a></td>
 </tr>
 <tr>
-<td>..&#x2F;img&#x2F;logo.png</td>
+<td>…/img/logo.png</td>
 <td><a target="_blank" rel="noopener" href="http://www.atguigu.com/img/logo.png">http://www.atguigu.com/img/logo.png</a></td>
 </tr>
 <tr>
-<td>..&#x2F;..&#x2F;mp4&#x2F;show.mp4</td>
+<td>…/…/mp4/show.mp4</td>
 <td><a target="_blank" rel="noopener" href="http://www.atguigu.com/mp4/show.mp4">http://www.atguigu.com/mp4/show.mp4</a></td>
 </tr>
-</tbody></table>
-<h4 id="网页中使用-URL-的场景小结"><a href="#网页中使用-URL-的场景小结" class="headerlink" title="网页中使用 URL 的场景小结"></a>网页中使用 <strong>URL</strong> 的场景小结</h4><p>包括但不限于如下场景：</p>
+</tbody>
+</table>
+<h4 id="网页中使用-URL-的场景小结">网页中使用 <strong>URL</strong> 的场景小结</h4>
+<p>包括但不限于如下场景：</p>
 <ul>
 <li>a 标签 href</li>
 <li>link 标签 href</li>
-<li>script 标签 src </li>
+<li>script 标签 src</li>
 <li>img 标签 src</li>
 <li>video audio 标签 src</li>
 <li>form 中的 action</li>

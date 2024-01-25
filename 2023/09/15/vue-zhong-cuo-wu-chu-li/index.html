@@ -6,14 +6,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Vue中错误处理, QT-7274">
-    <meta name="description" content="错误类型任何一个框架，对于错误的处理都是一种必备的能力
+    <meta name="description" content="错误类型
+任何一个框架，对于错误的处理都是一种必备的能力
 在Vue 中，则是定义了一套对应的错误处理规则给到使用者，且在源代码级别，对部分必要的过程做了一定的错误处理。
 主要的错误来源包括：
 
 后端接口错误
 代码中本身逻辑错误
 
-如何处理后端">
+如何处理
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -511,14 +513,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="错误类型"><a href="#错误类型" class="headerlink" title="错误类型"></a>错误类型</h2><p>任何一个框架，对于错误的处理都是一种必备的能力</p>
+                <h2 id="错误类型">错误类型</h2>
+<p>任何一个框架，对于错误的处理都是一种必备的能力</p>
 <p>在<code>Vue</code> 中，则是定义了一套对应的错误处理规则给到使用者，且在源代码级别，对部分必要的过程做了一定的错误处理。</p>
 <p>主要的错误来源包括：</p>
 <ul>
 <li>后端接口错误</li>
 <li>代码中本身逻辑错误</li>
 </ul>
-<h2 id="如何处理"><a href="#如何处理" class="headerlink" title="如何处理"></a>如何处理</h2><h3 id="后端接口错误"><a href="#后端接口错误" class="headerlink" title="后端接口错误"></a>后端接口错误</h3><p>通过<code>axios</code>的<code>interceptor</code>实现网络请求的<code>response</code>先进行一层拦截</p>
+<h2 id="如何处理">如何处理</h2>
+<h3 id="后端接口错误">后端接口错误</h3>
+<p>通过<code>axios</code>的<code>interceptor</code>实现网络请求的<code>response</code>先进行一层拦截</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">apiClient.interceptors.response.use(
   response &#x3D;&gt; &#123;
     return response;
@@ -532,14 +537,14 @@
     &#125;
   &#125;
 );<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="代码逻辑问题"><a href="#代码逻辑问题" class="headerlink" title="代码逻辑问题"></a>代码逻辑问题</h3><h4 id="全局设置错误处理"><a href="#全局设置错误处理" class="headerlink" title="全局设置错误处理"></a>全局设置错误处理</h4><p>设置全局错误处理函数</p>
+<h3 id="代码逻辑问题">代码逻辑问题</h3>
+<h4 id="全局设置错误处理">全局设置错误处理</h4>
+<p>设置全局错误处理函数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span><span class="token function-variable function">errorHandler</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> vm<span class="token punctuation">,</span> info</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token comment">// handle error</span>
   <span class="token comment">// `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子</span>
   <span class="token comment">// 只在 2.2.0+ 可用</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>errorHandler</code>指定组件的渲染和观察期间未捕获错误的处理函数。这个处理函数被调用时，可获取错误信息和 <code>Vue</code> 实例</p>
 <p>不过值得注意的是，在不同<code>Vue</code> 版本中，该全局 <code>API</code> 作用的范围会有所不同：</p>
 <blockquote>
@@ -551,10 +556,10 @@
 <blockquote>
 <p>从 2.6.0 起，这个钩子也会捕获 <code>v-on</code> DOM 监听器内部抛出的错误。另外，如果任何被覆盖的钩子或处理函数返回一个 Promise 链 (例如 async 函数)，则来自其 Promise 链的错误也会被处理</p>
 </blockquote>
-<h4 id="生命周期钩子"><a href="#生命周期钩子" class="headerlink" title="生命周期钩子"></a>生命周期钩子</h4><p><code>errorCaptured</code>是 2.5.0 新增的一个生命钩子函数，当捕获到一个来自子孙组件的错误时被调用</p>
+<h4 id="生命周期钩子">生命周期钩子</h4>
+<p><code>errorCaptured</code>是 2.5.0 新增的一个生命钩子函数，当捕获到一个来自子孙组件的错误时被调用</p>
 <p>基本类型</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">err</span><span class="token operator">:</span> Error<span class="token punctuation">,</span> <span class="token literal-property property">vm</span><span class="token operator">:</span> Component<span class="token punctuation">,</span> <span class="token literal-property property">info</span><span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token operator">?</span>boolean<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 <code>false</code> 以阻止该错误继续向上传播</p>
 <p>参考官网，错误传播规则如下：</p>
 <ul>
@@ -583,7 +588,6 @@
     <span class="token punctuation">&#125;</span>
 
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>定义一个子组件<code>kitten</code>，其中<code>dontexist()</code>并没有定义，存在错误</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'kitten'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
     <span class="token literal-property property">template</span><span class="token operator">:</span><span class="token string">'&lt;div>&lt;h1>Kitten: &#123;&#123; dontexist() &#125;&#125;&lt;/h1>&lt;/div>'</span><span class="token punctuation">,</span>
@@ -594,20 +598,18 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>页面中使用组件</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span> <span class="token attr-name">v-cloak</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cat</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>my cat<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>kitten</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>kitten</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>cat</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在父组件的<code>errorCaptured</code>则能够捕获到信息</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">cat <span class="token constant">EC</span><span class="token operator">:</span> TypeError<span class="token operator">:</span> dontexist is not a <span class="token keyword">function</span>
 <span class="token literal-property property">info</span><span class="token operator">:</span> render<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h3 id="三、源码分析"><a href="#三、源码分析" class="headerlink" title="三、源码分析"></a>三、源码分析</h3><p>异常处理源码</p>
-<p>源码位置：&#x2F;src&#x2F;core&#x2F;util&#x2F;error.js</p>
+<h3 id="三、源码分析">三、源码分析</h3>
+<p>异常处理源码</p>
+<p>源码位置：/src/core/util/error.js</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// Vue 全局配置,也就是上面的Vue.config</span>
 <span class="token keyword">import</span> config <span class="token keyword">from</span> <span class="token string">'../config'</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> warn <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'./debug'</span>
@@ -720,8 +722,8 @@
         <span class="token keyword">throw</span> err
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<h3 id="小结">小结</h3>
+<ul>
 <li><code>handleError</code>在需要捕获异常的地方调用，首先获取到报错的组件，之后递归查找当前组件的父组件，依次调用<code>errorCaptured</code> 方法，在遍历调用完所有 <code>errorCaptured</code> 方法或 <code>errorCaptured</code> 方法有报错时，调用 <code>globalHandleError</code> 方法</li>
 <li><code>globalHandleError</code>调用全局的 <code>errorHandler</code> 方法，再通过<code>logError</code>判断环境输出错误信息</li>
 <li><code>invokeWithErrorHandling</code>更好的处理异步错误信息</li>

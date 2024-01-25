@@ -496,150 +496,166 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="数组的顺序存储"><a href="#数组的顺序存储" class="headerlink" title="数组的顺序存储"></a>数组的顺序存储</h2><p>数组是由相同类型的数据元素构成的有限集合。</p>
+                <h2 id="数组的顺序存储">数组的顺序存储</h2>
+<p>数组是由相同类型的数据元素构成的有限集合。</p>
 <p>数组一般采用顺序存储结构，因为存储单元是一维的，而数组可以是多维的，如何用一组连续的存储单元来存储多维数组呢？</p>
-<p>以二维数组为例，可以按行序存储，即先存第一行，再存第二行……也可以按列序存储，先存第一列，再存第二列……</p>
+<p>以二维数组为例，可以按行序存储，即先存第一行，再存第二行…也可以按列序存储，先存第一列，再存第二列…</p>
 <ol>
-<li><p>按行序存储</p>
+<li>
+<p>按行序存储</p>
 <p><strong>如果按行序存储，怎么找到 a ij 的存储位置呢？</strong></p>
 <p>先看看存储 a ij 之前，前面已经存储了多少个元素：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916163751007.png" alt="image-20220916163751007"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916163751007.png" alt="image-20220916163751007"></p>
 <p>在 a ij 之前一共有 i×n+j 个元素，如果每个元素占用 L 字节，那么共需要 (i×n+j)×L 字节，只需要用基地址加上这些字节就可以得到 a ij 的存储地址了。</p>
 <p>按行序存储，a ij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916164635719.png" alt="image-20220916164635719"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916164635719.png" alt="image-20220916164635719"></p>
 <p>LOC(a 00 )表示第一个元素的存储地址，即基地址，LOC(a ij)表示 a ij 的存储地址。</p>
 </li>
-<li><p>按列序存储</p>
+<li>
+<p>按列序存储</p>
 <p><strong>如果按列序存储，怎么找到 a ij 的存储位置呢？</strong></p>
 <p>先看看存储 a ij 之前，前面已经存储了多少个元素：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916164855734.png" alt="image-20220916164855734"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916164855734.png" alt="image-20220916164855734"></p>
 <p>在 a ij 之前一共有 j×m+i 个元素，如果每个元素占用 L 字节，那么共需要(j×m+i)×L 字节，只需要用基地址加上这些字节就可以得到 a ij 的存储地址了。</p>
 <p>按列序存储，a ij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916164922583.png" alt="image-20220916164922583"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916164922583.png" alt="image-20220916164922583"></p>
 <p>LOC(a00 )表示第一个元素的存储地址，即基地址，LOC(a ij)表示 a ij 的存储地址。</p>
 <blockquote>
 <p><strong>注意：如果二维数组的下标是从 1 开始的，那么情形就变了。</strong></p>
 </blockquote>
 <p>先看看存储 a ij 之前，前面已经存储了多少个元素：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916165028591.png" alt="image-20220916165028591"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916165028591.png" alt="image-20220916165028591"></p>
 <p>行数和个数都少 1，在 a ij 之前一共有 <strong>(i−1)×n+j−1</strong> 个元素，如果每个元素占用 L 字节，那么共需要 <strong>((i−1)×n+j−1)×L</strong> 字节，只需要用基地址加上这些字节就可以得到 a ij 的存储地址了。</p>
 <p>如果二维数组下标从 1 开始，按行序存储，a ij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916165312801.png" alt="image-20220916165312801"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916165312801.png" alt="image-20220916165312801"></p>
 <p>LOC(a11 )表示第一个元素的存储地址，即基地址，LOC(a ij)表示 a ij 的存储地址。</p>
 <p>如果二维数组下标从 1 开始，按列序存储，a ij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916165344784.png" alt="image-20220916165344784"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916165344784.png" alt="image-20220916165344784"></p>
 <p>也就是说，如果下标是从 1 开始的，相应的公式需要行减 1，列减 1。</p>
 </li>
 </ol>
 <blockquote>
 <p>存储地址计算秘籍：<strong>a ij 的存储地址等于第一个元素的存储地址，加上前面的元素个数乘以每个元素占用的字节数。</strong></p>
-<p>LOC(aij) &#x3D; LOC(第一个元素) +(aij 前面的元素个数) × 每个元素占的字节</p>
+<p>LOC(aij) = LOC(第一个元素) +(aij 前面的元素个数) × 每个元素占的字节</p>
 </blockquote>
-<h2 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h2><ul>
-<li><strong>什么是压缩存储？</strong>给多个相同的元素分配一个存储空间，元素为 0 的不分配空间。</li>
-<li><strong>什么样的矩阵能够压缩？</strong>一些特殊矩阵，如对称矩阵、三角矩阵、对角矩阵、稀疏矩阵等。</li>
-<li><strong>什么叫稀疏矩阵？</strong>矩阵中非零元素的个数较少，怎样才算是较少呢？一般认为非零元素个数小于 5%的矩阵为稀疏矩阵。</li>
+<h2 id="特殊矩阵的压缩存储">特殊矩阵的压缩存储</h2>
+<ul>
+<li>**什么是压缩存储？**给多个相同的元素分配一个存储空间，元素为 0 的不分配空间。</li>
+<li>**什么样的矩阵能够压缩？**一些特殊矩阵，如对称矩阵、三角矩阵、对角矩阵、稀疏矩阵等。</li>
+<li>**什么叫稀疏矩阵？**矩阵中非零元素的个数较少，怎样才算是较少呢？一般认为非零元素个数小于 5%的矩阵为稀疏矩阵。</li>
 </ul>
-<h3 id="对称矩阵："><a href="#对称矩阵：" class="headerlink" title="对称矩阵："></a>对称矩阵：</h3><p>对称矩阵比较特殊，其数据元素沿着对角线对称，即：aij &#x3D; aji</p>
-<p>那么，因为上三角和下三角是一样的，因此只存储其中的一个就可以了。如果用一维数组存储下三角，则只需要 <strong>n(n+1)&#x2F;2</strong> 个空间，比全部存储需要 n^2 个空间少了很多。</p>
+<h3 id="对称矩阵：">对称矩阵：</h3>
+<p>对称矩阵比较特殊，其数据元素沿着对角线对称，即：aij = aji</p>
+<p>那么，因为上三角和下三角是一样的，因此只存储其中的一个就可以了。如果用一维数组存储下三角，则只需要 <strong>n(n+1)/2</strong> 个空间，比全部存储需要 n^2 个空间少了很多。</p>
 <p><strong>如果按行序存储下三角，那么怎么找到 a ij 的存储位置呢？</strong></p>
 <p>先看看存储下三角中的 a ij 之前，前面已经存储了多少个元素:</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916171702433.png" alt="image-20220916171702433"></p>
-<p>如果将对称矩阵的下三角（i≥j）存储在一维数组 s[]中，那么下三角中 a ij 的下标就是 <strong>i(i−1)&#x2F;2+j−1</strong></p>
-<p>而上三角的元素（i&lt;j），根据对称性，a ij &#x3D; a ji，可以直接读取下三角中的 a ji，因此按行序存储下三角时，a ij 的下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916172113874.png" alt="image-20220916172113874"></p>
-<p><strong>存储下标计算秘籍：</strong>如果用一维数组 s[]存储（下标从 0 开始），则 a ij 的存储下标 k 等于a ij 前面的元素个数。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916174820163.png" alt="image-20220916174820163"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916171702433.png" alt="image-20220916171702433"></p>
+<p>如果将对称矩阵的下三角（i≥j）存储在一维数组 s[]中，那么下三角中 a ij 的下标就是 <strong>i(i−1)/2+j−1</strong></p>
+<p>而上三角的元素（i&lt;j），根据对称性，a ij = a ji，可以直接读取下三角中的 a ji，因此按行序存储下三角时，a ij 的下标为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916172113874.png" alt="image-20220916172113874"></p>
+<p>**存储下标计算秘籍：**如果用一维数组 s[]存储（下标从 0 开始），则 a ij 的存储下标 k 等于a ij 前面的元素个数。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916174820163.png" alt="image-20220916174820163"></p>
 <p>如果一维数组的下标从 1 开始呢？——公式后面再加 1 就行了。</p>
 <p>上面的公式是计算一维数组存储的下标，如果给了基地址（a11 的存储地址），那么 aij 的存储地址为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916175406759.png" alt="image-20220916175406759"></p>
-<p>即 LOC(a ij)&#x3D;LOC(第一个元素)+(a ij 前面的元素个数)×每个元素占用的字节。</p>
-<h3 id="三角矩阵："><a href="#三角矩阵：" class="headerlink" title="三角矩阵："></a>三角矩阵：</h3><p>三角矩阵比较特殊，分为下三角矩阵和上三角矩阵，下三角矩阵是指矩阵的下三角有数据，而其余的都是常数 c 或者为 0：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220916180925565.png" alt="image-20220916180925565"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916175406759.png" alt="image-20220916175406759"></p>
+<p>即 LOC(a ij)=LOC(第一个元素)+(a ij 前面的元素个数)×每个元素占用的字节。</p>
+<h3 id="三角矩阵：">三角矩阵：</h3>
+<p>三角矩阵比较特殊，分为下三角矩阵和上三角矩阵，下三角矩阵是指矩阵的下三角有数据，而其余的都是常数 c 或者为 0：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220916180925565.png" alt="image-20220916180925565"></p>
 <p>在下三角矩阵存储时，<strong>只需要存储其下三角中的元素，最后一个空间存储常数 c 即可。如果上面全为 0，则不需要存储</strong>；下三角也是如此。</p>
 <p>例如下三角矩阵按行存储在一维数组 s[]中：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917122504003.png" alt="image-20220917122504003"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917122504003.png" alt="image-20220917122504003"></p>
 <p><strong>下三角矩阵如果按行序存储，怎么找到 a ij 的存储位置呢？</strong></p>
 <p>先看看存储 a ij 之前，前面已经存储了多少个元素：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917164303544.png" alt="image-20220917164303544"></p>
-<p>如果一维数组的下标从零开始，那么下三角中 a ij 的下标就是 i(i−1)&#x2F;2+j−1。而上三角的元素因为全是常数 c 或者为 0，最后一个空间（下标为 n(n+1)&#x2F;2）存储常数 c 即可，如果是 0，则不需要存储。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917164303544.png" alt="image-20220917164303544"></p>
+<p>如果一维数组的下标从零开始，那么下三角中 a ij 的下标就是 i(i−1)/2+j−1。而上三角的元素因为全是常数 c 或者为 0，最后一个空间（下标为 n(n+1)/2）存储常数 c 即可，如果是 0，则不需要存储。</p>
 <p>因此下三角矩阵按行序存储时，a ij 的下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917164625796.png" alt="image-20220917164625796"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917164625796.png" alt="image-20220917164625796"></p>
 <p><strong>上三角矩阵如果按行序存储，怎么找到 a ij 的存储位置呢？</strong></p>
 <p>先看看存储 a ij 之前，前面已经存储了多少个元素（梯形公式）：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917164934887.png" alt="image-20220917164934887"></p>
-<p>如果一维数组的下标从 0 开始，那么上三角中 aij 的下标就是(i−1)(2n−i+2)&#x2F;2+j−i。而下三角的元素全是常数 c 或者为 0，最后一个空间（下标为 n(n+1)&#x2F;2）存储常数 c 即可。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917164934887.png" alt="image-20220917164934887"></p>
+<p>如果一维数组的下标从 0 开始，那么上三角中 aij 的下标就是(i−1)(2n−i+2)/2+j−i。而下三角的元素全是常数 c 或者为 0，最后一个空间（下标为 n(n+1)/2）存储常数 c 即可。</p>
 <p>因此上三角矩阵按行序存储时，a ij 的下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917165936889.png" alt="image-20220917165936889"></p>
-<h3 id="对角矩阵："><a href="#对角矩阵：" class="headerlink" title="对角矩阵："></a>对角矩阵：</h3><p>对角矩阵又称为带状矩阵，是指在 n×n 的矩阵中非零元素集中在主对角线及其两侧，共 L（奇数）条对角线的带状区域内，称为 L 对角矩阵：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917170215104.png" alt="image-20220917170215104"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917165936889.png" alt="image-20220917165936889"></p>
+<h3 id="对角矩阵：">对角矩阵：</h3>
+<p>对角矩阵又称为带状矩阵，是指在 n×n 的矩阵中非零元素集中在主对角线及其两侧，共 L（奇数）条对角线的带状区域内，称为 L 对角矩阵：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917170215104.png" alt="image-20220917170215104"></p>
 <ol>
-<li><p><strong>L 对角矩阵非零元素个数</strong></p>
-<p>首先将每一行以对角线为中心进行补零，让每一行都达到带宽 L 个元素。一共补了多少个零呢？第一行补 d 个 0，第二行补 d−1 个 0 左上角补零个数为 d (d+1)&#x2F;2。同理，右下角补零个数也为 d(d+1)&#x2F;2，总的补零个数为 d(d+1)。那么每行按 L 个元素计算，再减去补零元素个数即可，即带状区域元素个数为 L×n−d(d+1)。因为 d&#x3D;(L−1)&#x2F;2，即 L&#x3D;2d+1，所以带状区域元素个数也可以表达为(2d+1)×n−d(d+1)。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917171101974.png" alt="image-20220917171101974"></p>
+<li>
+<p><strong>L 对角矩阵非零元素个数</strong></p>
+<p>首先将每一行以对角线为中心进行补零，让每一行都达到带宽 L 个元素。一共补了多少个零呢？第一行补 d 个 0，第二行补 d−1 个 0 左上角补零个数为 d (d+1)/2。同理，右下角补零个数也为 d(d+1)/2，总的补零个数为 d(d+1)。那么每行按 L 个元素计算，再减去补零元素个数即可，即带状区域元素个数为 L×n−d(d+1)。因为 d=(L−1)/2，即 L=2d+1，所以带状区域元素个数也可以表达为(2d+1)×n−d(d+1)。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917171101974.png" alt="image-20220917171101974"></p>
 </li>
-<li><p><strong>按行序存储</strong></p>
+<li>
+<p><strong>按行序存储</strong></p>
 <p>补零后每行都有 L 个元素，需要 L×n 个空间。为了节省空间，第一行前面和最后一行后面的 d 个 0 可以不存储，“<strong>掐头去尾</strong>”，需要 L×n−2d 个空间。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917172219604.png" alt="image-20220917172219604"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917172219604.png" alt="image-20220917172219604"></p>
 <p><strong>怎么找到 a ij 的存储位置呢？</strong></p>
 <p>首先找到 aii 的存储位置，因为 aii 是对角线上的元素，以对角线为中心，左右两侧都是d 个元素。a ii 之前有 i−1 行，每行 L 个元素，a ii 所在行左侧有 d 个元素，因此 a ii 之前有(i−1)×L+d 个元素。</p>
 <p>因为第一行前面的 d 个 0“<strong>掐头去尾</strong>”没有存储，所以 a ii 之前有(i−1)×L 个元素。aii 的存储位置为：(i−1)×L。而 aij 和 aii 相差 j−i 个元素，也就是说，aij的存储位置为：(i−1)×L+j−i：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917175712065.png" alt="image-20220917175712065"></p>
-<p>如果 a ij 在 a ii 的左侧（i&gt;j）呢？它们之间相差 i−j 个元素。只需要计算出 a ii 的存储位置，减去它们之间的差值就可以了。<br>即 aij 的存储位置为(i−1)×L−(i−j)&#x3D;(i−1)×L+j−i。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917175712065.png" alt="image-20220917175712065"></p>
+<p>如果 a ij 在 a ii 的左侧（i&gt;j）呢？它们之间相差 i−j 个元素。只需要计算出 a ii 的存储位置，减去它们之间的差值就可以了。<br>
+即 aij 的存储位置为(i−1)×L−(i−j)=(i−1)×L+j−i。</p>
 <p><strong>公式总结：</strong></p>
 <p>按行序，用一维数组（下标从 0 开始）存储 L 对角矩阵，a ij 的存储位置为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180013907.png" alt="image-20220917180013907"></p>
-<p>例如3对角矩阵中 a ij 的存储位置为 k&#x3D;3(i−1)+j−i&#x3D;2i+j−3，如果一维数组的下标从 1 开始，公式后面再加 1 即可。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917180013907.png" alt="image-20220917180013907"></p>
+<p>例如3对角矩阵中 a ij 的存储位置为 k=3(i−1)+j−i=2i+j−3，如果一维数组的下标从 1 开始，公式后面再加 1 即可。</p>
 </li>
-<li><p><strong>按对角线存储</strong></p>
+<li>
+<p><strong>按对角线存储</strong></p>
 <p>对角矩阵还有一种按对角线的顺序存储方式：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180434868.png" alt="image-20220917180434868"></p>
-<p>即对角线作为 0 行，左侧分别为 1, 2, …, d行，右侧分别为−1, −2, …, −d 行。相当于行转换为 i′&#x3D;i−j，列值 j 不变，把 n×n 的 L 对角矩阵转换为 L×n 的矩阵：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180505020.png" alt="image-20220917180505020"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917180434868.png" alt="image-20220917180434868"></p>
+<p>即对角线作为 0 行，左侧分别为 1, 2, …, d行，右侧分别为−1, −2, …, −d 行。相当于行转换为 i′=i−j，列值 j 不变，把 n×n 的 L 对角矩阵转换为 L×n 的矩阵：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917180505020.png" alt="image-20220917180505020"></p>
 <p>将其他位置补零：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180540927.png" alt="image-20220917180540927"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917180540927.png" alt="image-20220917180540927"></p>
 <p>用一维数组 s[]（下标从 0 开始）按行序存储，仍然采用“掐头去尾”，第一行前面和最后一行后面的 d 个 0 不存储：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917180602358.png" alt="image-20220917180602358"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917180602358.png" alt="image-20220917180602358"></p>
 <p><strong>怎么找到 a ij 的存储位置呢？</strong></p>
 <p>a i′j 之前有 i′+d行，每行有 n 个元素，a i′j 所在行左侧有 j−1 个元素，因此 ai′j 之前有(i′+d)×n+j−1 个元素。</p>
 <p>因为第一行前面的 d 个 0“掐头去尾”没有存储，所以 a i′j 之前有(i′+d)×n+j−1−d 个元素。a i′j的存储位置为：(i′+d)×n+j−1−d。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917181451463.png" alt="image-20220917181451463"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917181451463.png" alt="image-20220917181451463"></p>
 <p>如果用一维数组（下标从 0 开始）按行序存储，a i′j 的下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917181526649.png" alt="image-20220917181526649"></p>
-<p>又因为 i′&#x3D;i−j，因此对角矩阵中的 a ij 下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917181539937.png" alt="image-20220917181539937"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917181526649.png" alt="image-20220917181526649"></p>
+<p>又因为 i′=i−j，因此对角矩阵中的 a ij 下标为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917181539937.png" alt="image-20220917181539937"></p>
 <p><strong>公式总结：</strong></p>
 <p>按对角线存储，对角矩阵中的 a ij 下标为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917181629298.png" alt="image-20220917181629298"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917181629298.png" alt="image-20220917181629298"></p>
 </li>
 </ol>
-<h3 id="稀疏矩阵："><a href="#稀疏矩阵：" class="headerlink" title="稀疏矩阵："></a>稀疏矩阵：</h3><p>稀疏矩阵是指非零元素个数较少，且分布没有规律可言，那么少到什么程度才算稀疏呢？一般认为非零元素小于 5%时，属于稀疏矩阵。</p>
+<h3 id="稀疏矩阵：">稀疏矩阵：</h3>
+<p>稀疏矩阵是指非零元素个数较少，且分布没有规律可言，那么少到什么程度才算稀疏呢？一般认为非零元素小于 5%时，属于稀疏矩阵。</p>
 <p>当然也没那么绝对，只要非零元素个数远远小于矩阵元素个数，就可以认为是稀疏矩阵。</p>
 <blockquote>
 <p><strong>为了节省空间，只需要记录每个非零元素的行、列和数值即可，这就是三元组存储法</strong></p>
 </blockquote>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220917183620395.png" alt="image-20220917183620395"></p>
-<h2 id="广义表"><a href="#广义表" class="headerlink" title="广义表"></a>广义表</h2><p>广义表是线性表的推广，也称为列表。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220917183620395.png" alt="image-20220917183620395"></p>
+<h2 id="广义表">广义表</h2>
+<p>广义表是线性表的推广，也称为列表。</p>
 <blockquote>
-<p>它是 n(n≥0)个表元素组成的有限序列，记作 **LS&#x3D; (a0 , a1, a2 , …, a n−1 )**。LS 是表名，a i 是表元素，它可以是表（称为子表），也可以是数据元素(称为原子)。</p>
-<p>n 为表的长度，n&#x3D;0 的广义表为空表。</p>
+<p>它是 n(n≥0)个表元素组成的有限序列，记作 <strong>LS= (a0 , a1, a2 , …, a n−1 )</strong>。LS 是表名，a i 是表元素，它可以是表（称为子表），也可以是数据元素(称为原子)。</p>
+<p>n 为表的长度，n=0 的广义表为空表。</p>
 </blockquote>
 <p>广义表最常见的操作就是求表头和表尾。</p>
 <ul>
-<li><p>表头 GetHead(L)：</p>
+<li>
+<p>表头 GetHead(L)：</p>
 <p>非空广义表的第一个元素，可以是一个单元素，也可以是一个子表。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220918093948840.png" alt="image-20220918093948840"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918093948840.png" alt="image-20220918093948840"></p>
 </li>
-<li><p>表尾 GetTail(L)：</p>
+<li>
+<p>表尾 GetTail(L)：</p>
 <p>删除表头元素后余下的元素所构成的表。表尾一定是一个表。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220918094015252.png" alt="image-20220918094015252"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918094015252.png" alt="image-20220918094015252"></p>
 </li>
 </ul>
-<h2 id="数组与广义表学习技巧"><a href="#数组与广义表学习技巧" class="headerlink" title="数组与广义表学习技巧"></a>数组与广义表学习技巧</h2><p><strong>存储地址计算秘籍：</strong>a ij 的存储地址等于第一个元素的存储地址，加上前面的元素个数乘以每个元素占用的字节数。计算公式为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220918105951420.png" alt="image-20220918105951420"></p>
+<h2 id="数组与广义表学习技巧">数组与广义表学习技巧</h2>
+<p>**存储地址计算秘籍：**a ij 的存储地址等于第一个元素的存储地址，加上前面的元素个数乘以每个元素占用的字节数。计算公式为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918105951420.png" alt="image-20220918105951420"></p>
 <p>LOC(第一个元素)表示第一个元素的存储地址，即基地址，LOC(a ij)表示 aij 的存储地址。</p>
-<p><strong>存储下标计算秘籍：</strong>如果用一维数组 s[]存储（下标从 0 开始），则 aij 的存储下标 k 等于a ij 前面的元素个数。计算公式为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/16/shu-ju-jie-gou-ru-men-shu-zu-yu-guang-yi-biao/image-20220918110119654.png" alt="image-20220918110119654"></p>
+<p>**存储下标计算秘籍：**如果用一维数组 s[]存储（下标从 0 开始），则 aij 的存储下标 k 等于a ij 前面的元素个数。计算公式为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918110119654.png" alt="image-20220918110119654"></p>
 <p>如果一维数组的下标从 1 开始，公式后面再加 1 就行了。</p>
 
                 

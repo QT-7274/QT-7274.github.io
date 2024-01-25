@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    949
+                    954
                 </div>
                 
 
@@ -500,50 +500,64 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="文本效果"><a href="#文本效果" class="headerlink" title="文本效果"></a>文本效果</h1><h2 id="深入text-indent"><a href="#深入text-indent" class="headerlink" title="深入text-indent"></a>深入text-indent</h2><ol>
+                <h1>文本效果</h1>
+<h2 id="深入text-indent">深入text-indent</h2>
+<ol>
 <li>实现首行缩进2字符：<code>text-indent:2em</code></li>
-<li>在引擎优化中，h1是非常重要的标签，一般情况下，我们都是把网站的LOGO图片放在h1标签中。但是搜索引擎只能识别文字，不能识别图片。为了更好地进行搜索引擎优化，一个很好的解决方案是：<ul>
+<li>在引擎优化中，h1是非常重要的标签，一般情况下，我们都是把网站的LOGO图片放在h1标签中。但是搜索引擎只能识别文字，不能识别图片。为了更好地进行搜索引擎优化，一个很好的解决方案是：
+<ul>
 <li>指定h1元素的长宽和LOGO图片的长宽一样</li>
 <li>定义h1的背景图片为LOGO图片</li>
 <li>使用<code>text-indent:-9999px</code>来隐藏h1的文字内容</li>
 </ul>
 </li>
 </ol>
-<h2 id="深入text-align"><a href="#深入text-align" class="headerlink" title="深入text-align"></a>深入text-align</h2><p>text-align属性用来定义文本或图片的对齐方式，常用取值为left、right、center。</p>
+<h2 id="深入text-align">深入text-align</h2>
+<p>text-align属性用来定义文本或图片的对齐方式，常用取值为left、right、center。</p>
 <p>text-align属性对文本、inline元素以及inline-block元素都会起作用，但对block元素不起作用。</p>
-<h3 id="关于页面居中"><a href="#关于页面居中" class="headerlink" title="关于页面居中"></a>关于页面居中</h3><p>在实现页面居中的方式中，<code>text-align:center</code>和<code>margin:0 auto</code>是最常见的两种居中方式，不过这两者也有着本质的区别。</p>
+<h3 id="关于页面居中">关于页面居中</h3>
+<p>在实现页面居中的方式中，<code>text-align:center</code>和<code>margin:0 auto</code>是最常见的两种居中方式，不过这两者也有着本质的区别。</p>
 <ul>
 <li><code>text-align:center</code> 实现的是文本、inline元素以及inline-block元素的水平居中。</li>
 <li><code>margin:0 auto</code>实现的是block元素的水平居中。</li>
 <li><code>text-align:center</code> 在<strong>父元素</strong>中定义，<code>margin:0 auto</code>在<strong>当前元素</strong>中定义。</li>
 </ul>
-<h2 id="深入line-height"><a href="#深入line-height" class="headerlink" title="深入line-height"></a>深入line-height</h2><p>line-height的准确定义：两行文字<strong>基线</strong>之间的距离。关于顶线、中线、基线、底线的内容本文不再赘述。</p>
-<h3 id="height和line-height"><a href="#height和line-height" class="headerlink" title="height和line-height"></a>height和line-height</h3><p>line-height是有默认值的，当没有定义line-height属性时，浏览器就会采用默认的line-height值。</p>
+<h2 id="深入line-height">深入line-height</h2>
+<p>line-height的准确定义：两行文字<strong>基线</strong>之间的距离。关于顶线、中线、基线、底线的内容本文不再赘述。</p>
+<h3 id="height和line-height">height和line-height</h3>
+<p>line-height是有默认值的，当没有定义line-height属性时，浏览器就会采用默认的line-height值。</p>
 <p>一行文字的高度是由line-height决定，而不是由height决定。例如在p标签中，一个p标签的文字可以有很多行，其中line-height定义的是一行文字的高度，而height定义的才是整个段落的高度（即p标签的高度）。</p>
-<h3 id="line-height的取值"><a href="#line-height的取值" class="headerlink" title="line-height的取值"></a>line-height的取值</h3><p>当line-height的取值为百分比或者em值时，元素的行高是相对于“当前元素”的font-size值来计算的。计算公式如下：</p>
-<p><code>line-height = （当前元素font-size）×（百分比）</code> </p>
+<h3 id="line-height的取值">line-height的取值</h3>
+<p>当line-height的取值为百分比或者em值时，元素的行高是相对于“当前元素”的font-size值来计算的。计算公式如下：</p>
+<p><code>line-height = （当前元素font-size）×（百分比）</code></p>
 <p><code>line-height =（当前元素font-size）×（em值）</code></p>
-<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ol>
-<li><p>对于多行文字：控制行与行之间的距离。</p>
+<h4 id="应用场景">应用场景</h4>
+<ol>
+<li>
+<p>对于多行文字：控制行与行之间的距离。</p>
 </li>
-<li><p>对于单行文字：让<code>height</code>等于<code>line-height</code>，可以实现文字<strong>垂直居中</strong>。</p>
+<li>
+<p>对于单行文字：让<code>height</code>等于<code>line-height</code>，可以实现文字<strong>垂直居中</strong>。</p>
 <blockquote>
 <p>由于字体设计原因，靠上述办法实现的居中，并不是绝对的垂直居中，但如果一行中都是文字，不会太影响观感。</p>
 </blockquote>
 </li>
 </ol>
-<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><blockquote>
+<h4 id="注意事项">注意事项</h4>
+<blockquote>
 <ol>
 <li><code>line-height</code>过小——文字产生重叠，且最小值是<code>0</code>，不能为负数。</li>
 <li><code>line-height</code>是可以继承的，且为了能更好的呈现文字，最好写数值。</li>
-<li><code>line-height</code>和<code>height</code>是什么关系？<ul>
+<li><code>line-height</code>和<code>height</code>是什么关系？
+<ul>
 <li>设置了<code>height</code>，那么高度就是<code>height</code>的值。</li>
 <li>不设置<code>height</code>的时候，会根据<code>line-height</code>计算高度。</li>
 </ul>
 </li>
 </ol>
 </blockquote>
-<h2 id="深入vertical-align"><a href="#深入vertical-align" class="headerlink" title="深入vertical-align"></a>深入vertical-align</h2><p>W3C官方对vertical-align属性的定义有以下4个方面的解释。</p>
+<h2 id="深入vertical-align">深入vertical-align</h2>
+<p>W3C官方对vertical-align属性的定义有以下4个方面的解释。</p>
 <ul>
 <li>vertical-align属性用于定义<strong>周围的文字、inline元素以及inline-block元素内文字的垂直对齐方式</strong>（<strong>同一行元素、表格单元格</strong>）。</li>
 <li>在表格单元格中，vertical-align属性可以定义单元格td元素中内容的对齐方式。td元素是table-cell元素，也就是说vertical-align属性对table-cell类型元素有效（<strong>针对自身而言</strong>）。</li>

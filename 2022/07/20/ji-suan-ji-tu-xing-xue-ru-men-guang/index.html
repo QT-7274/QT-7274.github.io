@@ -492,25 +492,37 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="WebGL入门："><a href="#WebGL入门：" class="headerlink" title="WebGL入门："></a>WebGL入门：</h3><h3 id="1-画布："><a href="#1-画布：" class="headerlink" title="1.画布："></a>1.画布：</h3><h4 id="1-坐标系："><a href="#1-坐标系：" class="headerlink" title="1.坐标系："></a>1.坐标系：</h4><p>对于大多数计算机屏幕，坐标原点位于屏幕左上角，x轴向右侧延伸，y轴向左侧延伸：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620143143556.png" alt="image-20220620143143556"></p>
+                <h3 id="WebGL入门：">WebGL入门：</h3>
+<h3 id="1-画布：">1.画布：</h3>
+<h4 id="1-坐标系：">1.坐标系：</h4>
+<p>对于大多数计算机屏幕，坐标原点位于屏幕左上角，x轴向右侧延伸，y轴向左侧延伸：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620143143556.png" alt="image-20220620143143556"></p>
 <p>但对于3D图形程序员来说，更倾向使用另一种坐标系：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620143216979.png" alt="image-20220620143216979"></p>
-<h4 id="2-颜色模型："><a href="#2-颜色模型：" class="headerlink" title="2.颜色模型："></a>2.颜色模型：</h4><h5 id="1-减法色模型："><a href="#1-减法色模型：" class="headerlink" title="1.减法色模型："></a>1.减法色模型：</h5><p>从包含所有波长的光开始，减去一部分数量的颜色，从而创建任何其他颜色：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620143348156.png" alt="image-20220620143348156"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620143216979.png" alt="image-20220620143216979"></p>
+<h4 id="2-颜色模型：">2.颜色模型：</h4>
+<h5 id="1-减法色模型：">1.减法色模型：</h5>
+<p>从包含所有波长的光开始，减去一部分数量的颜色，从而创建任何其他颜色：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620143348156.png" alt="image-20220620143348156"></p>
 <p>但这种模型不完全正确，实际原色是青色、平红色和黄色。而且混合这三种模型会产生一种稍暗的颜色，但不是纯黑色，因此需要添加黑色作为第四种“原色”，黑色用K表示，因此我们得出CMYK模型，如下图：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620143819653.png" alt="image-20220620143819653"></p>
-<h5 id="2-加法色模型："><a href="#2-加法色模型：" class="headerlink" title="2.加法色模型："></a>2.加法色模型：</h5><p>屏幕与纸张相反，屏幕本身是黑色的，还会发出光，因此我们从没有光开始，然后添加我们想要的波长的光。大多数颜色可以通过在黑色表面添加不同“数量”的红色、绿色、蓝色来创建，这就是RGB颜色模型，是一种加法色模型，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620143826817.png" alt="image-20220620143826817"></p>
-<h4 id="3-颜色深度："><a href="#3-颜色深度：" class="headerlink" title="3.颜色深度："></a>3.颜色深度：</h4><p>大多数图像都是使用8位二进制数来表示一种原色，这里称原色为颜色通道，每个通道使用8位二进制的话，一个像素由三个通道组成就是24位二进制数，共有2^24种不同颜色，这种格式成为R8G8B8格式，是常用格式，颜色深度认为是24位。</p>
-<h4 id="4-颜色表示："><a href="#4-颜色表示：" class="headerlink" title="4.颜色表示："></a>4.颜色表示：</h4><p>使用三个字节来表示一种颜色，每个字节保存从0到255的8位颜色通道的值，我们将颜色表示为(R,G,B)。</p>
-<h4 id="5-颜色的处理方式："><a href="#5-颜色的处理方式：" class="headerlink" title="5.颜色的处理方式："></a>5.颜色的处理方式：</h4><p>我们可以通过将每个颜色通道值乘一个常量来修改颜色的强度，可以通过将每个颜色通道值分别相加来将两个颜色相加。这些运算可能产生无效值，我们将<strong>任何超过255的值视为255，任何低于0的值视为0</strong>，我们把这称为将值范围限制[0,255]，类似生活中使用相机曝光不足或过度曝光的情况。</p>
-<h4 id="6-场景："><a href="#6-场景：" class="headerlink" title="6.场景："></a>6.场景：</h4><p>场景需要坐标轴来讨论其中的为题，不能使用与画布相同的坐标系，因为画布为2D，场景是3D，如图是场景使用的坐标系：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620144636553.png" alt="image-20220620144636553"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620143819653.png" alt="image-20220620143819653"></p>
+<h5 id="2-加法色模型：">2.加法色模型：</h5>
+<p>屏幕与纸张相反，屏幕本身是黑色的，还会发出光，因此我们从没有光开始，然后添加我们想要的波长的光。大多数颜色可以通过在黑色表面添加不同“数量”的红色、绿色、蓝色来创建，这就是RGB颜色模型，是一种加法色模型，如图所示：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620143826817.png" alt="image-20220620143826817"></p>
+<h4 id="3-颜色深度：">3.颜色深度：</h4>
+<p>大多数图像都是使用8位二进制数来表示一种原色，这里称原色为颜色通道，每个通道使用8位二进制的话，一个像素由三个通道组成就是24位二进制数，共有2^24种不同颜色，这种格式成为R8G8B8格式，是常用格式，颜色深度认为是24位。</p>
+<h4 id="4-颜色表示：">4.颜色表示：</h4>
+<p>使用三个字节来表示一种颜色，每个字节保存从0到255的8位颜色通道的值，我们将颜色表示为(R,G,B)。</p>
+<h4 id="5-颜色的处理方式：">5.颜色的处理方式：</h4>
+<p>我们可以通过将每个颜色通道值乘一个常量来修改颜色的强度，可以通过将每个颜色通道值分别相加来将两个颜色相加。这些运算可能产生无效值，我们将<strong>任何超过255的值视为255，任何低于0的值视为0</strong>，我们把这称为将值范围限制[0,255]，类似生活中使用相机曝光不足或过度曝光的情况。</p>
+<h4 id="6-场景：">6.场景：</h4>
+<p>场景需要坐标轴来讨论其中的为题，不能使用与画布相同的坐标系，因为画布为2D，场景是3D，如图是场景使用的坐标系：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620144636553.png" alt="image-20220620144636553"></p>
 <p>场景的单位取决于我们的场景代表什么，不同场景单位不同。</p>
-<h3 id="2-基础光线追踪知识："><a href="#2-基础光线追踪知识：" class="headerlink" title="2.基础光线追踪知识："></a>2.基础光线追踪知识：</h3><h4 id="1-渲染图片："><a href="#1-渲染图片：" class="headerlink" title="1.渲染图片："></a>1.渲染图片：</h4><p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620152206227.png" alt="image-20220620152206227"></p>
+<h3 id="2-基础光线追踪知识：">2.基础光线追踪知识：</h3>
+<h4 id="1-渲染图片：">1.渲染图片：</h4>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620152206227.png" alt="image-20220620152206227"></p>
 <p>如何让计算机渲染这张图片？我们用一个固定的视角和一个窗口来观察风景，将图像分成很多“格子”，在每一个格子涂上相应的颜色，最终绘制的图像如图：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620152351610.png" alt="image-20220620152351610"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620152351610.png" alt="image-20220620152351610"></p>
 <p>绘画过程可以是这样的：</p>
 <ul>
 <li>将眼睛和框架搭建好</li>
@@ -519,37 +531,49 @@
 <li>识别图像上每一个区域所看到的的颜色</li>
 <li>将每个区域的颜色画出来</li>
 </ul>
-<h4 id="2-基本假设："><a href="#2-基本假设：" class="headerlink" title="2.基本假设："></a>2.基本假设：</h4><p>首先我们需要一个固定的观察位置，也就是相机位置，用O表示，假设相机位置O&#x3D;(0,0,0)；假设有一个固定的相机方位，相机方位决定了相机指向哪里，我们假设相机指向z轴正方向，并且y轴正方向是向上的，x轴正方向是向右的，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620153152123.png" alt="image-20220620153152123"></p>
+<h4 id="2-基本假设：">2.基本假设：</h4>
+<p>首先我们需要一个固定的观察位置，也就是相机位置，用O表示，假设相机位置O=(0,0,0)；假设有一个固定的相机方位，相机方位决定了相机指向哪里，我们假设相机指向z轴正方向，并且y轴正方向是向上的，x轴正方向是向右的，如图所示：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620153152123.png" alt="image-20220620153152123"></p>
 <p>再假设一个“窗口”，假设位于相机正前方，垂直于z轴，中心在z轴上，平行于x轴与y轴，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620153300698.png" alt="image-20220620153300698"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620153300698.png" alt="image-20220620153300698"></p>
 <p>图中的矩形作为我们观察世界的窗口，我们称之为视口。本质上，我们将在画布上绘制我们通过视口看到的任何内容。注意视口大小和视口到相机距离决定了从相机可以观察的角度，称为<strong>视野</strong>。</p>
-<h4 id="3-画布空间到视口空间："><a href="#3-画布空间到视口空间：" class="headerlink" title="3.画布空间到视口空间："></a>3.画布空间到视口空间：</h4><p>视口是以世界空间的单位衡量的，而画布是以像素衡量的，所以从画布到空间坐标<strong>只是比例的改变</strong>。</p>
-<h4 id="4-追踪光线："><a href="#4-追踪光线：" class="headerlink" title="4.追踪光线："></a>4.追踪光线：</h4><blockquote>
+<h4 id="3-画布空间到视口空间：">3.画布空间到视口空间：</h4>
+<p>视口是以世界空间的单位衡量的，而画布是以像素衡量的，所以从画布到空间坐标<strong>只是比例的改变</strong>。</p>
+<h4 id="4-追踪光线：">4.追踪光线：</h4>
+<blockquote>
 <p>现实世界中，光线是经过反射后到我们的眼睛中，我们可以尝试模拟场景光源中光子离开光源的路径，但这非常耗时，而且光子数量惊人，并且只有一小部分光子在通过视口后会刚好到达。这种技术称为光子追踪或光子映射。</p>
 </blockquote>
 <p>相反我们考虑，反向光线：从相机发出射线，穿过视口中的某个点，并跟踪射线的路径，直到他“击中”场景中的某个物体，这个物体就是相机通过视口那个点看到的物体。因此我们只需将<strong>该物体的颜色</strong>作为“通过该点的光的颜色”，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620155153656.png" alt="image-20220620155153656"></p>
-<h3 id="3-光："><a href="#3-光：" class="headerlink" title="3.光："></a>3.光：</h3><p>将介绍3种类型的光源，点光，方向光和环境光。</p>
-<h4 id="1-简单假设："><a href="#1-简单假设：" class="headerlink" title="1.简单假设："></a>1.简单假设：</h4><p>用单个实数i来表征任何光，i源于光的强度，使用白光从而保证事情简单。其次将忽视空气，因为在现实生活中，光源离得越远，看起来就越暗，因为空气中漂浮的粒子会在光线穿过它们时吸收部分光。</p>
-<h3 id="2-光源："><a href="#2-光源：" class="headerlink" title="2.光源："></a>2.光源：</h3><h5 id="1-点光："><a href="#1-点光：" class="headerlink" title="1.点光："></a>1.点光：</h5><p>从3D空间中的一个固定的点发射光，这个点被称为点光源的位置，点光源向每个方向均匀的发射光，这就是它被称为全向光的原因。因此，点光可以完全用位置和强度来描述。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620155153656.png" alt="image-20220620155153656"></p>
+<h3 id="3-光：">3.光：</h3>
+<p>将介绍3种类型的光源，点光，方向光和环境光。</p>
+<h4 id="1-简单假设：">1.简单假设：</h4>
+<p>用单个实数i来表征任何光，i源于光的强度，使用白光从而保证事情简单。其次将忽视空气，因为在现实生活中，光源离得越远，看起来就越暗，因为空气中漂浮的粒子会在光线穿过它们时吸收部分光。</p>
+<h3 id="2-光源：">2.光源：</h3>
+<h5 id="1-点光：">1.点光：</h5>
+<p>从3D空间中的一个固定的点发射光，这个点被称为点光源的位置，点光源向每个方向均匀的发射光，这就是它被称为全向光的原因。因此，点光可以完全用位置和强度来描述。</p>
 <p>定义向量L作为从场景中的点P到光源Q的方向，我们可以计算这个向量，称其为光向量，即Q-P。需要注意，Q是固定的，P可以是场景中的任何点，因此L对于场景中的每个点都是不同的，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620162555479.png" alt="image-20220620162555479"></p>
-<h5 id="2-方向光："><a href="#2-方向光：" class="headerlink" title="2.方向光："></a>2.方向光：</h5><p>和点光一样，方向光也有强度，但没有位置，相反它有一个固定的方向。在方向光的情况下，L是给定的，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620163037954.png" alt="image-20220620163037954"></p>
-<h5 id="3-环境光："><a href="#3-环境光：" class="headerlink" title="3.环境光："></a>3.环境光：</h5><p>不希望每个物体被直接照亮或者完全黑暗，为了突破这一限制，定义第三种光源，称之为环境光。它只以其强度为特征。我们将声明环境光为场景中的每个点贡献一些光，不管它在哪里。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620162555479.png" alt="image-20220620162555479"></p>
+<h5 id="2-方向光：">2.方向光：</h5>
+<p>和点光一样，方向光也有强度，但没有位置，相反它有一个固定的方向。在方向光的情况下，L是给定的，如图所示：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620163037954.png" alt="image-20220620163037954"></p>
+<h5 id="3-环境光：">3.环境光：</h5>
+<p>不希望每个物体被直接照亮或者完全黑暗，为了突破这一限制，定义第三种光源，称之为环境光。它只以其强度为特征。我们将声明环境光为场景中的每个点贡献一些光，不管它在哪里。</p>
 <p>一般来说，一个场景会有单个环境光（因为环境光只有一个强度值，任何数量的环境光都可以简单地组合成一个环境光）和任何数量的点光及方向光。</p>
-<h5 id="4-单点光照："><a href="#4-单点光照：" class="headerlink" title="4.单点光照："></a>4.单点光照：</h5><p>为了计算单个点的光照，我们将计算每个光源奉献的光，并将它们加在一起，得到一个代表该点接收到的光的总量的数字。然后我们可以用这个总量乘物体表面在该点的颜色，从而获得该点的着色颜色，用以代表该点接收了多少光。</p>
+<h5 id="4-单点光照：">4.单点光照：</h5>
+<p>为了计算单个点的光照，我们将计算每个光源奉献的光，并将它们加在一起，得到一个代表该点接收到的光的总量的数字。然后我们可以用这个总量乘物体表面在该点的颜色，从而获得该点的着色颜色，用以代表该点接收了多少光。</p>
 <p>我们可以根据物体反射的方式直观地将物体分为两大类：“哑光“和”闪光“物体。</p>
-<h5 id="5-漫反射："><a href="#5-漫反射：" class="headerlink" title="5.漫反射："></a>5.漫反射：</h5><p>当一束光线照射到一个哑光物体上时，光线会沿着每个方向均匀地散射回场景中，这个过程叫做漫反射，这是使哑光物体看起来无光泽的原因。另一方面，反射的光的数量取决于光线和物体表面之间的角度，这是因为光线所携带的能量必须根据角度分散在更小或更大的区域上，所以单位面积上反射到场景的能量分别更高或更低，如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620164823915.png" alt="image-20220620164823915"></p>
-<h5 id="6-镜面反射："><a href="#6-镜面反射：" class="headerlink" title="6.镜面反射："></a>6.镜面反射：</h5><p>与哑光物体不同，感知这些闪亮物体表面的方式实际上取决于你的视角。不规则物体表面是这样反射的：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620165117294.png" alt="image-20220620165117294"></p>
+<h5 id="5-漫反射：">5.漫反射：</h5>
+<p>当一束光线照射到一个哑光物体上时，光线会沿着每个方向均匀地散射回场景中，这个过程叫做漫反射，这是使哑光物体看起来无光泽的原因。另一方面，反射的光的数量取决于光线和物体表面之间的角度，这是因为光线所携带的能量必须根据角度分散在更小或更大的区域上，所以单位面积上反射到场景的能量分别更高或更低，如图所示：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620164823915.png" alt="image-20220620164823915"></p>
+<h5 id="6-镜面反射：">6.镜面反射：</h5>
+<p>与哑光物体不同，感知这些闪亮物体表面的方式实际上取决于你的视角。不规则物体表面是这样反射的：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620165117294.png" alt="image-20220620165117294"></p>
 <p>但如果表面是相对光滑的呢？如图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620165209598.png" alt="image-20220620165209598"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620165209598.png" alt="image-20220620165209598"></p>
 <p>注意在计算机图形学中，除非特殊说明，光源方向都是从场景中任意一点指向光源的方向，与物理中入射光的方向相反，是为了方便后续光照模型中的计算。</p>
 <p>但并非每一个物体是完全光滑的，所以总有一部分光线会沿着接近R的方向被反射，越是接近R，该方向反射的光线越多，物体的光泽度决定反射光线衰减的程度：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/20/ji-suan-ji-tu-xing-xue-ru-men-guang/image-20220620165525865.png" alt="image-20220620165525865"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220620165525865.png" alt="image-20220620165525865"></p>
 
                 
             </div>

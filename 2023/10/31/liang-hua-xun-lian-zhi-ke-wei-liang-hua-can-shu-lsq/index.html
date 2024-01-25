@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    1.8k
                 </div>
                 
 
@@ -501,15 +501,25 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>提示：阅读这篇文章需要了解量化训练的基本过程，详见：</p>
-<h2 id="LEARNED-STEP-SIZE-QUANTIZATION"><a href="#LEARNED-STEP-SIZE-QUANTIZATION" class="headerlink" title="LEARNED STEP SIZE QUANTIZATION"></a>LEARNED STEP SIZE QUANTIZATION</h2><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在推理时以低精度操作运行的深度网络相比高精度的替代方案具有功耗和空间优势，但需要克服精度降低时维持高准确性的挑战。在这里，我们提出了一种用于训练这种网络的方法，即学到的步长量化。该方法在使用2、3或4位精度进行权重和激活量化的模型，以及在训练能达到完全精度基准准确性的3位模型时，在ImageNet数据集上实现了迄今为止最高的准确性。</p>
+<h2 id="LEARNED-STEP-SIZE-QUANTIZATION">LEARNED STEP SIZE QUANTIZATION</h2>
+<h2 id="摘要">摘要</h2>
+<p>在推理时以低精度操作运行的深度网络相比高精度的替代方案具有功耗和空间优势，但需要克服精度降低时维持高准确性的挑战。在这里，我们提出了一种用于训练这种网络的方法，即学到的步长量化。该方法在使用2、3或4位精度进行权重和激活量化的模型，以及在训练能达到完全精度基准准确性的3位模型时，在ImageNet数据集上实现了迄今为止最高的准确性。</p>
 <p>我们的方法建立在现有的学习量化网络权重方法的基础上，通过改进量化器本身的配置方式来实现。具体而言，我们引入了一种新颖的方法来估计和缩放每个权重和激活层的量化器步长处的任务损失梯度，使其可以与其他网络参数一起学习。这种方法在给定系统所需的不同精度水平上都可以工作，并且只需要对现有的训练代码进行简单的修改。</p>
 <blockquote>
 <p>可以看出，文章是把量化参数 step size （也叫 scale）也当作参数训练，而这种量化参数也进行求导训练的技巧也叫作<strong>可微量化参数</strong>。</p>
 <p>注：在这之后，高通也发表了增强版的 LSQ+，把另一个量化参数 zero point 也进行训练，从而把 LSQ 推广到非对称量化中。</p>
 </blockquote>
-<h2 id="普通量化训练"><a href="#普通量化训练" class="headerlink" title="普通量化训练"></a>普通量化训练</h2><p>在普通量化训练中需要加入伪量化节点 (Fake Quantize)，这些节点做的事情就是把输入的 float 数据量化一遍后，再反量化回 float，以此来模拟量化误差，同时在反向传播的时候，发挥 STE 的功能，把导数回传到前面的层。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/31/liang-hua-xun-lian-zhi-ke-wei-liang-hua-can-shu-lsq/v2-a4db8c88fa80b458f54436dda98138ee_1440w.webp" alt="img"></p>
-<p>Fake Quantize 的过程可以总结成以下公式 (为了方便讲解 LSQ，这里采用 LSQ 中的对称量化的方式)：<br>$$<br>\begin{align}<br>\overline v &amp;&#x3D; \text{round}(clip(v&#x2F;s, -Q_N, Q_P)) \newline<br>\hat v &amp;&#x3D; \overline v \times s \tag{2}<br>\end{align}<br>$$<br>参数解释：</p>
+<h2 id="普通量化训练">普通量化训练</h2>
+<p>在普通量化训练中需要加入伪量化节点 (Fake Quantize)，这些节点做的事情就是把输入的 float 数据量化一遍后，再反量化回 float，以此来模拟量化误差，同时在反向传播的时候，发挥 STE 的功能，把导数回传到前面的层。</p>
+<p><img src="/medias/images/loading.gif" data-original="v2-a4db8c88fa80b458f54436dda98138ee_1440w.webp" alt="img"></p>
+<p>Fake Quantize 的过程可以总结成以下公式 (为了方便讲解 LSQ，这里采用 LSQ 中的对称量化的方式)：<br>
+$$<br>
+\begin{align}<br>
+\overline v &amp;= \text{round}(clip(v/s, -Q_N, Q_P)) \newline<br>
+\hat v &amp;= \overline v \times s \tag{2}<br>
+\end{align}<br>
+$$<br>
+参数解释：</p>
 <ul>
 <li>$v$ 是 float 的输入</li>
 <li>$\bar{v}$ 是量化后的数据 (仍然使用 float 来存储，但数值由于做了 round 操作，因此是整数)</li>
@@ -517,29 +527,60 @@
 <li>$−Q_N$ 和 $Q_P$ 分别是量化数值的最小值和最大值 (在对称量化中，$Q_N$ 、$Q_P$  通常是相等的)</li>
 <li>$s$ 是量化参数。</li>
 </ul>
-<p>由于 round 操作会带来误差，因此 $\hat{v}$ 和 $v$ 之间存在量化误差，这些误差反应到 loss 上会产生梯度，这样就可以反向传播进行学习。<strong>每次更新 weight 后</strong>，我们会得到新的 float 的数值范围，然后重新估计量化参数 $s$：<br>$$<br>s&#x3D;\frac{|v|_{max}}{Q_P} \tag{3}<br>$$<br>之后，开始新一次迭代训练。</p>
-<h2 id="LSQ"><a href="#LSQ" class="headerlink" title="LSQ"></a>LSQ</h2><h3 id="训练量化步长"><a href="#训练量化步长" class="headerlink" title="训练量化步长"></a>训练量化步长</h3><p>可以看到，上面这个过程的量化参数都是根据每一轮的权重计算出来的，而整个网络在训练的过程中只会更新权重的数值。</p>
+<p>由于 round 操作会带来误差，因此 $\hat{v}$ 和 $v$ 之间存在量化误差，这些误差反应到 loss 上会产生梯度，这样就可以反向传播进行学习。<strong>每次更新 weight 后</strong>，我们会得到新的 float 的数值范围，然后重新估计量化参数 $s$：<br>
+$$<br>
+s=\frac{|v|_{max}}{Q_P} \tag{3}<br>
+$$<br>
+之后，开始新一次迭代训练。</p>
+<h2 id="LSQ">LSQ</h2>
+<h3 id="训练量化步长">训练量化步长</h3>
+<p>可以看到，上面这个过程的量化参数都是根据每一轮的权重计算出来的，而整个网络在训练的过程中只会更新权重的数值。</p>
 <p><strong>LSQ 想做的，就是把这里的 $s$ 也放到网络的训练当中，而不是通过权重来计算。</strong></p>
 <p>也就是说，每次反向传播的时候，需要对 $s$ 求导进行更新。</p>
-<p>这个导数可以这样计算：把 (1)(2) 式统一一下得到：<br>$$<br>\begin{align} \hat v&amp;&#x3D;round(clip(v&#x2F;s, -Q_N, Q_P))\times s \newline \ &amp;&#x3D;\begin{cases}-Q_N \times s &amp; v&#x2F;s &lt;&#x3D; -Q_N \newline round(v&#x2F;s)\times s &amp; -Q_N &lt; v&#x2F;s &lt; Q_P \newline \ Q_P \times s &amp; v&#x2F;s &gt;&#x3D; Q_P \end{cases} \end{align}<br>$$<br>然后对 $s$ 求导得到：<br>$$<br>\frac{\partial \hat v}{\partial s}&#x3D; \begin{cases} -Q_N &amp; v&#x2F;s &lt;&#x3D; -Q_N \newline round(v&#x2F;s)+\frac{\partial round(v&#x2F;s)}{\partial s}\times s &amp; -Q_N&lt; v&#x2F;s&lt;Q_P \tag{6} \newline Q_P &amp; v&#x2F;s &gt;&#x3D; Q_P \newline \end{cases}<br>$$<br>$round(v&#x2F;s)$ 这一步的导数可以通过 STE 得到：<br>$$<br>\begin{align} \frac{\partial round(v&#x2F;s)}{\partial s}&amp;&#x3D;\frac{\partial (v&#x2F;s)}{\partial s} \tag{7} \newline &amp;&#x3D;-\frac{v}{s^2} \notag \end{align}<br>$$<br>最终得到论文中的求导公式：<br>$$<br>\frac{\partial \hat v}{\partial s}&#x3D; \begin{cases} -Q_N &amp; v&#x2F;s &lt;&#x3D; -Q_N \newline -\frac{v}{s}+round(v&#x2F;s) &amp; -Q_N&lt; v&#x2F;s &lt;Q_P \tag{8} \newline Q_P &amp; v&#x2F;s &gt;&#x3D; Q_P \newline \end{cases}<br>$$<br>作者在实验中发现，这种简单粗暴的训练方式有一个好处。</p>
-<p>假设把量化范围固定在 [0, 3] 区间，(即 $Q_N$&#x3D;0，、$Q_P$&#x3D;3)。下面 A 图表示量化前的 $v$ 和反量化后的 $\hat{v}$ 之间的映射关系(假设 $s$&#x3D;1)，这里面 round 采用四舍五入的原则，也就是说，在 0.5 这个地方 (图中第一道虚线)，$\hat{v}$ 是会从 0 突变到 1 的，从而带来巨大的量化误差。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/31/liang-hua-xun-lian-zhi-ke-wei-liang-hua-can-shu-lsq/image-20231031224108474.png" alt="image-20231031224108474"></p>
+<p>这个导数可以这样计算：把 (1)(2) 式统一一下得到：<br>
+$$<br>
+\begin{align} \hat v&amp;=round(clip(v/s, -Q_N, Q_P))\times s \newline \ &amp;=\begin{cases}-Q_N \times s &amp; v/s &lt;= -Q_N \newline round(v/s)\times s &amp; -Q_N &lt; v/s &lt; Q_P \newline \ Q_P \times s &amp; v/s &gt;= Q_P \end{cases} \end{align}<br>
+$$<br>
+然后对 $s$ 求导得到：<br>
+$$<br>
+\frac{\partial \hat v}{\partial s}= \begin{cases} -Q_N &amp; v/s &lt;= -Q_N \newline round(v/s)+\frac{\partial round(v/s)}{\partial s}\times s &amp; -Q_N&lt; v/s&lt;Q_P \tag{6} \newline Q_P &amp; v/s &gt;= Q_P \newline \end{cases}<br>
+$$<br>
+$round(v/s)$ 这一步的导数可以通过 STE 得到：<br>
+$$<br>
+\begin{align} \frac{\partial round(v/s)}{\partial s}&amp;=\frac{\partial (v/s)}{\partial s} \tag{7} \newline &amp;=-\frac{v}{s^2} \notag \end{align}<br>
+$$<br>
+最终得到论文中的求导公式：<br>
+$$<br>
+\frac{\partial \hat v}{\partial s}= \begin{cases} -Q_N &amp; v/s &lt;= -Q_N \newline -\frac{v}{s}+round(v/s) &amp; -Q_N&lt; v/s &lt;Q_P \tag{8} \newline Q_P &amp; v/s &gt;= Q_P \newline \end{cases}<br>
+$$<br>
+作者在实验中发现，这种简单粗暴的训练方式有一个好处。</p>
+<p>假设把量化范围固定在 [0, 3] 区间，(即 $Q_N$=0，、$Q_P$=3)。下面 A 图表示量化前的 $v$ 和反量化后的 $\hat{v}$ 之间的映射关系(假设 $s$=1)，这里面 round 采用四舍五入的原则，也就是说，在 0.5 这个地方 (图中第一道虚线)，$\hat{v}$ 是会从 0 突变到 1 的，从而带来巨大的量化误差。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231031224108474.png" alt="image-20231031224108474"></p>
 <p>因此，从 0.5 的左侧走到右侧，梯度应该是要陡然增大的。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/31/liang-hua-xun-lian-zhi-ke-wei-liang-hua-can-shu-lsq/image-20231031224211063.png" alt="image-20231031224211063"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231031224211063.png" alt="image-20231031224211063"></p>
 <p>在 B 图中，作者就对比了 QIL、PACT 和 LSQ (前面两个是另外两种可微量化参数的方法) 在这些突变处的梯度变化，结果发现，QIL 和 PACT 在突变处的梯度没有明显变化，还是按照原来的趋势走，而 LSQ 则出现了一个明显突变 (注意每条虚线右侧)。因此，LSQ 在梯度计算方面是更加合理的。</p>
-<h3 id="保持训练稳定"><a href="#保持训练稳定" class="headerlink" title="保持训练稳定"></a>保持训练稳定</h3><p>此外，作者还认为，在计算 $s$ 梯度的时候，还需要兼顾模型权重的梯度，二者差异不能过大，因此，作者设计了一个比例系数来约束 $s$ 的梯度大小：<br>$$<br>R&#x3D;\frac{\partial_s L}{s}&#x2F;\frac{||\partial_w L||}{||w||} \approx 1 \tag{9}<br>$$</p>
-<p>同时，为了保持训练稳定，作者在 $s$ 的梯度上还乘了一个缩放系数 g，对于 weight 来说，$g&#x3D;1&#x2F;\sqrt{N_W Q_P}$，对于 feature 来说，$g&#x3D;1&#x2F;\sqrt{N_F Q_P}$，$N_W$ 和 $N_F$ 分别表示 weight 和 feature 的大小。</p>
+<h3 id="保持训练稳定">保持训练稳定</h3>
+<p>此外，作者还认为，在计算 $s$ 梯度的时候，还需要兼顾模型权重的梯度，二者差异不能过大，因此，作者设计了一个比例系数来约束 $s$ 的梯度大小：<br>
+$$<br>
+R=\frac{\partial_s L}{s}/\frac{||\partial_w L||}{||w||} \approx 1 \tag{9}<br>
+$$</p>
+<p>同时，为了保持训练稳定，作者在 $s$ 的梯度上还乘了一个缩放系数 g，对于 weight 来说，$g=1/\sqrt{N_W Q_P}$，对于 feature 来说，$g=1/\sqrt{N_F Q_P}$，$N_W$ 和 $N_F$ 分别表示 weight 和 feature 的大小。</p>
 <p>而在初始化方面，作者采用 $\frac{2|v|}{\sqrt{Q_P}}$ 的方式初始化 $s$。</p>
 <p>到这里，LSQ 的要点基本讲完了，其实，精华的部分就是把$s$作为量化参数进行训练，至于后面的梯度约束、初始化等，在不同网络结构、不同任务中可能需要灵活调整，没必要完全照论文来。</p>
-<h2 id="LSQ-1"><a href="#LSQ-1" class="headerlink" title="LSQ+"></a>LSQ+</h2><p>LSQ+ 的思路和 LSQ 基本一致，就是把零点 (zero point，也叫 offset) 也变成可微参数进行训练。</p>
-<p>加入零点后，(1)(2) 式就变成了：<br>$$<br>\begin{align} \overline v&amp;&#x3D;round(clip((v-\beta)&#x2F;s, -Q_N,Q_P)) \tag{10} \newline \hat v&amp;&#x3D;\overline v \times s + \beta \tag{11} \end{align}<br>$$</p>
-<p>(高通这个零点计算方式和我之前使用的差得比较多，我自己使用的时候是遵照我之前文章的风格 $v&#x2F;s+\beta$ 来计算的，因此大家也可以灵活调整)</p>
+<h2 id="LSQ-2">LSQ+</h2>
+<p>LSQ+ 的思路和 LSQ 基本一致，就是把零点 (zero point，也叫 offset) 也变成可微参数进行训练。</p>
+<p>加入零点后，(1)(2) 式就变成了：<br>
+$$<br>
+\begin{align} \overline v&amp;=round(clip((v-\beta)/s, -Q_N,Q_P)) \tag{10} \newline \hat v&amp;=\overline v \times s + \beta \tag{11} \end{align}<br>
+$$</p>
+<p>(高通这个零点计算方式和我之前使用的差得比较多，我自己使用的时候是遵照我之前文章的风格 $v/s+\beta$ 来计算的，因此大家也可以灵活调整)</p>
 <p>之后就是按照 LSQ 的方式分别计算导数 $\frac{\partial \hat{v}}{\partial s}$ 和 $\frac{\partial \hat{v}}{\partial \beta}$，再做量化训练。</p>
 <p>论文还给出了一些初始化 $s$ 和 $\beta$ 的方式，但还是那句话，视具体任务、具体网络结构而定。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><strong><a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1902.08153">Learned Step Size Quantization</a></strong></li>
-<li><strong><a href="https://link.zhihu.com/?target=https://arxiv.org/abs/2004.09576">LSQ+: Improving low-bit quantization through learnable offsets and better initialization</a></strong></li>
-<li><a href="https://link.zhihu.com/?target=https://www.yuque.com/yahei/hey-yahei/quantization-retrain_differentiable">https://www.yuque.com/yahei/hey-yah</a></li>
+<h2 id="参考">参考</h2>
+<ul>
+<li><strong><a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1902.08153">Learned Step Size Quantization</a></strong></li>
+<li><strong><a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/2004.09576">LSQ+: Improving low-bit quantization through learnable offsets and better initialization</a></strong></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.yuque.com/yahei/hey-yahei/quantization-retrain_differentiable">https://www.yuque.com/yahei/hey-yah</a></li>
 </ul>
 
                 

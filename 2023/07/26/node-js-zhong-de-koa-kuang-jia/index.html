@@ -6,8 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Node.js中的Koa框架, QT-7274">
-    <meta name="description" content="Koa基本使用简介
-koa 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升错">
+    <meta name="description" content="Koa基本使用
+简介
+
+koa 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -501,15 +503,19 @@ koa 是由 Express 原班人马打造的，致力于成为一个更小、更富�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Koa基本使用"><a href="#Koa基本使用" class="headerlink" title="Koa基本使用"></a>Koa基本使用</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-koa-kuang-jia/143d174518b6a8dc724b126198b11f07fdac90f7.png" alt="image-20221231151037428"></p>
+                <h2 id="Koa基本使用">Koa基本使用</h2>
+<h3 id="简介">简介</h3>
+<p><img src="/medias/images/loading.gif" data-original="143d174518b6a8dc724b126198b11f07fdac90f7.png" alt="image-20221231151037428"></p>
 <p>koa 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。</p>
-<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><h4 id="安装Koa2"><a href="#安装Koa2" class="headerlink" title="安装Koa2"></a>安装Koa2</h4><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 初始化package.json
-npm init
+<h3 id="快速开始">快速开始</h3>
+<h4 id="安装Koa2">安装Koa2</h4>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 初始化package.json</span>
+<span class="token function">npm</span> init
 
-# 安装koa2 
-npm install koa<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="hello-world代码"><a href="#hello-world代码" class="headerlink" title="hello world代码"></a>hello world代码</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span>
+<span class="token comment"># 安装koa2 </span>
+<span class="token function">npm</span> <span class="token function">install</span> koa<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="hello-world代码">hello world代码</h4>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Koa</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span> <span class="token keyword">async</span> <span class="token punctuation">(</span> <span class="token parameter">ctx</span> <span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
@@ -517,19 +523,23 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-koa-kuang-jia/4a42b285b99e5ea0050fa789b7d1ab84ae181862.png" alt="image-20220417092053231"></p>
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">node index.js<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="Koa对比Express"><a href="#Koa对比Express" class="headerlink" title="Koa对比Express"></a>Koa对比Express</h3><p>通常都会说 Koa 是洋葱模型，这重点在于中间件的设计。但是按照上面的分析，会发现 Express 也是类似的，不同的是Express 中间件机制使用了 Callback 实现，这样如果出现异步则可能会使你在执行顺序上感到困惑，因此如果我们想做接口耗时统计、错误处理 Koa 的这种中间件模式处理起来更方便些。最后一点响应机制也很重要，Koa 不是立即响应，是整个中间件处理完成在最外层进行了响应，而 Express 则是立即响应</p>
-<h4 id="更轻量"><a href="#更轻量" class="headerlink" title="更轻量"></a>更轻量</h4><ul>
+<p><img src="/medias/images/loading.gif" data-original="4a42b285b99e5ea0050fa789b7d1ab84ae181862.png" alt="image-20220417092053231"></p>
+<h4 id="启动">启动</h4>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">node</span> index.js<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Koa对比Express">Koa对比Express</h3>
+<p>通常都会说 Koa 是洋葱模型，这重点在于中间件的设计。但是按照上面的分析，会发现 Express 也是类似的，不同的是Express 中间件机制使用了 Callback 实现，这样如果出现异步则可能会使你在执行顺序上感到困惑，因此如果我们想做接口耗时统计、错误处理 Koa 的这种中间件模式处理起来更方便些。最后一点响应机制也很重要，Koa 不是立即响应，是整个中间件处理完成在最外层进行了响应，而 Express 则是立即响应</p>
+<h4 id="更轻量">更轻量</h4>
+<ul>
 <li>koa 不提供内置的中间件；</li>
-<li>koa 不提供路由，而是把路由这个库分离出来了（koa&#x2F;router）</li>
+<li>koa 不提供路由，而是把路由这个库分离出来了（koa/router）</li>
 </ul>
-<h4 id="Context对象"><a href="#Context对象" class="headerlink" title="Context对象"></a>Context对象</h4><p>koa增加了一个<code>Context</code>的对象，作为这次请求的上下文对象（在koa2中作为中间件的第一个参数传入）。同时<code>Context</code>上也挂载了<code>Request</code>和<code>Response</code>两个对象。和Express类似，这两个对象都提供了大量的便捷方法辅助开发, 这样的话对于在保存一些公有的参数的话变得更加合情合理。</p>
-<h4 id="异步流程控制"><a href="#异步流程控制" class="headerlink" title="异步流程控制"></a>异步流程控制</h4><p>Express采用<code>callback</code>来处理异步， Koa v1采用<code>generator</code>，Koa v2 采用<code>async/await</code>。</p>
+<h4 id="Context对象">Context对象</h4>
+<p>koa增加了一个<code>Context</code>的对象，作为这次请求的上下文对象（在koa2中作为中间件的第一个参数传入）。同时<code>Context</code>上也挂载了<code>Request</code>和<code>Response</code>两个对象。和Express类似，这两个对象都提供了大量的便捷方法辅助开发, 这样的话对于在保存一些公有的参数的话变得更加合情合理。</p>
+<h4 id="异步流程控制">异步流程控制</h4>
+<p>Express采用<code>callback</code>来处理异步， Koa v1采用<code>generator</code>，Koa v2 采用<code>async/await</code>。</p>
 <p><code>generator</code>和<code>async/await</code>使用同步的写法来处理异步，明显好于<code>callback</code>和<code>promise</code>，</p>
-<h4 id="中间件模型"><a href="#中间件模型" class="headerlink" title="中间件模型"></a>中间件模型</h4><p>Express基于<code>connect</code>中间件，线性模型；</p>
+<h4 id="中间件模型">中间件模型</h4>
+<p>Express基于<code>connect</code>中间件，线性模型；</p>
 <p>Koa中间件采用洋葱模型（对于每个中间件，在完成了一些事情后，可以非常优雅的将控制权传递给下一个中间件，并能够等待它完成，当后续的中间件完成处理后，控制权又回到了自己）</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//同步</span>
 <span class="token keyword">var</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span>
@@ -568,7 +578,6 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
     <span class="token function">setTimeout</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span>
  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//同步</span>
 <span class="token keyword">var</span> koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa"</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">koa</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -608,8 +617,9 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 <span class="token punctuation">&#125;</span>
 
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa"</span><span class="token punctuation">)</span>
+<h3 id="路由">路由</h3>
+<h4 id="基本用法">基本用法</h4>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa"</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> Router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa-router"</span><span class="token punctuation">)</span>
 
 <span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Koa</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -620,9 +630,10 @@ router<span class="token punctuation">.</span><span class="token function">post<
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="router-allowedMethods作用"><a href="#router-allowedMethods作用" class="headerlink" title="router.allowedMethods作用"></a><code>router.allowedMethods</code>作用</h3><p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-koa-kuang-jia/354a30b8f46c9a20669beddbf29494a46e25be87.png" alt="image-20220417102845079"></p>
-<h4 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h4><p>Koa-router 请求方式： <code>get</code> 、 <code>put</code> 、 <code>post</code> 、 <code>patch</code> 、 <code>delete</code> 、 <code>del</code> ，而使用方法就是 <code>router.方式()</code> ，比如 <code>router.get()</code> 和 <code>router.post()</code> 。而 <code>router.all()</code> 会匹配所有的请求方法。</p>
+<h3 id="router-allowedMethods作用"><code>router.allowedMethods</code>作用</h3>
+<p><img src="/medias/images/loading.gif" data-original="354a30b8f46c9a20669beddbf29494a46e25be87.png" alt="image-20220417102845079"></p>
+<h4 id="请求方式">请求方式</h4>
+<p>Koa-router 请求方式： <code>get</code> 、 <code>put</code> 、 <code>post</code> 、 <code>patch</code> 、 <code>delete</code> 、 <code>del</code> ，而使用方法就是 <code>router.方式()</code> ，比如 <code>router.get()</code> 和 <code>router.post()</code> 。而 <code>router.all()</code> 会匹配所有的请求方法。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa"</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> Router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa-router"</span><span class="token punctuation">)</span>
 
@@ -645,8 +656,8 @@ router<span class="token punctuation">.</span><span class="token function">get</
 
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="拆分路由"><a href="#拆分路由" class="headerlink" title="拆分路由"></a>拆分路由</h4><p><code>routes/list.js</code></p>
+<h4 id="拆分路由">拆分路由</h4>
+<p><code>routes/list.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> Router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa-router"</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 router<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">ctx</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
@@ -662,7 +673,6 @@ router<span class="token punctuation">.</span><span class="token function">get</
     ctx<span class="token punctuation">.</span>body<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token literal-property property">ok</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token literal-property property">info</span><span class="token operator">:</span><span class="token string">"list del"</span><span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>routes/index.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> Router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa-router"</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> user <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./user"</span><span class="token punctuation">)</span>
@@ -674,7 +684,6 @@ router<span class="token punctuation">.</span><span class="token function">use</
 router<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/list'</span><span class="token punctuation">,</span> list<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> list<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>app.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"koa"</span><span class="token punctuation">)</span>
 <span class="token keyword">var</span> router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./routes"</span><span class="token punctuation">)</span>
@@ -682,11 +691,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Koa</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="路由前缀"><a href="#路由前缀" class="headerlink" title="路由前缀"></a>路由前缀</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">router<span class="token punctuation">.</span><span class="token function">prefix</span><span class="token punctuation">(</span><span class="token string">'/api'</span><span class="token punctuation">)</span>
+<h4 id="路由前缀">路由前缀</h4>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">router<span class="token punctuation">.</span><span class="token function">prefix</span><span class="token punctuation">(</span><span class="token string">'/api'</span><span class="token punctuation">)</span>
 router<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/user'</span><span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="路由重定向"><a href="#路由重定向" class="headerlink" title="路由重定向"></a>路由重定向</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">router.get(&quot;&#x2F;home&quot;,(ctx)&#x3D;&gt;&#123;
+<h4 id="路由重定向">路由重定向</h4>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">router.get(&quot;&#x2F;home&quot;,(ctx)&#x3D;&gt;&#123;
     ctx.body&#x3D;&quot;home页面&quot;
 &#125;)
 
@@ -696,8 +705,8 @@ router.redirect(&#39;&#x2F;&#39;, &#39;&#x2F;home&#39;); &#x2F;&#x2F;匹配到&#
 router.get(&quot;&#x2F;&quot;,(ctx, next)&#x3D;&gt;&#123;
     ctx.redirect(&quot;&#x2F;home&quot;)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const Koa &#x3D; require(&#39;koa&#39;)
+<h3 id="静态资源">静态资源</h3>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const Koa &#x3D; require(&#39;koa&#39;)
 const path &#x3D; require(&#39;path&#39;)
 const static &#x3D; require(&#39;koa-static&#39;)
 
@@ -710,31 +719,33 @@ app.use( async ( ctx ) &#x3D;&gt; &#123;
 &#125;)
 
 app.listen(3000)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="获取请求参数"><a href="#获取请求参数" class="headerlink" title="获取请求参数"></a>获取请求参数</h3><h4 id="get参数"><a href="#get参数" class="headerlink" title="get参数"></a>get参数</h4><p>在Koa中，获取GET请求数据源头是Koa中<code>request</code>对象中的<code>query</code>方法或<code>querystring</code>方法。</p>
+<h3 id="获取请求参数">获取请求参数</h3>
+<h4 id="get参数">get参数</h4>
+<p>在Koa中，获取GET请求数据源头是Koa中<code>request</code>对象中的<code>query</code>方法或<code>querystring</code>方法。</p>
 <p><code>query</code>返回是格式化好的参数对象，<code>querystring</code>返回的是请求字符串，由于ctx对<code>request</code>的API有直接引用的方式，所以获取GET请求数据有两个途径。</p>
 <ul>
 <li>从上下文中直接获取 请求对象<code>ctx.query</code>，返回如 <code>&#123; a:1, b:2 &#125;</code> 请求字符串<code>ctx.querystring</code>，返回如 <code>a=1&amp;b=2</code></li>
 <li>从上下文的<code>request</code>对象中获取 请求对象<code>ctx.request.query</code>，返回如 <code>&#123; a:1, b:2 &#125;</code> 请求字符串 <code>ctx.request.querystring</code>，返回如 <code>a=1&amp;b=2</code></li>
 </ul>
-<h4 id="post参数"><a href="#post参数" class="headerlink" title="post参数"></a>post参数</h4><p>对于POST请求的处理，<code>koa-bodyparser</code>中间件可以把koa2上下文的<code>formData</code>数据解析到<code>ctx.request.body</code>中</p>
+<h4 id="post参数">post参数</h4>
+<p>对于POST请求的处理，<code>koa-bodyparser</code>中间件可以把koa2上下文的<code>formData</code>数据解析到<code>ctx.request.body</code>中</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> bodyParser <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-bodyparser'</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 使用ctx.body解析中间件</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">bodyParser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="ejs模板">ejs模板</h3>
+<h4 id="安装模块">安装模块</h4>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装koa模板使用中间件</span>
+<span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">--save</span> koa-views
 
-<h3 id="ejs模板"><a href="#ejs模板" class="headerlink" title="ejs模板"></a>ejs模板</h3><h4 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h4><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 安装koa模板使用中间件
-npm install --save koa-views
-
-# 安装ejs模板引擎
-npm install --save ejs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="使用模板引擎"><a href="#使用模板引擎" class="headerlink" title="使用模板引擎"></a>使用模板引擎</h4><p><strong>文件目录</strong></p>
+<span class="token comment"># 安装ejs模板引擎</span>
+<span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">--save</span> ejs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="使用模板引擎">使用模板引擎</h4>
+<p><strong>文件目录</strong></p>
 <pre class="line-numbers language-dart" data-language="dart"><code class="language-dart">├── package<span class="token punctuation">.</span>json
 ├── index<span class="token punctuation">.</span>js
 └── view
     └── index<span class="token punctuation">.</span>ejs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>index.js</code>文件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> views <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-views'</span><span class="token punctuation">)</span>
@@ -754,7 +765,6 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>./view/index.ejs</code> 模板</p>
 <pre class="line-numbers language-ejs" data-language="ejs"><code class="language-ejs"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
@@ -766,13 +776,15 @@ app<span class="token punctuation">.</span><span class="token function">listen</
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>EJS Welcome to <span class="token ejs language-ejs"><span class="token delimiter punctuation">&lt;%=</span><span class="token language-javascript"> title </span><span class="token delimiter punctuation">%></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="cookie-amp-session"><a href="#cookie-amp-session" class="headerlink" title="cookie&amp;session"></a>cookie&amp;session</h3><h4 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h4><p>Koa提供了从上下文直接读取、写入<code>cookie</code>的方法</p>
+<h3 id="cookie-session">cookie&amp;session</h3>
+<h4 id="cookie">cookie</h4>
+<p>Koa提供了从上下文直接读取、写入<code>cookie</code>的方法</p>
 <ul>
 <li><code>ctx.cookies.get(name, [options])</code> 读取上下文请求中的<code>cookie</code></li>
 <li><code>ctx.cookies.set(name, value, [options])</code> 在上下文中写入<code>cookie</code></li>
 </ul>
-<h4 id="session"><a href="#session" class="headerlink" title="session"></a>session</h4><p><code>koa-session-minimal</code> 适用于 Koa2 的<code>session</code>中间件，提供存储介质的读写接口 。</p>
+<h4 id="session">session</h4>
+<p><code>koa-session-minimal</code> 适用于 Koa2 的<code>session</code>中间件，提供存储介质的读写接口 。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> session <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-session-minimal'</span><span class="token punctuation">)</span>
 
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">session</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -797,8 +809,9 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
         ctx<span class="token punctuation">.</span><span class="token function">redirect</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><ul>
+<h3 id="图片上传">图片上传</h3>
+<h4 id="环境">环境</h4>
+<ul>
 <li><code>koa</code>：用来起一个web服务器</li>
 <li><code>koa2-cors</code>: 解决跨域问题</li>
 <li><code>koa-router</code>: koa的路由处理</li>
@@ -806,9 +819,12 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 <li><code>koa-static</code>: 静态资源配置</li>
 <li><code>@koa/multer</code>和<code>multer</code>:图片上传的插件</li>
 </ul>
-<h4 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h4><p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-koa-kuang-jia/b515b2432db01bacbb93fe52c1dd02a6211cdbea.png" alt="image-20221231153921717"></p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><ol>
-<li><p>第一步:用<code>koa</code>+<code>koa-router</code>搭建一个简单的web服务</p>
+<h4 id="代码结构">代码结构</h4>
+<p><img src="/medias/images/loading.gif" data-original="b515b2432db01bacbb93fe52c1dd02a6211cdbea.png" alt="image-20221231153921717"></p>
+<h4 id="实现">实现</h4>
+<ol>
+<li>
+<p>第一步:用<code>koa</code>+<code>koa-router</code>搭建一个简单的web服务</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//main.js</span>
 <span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span> <span class="token comment">// 引入koa</span>
 <span class="token keyword">const</span> Router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-router'</span><span class="token punctuation">)</span> <span class="token comment">// 引入koa-router</span>
@@ -830,7 +846,8 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>接着我们新建一个upload文件夹,且在代码中加入静态内容的的代码</p>
+<li>
+<p>接着我们新建一个upload文件夹,且在代码中加入静态内容的的代码</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//mian.js 新增代码</span>
 <span class="token keyword">const</span> <span class="token keyword">static</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-static'</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
@@ -838,10 +855,10 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">static</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./upload'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>此时假如你在upload文件夹下新增一张照片便可通过<code>http://localhost:3000/***.png</code>查看到了。（***：你自己新增的照片名称加后缀）</p>
 </li>
-<li><p>此时新增一个<code>index.html</code>文件，且加入以下代码</p>
+<li>
+<p>此时新增一个<code>index.html</code>文件，且加入以下代码</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
@@ -875,7 +892,6 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
   </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>选择图片且上传会发现存在跨域问题，那么发现问题解决问题直接上代码：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//mian.js新增代码</span>
 <span class="token keyword">const</span> cors <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa2-cors'</span><span class="token punctuation">)</span>
@@ -886,7 +902,6 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
     <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">static</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./upload'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>解决完跨域后,选择图片且上传，此时咱们已经拿到传过来的数据啦，重头戏来了：<code>@koa/multer</code>使用</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> multer <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@koa/multer'</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> storage <span class="token operator">=</span> multer<span class="token punctuation">.</span><span class="token function">diskStorage</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
@@ -899,16 +914,17 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> upload <span class="token operator">=</span> <span class="token function">multer</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> storage <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>配置好后修改<code>/upload</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">router<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/upload'</span><span class="token punctuation">,</span> upload<span class="token punctuation">.</span><span class="token function">single</span><span class="token punctuation">(</span><span class="token string">'file'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">ctx</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'ctx.file'</span><span class="token punctuation">,</span>  ctx<span class="token punctuation">.</span>file<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
 <blockquote>
-<p>注意：<code>upload.single(&#39;file&#39;)</code>,中的<code>file</code>需要和上方的<code>index.html</code>中的<code>formData</code>字段一致</p>
+<p>注意：<code>upload.single('file')</code>,中的<code>file</code>需要和上方的<code>index.html</code>中的<code>formData</code>字段一致</p>
 </blockquote>
-<h3 id="记录日志"><a href="#记录日志" class="headerlink" title="记录日志"></a>记录日志</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span>
+<h3 id="记录日志">记录日志</h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> Router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-router'</span><span class="token punctuation">)</span>
 <span class="token comment">// 引入 koa-logger</span>
 <span class="token keyword">const</span> logger <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-logger'</span><span class="token punctuation">)</span>
@@ -931,7 +947,6 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'listen 3000 ok'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>在注册 <code>koa-logger</code> 中间件时可以传递一个函数，该函数有2个参数</li>
 <li><code>str</code> 是一个字符串类型，在发生请求时 <code>str</code> 包含 请求类型、请求路径信息，在发生响应时 <code>str</code> 包含 响应状态码、响应时长、响应文件大小信息。</li>

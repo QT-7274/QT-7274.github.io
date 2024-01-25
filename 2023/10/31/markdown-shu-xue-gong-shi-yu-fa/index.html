@@ -496,58 +496,66 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="如何复制知乎的数学公式"><a href="#如何复制知乎的数学公式" class="headerlink" title="如何复制知乎的数学公式"></a>如何复制知乎的数学公式</h2><p>使用Chrome浏览器，F12打开开发者模式，点击网络，点击停用缓存，将网络设置为3G低速，重新刷新网页，即可复制数学公式原始形态：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/31/markdown-shu-xue-gong-shi-yu-fa/image-20231101001716373.png" alt="image-20231101001716373"></p>
-<h2 id="行内与独行"><a href="#行内与独行" class="headerlink" title="行内与独行"></a>行内与独行</h2><ol>
+                <h2 id="如何复制知乎的数学公式">如何复制知乎的数学公式</h2>
+<p>使用Chrome浏览器，F12打开开发者模式，点击网络，点击停用缓存，将网络设置为3G低速，重新刷新网页，即可复制数学公式原始形态：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231101001716373.png" alt="image-20231101001716373"></p>
+<h2 id="行内与独行">行内与独行</h2>
+<ol>
 <li>行内公式：将公式插入到本行内，符号：<code>$公式内容$</code>，如：$xyz$</li>
 <li>独行公式：将公式插入到新的一行内，并且居中，符号：<code>$$公式内容$$</code>，如：$$xyz$$</li>
 </ol>
-<h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
+<h2 id="上标、下标与组合">上标、下标与组合</h2>
+<ol>
 <li>上标符号，符号：<code>^</code>，如：$x^4$</li>
 <li>下标符号，符号：<code>_</code>，如：$x_1$</li>
 <li>组合符号，符号：<code>&#123;&#125;</code>，如：${16}<em>{8}O{2+}</em>{2}$</li>
 </ol>
-<h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
+<h2 id="汉字、字体与格式">汉字、字体与格式</h2>
+<ol>
 <li>汉字形式，符号：<code>\mbox&#123;&#125;</code>，如：$V_{\mbox{初始}}$</li>
 <li>字体控制，符号：<code>\displaystyle</code>，如：$\displaystyle \frac{x+y}{y+z}$</li>
 <li>下划线符号，符号：<code>\underline</code>，如：$\underline{x+y}$</li>
 <li>标签，符号<code>\tag&#123;数字&#125;</code>，如：$\tag{11}$</li>
 <li>上大括号，符号：<code>\overbrace&#123;算式&#125;</code>，如：$\overbrace{a+b+c+d}^{2.0}$</li>
 <li>下大括号，符号：<code>\underbrace&#123;算式&#125;</code>，如：$a+\underbrace{b+c}_{1.0}+d$</li>
-<li>上位符号，符号：<code>\stacrel&#123;上位符号&#125;&#123;基位符号&#125;</code>，如：$\vec{x}\stackrel{\mathrm{def}}{&#x3D;}{x_1,\dots,x_n}$</li>
+<li>上位符号，符号：<code>\stacrel&#123;上位符号&#125;&#123;基位符号&#125;</code>，如：$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$</li>
 </ol>
-<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
+<h2 id="占位符">占位符</h2>
+<ol>
 <li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
 <li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
 <li>大空格，符号<code>\</code>，如：$x \  y$</li>
 <li>中空格，符号<code>\:</code>，如：$x : y$</li>
 <li>小空格，符号<code>\,</code>，如：$x , y$</li>
-<li>没有空格，符号&#96;&#96;，如：$xy$</li>
+<li>没有空格，符号``，如：$xy$</li>
 <li>紧贴，符号<code>\!</code>，如：$x ! y$</li>
 </ol>
-<h2 id="定界符与组合"><a href="#定界符与组合" class="headerlink" title="定界符与组合"></a>定界符与组合</h2><ol>
+<h2 id="定界符与组合">定界符与组合</h2>
+<ol>
 <li>括号，符号：<code>（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)</code>，如：$（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)$</li>
 <li>中括号，符号：<code>[]</code>，如：$[x+y]$</li>
 <li>大括号，符号：<code>\&#123; \&#125;</code>，如：${x+y}$</li>
 <li>自适应括号，符号：<code>\left \right</code>，如：$\left(x\right)$，$\left(x{yz}\right)$</li>
-<li>组合公式，符号：<code>&#123;上位公式 \choose 下位公式&#125;</code>，如：${n+1 \choose k}&#x3D;{n \choose k}+{n \choose k-1}$</li>
-<li>组合公式，符号：<code>&#123;上位公式 \atop 下位公式&#125;</code>，如：$\sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots&#x3D;n}A_{k_0}A_{k_1}\cdots$</li>
+<li>组合公式，符号：<code>&#123;上位公式 \choose 下位公式&#125;</code>，如：${n+1 \choose k}={n \choose k}+{n \choose k-1}$</li>
+<li>组合公式，符号：<code>&#123;上位公式 \atop 下位公式&#125;</code>，如：$\sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A_{k_0}A_{k_1}\cdots$</li>
 </ol>
-<h2 id="四则运算"><a href="#四则运算" class="headerlink" title="四则运算"></a>四则运算</h2><ol>
-<li>加法运算，符号：<code>+</code>，如：$x+y&#x3D;z$</li>
-<li>减法运算，符号：<code>-</code>，如：$x-y&#x3D;z$</li>
-<li>加减运算，符号：<code>\pm</code>，如：$x \pm y&#x3D;z$</li>
-<li>减甲运算，符号：<code>\mp</code>，如：$x \mp y&#x3D;z$</li>
-<li>乘法运算，符号：<code>\times</code>，如：$x \times y&#x3D;z$</li>
-<li>点乘运算，符号：<code>\cdot</code>，如：$x \cdot y&#x3D;z$</li>
-<li>星乘运算，符号：<code>\ast</code>，如：$x \ast y&#x3D;z$</li>
-<li>除法运算，符号：<code>\div</code>，如：$x \div y&#x3D;z$</li>
-<li>斜法运算，符号：<code>/</code>，如：$x&#x2F;y&#x3D;z$</li>
+<h2 id="四则运算">四则运算</h2>
+<ol>
+<li>加法运算，符号：<code>+</code>，如：$x+y=z$</li>
+<li>减法运算，符号：<code>-</code>，如：$x-y=z$</li>
+<li>加减运算，符号：<code>\pm</code>，如：$x \pm y=z$</li>
+<li>减甲运算，符号：<code>\mp</code>，如：$x \mp y=z$</li>
+<li>乘法运算，符号：<code>\times</code>，如：$x \times y=z$</li>
+<li>点乘运算，符号：<code>\cdot</code>，如：$x \cdot y=z$</li>
+<li>星乘运算，符号：<code>\ast</code>，如：$x \ast y=z$</li>
+<li>除法运算，符号：<code>\div</code>，如：$x \div y=z$</li>
+<li>斜法运算，符号：<code>/</code>，如：$x/y=z$</li>
 <li>分式表示，符号：<code>\frac&#123;分子&#125;&#123;分母&#125;</code>，如：$\frac{x+y}{y+z}$</li>
 <li>分式表示，符号：<code>&#123;分子&#125; \voer &#123;分母&#125;</code>，如：${x+y} \over {y+z}$</li>
 <li>绝对值表示，符号：<code>||</code>，如：$|x+y|$</li>
 </ol>
-<h2 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h2><ol>
+<h2 id="高级运算">高级运算</h2>
+<ol>
 <li>平均数运算，符号：<code>\overline&#123;算式&#125;</code>，如：$\overline{xyz}$</li>
 <li>开二次方运算，符号：<code>\sqrt</code>，如：$\sqrt x$</li>
 <li>开方运算，符号：<code>\sqrt[开方数]&#123;被开方数&#125;</code>，如：$\sqrt[3]{x+y}$</li>
@@ -561,8 +569,9 @@
 <li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
 <li>矩阵表示，符号：<code>\begin&#123;matrix&#125; \end&#123;matrix&#125;</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;4\5 &amp;6 &amp;\cdots &amp;8\vdots &amp;\vdots &amp;\ddots &amp;\vdots\13 &amp;14 &amp;\cdots &amp;16\end{matrix} \right]$</li>
 </ol>
-<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
-<li>等于运算，符号：<code>=</code>，如：$x+y&#x3D;z$</li>
+<h2 id="逻辑运算">逻辑运算</h2>
+<ol>
+<li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>
 <li>大于运算，符号：<code>&gt;</code>，如：$x+y&gt;z$</li>
 <li>小于运算，符号：<code>&lt;</code>，如：$x+y&lt;z$</li>
 <li>大于等于运算，符号：<code>\geq</code>，如：$x+y \geq z$</li>
@@ -575,7 +584,8 @@
 <li>约等于运算，符号：<code>\approx</code>，如：$x+y \approx z$</li>
 <li>恒定等于运算，符号：<code>\equiv</code>，如：$x+y \equiv z$</li>
 </ol>
-<h2 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h2><ol>
+<h2 id="集合运算">集合运算</h2>
+<ol>
 <li>属于运算，符号：<code>\in</code>，如：$x \in y$</li>
 <li>不属于运算，符号：<code>\notin</code>，如：$x \notin y$</li>
 <li>不属于运算，符号：<code>\not\in</code>，如：$x \not\in y$</li>
@@ -596,7 +606,8 @@
 <li>自然数集合，符号：<code>\mathbb&#123;Z&#125;</code>，如：<code>\mathbb&#123;Z&#125;</code></li>
 <li>空集，符号：<code>\emptyset</code>，如：$\emptyset$</li>
 </ol>
-<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><ol>
+<h2 id="数学符号">数学符号</h2>
+<ol>
 <li>无穷，符号：<code>\infty</code>，如：$\infty$</li>
 <li>虚数，符号：<code>\imath</code>，如：$\imath$</li>
 <li>虚数，符号：<code>\jmath</code>，如：$\jmath$</li>
@@ -624,7 +635,8 @@
 <li>竖直对齐的省略号，符号：<code>\vdots</code>，如：$\vdots$</li>
 <li>斜对齐的省略号，符号：<code>\ddots</code>，如：$\ddots$</li>
 </ol>
-<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h2><table>
+<h2 id="希腊字母">希腊字母</h2>
+<table>
 <thead>
 <tr>
 <th>字母</th>
@@ -633,7 +645,8 @@
 <th>实现</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>A</td>
 <td><code>A</code></td>
 <td>α</td>
@@ -777,8 +790,12 @@
 <td>ω</td>
 <td><code>\omega</code></td>
 </tr>
-</tbody></table>
-<p>作者：DanielGavin<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e74eb43960a1">https://www.jianshu.com/p/e74eb43960a1</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</tbody>
+</table>
+<p>作者：DanielGavin<br>
+链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e74eb43960a1">https://www.jianshu.com/p/e74eb43960a1</a><br>
+来源：简书<br>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 
                 
             </div>

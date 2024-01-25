@@ -495,7 +495,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="PCA（主成分分析）算法介绍"><a href="#PCA（主成分分析）算法介绍" class="headerlink" title="PCA（主成分分析）算法介绍"></a>PCA（主成分分析）算法介绍</h2><p>PCA是多元统计同用来分析数据的一种方法。通过<strong>正交变换</strong>将一组可能存在相关性的变量转换为一组线性不相关的向量，转换后的这组变量叫做主成分。</p>
+                <h2 id="PCA（主成分分析）算法介绍">PCA（主成分分析）算法介绍</h2>
+<p>PCA是多元统计同用来分析数据的一种方法。通过<strong>正交变换</strong>将一组可能存在相关性的变量转换为一组线性不相关的向量，转换后的这组变量叫做主成分。</p>
 <p>而这个转换的过程中，可以<strong>丢弃</strong>很多相关的成分或者对描述这个物体不重要的成分。<strong>从而达到对原始数据降维，提取重要特征的目的。</strong></p>
 <p><strong>为什么要降维？</strong></p>
 <blockquote>
@@ -504,29 +505,40 @@
 <li>去掉冗余，显现特征</li>
 </ol>
 </blockquote>
-<h3 id="基本知识："><a href="#基本知识：" class="headerlink" title="基本知识："></a>基本知识：</h3><p>首先需要知道几个相关的数学概念，这是我们进行PCA分析的基础：标准差（Standard Deviation）、方差（Variance）、协方差（Covariance）、特征向量（eigenvectors）、特征值（eigenvalues）</p>
+<h3 id="基本知识：">基本知识：</h3>
+<p>首先需要知道几个相关的数学概念，这是我们进行PCA分析的基础：标准差（Standard Deviation）、方差（Variance）、协方差（Covariance）、特征向量（eigenvectors）、特征值（eigenvalues）</p>
 <ol>
-<li><h3 id="Standard-Deviation（标准差）"><a href="#Standard-Deviation（标准差）" class="headerlink" title="Standard Deviation（标准差）"></a>Standard Deviation（标准差）</h3><p>标准差就是用来描述<strong>一组数据与平均值的偏离程度</strong>，反映了一组数据的<strong>波动情况</strong>，平均值数学表达公式如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181158607.png" alt="image-20220918181158607"></p>
+<li>
+<h3 id="Standard-Deviation（标准差）">Standard Deviation（标准差）</h3>
+<p>标准差就是用来描述<strong>一组数据与平均值的偏离程度</strong>，反映了一组数据的<strong>波动情况</strong>，平均值数学表达公式如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918181158607.png" alt="image-20220918181158607"></p>
 <p>标准差的表达公式如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181218236.png" alt="image-20220918181218236"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918181218236.png" alt="image-20220918181218236"></p>
 <p>需要注意的是分母是选择<code>n</code>还是<code>n-1</code>，取决于你选取的数据是整个完整数据还是数据中的一部分。</p>
 </li>
-<li><h3 id="Variance（方差）"><a href="#Variance（方差）" class="headerlink" title="Variance（方差）"></a>Variance（方差）</h3><p>方差是数据集中数据分布的另一种度量。实际上，它几乎与标准差相同。</p>
+<li>
+<h3 id="Variance（方差）">Variance（方差）</h3>
+<p>方差是数据集中数据分布的另一种度量。实际上，它几乎与标准差相同。</p>
 <p>方差的数学表达公式如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181303373.png" alt="image-20220918181303373"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918181303373.png" alt="image-20220918181303373"></p>
 </li>
-<li><h3 id="Covariance（协方差）"><a href="#Covariance（协方差）" class="headerlink" title="Covariance（协方差）"></a>Covariance（协方差）</h3><p>标准差与方差只针对一维数据进行衡量的指标，协方差是<strong>针对二维数据或者是更高维的数据</strong>进行的衡量指标，主要用来表示<strong>多维度与平均值的偏离程度</strong>。</p>
+<li>
+<h3 id="Covariance（协方差）">Covariance（协方差）</h3>
+<p>标准差与方差只针对一维数据进行衡量的指标，协方差是<strong>针对二维数据或者是更高维的数据</strong>进行的衡量指标，主要用来表示<strong>多维度与平均值的偏离程度</strong>。</p>
 <p>协方差的数学表达公式如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181435902.png" alt="image-20220918181435902"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918181435902.png" alt="image-20220918181435902"></p>
 </li>
-<li><h3 id="The-covariance-Matrix（协方差矩阵）"><a href="#The-covariance-Matrix（协方差矩阵）" class="headerlink" title="The covariance Matrix（协方差矩阵）"></a>The covariance Matrix（协方差矩阵）</h3><p>协方差矩阵主要是用于当数据的维度超过3或者更多的时候，我们可以通过<strong>一个矩阵来存储各个维度的协方差</strong>，这个矩阵就被称为“协方差矩阵”。</p>
+<li>
+<h3 id="The-covariance-Matrix（协方差矩阵）">The covariance Matrix（协方差矩阵）</h3>
+<p>协方差矩阵主要是用于当数据的维度超过3或者更多的时候，我们可以通过<strong>一个矩阵来存储各个维度的协方差</strong>，这个矩阵就被称为“协方差矩阵”。</p>
 <p>用数学方法来表示一个N为数据的协方差矩阵可以表示为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181804542.png" alt="image-20220918181804542"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918181804542.png" alt="image-20220918181804542"></p>
 <p>现在假设我们有一个三个维度的数据，使用一个协方差矩阵将这三维数据的协方差表示如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918181822893.png" alt="image-20220918181822893"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918181822893.png" alt="image-20220918181822893"></p>
 </li>
-<li><h3 id="Eigenvectors（特征向量）"><a href="#Eigenvectors（特征向量）" class="headerlink" title="Eigenvectors（特征向量）"></a>Eigenvectors（特征向量）</h3><p>在矩阵论中，我们可以这样去理解特征值和特征向量，一个矩阵由一个变换到另一个矩阵，Aα&#x3D;λα，其中α称为矩阵A 的一个特征向量，λ称为矩阵A的一个特征值。</p>
+<li>
+<h3 id="Eigenvectors（特征向量）">Eigenvectors（特征向量）</h3>
+<p>在矩阵论中，我们可以这样去理解特征值和特征向量，一个矩阵由一个变换到另一个矩阵，Aα=λα，其中α称为矩阵A 的一个特征向量，λ称为矩阵A的一个特征值。</p>
 <blockquote>
 <p><strong>特征向量确定了矩阵变换的方向，特征值确定了矩阵变换的比例。</strong></p>
 </blockquote>
@@ -534,21 +546,25 @@
 <p>协方差矩阵的特征向量代表的意思是<strong>方差最大的数据所在的方向</strong>。</p>
 <p>在n维数据空间中，第一特征向量指向的是<strong>数据方差最大的方向</strong>，第二特征向量是与第一特征向量垂直的数据方差最大的方向，第三特征向量是与第二特征向量垂直的数据方差最大的方向，以此类推。</p>
 </li>
-<li><h3 id="Choosing-components-and-forming-a-feature-vector（选择主成分并生成特征向量）"><a href="#Choosing-components-and-forming-a-feature-vector（选择主成分并生成特征向量）" class="headerlink" title="Choosing components and forming a feature vector（选择主成分并生成特征向量）"></a>Choosing components and forming a feature vector（选择主成分并生成特征向量）</h3><blockquote>
+<li>
+<h3 id="Choosing-components-and-forming-a-feature-vector（选择主成分并生成特征向量）">Choosing components and forming a feature vector（选择主成分并生成特征向量）</h3>
+<blockquote>
 <p>一个协方差矩阵有着不同的特征值与特征向量，事实上<strong>最高特征值的对应的特征向量就是这个数据集的主成分</strong>。</p>
 </blockquote>
 <p>通常来说，一旦协方差矩阵的特征值和特征向量被计算出来了之后，就是按照特征值的大小从高到低依次排列。特征值的大小确定了主成分的重要性。</p>
 </li>
 </ol>
-<h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><p>PCA原理就是将一个高维向量<em><strong>x</strong></em>,通过一个特殊的特征向量矩阵<em><strong>U</strong></em>，投影到一个低维的向量空间中，表征为一个低维向量<em><strong>y</strong></em>，并且仅仅损失了一些次要信息。</p>
+<h3 id="原理：">原理：</h3>
+<p>PCA原理就是将一个高维向量<em><strong>x</strong></em>,通过一个特殊的特征向量矩阵<em><strong>U</strong></em>，投影到一个低维的向量空间中，表征为一个低维向量<em><strong>y</strong></em>，并且仅仅损失了一些次要信息。</p>
 <blockquote>
 <p>也就是说，<strong>通过低维表征的向量和特征向量矩阵，可以基本重构出所对应的原始高维向量。</strong></p>
 <p>即<strong>选择特征值较大的作为主成分，从而进行降维。</strong></p>
 </blockquote>
 <p>比如：一开始你的数据集是N维的，在进行了协方差矩阵的特征值计算后， 你得到了N个特征值和与这些特征值相对应的特征向量。然后在主成分分析时，你选取了前P个较大的特征值，如此一来，就将原来N维的数据降维到只有P维。这样就起到了降维的效果了。</p>
-<h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><p>其方法主要是通过<strong>对协方差矩阵进行特征分解</strong>，以得出数据的主成分（即<strong>特征向量</strong>）与它们的权值（即<strong>特征值</strong>）。</p>
+<h3 id="方法：">方法：</h3>
+<p>其方法主要是通过<strong>对协方差矩阵进行特征分解</strong>，以得出数据的主成分（即<strong>特征向量</strong>）与它们的权值（即<strong>特征值</strong>）。</p>
 <p>计算新生成的数据集的公式如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918182958926.png" alt="image-20220918182958926"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918182958926.png" alt="image-20220918182958926"></p>
 <p>其中rowFeatureVector是由<strong>模式矢量作为列组成的矩阵</strong>的<strong>转置</strong>，因此它的行就是原来的模式矢量，而且对应<strong>最大特征值的特征矢量在该矩阵的最上一行</strong>。rowdataAdjust是<strong>每一维数据减去均值后，所组成矩阵的转置</strong>，即数据项目在每一列中，每一行是一维，对我们的样本来说即是，第一行为x维上数据，第二行为y维上的数据。</p>
 <p>正是由于特征向量是两两正交的，那么我们就可以使用任何的特征向量来<strong>将原始数据变换到正交的这些坐标轴</strong>上。</p>
 <p>在计算出协方差矩阵的特征值及特征向量后，接下来，我们<strong>选取一个较大的特征值对应的特征向量将原始数据降到一维</strong>：</p>
@@ -556,34 +572,44 @@
 <p><strong>将较大的特征值对应的特征向量转置然后乘以原始数据集，这样就得到新的降维后的一维数据。</strong></p>
 </blockquote>
 <p>换而言之，PCA提供了一种降低数据维度的有效办法；如果分析者在原数据中除掉最小的特征值所对应的成分，那么所得的低维度数据必定是最优化的（也即，这样降低维度必定是失去讯息最少的方法）。主成分分析在分析复杂数据时尤为有用，比如人脸识别。</p>
-<h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><p>设有m条n维数据（训练集）：</p>
+<h3 id="步骤：">步骤：</h3>
+<p>设有m条n维数据（训练集）：</p>
 <ol>
 <li>将原始数据按列组成n行m列矩阵X</li>
 <li>将X的每一行（代表一个属性字段）进行零均值化，即减去这一行的均值</li>
-<li>求出协方差矩阵C&#x3D;(1&#x2F;m)XX^T（实对称矩阵）</li>
+<li>求出协方差矩阵C=(1/m)XX^T（实对称矩阵）</li>
 <li>求出协方差矩阵的特征值及对应的特征向量</li>
 <li>将特征向量按对应特征值大小从上到下按行排列成矩阵，取前k行组成矩阵P</li>
-<li>Y&#x3D;PX 即为降维到k维后的数据</li>
+<li>Y=PX 即为降维到k维后的数据</li>
 </ol>
-<h2 id="PCA应用–人脸识别"><a href="#PCA应用–人脸识别" class="headerlink" title="PCA应用–人脸识别"></a>PCA应用–人脸识别</h2><p>主要思想就是用主成分分析的思想将图像从欧氏空间降维映射到特征空间中，根据<strong>不同人脸图像在特征空间中的度量距离来判断其相似度</strong>，从而实现人脸识别。</p>
-<h3 id="主要流程："><a href="#主要流程：" class="headerlink" title="主要流程："></a>主要流程：</h3><p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184204177.png" alt="image-20220918184204177"></p>
+<h2 id="PCA应用–人脸识别">PCA应用–人脸识别</h2>
+<p>主要思想就是用主成分分析的思想将图像从欧氏空间降维映射到特征空间中，根据<strong>不同人脸图像在特征空间中的度量距离来判断其相似度</strong>，从而实现人脸识别。</p>
+<h3 id="主要流程：">主要流程：</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918184204177.png" alt="image-20220918184204177"></p>
 <p>通过上图的PCA人脸识别流程可以看出，PCA方法可以总结为以下几个阶段：训练样本、特征提取、构造特征空间、投影计算。</p>
-<h3 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h3><ol>
-<li><p>使用ORL数据库。人脸图像总样本为（Q&#x3D;400），共有P（P&#x3D;40）个人，每人人均L（L&#x3D;10）幅图像，每张图像大小为 112 x 92 &#x3D; 10304。</p>
+<h3 id="步骤：-2">步骤：</h3>
+<ol>
+<li>
+<p>使用ORL数据库。人脸图像总样本为（Q=400），共有P（P=40）个人，每人人均L（L=10）幅图像，每张图像大小为 112 x 92 = 10304。</p>
 </li>
-<li><p>对每张图片进行矢量化处理。其中Xi为由第i个人的图像的每一列向量堆叠而成的一列M*N维列向量，即把矩阵向量化。需要注意的是，由于每个人都有L张图像，所以Xi对应的是每个人的平均脸，其中Xij为第i个人第j个样本：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184801736.png" alt="image-20220918184801736"></p>
+<li>
+<p>对每张图片进行矢量化处理。其中Xi为由第i个人的图像的每一列向量堆叠而成的一列M*N维列向量，即把矩阵向量化。需要注意的是，由于每个人都有L张图像，所以Xi对应的是每个人的平均脸，其中Xij为第i个人第j个样本：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918184801736.png" alt="image-20220918184801736"></p>
 </li>
-<li><p>计算所有训练图像的平均脸：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184914111.png" alt="image-20220918184914111"></p>
+<li>
+<p>计算所有训练图像的平均脸：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918184914111.png" alt="image-20220918184914111"></p>
 </li>
-<li><p>计算每张人脸与平均脸的差值（去均值）：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184940831.png" alt="image-20220918184940831"></p>
+<li>
+<p>计算每张人脸与平均脸的差值（去均值）：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918184940831.png" alt="image-20220918184940831"></p>
 </li>
-<li><p>构造协方差矩阵：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918184952241.png" alt="image-20220918184952241"></p>
+<li>
+<p>构造协方差矩阵：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918184952241.png" alt="image-20220918184952241"></p>
 </li>
-<li><p>是求解协方差矩阵的特征值和特征向量，构造特征脸：</p>
+<li>
+<p>是求解协方差矩阵的特征值和特征向量，构造特征脸：</p>
 <ul>
 <li>求出协方差矩阵的特征向量<em><strong>ui</strong></em>和对应的特征值<em><strong>λi</strong></em>，这些特征向量组成的矩阵<em><strong>U</strong></em>就是人脸空间的正交基底，用它们的线性组合可以重构出样本中任意的人脸图像。<strong>并且图像信息集中在特征值大的特征向量中，即使丢弃特征值小的向量也不会影响图像质量</strong>：</li>
 </ul>
@@ -591,12 +617,14 @@
 <p>为什么用特征向量和特征值的线性组合可以重构出样本中任意的人脸图像？</p>
 </blockquote>
 <ol>
-<li><p>在人脸识别过程中，对输入的一个测试样本x，求出它与平均脸的偏差，则这个偏差在特征脸空间U的投影，可以表示为系数向量y：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918191044392.png" alt="image-20220918191044392"></p>
-<p>U的维数为M×d（d为特征值个数），偏差的维数为M×1，y的维数为d×1。若<strong>M</strong>为200*200&#x3D;40000维，取200个主成分，即200个特征向量，则最后投影的系数向量y维数降维200维。</p>
+<li>
+<p>在人脸识别过程中，对输入的一个测试样本x，求出它与平均脸的偏差，则这个偏差在特征脸空间U的投影，可以表示为系数向量y：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918191044392.png" alt="image-20220918191044392"></p>
+<p>U的维数为M×d（d为特征值个数），偏差的维数为M×1，y的维数为d×1。若<strong>M</strong>为200*200=40000维，取200个主成分，即200个特征向量，则最后投影的系数向量y维数降维200维。</p>
 </li>
-<li><p>根据上述式子，可以得出：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918191404110.png" alt="image-20220918191404110"></p>
+<li>
+<p>根据上述式子，可以得出：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918191404110.png" alt="image-20220918191404110"></p>
 <p>这里的x就是根据投影系数向量y重构出的人脸图像，丢失了部分图像信息，但不会影响图像质量。</p>
 </li>
 </ol>
@@ -608,7 +636,8 @@
 </ul>
 </li>
 </ol>
-<h3 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h3><p>首先定义一个函数用于将人脸图像矢量化为一个向量，向量的大小与图片的像素有关，代码如下：</p>
+<h3 id="代码实现：">代码实现：</h3>
+<p>首先定义一个函数用于将人脸图像矢量化为一个向量，向量的大小与图片的像素有关，代码如下：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 图片矢量化</span>
 <span class="token keyword">def</span> <span class="token function">img2vector</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span><span class="token punctuation">:</span>
     img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span>image<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># 读取图片</span>
@@ -616,7 +645,6 @@
     imgVector <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> rows <span class="token operator">*</span> cols<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#初始值均设置为0，大小就是图片像素的大小</span>
     imgVector <span class="token operator">=</span> np<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> rows <span class="token operator">*</span> cols<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#使用imgVector变量作为一个向量存储图片矢量化信息</span>
     <span class="token keyword">return</span> imgVector<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>接下来定义一个函数用来选取训练图片，并对每张图片进行前面定义过的矢量化处理：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">load_orl</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token comment">#参数K代表选择K张图片作为训练图片使用</span>
     <span class="token triple-quoted-string string">'''
@@ -645,7 +673,6 @@
                 test_label<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">10</span> <span class="token operator">-</span> k<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>j <span class="token operator">-</span> k<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> people_num
 
     <span class="token keyword">return</span> train_face<span class="token punctuation">,</span> train_label<span class="token punctuation">,</span> test_face<span class="token punctuation">,</span> test_label<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>前期将所有训练图片矢量化之后，开始进行PCA算法的降维操作：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">PCA</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token comment">#参数r代表降低到r维</span>
     data <span class="token operator">=</span> np<span class="token punctuation">.</span>float32<span class="token punctuation">(</span>np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -661,7 +688,6 @@
 
     final_data <span class="token operator">=</span> A <span class="token operator">*</span> V_r
     <span class="token keyword">return</span> final_data<span class="token punctuation">,</span> data_mean<span class="token punctuation">,</span> V_r<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>最后我们进行初次训练，随机选取每个人物的五张图片作为训练图片使用。将降低的维数设定为10维，查看一下训练效果如何：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">face_recongize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
   <span class="token comment">#对每一个人随机选取5张照片作为训练数据</span>
@@ -697,11 +723,10 @@
 
   <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'当对每个人随机选择%d张照片降低至%d维进行训练时，The classify accuracy is: %.2f%%'</span> <span class="token operator">%</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span> accuracy <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>最终训练得到的结果如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918193440884.png" alt="image-20220918193440884"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918193440884.png" alt="image-20220918193440884"></p>
 <p>为了对比实验，我们分别选取5张、7张、9张，还是降低到10维进行对比实验：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/18/pca-suan-fa-zai-ren-lian-shi-bie-zhong-de-ying-yong/image-20220918193452524.png" alt="image-20220918193452524"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220918193452524.png" alt="image-20220918193452524"></p>
 
                 
             </div>

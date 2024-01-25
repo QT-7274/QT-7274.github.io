@@ -496,36 +496,42 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="知识蒸馏（Knowledge-Distillation"><a href="#知识蒸馏（Knowledge-Distillation" class="headerlink" title="知识蒸馏（Knowledge Distillation)"></a>知识蒸馏（Knowledge Distillation)</h2><p>知识蒸馏通常用于模型压缩，用一个已经训练好的模型A去“教”另外一个模型B。这两个模型称为老师-学生模型。</p>
+                <h2 id="知识蒸馏（Knowledge-Distillation">知识蒸馏（Knowledge Distillation)</h2>
+<p>知识蒸馏通常用于模型压缩，用一个已经训练好的模型A去“教”另外一个模型B。这两个模型称为老师-学生模型。</p>
 <p>通常模型A比模型B更强。在模型A的帮助下，模型B可以突破自我，学得更好。</p>
-<h3 id="PyTorch相关函数"><a href="#PyTorch相关函数" class="headerlink" title="PyTorch相关函数"></a>PyTorch相关函数</h3><p>•Softmax：将一个数值序列映射到概率空间</p>
+<h3 id="PyTorch相关函数">PyTorch相关函数</h3>
+<p>•Softmax：将一个数值序列映射到概率空间</p>
 <p>•log_softmax：在softmax的基础上取对数</p>
 <p>•NLLLoss：对log_softmax与one-hot进行计算</p>
 <p>•CrossEntropy：衡量两个概率分布的差别</p>
-<h4 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h4><p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027220753202.png" alt="image-20231027220753202"></p>
+<h4 id="Softmax">Softmax</h4>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027220753202.png" alt="image-20231027220753202"></p>
 <p>例如：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027220840530.png" alt="image-20231027220840530"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027220840530.png" alt="image-20231027220840530"></p>
 <blockquote>
 <p>注意：此处的 <code>output</code> 仅仅是一个得分，即得分越大，神经网络认为其更属于该类。</p>
 </blockquote>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027221022874.png" alt="image-20231027221022874"></p>
-<h4 id="log-softmax"><a href="#log-softmax" class="headerlink" title="log_softmax"></a>log_softmax</h4><p>这个很好理解，其实就是对softmax处理之后的结果执行一次对数运算。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027221022874.png" alt="image-20231027221022874"></p>
+<h4 id="log-softmax">log_softmax</h4>
+<p>这个很好理解，其实就是对softmax处理之后的结果执行一次对数运算。</p>
 <p>可以理解为 <code>log(softmax(output))</code></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027221209144.png" alt="image-20231027221209144"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027221209144.png" alt="image-20231027221209144"></p>
 <blockquote>
 <p>注意：由于softmax返回的是概率，即0-1之间的数，那么0-1之间的数取对数当然就是负数了。</p>
 <p>那么我们什么时候需要用到这个函数呢？</p>
 <p>一种常见的情况是在<strong>多类别分类任务</strong>中使用交叉熵损失函数（例如下文提及到的NLLLoss负对数似然损失函数）。交叉熵损失函数需要输入为对数概率，而不是原始概率。因此，在训练模型时，经常需要将模型的输出转换为对数概率。</p>
 </blockquote>
-<h4 id="NLLLoss"><a href="#NLLLoss" class="headerlink" title="NLLLoss"></a>NLLLoss</h4><p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027222353355.png" alt="image-20231027222353355"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027222711821.png" alt="image-20231027222711821"></p>
+<h4 id="NLLLoss">NLLLoss</h4>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027222353355.png" alt="image-20231027222353355"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027222711821.png" alt="image-20231027222711821"></p>
 <p>例如上图中的 torch.tensor([0]) 代表这张图片真实的结果所在的标签，即它是属于第0类的，那么该函数就会返回一个损失值。</p>
 <p>其实计算的方法非常简单，就是在 [-1.2,  -2,  -3] 中找到下标为0的数，然后取负数。</p>
 <p><strong>通常我们结合 log_softmax 和 nll_loss一起用</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027223749825.png" alt="image-20231027223749825"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027223749825.png" alt="image-20231027223749825"></p>
 <p>例如上图，神经网络认为输出中索引为2的值得分最高，如果真实数据的标签也是索引为2，那么神经网络就认为输出属于索引为2的这一类的概率是最大的，所以损失就是最小的。</p>
-<h4 id="CrossEntropy"><a href="#CrossEntropy" class="headerlink" title="CrossEntropy"></a>CrossEntropy</h4><p><strong>在分类问题中，CrossEntropy等价于log_softmax 结合 nll_loss</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027224501903.png" alt="image-20231027224501903"></p>
+<h4 id="CrossEntropy">CrossEntropy</h4>
+<p><strong>在分类问题中，CrossEntropy等价于log_softmax 结合 nll_loss</strong></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027224501903.png" alt="image-20231027224501903"></p>
 <p>例如上图，我们已经知道 NLLLoss 返回的结果越大，说明此数据和真实数据相差的程度就越大，从而它们两个的乘积就会越大；如果二者相等，那么乘积就会变成0。</p>
 <blockquote>
 <p>one-hot编码形式：</p>
@@ -535,23 +541,24 @@
 <p>- 蓝色: [0, 1, 0]</p>
 <p>- 绿色: [0, 0, 1]</p>
 </blockquote>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>log_softmax + NLLLoss 等价于 CrossEntropy</strong></p>
+<h3 id="总结">总结</h3>
+<p><strong>log_softmax + NLLLoss 等价于 CrossEntropy</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">output <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1.2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 target <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
 log_sm_output <span class="token operator">=</span> F<span class="token punctuation">.</span>log_softmax<span class="token punctuation">(</span>output<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
 nll_loss_of_log_sm_output <span class="token operator">=</span> F<span class="token punctuation">.</span>nll_loss<span class="token punctuation">(</span>log_sm_output<span class="token punctuation">,</span> target<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>nll_loss_of_log_sm_output<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">output <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1.2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 target <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
 ce_loss <span class="token operator">=</span> F<span class="token punctuation">.</span>cross_entropy<span class="token punctuation">(</span>output<span class="token punctuation">,</span> target<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>ce_loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>两者计算结果都是一样的。</p>
-<h3 id="Softmax相关知识"><a href="#Softmax相关知识" class="headerlink" title="Softmax相关知识"></a>Softmax相关知识</h3><ul>
-<li><p>初始实现</p>
+<h3 id="Softmax相关知识">Softmax相关知识</h3>
+<ul>
+<li>
+<p>初始实现</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
 <span class="token keyword">def</span> <span class="token function">softmax</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -563,7 +570,8 @@ output <span class="token operator">=</span> np<span class="token punctuation">.
 
 <span class="token comment"># [0.02590865 0.11611453 0.85797681]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>改造升级</p>
+<li>
+<p>改造升级</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">softmax_t</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> t<span class="token punctuation">)</span><span class="token punctuation">:</span>
     x_exp <span class="token operator">=</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span>x <span class="token operator">/</span> t<span class="token punctuation">)</span>
     <span class="token keyword">return</span> x_exp <span class="token operator">/</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>x_exp<span class="token punctuation">)</span>
@@ -572,13 +580,13 @@ output <span class="token operator">=</span> np<span class="token punctuation">.
 <span class="token keyword">print</span><span class="token punctuation">(</span>softmax_t<span class="token punctuation">(</span>output<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token comment"># [0.22916797 0.3093444  0.46148762]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>观察输出结果可以看到，加入了 t 后，输出的概率分布更<strong>平滑</strong>了，大的概率变小，小的概率变大了，t 越大，概率直接的差距就越小。</p>
 </blockquote>
 </li>
 </ul>
-<h2 id="老师网络"><a href="#老师网络" class="headerlink" title="老师网络"></a>老师网络</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> math
+<h2 id="老师网络">老师网络</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> math
 <span class="token keyword">import</span> torch
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
@@ -612,7 +620,6 @@ torch<span class="token punctuation">.</span>cuda<span class="token punctuation"
         x <span class="token operator">=</span> self<span class="token punctuation">.</span>dropout2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
         output <span class="token operator">=</span> self<span class="token punctuation">.</span>fc2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
         <span class="token keyword">return</span> output<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：在前向函数中没有经过上述提到的任何函数加工，而是直接输出。</p>
 </blockquote>
@@ -652,7 +659,6 @@ torch<span class="token punctuation">.</span>cuda<span class="token punctuation"
         test_loss<span class="token punctuation">,</span> correct<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token number">100.</span> <span class="token operator">*</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> test_loss<span class="token punctuation">,</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：cross_entropy的参数中也是使用了直接输出后的 <code>output</code>。</p>
 </blockquote>
@@ -691,7 +697,6 @@ torch<span class="token punctuation">.</span>cuda<span class="token punctuation"
 
     torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"teacher.pt"</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> model<span class="token punctuation">,</span> teacher_history<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 训练教师网络</span>
 
 teacher_model<span class="token punctuation">,</span> teacher_history <span class="token operator">=</span> teacher_main<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -717,8 +722,8 @@ Train epoch <span class="token number">9</span><span class="token punctuation">:
 Test<span class="token punctuation">:</span> average loss<span class="token punctuation">:</span> <span class="token number">0.0330</span><span class="token punctuation">,</span> accuracy<span class="token punctuation">:</span> <span class="token number">9910</span><span class="token operator">/</span><span class="token number">10000</span> <span class="token punctuation">(</span><span class="token number">99</span><span class="token operator">%</span><span class="token punctuation">)</span>
 Train epoch <span class="token number">10</span><span class="token punctuation">:</span> <span class="token number">60000</span><span class="token operator">/</span><span class="token number">60000</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span><span class="token punctuation">]</span> <span class="token number">100</span><span class="token operator">%</span>
 Test<span class="token punctuation">:</span> average loss<span class="token punctuation">:</span> <span class="token number">0.0302</span><span class="token punctuation">,</span> accuracy<span class="token punctuation">:</span> <span class="token number">9906</span><span class="token operator">/</span><span class="token number">10000</span> <span class="token punctuation">(</span><span class="token number">99</span><span class="token operator">%</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="那么如何把老师网络中的知识蒸馏出来呢？"><a href="#那么如何把老师网络中的知识蒸馏出来呢？" class="headerlink" title="那么如何把老师网络中的知识蒸馏出来呢？"></a>那么如何把老师网络中的知识蒸馏出来呢？</h3><p>通过蒸馏老师网络中的知识也被称为老师网络的暗知识：</p>
+<h3 id="那么如何把老师网络中的知识蒸馏出来呢？">那么如何把老师网络中的知识蒸馏出来呢？</h3>
+<p>通过蒸馏老师网络中的知识也被称为老师网络的暗知识：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 <span class="token keyword">from</span> matplotlib <span class="token keyword">import</span> pyplot <span class="token keyword">as</span> plt
 
@@ -732,7 +737,6 @@ test_loader_bs1 <span class="token operator">=</span> torch<span class="token pu
         transforms<span class="token punctuation">.</span>Normalize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">0.1307</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0.3081</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     batch_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> <span class="token comment"># batch_size = 1，每次只拿一张图片出来</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">teacher_model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     data<span class="token punctuation">,</span> target <span class="token operator">=</span> <span class="token builtin">next</span><span class="token punctuation">(</span><span class="token builtin">iter</span><span class="token punctuation">(</span>test_loader_bs1<span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -760,27 +764,30 @@ plt<span class="token punctuation">.</span>bar<span class="token punctuation">(<
 plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> softmax_t<span class="token punctuation">(</span>y_out<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span> width<span class="token operator">=</span><span class="token number">0.3</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上述代码对应的图：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027231657077.png" alt="image-20231027231657077"></p>
-<p>可以观察得出，t &#x3D; 1时其他标签的相似度都是接近于0，而t &#x3D; 10时其他标签的相似度就有体现了，尤其在下图更为明显：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027233137704.png" alt="image-20231027233137704"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027231657077.png" alt="image-20231027231657077"></p>
+<p>可以观察得出，t = 1时其他标签的相似度都是接近于0，而t = 10时其他标签的相似度就有体现了，尤其在下图更为明显：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027233137704.png" alt="image-20231027233137704"></p>
 <p>那么接下来就是学生的工作：<strong>学生会明白原来这个数字和3和5都有些相似。</strong></p>
 <blockquote>
 <p><strong>所称知识蒸馏，原来参数 t 就是温度，温度越高，暗知识就被蒸馏出的越多。</strong></p>
 </blockquote>
-<h2 id="老师和学生的关系"><a href="#老师和学生的关系" class="headerlink" title="老师和学生的关系"></a>老师和学生的关系</h2><p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231027233533986.png" alt="image-20231027233533986"></p>
+<h2 id="老师和学生的关系">老师和学生的关系</h2>
+<p><img src="/medias/images/loading.gif" data-original="image-20231027233533986.png" alt="image-20231027233533986"></p>
 <p>解释一下：</p>
 <ul>
-<li><p>如果没有老师的帮助，此时学生网络通过前向迭代，需要用Loss来衡量预测值和真实值之间的损失，就要使用softmax这个函数进行计算，得出的q是一个概率分布，最终求出p和q之间的Loss，当然我们希望这个Loss越小越好。</p>
+<li>
+<p>如果没有老师的帮助，此时学生网络通过前向迭代，需要用Loss来衡量预测值和真实值之间的损失，就要使用softmax这个函数进行计算，得出的q是一个概率分布，最终求出p和q之间的Loss，当然我们希望这个Loss越小越好。</p>
 <blockquote>
 <p>此处的Loss称为HARD Loss，因为p是one-hot编码形式。</p>
 </blockquote>
 </li>
-<li><p>如果有老师的帮助，那我们最终得出的Loss就不只是一个HARD Loss 了，而是有一部分还来自于老师蒸馏出来的SOFT Loss，二者相互结合，才得到最终的Loss。</p>
+<li>
+<p>如果有老师的帮助，那我们最终得出的Loss就不只是一个HARD Loss 了，而是有一部分还来自于老师蒸馏出来的SOFT Loss，二者相互结合，才得到最终的Loss。</p>
 </li>
 </ul>
-<h4 id="定义学生网络"><a href="#定义学生网络" class="headerlink" title="定义学生网络"></a>定义学生网络</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">StudentNet</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<h4 id="定义学生网络">定义学生网络</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">StudentNet</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token builtin">super</span><span class="token punctuation">(</span>StudentNet<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>fc1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">28</span> <span class="token operator">*</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span>
@@ -793,14 +800,13 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
         x <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>fc2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
         output <span class="token operator">=</span> F<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>fc3<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> output<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：此处学生网络比较简单，而老师网络比较复杂，为神经网络。</p>
 </blockquote>
-<h4 id="定义汇总的Loss"><a href="#定义汇总的Loss" class="headerlink" title="定义汇总的Loss"></a>定义汇总的Loss</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">distillation</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span> labels<span class="token punctuation">,</span> teacher_scores<span class="token punctuation">,</span> temp<span class="token punctuation">,</span> alpha<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<h4 id="定义汇总的Loss">定义汇总的Loss</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">distillation</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span> labels<span class="token punctuation">,</span> teacher_scores<span class="token punctuation">,</span> temp<span class="token punctuation">,</span> alpha<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> nn<span class="token punctuation">.</span>KLDivLoss<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>F<span class="token punctuation">.</span>log_softmax<span class="token punctuation">(</span>y <span class="token operator">/</span> temp<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> F<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>teacher_scores <span class="token operator">/</span> temp<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>
             temp <span class="token operator">*</span> temp <span class="token operator">*</span> <span class="token number">2.0</span> <span class="token operator">*</span> alpha<span class="token punctuation">)</span> <span class="token operator">+</span> F<span class="token punctuation">.</span>cross_entropy<span class="token punctuation">(</span>y<span class="token punctuation">,</span> labels<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1.</span> <span class="token operator">-</span> alpha<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p><code>distillation</code>接收5个参数：</p>
 <ul>
 <li>学生没有经过softmax的输出</li>
@@ -817,7 +823,8 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
 <li>nn.KLDivLoss()</li>
 </ul>
 </blockquote>
-<h4 id="通过KD的学生网络训练和测试过程"><a href="#通过KD的学生网络训练和测试过程" class="headerlink" title="通过KD的学生网络训练和测试过程"></a>通过KD的学生网络训练和测试过程</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">train_student_kd</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> device<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<h4 id="通过KD的学生网络训练和测试过程">通过KD的学生网络训练和测试过程</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">train_student_kd</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> device<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
     model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
     trained_samples <span class="token operator">=</span> <span class="token number">0</span>
     <span class="token keyword">for</span> batch_idx<span class="token punctuation">,</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> target<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -855,15 +862,17 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
         test_loss<span class="token punctuation">,</span> correct<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token number">100.</span> <span class="token operator">*</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> test_loss<span class="token punctuation">,</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：为什么我们要切断老师网络的反向传播？切断反向传播的目的有以下几个方面的考虑：</p>
 <ol>
-<li><p>模型压缩：知识蒸馏的目标之一是将一个复杂的模型（老师网络）的知识传递给一个简化的模型（学生网络），以减少模型的复杂性和计算资源的消耗。如果学生网络直接利用老师的梯度信息来学习，学生网络可能会过度拟合老师网络的复杂结构，导致学生网络无法真正学习到简化的知识表示。</p>
+<li>
+<p>模型压缩：知识蒸馏的目标之一是将一个复杂的模型（老师网络）的知识传递给一个简化的模型（学生网络），以减少模型的复杂性和计算资源的消耗。如果学生网络直接利用老师的梯度信息来学习，学生网络可能会过度拟合老师网络的复杂结构，导致学生网络无法真正学习到简化的知识表示。</p>
 </li>
-<li><p>提高泛化能力：通过切断反向传播，学生网络只能通过老师网络的输出结果来学习，而不是直接利用梯度信息。这样做可以帮助学生网络更好地泛化到新的样本，而不是过度依赖于老师网络的特定梯度信息。</p>
+<li>
+<p>提高泛化能力：通过切断反向传播，学生网络只能通过老师网络的输出结果来学习，而不是直接利用梯度信息。这样做可以帮助学生网络更好地泛化到新的样本，而不是过度依赖于老师网络的特定梯度信息。</p>
 </li>
-<li><p>独立性：切断反向传播可以使学生网络独立地学习，不再依赖于老师网络的参数更新。这样，学生网络可以根据自身的特点和目标进行优化，而不受老师网络的限制。</p>
+<li>
+<p>独立性：切断反向传播可以使学生网络独立地学习，不再依赖于老师网络的参数更新。这样，学生网络可以根据自身的特点和目标进行优化，而不受老师网络的限制。</p>
 </li>
 </ol>
 </blockquote>
@@ -899,10 +908,9 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
 
     torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"student_kd.pt"</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> model<span class="token punctuation">,</span> student_history<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">student_kd_model<span class="token punctuation">,</span> student_kd_history <span class="token operator">=</span> student_kd_main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="没有通过KD的学生网络训练和测试过程"><a href="#没有通过KD的学生网络训练和测试过程" class="headerlink" title="没有通过KD的学生网络训练和测试过程"></a>没有通过KD的学生网络训练和测试过程</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## 让学生自己学，不使用KD</span>
+<h4 id="没有通过KD的学生网络训练和测试过程">没有通过KD的学生网络训练和测试过程</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## 让学生自己学，不使用KD</span>
 <span class="token keyword">def</span> <span class="token function">train_student</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> device<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
     model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
     trained_samples <span class="token operator">=</span> <span class="token number">0</span>
@@ -939,7 +947,6 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
         test_loss<span class="token punctuation">,</span> correct<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token number">100.</span> <span class="token operator">*</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> test_loss<span class="token punctuation">,</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">student_main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     epochs <span class="token operator">=</span> <span class="token number">10</span>
     batch_size <span class="token operator">=</span> <span class="token number">64</span>
@@ -973,10 +980,9 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
 
     torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"student.pt"</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> model<span class="token punctuation">,</span> student_history<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">student_simple_model<span class="token punctuation">,</span> student_simple_history <span class="token operator">=</span> student_main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="对比结果"><a href="#对比结果" class="headerlink" title="对比结果"></a>对比结果</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<h4 id="对比结果">对比结果</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
 
 epochs <span class="token operator">=</span> <span class="token number">10</span>
 x <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> epochs<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -998,18 +1004,18 @@ plt<span class="token punctuation">.</span>plot<span class="token punctuation">(
 plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Test loss'</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231028000559484.png" alt="image-20231028000559484"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231028000559484.png" alt="image-20231028000559484"></p>
 <p>终于，我们看到了，在老师的帮助下，学生的预测准确率比自学要高很多（当然没老师高），而且最关键的是<strong>学生的网络更加轻量化</strong>，从代码就可以看出，老师网络是一个相当复杂的神经网络，而学生网络只是一个线性网络——<strong>通过牺牲一定的准确度，来换取轻量化。</strong></p>
-<h3 id="KD函数的原理"><a href="#KD函数的原理" class="headerlink" title="KD函数的原理"></a>KD函数的原理</h3><p><img src="/medias/images/loading.gif" data-original="/2023/10/27/shen-jing-wang-luo-zhi-shi-zheng-liu-chu-tan/image-20231028001140019.png" alt="image-20231028001140019"></p>
+<h3 id="KD函数的原理">KD函数的原理</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20231028001140019.png" alt="image-20231028001140019"></p>
 <p>首先是L2正则化计算（假设为分类问题），公式为预测值和真实值的交叉熵 + 正则化项（<strong>权重</strong>的L2范数 -&gt; 参数向量W的平方和的平方根）。</p>
 <blockquote>
 <p>通过增加正则化项，模型的优化过程会倾向于选择<strong>较小</strong>的参数值（因为参数会根据训练进行调整），因为我们的目的是为了最小化损失函数，首先我们想要交叉熵越小越好，因为我们期望预测值和真实值越接近越好；那么正则化项当然也要尽量最小化才能让最后的结果Loss最小，所以导致模型的参数被约束在了一个较小的值，不会变得过大。</p>
 <p><strong>那么为什么要让参数较小一些比较好呢？</strong></p>
 <ol>
-<li>过拟合：当模型的参数过大时，模型可能会过度拟合训练数据，而无法很好地泛化到未见过的数据。过大的参数值会导致模型过于复杂，过于敏感地去拟合训练数据的细节，从而在训练数据上表现很好，但在新数据上表现较差。   </li>
-<li>训练不稳定：参数过大可能导致训练过程不稳定。在优化过程中，梯度下降算法会尝试通过更新参数来最小化损失函数。当参数过大时，梯度下降算法可能会遇到梯度爆炸的问题，导致训练过程不收敛或收敛速度很慢。   </li>
-<li>过大的计算开销：参数过大会增加模型的计算开销。大量的参数需要更多的内存来存储和计算，这可能会增加模型的训练和推理时间，降低模型的效率。   </li>
+<li>过拟合：当模型的参数过大时，模型可能会过度拟合训练数据，而无法很好地泛化到未见过的数据。过大的参数值会导致模型过于复杂，过于敏感地去拟合训练数据的细节，从而在训练数据上表现很好，但在新数据上表现较差。</li>
+<li>训练不稳定：参数过大可能导致训练过程不稳定。在优化过程中，梯度下降算法会尝试通过更新参数来最小化损失函数。当参数过大时，梯度下降算法可能会遇到梯度爆炸的问题，导致训练过程不收敛或收敛速度很慢。</li>
+<li>过大的计算开销：参数过大会增加模型的计算开销。大量的参数需要更多的内存来存储和计算，这可能会增加模型的训练和推理时间，降低模型的效率。</li>
 <li>过大的模型尺寸：参数过大会导致模型的尺寸变大。大型模型需要更多的存储空间来保存参数，这可能会对模型的部署和使用造成不便。</li>
 </ol>
 <p>当然也不意味着L2正则化会选择非常小的参数值，可以通过正则化超参数λ控制正则化的强度，如何找到一个平衡点，又得需要其他技术了。</p>

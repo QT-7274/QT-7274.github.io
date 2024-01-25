@@ -496,42 +496,51 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p><strong>串：</strong>又称字符串，是由零个或多个字符组成的有限序列。</p>
-<p><strong>串长：</strong>串中字符的个数，例如 S 的串长为 6。</p>
-<p><strong>空串：</strong>零个字符的串，串长为 0。</p>
-<p><strong>子串：</strong>串中任意个连续的字符组成的子序列，称为该串的子串，原串称为子串的主串。</p>
+                <h2 id="字符串">字符串</h2>
+<p>**串：**又称字符串，是由零个或多个字符组成的有限序列。</p>
+<p>**串长：**串中字符的个数，例如 S 的串长为 6。</p>
+<p>**空串：**零个字符的串，串长为 0。</p>
+<p>**子串：**串中任意个连续的字符组成的子序列，称为该串的子串，原串称为子串的主串。</p>
 <blockquote>
 <p>注意：空格也算一个字符。</p>
 </blockquote>
-<p><strong>空格串：</strong>全部由空格组成的串为空格串。</p>
+<p>**空格串：**全部由空格组成的串为空格串。</p>
 <blockquote>
 <p>注意：空格串不是空串。</p>
 </blockquote>
-<h3 id="顺序存储："><a href="#顺序存储：" class="headerlink" title="顺序存储："></a>顺序存储：</h3><ol>
-<li><p>以’\0’表示字符串结束：</p>
-<p>在 C、C++、Java 语言中，通常用’\0’表示字符串结束，’\0’不算在字符串长度内。</p>
+<h3 id="顺序存储：">顺序存储：</h3>
+<ol>
+<li>
+<p>以’\0’表示字符串结束：</p>
+<p>在 C、C++、Java 语言中，通常用’\0’表示字符串结束，'\0’不算在字符串长度内。</p>
 </li>
-<li><p>在 0 空间存储字符串的长度：</p>
+<li>
+<p>在 0 空间存储字符串的长度：</p>
 <p>下标为 0 的空间不使用，因此可以预先分配 Maxsize+1 的空间，在下标为 0 的空间中存储字符串长度。</p>
 </li>
-<li><p>结构体变量存储字符串的长度：</p>
+<li>
+<p>结构体变量存储字符串的长度：</p>
 <p>串的运算如合并、插入、替换等操作，容易超过最大长度，出现溢出。为了解决这个问题，可以采用动态分配空间的方法，其结构体定义如下。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
 	<span class="token keyword">char</span> <span class="token operator">*</span>ch<span class="token punctuation">;</span>  <span class="token comment">//指向字符串指针</span>
 	<span class="token keyword">int</span> length<span class="token punctuation">;</span>  <span class="token comment">//字符串的长度</span>
-<span class="token punctuation">&#125;</span>SString<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span>SString<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h3 id="链式存储："><a href="#链式存储：" class="headerlink" title="链式存储："></a>链式存储：</h3><p>单链表存储字符串时，虽然插入和删除非常容易，但是这样做也有一个问题：一个节点只存储一个字符，如果需要存储的字符特别多，会浪费很多空间。</p>
+<h3 id="链式存储：">链式存储：</h3>
+<p>单链表存储字符串时，虽然插入和删除非常容易，但是这样做也有一个问题：一个节点只存储一个字符，如果需要存储的字符特别多，会浪费很多空间。</p>
 <p>因此也可以考虑<strong>一个节点存储多个字符</strong>的形式，例如一个节点存储 3 个字符，最后一个节点不够 3 个时用#代替。</p>
 <p>但是这样做也有一个大问题：如在第 2 个字符之前插入一个元素，就需要将 b 和 c 后移，那么这种后移还要跨到第二个节点，如同“蝴蝶效应”，一直波及最后一个节点，麻烦就大了！</p>
 <p><strong>因此字符串很少使用链式存储结构，还是使用顺序存储结构更灵活一些。</strong></p>
-<h2 id="模式匹配BF算法"><a href="#模式匹配BF算法" class="headerlink" title="模式匹配BF算法"></a>模式匹配BF算法</h2><p><strong>模式匹配：</strong>子串的定位运算称为串的模式匹配或串匹配。</p>
+<h2 id="模式匹配BF算法">模式匹配BF算法</h2>
+<p>**模式匹配：**子串的定位运算称为串的模式匹配或串匹配。</p>
 <p>假设有两个串 S、T，设 S 为主串，也称正文串；T 为子串，也称模式。</p>
 <blockquote>
 <p><strong>在主串 S 中查找与模式 T 相匹配的子串，如果查找成功，返回匹配的子串第一个字符在主串中的位置。</strong></p>
 </blockquote>
-<p>最笨的办法就是穷举所有 S 的所有子串，判断是否与 T 匹配，该算法称为 <strong>BF（Brute Force）</strong>算法。</p>
-<h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><ol>
+<p>最笨的办法就是穷举所有 S 的所有子串，判断是否与 T 匹配，该算法称为 **BF（Brute Force）**算法。</p>
+<h3 id="步骤：">步骤：</h3>
+<ol>
 <li>从 S 第 1 个字符开始，与 T 第 1 个字符比较，如果相等，继续比较下一个字符，否则转向下一步；</li>
 <li>从 S 第 2 个字符开始，与 T 第 1 个字符比较，如果相等，继续比较下一个字符，否则转向下一步，以此类推；</li>
 <li>如果 T 比较完毕，则返回 T 在 S 中第一个字符出现的位置；</li>
@@ -587,41 +596,45 @@
 	<span class="token keyword">else</span>
 		<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="算法复杂度分析："><a href="#算法复杂度分析：" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h3><p>设 S、T 串的长度分别为 n、m，则 BF 算法的时间复杂度分为以下两种情况：</p>
+<h3 id="算法复杂度分析：">算法复杂度分析：</h3>
+<p>设 S、T 串的长度分别为 n、m，则 BF 算法的时间复杂度分为以下两种情况：</p>
 <ol>
-<li><p>最好情况</p>
+<li>
+<p>最好情况</p>
 <p>在最好情况下，每一次匹配都在第一次比较时发现不等。</p>
 <p>假设第 i 次匹配成功，则前 i−1 次匹配都进行了 1 次比较，一共 i−1 次，第 i 次匹配成功时进行了 m 次比较，则总的比较次数为 <strong>i−1+m</strong></p>
 <p><strong>即模式串正好在主串的最后端。</strong></p>
-<p>假 设 每 一 次 匹 配 成 功 的 概 率 均 等 ， 概 率p i &#x3D;1&#x2F;(n−m+1)，则在最好情况下，匹配成功的平均比较次数为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220914180721501.png" alt="image-20220914180721501"></p>
+<p>假 设 每 一 次 匹 配 成 功 的 概 率 均 等 ， 概 率p i =1/(n−m+1)，则在最好情况下，匹配成功的平均比较次数为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220914180721501.png" alt="image-20220914180721501"></p>
 <p>最好情况下的平均时间复杂度为 O(n+m)。</p>
 </li>
-<li><p>最差情况</p>
+<li>
+<p>最差情况</p>
 <p>在最坏情况下，每一次匹配都比较到 T 的最后一个字符发现不等，回退重新开始，这样每次匹配都需要比较 m 次</p>
 <p>假设第 i 次匹配成功，则前 i−1 次匹配都进行了 m 次比较，第 i 次匹配成功时也进行 m次比较，则总的比较次数为 <strong>i×m</strong></p>
 <p>在匹配成功的情况下，最多需要 n−m+1 次匹配，<strong>即模式串正好在主串的最后端</strong></p>
-<p>假设每一次匹配成功的概率均等，概率 p i&#x3D;1&#x2F;(n−m+1)，则在最坏情况下，匹配成功的平均比较次数为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220914180846050.png" alt="image-20220914180846050"></p>
+<p>假设每一次匹配成功的概率均等，概率 p i=1/(n−m+1)，则在最坏情况下，匹配成功的平均比较次数为：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220914180846050.png" alt="image-20220914180846050"></p>
 <p>最坏情况下的平均时间复杂度为 O(n×m)。</p>
 </li>
 </ol>
-<h2 id="模式匹配KMP算法"><a href="#模式匹配KMP算法" class="headerlink" title="模式匹配KMP算法"></a>模式匹配KMP算法</h2><h3 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h3><p>按照 BF 算法，如果匹配的字符串不等，则 i 回退到 i−j+2，j 回退到 1，即 i&#x3D;2，j&#x3D;1：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220914215010257.png" alt="image-20220914215010257"></p>
+<h2 id="模式匹配KMP算法">模式匹配KMP算法</h2>
+<h3 id="步骤：-2">步骤：</h3>
+<p>按照 BF 算法，如果匹配的字符串不等，则 i 回退到 i−j+2，j 回退到 1，即 i=2，j=1：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220914215010257.png" alt="image-20220914215010257"></p>
 <p>其实 i 不用回退，让 j 回退到第 3 个位置，接着比较即可：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220914215026957.png" alt="image-20220914215026957"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220914215026957.png" alt="image-20220914215026957"></p>
 <p>那怎么知道 T 中开头的两个字符和 i 指向的字符前面的两个字符一模一样？难道还要比较？</p>
 <p>我们发现 i 指向的字符前面的两个字符和 T 中 j 指向的字符前面两个字符一模一样，<strong>因为它们一直相等， i++、j++才会走到当前的位置</strong>：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220914215201151.png" alt="image-20220914215201151"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220914215201151.png" alt="image-20220914215201151"></p>
 <p>也就是说，我们不必判断开头的两个字母和 i 指向的字符前面的两个字符是否一样，只需要在 T 本身比较就可以了。</p>
 <p>假设 T 中当前 j 指向的字符前面的所有字符为 T′，<strong>只需要比较T′的前缀和 T′的后缀即可</strong>：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220914215308905.png" alt="image-20220914215308905"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220914215308905.png" alt="image-20220914215308905"></p>
 <blockquote>
 <p>注意：前缀和后缀不可以取字符串本身。如果串的长度为 n，前缀和后缀长度最多达到 <strong>n−1</strong></p>
 </blockquote>
 <p>因此，当 i、j 指向的字符不等时，只需要求出 T′的相等前缀后缀的最大长度 l，<strong>i 不变，j 回退到 l+1的位置继续比较即可</strong>。</p>
-<p><strong>这样找所有的前缀和后缀比较，是不是也是暴力穷举？那怎么办呢？</strong>可以用动态规划递推</p>
+<p>**这样找所有的前缀和后缀比较，是不是也是暴力穷举？那怎么办呢？**可以用动态规划递推</p>
 <blockquote>
 <p>有了 next[]数组，就很容易进行模式匹配了，当 S[i]≠T[j]时，i 不动，j 回退到 next[j]的位置继续比较即可。</p>
 </blockquote>
@@ -643,7 +656,6 @@
         cout<span class="token operator">&lt;&lt;</span>next<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">&lt;&lt;</span><span class="token string">"  "</span><span class="token punctuation">;</span>
     cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">Index_KMP</span><span class="token punctuation">(</span>SString S<span class="token punctuation">,</span>SString T<span class="token punctuation">,</span><span class="token keyword">int</span> pos<span class="token punctuation">,</span><span class="token keyword">int</span> next<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token comment">//KMP算法</span>
 <span class="token punctuation">&#123;</span> 	<span class="token comment">// 利用模式串T的next函数求T在主串S中第pos个字符之后的位置的KMP算法</span>
 	<span class="token comment">//其中，T非空，1≤pos≤StrLength(S)</span>
@@ -665,18 +677,20 @@
 	<span class="token keyword">else</span>
 		<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="算法复杂度分析：-1"><a href="#算法复杂度分析：-1" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h3><p>设 S、T 串的长度分别为 n、m。KMP 算法的特点是：i 不回退，当 S[i]≠T[j]时，j 回退到 next[j]，重新开始比较。</p>
+<h3 id="算法复杂度分析：-2">算法复杂度分析：</h3>
+<p>设 S、T 串的长度分别为 n、m。KMP 算法的特点是：i 不回退，当 S[i]≠T[j]时，j 回退到 next[j]，重新开始比较。</p>
 <p><strong>最坏情况下扫描整个 S 串，其时间复杂度为 O(n)。</strong></p>
 <p><strong>计算 next[]数组需要扫描整个 T 串，其时间复杂度为 O(m)，因此总的时间复杂度为 O(n+m)。</strong></p>
 <p>需要注意的是，尽管 BF 算法最坏情况下时间复杂度为 O(n×m)，KMP 算法的时间复杂度为 O(n+m)。但是在实际运用中，BF 算法的时间复杂度一般为 O(n+m)，因此仍然有很多地方用 BF 算法进行模式匹配。</p>
 <blockquote>
 <p><strong>只有在主串和子串有很多部分匹配的情况下，KMP 才显得更优越。</strong></p>
 </blockquote>
-<h2 id="改进的KMP算法"><a href="#改进的KMP算法" class="headerlink" title="改进的KMP算法"></a>改进的KMP算法</h2><h3 id="步骤：-2"><a href="#步骤：-2" class="headerlink" title="步骤："></a>步骤：</h3><p>在 KMP 算法中，next[]求解非常方便、迅速，但是也有一个问题：当 s i≠t j 时，j 回退到 next[j]（k&#x3D;next[j]），然后 s i 与 t k 比较。这样的确没错，但是如果 t k&#x3D;t j，这次比较就没必要了，因为刚才就是因为 s i≠t j 才回退的，那么肯定 s i≠t k，完全没必要再比了：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220915111812301.png" alt="image-20220915111812301"></p>
-<p>再向前回退，找下一个位置 next[k]，继续比较就可以了。当 si≠tj 时，本来应该 j 回退到next[j]（k&#x3D;next[j]），si 与 t k 比较。</p>
-<p><strong>但是如果 t k&#x3D;t j，则不需要比较，继续回退到下一个位置 next[k]，减少了一次无效比较。</strong></p>
+<h2 id="改进的KMP算法">改进的KMP算法</h2>
+<h3 id="步骤：-3">步骤：</h3>
+<p>在 KMP 算法中，next[]求解非常方便、迅速，但是也有一个问题：当 s i≠t j 时，j 回退到 next[j]（k=next[j]），然后 s i 与 t k 比较。这样的确没错，但是如果 t k=t j，这次比较就没必要了，因为刚才就是因为 s i≠t j 才回退的，那么肯定 s i≠t k，完全没必要再比了：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220915111812301.png" alt="image-20220915111812301"></p>
+<p>再向前回退，找下一个位置 next[k]，继续比较就可以了。当 si≠tj 时，本来应该 j 回退到next[j]（k=next[j]），si 与 t k 比较。</p>
+<p><strong>但是如果 t k=t j，则不需要比较，继续回退到下一个位置 next[k]，减少了一次无效比较。</strong></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">get_next2</span><span class="token punctuation">(</span>SString T<span class="token punctuation">,</span><span class="token keyword">int</span> next<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token comment">//计算next函数值改进算法</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
@@ -701,23 +715,28 @@
         cout<span class="token operator">&lt;&lt;</span>next<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">&lt;&lt;</span><span class="token string">"  "</span><span class="token punctuation">;</span>
     cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="算法复杂度分析：-2"><a href="#算法复杂度分析：-2" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h3><p>设 S、T 的长度分别为 n、m。改进的 KMP 算法只是在求解 next[]从常数上的改进，并没有降阶，因此其时间复杂度仍为 O(n+m)。</p>
-<h2 id="字符串的应用–病毒检测"><a href="#字符串的应用–病毒检测" class="headerlink" title="字符串的应用–病毒检测"></a>字符串的应用–病毒检测</h2><p><strong>题目：</strong>疫情暴发，专家发现了一种新型环状病毒，这种病毒的 DNA 序列是环状的，而人类的 DNA 序列是线性的。专家把人类和病毒的 DNA 表示为字母组成的字符串序列，如果在某个患者的 DNA 中发现这种环状病毒，说明该患者已被感染病毒，否则没有感染。</p>
-<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><p>该问题属于字符串的模式匹配问题，可以使用前面讲的 BF 或 KMP 算法求解。这里需要对环状病毒进行处理，然后调用模式匹配算法即可。</p>
+<h3 id="算法复杂度分析：-3">算法复杂度分析：</h3>
+<p>设 S、T 的长度分别为 n、m。改进的 KMP 算法只是在求解 next[]从常数上的改进，并没有降阶，因此其时间复杂度仍为 O(n+m)。</p>
+<h2 id="字符串的应用–病毒检测">字符串的应用–病毒检测</h2>
+<p>**题目：**疫情暴发，专家发现了一种新型环状病毒，这种病毒的 DNA 序列是环状的，而人类的 DNA 序列是线性的。专家把人类和病毒的 DNA 表示为字母组成的字符串序列，如果在某个患者的 DNA 中发现这种环状病毒，说明该患者已被感染病毒，否则没有感染。</p>
+<h3 id="思路：">思路：</h3>
+<p>该问题属于字符串的模式匹配问题，可以使用前面讲的 BF 或 KMP 算法求解。这里需要对环状病毒进行处理，然后调用模式匹配算法即可。</p>
 <p>处理环状病毒：</p>
 <ol>
-<li><p>环形处理</p>
+<li>
+<p>环形处理</p>
 <p>使用循环存储的方式，类似循环队列或循环链表的处理方式。假设病毒的 DNA 长度为m，依次从环状存储空间中每一个下标开始，取 m 个字符作为病毒序列：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220915165432322.png" alt="image-20220915165432322"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220915165432322.png" alt="image-20220915165432322"></p>
 </li>
-<li><p>线性处理</p>
+<li>
+<p>线性处理</p>
 <p>将病毒序列扩大两倍，依次从每个下标开始，取 m 个字符，作为病毒序列。</p>
 <p>例如，病毒序列：aabb，如图 4-45 所示。将该病毒序列扩大两倍。从每个下标（1、2、3、4）开始取 4 个字符，分别为 aabb、abba、bbaa、baab，这 4 个序列都是病毒序列的变种：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/09/14/shu-ju-jie-gou-ru-men-zi-fu-chuan/image-20220915165525020.png" alt="image-20220915165525020"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220915165525020.png" alt="image-20220915165525020"></p>
 </li>
 </ol>
-<h3 id="步骤：-3"><a href="#步骤：-3" class="headerlink" title="步骤："></a>步骤：</h3><ol>
+<h3 id="步骤：-4">步骤：</h3>
+<ol>
 <li>首先对环状病毒进行处理（环形处理或线性处理）。</li>
 <li>依次把每一个环状病毒变种作为子串，把患者 DNA 序列作为主串，进行模式匹配。一旦匹配成功，立即结束，返回已感染病毒。</li>
 <li>重复运行第 2 步。</li>
@@ -739,8 +758,8 @@
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="算法复杂度分析：-3"><a href="#算法复杂度分析：-3" class="headerlink" title="算法复杂度分析："></a>算法复杂度分析：</h3><p>假设病毒 DNA 序列长度为 m，则一共有 m 个变种，需要进行 m 次模式匹配，每次模式匹配如果使用 KMP 算法，其时间复杂度为 O(n+m)，则总的时间复杂度为 O(m×(n+m))。</p>
+<h3 id="算法复杂度分析：-4">算法复杂度分析：</h3>
+<p>假设病毒 DNA 序列长度为 m，则一共有 m 个变种，需要进行 m 次模式匹配，每次模式匹配如果使用 KMP 算法，其时间复杂度为 O(n+m)，则总的时间复杂度为 O(m×(n+m))。</p>
 
                 
             </div>

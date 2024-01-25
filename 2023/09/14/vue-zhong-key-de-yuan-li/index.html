@@ -508,22 +508,27 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
 <li><a target="_blank" rel="noopener" href="https://qblog.top/2023/09/11/vue-xing-neng-you-hua-xiang-jie/">Vue性能优化详解 | QT-7274 (qblog.top)</a>中 “ <code>v-for</code> 遍历必须为 <code>item</code> 添加 <code>key</code> ，且避免同时使用 <code>v-if</code> ”</li>
 <li><a target="_blank" rel="noopener" href="https://qblog.top/2023/07/10/vue-he-xin-lie-biao-xuan-ran-he-shu-ju-jian-shi/">Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)</a>中 “ <code>React</code>，<code>Vue</code>中的<code>key</code>有什么作用？”</li>
 </ul>
-<h2 id="Key是什么"><a href="#Key是什么" class="headerlink" title="Key是什么"></a>Key是什么</h2><p>开始之前，我们先还原两个实际工作场景</p>
+<h2 id="Key是什么">Key是什么</h2>
+<p>开始之前，我们先还原两个实际工作场景</p>
 <ol>
-<li><p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
+<li>
+<p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item in items<span class="token punctuation">"</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item.id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>用<code>+new Date()</code>生成的时间戳作为<code>key</code>，手动强制触发重新渲染</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Comp</span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>+new Date()<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>
+<p>用<code>+new Date()</code>生成的时间戳作为<code>key</code>，手动强制触发重新渲染</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Comp</span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>+new Date()<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ol>
 <p>那么这背后的逻辑是什么，<code>key</code>的作用又是什么？</p>
 <p>一句话来讲</p>
 <blockquote>
 <p>key是给每一个vnode的唯一id，也是diff的一种优化策略，可以根据key，更准确， 更快的找到对应的vnode节点</p>
 </blockquote>
-<h3 id="背后原理"><a href="#背后原理" class="headerlink" title="背后原理"></a>背后原理</h3><p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
+<h3 id="背后原理">背后原理</h3>
+<p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
 <ul>
 <li>如果不用key，Vue会采用就地复地原则：最小化element的移动，并且会尝试尽最大程度在同适当的地方对相同类型的element，做patch或者reuse。</li>
 <li>如果使用了key，Vue会根据keys的顺序记录element，曾经拥有了key的element如果不再出现的话，会被直接remove或者destoryed</li>
@@ -535,7 +540,8 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
 <ul>
 <li>当拥有新值的rerender作为key时，拥有了新key的Comp出现了，那么旧key Comp会被移除，新key Comp触发渲染</li>
 </ul>
-<h2 id="设置key与不设置key区别"><a href="#设置key与不设置key区别" class="headerlink" title="设置key与不设置key区别"></a>设置key与不设置key区别</h2><p>举个例子：</p>
+<h2 id="设置key与不设置key区别">设置key与不设置key区别</h2>
+<p>举个例子：</p>
 <p>创建一个实例，2秒后往<code>items</code>数组插入数据</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>demo<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -555,9 +561,8 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在不使用<code>key</code>的情况，<code>vue</code>会进行这样的操作：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/14/vue-zhong-key-de-yuan-li/c9da6790-3f41-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="c9da6790-3f41-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <p>分析下整体流程：</p>
 <ul>
 <li>比较A，A（相同类型的节点），进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
@@ -579,13 +584,15 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
 <li>循环结束，将F插入到C之前</li>
 </ul>
 <p>一共发生了0次更新，1次插入操作</p>
-<h3 id="设置key值一定能提高diff效率吗？"><a href="#设置key值一定能提高diff效率吗？" class="headerlink" title="设置key值一定能提高diff效率吗？"></a>设置key值一定能提高diff效率吗？</h3><p>其实不然，文档中也明确表示</p>
+<h3 id="设置key值一定能提高diff效率吗？">设置key值一定能提高diff效率吗？</h3>
+<p>其实不然，文档中也明确表示</p>
 <blockquote>
 <p>当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略。如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素</p>
 </blockquote>
 <p>这个默认的模式是高效的，但是只适用于不依赖子组件状态或临时 DOM 状态 (例如：表单输入值) 的列表渲染输出</p>
 <p>建议尽可能在使用 <code>v-for</code> 时提供 <code>key</code>，除非遍历输出的 DOM 内容非常简单，或者是刻意依赖默认行为以获取性能上的提升</p>
-<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>源码位置：core&#x2F;vdom&#x2F;patch.js</p>
+<h2 id="原理分析">原理分析</h2>
+<p>源码位置：core/vdom/patch.js</p>
 <p>这里判断是否为同一个<code>key</code>，首先判断的是<code>key</code>值是否相等如果没有设置<code>key</code>，那么<code>key</code>为<code>undefined</code>，这时候<code>undefined</code>是恒等于<code>undefined</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sameVnode</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span>
@@ -603,7 +610,6 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
         <span class="token punctuation">)</span>
     <span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>updateChildren<code>方法中会对新旧</code>vnode<code>进行</code>diff<code>，然后将比对出的结果用来更新真实的</code>DOM</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) &#123;
     ...
@@ -643,7 +649,6 @@ Vue核心 列表渲染和数据监视 | QT-7274 (qblog.top)中">
     &#125;
     ...
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

@@ -496,40 +496,76 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="什么是量化？"><a href="#什么是量化？" class="headerlink" title="什么是量化？"></a>什么是量化？</h2><p><img src="/medias/images/loading.gif" data-original="/2023/10/21/shen-jing-wang-luo-liang-hua-chu-tan/image-20231021104226103.png" alt="image-20231021104226103"></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/21/shen-jing-wang-luo-liang-hua-chu-tan/image-20231021104342734.png" alt="image-20231021104342734"></p>
-<h2 id="为什么要量化？"><a href="#为什么要量化？" class="headerlink" title="为什么要量化？"></a>为什么要量化？</h2><ol>
-<li><p>量化最直接的好处就是<strong>减少存储空间和内存需求</strong>，减少数据的位宽，从而减少模型的大小，即压缩模型。</p>
+                <h2 id="什么是量化？">什么是量化？</h2>
+<p><img src="/medias/images/loading.gif" data-original="image-20231021104226103.png" alt="image-20231021104226103"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231021104342734.png" alt="image-20231021104342734"></p>
+<h2 id="为什么要量化？">为什么要量化？</h2>
+<ol>
+<li>
+<p>量化最直接的好处就是<strong>减少存储空间和内存需求</strong>，减少数据的位宽，从而减少模型的大小，即压缩模型。</p>
 </li>
-<li><p>量化的第二个好处就是<strong>加快推理速度</strong>，<strong>减少了计算时间</strong>：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/21/shen-jing-wang-luo-liang-hua-chu-tan/image-20231021104618371.png" alt="image-20231021104618371"></p>
+<li>
+<p>量化的第二个好处就是<strong>加快推理速度</strong>，<strong>减少了计算时间</strong>：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231021104618371.png" alt="image-20231021104618371"></p>
 <p>例如在上图中，A可以用A<sub>Q</sub> × a + b来表示，此处的A<sub>Q</sub>为 int8 类型，而A为 float32 类型，所以就实现了数据的压缩。同样也可以反推回去，但是这种反量化是有精读损失的。最后可以看到Z的表示方法，相比于两个浮点数A和W相乘，转化为了 int8 类型的计算，<strong>速度变快了很多</strong>。</p>
 </li>
 </ol>
-<h2 id="量化推导"><a href="#量化推导" class="headerlink" title="量化推导"></a>量化推导</h2><p>回想一下，我们通常会将一张 uint8 类型、数值范围在 0-255 的图片归一成 float32 类型、数值范围在 0.0-1.0 的张量，这个过程就是<strong>反量化</strong>。类似地，我们经常将网络输出的范围在 0.0-1.0 之间的张量调整成数值为 0-255、uint8 类型的图片数据，这个过程就是<strong>量化</strong>。</p>
+<h2 id="量化推导">量化推导</h2>
+<p>回想一下，我们通常会将一张 uint8 类型、数值范围在 0-255 的图片归一成 float32 类型、数值范围在 0.0-1.0 的张量，这个过程就是<strong>反量化</strong>。类似地，我们经常将网络输出的范围在 0.0-1.0 之间的张量调整成数值为 0-255、uint8 类型的图片数据，这个过程就是<strong>量化</strong>。</p>
 <blockquote>
 <p>所以量化本质上只是对数值范围的重新调整，可以「粗略」理解为是一种线性映射。之所以加「粗略」二字，是因为有些论文会用非线性量化，但目前在工业界落地的还都是线性量化，所以本文只讨论线性量化的方案。</p>
 </blockquote>
 <p>不过，可以明显看出，反量化一般没有信息损失，而量化一般都会有精度损失。这也非常好理解，<strong>float32 能保存的数值范围本身就比 uint8 多，因此必定有大量数值无法用 uint8 表示</strong>，只能四舍五入成 uint8 型的数值。量化模型和全精度模型的误差也来自四舍五入的 clip 操作。</p>
-<h3 id="量化公式推导"><a href="#量化公式推导" class="headerlink" title="量化公式推导"></a>量化公式推导</h3><ul>
+<h3 id="量化公式推导">量化公式推导</h3>
+<ul>
 <li>$r$：浮点实数</li>
 <li>$q$：量化后的定点整数</li>
 </ul>
-<p>浮点和整型的换算公式：<br>$$<br>\begin{align} \overline r &#x3D; S(q-Z) \tag{1} \newline \ q &#x3D; round(\frac{r}{S}+Z) \tag{2} \end{align}<br>$$</p>
+<p>浮点和整型的换算公式：<br>
+$$<br>
+\begin{align} \overline r = S(q-Z) \tag{1} \newline \ q = round(\frac{r}{S}+Z) \tag{2} \end{align}<br>
+$$</p>
 <ul>
-<li><p>$S$：scale，表示实数和整数之间的比例关系</p>
+<li>
+<p>$S$：scale，表示实数和整数之间的比例关系</p>
 </li>
-<li><p>$Z$：zero point，表示实数中的 0 经过量化后对应的整数</p>
-<p>得到它们的计算方法：<br>$$<br>\begin{align}<br>S &#x3D; \frac{r_{\text{max}} - r_{\text{min}}}{q_{\text{max}} - q_{\text{min}}} \tag{3} \newline<br>Z &#x3D; \text{round}(q_{\text{max}} - \frac{r_{\text{max}}}{S}) \tag{4}<br>\end{align}<br>$$<br>$r_{max}$ 、 $r_{min}$ 分别是r的最大值和最小值， $q_{min}$ 、 $q_{max}$ 同理。这个公式的推导比较简单，很多资料也有详细的介绍，这里不过多介绍。需要强调的一点是，定点整数的 zero point 就代表浮点实数的 0，二者之间的换算不存在精度损失，这一点可以从公式 (2) 中看出来，把 $r&#x3D;0$ 代入后就可以得到 $q&#x3D;Z$。<strong>这么做的目的是为了在 padding 时保证浮点数值的 0 和定点整数的 zero point 完全等价，保证定点和浮点之间的表征能够一致。</strong></p>
+<li>
+<p>$Z$：zero point，表示实数中的 0 经过量化后对应的整数</p>
+<p>得到它们的计算方法：<br>
+$$<br>
+\begin{align}<br>
+S = \frac{r_{\text{max}} - r_{\text{min}}}{q_{\text{max}} - q_{\text{min}}} \tag{3} \newline<br>
+Z = \text{round}(q_{\text{max}} - \frac{r_{\text{max}}}{S}) \tag{4}<br>
+\end{align}<br>
+$$<br>
+$r_{max}$ 、 $r_{min}$ 分别是r的最大值和最小值， $q_{min}$ 、 $q_{max}$ 同理。这个公式的推导比较简单，很多资料也有详细的介绍，这里不过多介绍。需要强调的一点是，定点整数的 zero point 就代表浮点实数的 0，二者之间的换算不存在精度损失，这一点可以从公式 (2) 中看出来，把 $r=0$ 代入后就可以得到 $q=Z$。<strong>这么做的目的是为了在 padding 时保证浮点数值的 0 和定点整数的 zero point 完全等价，保证定点和浮点之间的表征能够一致。</strong></p>
 </li>
 </ul>
-<h3 id="矩阵运算的量化"><a href="#矩阵运算的量化" class="headerlink" title="矩阵运算的量化"></a>矩阵运算的量化</h3><p>由于卷积网络中的卷积层和全连接层本质上都是一堆矩阵乘法，因此我们先看如何将浮点运算上的矩阵转换为定点运算。</p>
-<p>假设 $r_1$、$r_2$ 是浮点实数上的两个$N \times N$的矩阵，$r_3$ 是 $r_1$、$r_2$ 相乘后的矩阵：<br>$$<br>r_3^{i,k}&#x3D;\sum_{j&#x3D;1}^N r_1^{i,j}r_2^{j,k} \tag{5}<br>$$<br>假设 $S_1$、$Z_1$ 是$r_1$矩阵对应的scale和zero point，$S_2$、$Z_2$、$S_3$、$Z_3$ 同理。那么将 $(1)$ 式代入 $(5)$ 式可以推出：<br>$$<br>S_3(q_3^{i,k}-Z_3)&#x3D;\sum_{j&#x3D;1}^{N}S_1(q_{1}^{i,j}-Z_1)S_2(q_2^{j,k}-Z_2) \tag{6}<br>$$<br>  移项可以得到：<br>$$<br>q_3^{i,k}&#x3D;\frac{S_1 S_2}{S_3}\sum_{j&#x3D;1}^N(q_1^{i,j}-Z_1)(q_2^{j,k}-Z_2)+Z_3 \tag{7}<br>$$<br>仔细观察 $(7)$ 式可以发现，除了 $\frac{S_1 S_2}{S_3}$ ，其他都是定点整数运算。那如何把 $\frac{S_1 S_2}{S_3}$ 也变成定点运算呢？这里要用到一个 trick。假设 $M&#x3D;\frac{S_1 S_2}{S_3}$，由于 $M$ 通常都是 $(0, 1)$ 之间的实数（这是通过大量实验统计出来的），因此可以表示成 $M&#x3D;2^{-n}M_0$，其中 $M_0$ 是一个定点实数。</p>
+<h3 id="矩阵运算的量化">矩阵运算的量化</h3>
+<p>由于卷积网络中的卷积层和全连接层本质上都是一堆矩阵乘法，因此我们先看如何将浮点运算上的矩阵转换为定点运算。</p>
+<p>假设 $r_1$、$r_2$ 是浮点实数上的两个$N \times N$的矩阵，$r_3$ 是 $r_1$、$r_2$ 相乘后的矩阵：<br>
+$$<br>
+r_3^{i,k}=\sum_{j=1}^N r_1^{i,j}r_2^{j,k} \tag{5}<br>
+$$<br>
+假设 $S_1$、$Z_1$ 是$r_1$矩阵对应的scale和zero point，$S_2$、$Z_2$、$S_3$、$Z_3$ 同理。那么将 $(1)$ 式代入 $(5)$ 式可以推出：<br>
+$$<br>
+S_3(q_3^{i,k}-Z_3)=\sum_{j=1}^{N}S_1(q_{1}^{i,j}-Z_1)S_2(q_2^{j,k}-Z_2) \tag{6}<br>
+$$<br>
+移项可以得到：<br>
+$$<br>
+q_3^{i,k}=\frac{S_1 S_2}{S_3}\sum_{j=1}^N(q_1^{i,j}-Z_1)(q_2^{j,k}-Z_2)+Z_3 \tag{7}<br>
+$$<br>
+仔细观察 $(7)$ 式可以发现，除了 $\frac{S_1 S_2}{S_3}$ ，其他都是定点整数运算。那如何把 $\frac{S_1 S_2}{S_3}$ 也变成定点运算呢？这里要用到一个 trick。假设 $M=\frac{S_1 S_2}{S_3}$，由于 $M$ 通常都是 $(0, 1)$ 之间的实数（这是通过大量实验统计出来的），因此可以表示成 $M=2^{-n}M_0$，其中 $M_0$ 是一个定点实数。</p>
 <blockquote>
 <p>注意：定点数并不一定是整数，所谓定点，指的是小数点的位置是固定的，即小数位数是固定的。</p>
 </blockquote>
-<p>因此，如果存在 $M&#x3D;2^{-n}M_0$，那我们就可以通过 $M_0$ 的 bit 位移操作实现 $2^{-n}M_0$，这样整个过程就都在定点上计算了。 </p>
-<p>很多刚接触量化的同学对这一点比较疑惑，下面我就用一个简单的示例说明这一点。我们把 $M&#x3D;\frac{S_1 S_2}{S_3}$ 代入 $(7)$ 式可以得到：<br>$$<br>q_3^{i,k}&#x3D;M\sum_{j&#x3D;1}^N(q_1^{i,j}-Z_1)(q_2^{j,k}-Z_2)+Z_3&#x3D;MP+Z_3 \tag{8}<br>$$<br>这里面 $P$ 是一个在定点域上计算好的整数。<br>假设 $P&#x3D;7091$，$M&#x3D;0.0072474273418460$ ($M$ 可以通过事先计算得到)，那下面我们就是要找到一个 $M_0$ 和 $n$，使得 $MP&#x3D;2^{-n}M_0 P$ 成立。我们可以用一段代码来找到这两个数：</p>
+<p>因此，如果存在 $M=2^{-n}M_0$，那我们就可以通过 $M_0$ 的 bit 位移操作实现 $2^{-n}M_0$，这样整个过程就都在定点上计算了。</p>
+<p>很多刚接触量化的同学对这一点比较疑惑，下面我就用一个简单的示例说明这一点。我们把 $M=\frac{S_1 S_2}{S_3}$ 代入 $(7)$ 式可以得到：<br>
+$$<br>
+q_3^{i,k}=M\sum_{j=1}^N(q_1^{i,j}-Z_1)(q_2^{j,k}-Z_2)+Z_3=MP+Z_3 \tag{8}<br>
+$$<br>
+这里面 $P$ 是一个在定点域上计算好的整数。<br>
+假设 $P=7091$，$M=0.0072474273418460$ ($M$ 可以通过事先计算得到)，那下面我们就是要找到一个 $M_0$ 和 $n$，使得 $MP=2^{-n}M_0 P$ 成立。我们可以用一段代码来找到这两个数：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">M <span class="token operator">=</span> <span class="token number">0.0072474273418460</span>
 P <span class="token operator">=</span> <span class="token number">7091</span>
 
@@ -543,7 +579,6 @@ P <span class="token operator">=</span> <span class="token number">7091</span>
 
 <span class="token keyword">for</span> n <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     multiply<span class="token punctuation">(</span>n<span class="token punctuation">,</span> M<span class="token punctuation">,</span> P<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出：</p>
 <pre class="line-numbers language-none"><code class="language-none">n&#x3D;1, Mo&#x3D;0, approx&#x3D;0.000000, error&#x3D;51.391507
 n&#x3D;2, Mo&#x3D;0, approx&#x3D;0.000000, error&#x3D;51.391507
@@ -560,38 +595,58 @@ n&#x3D;12, Mo&#x3D;30, approx&#x3D;51.000000, error&#x3D;0.391507
 n&#x3D;13, Mo&#x3D;59, approx&#x3D;51.000000, error&#x3D;0.391507
 n&#x3D;14, Mo&#x3D;119, approx&#x3D;51.000000, error&#x3D;0.391507
 n&#x3D;15, Mo&#x3D;237, approx&#x3D;51.000000, error&#x3D;0.391507<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以看到，在 n&#x3D;11、 $M_0$ &#x3D;15 的时候，误差就已经在 1 以内了。因此，可以通过对 $M_0P$ 右移 n 个 bit 来近似$MP$，而这个误差本身在可以接受的范围内。这样一来，$(8)$ 式就可以完全通过定点运算来计算，即我们实现了浮点矩阵乘法的量化。</p>
-<h3 id="卷积网络的量化"><a href="#卷积网络的量化" class="headerlink" title="卷积网络的量化"></a>卷积网络的量化</h3><p>有了上面矩阵乘法的量化，我们就可以进一步尝试对卷积网络的量化。</p>
+<p>可以看到，在 n=11、 $M_0$ =15 的时候，误差就已经在 1 以内了。因此，可以通过对 $M_0P$ 右移 n 个 bit 来近似$MP$，而这个误差本身在可以接受的范围内。这样一来，$(8)$ 式就可以完全通过定点运算来计算，即我们实现了浮点矩阵乘法的量化。</p>
+<h3 id="卷积网络的量化">卷积网络的量化</h3>
+<p>有了上面矩阵乘法的量化，我们就可以进一步尝试对卷积网络的量化。</p>
 <p>假设一个这样的网络：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/21/shen-jing-wang-luo-liang-hua-chu-tan/v2-8aeb50d76358ee1f6e88c33916b57200_1440w.webp" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="v2-8aeb50d76358ee1f6e88c33916b57200_1440w.webp" alt="img"></p>
 <p>这个网络只有三个模块，现在需要把 conv、fc、relu 量化。</p>
 <ul>
-<li><p>conv量化</p>
-<p>假设输入为 $x$，我们可以事先统计样本的最大值和最小值，然后根据式 $(3)$ 和式 $(4)$ 计算出 $S_x$ (scale) 和 $Z_x$ (zero point)。 </p>
-<p>同样地，假设 conv、fc 的参数为 $w_1$、$w_2$，以及 scale 和 zero point 为 $S_{w1}$、$Z_{w1}$、$S_{w2}$、$Z_{w2}$。中间层的 feature map 为 $a_1$、$a_2$，并且事先统计出它们的 scale 和 zero point 为 $S_{a1}$、$Z_{a1}$、$S_{a2}$、$Z_{a2}$。   </p>
-<p>卷积运算和全连接层的本质都是矩阵运算，因此我们可以把卷积运算表示成（这里先忽略加 bias 的操作，这一步同样可以量化，不过中间有一些 trick，详见：）：<br>$$<br>a_1^{i,k}&#x3D;\sum_{j&#x3D;1}^N x^{i,j}w_1^{j,k} \tag{9}<br>$$<br>根据 $(7)$ 式的转换，我们可以得到：<br>$$<br>q_{a1}^{i,k}&#x3D;M\sum_{j&#x3D;1}^N(q_x^{i,j}-Z_x)(q_{w1}^{j,k}-Z_{w1})+Z_{a1} \tag{10}<br>$$<br>其中 $M&#x3D;\frac{S_{w1}S_{x}}{S_{a1}}$，我们得到量化conv后的输出。  </p>
+<li>
+<p>conv量化</p>
+<p>假设输入为 $x$，我们可以事先统计样本的最大值和最小值，然后根据式 $(3)$ 和式 $(4)$ 计算出 $S_x$ (scale) 和 $Z_x$ (zero point)。</p>
+<p>同样地，假设 conv、fc 的参数为 $w_1$、$w_2$，以及 scale 和 zero point 为 $S_{w1}$、$Z_{w1}$、$S_{w2}$、$Z_{w2}$。中间层的 feature map 为 $a_1$、$a_2$，并且事先统计出它们的 scale 和 zero point 为 $S_{a1}$、$Z_{a1}$、$S_{a2}$、$Z_{a2}$。</p>
+<p>卷积运算和全连接层的本质都是矩阵运算，因此我们可以把卷积运算表示成（这里先忽略加 bias 的操作，这一步同样可以量化，不过中间有一些 trick，详见：）：<br>
+$$<br>
+a_1^{i,k}=\sum_{j=1}^N x^{i,j}w_1^{j,k} \tag{9}<br>
+$$<br>
+根据 $(7)$ 式的转换，我们可以得到：<br>
+$$<br>
+q_{a1}^{i,k}=M\sum_{j=1}^N(q_x^{i,j}-Z_x)(q_{w1}^{j,k}-Z_{w1})+Z_{a1} \tag{10}<br>
+$$<br>
+其中 $M=\frac{S_{w1}S_{x}}{S_{a1}}$，我们得到量化conv后的输出。</p>
 </li>
-<li><p>relu量化</p>
+<li>
+<p>relu量化</p>
 <p>得到 conv 的输出后，我们不用反量化回 $a_1$，直接用 $q_{a1}$ 继续后面的计算即可。</p>
-<p>对于量化的 relu 来说，计算公式不再是$q_{a2}&#x3D;max(q_{a1}, 0)$，而是 $q_{a2}&#x3D;max(q_{a1},Z_{a1})$ ，并且$S_{a1}&#x3D;S_{a2}$， $Z_{a1}&#x3D;Z_{a2}$ (为什么是这样，这一点留作思考题)，我们得到量化relu后的输出。</p>
+<p>对于量化的 relu 来说，计算公式不再是$q_{a2}=max(q_{a1}, 0)$，而是 $q_{a2}=max(q_{a1},Z_{a1})$ ，并且$S_{a1}=S_{a2}$， $Z_{a1}=Z_{a2}$ (为什么是这样，这一点留作思考题)，我们得到量化relu后的输出。</p>
 <blockquote>
-<p>另外，在实际部署的时候，relu 或者 bn 通常是会整合到 conv 中一起计算的，这一点在之后的文章再讲解。 </p>
+<p>另外，在实际部署的时候，relu 或者 bn 通常是会整合到 conv 中一起计算的，这一点在之后的文章再讲解。</p>
 </blockquote>
 </li>
-<li><p>fc量化</p>
-<p>得到 $q_{a2}$ 后，我们可以继续用 $(8)$ 式来计算 fc 层。假设网络输出为 y，对应的 scale 和 zero point 为 $S_y$、 $Z_y$ ，则量化后的 fc 层可以用如下公式计算：<br>$$<br>q_{y}^{i,k}&#x3D;M\sum_{j&#x3D;1}^N(q_{a2}^{i,j}-Z_{a2})(q_{w2}^{j,k}-Z_{w2})+Z_{y}\tag{11}<br>$$<br>然后通过公式 $y&#x3D;S_y(q_y-Z_y)$ 把结果反量化回去，就可以得到近似原来全精度模型的输出了。</p>
+<li>
+<p>fc量化</p>
+<p>得到 $q_{a2}$ 后，我们可以继续用 $(8)$ 式来计算 fc 层。假设网络输出为 y，对应的 scale 和 zero point 为 $S_y$、 $Z_y$ ，则量化后的 fc 层可以用如下公式计算：<br>
+$$<br>
+q_{y}^{i,k}=M\sum_{j=1}^N(q_{a2}^{i,j}-Z_{a2})(q_{w2}^{j,k}-Z_{w2})+Z_{y}\tag{11}<br>
+$$<br>
+然后通过公式 $y=S_y(q_y-Z_y)$ 把结果反量化回去，就可以得到近似原来全精度模型的输出了。</p>
 </li>
 </ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>可以看到，上面整个流程都是用定点运算实现的。我们在得到全精度的模型后，可以事先统计出 $weight$ 以及中间各个 feature map 的 $min$、$max$，并以此计算出 scale 和 zero point，然后把 $weight$ 量化成 int8&#x2F;int16 型的整数后，整个网络便完成了量化，然后就可以依据上面的流程做量化推理了。 </p>
-<h2 id="K-Means到底做了什么？"><a href="#K-Means到底做了什么？" class="headerlink" title="K-Means到底做了什么？"></a>K-Means到底做了什么？</h2><p><img src="/medias/images/loading.gif" data-original="/2023/10/21/shen-jing-wang-luo-liang-hua-chu-tan/image-20231021105755989.png" alt="image-20231021105755989"></p>
+<h3 id="总结">总结</h3>
+<p>可以看到，上面整个流程都是用定点运算实现的。我们在得到全精度的模型后，可以事先统计出 $weight$ 以及中间各个 feature map 的 $min$、$max$，并以此计算出 scale 和 zero point，然后把 $weight$ 量化成 int8/int16 型的整数后，整个网络便完成了量化，然后就可以依据上面的流程做量化推理了。</p>
+<h2 id="K-Means到底做了什么？">K-Means到底做了什么？</h2>
+<p><img src="/medias/images/loading.gif" data-original="image-20231021105755989.png" alt="image-20231021105755989"></p>
 <p>例如上图，K-Means对这些数据做了这些事：</p>
 <ol>
-<li><p>分类：将数据集划分为K个组（簇），使得同一簇内的数据点彼此相似度较高，而不同簇之间的相似度较低。</p>
+<li>
+<p>分类：将数据集划分为K个组（簇），使得同一簇内的数据点彼此相似度较高，而不同簇之间的相似度较低。</p>
 </li>
-<li><p>确定聚类中心。</p>
+<li>
+<p>确定聚类中心。</p>
 </li>
-<li><p>代码示例：</p>
+<li>
+<p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
@@ -872,9 +927,11 @@ model<span class="token punctuation">,</span> quant_model <span class="token ope
 
 plot_weights<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
 plot_weights<span class="token punctuation">(</span>quant_model<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h2 id="线性量化"><a href="#线性量化" class="headerlink" title="线性量化"></a>线性量化</h2><p>代码示例：</p>
+<h2 id="线性量化">线性量化</h2>
+<p>代码示例：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
@@ -1091,28 +1148,33 @@ model<span class="token punctuation">,</span> quant_model <span class="token ope
 
 plot_weights<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
 plot_weights<span class="token punctuation">(</span>quant_model<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="量化的方向分类"><a href="#量化的方向分类" class="headerlink" title="量化的方向分类"></a>量化的方向分类</h2><ul>
-<li><p>量化的对象</p>
+<h2 id="量化的方向分类">量化的方向分类</h2>
+<ul>
+<li>
+<p>量化的对象</p>
 <p>思考：我们可以在模型训练后再对模型进行量化，那我们可不可以在模型训练的同时进行量化呢？</p>
 </li>
-<li><p>量化的颗粒度</p>
+<li>
+<p>量化的颗粒度</p>
 <p>思考：我们可以对整个模型进行量化，那我们可不可以对模型的每一层运用不同的量化呢？我们可不可以对每个卷积核进行量化呢？我们可不可以甚至对每个元素进行量化呢？</p>
 </li>
-<li><p>按需量化</p>
+<li>
+<p>按需量化</p>
 <p>思考：我们可不可以对一个模型进行按需量化？针对不同模型的精读要求，那我们就可以采用对应的量化措施。</p>
 </li>
 </ul>
-<h2 id="Transform使用方法"><a href="#Transform使用方法" class="headerlink" title="Transform使用方法"></a>Transform使用方法</h2><p>图像处理：以后再写</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<h2 id="Transform使用方法">Transform使用方法</h2>
+<p>图像处理：以后再写</p>
+<h2 id="参考">参考</h2>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/64744154">神经网络量化简介</a></li>
-<li><a href="https://link.zhihu.com/?target=https://github.com/google/gemmlowp/blob/master/doc/quantization.md%23implementation-of-quantized-matrix-multiplication">Building a quantization paradigm from first principles</a></li>
-<li><a href="https://link.zhihu.com/?target=https://github.com/NervanaSystems/distiller/issues/327">Post Training Quantization General Questions</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//github.com/google/gemmlowp/blob/master/doc/quantization.md%23implementation-of-quantized-matrix-multiplication">Building a quantization paradigm from first principles</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//github.com/NervanaSystems/distiller/issues/327">Post Training Quantization General Questions</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/101346240">量化训练：Quantization Aware Training in Tensorflow（一）</a></li>
-<li><a href="https://link.zhihu.com/?target=https://medium.com/@karanbirchahal/how-to-quantise-an-mnist-network-to-8-bits-in-pytorch-no-retraining-required-from-scratch-39f634ac8459">How to Quantize an MNIST network to 8 bits in Pytorch from scratch (No retraining required)</a></li>
-<li><a href="https://link.zhihu.com/?target=https://medium.com/@karanbirchahal/aggressive-quantization-how-to-run-mnist-on-a-4-bit-neural-net-using-pytorch-5703f3faa599">Aggressive Quantization: How to run MNIST on a 4 bit Neural Net using Pytorch</a></li>
-<li><a href="https://link.zhihu.com/?target=https://www.tensorflow.org/lite/performance/quantization_spec">TensorFlow Lite 8-bit quantization specification</a></li>
-<li><a href="https://link.zhihu.com/?target=https://www.tensorflow.org/lite/performance/post_training_quantization">Post-training quantization</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//medium.com/%40karanbirchahal/how-to-quantise-an-mnist-network-to-8-bits-in-pytorch-no-retraining-required-from-scratch-39f634ac8459">How to Quantize an MNIST network to 8 bits in Pytorch from scratch (No retraining required)</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//medium.com/%40karanbirchahal/aggressive-quantization-how-to-run-mnist-on-a-4-bit-neural-net-using-pytorch-5703f3faa599">Aggressive Quantization: How to run MNIST on a 4 bit Neural Net using Pytorch</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.tensorflow.org/lite/performance/quantization_spec">TensorFlow Lite 8-bit quantization specification</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.tensorflow.org/lite/performance/post_training_quantization">Post-training quantization</a></li>
 </ul>
 
                 

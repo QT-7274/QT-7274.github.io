@@ -500,8 +500,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="真实DOM和其解析流程"><a href="#真实DOM和其解析流程" class="headerlink" title="真实DOM和其解析流程"></a>真实DOM和其解析流程</h2><p>下图为 <code>webkit</code> 渲染引擎工作流程图</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e10922325215tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+                <h2 id="真实DOM和其解析流程">真实DOM和其解析流程</h2>
+<p>下图为 <code>webkit</code> 渲染引擎工作流程图</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e10922325215tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
 <p>所有的浏览器渲染引擎工作流程大致分为5步：创建 <code>DOM</code> 树 —&gt; 创建 <code>Style Rules</code> -&gt; 构建 <code>Render</code> 树 —&gt; 布局 <code>Layout</code> -—&gt; 绘制 <code>Painting</code>。</p>
 <p>第一步，构建 DOM 树：用 HTML 分析器，分析 HTML 元素，构建一棵 DOM 树；</p>
 <p>第二步，生成样式表：用 CSS 分析器，分析 CSS 文件和元素上的 inline 样式，生成页面的样式表；</p>
@@ -515,9 +516,11 @@
 <li><strong><code>CSS</code> 的解析注意点？</strong> <code>CSS</code> 的解析是从右往左逆向解析的，嵌套标签越多，解析越慢。</li>
 <li><strong><code>JS</code> 操作真实 <code>DOM</code> 的代价？</strong> 用我们传统的开发模式，原生 <code>JS</code> 或 <code>JQ</code> 操作 <code>DOM</code> 时，浏览器会从构建 DOM 树开始从头到尾执行一遍流程。在一次操作中，我需要更新 10 个 <code>DOM</code> 节点，浏览器收到第一个 <code>DOM</code> 请求后并不知道还有 9 次更新操作，因此会马上执行流程，最终执行10 次。例如，第一次计算完，紧接着下一个 <code>DOM</code> 更新请求，这个节点的坐标值就变了，前一次计算为无用功。计算 <code>DOM</code> 节点坐标值等都是白白浪费的性能。即使计算机硬件一直在迭代更新，操作 <code>DOM</code> 的代价仍旧是昂贵的，频繁操作还是会出现页面卡顿，影响用户体验</li>
 </ul>
-<h2 id="为什么需要虚拟DOM"><a href="#为什么需要虚拟DOM" class="headerlink" title="为什么需要虚拟DOM"></a>为什么需要虚拟DOM</h2><p>虚拟 <code>DOM</code> 就是为了解决浏览器性能问题而被设计出来的。如前，若一次操作中有 10 次更新 <code>DOM</code> 的动作，虚拟 <code>DOM</code> 不会立即操作 <code>DOM</code>，而是将这 10 次更新的 <code>diff</code> 内容保存到本地一个 <code>JS</code> 对象中，最终将这个 <code>JS</code> 对象一次性 <code>attch</code> 到 <code>DOM</code> 树上，再进行后续操作，避免大量无谓的计算量。</p>
+<h2 id="为什么需要虚拟DOM">为什么需要虚拟DOM</h2>
+<p>虚拟 <code>DOM</code> 就是为了解决浏览器性能问题而被设计出来的。如前，若一次操作中有 10 次更新 <code>DOM</code> 的动作，虚拟 <code>DOM</code> 不会立即操作 <code>DOM</code>，而是将这 10 次更新的 <code>diff</code> 内容保存到本地一个 <code>JS</code> 对象中，最终将这个 <code>JS</code> 对象一次性 <code>attch</code> 到 <code>DOM</code> 树上，再进行后续操作，避免大量无谓的计算量。</p>
 <p>所以，用 <code>JS</code> 对象模拟 <code>DOM</code> 节点的好处是，<strong>页面的更新可以先全部反映在 <code>JS</code> 对象(虚拟 <code>DOM</code> )上</strong>，操作内存中的 <code>JS</code> 对象的速度显然要更快，等更新完成后，再将最终的 <code>JS</code> 对象映射成真实的 <code>DOM</code>，交由浏览器去绘制。</p>
-<h2 id="什么是虚拟DOM"><a href="#什么是虚拟DOM" class="headerlink" title="什么是虚拟DOM"></a>什么是虚拟DOM</h2><p>实际上它只是一层<strong>对真实<code>DOM</code>的抽象</strong>，以<code>JavaScript</code> 对象 (<code>VNode</code> 节点) 作为基础的树，用对象的属性来描述节点，最终可以通过一系列操作使这棵树映射到真实环境上</p>
+<h2 id="什么是虚拟DOM">什么是虚拟DOM</h2>
+<p>实际上它只是一层<strong>对真实<code>DOM</code>的抽象</strong>，以<code>JavaScript</code> 对象 (<code>VNode</code> 节点) 作为基础的树，用对象的属性来描述节点，最终可以通过一系列操作使这棵树映射到真实环境上</p>
 <p>在<code>Javascript</code>对象中，虚拟<code>DOM</code> 表现为一个 <code>Object</code>对象。并且最少包含标签名 (<code>tag</code>)、属性 (<code>attrs</code>) 和子元素对象 (<code>children</code>) 三个属性，不同框架对这三个属性的名命可能会有差别</p>
 <p>创建虚拟<code>DOM</code>就是为了更好将虚拟的节点渲染到页面视图中，所以虚拟<code>DOM</code>对象的节点与真实<code>DOM</code>的属性一一照应</p>
 <p>在<code>vue</code>中同样使用到了虚拟<code>DOM</code>技术</p>
@@ -526,7 +529,6 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>p<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>节点内容<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>&#123;&#123; foo &#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>实例化<code>vue</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const app &#x3D; new Vue(&#123;
     el:&quot;#app&quot;,
@@ -534,19 +536,21 @@
         foo:&quot;foo&quot;
     &#125;
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>观察<code>render</code>的<code>render</code>，我们能得到虚拟<code>DOM</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">anonymous</span><span class="token punctuation">(</span>
 <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	<span class="token keyword">with</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token keyword">return</span> <span class="token function">_c</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token literal-property property">attrs</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token string-property property">"id"</span><span class="token operator">:</span><span class="token string">"app"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token function">_c</span><span class="token punctuation">(</span><span class="token string">'p'</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token literal-property property">staticClass</span><span class="token operator">:</span><span class="token string">"p"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 					  <span class="token punctuation">[</span><span class="token function">_v</span><span class="token punctuation">(</span><span class="token string">"节点内容"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">_v</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">_c</span><span class="token punctuation">(</span><span class="token string">'h3'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token function">_v</span><span class="token punctuation">(</span><span class="token function">_s</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>通过<code>VNode</code>，<code>vue</code>可以对这颗抽象树进行创建节点，删除节点以及修改节点的操作， 经过<code>diff</code>算法得出一些需要修改的最小单位，再更新视图，减少了<code>dom</code>操作，提高了性能</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>而通过<code>VNode</code>，同样更新10个<code>DOM</code>节点，虚拟<code>DOM</code>不会立即操作<code>DOM</code>，而是<strong>将这10次更新的<code>diff</code>内容保存到本地的一个<code>js</code>对象中</strong>，最终将这个<code>js</code>对象一次性<code>attach</code>到<code>DOM</code>树上，避免大量的无谓计算</p>
+<h2 id=""></h2>
+<p>而通过<code>VNode</code>，同样更新10个<code>DOM</code>节点，虚拟<code>DOM</code>不会立即操作<code>DOM</code>，而是<strong>将这10次更新的<code>diff</code>内容保存到本地的一个<code>js</code>对象中</strong>，最终将这个<code>js</code>对象一次性<code>attach</code>到<code>DOM</code>树上，避免大量的无谓计算</p>
 <blockquote>
 <p>很多人认为虚拟 DOM 最大的优势是 diff 算法，减少 JavaScript 操作真实 DOM 的带来的性能消耗。虽然这一个虚拟 DOM 带来的一个优势，但并不是全部。虚拟 DOM 最大的优势在于抽象了原本的渲染过程，实现了跨平台的能力，而不仅仅局限于浏览器的 DOM，可以是安卓和 IOS 的原生组件，可以是近期很火热的小程序，也可以是各种GU</p>
 </blockquote>
-<h2 id="如何实现虚拟DOM"><a href="#如何实现虚拟DOM" class="headerlink" title="如何实现虚拟DOM"></a>如何实现虚拟DOM</h2><h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><h4 id="用-JS-对象模拟-DOM-树"><a href="#用-JS-对象模拟-DOM-树" class="headerlink" title="用 JS 对象模拟 DOM 树"></a>用 <code>JS</code> 对象模拟 <code>DOM</code> 树</h4><p>例如一个真实的 <code>DOM</code> 节点如下：</p>
+<h2 id="如何实现虚拟DOM">如何实现虚拟DOM</h2>
+<h3 id="算法实现">算法实现</h3>
+<h4 id="用-JS-对象模拟-DOM-树">用 <code>JS</code> 对象模拟 <code>DOM</code> 树</h4>
+<p>例如一个真实的 <code>DOM</code> 节点如下：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>virtual-dom<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Virtual DOM<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>list<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -556,7 +560,6 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>Hello World<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们用 <code>JavaScript</code> 对象来表示 <code>DOM</code> 节点，使用对象的属性记录节点的类型、属性、子节点等。</p>
 <p><code>element.js</code> 中表示节点对象代码如下：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
@@ -591,7 +594,6 @@ function createElement(tagName, props, children)&#123;
 &#125;
 
 module.exports &#x3D; createElement;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>根据 <code>element</code> 对象的设定，则上面的 <code>DOM</code> 结构就可以简单表示为：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var el &#x3D; require(&quot;.&#x2F;element.js&quot;);
 var ul &#x3D; el(&#39;div&#39;,&#123;id:&#39;virtual-dom&#39;&#125;,[
@@ -603,10 +605,10 @@ var ul &#x3D; el(&#39;div&#39;,&#123;id:&#39;virtual-dom&#39;&#125;,[
   ]),
   el(&#39;div&#39;,&#123;&#125;,[&#39;Hello World&#39;])
 ]) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>现在 <code>ul</code> 就是我们用 <code>JavaScript</code> 对象表示的 <code>DOM</code> 结构，我们输出查看 <code>ul</code> 对应的数据结构如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e14fcff074f0tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
-<h4 id="渲染用-JS-表示的-DOM-对象"><a href="#渲染用-JS-表示的-DOM-对象" class="headerlink" title="渲染用 JS 表示的 DOM 对象"></a><strong>渲染用 <code>JS</code> 表示的 <code>DOM</code> 对象</strong></h4><p>但是页面上并没有这个结构，下一步我们介绍如何将 <code>ul</code> 渲染成页面上真实的 <code>DOM</code> 结构，相关渲染函数如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e14fcff074f0tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+<h4 id="渲染用-JS-表示的-DOM-对象"><strong>渲染用 <code>JS</code> 表示的 <code>DOM</code> 对象</strong></h4>
+<p>但是页面上并没有这个结构，下一步我们介绍如何将 <code>ul</code> 渲染成页面上真实的 <code>DOM</code> 结构，相关渲染函数如下：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
  * render 将virdual-dom 对象渲染为实际 DOM 元素
  *&#x2F;
@@ -628,20 +630,20 @@ Element.prototype.render &#x3D; function () &#123;
     &#125;)
     return el
 &#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们通过查看以上 <code>render</code> 方法，会根据  <code>tagName</code> 构建一个真正的 <code>DOM</code> 节点，然后设置这个节点的属性，最后递归地把自己的子节点也构建起来。</p>
 <p>我们将构建好的 <code>DOM</code> 结构添加到页面 <code>body</code> 上面，如下：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">ulRoot &#x3D; ul.render();
 document.body.appendChild(ulRoot); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>这样，页面 <code>body</code> 里面就有真正的 <code>DOM</code> 结构，效果如下图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e179a748d425tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
-<h4 id="比较两棵虚拟-DOM-树的差异-—-diff-算法"><a href="#比较两棵虚拟-DOM-树的差异-—-diff-算法" class="headerlink" title="比较两棵虚拟 DOM 树的差异 — diff 算法"></a>比较两棵虚拟 <code>DOM</code> 树的差异 — <code>diff</code> 算法</h4><p><code>diff</code> 算法用来比较两棵 <code>Virtual DOM</code> 树的差异，如果需要两棵树的完全比较，那么 <code>diff</code> 算法的时间复杂度为<code>O(n^3)</code>。但是在前端当中，你很少会跨越层级地移动 <code>DOM</code> 元素，所以 <code>Virtual DOM</code> 只会对同一个层级的元素进行对比，如下图所示， <code>div</code> 只会和同一层级的 <code>div</code> 对比，第二层级的只会跟第二层级对比，这样算法复杂度就可以达到 <code>O(n)</code>。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e26a5ecf086etplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e179a748d425tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+<h4 id="比较两棵虚拟-DOM-树的差异-—-diff-算法">比较两棵虚拟 <code>DOM</code> 树的差异 — <code>diff</code> 算法</h4>
+<p><code>diff</code> 算法用来比较两棵 <code>Virtual DOM</code> 树的差异，如果需要两棵树的完全比较，那么 <code>diff</code> 算法的时间复杂度为<code>O(n^3)</code>。但是在前端当中，你很少会跨越层级地移动 <code>DOM</code> 元素，所以 <code>Virtual DOM</code> 只会对同一个层级的元素进行对比，如下图所示， <code>div</code> 只会和同一层级的 <code>div</code> 对比，第二层级的只会跟第二层级对比，这样算法复杂度就可以达到 <code>O(n)</code>。</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e26a5ecf086etplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
 <ol>
-<li><p><strong>深度优先遍历，记录差异</strong></p>
+<li>
+<p><strong>深度优先遍历，记录差异</strong></p>
 <p>在实际的代码中，会对新旧两棵树进行一个深度优先的遍历，这样每个节点都会有一个唯一的标记：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e2873e42b1tplv-t2oaga2asx-jj-mark3024000q75.png" alt="dfs-walk"></p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e2873e42b1tplv-t2oaga2asx-jj-mark3024000q75.png" alt="dfs-walk"></p>
 <p>在深度优先遍历的时候，<strong>每遍历到一个节点就把该节点和新的树进行对比</strong>。如果有差异的话就记录到一个对象里面。</p>
 <blockquote>
 <p>⚠️并非深度遍历结束再进行对比。</p>
@@ -688,12 +690,12 @@ function dfsWalk(oldNode, newNode, index, patches) &#123;
     patches[index] &#x3D; currentPatch
   &#125;
 &#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>此处diff过程中的key的作用，详见：<a href="https://qt-7274.github.io/2023/09/14/vue-zhong-key-de-yuan-li/">Vue中key的原理 | QT-7274 (qblog.top)</a></p>
 </blockquote>
 </li>
-<li><p><strong>差异类型</strong></p>
+<li>
+<p><strong>差异类型</strong></p>
 <p><code>DOM</code> 操作导致的差异类型包括以下几种：</p>
 <ul>
 <li>节点替换：节点改变了，例如将上面的 <code>div</code> 换成 <code>h1</code>;</li>
@@ -707,15 +709,17 @@ var REORDER &#x3D; 1 &#x2F;&#x2F; 重新排序
 var PROPS &#x3D; 2 &#x2F;&#x2F; 修改了节点的属性
 var TEXT &#x3D; 3 &#x2F;&#x2F; 文本内容改变 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>列表对比算法</strong></p>
+<li>
+<p><strong>列表对比算法</strong></p>
 <p>子节点的对比算法，例如      <code>p, ul, div</code> 的顺序换成了 <code>div, p, ul</code>。这个该怎么对比？如果按照同层级进行顺序对比的话，它们都会被替换掉。如 <code>p</code> 和 <code>div</code> 的 <code>tagName</code> 不同，<code>p</code> 会被 <code>div</code> 所替代。最终，三个节点都会被替换，这样 <code>DOM</code> 开销就非常大。而实际上是不需要替换节点，而<strong>只需要经过节点移动</strong>就可以达到，我们只需知道怎么进行移动。</p>
 <p>将这个问题抽象出来其实就是字符串的最小编辑距离问题（<code>Edition Distance</code>），最常见的解决方法是 <code>Levenshtein Distance</code> , <code>Levenshtein Distance</code> 是一个度量两个字符序列之间差异的字符串度量标准，两个单词之间的 <code>Levenshtein Distance</code> 是将一个单词转换为另一个单词所需的单字符编辑（插入、删除或替换）的最小数量。<code>Levenshtein Distance</code> 是1965年由苏联数学家 Vladimir Levenshtein 发明的。<code>Levenshtein Distance</code> 也被称为编辑距离（<code>Edit Distance</code>），通过<strong>动态规划</strong>求解，时间复杂度为 <code>O(M*N)</code>。</p>
 <p>定义：对于两个字符串 <code>a、b</code>，则他们的 <code>Levenshtein Distance</code> 为：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e1953b479b3dtplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e1953b479b3dtplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
 <p>示例：字符串 <code>a</code> 和 <code>b</code>，<code>a=“abcde” ，b=“cabef”</code>，根据上面给出的计算公式，则他们的 <code>Levenshtein Distance</code> 的计算过程如下：</p>
-<p>本文的 <code>demo</code> 使用插件 <code>list-diff2</code> 算法进行比较，该算法的时间复杂度伟 <code>O(n*m)</code>，虽然该算法并非最优的算法，但是用于对于 <code>dom</code> 元素的常规操作是足够的。该算法具体的实现过程这里不再详细介绍，该算法的具体介绍可以参照：<a href="https://link.juejin.cn/?target=https://github.com/livoras/list-diff">github.com&#x2F;livoras&#x2F;lis…</a></p>
+<p>本文的 <code>demo</code> 使用插件 <code>list-diff2</code> 算法进行比较，该算法的时间复杂度伟 <code>O(n*m)</code>，虽然该算法并非最优的算法，但是用于对于 <code>dom</code> 元素的常规操作是足够的。该算法具体的实现过程这里不再详细介绍，该算法的具体介绍可以参照：<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Flivoras%2Flist-diff">github.com/livoras/lis…</a></p>
 </li>
-<li><p><strong>实例输出</strong></p>
+<li>
+<p><strong>实例输出</strong></p>
 <p>两个虚拟 <code>DOM</code> 对象如下图所示，其中 <code>ul1</code> 表示原有的虚拟 <code>DOM</code> 树，<code>ul2</code> 表示改变后的虚拟 <code>DOM</code> 树</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var ul1 &#x3D; el(&#39;div&#39;,&#123;id:&#39;virtual-dom&#39;&#125;,[
   el(&#39;p&#39;,&#123;&#125;,[&#39;Virtual DOM&#39;]),
@@ -736,13 +740,14 @@ var ul2 &#x3D; el(&#39;div&#39;,&#123;id:&#39;virtual-dom&#39;&#125;,[
 ]) 
 var patches &#x3D; diff(ul1,ul2);
 console.log(&#39;patches:&#39;,patches);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们查看输出的两个虚拟 <code>DOM</code> 对象之间的差异对象如下图所示，我们能通过差异对象得到，两个虚拟 <code>DOM</code> 对象之间进行了哪些变化，从而根据这个差异对象（<code>patches</code>）更改原先的真实 <code>DOM</code> 结构，从而将页面的 <code>DOM</code> 结构进行更改。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e1a5bff0b71atplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e1a5bff0b71atplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
 </li>
 </ol>
-<h4 id="将两个虚拟-DOM-对象的差异应用到真正的-DOM-树"><a href="#将两个虚拟-DOM-对象的差异应用到真正的-DOM-树" class="headerlink" title="将两个虚拟 DOM 对象的差异应用到真正的 DOM 树"></a>将两个虚拟 <code>DOM</code> 对象的差异应用到真正的 <code>DOM</code> 树</h4><ol>
-<li><p><strong>深度优先遍历 <code>DOM</code> 树</strong></p>
+<h4 id="将两个虚拟-DOM-对象的差异应用到真正的-DOM-树">将两个虚拟 <code>DOM</code> 对象的差异应用到真正的 <code>DOM</code> 树</h4>
+<ol>
+<li>
+<p><strong>深度优先遍历 <code>DOM</code> 树</strong></p>
 <p>因为步骤一所构建的 <code>JavaScript</code> 对象树和 <code>render</code> 出来真正的 <code>DOM</code> 树的信息、结构是一样的。所以我们可以对那棵 <code>DOM</code> 树也进行深度优先的遍历，遍历的时候从步骤二生成的 <code>patches</code> 对象中找出当前遍历的节点差异，如下相关代码所示：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function patch (node, patches) &#123;
   var walker &#x3D; &#123;index: 0&#125;
@@ -768,7 +773,8 @@ function dfsWalk (node, walker, patches) &#123;
   &#125;
 &#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>对原有 <code>DOM</code> 树进行 <code>DOM</code> 操作</strong></p>
+<li>
+<p><strong>对原有 <code>DOM</code> 树进行 <code>DOM</code> 操作</strong></p>
 <p>我们根据不同类型的差异对当前节点进行不同的 <code>DOM</code> 操作 ，例如</p>
 <ul>
 <li>如果进行了节点替换，就进行节点替换 <code>DOM</code> 操作；</li>
@@ -799,15 +805,18 @@ function dfsWalk (node, walker, patches) &#123;
   &#125;)
 &#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><strong>DOM结构改变</strong></p>
+<li>
+<p><strong>DOM结构改变</strong></p>
 <p>通过将得到的两个 <code>DOM</code> 对象之间的差异，应用到第一个（原先）<code>DOM</code> 结构中，我们可以看到 <code>DOM</code> 结构进行了预期的变化，如下图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e1ae714e9779tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e1ae714e9779tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
 </li>
 </ol>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>相关代码实现已经放到 github 上面，有兴趣的同学可以clone运行实验，github地址为：<a href="https://link.juejin.cn/?target=https://github.com/fengshi123/virtual-dom-example%E3%80%82">github.com&#x2F;fengshi123&#x2F;…</a></p>
+<h4 id="小结">小结</h4>
+<p>相关代码实现已经放到 github 上面，有兴趣的同学可以clone运行实验，github地址为：<a href="https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Ffengshi123%2Fvirtual-dom-example%E3%80%82">github.com/fengshi123/…</a></p>
 <p><code>Virtual DOM</code> 算法主要实现上面三个步骤来实现：</p>
 <ul>
-<li><p>用 <code>JS</code> 对象模拟 <code>DOM</code> 树 — <code>element.js</code></p>
+<li>
+<p>用 <code>JS</code> 对象模拟 <code>DOM</code> 树 — <code>element.js</code></p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>virtual-dom<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Virtual DOM<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>list<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -818,10 +827,12 @@ function dfsWalk (node, walker, patches) &#123;
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>Hello World<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>比较两棵虚拟 <code>DOM</code> 树的差异 — <code>diff.js</code></p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e1bb518a2951tplv-t2oaga2asx-jj-mark3024000q75-169477137213526.png" alt="img"></p>
+<li>
+<p>比较两棵虚拟 <code>DOM</code> 树的差异 — <code>diff.js</code></p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e1bb518a2951tplv-t2oaga2asx-jj-mark3024000q75-169477137213526.png" alt="img"></p>
 </li>
-<li><p>将两个虚拟 <code>DOM</code> 对象的差异应用到真正的 <code>DOM</code> 树 — <code>patch.js</code></p>
+<li>
+<p>将两个虚拟 <code>DOM</code> 对象的差异应用到真正的 <code>DOM</code> 树 — <code>patch.js</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function applyPatches (node, currentPatches) &#123;
   currentPatches.forEach(currentPatch &#x3D;&gt; &#123;
     switch (currentPatch.type) &#123;
@@ -844,10 +855,13 @@ function dfsWalk (node, walker, patches) &#123;
         throw new Error(&#39;Unknown patch type &#39; + currentPatch.type)
     &#125;
   &#125;)
-&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h3 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h3><h4 id="VNode-模拟-DOM-树"><a href="#VNode-模拟-DOM-树" class="headerlink" title="VNode 模拟 DOM 树"></a><code>VNode</code> 模拟 <code>DOM</code> 树</h4><p>在 <code>Vue.js</code> 中，<code>Virtual DOM</code> 是用 <code>VNode</code> 这个 <code>Class</code> 去描述，它定义在 <code>src/core/vdom/vnode.js</code> 中 ，从以下代码块中可以看到 <code>Vue.js</code> 中的 <code>Virtual DOM</code> 的定义较为复杂一些，因为它这里包含了很多 <code>Vue.js</code> 的特性。实际上 <code>Vue.js</code> 中 <code>Virtual DOM</code> 是借鉴了一个开源库  <a href="https://link.juejin.cn/?target=https://github.com/snabbdom/snabbdom">snabbdom</a> 的实现，然后加入了一些 <code>Vue.js</code> 的一些特性。</p>
-<p>源码位置：src&#x2F;core&#x2F;vdom&#x2F;vnode.js</p>
+<h3 id="源码详解">源码详解</h3>
+<h4 id="VNode-模拟-DOM-树"><code>VNode</code> 模拟 <code>DOM</code> 树</h4>
+<p>在 <code>Vue.js</code> 中，<code>Virtual DOM</code> 是用 <code>VNode</code> 这个 <code>Class</code> 去描述，它定义在 <code>src/core/vdom/vnode.js</code> 中 ，从以下代码块中可以看到 <code>Vue.js</code> 中的 <code>Virtual DOM</code> 的定义较为复杂一些，因为它这里包含了很多 <code>Vue.js</code> 的特性。实际上 <code>Vue.js</code> 中 <code>Virtual DOM</code> 是借鉴了一个开源库  <a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fsnabbdom%2Fsnabbdom">snabbdom</a> 的实现，然后加入了一些 <code>Vue.js</code> 的一些特性。</p>
+<p>源码位置：src/core/vdom/vnode.js</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">VNode</span> <span class="token punctuation">&#123;</span>
   <span class="token literal-property property">tag</span><span class="token operator">:</span> string <span class="token operator">|</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
   <span class="token literal-property property">data</span><span class="token operator">:</span> VNodeData <span class="token operator">|</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
@@ -922,7 +936,6 @@ function dfsWalk (node, walker, patches) &#123;
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这里千万不要因为 <code>VNode</code> 的这么属性而被吓到，或者咬紧牙去摸清楚每个属性的意义，其实，我们主要了解其几个核心的关键属性就差不多了，例如：</p>
 <ul>
 <li><code>tag</code> 属性即这个<code>vnode</code>的标签属性</li>
@@ -932,8 +945,10 @@ function dfsWalk (node, walker, patches) &#123;
 <li><code>elm</code> 属性为这个<code>vnode</code>对应的真实<code>dom</code>节点</li>
 <li><code>key</code> 属性是<code>vnode</code>的标记，在<code>diff</code>过程中可以提高<code>diff</code>的效率</li>
 </ul>
-<h5 id="源码创建-VNode-过程"><a href="#源码创建-VNode-过程" class="headerlink" title="源码创建 VNode 过程"></a>源码创建 <code>VNode</code> 过程</h5><ol>
-<li><p>初始化 <code>Vue</code></p>
+<h5 id="源码创建-VNode-过程">源码创建 <code>VNode</code> 过程</h5>
+<ol>
+<li>
+<p>初始化 <code>Vue</code></p>
 <p>我们在实例化一个 <code>vue</code> 实例，也即 <code>new Vue( )</code> 时，实际上是执行 <code>src/core/instance/index.js</code>  中定义的 <code>Function</code> 函数。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Vue (options) &#123;
   if (process.env.NODE_ENV !&#x3D;&#x3D; &#39;production&#39; &amp;&amp;
@@ -943,7 +958,6 @@ function dfsWalk (node, walker, patches) &#123;
   &#125;
   this._init(options)
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>通过查看 <code>Vue</code> 的 <code>function</code>，我们知道 <code>Vue</code> 只能通过 <code>new</code> 关键字初始化，然后调用 <code>this._init</code> 方法，该方法在 <code>src/core/instance/init.js</code> 中定义。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Vue.prototype._init &#x3D; function (options?: Object) &#123;
     const vm: Component &#x3D; this
@@ -956,7 +970,8 @@ function dfsWalk (node, walker, patches) &#123;
     &#125;
   &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><code>Vue</code> 实例挂载</p>
+<li>
+<p><code>Vue</code> 实例挂载</p>
 <p><code>Vue</code> 中是通过 <code>$mount</code> 实例方法去挂载 <code>dom</code> 的，下面我们通过分析 <code>compiler</code> 版本的 <code>mount</code> 实现，相关源码在目录 <code>src/platforms/web/entry-runtime-with-compiler.js</code> 文件中定义：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> mount <span class="token operator">=</span> <span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>$mount
 <span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">$mount</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>
@@ -969,7 +984,6 @@ function dfsWalk (node, walker, patches) &#123;
  
   <span class="token keyword">return</span> <span class="token function">mount</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> el<span class="token punctuation">,</span> hydrating<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们发现最终还是调用用原先原型上的 <code>$mount</code> 方法挂载 ，原先原型上的 <code>$mount</code> 方法在 <code>src/platforms/web/runtime/index.js</code> 中定义 。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">$mount</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>
   <span class="token parameter">el<span class="token operator">?</span><span class="token operator">:</span> string <span class="token operator">|</span> Element<span class="token punctuation">,</span>
@@ -978,7 +992,6 @@ function dfsWalk (node, walker, patches) &#123;
   el <span class="token operator">=</span> el <span class="token operator">&amp;&amp;</span> inBrowser <span class="token operator">?</span> <span class="token function">query</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">undefined</span>
   <span class="token keyword">return</span> <span class="token function">mountComponent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> el<span class="token punctuation">,</span> hydrating<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们发现<code>$mount</code> 方法实际上会去调用 <code>mountComponent</code> 方法，这个方法定义在 <code>src/core/instance/lifecycle.js</code> 文件中</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">mountComponent</span> <span class="token punctuation">(</span>
   <span class="token parameter"><span class="token literal-property property">vm</span><span class="token operator">:</span> Component<span class="token punctuation">,</span>
@@ -1015,10 +1028,10 @@ function dfsWalk (node, walker, patches) &#123;
 
   <span class="token keyword">return</span> vm
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>从上面的代码可以看到，<code>mountComponent</code> 核心就是先实例化一个渲染<code>Watcher</code>，在它的回调函数中会调用 <code>updateComponent</code> 方法，在此方法中调用 <code>vm._render</code> 方法先生成虚拟 Node，最终调用 <code>vm._update</code> 更新 <code>DOM</code>。</p>
 </li>
-<li><p>创建虚拟 Node</p>
+<li>
+<p>创建虚拟 Node</p>
 <p><code>Vue</code> 的 <code>_render</code> 方法是实例的一个私有方法，它用来把实例渲染成一个虚拟 <code>Node</code>。它的定义在 <code>src/core/instance/render.js</code> 文件中：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token class-name">Vue</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">_render</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> VNode <span class="token punctuation">&#123;</span>
    <span class="token keyword">const</span> <span class="token literal-property property">vm</span><span class="token operator">:</span> Component <span class="token operator">=</span> <span class="token keyword">this</span>
@@ -1037,7 +1050,6 @@ function dfsWalk (node, walker, patches) &#123;
    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"vnode...:"</span><span class="token punctuation">,</span>vnode<span class="token punctuation">)</span><span class="token punctuation">;</span>
    <span class="token keyword">return</span> vnode
  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>Vue.js</code> 利用 <code>_createElement</code> 方法创建 <code>VNode</code>，它定义在 <code>src/core/vdom/create-elemenet.js</code> 中：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">_createElement</span> <span class="token punctuation">(</span>
   <span class="token parameter"><span class="token literal-property property">context</span><span class="token operator">:</span> Component<span class="token punctuation">,</span>
@@ -1088,11 +1100,11 @@ function dfsWalk (node, walker, patches) &#123;
     <span class="token keyword">return</span> <span class="token function">createEmptyVNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>_createElement</code> 方法有 5 个参数，<code>context</code> 表示 VNode 的上下文环境，它是 <code>Component</code> 类型；<code>tag</code>表示标签，它可以是一个字符串，也可以是一个 <code>Component</code>；<code>data</code> 表示 VNode 的数据，它是一个 <code>VNodeData</code> 类型，可以在 <code>flow/vnode.js</code> 中找到它的定义；<code>children</code> 表示当前 VNode 的子节点，它是任意类型的，需要被规范为标准的 <code>VNode</code> 数组；</p>
 </li>
 </ol>
-<h5 id="实例查看"><a href="#实例查看" class="headerlink" title="实例查看"></a><strong>实例查看</strong></h5><p>为了更直观查看我们平时写的 <code>Vue</code> 代码如何用 <code>VNode</code> 类来表示，我们通过一个实例的转换进行更深刻了解。</p>
+<h5 id="实例查看"><strong>实例查看</strong></h5>
+<p>为了更直观查看我们平时写的 <code>Vue</code> 代码如何用 <code>VNode</code> 类来表示，我们通过一个实例的转换进行更深刻了解。</p>
 <p>例如，实例化一个 <code>Vue</code> 实例：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
     <span class="token literal-property property">el</span><span class="token operator">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
@@ -1108,10 +1120,11 @@ function dfsWalk (node, walker, patches) &#123;
       <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">'Hello Vue!'</span>
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们打印出其对应的 <code>VNode</code> 表示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e23b7481b16ftplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
-<h4 id="diff-过程"><a href="#diff-过程" class="headerlink" title="diff 过程"></a><code>diff</code> 过程</h4><h5 id="⚠️Vue-js-源码的-diff-调用逻辑"><a href="#⚠️Vue-js-源码的-diff-调用逻辑" class="headerlink" title="⚠️Vue.js 源码的 diff 调用逻辑"></a>⚠️<code>Vue.js</code> 源码的 <code>diff</code> 调用逻辑</h5><p><code>Vue.js</code> 源码实例化了一个 <code>watcher</code>，这个 ~ 被添加到了在模板当中所绑定变量的依赖当中，一旦 <code>model</code> 中的响应式的数据发生了变化，这些响应式的数据所维护的 <code>dep</code> 数组便会调用 <code>dep.notify()</code> 方法完成所有依赖遍历执行的工作，这包括视图的更新，即 <code>updateComponent</code> 方法的调用。<code>watcher</code> 和 <code>updateComponent</code>方法定义在  <code>src/core/instance/lifecycle.js</code> 文件中 。</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e23b7481b16ftplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+<h4 id="diff-过程"><code>diff</code> 过程</h4>
+<h5 id="⚠️Vue-js-源码的-diff-调用逻辑">⚠️<code>Vue.js</code> 源码的 <code>diff</code> 调用逻辑</h5>
+<p><code>Vue.js</code> 源码实例化了一个 <code>watcher</code>，这个 ~ 被添加到了在模板当中所绑定变量的依赖当中，一旦 <code>model</code> 中的响应式的数据发生了变化，这些响应式的数据所维护的 <code>dep</code> 数组便会调用 <code>dep.notify()</code> 方法完成所有依赖遍历执行的工作，这包括视图的更新，即 <code>updateComponent</code> 方法的调用。<code>watcher</code> 和 <code>updateComponent</code>方法定义在  <code>src/core/instance/lifecycle.js</code> 文件中 。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">export function mountComponent (
   vm: Component,
   el: ?Element,
@@ -1148,7 +1161,6 @@ function dfsWalk (node, walker, patches) &#123;
   return vm
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>完成视图的更新工作事实上就是调用了<code>vm._update</code>方法，这个方法接收的第一个参数是刚生成的<code>Vnode</code>，调用的<code>vm._update</code>方法定义在 <code>src/core/instance/lifecycle.js</code>中。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Vue.prototype._update &#x3D; function (vnode: VNode, hydrating?: boolean) &#123;
   const vm: Component &#x3D; this
@@ -1176,7 +1188,6 @@ function dfsWalk (node, walker, patches) &#123;
     vm.$parent.$el &#x3D; vm.$el
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在这个方法当中<strong>最为关键</strong>的就是 <code>vm.__patch__</code> 方法，这也是整个 <code>virtual-dom</code> 当中最为核心的方法，主要完成了<code>prevVnode</code> 和 <code>vnode</code> 的 <code>diff</code> 过程并根据需要操作的 <code>vdom</code> 节点打 <code>patch</code>，最后生成新的真实 <code>dom</code> 节点并完成视图的更新工作。</p>
 <p>接下来，让我们看下 <code>vm.__patch__</code>的逻辑过程， <code>vm.__patch__</code> 方法定义在 <code>src/core/vdom/patch.js</code> 中。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function patch (oldVnode, vnode, hydrating, removeOnly) &#123;
@@ -1196,7 +1207,6 @@ function dfsWalk (node, walker, patches) &#123;
   &#125;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在 <code>patch</code> 方法中，我们看到会分为两种情况，一种是当 <code>oldVnode</code> 不存在时，会创建新的节点；另一种则是已经存在 <code>oldVnode</code> ，那么会对 <code>oldVnode</code> 和 <code>vnode</code> 进行 <code>diff</code> 及 <code>patch</code> 的过程。其中 <code>patch</code> 过程中会调用 <code>sameVnode</code> 方法来对对传入的2个 <code>vnode</code> 进行基本属性的比较，只有当基本属性相同的情况下才认为这个2个<code>vnode</code> 只是局部发生了更新，然后才会对这2个 <code>vnode</code> 进行 <code>diff</code>，如果2个 <code>vnode</code> 的基本属性存在不一致的情况，那么就会直接跳过 <code>diff</code> 的过程，进而依据 <code>vnode</code> 新建一个真实的 <code>dom</code>，同时删除老的 <code>dom</code>节点。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sameVnode (a, b) &#123;
   return (
@@ -1207,7 +1217,6 @@ function dfsWalk (node, walker, patches) &#123;
     sameInputType(a, b)
   )
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>diff</code> 过程中主要是通过调用 <code>patchVnode</code> 方法进行的:</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function patchVnode (oldVnode, vnode, insertedVnodeQueue, ownerArray, index, removeOnly) &#123;
     ...... 
@@ -1240,7 +1249,6 @@ function dfsWalk (node, walker, patches) &#123;
     &#125;
     ......
   &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>从以上代码得知，</p>
 <p><code>diff</code> 过程中又分了好几种情况，<code>oldCh</code> 为 <code>oldVnode</code>的子节点，<code>ch</code> 为 <code>Vnode</code>的子节点：</p>
 <ul>
@@ -1251,8 +1259,10 @@ function dfsWalk (node, walker, patches) &#123;
 <li>若 <code>oldCh</code>存在，<code>ch</code>不存在，则删除 <code>elm</code> 真实节点下的 <code>oldCh</code> 子节点；</li>
 <li>若 <code>oldVnode</code> 有文本节点，而 <code>vnode</code> 没有，那么就清空这个文本节点。</li>
 </ul>
-<h5 id="子节点-diff-流程分析"><a href="#子节点-diff-流程分析" class="headerlink" title="子节点 diff 流程分析"></a>子节点 <code>diff</code> 流程分析</h5><ol>
-<li><p><strong>Vue.js 源码</strong></p>
+<h5 id="子节点-diff-流程分析">子节点 <code>diff</code> 流程分析</h5>
+<ol>
+<li>
+<p><strong>Vue.js 源码</strong></p>
 <p>这里着重分析下<code>updateChildren</code>方法，它也是整个 <code>diff</code> 过程中最重要的环节，以下为 <code>Vue.js</code> 的源码过程，为了更形象理解 <code>diff</code> 过程，我们给出相关的示意图来讲解。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) &#123;
   &#x2F;&#x2F; 为oldCh和newCh分别建立索引，为之后遍历的依据
@@ -1318,32 +1328,39 @@ function dfsWalk (node, walker, patches) &#123;
     removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在开始遍历 <code>diff</code> 前，首先给 <code>oldCh</code>和 <code>newCh</code> 分别分配一个 <code>startIndex</code> 和 <code>endIndex</code> 来作为遍历的索引，当<code>oldCh</code> 或者 <code>newCh</code> 遍历完后(遍历完的条件就是 <code>oldCh</code> 或者 <code>newCh</code> 的 <code>startIndex &gt;= endIndex</code> )，就停止<code>oldCh</code> 和 <code>newCh</code> 的 <code>diff</code> 过程。接下来通过实例来看下整个 <code>diff</code> 的过程(节点属性中不带 <code>key</code> 的情况)。</p>
 </li>
-<li><p><strong>无 <code>key</code> 的 <code>diff</code> 过程</strong></p>
+<li>
+<p><strong>无 <code>key</code> 的 <code>diff</code> 过程</strong></p>
 <ul>
-<li><p>首先从第一个节点开始比较，不管是 <code>oldCh</code> 还是 <code>newCh</code> 的起始或者终止节点都不存在 <code>sameVnode</code> ，同时节点属性中是不带 <code>key</code>标记的，因此第一轮的 <code>diff</code> 完后，<code>newCh</code>的 <code>startVnode</code> 被添加到 <code>oldStartVnode</code>的前面，同时 <code>newStartIndex</code>前移一位；</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e2878c44dctplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>首先从第一个节点开始比较，不管是 <code>oldCh</code> 还是 <code>newCh</code> 的起始或者终止节点都不存在 <code>sameVnode</code> ，同时节点属性中是不带 <code>key</code>标记的，因此第一轮的 <code>diff</code> 完后，<code>newCh</code>的 <code>startVnode</code> 被添加到 <code>oldStartVnode</code>的前面，同时 <code>newStartIndex</code>前移一位；</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e2878c44dctplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>第二轮的 <code>diff</code>中，满足 <code>sameVnode(oldStartVnode, newStartVnode)</code>，因此对这2个 <code>vnode</code> 进行<code>diff</code>，最后将 <code>patch</code> 打到 <code>oldStartVnode</code> 上，同时 <code>oldStartVnode</code>和 <code>newStartIndex</code> 都向前移动一位 ；</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e28889eafftplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>第二轮的 <code>diff</code>中，满足 <code>sameVnode(oldStartVnode, newStartVnode)</code>，因此对这2个 <code>vnode</code> 进行<code>diff</code>，最后将 <code>patch</code> 打到 <code>oldStartVnode</code> 上，同时 <code>oldStartVnode</code>和 <code>newStartIndex</code> 都向前移动一位 ；</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e28889eafftplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>第三轮的 <code>diff</code> 中，满足 <code>sameVnode(oldEndVnode, newStartVnode)</code>，那么首先对  <code>oldEndVnode</code>和<code>newStartVnode</code> 进行 <code>diff</code>，并对 <code>oldEndVnode</code>进行 <code>patch</code>，并完成  <code>oldEndVnode</code> 移位的操作，最后<code>newStartIndex</code>前移一位，<code>oldStartVnode</code> 后移一位；</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e289a351b2tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>第三轮的 <code>diff</code> 中，满足 <code>sameVnode(oldEndVnode, newStartVnode)</code>，那么首先对  <code>oldEndVnode</code>和<code>newStartVnode</code> 进行 <code>diff</code>，并对 <code>oldEndVnode</code>进行 <code>patch</code>，并完成  <code>oldEndVnode</code> 移位的操作，最后<code>newStartIndex</code>前移一位，<code>oldStartVnode</code> 后移一位；</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e289a351b2tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>第四轮的 <code>diff</code>中，过程同步骤3；</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e289f9213etplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>第四轮的 <code>diff</code>中，过程同步骤3；</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e289f9213etplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>第五轮的 <code>diff</code> 中，同过程1；</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e28aee99a1tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>第五轮的 <code>diff</code> 中，同过程1；</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e28aee99a1tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>遍历的过程结束后，<code>newStartIdx &gt; newEndIdx</code>，说明此时 <code>oldCh</code> 存在多余的节点，那么最后就需要将这些多余的节点删除</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e2ca893b49tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>遍历的过程结束后，<code>newStartIdx &gt; newEndIdx</code>，说明此时 <code>oldCh</code> 存在多余的节点，那么最后就需要将这些多余的节点删除</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e2ca893b49tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
 </ul>
 </li>
-<li><p><strong>有 <code>key</code> 的 <code>diff</code> 流程</strong></p>
+<li>
+<p><strong>有 <code>key</code> 的 <code>diff</code> 流程</strong></p>
 <p>在 <code>vnode</code> 不带 <code>key</code> 的情况下，每一轮的 <code>diff</code> 过程当中都是<code>起始</code>和<code>结束</code>节点进行比较，直到 <code>oldCh</code> 或者<code>newCh</code> 被遍历完。而当为 <code>vnode</code> 引入 <code>key</code> 属性后，在每一轮的 <code>diff</code> 过程中，当<code>起始</code>和<code>结束</code>节点都没有找到<code>sameVnode</code> 时，然后再判断在 <code>newStartVnode</code> 的属性中是否有 <code>key</code>，且是否在 <code>oldKeyToIndx</code> 中找到对应的节点 ：</p>
 <ul>
 <li>如果不存在这个 <code>key</code>，那么就将这个 <code>newStartVnode</code>作为新的节点创建且插入到原有的 <code>root</code> 的子节点中；</li>
@@ -1352,25 +1369,31 @@ function dfsWalk (node, walker, patches) &#123;
 <p>通过以上分析，给<code>vdom</code>上添加 <code>key</code>属性后，遍历 <code>diff</code> 的过程中，当<strong>起始点</strong>，<strong>结束点</strong>的<strong>搜寻</strong>及 <code>diff</code> 出现还是无法匹配的情况下时，就会用 <code>key</code> 来作为唯一标识，来进行 <code>diff</code>，这样就可以提高 <code>diff</code> 效率。</p>
 <p>带有 <code>Key</code>属性的 <code>vnode</code>的 <code>diff</code> 过程可见下图：</p>
 <ul>
-<li><p>首先从第一个节点开始比较，不管是 <code>oldCh</code> 还是 <code>newCh</code> 的起始或者终止节点都不存在 <code>sameVnode</code>，但节点属性中是带 <code>key</code> 标记的， 然后在 <code>oldKeyToIndx</code> 中找到对应的节点，这样第一轮 <code>diff</code> 过后 <code>oldCh</code> 上的<code>B节点</code>被删除了，但是 <code>newCh</code> 上的<code>B节点</code>上 <code>elm</code> 属性保持对 <code>oldCh</code> 上 <code>B节点</code> 的<code>elm</code>引用。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e2db1c4812tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>首先从第一个节点开始比较，不管是 <code>oldCh</code> 还是 <code>newCh</code> 的起始或者终止节点都不存在 <code>sameVnode</code>，但节点属性中是带 <code>key</code> 标记的， 然后在 <code>oldKeyToIndx</code> 中找到对应的节点，这样第一轮 <code>diff</code> 过后 <code>oldCh</code> 上的<code>B节点</code>被删除了，但是 <code>newCh</code> 上的<code>B节点</code>上 <code>elm</code> 属性保持对 <code>oldCh</code> 上 <code>B节点</code> 的<code>elm</code>引用。</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e2db1c4812tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>第二轮的 <code>diff</code> 中，满足 <code>sameVnode(oldStartVnode, newStartVnode)</code>，因此对这2个 <code>vnode</code> 进行<code>diff</code>，最后将 <code>patch</code> 打到 <code>oldStartVnode</code>上，同时 <code>oldStartVnode</code> 和 <code>newStartIndex</code> 都向前移动一位 ；</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e2d7df4fbftplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>第二轮的 <code>diff</code> 中，满足 <code>sameVnode(oldStartVnode, newStartVnode)</code>，因此对这2个 <code>vnode</code> 进行<code>diff</code>，最后将 <code>patch</code> 打到 <code>oldStartVnode</code>上，同时 <code>oldStartVnode</code> 和 <code>newStartIndex</code> 都向前移动一位 ；</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e2d7df4fbftplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>第三轮的 <code>diff</code>中，满足 <code>sameVnode(oldEndVnode, newStartVnode)</code>，那么首先对 <code>oldEndVnode</code> 和<code>newStartVnode</code> 进行 <code>diff</code>，并对 <code>oldEndVnode</code> 进行 <code>patch</code>，并完成 <code>oldEndVnode</code> 移位的操作，最后<code>newStartIndex</code> 前移一位，<code>oldStartVnode</code>后移一位；</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e2e2a2835etplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>第三轮的 <code>diff</code>中，满足 <code>sameVnode(oldEndVnode, newStartVnode)</code>，那么首先对 <code>oldEndVnode</code> 和<code>newStartVnode</code> 进行 <code>diff</code>，并对 <code>oldEndVnode</code> 进行 <code>patch</code>，并完成 <code>oldEndVnode</code> 移位的操作，最后<code>newStartIndex</code> 前移一位，<code>oldStartVnode</code>后移一位；</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e2e2a2835etplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>第四轮的<code>diff</code>中，过程同步骤2；</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e2e507aec0tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>第四轮的<code>diff</code>中，过程同步骤2；</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e2e507aec0tplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
-<li><p>第五轮的<code>diff</code>中，因为此时 <code>oldStartIndex</code> 已经大于 <code>oldEndIndex</code>，所以将剩余的 <code>Vnode</code> 队列插入队列最后。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e0e3178398fctplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
+<li>
+<p>第五轮的<code>diff</code>中，因为此时 <code>oldStartIndex</code> 已经大于 <code>oldEndIndex</code>，所以将剩余的 <code>Vnode</code> 队列插入队列最后。</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e0e3178398fctplv-t2oaga2asx-jj-mark3024000q75.png" alt="å¾çæè¿°"></p>
 </li>
 </ul>
 </li>
 </ol>
-<h4 id="patch-过程"><a href="#patch-过程" class="headerlink" title="patch 过程"></a><code>patch</code> 过程</h4><p>通过介绍的 <code>diff</code> 过程中，我们会看到 <code>nodeOps</code> 相关的方法对真实 <code>DOM</code> 结构进行操作，<code>nodeOps</code> 定义在 <code>src/platforms/web/runtime/node-ops.js</code> 中，其为基本 <code>DOM</code> 操作，这里就不在详细介绍。</p>
+<h4 id="patch-过程"><code>patch</code> 过程</h4>
+<p>通过介绍的 <code>diff</code> 过程中，我们会看到 <code>nodeOps</code> 相关的方法对真实 <code>DOM</code> 结构进行操作，<code>nodeOps</code> 定义在 <code>src/platforms/web/runtime/node-ops.js</code> 中，其为基本 <code>DOM</code> 操作，这里就不在详细介绍。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">export function createElementNS (namespace: string, tagName: string): Element &#123;
   return document.createElementNS(namespaceMap[namespace], tagName)
 &#125;
@@ -1390,11 +1413,15 @@ export function insertBefore (parentNode: Node, newNode: Node, referenceNode: No
 export function removeChild (node: Node, child: Node) &#123;
   node.removeChild(child)
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="小节"><a href="#小节" class="headerlink" title="小节"></a>小节</h4><p>通过前三小节简析，我们从主线上把模板和数据如何渲染成最终的 <code>DOM</code> 的过程分析完毕了，我们可以通过下图更直观地看到从初始化 <code>Vue</code> 到最终渲染的整个过程。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/15/vue-xu-ni-dom-xiang-jie/16c1e2486c7e0ed7tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文从通过介绍真实 <code>DOM</code> 结构其解析过程以及存在的问题，从而引出为什么需要虚拟 <code>DOM</code>；然后分析虚拟<code>DOM</code> 的好处，以及其一些理论基础和基础算法的实现；最后根据我们已经掌握的基础知识，再一步步去查看<code>Vue.js</code> 的源码如何实现的。从存在问题 —&gt; 理论基础 —&gt; 具体实践，一步步深入，帮助大家更好的了解什么是<code>Virtual DOM</code>、为什么需要 <code>Virtual DOM</code>、以及 <code>Virtual DOM</code>的具体实现，希望本文对您有帮助。</p>
-<p>作者：随风而逝_风逝<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903895467032589">https://juejin.cn/post/6844903895467032589</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h4 id="小节">小节</h4>
+<p>通过前三小节简析，我们从主线上把模板和数据如何渲染成最终的 <code>DOM</code> 的过程分析完毕了，我们可以通过下图更直观地看到从初始化 <code>Vue</code> 到最终渲染的整个过程。</p>
+<p><img src="/medias/images/loading.gif" data-original="16c1e2486c7e0ed7tplv-t2oaga2asx-jj-mark3024000q75.png" alt="img"></p>
+<h2 id="总结">总结</h2>
+<p>本文从通过介绍真实 <code>DOM</code> 结构其解析过程以及存在的问题，从而引出为什么需要虚拟 <code>DOM</code>；然后分析虚拟<code>DOM</code> 的好处，以及其一些理论基础和基础算法的实现；最后根据我们已经掌握的基础知识，再一步步去查看<code>Vue.js</code> 的源码如何实现的。从存在问题 —&gt; 理论基础 —&gt; 具体实践，一步步深入，帮助大家更好的了解什么是<code>Virtual DOM</code>、为什么需要 <code>Virtual DOM</code>、以及 <code>Virtual DOM</code>的具体实现，希望本文对您有帮助。</p>
+<p>作者：随风而逝_风逝<br>
+链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903895467032589">https://juejin.cn/post/6844903895467032589</a><br>
+来源：稀土掘金<br>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 
                 
             </div>

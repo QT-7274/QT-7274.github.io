@@ -6,11 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JavaScript缓存详解, QT-7274">
-    <meta name="description" content="函数缓存概念函数缓存，就是将函数运算过的结果进行缓存
+    <meta name="description" content="函数缓存
+概念
+函数缓存，就是将函数运算过的结果进行缓存
 本质上就是用空间（缓存存储）换时间（计算过程）
 常用于缓存数据计算结果和缓存对象
 const add = (a,b) =&gt; a+b;
-const calc = memoize(add);">
+const calc = memoize(add">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -504,17 +506,20 @@ const calc = memoize(add);">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="函数缓存"><a href="#函数缓存" class="headerlink" title="函数缓存"></a>函数缓存</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>函数缓存，就是将函数运算过的结果进行缓存</p>
+                <h1>函数缓存</h1>
+<h2 id="概念">概念</h2>
+<p>函数缓存，就是将函数运算过的结果进行缓存</p>
 <p>本质上就是用空间（缓存存储）换时间（计算过程）</p>
 <p>常用于缓存数据计算结果和缓存对象</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">add</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span>b</span><span class="token punctuation">)</span> <span class="token operator">=></span> a<span class="token operator">+</span>b<span class="token punctuation">;</span>
 <span class="token keyword">const</span> calc <span class="token operator">=</span> <span class="token function">memoize</span><span class="token punctuation">(</span>add<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 函数缓存</span>
 <span class="token function">calc</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 30</span>
 <span class="token function">calc</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 30 缓存</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>缓存只是一个临时的数据存储，它保存数据，以便将来对该数据的请求能够更快地得到处理</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>实现函数缓存主要依靠闭包、柯里化、高阶函数，这里再简单复习下：</p>
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包可以理解成，函数 + 函数体内可访问的变量总和</p>
+<h2 id="实现">实现</h2>
+<p>实现函数缓存主要依靠闭包、柯里化、高阶函数，这里再简单复习下：</p>
+<h3 id="闭包">闭包</h3>
+<p>闭包可以理解成，函数 + 函数体内可访问的变量总和</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">(function() &#123;
     var a &#x3D; 1;
     function add() &#123;
@@ -524,9 +529,9 @@ const calc = memoize(add);">
     &#125;
     add()
 &#125;)()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>add</code>函数本身，以及其内部可访问的变量，即 <code>a = 1</code>，这两个组合在⼀起就形成了闭包</p>
-<h3 id="柯里化"><a href="#柯里化" class="headerlink" title="柯里化"></a>柯里化</h3><p>把接受多个参数的函数转换成接受一个单一参数的函数</p>
+<h3 id="柯里化">柯里化</h3>
+<p>把接受多个参数的函数转换成接受一个单一参数的函数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 非函数柯里化</span>
 <span class="token keyword">var</span> <span class="token function-variable function">add</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span>y</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> x<span class="token operator">+</span>y<span class="token punctuation">;</span>
@@ -541,9 +546,9 @@ const calc = memoize(add);">
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span class="token function">add2</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token comment">//7</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>将一个二元函数拆分成两个一元函数</p>
-<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>通过接收其他函数作为参数或返回其他函数的函数</p>
+<h3 id="高阶函数">高阶函数</h3>
+<p>通过接收其他函数作为参数或返回其他函数的函数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
   <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
 
@@ -554,7 +559,6 @@ const calc = memoize(add);">
 <span class="token punctuation">&#125;</span>
 <span class="token keyword">var</span> baz <span class="token operator">=</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>函数 <code>foo</code> 如何返回另一个函数 <code>bar</code>，<code>baz</code> 现在持有对 <code>foo</code> 中定义的<code>bar</code> 函数的引用。由于闭包特性，<code>a</code>的值能够得到</p>
 <p>下面再看看如何实现函数缓存，实现原理也很简单，把参数和对应的结果数据存在一个对象中，调用时判断参数对应的数据是否存在，存在就返回对应的结果数据，否则就返回计算结果</p>
 <p>如下所示</p>
@@ -568,19 +572,18 @@ const calc = memoize(add);">
     <span class="token keyword">return</span> cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>调用方式也很简单</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> calc <span class="token operator">=</span> <span class="token function">memoize</span><span class="token punctuation">(</span>add<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> num1 <span class="token operator">=</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> num2 <span class="token operator">=</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">)</span> <span class="token comment">// 缓存得到的结果</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>过程分析：</p>
 <ul>
 <li>在当前函数作用域定义了一个空对象，用于缓存运行结果</li>
 <li>运用柯里化返回一个函数，返回的函数由于闭包特性，可以访问到<code>cache</code></li>
 <li>然后判断输入参数是不是在<code>cache</code>的中。如果已经存在，直接返回<code>cache</code>的内容，如果没有存在，使用函数<code>func</code>对输入参数求值，然后把结果存储在<code>cache</code>中</li>
 </ul>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>虽然使用缓存效率是非常高的，但并不是所有场景都适用，因此千万不要极端的将所有函数都添加缓存</p>
+<h2 id="应用场景">应用场景</h2>
+<p>虽然使用缓存效率是非常高的，但并不是所有场景都适用，因此千万不要极端的将所有函数都添加缓存</p>
 <p>以下几种情况下，适合使用缓存：</p>
 <ul>
 <li>对于昂贵的函数调用，执行复杂计算的函数</li>

@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    685
+                    687
                 </div>
                 
 
@@ -500,19 +500,22 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="负margin技术"><a href="#负margin技术" class="headerlink" title="负margin技术"></a>负margin技术</h1><p>当margin取值为负数时，margin对普通文档流元素和对浮动元素的影响是不一样的。其中，margin对普通文档流元素的影响，可以分为以下两种情况：</p>
+                <h1>负margin技术</h1>
+<p>当margin取值为负数时，margin对普通文档流元素和对浮动元素的影响是不一样的。其中，margin对普通文档流元素的影响，可以分为以下两种情况：</p>
 <ul>
 <li>当元素的margin-top或者margin-left为负数时，“<strong>当前元素</strong>”会被拉向指定方向。</li>
 <li>当元素的margin-bottom或者margin-right为负数时，“<strong>后续元素</strong>”会被拉向指定方向。</li>
 </ul>
 <p>对于浮动元素，我们只需要比普通文档流元素多考虑一点，那就是浮动元素的“流动方向”。</p>
-<h2 id="负margin技巧"><a href="#负margin技巧" class="headerlink" title="负margin技巧"></a>负margin技巧</h2><h3 id="图片与文本对齐"><a href="#图片与文本对齐" class="headerlink" title="图片与文本对齐"></a>图片与文本对齐</h3><p>当图片与文本放到一起的时候，它们在底部水平方向上往往都是不对齐的。这是因为在默认情况下，图片与周围的文本是基线对齐，也就是vertical-align:baseline。如果想让它们在底部水平方向上对齐，有两种方法：一种是使用vertical-align:text-bottom；另一种是使用负margin技术。</p>
+<h2 id="负margin技巧">负margin技巧</h2>
+<h3 id="图片与文本对齐">图片与文本对齐</h3>
+<p>当图片与文本放到一起的时候，它们在底部水平方向上往往都是不对齐的。这是因为在默认情况下，图片与周围的文本是基线对齐，也就是vertical-align:baseline。如果想让它们在底部水平方向上对齐，有两种方法：一种是使用vertical-align:text-bottom；另一种是使用负margin技术。</p>
 <p>默认情况下，图片与文字在底部水平方向上是不对齐的。我们在CSS中添加：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">img</span><span class="token punctuation">&#123;</span>
 	<span class="token property">margin</span><span class="token punctuation">:</span>0 3px -3px 0<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="自适应两列布局"><a href="#自适应两列布局" class="headerlink" title="自适应两列布局"></a>自适应两列布局</h3><p>自适应两列布局，指的是在两列布局中，其中一列的宽度是固定的，而另外一列宽度自适应。如果使用浮动来做的话，只能实现固定的左右两列布局，并不能实现其中一列为自适应的布局。</p>
+<h3 id="自适应两列布局">自适应两列布局</h3>
+<p>自适应两列布局，指的是在两列布局中，其中一列的宽度是固定的，而另外一列宽度自适应。如果使用浮动来做的话，只能实现固定的左右两列布局，并不能实现其中一列为自适应的布局。</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 
@@ -553,8 +556,8 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="元素垂直居中"><a href="#元素垂直居中" class="headerlink" title="元素垂直居中"></a>元素垂直居中</h3><p>想要实现块元素的垂直居中，一般来说比较麻烦，不过有一个经典的方法就是使用position结合负margin来实现：首先，给父元素写上position:relative，这样做是为了给子元素添加position:absolute的时候不会定位到外太空去；然后给子元素添加如下属性：</p>
+<h3 id="元素垂直居中">元素垂直居中</h3>
+<p>想要实现块元素的垂直居中，一般来说比较麻烦，不过有一个经典的方法就是使用position结合负margin来实现：首先，给父元素写上position:relative，这样做是为了给子元素添加position:absolute的时候不会定位到外太空去；然后给子元素添加如下属性：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">父元素</span><span class="token punctuation">&#123;</span>
         <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
       <span class="token punctuation">&#125;</span>
@@ -565,8 +568,8 @@
         <span class="token property">margin-top</span><span class="token punctuation">:</span> “height值一半的负值”<span class="token punctuation">;</span>
         <span class="token property">margin-left</span><span class="token punctuation">:</span> “width值一般的负值”<span class="token punctuation">;</span>
       <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="tab选项卡"><a href="#tab选项卡" class="headerlink" title="tab选项卡"></a>tab选项卡</h3><p>具体技巧就是使用margin-top:-1px消除tab选项卡的下边框。</p>
+<h3 id="tab选项卡">tab选项卡</h3>
+<p>具体技巧就是使用margin-top:-1px消除tab选项卡的下边框。</p>
 
                 
             </div>

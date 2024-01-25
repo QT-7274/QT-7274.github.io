@@ -496,10 +496,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><blockquote>
+                <h2 id="图">图</h2>
+<blockquote>
 <p>图形结构是<strong>多对多</strong>的关系，任何两个数据元素都可能有关系，每个节点可以有多个前驱和后继。</p>
 </blockquote>
-<h3 id="图的基本术语"><a href="#图的基本术语" class="headerlink" title="图的基本术语"></a>图的基本术语</h3><p>图通常用一个二元组 G&#x3D;&lt;V, E&gt;表示，V 表示顶点集，E 表示边集。</p>
+<h3 id="图的基本术语">图的基本术语</h3>
+<p>图通常用一个二元组 G=&lt;V, E&gt;表示，V 表示顶点集，E 表示边集。</p>
 <ul>
 <li>|V|表示顶点集中元素的个数，即顶点数，n 个顶点的图称为 n 阶图。</li>
 <li>|E|表示边集中元素的个数，即边数。</li>
@@ -509,53 +511,63 @@
 <p><strong>V 为空集</strong>的图称为空图，记为φ 。</p>
 </blockquote>
 <ol>
-<li><p><strong>无向图</strong></p>
+<li>
+<p><strong>无向图</strong></p>
 <p>若图 G 中每条边都是没有方向的，则称为无向图。</p>
 <p>每条边都是两个顶点组成的无序对，例如顶点 v<sub>1</sub> 和顶点 v<sub>3</sub> 之间的边，记为（v<sub>1</sub> , v<sub>3</sub>）或（v<sub>3</sub> , v<sub>1</sub>）</p>
 </li>
-<li><p><strong>有向图</strong></p>
+<li>
+<p><strong>有向图</strong></p>
 <p>若图 G 中每条边都是有方向的，则称为有向图。</p>
 <p>有向边也称为<strong>弧</strong>，每条弧都是由两个顶点组成的有序对，例如从顶点 v<sub>1</sub> 到顶点 v<sub>3</sub> 的弧，记为&lt;v<sub>1</sub>，v<sub>3</sub> &gt;，v<sub>1</sub> 称为弧尾，v<sub>3</sub> 称为弧头。</p>
 </li>
-<li><p><strong>简单图</strong></p>
+<li>
+<p><strong>简单图</strong></p>
 <p>既不含平行边也不含环的图称为简单图。</p>
 <ul>
-<li><p>平行边：</p>
+<li>
+<p>平行边：</p>
 <p>在无向图中，若关联一对顶点的无向边多于一条，则称这些边为平行边，平行边的条数称为重数；</p>
 <p>在有向图中，若关联一对顶点的有向边多于一条，并且这些边的始点和终点相同（<strong>方向一致</strong>），则称这些边为平行边</p>
 <blockquote>
 <p>含有平行边的图称为多重图。平行边的条数称为重数。</p>
 </blockquote>
 </li>
-<li><p>自环：</p>
+<li>
+<p>自环：</p>
 <p>自环是指一条边关联的两个顶点为同一个顶点，也就是说自己到自己有一条边。</p>
 </li>
 </ul>
 </li>
-<li><p><strong>完全图</strong></p>
+<li>
+<p><strong>完全图</strong></p>
 <p>在无向图中，若<strong>任意两个点都有一条边</strong>，则该图称为无向完全图。</p>
 <blockquote>
-<p>含有 n 个顶点的无向图，每个顶点到其他的 n−1 个顶点都有边，一共有 n(n−1)&#x2F;2 条边。</p>
+<p>含有 n 个顶点的无向图，每个顶点到其他的 n−1 个顶点都有边，一共有 n(n−1)/2 条边。</p>
 </blockquote>
 <p>在有向图中，若<strong>任意两个点都有两条方向相反的两条弧</strong>，则该图称为有向完全图。</p>
 <blockquote>
 <p>含有 n 个顶点的有向图，每个顶点发出 n−1 条边，并且进来 n−1 条边，一共有 n(n−1)条边。</p>
 </blockquote>
 </li>
-<li><p><strong>稀疏图和稠密图</strong></p>
+<li>
+<p><strong>稀疏图和稠密图</strong></p>
 <p>有很少边或弧的图称为稀疏图，反之，则称为稠密图。这是一个非常模糊的概念，很难讲多少算稀疏，多少算稠密，一般来说，若图 G 满足|E|&lt;|V|×log|V|，则称 G 为稀疏图。</p>
 </li>
-<li><p><strong>网</strong></p>
+<li>
+<p><strong>网</strong></p>
 <p>在实际应用中，经常在边上标注如距离、时间、耗费等数值，该数值称为边的权值。带权的图称为网。</p>
 </li>
-<li><p><strong>邻接和关联</strong></p>
+<li>
+<p><strong>邻接和关联</strong></p>
 <p>邻接是指<strong>顶点和顶点</strong>之间的关系，关联是指<strong>边和顶点</strong>之间的关系。</p>
-<p>有边&#x2F;弧相连的两个顶点之间的关系，如无向边(v<sub>i</sub>, v<sub>j</sub>)，则称 v<sub>i</sub> 和 v<sub>j</sub> 互为邻接点；有向边&lt;v<sub>i</sub>, v<sub>j</sub>&gt;，则称 v<sub>i</sub> 邻接到v<sub>j</sub>，v<sub>j</sub> 邻接于 v<sub>i</sub>。若存在(v<sub>i</sub>, v<sub>j</sub>)或&lt;v<sub>i</sub>, v<sub>j</sub>&gt;，则称该边或弧关联于 v<sub>i</sub> 和 v<sub>j</sub>，</p>
+<p>有边/弧相连的两个顶点之间的关系，如无向边(v<sub>i</sub>, v<sub>j</sub>)，则称 v<sub>i</sub> 和 v<sub>j</sub> 互为邻接点；有向边&lt;v<sub>i</sub>, v<sub>j</sub>&gt;，则称 v<sub>i</sub> 邻接到v<sub>j</sub>，v<sub>j</sub> 邻接于 v<sub>i</sub>。若存在(v<sub>i</sub>, v<sub>j</sub>)或&lt;v<sub>i</sub>, v<sub>j</sub>&gt;，则称该边或弧关联于 v<sub>i</sub> 和 v<sub>j</sub>，</p>
 </li>
-<li><p><strong>顶点的度</strong></p>
+<li>
+<p><strong>顶点的度</strong></p>
 <p>顶点的度是指与该顶点相关联的边的数目，记为 TD(v)。</p>
 <p><strong>握手定理</strong>：<strong>度数之和等于边数的两倍</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/03/shu-ju-jie-gou-ru-men-tu/image-20221003105732197.png" alt="image-20221003105732197"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221003105732197.png" alt="image-20221003105732197"></p>
 <p>如果在计算度数时，每算一度划一条线，则可以看出每条边被计算了两次。</p>
 <p>在有向图中，顶点的度又分为入度和出度：</p>
 <ul>
@@ -563,25 +575,29 @@
 <li>顶点 v 的出度是以 v 为始点的有向边的条数，记作 OD(v)，即发出的边数。</li>
 </ul>
 <p>顶点 v 的度等于其入度和出度之和，即：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/03/shu-ju-jie-gou-ru-men-tu/image-20221003105848735.png" alt="image-20221003105848735"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221003105848735.png" alt="image-20221003105848735"></p>
 <p>在有向图中，所有顶点的入度之和等于出度之和，又因为所有顶点度数之和等于边的 2倍，因此：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/03/shu-ju-jie-gou-ru-men-tu/image-20221003110514033.png" alt="image-20221003110514033"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221003110514033.png" alt="image-20221003110514033"></p>
 </li>
-<li><p><strong>路径、路径长度和距离</strong></p>
+<li>
+<p><strong>路径、路径长度和距离</strong></p>
 <p>路径：接续的边的顶点构成的序列。</p>
 <p>路径长度：路径上边或弧的数目。</p>
 <p>距离：从顶点到另一顶点的最短路径长度。</p>
 </li>
-<li><p><strong>回路（环）、简单路径和简单回路</strong></p>
+<li>
+<p><strong>回路（环）、简单路径和简单回路</strong></p>
 <p>回路（环）：第一个顶点和最后一个顶点相同的路径。</p>
 <p>简单路径：除路径起点和终点可以相同外，其余顶点均不相同的路径。</p>
 <p>简单回路：除路径起点和终点相同外，其余顶点均不相同的路径。</p>
 </li>
-<li><p><strong>子图与生成子图</strong></p>
-<p>子图：设有两个图 G&#x3D;(V, E)、G1 &#x3D;(V1 , E1 )，若 V1⊆V，E1 ⊆ E，则称 G1 是 G 的子图。从图中选择若干个顶点、若干条边构成的图称为原图的子图。</p>
+<li>
+<p><strong>子图与生成子图</strong></p>
+<p>子图：设有两个图 G=(V, E)、G1 =(V1 , E1 )，若 V1⊆V，E1 ⊆ E，则称 G1 是 G 的子图。从图中选择若干个顶点、若干条边构成的图称为原图的子图。</p>
 <p>生成子图：从图中选择所有顶点，若干条边构成的图称为原图的生成子图。</p>
 </li>
-<li><p><strong>连通图和连通分量</strong></p>
+<li>
+<p><strong>连通图和连通分量</strong></p>
 <p>连通图：在无向图中，如果顶点 v i 到 v j 有路径，则称 v i 和 vj 是连通的。</p>
 <p>如果图中<strong>任何两个顶点都是连通的</strong>，则称 G 为连通图。</p>
 <p>连通分量：无向图 G 的极大连通子图称为 G 的连通分量。极大连通子图意思是：该子图是 G 的连通子图，<strong>如果再加入一个顶点，该子图不连通</strong>。</p>
@@ -589,15 +605,17 @@
 <p>对于连通图，其连通分量就是它自己；对于非连通图，则有 2 个以上连通分量。</p>
 </blockquote>
 </li>
-<li><p><strong>强连通图和强连通分量</strong></p>
+<li>
+<p><strong>强连通图和强连通分量</strong></p>
 <p>强连通图：<strong>在有向图中</strong>，如果图中任何两个顶点 v i 到 v j 有路径，且 v j 到 v i 也有路径，则称 G 为强连通图。</p>
 <p>强连通分量：有向图 G 的极大强连通子图称为 G 的强连通分量。极大强连通子图意思是：该子图是 G 的强连通子图，如果再加入一个顶点，该子图不再是强连通的。</p>
 </li>
-<li><p><strong>树和有向树</strong></p>
+<li>
+<p><strong>树和有向树</strong></p>
 <p>从图论的角度来看，树是一个无环连通图。</p>
 <p>一个含 n 个顶点、m 条边的图，只要满足下列 5 个条件之一就是一棵树：</p>
 <ul>
-<li>G 是连通图且 m&#x3D;n−1；</li>
+<li>G 是连通图且 m=n−1；</li>
 <li>G 是连通图且无环；</li>
 <li>G 是连通图，但删除任意一条边就不连通；</li>
 <li>G 是无环图，但添加任意一条边就会产生环；</li>
@@ -607,7 +625,8 @@
 <p>有向树：<strong>只有一个顶点入度为 0，其余顶点入度均为 1 的有向图</strong></p>
 </blockquote>
 </li>
-<li><p><strong>生成树和生成森林</strong></p>
+<li>
+<p><strong>生成树和生成森林</strong></p>
 <p>极小连通子图：该子图是 G 的连通子图，在<strong>该子图中删除任何一条边，该子图不再连通</strong>。</p>
 <p>生成树：包含无向图 G <strong>所有顶点的极小连通子图</strong>。</p>
 <blockquote>
@@ -615,9 +634,10 @@
 </blockquote>
 <p>生成森林：对非连通图，由各个连通分量的生成树组成的集合。</p>
 </li>
-<li><p><strong>二分图</strong></p>
-<p>二分图，又称为二部图，是图论中的一种特殊模型。设 G&#x3D;&lt;V，E&gt;是一个无向图，如果顶点集 V 可分割为两个互不相交的子集 V1、V2，并且图中的每条边(i, j)所关联的两个顶点 i 和 j 分别属于这两个不同的顶点集(i∈V1 , j∈V2 )，则称图 G 为二分图：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/10/03/shu-ju-jie-gou-ru-men-tu/image-20221003114408992.png" alt="image-20221003114408992"></p>
+<li>
+<p><strong>二分图</strong></p>
+<p>二分图，又称为二部图，是图论中的一种特殊模型。设 G=&lt;V，E&gt;是一个无向图，如果顶点集 V 可分割为两个互不相交的子集 V1、V2，并且图中的每条边(i, j)所关联的两个顶点 i 和 j 分别属于这两个不同的顶点集(i∈V1 , j∈V2 )，则称图 G 为二分图：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20221003114408992.png" alt="image-20221003114408992"></p>
 </li>
 </ol>
 

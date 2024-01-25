@@ -496,15 +496,19 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-着色器是什么？"><a href="#1-着色器是什么？" class="headerlink" title="1.着色器是什么？"></a>1.着色器是什么？</h3><p>WebGL需要两种着色器：<br><strong>顶点着色器(Vertex shader)</strong>:顶点着色器是用来描述顶点特性（如位置、颜色等)的程序。顶点(vertex)是指二维或三维空间中的一个点，比如二维或三维图形的端点或交点。</p>
+                <h3 id="1-着色器是什么？">1.着色器是什么？</h3>
+<p>WebGL需要两种着色器：<br>
+<strong>顶点着色器(Vertex shader)</strong>:顶点着色器是用来描述顶点特性（如位置、颜色等)的程序。顶点(vertex)是指二维或三维空间中的一个点，比如二维或三维图形的端点或交点。</p>
 <p><strong>片元着色器(Vertex shader)</strong>:进行逐片元处理过程如光照的程序。片元(fragment)是一个WebGL术语，你可以将其理解为像素（图像的单元）。</p>
 <p>下图是浏览器显示图像的流程：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/webgl-zhao-se-qi-ru-men/image-20220713214157458.webp"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220713214157458.webp" alt=""></p>
 <p>图的左侧是两个浏览器窗口。它们是同一个窗口，上面一个是执行JavaScript程序之前的窗口，下面一个是执行之后的。程序执行的流程大概是：首先运行JavaScript程序，调用了WbGL的相关方法，然后顶点着色器和片元着色器就会执行，在颜色缓冲区内进行绘制，这时就清空了绘图区；最后，颜色缓冲区中的内容会自动在浏览器的画布上显示出来。</p>
-<h3 id="2-着色器代码示例："><a href="#2-着色器代码示例：" class="headerlink" title="2.着色器代码示例："></a>2.着色器代码示例：</h3><p>因为着色器程序代码必须预先处理成单个字符串的形式，所以我们用+号将多行字符串连成一个长字符串。每一行以\n结束，这是由于当着色器内部出错时，就能获取出错的行号，这对于检查源代码中的错误很有帮助。但是，\n并不是必须的，你自己编写着色器时，也可以不用它。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/webgl-zhao-se-qi-ru-men/image-20220713214259031.webp"></p>
-<h3 id="3-初始化着色器："><a href="#3-初始化着色器：" class="headerlink" title="3.初始化着色器："></a>3.初始化着色器：</h3><p>大部分WebGL程序都遵循这样的流程：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2022/07/13/webgl-zhao-se-qi-ru-men/image-20220713214315749.webp"></p>
+<h3 id="2-着色器代码示例：">2.着色器代码示例：</h3>
+<p>因为着色器程序代码必须预先处理成单个字符串的形式，所以我们用+号将多行字符串连成一个长字符串。每一行以\n结束，这是由于当着色器内部出错时，就能获取出错的行号，这对于检查源代码中的错误很有帮助。但是，\n并不是必须的，你自己编写着色器时，也可以不用它。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220713214259031.webp" alt=""></p>
+<h3 id="3-初始化着色器：">3.初始化着色器：</h3>
+<p>大部分WebGL程序都遵循这样的流程：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20220713214315749.webp" alt=""></p>
 <p>目前最重要的是，你必须知道，<strong>WebGL程序包括运行在浏览器中的JavaScript和运行在WebGL系统的着色器程序这两个部分</strong>。</p>
 
                 

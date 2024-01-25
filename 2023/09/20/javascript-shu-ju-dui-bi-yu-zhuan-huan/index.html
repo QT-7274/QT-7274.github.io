@@ -6,9 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JavaScript数据对比与转换, QT-7274">
-    <meta name="description" content="数据转换概述前面我们讲到，JS中有六种简单数据类型：undefined、null、boolean、string、number、symbol，以及引用类型：object
-但是我们在声明的时候只有一种数据类型，只有到运行期间才会确定当前类型
-l">
+    <meta name="description" content="数据转换
+概述
+前面我们讲到，JS中有六种简单数据类型：undefined、null、boolean、string、number、symbol，以及引用类型：object
+但是我们在声明的时候只有一种数据类型，只有到运行期间才会确定当前类型">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -502,10 +503,11 @@ l">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="数据转换"><a href="#数据转换" class="headerlink" title="数据转换"></a>数据转换</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>前面我们讲到，<code>JS</code>中有六种简单数据类型：<code>undefined</code>、<code>null</code>、<code>boolean</code>、<code>string</code>、<code>number</code>、<code>symbol</code>，以及引用类型：<code>object</code></p>
+                <h1>数据转换</h1>
+<h2 id="概述">概述</h2>
+<p>前面我们讲到，<code>JS</code>中有六种简单数据类型：<code>undefined</code>、<code>null</code>、<code>boolean</code>、<code>string</code>、<code>number</code>、<code>symbol</code>，以及引用类型：<code>object</code></p>
 <p>但是我们在声明的时候只有一种数据类型，只有到运行期间才会确定当前类型</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> x <span class="token operator">=</span> y <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> a<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>上面代码中，<code>x</code>的值在编译阶段是无法获取的，只有等到程序运行时才能知道</p>
 <p>虽然变量的数据类型是不确定的，但是各种运算符对数据类型是有要求的，如果运算子的类型与预期不符合，就会触发类型转换机制</p>
 <p>常见的类型转换有：</p>
@@ -513,16 +515,18 @@ l">
 <li>强制转换（显示转换）</li>
 <li>自动转换（隐式转换）</li>
 </ul>
-<h2 id="显示转换"><a href="#显示转换" class="headerlink" title="显示转换"></a>显示转换</h2><p>显示转换，即我们很清楚可以看到这里发生了类型的转变，常见的方法有：</p>
+<h2 id="显示转换">显示转换</h2>
+<p>显示转换，即我们很清楚可以看到这里发生了类型的转变，常见的方法有：</p>
 <ul>
 <li>Number()</li>
 <li>parseInt()</li>
 <li>String()</li>
 <li>Boolean()</li>
 </ul>
-<h3 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h3><p>将任意类型的值转化为数值</p>
+<h3 id="Number">Number()</h3>
+<p>将任意类型的值转化为数值</p>
 <p>先给出类型转换规则：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/20/javascript-shu-ju-dui-bi-yu-zhuan-huan/915b7300-6692-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="915b7300-6692-11eb-ab90-d9ae814b240d.png" alt="img"></p>
 <p>实践一下：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">Number</span><span class="token punctuation">(</span><span class="token number">324</span><span class="token punctuation">)</span> <span class="token comment">// 324</span>
 
@@ -549,14 +553,14 @@ l">
 <span class="token function">Number</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">// NaN</span>
 <span class="token function">Number</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// NaN</span>
 <span class="token function">Number</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>从上面可以看到，<code>Number</code>转换的时候是很严格的，只要有一个字符无法转成数值，整个字符串就会被转为<code>NaN</code></p>
-<h3 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt()"></a>parseInt()</h3><p><code>parseInt</code>相比<code>Number</code>，就没那么严格了，<code>parseInt</code>函数逐个解析字符，遇到不能转换的字符就停下来</p>
+<h3 id="parseInt">parseInt()</h3>
+<p><code>parseInt</code>相比<code>Number</code>，就没那么严格了，<code>parseInt</code>函数逐个解析字符，遇到不能转换的字符就停下来</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token string">'32a3'</span><span class="token punctuation">)</span> <span class="token comment">//32</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h3><p>可以将任意类型的值转化成字符串</p>
+<h3 id="String">String()</h3>
+<p>可以将任意类型的值转化成字符串</p>
 <p>给出转换规则图：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/20/javascript-shu-ju-dui-bi-yu-zhuan-huan/48dd8eb0-6692-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="48dd8eb0-6692-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <p>实践一下：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 数值：转为相应的字符串</span>
 <span class="token function">String</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// "1"</span>
@@ -576,9 +580,9 @@ l">
 <span class="token comment">//对象</span>
 <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">// "[object Object]"</span>
 <span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// "1,2,3"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h3><p>可以将任意类型的值转为布尔值，转换规则如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/20/javascript-shu-ju-dui-bi-yu-zhuan-huan/53bdad10-6692-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<h3 id="Boolean">Boolean()</h3>
+<p>可以将任意类型的值转为布尔值，转换规则如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="53bdad10-6692-11eb-ab90-d9ae814b240d.png" alt="img"></p>
 <p>实践一下：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">Boolean</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token comment">// false</span>
 <span class="token function">Boolean</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token comment">// false</span>
@@ -588,15 +592,16 @@ l">
 <span class="token function">Boolean</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">// true</span>
 <span class="token function">Boolean</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// true</span>
 <span class="token function">Boolean</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Boolean</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h2><p>在隐式转换中，我们可能最大的疑惑是 ：何时发生隐式转换？</p>
+<h2 id="隐式转换">隐式转换</h2>
+<p>在隐式转换中，我们可能最大的疑惑是 ：何时发生隐式转换？</p>
 <p>我们这里可以归纳为两种情况发生隐式转换的场景：</p>
 <ul>
 <li>比较运算（<code>==</code>、<code>!=</code>、<code>&gt;</code>、<code>&lt;</code>）、<code>if</code>、<code>while</code>需要布尔值地方</li>
 <li>算术运算（<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>）</li>
 </ul>
 <p>除了上面的场景，还要求运算符两边的操作数不是同一类型</p>
-<h3 id="自动转换为布尔值"><a href="#自动转换为布尔值" class="headerlink" title="自动转换为布尔值"></a>自动转换为布尔值</h3><p>在需要布尔值的地方，就会将非布尔值的参数自动转为布尔值，系统内部会调用<code>Boolean</code>函数</p>
+<h3 id="自动转换为布尔值">自动转换为布尔值</h3>
+<p>在需要布尔值的地方，就会将非布尔值的参数自动转为布尔值，系统内部会调用<code>Boolean</code>函数</p>
 <p>可以得出个小结：</p>
 <ul>
 <li>undefined</li>
@@ -608,7 +613,8 @@ l">
 <li>“”</li>
 </ul>
 <p>除了上面几种会被转化成<code>false</code>，其他都换被转化成<code>true</code></p>
-<h3 id="自动转换成字符串"><a href="#自动转换成字符串" class="headerlink" title="自动转换成字符串"></a>自动转换成字符串</h3><p>遇到预期为字符串的地方，就会将非字符串的值自动转为字符串</p>
+<h3 id="自动转换成字符串">自动转换成字符串</h3>
+<p>遇到预期为字符串的地方，就会将非字符串的值自动转为字符串</p>
 <p>具体规则是：先将复合类型的值转为原始类型的值，再将原始类型的值转为字符串</p>
 <p>常发生在<code>+</code>运算中，一旦存在字符串，则会进行字符串拼接操作</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string">'5'</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token comment">// '51'</span>
@@ -619,8 +625,8 @@ l">
 <span class="token string">'5'</span> <span class="token operator">+</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// "5function ()&#123;&#125;"</span>
 <span class="token string">'5'</span> <span class="token operator">+</span> <span class="token keyword">undefined</span> <span class="token comment">// "5undefined"</span>
 <span class="token string">'5'</span> <span class="token operator">+</span> <span class="token keyword">null</span> <span class="token comment">// "5null"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="自动转换成数值"><a href="#自动转换成数值" class="headerlink" title="自动转换成数值"></a>自动转换成数值</h3><p>除了<code>+</code>有可能把运算子转为字符串，其他运算符都会把运算子自动转成数值</p>
+<h3 id="自动转换成数值">自动转换成数值</h3>
+<p>除了<code>+</code>有可能把运算子转为字符串，其他运算符都会把运算子自动转成数值</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string">'5'</span> <span class="token operator">-</span> <span class="token string">'2'</span> <span class="token comment">// 3</span>
 <span class="token string">'5'</span> <span class="token operator">*</span> <span class="token string">'2'</span> <span class="token comment">// 10</span>
 <span class="token boolean">true</span> <span class="token operator">-</span> <span class="token number">1</span>  <span class="token comment">// 0</span>
@@ -631,32 +637,27 @@ l">
 <span class="token string">'abc'</span> <span class="token operator">-</span> <span class="token number">1</span>   <span class="token comment">// NaN</span>
 <span class="token keyword">null</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token comment">// 1</span>
 <span class="token keyword">undefined</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token comment">// NaN</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>null</code>转为数值时，值为<code>0</code> 。<code>undefined</code>转为数值时，值为<code>NaN</code></p>
-<h1 id="x3D-x3D-和-x3D-x3D-x3D-区别"><a href="#x3D-x3D-和-x3D-x3D-x3D-区别" class="headerlink" title="&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 区别"></a>&#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 区别</h1><h2 id="等于操作符"><a href="#等于操作符" class="headerlink" title="等于操作符"></a>等于操作符</h2><p>等于操作符用两个等于号（ &#x3D;&#x3D; ）表示，如果操作数相等，则会返回 <code>true</code></p>
-<p>前面文章，我们提到在<code>JavaScript</code>中存在隐式转换。等于操作符（&#x3D;&#x3D;）在比较中会<strong>先进行类型转换，再确定操作数是否相等</strong></p>
+<h1>== 和 === 区别</h1>
+<h2 id="等于操作符">等于操作符</h2>
+<p>等于操作符用两个等于号（ == ）表示，如果操作数相等，则会返回 <code>true</code></p>
+<p>前面文章，我们提到在<code>JavaScript</code>中存在隐式转换。等于操作符（==）在比较中会<strong>先进行类型转换，再确定操作数是否相等</strong></p>
 <p>遵循以下规则：</p>
 <p>如果任一操作数是布尔值，则将其转换为数值再比较是否相等</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token boolean">true</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>如果一个操作数是字符串，另一个操作数是数值，则尝试将字符串转换为数值，再比较是否相等</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">"55"</span> <span class="token operator">==</span> <span class="token number">55</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>如果一个操作数是对象，另一个操作数不是，则调用对象的 <code>valueOf()</code>方法取得其原始值，再根据前面的规则进行比较</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token function-variable function">valueOf</span><span class="token operator">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
 <span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span>obj <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><code>null</code>和<code>undefined</code>相等</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>⚠️如果有<strong>任一</strong>操作数是 <code>NaN</code> ，则相等操作符返回 <code>false</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">NaN</span> <span class="token operator">==</span> <span class="token number">NaN</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>如果两个操作数都是对象，则比较它们是不是同一个对象。如果两个操作数都指向同一个对象，则相等操作符返回<code>true</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let obj1 &#x3D; &#123;name:&quot;xxx&quot;&#125;
 let obj2 &#x3D; &#123;name:&quot;xxx&quot;&#125;
 let result1 &#x3D; (obj1 &#x3D;&#x3D; obj2 ); &#x2F;&#x2F; false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>下面进一步做个小结：</p>
 <ul>
@@ -667,24 +668,23 @@ let result1 &#x3D; (obj1 &#x3D;&#x3D; obj2 ); &#x2F;&#x2F; false<span aria-hidde
 <li>存在 NaN 则返回 false</li>
 </ul>
 </blockquote>
-<h2 id="全等操作符"><a href="#全等操作符" class="headerlink" title="全等操作符"></a>全等操作符</h2><p>全等操作符由 3 个等于号（ &#x3D;&#x3D;&#x3D; ）表示，只有两个操作数在不转换的前提下相等才返回 <code>true</code>。</p>
+<h2 id="全等操作符">全等操作符</h2>
+<p>全等操作符由 3 个等于号（ === ）表示，只有两个操作数在不转换的前提下相等才返回 <code>true</code>。</p>
 <p>即<strong>类型相同，值也需相同</strong></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">"55"</span> <span class="token operator">===</span> <span class="token number">55</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false，不相等，因为数据类型不同</span>
 <span class="token keyword">let</span> result2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">55</span> <span class="token operator">===</span> <span class="token number">55</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true，相等，因为数据类型相同值也相同</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p><code>undefined</code> 和 <code>null</code> 与自身严格相等</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span>  <span class="token comment">//true</span>
 <span class="token keyword">let</span> result2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">undefined</span> <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span>  <span class="token comment">//true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>相等操作符（&#x3D;&#x3D;）会做类型转换，再进行值的比较，全等运算符不会做类型转换</p>
+<h2 id="区别">区别</h2>
+<p>相等操作符（==）会做类型转换，再进行值的比较，全等运算符不会做类型转换</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">"55"</span> <span class="token operator">===</span> <span class="token number">55</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false，不相等，因为数据类型不同</span>
 <span class="token keyword">let</span> result2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">55</span> <span class="token operator">===</span> <span class="token number">55</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true，相等，因为数据类型相同值也相同</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p><code>null</code> 和 <code>undefined</code> 比较，相等操作符（&#x3D;&#x3D;）为<code>true</code>，全等为<code>false</code></p>
+<p><code>null</code> 和 <code>undefined</code> 比较，相等操作符（==）为<code>true</code>，全等为<code>false</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span>
 <span class="token keyword">let</span> result2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">null</span>  <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>相等运算符隐藏的类型转换，会带来一些违反直觉的结果</p>
+<h2 id="小结">小结</h2>
+<p>相等运算符隐藏的类型转换，会带来一些违反直觉的结果</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string">''</span> <span class="token operator">==</span> <span class="token string">'0'</span> <span class="token comment">// false</span>
 <span class="token number">0</span> <span class="token operator">==</span> <span class="token string">''</span> <span class="token comment">// true</span>
 <span class="token number">0</span> <span class="token operator">==</span> <span class="token string">'0'</span> <span class="token comment">// true</span>
@@ -697,21 +697,18 @@ let result1 &#x3D; (obj1 &#x3D;&#x3D; obj2 ); &#x2F;&#x2F; false<span aria-hidde
 <span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
 
 <span class="token string">' \t\r\n'</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>但在比较<code>null</code>的情况的时候，我们一般使用相等操作符<code>==</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>x <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//执行</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>等同于下面写法</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>x <span class="token operator">===</span> <span class="token keyword">null</span> <span class="token operator">||</span> obj<span class="token punctuation">.</span>x <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token operator">...</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>使用相等操作符（&#x3D;&#x3D;）的写法明显更加简洁了</p>
-<p>所以，除了在比较对象属性为<code>null</code>或者<code>undefined</code>的情况下，我们可以使用相等操作符（&#x3D;&#x3D;），其他情况建议一律使用全等操作符（&#x3D;&#x3D;&#x3D;）</p>
+<p>使用相等操作符（==）的写法明显更加简洁了</p>
+<p>所以，除了在比较对象属性为<code>null</code>或者<code>undefined</code>的情况下，我们可以使用相等操作符（==），其他情况建议一律使用全等操作符（===）</p>
 
                 
             </div>

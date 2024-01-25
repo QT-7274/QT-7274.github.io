@@ -6,10 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="CSS视差滚动效果, QT-7274">
-    <meta name="description" content="如何使用css完成视差滚动效果?概念视差滚动（Parallax Scrolling）是指多层背景以不同的速度移动，形成立体的运动效果，带来非常出色的视觉体验
+    <meta name="description" content="如何使用css完成视差滚动效果?
+概念
+视差滚动（Parallax Scrolling）是指多层背景以不同的速度移动，形成立体的运动效果，带来非常出色的视觉体验
 我们可以把网页解刨成：背景层、内容层、悬浮层
 
-当滚动鼠标滑轮的时候，各个图层以不">
+当滚动鼠标滑轮的时候，各个图层">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -473,7 +475,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    858
+                    857
                 </div>
                 
 
@@ -503,17 +505,21 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="如何使用css完成视差滚动效果"><a href="#如何使用css完成视差滚动效果" class="headerlink" title="如何使用css完成视差滚动效果?"></a>如何使用css完成视差滚动效果?</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>视差滚动（Parallax Scrolling）是指多层背景以不同的速度移动，形成立体的运动效果，带来非常出色的视觉体验</p>
+                <h2 id="如何使用css完成视差滚动效果">如何使用css完成视差滚动效果?</h2>
+<h3 id="概念">概念</h3>
+<p>视差滚动（Parallax Scrolling）是指多层背景以不同的速度移动，形成立体的运动效果，带来非常出色的视觉体验</p>
 <p>我们可以把网页解刨成：背景层、内容层、悬浮层</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/18/css-shi-chai-gun-dong-xiao-guo/57c942a0-a1cc-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="57c942a0-a1cc-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <p>当滚动鼠标滑轮的时候，各个图层以不同的速度移动，形成视觉差的效果</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/18/css-shi-chai-gun-dong-xiao-guo/e57ab280-a1dd-11eb-ab90-d9ae814b240d.png" alt="image.png"></p>
-<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><p>使用<code>css</code>形式实现视觉差滚动效果的方式有：</p>
+<p><img src="/medias/images/loading.gif" data-original="e57ab280-a1dd-11eb-ab90-d9ae814b240d.png" alt="image.png"></p>
+<h3 id="实现方式">实现方式</h3>
+<p>使用<code>css</code>形式实现视觉差滚动效果的方式有：</p>
 <ul>
 <li>background-attachment</li>
 <li>transform:translate3D</li>
 </ul>
-<h3 id="background-attachment"><a href="#background-attachment" class="headerlink" title="background-attachment"></a>background-attachment</h3><p>作用是设置背景图像是否固定或者随着页面的其余部分滚动</p>
+<h3 id="background-attachment">background-attachment</h3>
+<p>作用是设置背景图像是否固定或者随着页面的其余部分滚动</p>
 <p>值分别有如下：</p>
 <ul>
 <li>scroll：默认值，背景图像会随着页面其余部分的滚动而移动</li>
@@ -533,7 +539,6 @@
     <span class="token property">background-size</span><span class="token punctuation">:</span> cover<span class="token punctuation">;</span>
     <span class="token property">background-position</span><span class="token punctuation">:</span> center center<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>整体例子如下：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
 <span class="token selector">div</span> <span class="token punctuation">&#123;</span>
@@ -573,14 +578,14 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a-text<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a-img3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>6<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a-text<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>7<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="transform-translate3D"><a href="#transform-translate3D" class="headerlink" title="transform:translate3D"></a>transform:translate3D</h3><p>同样，让我们先来看一下两个概念<code>transform</code>和<code>perspective</code>：</p>
+<h3 id="transform-translate3D">transform:translate3D</h3>
+<p>同样，让我们先来看一下两个概念<code>transform</code>和<code>perspective</code>：</p>
 <ul>
-<li>transform: css3 属性，可以对元素进行变换(2d&#x2F;3d)，包括平移 translate,旋转 rotate,缩放 scale,等等</li>
+<li>transform: css3 属性，可以对元素进行变换(2d/3d)，包括平移 translate,旋转 rotate,缩放 scale,等等</li>
 <li>perspective: css3 属性，当元素涉及 3d 变换时，perspective 可以定义我们眼睛看到的 3d 立体效果，即空间感</li>
 </ul>
 <p><code>3D</code>视角示意图如下所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/09/18/css-shi-chai-gun-dong-xiao-guo/24f37dd0-a18d-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="24f37dd0-a18d-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <p>举个例子：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
     <span class="token selector">html</span> <span class="token punctuation">&#123;</span>
@@ -629,7 +634,6 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>two<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>two<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>three<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>three<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>而这种方式实现视觉差动的原理如下：</p>
 <ul>
 <li>容器设置上 transform-style: preserve-3d 和 perspective: xpx，那么处于这个容器的子元素就将位于3D空间中，</li>

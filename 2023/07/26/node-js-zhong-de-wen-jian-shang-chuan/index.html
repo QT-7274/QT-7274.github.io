@@ -6,9 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Node.js中的文件上传, QT-7274">
-    <meta name="description" content="文件上传初始化准备安装依赖首先创建一个express-multer-upload工程项目，然后在项目中下好各种依赖包。
+    <meta name="description" content="文件上传
+初始化准备
+安装依赖
+首先创建一个express-multer-upload工程项目，然后在项目中下好各种依赖包。
 multer中间件
-Multer 是一个 node.js 中间件，用于处理 multipart/form-data 类型">
+Multer 是一个 node.js 中间件，用于处理 multipart/form-data">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -502,17 +505,23 @@ Multer 是一个 node.js 中间件，用于处理 multipart/form-data 类型">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><h3 id="初始化准备"><a href="#初始化准备" class="headerlink" title="初始化准备"></a>初始化准备</h3><h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><p>首先创建一个<code>express-multer-upload</code>工程项目，然后在项目中下好各种依赖包。</p>
+                <h2 id="文件上传">文件上传</h2>
+<h3 id="初始化准备">初始化准备</h3>
+<h4 id="安装依赖">安装依赖</h4>
+<p>首先创建一个<code>express-multer-upload</code>工程项目，然后在项目中下好各种依赖包。</p>
 <p><strong>multer中间件</strong></p>
 <p>Multer 是一个 node.js 中间件，用于处理 <code>multipart/form-data</code> 类型的表单数据，它主要用于上传文件。</p>
 <blockquote>
 <p><strong>注意</strong>: Multer 不会处理任何非 <code>multipart/form-data</code> 类型的表单数据。</p>
 </blockquote>
 <p>下面是我下载的依赖以及版本。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-wen-jian-shang-chuan/b61fccbd8e385d376270ad9ba3a8bf7e77a260e5.png" alt="image-20221231143824464"></p>
-<h4 id="项目结构划分"><a href="#项目结构划分" class="headerlink" title="项目结构划分"></a>项目结构划分</h4><p>本着以比较规范的形式去完成这个项目，所以有必要进行合理的项目结构划分。如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-wen-jian-shang-chuan/fae1b84fb6e88e92b54428a9ba2fd93b0ad4680a.png" alt="image-20221231144220130"></p>
-<h3 id="multer上传逻辑"><a href="#multer上传逻辑" class="headerlink" title="multer上传逻辑"></a>multer上传逻辑</h3><h4 id="multer配置"><a href="#multer配置" class="headerlink" title="multer配置"></a>multer配置</h4><p>在multer目录下创建 <code>multerConfig.js</code> 编写如下代码：</p>
+<p><img src="/medias/images/loading.gif" data-original="b61fccbd8e385d376270ad9ba3a8bf7e77a260e5.png" alt="image-20221231143824464"></p>
+<h4 id="项目结构划分">项目结构划分</h4>
+<p>本着以比较规范的形式去完成这个项目，所以有必要进行合理的项目结构划分。如下：</p>
+<p><img src="/medias/images/loading.gif" data-original="fae1b84fb6e88e92b54428a9ba2fd93b0ad4680a.png" alt="image-20221231144220130"></p>
+<h3 id="multer上传逻辑">multer上传逻辑</h3>
+<h4 id="multer配置">multer配置</h4>
+<p>在multer目录下创建 <code>multerConfig.js</code> 编写如下代码：</p>
 <ul>
 <li>引入依赖</li>
 <li>封装处理路径函数</li>
@@ -554,9 +563,9 @@ const multerConfig &#x3D; multer(&#123;
 &#125;)
 
 module.exports &#x3D; multerConfig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在该配置中可以设置文件保存的地址、文件名称、限制上传的文件格式、文件大小</p>
-<h4 id="upload上传逻辑"><a href="#upload上传逻辑" class="headerlink" title="upload上传逻辑"></a>upload上传逻辑</h4><p>在 multer 目录下创建 <code>upload.js</code>，编写如下代码：</p>
+<h4 id="upload上传逻辑">upload上传逻辑</h4>
+<p>在 multer 目录下创建 <code>upload.js</code>，编写如下代码：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 引入配置好的 multerConfig</span>
 <span class="token keyword">const</span> multerConfig <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./multerConfig'</span><span class="token punctuation">)</span>
 
@@ -581,12 +590,13 @@ module.exports &#x3D; multerConfig<span aria-hidden="true" class="line-numbers-r
 <span class="token punctuation">&#125;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> uploadAvatar<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上述代码主要是封装了一个上传文件的方法，当图片上传成功时就将拼接好的图片链接 <code>resolve</code> 出去。该方法会在控制器中被调用。</p>
 <blockquote>
-<p>注意：上面的 <code>multerConfig.single(&#39;file&#39;)</code> 表示单文件上传，并且字段名为 “file”，后面上传图片的字段必须保持一致</p>
+<p>注意：上面的 <code>multerConfig.single('file')</code> 表示单文件上传，并且字段名为 “file”，后面上传图片的字段必须保持一致</p>
 </blockquote>
-<h3 id="编写控制器与定义路由"><a href="#编写控制器与定义路由" class="headerlink" title="编写控制器与定义路由"></a>编写控制器与定义路由</h3><h4 id="编写控制器"><a href="#编写控制器" class="headerlink" title="编写控制器"></a>编写控制器</h4><p>在 controllers 目录下创建 <code>UserController.js</code>，编写如下代码：</p>
+<h3 id="编写控制器与定义路由">编写控制器与定义路由</h3>
+<h4 id="编写控制器">编写控制器</h4>
+<p>在 controllers 目录下创建 <code>UserController.js</code>，编写如下代码：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> uploadAvatar <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'../multer/upload'</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 用户的逻辑控制器</span>
@@ -606,11 +616,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">&#125;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> UserController<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上述代码主要是编写了一个用户控制器类 <code>UserController</code>，以及一个图片上传的方法 <code>upload</code>。</p>
 <p>在 <code>upload</code> 中调用了上传图片的接口 <code>uploadAvatar</code>，得到成功或失败的结果，再响应给客户端。</p>
-<h4 id="定义路由"><a href="#定义路由" class="headerlink" title="定义路由"></a>定义路由</h4><ol>
-<li><p>在 routers 目录下创建 <code>index.js</code>，编写如下代码：</p>
+<h4 id="定义路由">定义路由</h4>
+<ol>
+<li>
+<p>在 routers 目录下创建 <code>index.js</code>，编写如下代码：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 导入用户逻辑</span>
@@ -625,18 +636,19 @@ router<span class="token punctuation">.</span><span class="token function">post<
 <span class="token comment">// 导入路由对象</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>定义了路由之后还需要在 <code>app.js</code> 中注册路由，添加如下代码：</p>
+<li>
+<p>定义了路由之后还需要在 <code>app.js</code> 中注册路由，添加如下代码：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 导入定义的路由</span>
 <span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./src/routers/index'</span><span class="token punctuation">)</span>
 
 <span class="token comment">// 注册路由</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/user'</span><span class="token punctuation">,</span> router<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在 <code>app.js</code> 中，增加上面两行代码即可完成路由注册</p>
 </li>
 </ol>
-<h3 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h3><p>接下来进入测试环节，借助 postman 工具进行测试</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-wen-jian-shang-chuan/67de24fa073b3e001ef3b10e55a0d1ef2f359fe4.png" alt="image-20221231144808803"></p>
+<h3 id="上传图片">上传图片</h3>
+<p>接下来进入测试环节，借助 postman 工具进行测试</p>
+<p><img src="/medias/images/loading.gif" data-original="67de24fa073b3e001ef3b10e55a0d1ef2f359fe4.png" alt="image-20221231144808803"></p>
 <p>可以看到，成功的拿到了响应的数据，里面也包含了图片的链接地址</p>
 <blockquote>
 <p>注意：</p>
@@ -645,21 +657,23 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
 <li>文件的字段必须与后端保持一致</li>
 </ul>
 </blockquote>
-<h3 id="图片名称优化"><a href="#图片名称优化" class="headerlink" title="图片名称优化"></a>图片名称优化</h3><p>由于这是一个用户上传头像图片的功能，当用户第二次上传头像时，需要将原先的图片删除掉，否则旧的图片会一直保存在服务器中。</p>
+<h3 id="图片名称优化">图片名称优化</h3>
+<p>由于这是一个用户上传头像图片的功能，当用户第二次上传头像时，需要将原先的图片删除掉，否则旧的图片会一直保存在服务器中。</p>
 <p>一开始的想法是使用用户id作为图片名称，这样每一次上传图片，都会把原来的图片覆盖掉。但是这样会有两个问题</p>
 <ul>
 <li>不同格式的图片会残留（jpg、png、gif），不会被覆盖掉</li>
 <li>如果可以覆盖，但是图片链接地址不会有变化，存入数据库时也是跟上一次的图片地址是相同的，这样会导致前端页面不会根据静态资源中头像图片变化而变化</li>
 </ul>
 <p>所以这里采用的做法是先对图片的名称进行拼接优化，改为如下的形式：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">时间戳.用户id.jpg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">时间戳.用户id.jpg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这样既能保证每一张图片都不重复，而且还附带了用户的id</p>
 <blockquote>
 <p>注：可以使用 md5 对时间戳进行加密，以确保唯一性。这里为了方便就直接使用时间戳。</p>
 </blockquote>
-<h3 id="图片名称优化实现"><a href="#图片名称优化实现" class="headerlink" title="图片名称优化实现"></a>图片名称优化实现</h3><p>这个过程其实就是删除旧图片，重命名新图片为规定的格式，可以编写一个函数来实现。</p>
-<h4 id="图片去重删除和重命名"><a href="#图片去重删除和重命名" class="headerlink" title="图片去重删除和重命名"></a>图片去重删除和重命名</h4><ul>
+<h3 id="图片名称优化实现">图片名称优化实现</h3>
+<p>这个过程其实就是删除旧图片，重命名新图片为规定的格式，可以编写一个函数来实现。</p>
+<h4 id="图片去重删除和重命名">图片去重删除和重命名</h4>
+<ul>
 <li>查找指定路径下的所有图片文件，进行遍历</li>
 <li>先查询该id命名的文件是否存在，存在则删除</li>
 <li>根据新存入的文件名(时间戳.jpg)，找到对应文件，然后重命名为: <code>时间戳.id.jpg</code></li>
@@ -693,14 +707,14 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>函数执行过程分析：</p>
 <ol>
 <li>该函数主要调用了 <code>fs</code> 内置模块中的 <code>readdir</code> 进行指定路径查询文件，再进行遍历</li>
 <li>将图片名称分割为数组，取出id与传入的id进行判断，符合条件则调用 <code>fs</code> 内置模块中的 <code>fs.unlink()</code> 方法删除文件</li>
 <li>根据新存入的文件名(时间戳.jpg)，找到对应文件，然后重命名为: <code>时间戳.id.jpg</code>。然后调用 <code>fs</code> 内置模块中的 <code>fs.rename()</code> 方法重命名文件</li>
 </ol>
-<h4 id="修改-uploadAvatar-接口"><a href="#修改-uploadAvatar-接口" class="headerlink" title="修改 uploadAvatar 接口"></a>修改 uploadAvatar 接口</h4><p>完成图片去重删除和重命名 <code>hanldeImgDelAndRename</code> 方法后，还需要在 <code>upload.js</code> 中原先的上传接口方法 <code>uploadAvatar</code> 中进行调用，修改为如下代码：</p>
+<h4 id="修改-uploadAvatar-接口">修改 uploadAvatar 接口</h4>
+<p>完成图片去重删除和重命名 <code>hanldeImgDelAndRename</code> 方法后，还需要在 <code>upload.js</code> 中原先的上传接口方法 <code>uploadAvatar</code> 中进行调用，修改为如下代码：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
 <span class="token comment">// 封装处理路径函数</span>
 <span class="token keyword">const</span> <span class="token function-variable function">handlePath</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">dir</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
@@ -726,19 +740,23 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：在上传文件时，必须携带 id 字段，这样 <code>req.body.id</code> 才能获取到传入的 id。</p>
 </blockquote>
-<h3 id="最终测试"><a href="#最终测试" class="headerlink" title="最终测试"></a>最终测试</h3><h4 id="第一次上传"><a href="#第一次上传" class="headerlink" title="第一次上传"></a>第一次上传</h4><p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-wen-jian-shang-chuan/091fb78bd9060b86acfb97692aac08896e7145cf.png" alt="image-20221231145520966"></p>
+<h3 id="最终测试">最终测试</h3>
+<h4 id="第一次上传">第一次上传</h4>
+<p><img src="/medias/images/loading.gif" data-original="091fb78bd9060b86acfb97692aac08896e7145cf.png" alt="image-20221231145520966"></p>
 <p>可以看到，图片上传成功，并且图片的名称也是按照我们的规定进行拼接，后端服务器也成功保存了上传的图片。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-wen-jian-shang-chuan/c9b36c3e07689163cdf719f27613600efc655764.png" alt="image-20221231145533537"></p>
-<h4 id="第二次上传"><a href="#第二次上传" class="headerlink" title="第二次上传"></a>第二次上传</h4><p><img src="/medias/images/loading.gif" data-original="/Node-js%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/f8cc5e1e10251493e090ee2030861d3d279c7bed-169035338616813.png" alt="image-20221231145555139"></p>
+<p><img src="/medias/images/loading.gif" data-original="c9b36c3e07689163cdf719f27613600efc655764.png" alt="image-20221231145533537"></p>
+<h4 id="第二次上传">第二次上传</h4>
+<p><img src="/medias/images/loading.gif" data-original="Node-js%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/f8cc5e1e10251493e090ee2030861d3d279c7bed-169035338616813.png" alt="image-20221231145555139"></p>
 <p>第二次上传，成功的将相同 id 的旧图片进行了删除，并且重命名了图片名称。</p>
-<h4 id="第三次上传"><a href="#第三次上传" class="headerlink" title="第三次上传"></a>第三次上传</h4><p><img src="/medias/images/loading.gif" data-original="/2023/07/26/node-js-zhong-de-wen-jian-shang-chuan/7fcff0c72d96af7a77e65901326d43e211c58635.png" alt="image-20221231145616872"></p>
+<h4 id="第三次上传">第三次上传</h4>
+<p><img src="/medias/images/loading.gif" data-original="7fcff0c72d96af7a77e65901326d43e211c58635.png" alt="image-20221231145616872"></p>
 <p>可以看到，不同 id 之间上传的图片是互不干扰的，只有当 id 匹配时才会进行替换和重命名。</p>
 <p>最后只需要在控制器当中，把获取到的图片链接地址保存到数据库即可，这里可以根据用户 id 进行保存。</p>
-<h3 id="Ajax上传"><a href="#Ajax上传" class="headerlink" title="Ajax上传"></a>Ajax上传</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"ajax"</span><span class="token operator">></span>
+<h3 id="Ajax上传">Ajax上传</h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"ajax"</span><span class="token operator">></span>
   <span class="token operator">&lt;</span>p<span class="token operator">></span>ajax上传<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
   <span class="token operator">&lt;</span>form<span class="token operator">></span>
     <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> name<span class="token operator">=</span><span class="token string">"username"</span> <span class="token operator">/</span><span class="token operator">></span>
@@ -780,7 +798,6 @@ app<span class="token punctuation">.</span><span class="token function">use</spa
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

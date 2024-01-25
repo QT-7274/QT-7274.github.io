@@ -496,11 +496,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="卷积层量化"><a href="#卷积层量化" class="headerlink" title="卷积层量化"></a>卷积层量化</h2><p>卷积网络最核心的要素是卷积，前文虽然有提及卷积运算的量化，但省略了很多细节，本文继续深入卷积层的量化。</p>
+                <h2 id="卷积层量化">卷积层量化</h2>
+<p>卷积网络最核心的要素是卷积，前文虽然有提及卷积运算的量化，但省略了很多细节，本文继续深入卷积层的量化。</p>
 <p>这里我们继续沿用之前的公式，用 $S$、$Z$ 表示 scale 和 zero point，$r$ 表示浮点实数，$q$ 表示定点整数。</p>
-<p>假设卷积的权重 weight 为 $w$，bias 为 $b$，输入为 $x$，输出的激活值为 $a$。由于卷积本质上就是矩阵运算，因此可以表示成:<br>$$<br>a&#x3D;\sum_{i}^N w_i x_i+b \tag{1}<br>$$<br>由此得到量化的公式：<br>$$<br>\begin{align}<br>S_a (q_a-Z_a)&#x3D;\sum_{i}^N S_w(q_w-Z_w)S_x(q_x-Z_x)+S_b(q_b-Z_b) \tag{2} \newline<br>q_a&#x3D;\frac{S_w S_x}{S_a}\sum_{i}^N (q_w-Z_w)(q_x-Z_x)+\frac{S_b}{S_a}(q_b-Z_b)+Z_a \tag{3}<br>\end{align}<br>$$<br>这里面非整数的部分就只有 $\frac{S_w S_x}{S_a}$、$\frac{S_b}{S_a}$，因此接下来就是把这部分也变成定点运算。</p>
+<p>假设卷积的权重 weight 为 $w$，bias 为 $b$，输入为 $x$，输出的激活值为 $a$。由于卷积本质上就是矩阵运算，因此可以表示成:<br>
+$$<br>
+a=\sum_{i}^N w_i x_i+b \tag{1}<br>
+$$<br>
+由此得到量化的公式：<br>
+$$<br>
+\begin{align}<br>
+S_a (q_a-Z_a)=\sum_{i}^N S_w(q_w-Z_w)S_x(q_x-Z_x)+S_b(q_b-Z_b) \tag{2} \newline<br>
+q_a=\frac{S_w S_x}{S_a}\sum_{i}^N (q_w-Z_w)(q_x-Z_x)+\frac{S_b}{S_a}(q_b-Z_b)+Z_a \tag{3}<br>
+\end{align}<br>
+$$<br>
+这里面非整数的部分就只有 $\frac{S_w S_x}{S_a}$、$\frac{S_b}{S_a}$，因此接下来就是把这部分也变成定点运算。</p>
 <p>对于 bias，由于 $\sum_{i}^N (q_w-Z_w)(q_x-Z_x)$ 的结果通常会用 int32 的整数存储，因此 bias 通常也量化到 int32。这里我们可以直接用 $S_w S_x$ 来代替 $S_b$，由于 $S_w$、$S_x$ 都是对应 8 个 bit 的缩放比例，因此 $S_w S_x$ 最多就放缩到 16 个 bit，用 32bit 来存放 bias 绰绰有余，而 $Z_b$ 则直接记为 0。</p>
-<p>因此，公式 (3) 再次调整为:<br>$$<br>\begin{align} q_a&amp;&#x3D;\frac{S_w S_x}{S_a}(\sum_{i}^N(q_w-Z_w)(q_x-Z_x)+q_b)+Z_a \notag \newline &amp;&#x3D;M(\sum_{i}^N q_wq_x-\sum_i^N q_wZ_x-\sum_i^N q_xZ_w+\sum_i^NZ_wZ_x+q_b)+Z_a \tag{4} \end{align}<br>$$<br>其中，$M&#x3D;\frac{S_w S_x}{S_a}$。</p>
+<p>因此，公式 (3) 再次调整为:<br>
+$$<br>
+\begin{align} q_a&amp;=\frac{S_w S_x}{S_a}(\sum_{i}^N(q_w-Z_w)(q_x-Z_x)+q_b)+Z_a \notag \newline &amp;=M(\sum_{i}^N q_wq_x-\sum_i^N q_wZ_x-\sum_i^N q_xZ_w+\sum_i^NZ_wZ_x+q_b)+Z_a \tag{4} \end{align}<br>
+$$<br>
+其中，$M=\frac{S_w S_x}{S_a}$。</p>
 <p>根据上一篇文章的介绍，$M$ 可以通过一个定点小数加上 bit shift 来实现，因此公式 $(4)$ 完全可以通过定点运算进行计算。由于 $Z_w$、$q_w$、$Z_x$、$q_b$ 都是可以事先计算的，因此 $\sum_i^N q_wZ_x$、$\sum_i^NZ_wZ_x+q_b$ 也可以事先计算好，实际 inference 的时候，只需要计算 $\sum_{i}^N q_wq_x$ 和 $\sum_i^N q_xZ_w$ 即可。</p>
 <blockquote>
 <ul>
@@ -509,16 +525,24 @@
 </ul>
 </blockquote>
 <p>首先我们要明确一个概念，$S$ 和 $Z$ 只是充当 $r$ 和 $q$ 之间转换的桥梁而已，只要保证 $r$ 经过 $S$、$Z$ 变换后得到 $q$，而这个 $q$ 经过 $S$ 和 $Z$ 可以反变换到同样的 $r$ 即可。</p>
-<p>举个例子，假设 $r \in [-1, 1]$，$q \in [0, 255$]，那么 $S&#x3D;\frac{2}{255}$、$Z&#x3D;128$，在这种情况下，一个 [-1, 1] 区间的实数，完全可以通过 $S$ 和 $Z$ 换算到 [0, 255] 区间的整数，反过来也一样。</p>
-<p>但是，如果对 $q$ 的范围做下限制，限制到 [0, 100]，这个时候 $S&#x3D;\frac{2}{100}$、$Z&#x3D;50$。次时，$r$ 和 $q$ 依然可以相互转换，我们同样可以根据这个 $q$ 去做量化运算，只要保证 $S&#x3D;\frac{2}{100}$、$Z&#x3D;50$，最后还是能换算回原来的 $r$。但为什么我们不这么做呢？很显然，这种做法对精度损失极大，因为我们把 $r$ 的所有信息都压缩到更小的 [0, 100] 区间了，比原来的 [0, 255] 少了一半的信息带宽。</p>
+<p>举个例子，假设 $r \in [-1, 1]$，$q \in [0, 255$]，那么 $S=\frac{2}{255}$、$Z=128$，在这种情况下，一个 [-1, 1] 区间的实数，完全可以通过 $S$ 和 $Z$ 换算到 [0, 255] 区间的整数，反过来也一样。</p>
+<p>但是，如果对 $q$ 的范围做下限制，限制到 [0, 100]，这个时候 $S=\frac{2}{100}$、$Z=50$。次时，$r$ 和 $q$ 依然可以相互转换，我们同样可以根据这个 $q$ 去做量化运算，只要保证 $S=\frac{2}{100}$、$Z=50$，最后还是能换算回原来的 $r$。但为什么我们不这么做呢？很显然，这种做法对精度损失极大，因为我们把 $r$ 的所有信息都压缩到更小的 [0, 100] 区间了，比原来的 [0, 255] 少了一半的信息带宽。</p>
 <p>好了，现在回到 bias，其实也是类似的道理。$S_{b}$ 和 $Z_{b}$ 的数值怎么取，其实无所谓，只要保证 $r$ 和 $q$ 之间相互转换就可以。所以我们就用 $S_xS_w$ 来代替 $S_b$，然后把 $Z_b$ 置 0，此时，对于量化后的 $q_{bias}$，我们是可以重新换算回 $r_{bias}$ 的，因此这个 $S_b$ 和 $Z_b$ 的取值是完全可行的。</p>
-<p>这么做的代价是什么呢？我们假设所有的 $r \in [-1, 1]$，那么 $S_xS_w&#x3D;\frac{4}{2^{16}}$，而由于 bias 是用 32bit 来存储的，本来 $S_b&#x3D;\frac{2}{2^{32}}$，因此这个放缩系数直接砍掉了一半的信息量，相当于把 bias 量化到了 16bit 了，因此会带来一定的精度损失。不过，大部分情况下这点损失是可以忽略的，对效果影响不大，而代码实现上却可以更加高效，因此，这就成了一个约定俗成的操作了。</p>
-<h2 id="卷积网络量化流程"><a href="#卷积网络量化流程" class="headerlink" title="卷积网络量化流程"></a>卷积网络量化流程</h2><p>了解完整个卷积层的量化，现在我们再来完整过一遍卷积网络的量化流程。</p>
+<p>这么做的代价是什么呢？我们假设所有的 $r \in [-1, 1]$，那么 $S_xS_w=\frac{4}{2^{16}}$，而由于 bias 是用 32bit 来存储的，本来 $S_b=\frac{2}{2^{32}}$，因此这个放缩系数直接砍掉了一半的信息量，相当于把 bias 量化到了 16bit 了，因此会带来一定的精度损失。不过，大部分情况下这点损失是可以忽略的，对效果影响不大，而代码实现上却可以更加高效，因此，这就成了一个约定俗成的操作了。</p>
+<h2 id="卷积网络量化流程">卷积网络量化流程</h2>
+<p>了解完整个卷积层的量化，现在我们再来完整过一遍卷积网络的量化流程。</p>
 <p>我们继续沿用前文的小网络：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/01/shen-jing-wang-luo-liang-hua-chu-tan-hou-xun-lian-liang-hua/v2-ba5e66c0fadb7e34ee788d3018ac9f20_720w.webp" alt="img"></p>
+<p><img src="/medias/images/loading.gif" data-original="v2-ba5e66c0fadb7e34ee788d3018ac9f20_720w.webp" alt="img"></p>
 <p>其中，$x$、$y$ 表示输入和输出，$a_1$、$a_2$ 是网络中间的 feature map，$q_x$ 表示 $x$ 量化后的定点数，$q_{a1}$ 等同理。</p>
 <p>在后训练量化中，我们需要一些样本来统计 $x$、$a_1$、$a_2$ 以及 $y$ 的数值范围「即 $min$, $max$」，再根据量化的位数以及量化方法来计算 scale 和 zero point。</p>
-<p>本文中，我们先采用最简单的量化方式，即统计 $min$、$max$ 后，按照线性量化公式:<br>$$<br>\begin{align}<br>S &#x3D; \frac{r_{max}-r_{min}}{q_{max}-q_{min}} \tag{5} \newline<br>Z &#x3D; round(q_{max} - \frac{r_{max}}{S}) \tag{6}<br>\end{align}<br>$$<br>来计算 scale 和 zero point。</p>
+<p>本文中，我们先采用最简单的量化方式，即统计 $min$、$max$ 后，按照线性量化公式:<br>
+$$<br>
+\begin{align}<br>
+S = \frac{r_{max}-r_{min}}{q_{max}-q_{min}} \tag{5} \newline<br>
+Z = round(q_{max} - \frac{r_{max}}{S}) \tag{6}<br>
+\end{align}<br>
+$$<br>
+来计算 scale 和 zero point。</p>
 <blockquote>
 <p>注意：</p>
 <ul>
@@ -528,7 +552,9 @@
 </blockquote>
 <p>因此，在最简单的后训练量化算法中，我们会先按照正常的 forward 流程跑一些数据，在这个过程中，统计输入输出以及中间 feature map 的 $min$、$max$。等统计得差不多了，我们就可以根据 $min$、$max$ 来计算 scale 和 zero point，然后根据公式 $(4)$ 对一些数据项提前计算。</p>
 <p>之后，在 inference 的时候，我们会先把输入 $x$ 量化成定点整数 $q_x$，然后按照公式 $(4)$ 计算卷积的输出 $q_{a1}$，这个结果依然是整型的，然后继续计算 relu 的输出 $q_{a2}$。对于 fc 层来说，它本质上也是矩阵运算，因此也可以用公式 $(4)$ 计算，然后得到 $q_y$。最后，根据 fc 层已经计算出来的 scale 和 zero point，推算回浮点实数 $y$。除了输入输出的量化和反量化操作，其他流程完全可以用定点运算来完成。</p>
-<h2 id="Pytorch实现"><a href="#Pytorch实现" class="headerlink" title="Pytorch实现"></a>Pytorch实现</h2><h4 id="基础量化函数"><a href="#基础量化函数" class="headerlink" title="基础量化函数"></a>基础量化函数</h4><p>首先，我们需要把量化的基本公式，也就是公式 $(5)$$(6)$ 先实现：</p>
+<h2 id="Pytorch实现">Pytorch实现</h2>
+<h4 id="基础量化函数">基础量化函数</h4>
+<p>首先，我们需要把量化的基本公式，也就是公式 $(5)$$(6)$ 先实现：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 计算量化比例和零点的函数</span>
 <span class="token keyword">def</span> <span class="token function">calcScaleZeroPoint</span><span class="token punctuation">(</span>min_val<span class="token punctuation">,</span> max_val<span class="token punctuation">,</span> num_bits<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># 最小值 最大值 比特数</span>
     qmin <span class="token operator">=</span> <span class="token number">0.</span> <span class="token comment"># 初始化量化的最小值为0</span>
@@ -560,7 +586,6 @@
     q_x<span class="token punctuation">.</span>clamp_<span class="token punctuation">(</span>qmin<span class="token punctuation">,</span> qmax<span class="token punctuation">)</span><span class="token punctuation">.</span>round_<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># q=round(r/S+Z) clamp_()函数是一个张量操作函数，用于将张量的值限制在指定的范围内</span>
     
     <span class="token keyword">return</span> q_x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>前面提到，在后训练量化过程中，需要先统计样本以及中间层的 $min$、$max$，同时也频繁涉及到一些量化、反量化操作，因此我们可以把这些功能都封装成一个 <code>QParam</code> 类：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">QParam</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
@@ -613,8 +638,8 @@
         info <span class="token operator">+=</span> <span class="token string">'min: %.6f '</span> <span class="token operator">%</span> self<span class="token punctuation">.</span><span class="token builtin">min</span>
         info <span class="token operator">+=</span> <span class="token string">'max: %.6f'</span> <span class="token operator">%</span> self<span class="token punctuation">.</span><span class="token builtin">max</span>
         <span class="token keyword">return</span> info<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="量化网络模块"><a href="#量化网络模块" class="headerlink" title="量化网络模块"></a>量化网络模块</h4><p>下面要来实现一些最基本网络模块的量化形式，包括 conv、relu、maxpooling 以及 fc 层。</p>
+<h4 id="量化网络模块">量化网络模块</h4>
+<p>下面要来实现一些最基本网络模块的量化形式，包括 conv、relu、maxpooling 以及 fc 层。</p>
 <p>首先我们定义一个量化基类，这样可以减少一些重复代码，也能让代码结构更加清晰：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">QModule</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
@@ -630,7 +655,6 @@
 
     <span class="token keyword">def</span> <span class="token function">quantize_inference</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token string">'quantize_inference should be implemented.'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>首先是 <code>__init__</code> 函数，除了指定量化的位数外，还需指定是否提供量化输入 (qi) 及输出参数 (qo)。在前面也提到，不是每一个网络模块都需要统计输入的 min、max，大部分中间层都是用上一层的 输出参数 来作为自己的 输入参数 的，另外有些中间层的激活函数也是直接用上一层的 qi 来作为自己的 qi 和 qo。</li>
 <li>其次是 <code>freeze</code> 函数，这个函数会在统计完 min、max 后发挥作用。正如上文所说的，公式 (4) 中有很多项是可以提前计算好的，freeze 就是把这些项提前固定下来，同时也将网络的权重由<strong>浮点实数</strong>转化为<strong>定点整数</strong>。</li>
@@ -698,23 +722,31 @@
         x <span class="token operator">=</span> x <span class="token operator">+</span> self<span class="token punctuation">.</span>qo<span class="token punctuation">.</span>zero_point        
         x<span class="token punctuation">.</span>clamp_<span class="token punctuation">(</span><span class="token number">0.</span><span class="token punctuation">,</span> <span class="token number">2.</span><span class="token operator">**</span>self<span class="token punctuation">.</span>num_bits<span class="token operator">-</span><span class="token number">1.</span><span class="token punctuation">)</span><span class="token punctuation">.</span>round_<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 限制x的取值，并进行取整操作</span>
         <span class="token keyword">return</span> x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
-<li><p>首先是 <code>__init__</code> 函数，可以看到我传入了一个 <code>conv_module</code> 模块，这个模块对应全精度的卷积层，另外的 <code>qw</code> 参数则是用来统计 weight 的 $min$、$max$ 以及对 weight 进行量化用的。</p>
+<li>
+<p>首先是 <code>__init__</code> 函数，可以看到我传入了一个 <code>conv_module</code> 模块，这个模块对应全精度的卷积层，另外的 <code>qw</code> 参数则是用来统计 weight 的 $min$、$max$ 以及对 weight 进行量化用的。</p>
 </li>
-<li><p>其次是 <code>freeze</code> 函数，这个函数主要就是计算公式 $(4)$ 中的 $M$、$q_w$ 以及 $q_b$。由于完全实现公式 $(4)$ 的加速效果需要更底层代码的支持，因此在 pytorch 中我用了更简单的实现方式，即优化前的公式 $(4)$:<br>$$<br>q_a&#x3D;M(\sum_{i}^N(q_w-Z_w)(q_x-Z_x)+q_b)+Z_a \tag{7}<br>$$</p>
+<li>
+<p>其次是 <code>freeze</code> 函数，这个函数主要就是计算公式 $(4)$ 中的 $M$、$q_w$ 以及 $q_b$。由于完全实现公式 $(4)$ 的加速效果需要更底层代码的支持，因此在 pytorch 中我用了更简单的实现方式，即优化前的公式 $(4)$:<br>
+$$<br>
+q_a=M(\sum_{i}^N(q_w-Z_w)(q_x-Z_x)+q_b)+Z_a \tag{7}<br>
+$$</p>
 </li>
-<li><p>这里的 $M$ 本来也需要通过移位来实现定点化加速，但 pytorch 中 bit shift 操作不好实现，因此我们还是用原始的乘法操作来代替。</p>
+<li>
+<p>这里的 $M$ 本来也需要通过移位来实现定点化加速，但 pytorch 中 bit shift 操作不好实现，因此我们还是用原始的乘法操作来代替。</p>
 <blockquote>
 <p>注意： freeze 函数可能会传入 qi 或者 qo，这也是之前提到的，有些中间的模块不会有自己的 qi，而是复用之前层的 qo 作为自己的 qi。</p>
 </blockquote>
 </li>
-<li><p>接着是 <code>forward</code> 函数，这个函数和正常的 forward 一样，也是在 float 上进行的，只不过需要统计输入输出以及 weight 的 min、max 而已。有读者可能会疑惑为什么需要对 weight 量化到 int8 然后又反量化回 float，这里其实就是所谓的伪量化节点，因为我们在实际量化 inference 的时候会把 weight 量化到 int8，这个过程本身是有精度损失的 (来自四舍五入的 round 带来的截断误差)，所以在统计 min、max 的时候，需要把这个过程带来的误差也模拟进去。</p>
+<li>
+<p>接着是 <code>forward</code> 函数，这个函数和正常的 forward 一样，也是在 float 上进行的，只不过需要统计输入输出以及 weight 的 min、max 而已。有读者可能会疑惑为什么需要对 weight 量化到 int8 然后又反量化回 float，这里其实就是所谓的伪量化节点，因为我们在实际量化 inference 的时候会把 weight 量化到 int8，这个过程本身是有精度损失的 (来自四舍五入的 round 带来的截断误差)，所以在统计 min、max 的时候，需要把这个过程带来的误差也模拟进去。</p>
 </li>
-<li><p>最后是 <code>quantize_inference</code> 函数，这个函数在实际 inference 的时候会被调用，对应的就是上面的公式 (7)。注意，这个函数里面的卷积操作是在 int 上进行的，这是量化推理加速的关键「当然，由于 pytorch 的限制，我们仍然是在 float 上计算，只不过数值都是整数。这也可以看出量化推理是跟底层实现紧密结合的技术」。</p>
+<li>
+<p>最后是 <code>quantize_inference</code> 函数，这个函数在实际 inference 的时候会被调用，对应的就是上面的公式 (7)。注意，这个函数里面的卷积操作是在 int 上进行的，这是量化推理加速的关键「当然，由于 pytorch 的限制，我们仍然是在 float 上计算，只不过数值都是整数。这也可以看出量化推理是跟底层实现紧密结合的技术」。</p>
 </li>
 </ul>
-<h4 id="完整的量化网络"><a href="#完整的量化网络" class="headerlink" title="完整的量化网络"></a>完整的量化网络</h4><p>我们定义一个简单的卷积网络：</p>
+<h4 id="完整的量化网络">完整的量化网络</h4>
+<p>我们定义一个简单的卷积网络：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Net</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num_channels<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -731,7 +763,6 @@
         x <span class="token operator">=</span> x<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token operator">*</span><span class="token number">5</span><span class="token operator">*</span><span class="token number">40</span><span class="token punctuation">)</span>
         x <span class="token operator">=</span> self<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
         <span class="token keyword">return</span> x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>接下来就是把这个网络的每个模块进行量化，我们单独定义一个 <code>quantize</code> 函数来逐个量化每个模块：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Net</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
@@ -743,7 +774,6 @@
         self<span class="token punctuation">.</span>qrelu2 <span class="token operator">=</span> QReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>qmaxpool2d_2 <span class="token operator">=</span> QMaxPooling2d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>qfc <span class="token operator">=</span> QLinear<span class="token punctuation">(</span>self<span class="token punctuation">.</span>fc<span class="token punctuation">,</span> qi<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> qo<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> num_bits<span class="token operator">=</span>num_bits<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：这里只有第一层的 conv 需要 qi，后面的模块基本是复用前面层的 qo 作为当前层的 qi。</p>
 </blockquote>
@@ -760,7 +790,6 @@
         x <span class="token operator">=</span> x<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token operator">*</span><span class="token number">5</span><span class="token operator">*</span><span class="token number">40</span><span class="token punctuation">)</span>
         x <span class="token operator">=</span> self<span class="token punctuation">.</span>qfc<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
         <span class="token keyword">return</span> x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>下面的 <code>freeze</code> 函数会在统计完 min、max 后对一些变量进行固化：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Net</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
@@ -772,7 +801,6 @@
         self<span class="token punctuation">.</span>qrelu2<span class="token punctuation">.</span>freeze<span class="token punctuation">(</span>self<span class="token punctuation">.</span>qconv2<span class="token punctuation">.</span>qo<span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>qmaxpool2d_2<span class="token punctuation">.</span>freeze<span class="token punctuation">(</span>self<span class="token punctuation">.</span>qconv2<span class="token punctuation">.</span>qo<span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>qfc<span class="token punctuation">.</span>freeze<span class="token punctuation">(</span>qi<span class="token operator">=</span>self<span class="token punctuation">.</span>qconv2<span class="token punctuation">.</span>qo<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>由于我们在量化网络的时候，有些模块是没有定义 qi 的，因此这里需要传入前面层的 qo 作为当前层的 qi。</p>
 <p>最后是 <code>quantize_inference</code> 函数，就是实际 inference 的时候用到的函数：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Net</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -789,9 +817,9 @@
         qx <span class="token operator">=</span> self<span class="token punctuation">.</span>qfc<span class="token punctuation">.</span>quantize_inference<span class="token punctuation">(</span>qx<span class="token punctuation">)</span>
         out <span class="token operator">=</span> self<span class="token punctuation">.</span>qfc<span class="token punctuation">.</span>qo<span class="token punctuation">.</span>dequantize_tensor<span class="token punctuation">(</span>qx<span class="token punctuation">)</span>
         <span class="token keyword">return</span> out<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这里我们会将输入 <code>x</code> 先量化到 int8，然后就是全量化的定点运算，得到最后一层的输出后，再反量化回 float 即可。</p>
-<h4 id="训练全精度网络"><a href="#训练全精度网络" class="headerlink" title="训练全精度网络"></a>训练全精度网络</h4><p>我们用 mnist 数据集来训练上面的网络：</p>
+<h4 id="训练全精度网络">训练全精度网络</h4>
+<p>我们用 mnist 数据集来训练上面的网络：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">device <span class="token operator">=</span> torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">'cuda'</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">'cpu'</span><span class="token punctuation">)</span>
 
 train_loader <span class="token operator">=</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data<span class="token punctuation">.</span>DataLoader<span class="token punctuation">(</span>
@@ -812,17 +840,15 @@ test_loader <span class="token operator">=</span> torch<span class="token punctu
 <span class="token punctuation">)</span>
 
 model <span class="token operator">=</span> Net<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>具体训练细节比较简单，这里不再赘述。</p>
 <p>训练完成后，我测试得到的准确率在 98% 左右。</p>
-<h4 id="后训练量化"><a href="#后训练量化" class="headerlink" title="后训练量化"></a>后训练量化</h4><p>这一部分代码在 post_training_quantize.py 中。</p>
+<h4 id="后训练量化">后训练量化</h4>
+<p>这一部分代码在 post_training_quantize.py 中。</p>
 <p>我们先加载全精度模型的参数：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">model <span class="token operator">=</span> Net<span class="token punctuation">(</span><span class="token punctuation">)</span>
 model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">'ckpt/mnist_cnn.pt'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>然后对网络进行量化：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">model<span class="token punctuation">.</span>quantize<span class="token punctuation">(</span>num_bits<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>接下来就是用一些训练数据来估计 min、max：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">direct_quantize</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">for</span> i<span class="token punctuation">,</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> target<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -830,7 +856,6 @@ model<span class="token punctuation">.</span>load_state_dict<span class="token p
         <span class="token keyword">if</span> i <span class="token operator">%</span> <span class="token number">200</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
             <span class="token keyword">break</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'direct quantization finish'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>简单起见，我们就跑 200 个迭代。</p>
 <p>然后，我们把量化参数都固定下来，并进行全量化推理：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">model<span class="token punctuation">.</span>freeze<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -844,16 +869,17 @@ model<span class="token punctuation">.</span>load_state_dict<span class="token p
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTest set: Quant Model Accuracy: &#123;:.0f&#125;%\n'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span><span class="token number">100.</span> <span class="token operator">*</span> correct <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>test_loader<span class="token punctuation">.</span>dataset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 quantize_inference<span class="token punctuation">(</span>model<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>由于很多细节都封装在量化网络的模块中了，因此外部调用的代码跟全精度模型其实很类似。</p>
 <p>我自己测试了 bit 数为 1～8 的准确率，得到下面这张折线图：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/11/01/shen-jing-wang-luo-liang-hua-chu-tan-hou-xun-lian-liang-hua/v2-56dbc18828ed95898c96ab0fb7725fc1_720w.webp" alt="img"></p>
-<p>发现，当 bit &gt;&#x3D; 3 的时候，精度几乎不会掉，bit &#x3D; 2 的时候精度下降到 69%，bit &#x3D; 1 的时候则下降到 10%。</p>
-<p>这一方面是 mnist 分类任务比较简单，但也说明神经网络中的冗余量其实非常大，所以量化在分类网络中普遍有不错的效果「不过 bit &#x3D;3 或 4 的时候效果依然这么好，让我依稀觉得代码里面应该有 bug，后续还要反复检查」。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>这篇文章主要补充了卷积层量化的细节，包括 bias 的量化，以及实际 inference 时一些优化的操作。并梳理了完整的卷积网络量化的流程。然后重点用 pytorch 从零搭建一个量化模型来帮助大家理解其中的细节，以及后训练量化算法的过程。代码是参考了这篇**<a href="https://link.zhihu.com/?target=https://medium.com/@karanbirchahal/how-to-quantise-an-mnist-network-to-8-bits-in-pytorch-no-retraining-required-from-scratch-39f634ac8459">文章</a>**，加上自己拍脑袋构思的，存在很多不足之处，而且应该有不少 bug 存在，也欢迎大家指正。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><ul>
-<li><strong><a href="https://link.zhihu.com/?target=https://medium.com/@karanbirchahal/how-to-quantise-an-mnist-network-to-8-bits-in-pytorch-no-retraining-required-from-scratch-39f634ac8459">How to Quantize an MNIST network to 8 bits in Pytorch from scratch (No retraining required)</a></strong></li>
-<li><strong><a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1712.05877">Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference</a></strong></li>
+<p><img src="/medias/images/loading.gif" data-original="v2-56dbc18828ed95898c96ab0fb7725fc1_720w.webp" alt="img"></p>
+<p>发现，当 bit &gt;= 3 的时候，精度几乎不会掉，bit = 2 的时候精度下降到 69%，bit = 1 的时候则下降到 10%。</p>
+<p>这一方面是 mnist 分类任务比较简单，但也说明神经网络中的冗余量其实非常大，所以量化在分类网络中普遍有不错的效果「不过 bit =3 或 4 的时候效果依然这么好，让我依稀觉得代码里面应该有 bug，后续还要反复检查」。</p>
+<h2 id="总结"><strong>总结</strong></h2>
+<p>这篇文章主要补充了卷积层量化的细节，包括 bias 的量化，以及实际 inference 时一些优化的操作。并梳理了完整的卷积网络量化的流程。然后重点用 pytorch 从零搭建一个量化模型来帮助大家理解其中的细节，以及后训练量化算法的过程。代码是参考了这篇**<a href="https://link.zhihu.com/?target=https%3A//medium.com/%40karanbirchahal/how-to-quantise-an-mnist-network-to-8-bits-in-pytorch-no-retraining-required-from-scratch-39f634ac8459">文章</a>**，加上自己拍脑袋构思的，存在很多不足之处，而且应该有不少 bug 存在，也欢迎大家指正。</p>
+<h2 id="参考"><strong>参考</strong></h2>
+<ul>
+<li><strong><a href="https://link.zhihu.com/?target=https%3A//medium.com/%40karanbirchahal/how-to-quantise-an-mnist-network-to-8-bits-in-pytorch-no-retraining-required-from-scratch-39f634ac8459">How to Quantize an MNIST network to 8 bits in Pytorch from scratch (No retraining required)</a></strong></li>
+<li><strong><a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1712.05877">Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference</a></strong></li>
 </ul>
 
                 

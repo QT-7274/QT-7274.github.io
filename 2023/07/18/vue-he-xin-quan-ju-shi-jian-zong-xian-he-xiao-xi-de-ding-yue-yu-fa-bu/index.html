@@ -6,15 +6,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Vue核心 全局事件总线和消息的订阅与发布, QT-7274">
-    <meta name="description" content="全局事件总线一种可以在任意组件间通信的方式，本质上就是一个对象，它必须满足以下条件
+    <meta name="description" content="全局事件总线
+一种可以在任意组件间通信的方式，本质上就是一个对象，它必须满足以下条件
 
 所有组件对象都必须能看见它
 这个对象必须能够使用$on $emit $off方法去绑定、触发和解绑事件
 
 使用步骤
 
+
 定义全局事件总线
-new Vue(&amp;">
+new Vue">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -478,7 +480,7 @@ new Vue(&amp;">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    363
+                    357
                 </div>
                 
 
@@ -508,14 +510,16 @@ new Vue(&amp;">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="全局事件总线"><a href="#全局事件总线" class="headerlink" title="全局事件总线"></a>全局事件总线</h2><p>一种可以在任意组件间通信的方式，本质上就是一个对象，它必须满足以下条件</p>
+                <h2 id="全局事件总线">全局事件总线</h2>
+<p>一种可以在任意组件间通信的方式，本质上就是一个对象，它必须满足以下条件</p>
 <ol>
 <li>所有组件对象都必须能看见它</li>
 <li>这个对象必须能够使用<code>$on</code> <code>$emit</code> <code>$off</code>方法去绑定、触发和解绑事件</li>
 </ol>
 <p>使用步骤</p>
 <ol>
-<li><p>定义全局事件总线</p>
+<li>
+<p>定义全局事件总线</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">new Vue(&#123;
 	...
 	beforeCreate()&#123;
@@ -523,9 +527,11 @@ new Vue(&amp;">
 	&#125;
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>使用事件总线</p>
+<li>
+<p>使用事件总线</p>
 <ul>
-<li><p>接收数据：A组件想接收数据，则在A组件中给<code>$bus</code>绑定自定义事件，事件的回调留在A组件自身</p>
+<li>
+<p>接收数据：A组件想接收数据，则在A组件中给<code>$bus</code>绑定自定义事件，事件的回调留在A组件自身</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span><span class="token punctuation">&#123;</span>
 	<span class="token function">methods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 		<span class="token function">demo</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span>
@@ -536,21 +542,27 @@ new Vue(&amp;">
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>提供数据：<code>this.$bus.$emit(&#39;xxx&#39;,data)</code></p>
+<li>
+<p>提供数据：<code>this.$bus.$emit('xxx',data)</code></p>
 </li>
 </ul>
 </li>
-<li><p>最好在<code>beforeDestroy</code>钩子中，用<code>$off()</code>去解绑当前组件所用到的事件</p>
+<li>
+<p>最好在<code>beforeDestroy</code>钩子中，用<code>$off()</code>去解绑当前组件所用到的事件</p>
 </li>
 </ol>
-<h2 id="消息的订阅与发布"><a href="#消息的订阅与发布" class="headerlink" title="消息的订阅与发布"></a>消息的订阅与发布</h2><p>消息订阅与发布（pubsub）消息订阅与发布是一种组件间通信的方式，适用于任意组件间通信</p>
+<h2 id="消息的订阅与发布">消息的订阅与发布</h2>
+<p>消息订阅与发布（pubsub）消息订阅与发布是一种组件间通信的方式，适用于任意组件间通信</p>
 <p>使用步骤</p>
 <ol>
-<li><p>安装pubsub：<code>npm i pubsub-js</code></p>
+<li>
+<p>安装pubsub：<code>npm i pubsub-js</code></p>
 </li>
-<li><p>引入：<code>import pubsub from &#39;pubsub-js&#39;</code></p>
+<li>
+<p>引入：<code>import pubsub from 'pubsub-js'</code></p>
 </li>
-<li><p>接收数据：A组件想接收数据，则在A组件中订阅消息，订阅的回调留在A组件自身</p>
+<li>
+<p>接收数据：A组件想接收数据，则在A组件中订阅消息，订阅的回调留在A组件自身</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
 	<span class="token literal-property property">methods</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
 		<span class="token function">demo</span><span class="token punctuation">(</span><span class="token parameter">msgName<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span>
@@ -561,9 +573,11 @@ new Vue(&amp;">
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>提供数据：<code>pubsub.publish(&#39;xxx&#39;,data)</code></p>
+<li>
+<p>提供数据：<code>pubsub.publish('xxx',data)</code></p>
 </li>
-<li><p>最好在<code>beforeDestroy</code>钩子中，使用<code>pubsub.unsubscribe(pid)</code>取消订阅</p>
+<li>
+<p>最好在<code>beforeDestroy</code>钩子中，使用<code>pubsub.unsubscribe(pid)</code>取消订阅</p>
 </li>
 </ol>
 

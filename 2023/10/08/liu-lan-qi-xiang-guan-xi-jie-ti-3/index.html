@@ -500,23 +500,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="说一下你对浏览器引擎的理解？"><a href="#说一下你对浏览器引擎的理解？" class="headerlink" title="说一下你对浏览器引擎的理解？"></a>说一下你对浏览器引擎的理解？</h2><ul>
-<li><p>理解</p>
+                <h2 id="说一下你对浏览器引擎的理解？">说一下你对浏览器引擎的理解？</h2>
+<ul>
+<li>
+<p>理解</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <p>浏览器引擎分为两部分，分别是“渲染引擎”和“JS引擎”。最开始的时候，渲染引擎和 JS 引擎并没有明确的区分，后来 JS 引擎越来越独立，浏览器引擎就倾向于仅指渲染引擎了。</p>
 <ul>
-<li><p>渲染引擎。</p>
+<li>
+<p>渲染引擎。</p>
 <p>负责取得页面的内容（HTML、XML、图片等）、整理信息（比如引入 CSS）以及计算页面的显示方式，最后输出到显示器或打印机。</p>
 </li>
-<li><p>JS 引擎。</p>
+<li>
+<p>JS 引擎。</p>
 <p>负责解析 JavaScript 代码来实现页面的动态效果。</p>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="浏览器是如何渲染页面的？"><a href="#浏览器是如何渲染页面的？" class="headerlink" title="浏览器是如何渲染页面的？"></a>浏览器是如何渲染页面的？</h2><p>当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。</p>
+<h2 id="浏览器是如何渲染页面的？">浏览器是如何渲染页面的？</h2>
+<p>当浏览器的网络线程收到 HTML 文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。</p>
 <p>在事件循环机制的作用下，渲染主线程取出消息队列中的渲染任务，开启渲染流程。</p>
 <hr>
 <p>整个渲染流程分为多个阶段，分别是： <strong>HTML 解析</strong>、<strong>样式计算</strong>、<strong>布局</strong>、<strong>分层</strong>、<strong>绘制</strong>、<strong>分块</strong>、<strong>光栅化</strong>、<strong>画</strong></p>
@@ -567,11 +571,12 @@
 <p>指引会标识出每个位图应该画到屏幕的哪个位置，以及会考虑到旋转、缩放等变形。</p>
 <p><strong>变形发生在合成线程，与渲染主线程无关，这就是<code>transform</code>效率高的本质原因。</strong></p>
 <p>合成线程会把 quad 提交给 GPU 进程，由 GPU 进程产生系统调用，提交给 GPU 硬件，完成最终的屏幕成像。</p>
-<h2 id="什么是-reflow？"><a href="#什么是-reflow？" class="headerlink" title="什么是 reflow？"></a>什么是 reflow？</h2><ul>
-<li><p>概念</p>
+<h2 id="什么是-reflow？">什么是 reflow？</h2>
+<ul>
+<li>
+<p>概念</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <p>reflow 的本质就是<strong>重新计算 layout 树</strong>。</p>
 <p>当进行了会影响布局树的操作后，需要重新计算布局树，会引发 layout。</p>
 <p>为了避免连续的多次操作导致布局树反复计算，浏览器会合并这些操作，当 JS 代码全部完成后再进行统一计算。所以，改动属性造成的 reflow 是异步完成的。</p>
@@ -579,50 +584,54 @@
 <p>浏览器在反复权衡下，最终决定获取属性立即 reflow。</p>
 </li>
 </ul>
-<h2 id="什么是-repaint？"><a href="#什么是-repaint？" class="headerlink" title="什么是 repaint？"></a>什么是 repaint？</h2><ul>
-<li><p>概念</p>
+<h2 id="什么是-repaint？">什么是 repaint？</h2>
+<ul>
+<li>
+<p>概念</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <p>repaint 的本质就是重新根据分层信息计算了绘制指令。</p>
 <p>当改动了<strong>可见样式</strong>后，就需要重新计算，会引发 repaint。</p>
 <p><strong>由于元素的布局信息也属于可见样式，所以 reflow 一定会引起 repaint。</strong></p>
 </li>
 </ul>
-<h2 id="为什么-transform-的效率高？"><a href="#为什么-transform-的效率高？" class="headerlink" title="为什么 transform 的效率高？"></a>为什么 transform 的效率高？</h2><ul>
-<li><p>概念</p>
+<h2 id="为什么-transform-的效率高？">为什么 transform 的效率高？</h2>
+<ul>
+<li>
+<p>概念</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <p>因为 transform 既不会影响布局也不会影响绘制指令，它影响的只是渲染流程的<strong>最后</strong>一个「draw」阶段</p>
 <p>由于 draw 阶段在合成线程中，所以 transform 的变化几乎不会影响渲染主线程。反之，渲染主线程无论如何忙碌，也不会影响 transform 的变化。</p>
 </li>
 </ul>
-<h2 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h2><ul>
-<li><p>进程</p>
+<h2 id="进程和线程的区别">进程和线程的区别</h2>
+<ul>
+<li>
+<p>进程</p>
 <details><summary><b>答案</b></summary>
 <p>
-
-<p>进程是一个<strong>正在执行的程序的实例</strong>。它拥有独立的内存空间、执行环境和系统资源，可以被视为一个独立的个体。每个进程都有自己的地址空间，包括代码、数据和堆栈等。进程之间是相互独立的，它们不能直接访问彼此的内存空间，通信必须通过特定的机制（如进程间通信）。 </p>
+<p>进程是一个<strong>正在执行的程序的实例</strong>。它拥有独立的内存空间、执行环境和系统资源，可以被视为一个独立的个体。每个进程都有自己的地址空间，包括代码、数据和堆栈等。进程之间是相互独立的，它们不能直接访问彼此的内存空间，通信必须通过特定的机制（如进程间通信）。</p>
 </li>
-<li><p>线程</p>
+<li>
+<p>线程</p>
 <details><summary><b>答案</b></summary>
 <p>
-
-<p>线程是进程内的执行单元。<strong>一个进程可以包含多个线程，它们共享同一个进程的地址空间和系统资源</strong>。线程之间可以直接访问彼此的内存空间，<strong>共享</strong>数据和资源。线程的创建、销毁和切换开销较小，因此多线程可以提高程序的并发性和响应性。 </p>
+<p>线程是进程内的执行单元。<strong>一个进程可以包含多个线程，它们共享同一个进程的地址空间和系统资源</strong>。线程之间可以直接访问彼此的内存空间，<strong>共享</strong>数据和资源。线程的创建、销毁和切换开销较小，因此多线程可以提高程序的并发性和响应性。</p>
 </li>
-<li><p>区别：  </p>
+<li>
+<p>区别：</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <ol>
-<li>资源开销：进程拥有独立的内存空间和系统资源，创建和销毁进程的开销较大；而线程共享同一个进程的资源，创建和销毁线程的开销较小。  </li>
+<li>资源开销：进程拥有独立的内存空间和系统资源，创建和销毁进程的开销较大；而线程共享同一个进程的资源，创建和销毁线程的开销较小。</li>
 <li>通信和同步：进程之间通信需要特定的机制，如管道、消息队列等；线程之间可以直接访问共享内存，通信更方便。线程之间共享数据时需要考虑同步问题，以避免竞态条件和数据不一致。</li>
 <li>执行能力：进程是独立的执行实体，可以利用多核处理器的并行性；线程是进程内的执行单元，利用多线程可以实现并发执行，但受限于单个进程的执行能力。</li>
 </ol>
 </li>
 </ul>
-<h2 id="渲染主线程是如何工作的？-同时回答了事件循环"><a href="#渲染主线程是如何工作的？-同时回答了事件循环" class="headerlink" title="渲染主线程是如何工作的？(同时回答了事件循环)"></a>渲染主线程是如何工作的？(同时回答了事件循环)</h2><p>渲染主线程是浏览器中最繁忙的线程，需要它处理的任务包括但不限于：</p>
+<h2 id="渲染主线程是如何工作的？-同时回答了事件循环">渲染主线程是如何工作的？(同时回答了事件循环)</h2>
+<p>渲染主线程是浏览器中最繁忙的线程，需要它处理的任务包括但不限于：</p>
 <ul>
 <li>解析 HTML</li>
 <li>解析 CSS</li>
@@ -633,19 +642,19 @@
 <li>执行全局 JS 代码</li>
 <li>执行事件处理函数</li>
 <li>执行计时器的回调函数</li>
-<li>……</li>
+<li>…</li>
 </ul>
 <blockquote>
 <p>思考题：为什么渲染进程不适用多个线程来处理这些事情？</p>
 </blockquote>
 <p>要处理这么多的任务，主线程遇到了一个前所未有的难题：如何调度任务？</p>
 <p>渲染主线程想出了一个绝妙的主意来处理这个问题：排队</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/08/liu-lan-qi-xiang-guan-xi-jie-ti-3/image-20231008214124272.png" alt="image-20231008214124272"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231008214124272.png" alt="image-20231008214124272"></p>
 <ul>
-<li><p>事件循环</p>
+<li>
+<p>事件循环</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <ol>
 <li>在最开始的时候，渲染主线程会进入一个无限循环</li>
 <li>每一次循环会检查消息队列中是否有任务存在。如果有，就取出第一个任务执行，执行完一个后进入下一次循环；如果没有，则进入休眠状态。</li>
@@ -656,26 +665,27 @@
 </ul>
 <p>这样一来，就可以让每个任务有条不紊的、持续的进行下去了。</p>
 <p><strong>整个过程，被称之为事件循环（消息循环）</strong></p>
-<h3 id="何为异步？"><a href="#何为异步？" class="headerlink" title="何为异步？"></a>何为异步？</h3><p>代码在执行过程中，会遇到一些无法立即处理的任务，比如：</p>
+<h3 id="何为异步？">何为异步？</h3>
+<p>代码在执行过程中，会遇到一些无法立即处理的任务，比如：</p>
 <ul>
 <li>计时完成后需要执行的任务 —— <code>setTimeout</code>、<code>setInterval</code></li>
 <li>网络通信完成后需要执行的任务 – <code>XHR</code>、<code>Fetch</code></li>
 <li>用户操作后需要执行的任务 – <code>addEventListener</code></li>
 </ul>
 <p>如果让渲染主线程等待这些任务的时机达到，就会导致主线程长期处于「阻塞」的状态，从而导致浏览器「卡死」</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/08/liu-lan-qi-xiang-guan-xi-jie-ti-3/image-20231008215530657.png" alt="image-20231008215530657"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231008215530657.png" alt="image-20231008215530657"></p>
 <p><strong>渲染主线程承担着极其重要的工作，无论如何都不能阻塞！</strong></p>
 <p>因此，浏览器选择<strong>异步</strong>来解决这个问题</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/08/liu-lan-qi-xiang-guan-xi-jie-ti-3/202208101048899.png" alt="image-20220810104858857"></p>
+<p><img src="/medias/images/loading.gif" data-original="202208101048899.png" alt="image-20220810104858857"></p>
 <p>使用异步的方式，<strong>渲染主线程永不阻塞</strong></p>
 <blockquote>
 <p>面试题：如何理解 JS 的异步？</p>
 <p>参考答案：</p>
 <ul>
-<li><p>概念</p>
+<li>
+<p>概念</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <p>JS是一门单线程的语言，这是因为它运行在浏览器的渲染主线程中，而渲染主线程只有一个。</p>
 <p>而渲染主线程承担着诸多的工作，渲染页面、执行 JS 都在其中运行。</p>
 <p>如果使用同步的方式，就极有可能导致主线程产生阻塞，从而导致消息队列中的很多其他任务无法得到执行。这样一来，一方面会导致繁忙的主线程白白的消耗时间，另一方面导致页面无法及时更新，给用户造成卡死现象。</p>
@@ -684,12 +694,15 @@
 </li>
 </ul>
 </blockquote>
-<h3 id="任务有优先级吗？"><a href="#任务有优先级吗？" class="headerlink" title="任务有优先级吗？"></a>任务有优先级吗？</h3><p>任务没有优先级，在消息队列中先进先出</p>
+<h3 id="任务有优先级吗？">任务有优先级吗？</h3>
+<p>任务没有优先级，在消息队列中先进先出</p>
 <p>但<strong>消息队列是有优先级的</strong></p>
 <p>根据 W3C 的最新解释:</p>
 <ul>
-<li>每个任务都有一个任务类型，同一个类型的任务必须在一个队列，不同类型的任务可以分属于不同的队列。<br>在一次事件循环中，浏览器可以根据实际情况从不同的队列中取出任务执行。</li>
-<li>浏览器必须准备好一个微队列，微队列中的任务优先所有其他任务执行<br><a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint">https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint</a></li>
+<li>每个任务都有一个任务类型，同一个类型的任务必须在一个队列，不同类型的任务可以分属于不同的队列。<br>
+在一次事件循环中，浏览器可以根据实际情况从不同的队列中取出任务执行。</li>
+<li>浏览器必须准备好一个微队列，微队列中的任务优先所有其他任务执行<br>
+<a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint">https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint</a></li>
 </ul>
 <blockquote>
 <p>随着浏览器的复杂度急剧提升，W3C 不再使用宏队列的说法</p>
@@ -700,13 +713,14 @@
 <li><strong>交互队列</strong>：用于存放用户操作后产生的事件处理任务，优先级「高」</li>
 <li><strong>微队列</strong>：用户存放需要最快执行的任务，优先级「<strong>最高</strong>」</li>
 </ul>
-<h3 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h3><p>一个需要异步执行的函数，执行时机是在主函数执行结束之后、当前宏任务结束之前</p>
+<h3 id="微任务">微任务</h3>
+<p>一个需要异步执行的函数，执行时机是在主函数执行结束之后、当前宏任务结束之前</p>
 <p>常见的微任务有：</p>
 <ul>
-<li><p>概念</p>
+<li>
+<p>概念</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <ul>
 <li>Promise.then</li>
 <li>MutaionObserver</li>
@@ -715,33 +729,37 @@
 </ul>
 </li>
 </ul>
-<h3 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h3><p>宏任务的时间粒度比较大，执行的时间间隔是不能精确控制的，对一些高实时性的需求就不太符合</p>
+<h3 id="宏任务">宏任务</h3>
+<p>宏任务的时间粒度比较大，执行的时间间隔是不能精确控制的，对一些高实时性的需求就不太符合</p>
 <p>常见的宏任务有：</p>
 <ul>
-<li><p>概念</p>
+<li>
+<p>概念</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <ul>
 <li>script (可以理解为<strong>外层同步代码</strong>)</li>
-<li>setTimeout&#x2F;setInterval</li>
-<li>UI rendering&#x2F;UI事件</li>
+<li>setTimeout/setInterval</li>
+<li>UI rendering/UI事件</li>
 <li>postMessage、MessageChannel</li>
-<li>setImmediate、I&#x2F;O（Node.js）</li>
+<li>setImmediate、I/O（Node.js）</li>
 </ul>
 </li>
 </ul>
 <p>执行机制是：</p>
 <ul>
-<li><p>执行一个宏任务，如果遇到微任务就将它放到微任务的事件队列中</p>
+<li>
+<p>执行一个宏任务，如果遇到微任务就将它放到微任务的事件队列中</p>
 </li>
-<li><p>当前宏任务执行完成后，会查看微任务的事件队列，然后将里面的所有微任务依次执行完</p>
+<li>
+<p>当前宏任务执行完成后，会查看微任务的事件队列，然后将里面的所有微任务依次执行完</p>
 <blockquote>
 <p><code>await</code> 会阻塞下面的代码（即加入微任务队列）</p>
 </blockquote>
 </li>
 </ul>
-<h3 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async function async1() &#123;
+<h3 id="流程分析">流程分析</h3>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async function async1() &#123;
     console.log(&#39;async1 start&#39;)
     await async2()
     console.log(&#39;async1 end&#39;)
@@ -761,15 +779,14 @@ new Promise(function (resolve) &#123;
     console.log(&#39;promise2&#39;)
 &#125;)
 console.log(&#39;script end&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>分析过程：</p>
 <ul>
-<li><p>概念：</p>
+<li>
+<p>概念：</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <ol>
-<li>执行整段代码，遇到 <code>console.log(&#39;script start&#39;)</code> 直接打印结果，输出 <code>script start</code></li>
+<li>执行整段代码，遇到 <code>console.log('script start')</code> 直接打印结果，输出 <code>script start</code></li>
 <li>遇到定时器了，它是宏任务，先放着不执行</li>
 <li>遇到 <code>async1()</code>，执行 <code>async1</code> 函数，先打印 <code>async1 start</code>，下面遇到<code>await</code>怎么办？先执行 <code>async2</code>，打印 <code>async2</code>，然后阻塞下面代码（即加入微任务列表），跳出去执行同步代码</li>
 <li>跳到 <code>new Promise</code> 这里，直接执行，打印 <code>promise1</code>，下面遇到 <code>.then()</code>，它是微任务，放到微任务列表等待执行</li>
@@ -784,10 +801,10 @@ console.log(&#39;script end&#39;)<span aria-hidden="true" class="line-numbers-ro
 <p>面试题：JS 中的计时器能做到精确计时吗？为什么？</p>
 <p>参考答案：</p>
 <ul>
-<li><p>概念</p>
+<li>
+<p>概念</p>
 <details><summary><b>答案</b></summary>
 <p>
-
 <p>不行，因为：</p>
 <ol>
 <li>计算机硬件没有原子钟，无法做到精确计时</li>

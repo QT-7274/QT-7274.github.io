@@ -6,9 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JavaScript中this对象详解, QT-7274">
-    <meta name="description" content="定义函数的 this 关键字在 JavaScript 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别
+    <meta name="description" content="定义
+函数的 this 关键字在 JavaScript 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别
 在绝大多数情况下，函数的调用方式决定了 this 的值（运行时绑定）
-this 关键字是函数运行时自动生成的一个内部对象">
+this 关键字是函数运行时自动生成的一个内部对">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -502,7 +503,8 @@ this 关键字是函数运行时自动生成的一个内部对象">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>函数的 <code>this</code> 关键字在 <code>JavaScript</code> 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别</p>
+                <h2 id="定义">定义</h2>
+<p>函数的 <code>this</code> 关键字在 <code>JavaScript</code> 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别</p>
 <p>在绝大多数情况下，函数的调用方式决定了 <code>this</code> 的值（运行时绑定）</p>
 <p><code>this</code> 关键字是函数运行时自动生成的一个内部对象，只能在函数内部使用，总指向<strong>调用它的对象</strong></p>
 <blockquote>
@@ -533,7 +535,6 @@ this 关键字是函数运行时自动生成的一个内部对象">
 <span class="token punctuation">&#125;</span>
 
 <span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;-- baz的调用位置</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>同时，<code>this</code>在函数执行过程中，<code>this</code>一旦被确定了，就不可以再更改</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
@@ -546,26 +547,27 @@ this 关键字是函数运行时自动生成的一个内部对象">
 <span class="token punctuation">&#125;</span>
 
 <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="绑定规则"><a href="#绑定规则" class="headerlink" title="绑定规则"></a>绑定规则</h2><p>根据不同的使用场合，<code>this</code>有不同的值，主要分为下面几种情况：</p>
+<h2 id="绑定规则">绑定规则</h2>
+<p>根据不同的使用场合，<code>this</code>有不同的值，主要分为下面几种情况：</p>
 <ul>
 <li>默认绑定</li>
 <li>隐式绑定</li>
 <li>new绑定</li>
 <li>显示绑定</li>
 </ul>
-<h3 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h3><p>全局环境中定义<code>person</code>函数，内部使用<code>this</code>关键字</p>
+<h3 id="默认绑定">默认绑定</h3>
+<p>全局环境中定义<code>person</code>函数，内部使用<code>this</code>关键字</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> name <span class="token operator">=</span> <span class="token string">'Jenny'</span><span class="token punctuation">;</span>
 <span class="token keyword">function</span> <span class="token function">person</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//Jenny</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上述代码输出<code>Jenny</code>，原因是调用函数的对象在游览器中位<code>window</code>，因此<code>this</code>指向<code>window</code>，所以输出<code>Jenny</code></p>
 <blockquote>
 <p>注意：严格模式下，不能将全局对象用于默认绑定，this会绑定到<code>undefined</code>，只有函数运行在非严格模式下，默认绑定才能绑定到全局对象</p>
 </blockquote>
-<h3 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h3><p>函数还可以作为某个对象的方法调用，这时<code>this</code>就指这个上级对象</p>
+<h3 id="隐式绑定">隐式绑定</h3>
+<p>函数还可以作为某个对象的方法调用，这时<code>this</code>就指这个上级对象</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
@@ -575,7 +577,6 @@ obj<span class="token punctuation">.</span>x <span class="token operator">=</spa
 obj<span class="token punctuation">.</span>m <span class="token operator">=</span> test<span class="token punctuation">;</span>
 
 obj<span class="token punctuation">.</span><span class="token function">m</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，<code>this</code>指向的也只是它上一级的对象</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
     <span class="token literal-property property">a</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span>
@@ -586,7 +587,6 @@ obj<span class="token punctuation">.</span><span class="token function">m</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 o<span class="token punctuation">.</span>b<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上述代码中，<code>this</code>的上一级对象为<code>b</code>，<code>b</code>内部并没有<code>a</code>变量的定义，所以输出<code>undefined</code></p>
 <p>这里再举一种特殊情况</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
@@ -601,20 +601,20 @@ o<span class="token punctuation">.</span>b<span class="token punctuation">.</spa
 <span class="token punctuation">&#125;</span>
 <span class="token keyword">var</span> j <span class="token operator">=</span> o<span class="token punctuation">.</span>b<span class="token punctuation">.</span>fn<span class="token punctuation">;</span>
 <span class="token function">j</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>此时<code>this</code>指向的是<code>window</code>，这里的大家需要记住，<code>this</code>永远指向的是<strong>最后调用它的对象</strong>，虽然<code>fn</code>是对象<code>b</code>的方法，但是<code>fn</code>赋值给<code>j</code>时候并没有执行，所以最终指向<code>window</code></p>
-<h3 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h3><p>通过构建函数<code>new</code>关键字生成一个实例对象，此时<code>this</code>指向这个实例对象</p>
+<h3 id="new绑定">new绑定</h3>
+<p>通过构建函数<code>new</code>关键字生成一个实例对象，此时<code>this</code>指向这个实例对象</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function test() &#123;
 　this.x &#x3D; 1;
 &#125;
 
 var obj &#x3D; new test();
 obj.x &#x2F;&#x2F; 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上述代码之所以能过输出1，是因为<code>new</code>关键字改变了<code>this</code>的指向</p>
 <p>这里再列举一些特殊情况：</p>
 <ul>
-<li><p><code>new</code>过程遇到<code>return</code>一个<strong>对象</strong>，此时<code>this</code>指向为返回的对象</p>
+<li>
+<p><code>new</code>过程遇到<code>return</code>一个<strong>对象</strong>，此时<code>this</code>指向为返回的对象</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn()  
 &#123;  
     this.user &#x3D; &#39;xxx&#39;;  
@@ -623,7 +623,8 @@ obj.x &#x2F;&#x2F; 1<span aria-hidden="true" class="line-numbers-rows"><span></s
 var a &#x3D; new fn();  
 console.log(a.user); &#x2F;&#x2F;undefined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>如果返回一个<strong>简单类型</strong>的时候，则<code>this</code>指向实例对象</p>
+<li>
+<p>如果返回一个<strong>简单类型</strong>的时候，则<code>this</code>指向实例对象</p>
 <pre class="line-numbers language-none"><code class="language-none">function fn()  
 &#123;  
     this.user &#x3D; &#39;xxx&#39;;  
@@ -632,16 +633,19 @@ console.log(a.user); &#x2F;&#x2F;undefined<span aria-hidden="true" class="line-n
 var a &#x3D; new fn;  
 console.log(a.user); &#x2F;&#x2F;xxx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>注意的是<code>null</code>虽然也是对象，但是此时<code>new</code>仍然指向实例对象</p>
+<li>
+<p>注意的是<code>null</code>虽然也是对象，但是此时<code>new</code>仍然指向实例对象</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function fn()  
 &#123;  
     this.user &#x3D; &#39;xxx&#39;;  
     return null;
 &#125;
 var a &#x3D; new fn;  
-console.log(a.user); &#x2F;&#x2F;xxx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+console.log(a.user); &#x2F;&#x2F;xxx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h3 id="显示修改"><a href="#显示修改" class="headerlink" title="显示修改"></a>显示修改</h3><p><code>apply()、call()、bind()</code>是函数的一个方法，作用是改变函数的调用对象。它的第一个参数就表示改变后的调用这个函数的对象。因此，这时<code>this</code>指的就是这第一个参数</p>
+<h3 id="显示修改">显示修改</h3>
+<p><code>apply()、call()、bind()</code>是函数的一个方法，作用是改变函数的调用对象。它的第一个参数就表示改变后的调用这个函数的对象。因此，这时<code>this</code>指的就是这第一个参数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 　console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -651,9 +655,9 @@ console.log(a.user); &#x2F;&#x2F;xxx<span aria-hidden="true" class="line-numbers
 obj<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 obj<span class="token punctuation">.</span>m <span class="token operator">=</span> test<span class="token punctuation">;</span>
 obj<span class="token punctuation">.</span><span class="token function">m</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token comment">// 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>关于<code>apply、call、bind</code>三者的区别，我们后面再详细说</p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>在 ES6 的语法中还提供了箭头函语法，让我们在代码书写时就能确定 <code>this</code> 的指向（编译时绑定）</p>
+<h2 id="箭头函数">箭头函数</h2>
+<p>在 ES6 的语法中还提供了箭头函语法，让我们在代码书写时就能确定 <code>this</code> 的指向（编译时绑定）</p>
 <p>举个例子：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
   <span class="token function-variable function">sayThis</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
@@ -664,7 +668,6 @@ obj<span class="token punctuation">.</span><span class="token function">m</span>
 obj<span class="token punctuation">.</span><span class="token function">sayThis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// window 因为 JavaScript 没有块作用域，所以在定义 sayThis 的时候，里面的 this 就绑到 window 上去了</span>
 <span class="token keyword">const</span> globalSay <span class="token operator">=</span> obj<span class="token punctuation">.</span>sayThis<span class="token punctuation">;</span>
 <span class="token function">globalSay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// window 浏览器中的 global 对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>虽然箭头函数的<code>this</code>能够在编译的时候就确定了<code>this</code>的指向，但也需要注意一些潜在的坑</p>
 <p>下面举个例子：</p>
 <p>绑定事件监听</p>
@@ -673,7 +676,6 @@ button<span class="token punctuation">.</span><span class="token function">addEv
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">===</span> window<span class="token punctuation">)</span> <span class="token comment">// true</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">'clicked button'</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上述可以看到，我们其实是想要<code>this</code>为点击的<code>button</code>，但此时<code>this</code>指向了<code>window</code></p>
 <p>包括在原型上添加方法时候，此时<code>this</code>指向<code>window</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token class-name">Cat</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">sayName</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
@@ -682,9 +684,10 @@ button<span class="token punctuation">.</span><span class="token function">addEv
 <span class="token punctuation">&#125;</span>
 <span class="token keyword">const</span> cat <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cat</span><span class="token punctuation">(</span><span class="token string">'mm'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 cat<span class="token punctuation">.</span><span class="token function">sayName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>同样的，箭头函数不能作为构建函数</p>
-<h2 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h2><h3 id="隐式绑定-VS-显式绑定"><a href="#隐式绑定-VS-显式绑定" class="headerlink" title="隐式绑定 VS 显式绑定"></a>隐式绑定 VS 显式绑定</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<h2 id="优先级">优先级</h2>
+<h3 id="隐式绑定-VS-显式绑定">隐式绑定 VS 显式绑定</h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
@@ -703,9 +706,9 @@ obj2<span class="token punctuation">.</span><span class="token function">foo</sp
 
 obj1<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span> obj2 <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span>
 obj2<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span> obj1 <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>显然，显示绑定的优先级更高</p>
-<h3 id="new绑定-VS-隐式绑定"><a href="#new绑定-VS-隐式绑定" class="headerlink" title="new绑定 VS 隐式绑定"></a>new绑定 VS 隐式绑定</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">something</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<h3 id="new绑定-VS-隐式绑定">new绑定 VS 隐式绑定</h3>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">something</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">=</span> something<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
@@ -724,9 +727,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">var</span> bar <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">obj1<span class="token punctuation">.</span>foo</span><span class="token punctuation">(</span> <span class="token number">4</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> obj1<span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> bar<span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>可以看到，new绑定的优先级<code>&gt;</code>隐式绑定</p>
-<h3 id="new绑定-VS-显式绑定"><a href="#new绑定-VS-显式绑定" class="headerlink" title="new绑定 VS 显式绑定"></a><code>new</code>绑定 VS 显式绑定</h3><p>因为<code>new</code>和<code>apply、call</code>无法一起使用，但硬绑定也是显式绑定的一种，可以替换测试</p>
+<h3 id="new绑定-VS-显式绑定"><code>new</code>绑定 VS 显式绑定</h3>
+<p>因为<code>new</code>和<code>apply、call</code>无法一起使用，但硬绑定也是显式绑定的一种，可以替换测试</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">something</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">=</span> something<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
@@ -740,11 +743,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">var</span> baz <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">bar</span><span class="token punctuation">(</span> <span class="token number">3</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> obj1<span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> baz<span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>bar</code>被绑定到obj1上，但是<code>new bar(3)</code> 并没有像我们预计的那样把<code>obj1.a</code>修改为3。但是，<code>new</code>修改了绑定调用<code>bar()</code>中的<code>this</code></p>
 <p>我们可认为<code>new</code>绑定优先级<code>&gt;</code>显式绑定</p>
 <p>综上，new绑定优先级 &gt; 显示绑定优先级 &gt; 隐式绑定优先级 &gt; 默认绑定优先级</p>
-<h2 id="bind、call、apply-区别？"><a href="#bind、call、apply-区别？" class="headerlink" title="bind、call、apply 区别？"></a>bind、call、apply 区别？</h2><p><code>call</code>、<code>apply</code>、<code>bind</code>作用是改变函数执行时的上下文，简而言之就是改变函数运行时的<code>this</code>指向</p>
+<h2 id="bind、call、apply-区别？">bind、call、apply 区别？</h2>
+<p><code>call</code>、<code>apply</code>、<code>bind</code>作用是改变函数执行时的上下文，简而言之就是改变函数运行时的<code>this</code>指向</p>
 <p>那么什么情况下需要改变<code>this</code>的指向呢？下面举个例子</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> name <span class="token operator">=</span> <span class="token string">"lucy"</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
@@ -755,14 +758,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 obj<span class="token punctuation">.</span><span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// martin，this 指向 obj 对象</span>
 <span class="token function">setTimeout</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>say<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// lucy，this 指向 window 对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>从上面可以看到，正常情况<code>say</code>方法输出<code>martin</code></p>
 <p>但是我们把<code>say</code>放在<code>setTimeout</code>方法中，在定时器中是作为回调函数来执行的，因此回到主栈执行时是在全局执行上下文的环境中执行的，这时候<code>this</code>指向<code>window</code>，所以输出<code>lucy</code></p>
 <p>我们实际需要的是<code>this</code>指向<code>obj</code>对象，这时候就需要该改变<code>this</code>指向了</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">setTimeout</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">say</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//martin，this指向obj对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>下面再来看看<code>apply</code>、<code>call</code>、<code>bind</code>的使用</p>
-<h4 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h4><p><code>apply</code>接受两个参数，第一个参数是<code>this</code>的指向，第二个参数是函数接受的参数，以数组的形式传入</p>
+<h3 id="区别">区别</h3>
+<p>下面再来看看<code>apply</code>、<code>call</code>、<code>bind</code>的使用</p>
+<h4 id="apply">apply</h4>
+<p><code>apply</code>接受两个参数，第一个参数是<code>this</code>的指向，第二个参数是函数接受的参数，以数组的形式传入</p>
 <p>改变<code>this</code>指向后原函数会立即执行，且此方法只是临时改变<code>this</code>指向一次</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -773,12 +776,11 @@ obj<span class="token punctuation">.</span><span class="token function">say</spa
 
 <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// this会变成传入的obj，传入的参数必须是一个数组；</span>
 <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// this指向window</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>当第一个参数为<code>null</code>、<code>undefined</code>的时候，默认指向<code>window</code>(在浏览器中)</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// this指向window</span>
 <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// this指向window</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="call"><a href="#call" class="headerlink" title="call"></a>call</h4><p><code>call</code>方法的第一个参数也是<code>this</code>的指向，后面传入的是一个参数列表</p>
+<h4 id="call">call</h4>
+<p><code>call</code>方法的第一个参数也是<code>this</code>的指向，后面传入的是一个参数列表</p>
 <p>跟<code>apply</code>一样，改变<code>this</code>指向后原函数会立即执行，且此方法只是临时改变<code>this</code>指向一次</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -789,12 +791,11 @@ obj<span class="token punctuation">.</span><span class="token function">say</spa
 
 <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// this会变成传入的obj，传入的参数必须是一个数组；</span>
 <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// this指向window</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>同样的，当第一个参数为<code>null</code>、<code>undefined</code>的时候，默认指向<code>window</code>(在浏览器中)</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// this指向window</span>
 <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// this指向window</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h4><p>bind方法和call很相似，第一参数也是<code>this</code>的指向，后面传入的也是一个参数列表(但是这个参数列表可以分多次传入)</p>
+<h4 id="bind">bind</h4>
+<p>bind方法和call很相似，第一参数也是<code>this</code>的指向，后面传入的也是一个参数列表(但是这个参数列表可以分多次传入)</p>
 <p>改变<code>this</code>指向后不会立即执行，而是返回一个<strong>永久</strong>改变<code>this</code>指向的函数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -806,15 +807,16 @@ obj<span class="token punctuation">.</span><span class="token function">say</spa
 <span class="token keyword">const</span> bindFn <span class="token operator">=</span> <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// this 也会变成传入的obj ，bind不是立即执行需要执行一次</span>
 <span class="token function">bindFn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// this指向obj</span>
 <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// this指向window</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>从上面可以看到，<code>apply</code>、<code>call</code>、<code>bind</code>三者的区别在于：</p>
+<h3 id="小结">小结</h3>
+<p>从上面可以看到，<code>apply</code>、<code>call</code>、<code>bind</code>三者的区别在于：</p>
 <ul>
 <li>三者都可以改变函数的<code>this</code>对象指向</li>
 <li>三者第一个参数都是<code>this</code>要指向的对象，如果如果没有这个参数或参数为<code>undefined</code>或<code>null</code>，则默认指向全局<code>window</code></li>
 <li>三者都可以传参，但是<code>apply</code>是数组，而<code>call</code>是参数列表，且<code>apply</code>和<code>call</code>是一次性传入参数，而<code>bind</code>可以分为多次传入</li>
 <li><code>bind</code>是返回绑定this之后的函数，<code>apply</code>、<code>call</code> 则是立即执行</li>
 </ul>
-<h3 id="bind-实现"><a href="#bind-实现" class="headerlink" title="bind 实现"></a><code>bind</code> 实现</h3><p>实现<code>bind</code>的步骤，我们可以分解成为三部分：</p>
+<h3 id="bind-实现"><code>bind</code> 实现</h3>
+<p>实现<code>bind</code>的步骤，我们可以分解成为三部分：</p>
 <ul>
 <li>修改<code>this</code>指向</li>
 <li>动态传递参数</li>
@@ -824,7 +826,6 @@ obj<span class="token punctuation">.</span><span class="token function">say</spa
 
 <span class="token comment">// 方式二：在bind中传递函数参数，也在返回函数中传递参数</span>
 <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>兼容<code>new</code>关键字</li>
 </ul>
@@ -845,7 +846,6 @@ obj<span class="token punctuation">.</span><span class="token function">say</spa
         <span class="token keyword">return</span> <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token keyword">instanceof</span> <span class="token class-name">Fn</span> <span class="token operator">?</span> <span class="token keyword">new</span> <span class="token class-name">fn</span><span class="token punctuation">(</span><span class="token operator">...</span>arguments<span class="token punctuation">)</span> <span class="token operator">:</span> context<span class="token punctuation">,</span> args<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token operator">...</span>arguments<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

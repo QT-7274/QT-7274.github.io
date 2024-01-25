@@ -13,9 +13,10 @@
 使用继承
 使用默认值
 
-确定声明值首先第一步，是确定声明值。所谓声明值就是作者自己所书写的 CSS 样式，例如前面的：
+确定声明值
+首先第一步，是确定声明值。所谓声明值就是作者自己所书写的 CSS 样式，例如前面的：
 p&amp;#123;
-  color : re">
+  color : r">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -516,17 +517,18 @@ p&amp;#123;
 <li>使用继承</li>
 <li>使用默认值</li>
 </ul>
-<h2 id="确定声明值"><a href="#确定声明值" class="headerlink" title="确定声明值"></a>确定声明值</h2><p>首先第一步，是确定声明值。所谓声明值就是作者自己所书写的 CSS 样式，例如前面的：</p>
+<h2 id="确定声明值">确定声明值</h2>
+<p>首先第一步，是确定声明值。所谓声明值就是作者自己所书写的 CSS 样式，例如前面的：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">p</span><span class="token punctuation">&#123;</span>
   <span class="token property">color</span> <span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>这里我们声明了 p 元素为红色，那么就会应用此属性设置。</p>
 <p>当然，除了作者样式表，一般浏览器还会存在“用户代理样式表”，简单来讲就是浏览器内置了一套样式表。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/2022-08-13-063500.png" alt="image-20220813143500066"></p>
+<p><img src="/medias/images/loading.gif" data-original="2022-08-13-063500.png" alt="image-20220813143500066"></p>
 <p>在上面的示例中，作者样式表中设置了 color 属性，而用户代理样式表（浏览器提供的样式表）中设置了诸如 display、margin-block-start、margin-block-end、margin-inline-start、margin-inline-end 等属性对应的值。</p>
 <p>这些值目前来讲也没有什么冲突，因此最终就会应用这些属性值。</p>
-<h2 id="层叠冲突"><a href="#层叠冲突" class="headerlink" title="层叠冲突"></a>层叠冲突</h2><p>在确定声明值时，可能出现一种情况，那就是声明的样式规则发生了冲突。</p>
+<h2 id="层叠冲突">层叠冲突</h2>
+<p>在确定声明值时，可能出现一种情况，那就是声明的样式规则发生了冲突。</p>
 <p>此时会进入解决层叠冲突的流程。而这一步又可以细分为下面这三个步骤：</p>
 <ul>
 <li>比较源的重要性</li>
@@ -534,7 +536,8 @@ p&amp;#123;
 <li>比较次序</li>
 </ul>
 <p>来来来，我们一步一步来看。</p>
-<h3 id="比较源的重要性"><a href="#比较源的重要性" class="headerlink" title="比较源的重要性"></a>比较源的重要性</h3><p>当不同的 CSS 样式来源拥有相同的声明时，此时就会根据样式表来源的重要性来确定应用哪一条样式规则。</p>
+<h3 id="比较源的重要性">比较源的重要性</h3>
+<p>当不同的 CSS 样式来源拥有相同的声明时，此时就会根据样式表来源的重要性来确定应用哪一条样式规则。</p>
 <p>那么问题来了，咱们的样式表的源究竟有几种呢？</p>
 <p>整体来讲有三种来源：</p>
 <ul>
@@ -550,15 +553,14 @@ p&amp;#123;
   <span class="token property">color</span> <span class="token punctuation">:</span> red<span class="token punctuation">;</span>
   <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/2022-08-13-064222.png" alt="image-20220813144222152"></p>
+<p><img src="/medias/images/loading.gif" data-original="2022-08-13-064222.png" alt="image-20220813144222152"></p>
 <p>可以明显的看到，作者样式表和用户代理样式表中同时存在的 display 属性的设置，最终作者样式表干掉了用户代理样式表中冲突的属性。这就是第一步，根据不同源的重要性来决定应用哪一个源的样式。</p>
-<h3 id="比较优先级"><a href="#比较优先级" class="headerlink" title="比较优先级"></a>比较优先级</h3><p>那么接下来，如果是在在同一个源中有样式声明冲突怎么办呢？此时就会进行样式声明的优先级比较。</p>
+<h3 id="比较优先级">比较优先级</h3>
+<p>那么接下来，如果是在在同一个源中有样式声明冲突怎么办呢？此时就会进行样式声明的优先级比较。</p>
 <p>例如：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.test h1</span><span class="token punctuation">&#123;</span>
   <span class="token property">font-size</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
@@ -566,14 +568,13 @@ p&amp;#123;
 <span class="token selector">h1</span> <span class="token punctuation">&#123;</span>
   <span class="token property">font-size</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在上面的代码中，同属于<strong>页面作者样式</strong>，源的重要性是相同的，此时会以选择器的权重来比较重要性。</p>
 <p>很明显，上面的选择器的权重要大于下面的选择器，因此最终标题呈现为 <em>50px</em>。</p>
 <img src="/medias/images/loading.gif" data-original="2021-09-16-071546.png" alt="image-20210916151546500" style="zoom: 40%;" />
-
 <p>可以看到，落败的作者样式在 <em>Elements&gt;Styles</em> 中会被划掉。</p>
 <p>有关选择器权重的计算方式，不清楚的同学，可以进入此传送门：<em><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity</a></em></p>
-<h3 id="比较次序"><a href="#比较次序" class="headerlink" title="比较次序"></a>比较次序</h3><p>经历了上面两个步骤，大多数的样式声明能够被确定下来。但是还剩下最后一种情况，那就是样式声明既是同源，权重也相同。</p>
+<h3 id="比较次序">比较次序</h3>
+<p>经历了上面两个步骤，大多数的样式声明能够被确定下来。但是还剩下最后一种情况，那就是样式声明既是同源，权重也相同。</p>
 <p>此时就会进入第三个步骤，比较样式声明的次序。</p>
 <p>举个例子：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">h1</span> <span class="token punctuation">&#123;</span>
@@ -583,24 +584,22 @@ p&amp;#123;
 <span class="token selector">h1</span> <span class="token punctuation">&#123;</span>
   <span class="token property">font-size</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>在上面的代码中，同样都是<strong>页面作者样式</strong>，<strong>选择器的权重也相同</strong>，此时位于下面的样式声明会层叠掉上面的那一条样式声明，最终会应用 <em>20px</em> 这一条属性值。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/2022-08-23-103928.png" alt="image-20220823183928330"></p>
+<p><img src="/medias/images/loading.gif" data-original="2022-08-23-103928.png" alt="image-20220823183928330"></p>
 <p>至此，样式声明中存在冲突的所有情况，就全部被解决了。</p>
-<h2 id="使用继承"><a href="#使用继承" class="headerlink" title="使用继承"></a>使用继承</h2><p>层叠冲突这一步完成后，解决了相同元素被声明了多条样式规则究竟应用哪一条样式规则的问题。</p>
+<h2 id="使用继承">使用继承</h2>
+<p>层叠冲突这一步完成后，解决了相同元素被声明了多条样式规则究竟应用哪一条样式规则的问题。</p>
 <p>那么如果没有声明的属性呢？此时就使用默认值么？</p>
 <p><em>No、No、No</em>，别急，此时还有第三个步骤，那就是使用继承而来的值。</p>
 <p>例如：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
   <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>在上面的代码中，我们针对 div 设置了 color 属性值为红色，而针对 p 元素我们没有声明任何的属性，但是由于 color 是可以继承的，因此 p 元素从最近的 div 身上继承到了 color 属性的值。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/2022-08-13-065102.png" alt="image-20220813145102293"></p>
+<p><img src="/medias/images/loading.gif" data-original="2022-08-13-065102.png" alt="image-20220813145102293"></p>
 <p>这里有两个点需要同学们注意一下。</p>
 <p>首先第一个是我强调了是<strong>最近的</strong> div 元素，看下面的例子：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -608,38 +607,36 @@ p&amp;#123;
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
   <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 <span class="token selector">.test</span><span class="token punctuation">&#123;</span>
   <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/2022-08-13-065653.png" alt="image-20220813145652726"></p>
+<p><img src="/medias/images/loading.gif" data-original="2022-08-13-065653.png" alt="image-20220813145652726"></p>
 <p>因为这里并不涉及到选中 p 元素声明 color 值，而是从父元素上面继承到 color 对应的值，因此这里是<strong>谁近就听谁</strong>的，初学者往往会产生混淆，又去比较权重，但是这里根本不会涉及到权重比较，因为压根儿就没有选中到 p 元素。</p>
 <p>第二个就是哪些属性能够继承？</p>
 <p>关于这一点的话，大家可以在 MDN 上面很轻松的查阅到。例如我们以 text-align 为例，如下图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/2022-08-13-070148.png" alt="image-20220813150147885"></p>
-<h2 id="使用默认值"><a href="#使用默认值" class="headerlink" title="使用默认值"></a>使用默认值</h2><p>好了，目前走到这一步，如果属性值都还不能确定下来，那么就只能是使用默认值了。</p>
+<p><img src="/medias/images/loading.gif" data-original="2022-08-13-070148.png" alt="image-20220813150147885"></p>
+<h2 id="使用默认值">使用默认值</h2>
+<p>好了，目前走到这一步，如果属性值都还不能确定下来，那么就只能是使用默认值了。</p>
 <p>如下图所示：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/2022-08-13-070825.png" alt="image-20220813150824752"></p>
+<p><img src="/medias/images/loading.gif" data-original="2022-08-13-070825.png" alt="image-20220813150824752"></p>
 <p>前面我们也说过，一个 HTML 元素要在浏览器中渲染出来，必须具备所有的 CSS 属性值，但是绝大部分我们是不会去设置的，用户代理样式表里面也不会去设置，也无法从继承拿到，因此最终都是用默认值。</p>
 <p>好了，这就是关于 CSS 属性计算过程的所有知识了。</p>
-<h2 id="一道面试题"><a href="#一道面试题" class="headerlink" title="一道面试题"></a>一道面试题</h2><p>好了，学习了今天的内容，让我来用一道面试题测试测试大家的理解程度。</p>
+<h2 id="一道面试题">一道面试题</h2>
+<p>好了，学习了今天的内容，让我来用一道面试题测试测试大家的理解程度。</p>
 <p>下面的代码，最终渲染出来的效果，a 元素是什么颜色？p 元素又是什么颜色？</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
   <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>大家能说出为什么会呈现这样的结果么？</p>
 <p>解答如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/10/02/css-shu-xing-ji-suan-guo-cheng/2022-08-13-071941.png" alt="image-20220813151941113"></p>
+<p><img src="/medias/images/loading.gif" data-original="2022-08-13-071941.png" alt="image-20220813151941113"></p>
 <p>实际上原因很简单，因为 a 元素在用户代理样式表中已经设置了 color 属性对应的值，因此会应用此声明值。而在 p 元素中无论是作者样式表还是用户代理样式表，都没有对此属性进行声明，然而由于 color 属性是可以继承的，因此最终 p 元素的 color 属性值通过继承来自于父元素。</p>
 
                 

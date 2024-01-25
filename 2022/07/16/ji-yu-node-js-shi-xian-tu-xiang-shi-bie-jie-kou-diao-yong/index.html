@@ -474,7 +474,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    781
+                    780
                 </div>
                 
 
@@ -504,12 +504,15 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-比较各类商业图像识别接口："><a href="#1-比较各类商业图像识别接口：" class="headerlink" title="1.比较各类商业图像识别接口："></a>1.比较各类商业图像识别接口：</h3><p>1.火山引擎：对于人体、人像的识别功能较多，对于动物几乎没有，分类较少只有两三个，而且识别精度较差，往往识别不出图像中的实体。</p>
+                <h3 id="1-比较各类商业图像识别接口：">1.比较各类商业图像识别接口：</h3>
+<p>1.火山引擎：对于人体、人像的识别功能较多，对于动物几乎没有，分类较少只有两三个，而且识别精度较差，往往识别不出图像中的实体。</p>
 <p>2.谷歌引擎：识别精度、细节相当高，但没有分类，识别元素过多，且在国外，调试和支付不太方便。</p>
 <p>3.百度引擎：识别精度优秀，分类较多，有明确的动物识别分类，且能衍生出百科知识，返回的标签为中文标签。</p>
 <p>4.阿里云引擎：识别分类没有动物分类，但是在阿里云市场有其他公司的接口，相当于外包。</p>
-<h3 id="2-选用接口："><a href="#2-选用接口：" class="headerlink" title="2.选用接口："></a>2.选用接口：</h3><p>综合考虑使用百度动物识别，使用语言为node.js。但其官方示例没有node.js的语言示例，需要自己琢磨开发。</p>
-<h4 id="1-调用百度获取token的接口："><a href="#1-调用百度获取token的接口：" class="headerlink" title="1.调用百度获取token的接口："></a>1.调用百度获取token的接口：</h4><p>一开始的想法是将这个过程作为中间件，但发现作为中间件使用后，原接口就不能再发起请求了，原因不得而知，只能将其封装在方法中：</p>
+<h3 id="2-选用接口：">2.选用接口：</h3>
+<p>综合考虑使用百度动物识别，使用语言为node.js。但其官方示例没有node.js的语言示例，需要自己琢磨开发。</p>
+<h4 id="1-调用百度获取token的接口：">1.调用百度获取token的接口：</h4>
+<p>一开始的想法是将这个过程作为中间件，但发现作为中间件使用后，原接口就不能再发起请求了，原因不得而知，只能将其封装在方法中：</p>
 <pre class="line-numbers language-JS" data-language="JS"><code class="language-JS">async function getToken() &#123;
   const param &#x3D; qs.stringify(&#123;
     grant_type: &quot;client_credentials&quot;,
@@ -537,16 +540,16 @@
     console.log(error);
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>之前考虑过将获取到的token存放在文件中，这样不太会占用内存，但使用fs.createWriteStream(“.&#x2F;baidu-token.json”)浏览器会报同源跨域错误，虽然没什么影响，但如果不想看见报错还是不要使用这种优雅的写法了。</p>
-<h4 id="2-将图像转换为base64格式："><a href="#2-将图像转换为base64格式：" class="headerlink" title="2.将图像转换为base64格式："></a>2.将图像转换为base64格式：</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> image2base64 <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"image-to-base64"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>之前考虑过将获取到的token存放在文件中，这样不太会占用内存，但使用fs.createWriteStream(“./baidu-token.json”)浏览器会报同源跨域错误，虽然没什么影响，但如果不想看见报错还是不要使用这种优雅的写法了。</p>
+<h4 id="2-将图像转换为base64格式：">2.将图像转换为base64格式：</h4>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> image2base64 <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"image-to-base64"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> imageBase64 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">image2base64</span><span class="token punctuation">(</span>
       <span class="token comment">// "http://localhost:4000/" + req.file.filename</span>
       imageUrl
     <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">//这里的imageUrl直接使用的是阿里云存储OSS返回的url，比较方便</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="3-调用动物识别接口："><a href="#3-调用动物识别接口：" class="headerlink" title="3.调用动物识别接口："></a>3.调用动物识别接口：</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getAnimal</span><span class="token punctuation">(</span><span class="token parameter">imageUrl<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<h4 id="3-调用动物识别接口：">3.调用动物识别接口：</h4>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getAnimal</span><span class="token punctuation">(</span><span class="token parameter">imageUrl<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">let</span> token <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> imageBase64 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">image2base64</span><span class="token punctuation">(</span>
@@ -565,9 +568,9 @@
     response<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>注意这里一定要将imageBase64添加到bodyFormData，官方文档中没有说，是一个坑。</p>
-<h3 id="3-识别结果："><a href="#3-识别结果：" class="headerlink" title="3.识别结果："></a>3.识别结果：</h3><p><img src="/medias/images/loading.gif" data-original="/2022/07/16/ji-yu-node-js-shi-xian-tu-xiang-shi-bie-jie-kou-diao-yong/image-20220716192722021.png" alt="image-20220716192722021"></p>
+<h3 id="3-识别结果：">3.识别结果：</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20220716192722021.png" alt="image-20220716192722021"></p>
 
                 
             </div>

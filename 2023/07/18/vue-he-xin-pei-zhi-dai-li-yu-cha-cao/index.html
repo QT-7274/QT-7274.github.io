@@ -7,9 +7,11 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Vue核心 配置代理与插槽, QT-7274">
     <meta name="description" content="更新记录
+
 2023-09-14：对于“slot插槽”作了补充。
 
-Vue脚手架配置代理vue.config.js是一个可选的配置文件，如果项目的根目录中存在这个文件，那么它会被@vue/cli-service自动加载。你也可以使用packa">
+Vue脚手架配置代理
+vue.config.js是一个可选的配置文件，如果项目的根目录中存在这个文件，那么它会被@vue/cli-service自动加载。你也可以使用pac">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -503,24 +505,27 @@ Vue脚手架配置代理vue.config.js是一个可选的配置文件，如果项�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a><font color='#3498db'>更新记录</font></h3><ul>
+                <h3 id="font-color-3498db-更新记录-font"><font color='#3498db'>更新记录</font></h3>
+<ul>
 <li>2023-09-14：对于“slot插槽”作了补充。</li>
 </ul>
-<h2 id="Vue脚手架配置代理"><a href="#Vue脚手架配置代理" class="headerlink" title="Vue脚手架配置代理"></a>Vue脚手架配置代理</h2><p><code>vue.config.js</code>是一个可选的配置文件，如果项目的根目录中存在这个文件，那么它会被<code>@vue/cli-service</code>自动加载。你也可以使用<code>package.json</code>中的<code>vue</code>字段，但是注意这种写法需要你严格遵照JSON的格式来写。</p>
-<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>在<code>vue.config.js</code>中添加如下配置</p>
+<h2 id="Vue脚手架配置代理">Vue脚手架配置代理</h2>
+<p><code>vue.config.js</code>是一个可选的配置文件，如果项目的根目录中存在这个文件，那么它会被<code>@vue/cli-service</code>自动加载。你也可以使用<code>package.json</code>中的<code>vue</code>字段，但是注意这种写法需要你严格遵照JSON的格式来写。</p>
+<h3 id="方法一">方法一</h3>
+<p>在<code>vue.config.js</code>中添加如下配置</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
 	<span class="token literal-property property">devServer</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
 		<span class="token literal-property property">proxy</span><span class="token operator">:</span><span class="token string">"http://localhost:5000"</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>说明</p>
 <ol>
 <li>优点：配置简单，请求资源时直接发给前端（8080）即可。</li>
 <li>缺点：不能配置多个代理，不能灵活的控制请求是否走代理</li>
 <li>工作方式：若按照上述配置代理，当请求了前端不存在的资源时，才会将请求会转发给服务器（优先匹配前端资源）</li>
 </ol>
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>编写<code>vue.config.js</code>配置具体代理规则</p>
+<h3 id="方法二">方法二</h3>
+<p>编写<code>vue.config.js</code>配置具体代理规则</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">module.exports &#x3D; &#123;
 devServer: &#123;
     proxy: &#123;
@@ -538,25 +543,28 @@ devServer: &#123;
     &#125;
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>说明</p>
 <ol>
 <li>优点：可以配置多个代理，且可以灵活的控制请求是否走代理</li>
 <li>缺点：配置略微繁琐，请求资源必须加前缀</li>
 </ol>
-<h2 id="slot插槽"><a href="#slot插槽" class="headerlink" title="slot插槽"></a>slot插槽</h2><p>让父组件可以向子组件指定位置插入<code>html</code>结构，也是一种组件间通信的方式，适用于<strong>父组件 &#x3D;&#x3D;&#x3D;&gt; 子组件</strong>，即父组件给子组件的<strong>指定位置</strong>传递了数据。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>通过插槽可以让用户可以拓展组件，去更好地复用组件和对其做定制化处理</p>
+<h2 id="slot插槽">slot插槽</h2>
+<p>让父组件可以向子组件指定位置插入<code>html</code>结构，也是一种组件间通信的方式，适用于<strong>父组件 ===&gt; 子组件</strong>，即父组件给子组件的<strong>指定位置</strong>传递了数据。</p>
+<h3 id="使用场景">使用场景</h3>
+<p>通过插槽可以让用户可以拓展组件，去更好地复用组件和对其做定制化处理</p>
 <p>如果父组件在使用到一个复用组件的时候，获取这个组件在不同的地方有少量的更改，如果去重写组件是一件不明智的事情</p>
 <p>通过<code>slot</code>插槽向组件内部指定位置传递内容，完成这个复用组件在不同场景的应用</p>
 <p>比如布局组件、表格列、下拉选、弹框显示内容等</p>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<h3 id="分类">分类</h3>
+<ul>
 <li>默认插槽</li>
 <li>具名插槽</li>
 <li>作用域插槽</li>
 </ul>
 <p>使用方式：</p>
 <ul>
-<li><p>默认插槽</p>
+<li>
+<p>默认插槽</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">父组件中：
 &lt;Category&gt;
 	&lt;div&gt;html结构1&lt;&#x2F;div&gt;
@@ -569,7 +577,8 @@ devServer: &#123;
 		&lt;&#x2F;div&gt;
 	&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>具名插槽</p>
+<li>
+<p>具名插槽</p>
 <p>父组件指明放入子组件的哪个插槽<code>slot=&quot;footer&quot;</code>，如果是<code>template</code>可以写成<code>v-slot:footer</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">父组件中：
 		&lt;Category&gt;
@@ -589,7 +598,8 @@ devServer: &#123;
 				&lt;&#x2F;div&gt;
 		&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>作用域插槽</p>
+<li>
+<p>作用域插槽</p>
 <p><code>scope</code>用于父组件往子组件插槽放的<code>html</code>结构接收子组件的数据</p>
 <p>理解：<strong>数据在组件的自身，但根据数据生成的结构需要组件的使用者来决定。</strong></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">父组件中：
@@ -617,33 +627,33 @@ devServer: &#123;
 					&#125;
 				&#125;
 			&#125;
-		&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+		&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<h3 id="小结">小结</h3>
+<ul>
 <li><code>v-slot</code>属性只能在<code>&lt;template&gt;</code>上使用，但在只有默认插槽时可以在组件标签上使用</li>
 <li>默认插槽名为<code>default</code>，可以省略default直接写<code>v-slot</code></li>
 <li>缩写为<code>#</code>时不能不写参数，写成<code>#default</code></li>
-<li>可以通过解构获取<code>v-slot=&#123;user&#125;</code>，还可以重命名<code>v-slot=&quot;&#123;user: newName&#125;&quot;</code>和定义默认值<code>v-slot=&quot;&#123;user = &#39;默认值&#39;&#125;&quot;</code></li>
+<li>可以通过解构获取<code>v-slot=&#123;user&#125;</code>，还可以重命名<code>v-slot=&quot;&#123;user: newName&#125;&quot;</code>和定义默认值<code>v-slot=&quot;&#123;user = '默认值'&#125;&quot;</code></li>
 </ul>
-<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p><code>slot</code>本质上是返回<code>VNode</code>的函数，一般情况下，<code>Vue</code>中的组件要渲染到页面上需要经过<code>template -&gt; render function -&gt; VNode -&gt; DOM</code> 过程，这里看看<code>slot</code>如何实现：</p>
+<h2 id="原理分析">原理分析</h2>
+<p><code>slot</code>本质上是返回<code>VNode</code>的函数，一般情况下，<code>Vue</code>中的组件要渲染到页面上需要经过<code>template -&gt; render function -&gt; VNode -&gt; DOM</code> 过程，这里看看<code>slot</code>如何实现：</p>
 <p>编写一个<code>buttonCounter</code>组件，使用匿名插槽</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'button-counter'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
   <span class="token literal-property property">template</span><span class="token operator">:</span> <span class="token string">'&lt;div> &lt;slot>我是默认内容&lt;/slot>&lt;/div>'</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>使用该组件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
     <span class="token literal-property property">el</span><span class="token operator">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
     <span class="token literal-property property">template</span><span class="token operator">:</span> <span class="token string">'&lt;button-counter>&lt;span>我是slot传入内容&lt;/span>&lt;/button-counter>'</span><span class="token punctuation">,</span>
     <span class="token literal-property property">components</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>buttonCounter<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>获取<code>buttonCounter</code>组件渲染函数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">anonymous</span><span class="token punctuation">(</span>
 <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 <span class="token keyword">with</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token keyword">return</span> <span class="token function">_c</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token function">_t</span><span class="token punctuation">(</span><span class="token string">"default"</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token function">_v</span><span class="token punctuation">(</span><span class="token string">"我是默认内容"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>_v</code>表示穿件普通文本节点，<code>_t</code>表示渲染插槽的函数</p>
 <p>渲染插槽函数<code>renderSlot</code>（做了简化）</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">renderSlot</span> <span class="token punctuation">(</span>
@@ -660,7 +670,6 @@ devServer: &#123;
   nodes <span class="token operator">=</span> <span class="token function">scopedSlotFn</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token operator">||</span> fallback<span class="token punctuation">;</span>
   <span class="token keyword">return</span> nodes<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>name</code>属性表示定义插槽的名字，默认值为<code>default</code>，<code>fallback</code>表示子组件中的<code>slot</code>节点的默认值</p>
 <p>关于<code>this.$scopredSlots</code>是什么，我们可以先看看<code>vm.slot</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">initRender</span> <span class="token punctuation">(</span><span class="token parameter">vm</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -668,7 +677,6 @@ devServer: &#123;
   vm<span class="token punctuation">.</span>$slots <span class="token operator">=</span> <span class="token function">resolveSlots</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>_renderChildren<span class="token punctuation">,</span> renderContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token operator">...</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">resolveSlots&#96;函数会对&#96;children&#96;节点做归类和过滤处理，返回&#96;slots
 function resolveSlots (
     children,
@@ -712,14 +720,12 @@ function resolveSlots (
     &#125;
     return slots
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">_render&#96;渲染函数通过&#96;normalizeScopedSlots&#96;得到&#96;vm.$scopedSlots
 vm.$scopedSlots &#x3D; normalizeScopedSlots(
   _parentVnode.data.scopedSlots,
   vm.$slots,
   vm.$scopedSlots
 );<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>作用域插槽中父组件能够得到子组件的值是因为在<code>renderSlot</code>的时候执行会传入<code>props</code>，也就是上述<code>_t</code>第三个参数，父组件则能够得到子组件传递过来的值</p>
 
                 

@@ -500,16 +500,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h1><ol>
+                <h1>导航</h1>
+<ol>
 <li><a href="https://qt-7274.github.io/2023/02/27/html5-xin-zeng-yuan-su/">CSS特性与优先级</a></li>
 <li><a href="https://qt-7274.github.io/2023/06/24/css-xuan-ze-qi-quan-chong-ji-suan/">CSS选择器权重计算 | QT-7274 (qt7274.co)</a></li>
 </ol>
-<h2 id="交集选择器"><a href="#交集选择器" class="headerlink" title="交集选择器"></a>交集选择器</h2><p>使用场景：选中<strong>同时满足</strong>条件的所有选择器。</p>
+<h2 id="交集选择器">交集选择器</h2>
+<p>使用场景：选中<strong>同时满足</strong>条件的所有选择器。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">p.red</span> <span class="token punctuation">&#123;</span>
   <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：</p>
 <ol>
@@ -520,11 +521,12 @@
 <li>元素选择器配合类名选择器使用频率较多。</li>
 </ol>
 </blockquote>
-<h2 id="并集选择器"><a href="#并集选择器" class="headerlink" title="并集选择器"></a>并集选择器</h2><p>使用场景：同时选择<strong>满足其中任意一个</strong>选择器条件的元素。<br>代码示例：</p>
+<h2 id="并集选择器">并集选择器</h2>
+<p>使用场景：同时选择<strong>满足其中任意一个</strong>选择器条件的元素。<br>
+代码示例：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">h1, h2</span> <span class="token punctuation">&#123;</span>
   <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意；</p>
 <ol>
@@ -535,12 +537,12 @@
 <li>并集选择器通常用于集体声明，可以缩小样式表体积。</li>
 </ol>
 </blockquote>
-<h2 id="后代选择器"><a href="#后代选择器" class="headerlink" title="后代选择器"></a>后代选择器</h2><p>使用场景：选中指定元素中，<strong>符合要求的后代元素</strong>。</p>
+<h2 id="后代选择器">后代选择器</h2>
+<p>使用场景：选中指定元素中，<strong>符合要求的后代元素</strong>。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">ul li</span><span class="token punctuation">&#123;</span>
 	<span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：</p>
 <ol>
@@ -550,12 +552,12 @@
 <li>结构一定要符合HTML的嵌套要求。</li>
 </ol>
 </blockquote>
-<h2 id="子代选择器"><a href="#子代选择器" class="headerlink" title="子代选择器"></a>子代选择器</h2><p>使用场景：选择指定元素中，符合要求的子元素（<strong>儿子元素</strong>）。</p>
+<h2 id="子代选择器">子代选择器</h2>
+<p>使用场景：选择指定元素中，符合要求的子元素（<strong>儿子元素</strong>）。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div>a</span> <span class="token punctuation">&#123;</span>
 	<span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：</p>
 <ol>
@@ -564,7 +566,9 @@
 <li>注意子元素和后代元素的区别。</li>
 </ol>
 </blockquote>
-<h2 id="兄弟选择器"><a href="#兄弟选择器" class="headerlink" title="兄弟选择器"></a>兄弟选择器</h2><h3 id="相邻兄弟选择器"><a href="#相邻兄弟选择器" class="headerlink" title="相邻兄弟选择器"></a>相邻兄弟选择器</h3><p>使用场景：选中指定元素后，符合条件的<strong>相邻兄弟</strong>元素。</p>
+<h2 id="兄弟选择器">兄弟选择器</h2>
+<h3 id="相邻兄弟选择器">相邻兄弟选择器</h3>
+<p>使用场景：选中指定元素后，符合条件的<strong>相邻兄弟</strong>元素。</p>
 <blockquote>
 <p>相邻：紧挨着当前元素的下一个元素。</p>
 </blockquote>
@@ -572,26 +576,26 @@
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div+p</span> <span class="token punctuation">&#123;</span>
 	<span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：</p>
 <ol>
 <li>选择器之间以**<code>+</code>**连接。</li>
 </ol>
 </blockquote>
-<h3 id="通用兄弟选择器"><a href="#通用兄弟选择器" class="headerlink" title="通用兄弟选择器"></a>通用兄弟选择器</h3><p>使用场景：选中指定元素后，符合条件的<strong>所有兄弟</strong>元素。</p>
+<h3 id="通用兄弟选择器">通用兄弟选择器</h3>
+<p>使用场景：选中指定元素后，符合条件的<strong>所有兄弟</strong>元素。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div~p</span> <span class="token punctuation">&#123;</span>
 	<span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：</p>
 <ol>
 <li>选择器之间以**<code>~</code>**连接。</li>
 </ol>
 </blockquote>
-<h2 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h2><p>使用场景：选中属性值<strong>符合一定要求</strong>的元素。</p>
+<h2 id="属性选择器">属性选择器</h2>
+<p>使用场景：选中属性值<strong>符合一定要求</strong>的元素。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/* 选中具有title属性的元素 */</span>
 <span class="token selector">div[title]</span><span class="token punctuation">&#123;</span><span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
@@ -607,7 +611,6 @@
 
 <span class="token comment">/* 选中title属性值包含g的元素 */</span>
 <span class="token selector">div[title*="g"]</span><span class="token punctuation">&#123;</span><span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：</p>
 <ol>
@@ -618,32 +621,41 @@
 <li><code>[属性名*=“值”]</code> 选择包含某个属性，属性值<strong>包含</strong>指定值的元素。</li>
 </ol>
 </blockquote>
-<h2 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h2><p>使用场景：选中特殊状态的元素。</p>
+<h2 id="伪类选择器">伪类选择器</h2>
+<p>使用场景：选中特殊状态的元素。</p>
 <blockquote>
 <p>伪——虚假的，不是真实存在的。</p>
 <p>伪类——像类(<code>class</code>)，但不是类，是元素的一种特殊状态。</p>
 </blockquote>
-<h3 id="动态伪类"><a href="#动态伪类" class="headerlink" title="动态伪类"></a>动态伪类</h3><ol>
-<li><p><code>:link</code> 超链接<strong>未被访问</strong>的状态。</p>
+<h3 id="动态伪类">动态伪类</h3>
+<ol>
+<li>
+<p><code>:link</code> 超链接<strong>未被访问</strong>的状态。</p>
 </li>
-<li><p><code>:visited</code> 超链接<strong>访问过</strong>的状态。</p>
+<li>
+<p><code>:visited</code> 超链接<strong>访问过</strong>的状态。</p>
 </li>
-<li><p><code>:hover</code> 鼠标<strong>悬停</strong>在元素上的状态。</p>
+<li>
+<p><code>:hover</code> 鼠标<strong>悬停</strong>在元素上的状态。</p>
 </li>
-<li><p><code>:active</code> 元素<strong>激活</strong>的状态。</p>
+<li>
+<p><code>:active</code> 元素<strong>激活</strong>的状态。</p>
 <blockquote>
 <p>在CSS中，元素的激活状态（Active State）是指当用户与元素进行交互并触发其激活行为时的状态。通常，元素的激活状态与用户的操作有关，例如点击、按下鼠标按钮或按下键盘按键等。</p>
 <p>一旦用户释放鼠标按钮或松开键盘按键，元素就会恢复到正常状态。</p>
 </blockquote>
 </li>
-<li><p><code>:focus</code>获取<strong>焦点</strong>的元素。</p>
+<li>
+<p><code>:focus</code>获取<strong>焦点</strong>的元素。</p>
 <blockquote>
 <p>表单类元素才能使用<code>:focus</code>伪类。</p>
 <p>当用户：点击元素、触摸元素、或通过键盘的“tab”键等方式选择元素时，就是获得焦点。</p>
 </blockquote>
 </li>
 </ol>
-<h3 id="结构伪类"><a href="#结构伪类" class="headerlink" title="结构伪类"></a>结构伪类</h3><h4 id="常用结构伪类"><a href="#常用结构伪类" class="headerlink" title="常用结构伪类"></a>常用结构伪类</h4><ol>
+<h3 id="结构伪类">结构伪类</h3>
+<h4 id="常用结构伪类">常用结构伪类</h4>
+<ol>
 <li><code>:first-child</code> 所有兄弟元素中的<strong>第一个</strong>。</li>
 <li><code>:last-child</code> 所有兄弟元素中的<strong>最后一个</strong>。</li>
 <li><code>:nth-child(n)</code> 所有兄弟元素中的<strong>第 n 个</strong>。</li>
@@ -662,7 +674,8 @@
 <li><code>-n+3</code> ：选中的是前 3 个。</li>
 </ol>
 </blockquote>
-<h4 id="不常用结构伪类"><a href="#不常用结构伪类" class="headerlink" title="不常用结构伪类"></a>不常用结构伪类</h4><ol>
+<h4 id="不常用结构伪类">不常用结构伪类</h4>
+<ol>
 <li><code>:nth-last-child(n) </code>所有兄弟元素中的<strong>倒数第 n 个</strong>。</li>
 <li><code>:nth-last-of-type(n)</code> 所有<strong>同类型</strong>兄弟元素中的 <strong>倒数第n个</strong> 。</li>
 <li><code>:only-child</code> 选择没有兄弟的元素（独生子女）。</li>
@@ -670,15 +683,20 @@
 <li><code>:root </code>根元素。</li>
 <li><code>:empty</code> 内容为空元素（空格也算内容）。</li>
 </ol>
-<h3 id="否定伪类"><a href="#否定伪类" class="headerlink" title="否定伪类"></a>否定伪类</h3><p><code>:not(选择器)</code> 排除满足括号中条件的元素。</p>
-<h3 id="UI伪类"><a href="#UI伪类" class="headerlink" title="UI伪类"></a>UI伪类</h3><ol>
+<h3 id="否定伪类">否定伪类</h3>
+<p><code>:not(选择器)</code> 排除满足括号中条件的元素。</p>
+<h3 id="UI伪类">UI伪类</h3>
+<ol>
 <li><code>:checked</code> 被选中的复选框或单选按钮。</li>
 <li><code>:enable</code> 可用的表单元素（没有 <code>disabled</code> 属性）。</li>
 <li><code>:disabled</code> 不可用的表单元素（有 <code>disabled</code> 属性）。</li>
 </ol>
-<h3 id="目标伪类"><a href="#目标伪类" class="headerlink" title="目标伪类"></a>目标伪类</h3><p><code>:target</code> 选中锚点指向的元素。</p>
-<h3 id="语言伪类"><a href="#语言伪类" class="headerlink" title="语言伪类"></a>语言伪类</h3><p><code>:lang()</code> 根据指定的语言选择元素（本质是看 <code>lang</code> 属性的值）</p>
-<h2 id="伪元素选择器"><a href="#伪元素选择器" class="headerlink" title="伪元素选择器"></a>伪元素选择器</h2><p>使用场景：选中元素中的一些特殊位置</p>
+<h3 id="目标伪类">目标伪类</h3>
+<p><code>:target</code> 选中锚点指向的元素。</p>
+<h3 id="语言伪类">语言伪类</h3>
+<p><code>:lang()</code> 根据指定的语言选择元素（本质是看 <code>lang</code> 属性的值）</p>
+<h2 id="伪元素选择器">伪元素选择器</h2>
+<p>使用场景：选中元素中的一些特殊位置</p>
 <p>常用伪元素：</p>
 <ul>
 <li><code>::first-letter</code> 选中元素中的<strong>第一个文字</strong>。</li>

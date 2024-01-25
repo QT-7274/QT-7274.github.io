@@ -6,11 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="尚品汇-登录注册流程, QT-7274">
-    <meta name="description" content="前台项目注册首先是静态页面：
+    <meta name="description" content="前台项目
+注册
+首先是静态页面：
 src/pages/Register/index.vue
 &amp;lt;template&amp;gt;
   &amp;lt;div class&amp;#x3D;&amp;quot;register-container&amp;quot;&amp;gt;
-   ">
+ ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -508,7 +510,9 @@ src/pages/Register/index.vue
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前台项目"><a href="#前台项目" class="headerlink" title="前台项目"></a>前台项目</h2><h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>首先是静态页面：</p>
+                <h2 id="前台项目">前台项目</h2>
+<h3 id="注册">注册</h3>
+<p>首先是静态页面：</p>
 <p><code>src/pages/Register/index.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
   &lt;div class&#x3D;&quot;register-container&quot;&gt;
@@ -650,7 +654,6 @@ export default &#123;
   &#125;,
 &#125;;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这里表单验证采用的是<code>VeeValidate</code>依赖（仅作了解），在<code>main.js</code>中引入<code>src/plugins/validate.js</code>文件：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import Vue from &quot;vue&quot;;
 import VeeValidate from &quot;vee-validate&quot;;
@@ -679,7 +682,6 @@ VeeValidate.Validator.extend(&quot;agree&quot;, &#123;
   &#125;,
   getMessage: (field) &#x3D;&gt; field + &quot;必须同意&quot;,
 &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>那么我们再看看这两个方法：<code>getCode()</code>和<code>userRegister()</code>：</p>
 <p><code>getCode()</code>：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async getCode() &#123;
@@ -691,7 +693,6 @@ VeeValidate.Validator.extend(&quot;agree&quot;, &#123;
         alert(error.message);
       &#125;
     &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这段代码的关键：</p>
 <ol>
 <li>获取并判断变量<code>phone</code>是否存在，</li>
@@ -722,7 +723,6 @@ VeeValidate.Validator.extend(&quot;agree&quot;, &#123;
           state<span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>userRegister()</code>：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">async register() &#123;
       &#x2F;&#x2F;解构出参数
@@ -741,7 +741,6 @@ VeeValidate.Validator.extend(&quot;agree&quot;, &#123;
         &#125;
       &#125;
     &#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>代码很简单，就是解构对象与发起注册请求，注册成功后跳转登录页面。</p>
 <p>我们去<code>store</code>中看看<code>registerUser</code>做了什么：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//注册用户的地方</span>
@@ -757,8 +756,8 @@ VeeValidate.Validator.extend(&quot;agree&quot;, &#123;
               <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
          <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p><code>src/pages/Login/index.vue</code></p>
+<h3 id="登录">登录</h3>
+<p><code>src/pages/Login/index.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
   &lt;div class&#x3D;&quot;login-container&quot;&gt;
     &lt;!-- 登录 --&gt;
@@ -874,7 +873,6 @@ export default &#123;
   &#125;,
 &#125;;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>store</code>中的登录操作比较特殊：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//登录、注册模块的小仓库</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> reqGetCode<span class="token punctuation">,</span> reqRegister<span class="token punctuation">,</span> reqUserLogin<span class="token punctuation">,</span> reqUserInfo<span class="token punctuation">,</span> reqUserLogout <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/api'</span><span class="token punctuation">;</span>
@@ -963,7 +961,6 @@ export default &#123;
      actions<span class="token punctuation">,</span>
      getters
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>但是登录功能最重要的还是权限控制，即部分页面在未登录状态下是不可以被访问的，这里我们可以使用全局路由守卫实现：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;全局守卫:只要项目中有任何路由变化，全局守卫都会进行拦截【符合条件走你，不符合条件不能访问】
 
@@ -1020,12 +1017,13 @@ router.beforeEach(async (to, from, next) &#x3D;&gt; &#123;
     &#125;
 &#125;);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>需要判断的情况有以下几种：</p>
 <ol>
-<li><p>用户已登录（有<code>token</code>）且有用户信息：直接放行到目标路由。</p>
+<li>
+<p>用户已登录（有<code>token</code>）且有用户信息：直接放行到目标路由。</p>
 </li>
-<li><p>用户已登录（有<code>token</code>）但没有用户信息：发起请求获取用户信息，如果获取成功则放行到目标路由，如果获取失败则清空本地数据、通知服务器清除<code>token</code>，并重定向到登录页。</p>
+<li>
+<p>用户已登录（有<code>token</code>）但没有用户信息：发起请求获取用户信息，如果获取成功则放行到目标路由，如果获取失败则清空本地数据、通知服务器清除<code>token</code>，并重定向到登录页。</p>
 <blockquote>
 <p>那么为什么用户已登录但没有用户信息这种情况会发生呢？</p>
 <ul>
@@ -1035,12 +1033,16 @@ router.beforeEach(async (to, from, next) &#x3D;&gt; &#123;
 </ul>
 </blockquote>
 </li>
-<li><p>用户未登录且目标路由是需要登录才能访问的页面（如<code>trade</code>、<code>pay</code>、<code>center</code>等）：重定向到登录页并携带重定向参数。 </p>
+<li>
+<p>用户未登录且目标路由是需要登录才能访问的页面（如<code>trade</code>、<code>pay</code>、<code>center</code>等）：重定向到登录页并携带重定向参数。</p>
 </li>
-<li><p>用户未登录且目标路由不是需要登录才能访问的页面：直接放行到目标路由。</p>
+<li>
+<p>用户未登录且目标路由不是需要登录才能访问的页面：直接放行到目标路由。</p>
 </li>
 </ol>
-<h2 id="后台项目"><a href="#后台项目" class="headerlink" title="后台项目"></a>后台项目</h2><h3 id="登录-1"><a href="#登录-1" class="headerlink" title="登录"></a>登录</h3><p><code>src/views/login/index.vue</code></p>
+<h2 id="后台项目">后台项目</h2>
+<h3 id="登录-2">登录</h3>
+<p><code>src/views/login/index.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
   &lt;div class&#x3D;&quot;login-container&quot;&gt;
     &lt;!-- el-form组件：elementUI插件里面的一个组件，经常展示表单元素  model：用于收集表单数据  rules：表单验证规则--&gt;
@@ -1177,18 +1179,18 @@ export default &#123;
   &#125;
 &#125;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们逐行拆解一下：</p>
 <ol>
-<li><p>登录页面使用了<code>el-form</code>组件，展示表单元素：</p>
+<li>
+<p>登录页面使用了<code>el-form</code>组件，展示表单元素：</p>
 <ul>
-<li><p><code>model</code>：用于收集表单数据  </p>
+<li>
+<p><code>model</code>：用于收集表单数据</p>
 <p>此处默认值为：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">loginForm</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
         <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token string">'admin'</span><span class="token punctuation">,</span>
         <span class="token literal-property property">password</span><span class="token operator">:</span> <span class="token string">'111111'</span>
       <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>同时在<code>el-form-item</code>中的<code>el-input</code>标签中：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-input</span>
           <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>username<span class="token punctuation">"</span></span>
@@ -1207,7 +1209,8 @@ export default &#123;
 //- tabindex="1"：设置输入框的Tab键顺序，表示在表单中的焦点切换顺序。 
 //- auto-complete="on"：启用输入框的自动完成功能。 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><code>rules</code>：表单验证规则</p>
+<li>
+<p><code>rules</code>：表单验证规则</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> validUsername <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/utils/validate'</span>
 <span class="token literal-property property">loginRules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
         <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token literal-property property">trigger</span><span class="token operator">:</span> <span class="token string">'blur'</span><span class="token punctuation">,</span> <span class="token literal-property property">validator</span><span class="token operator">:</span> validateUsername <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1229,7 +1232,6 @@ export default &#123;
         <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>其中<code>validUsername</code>规则单独引入</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
  * @param &#123;string&#125; str
@@ -1241,10 +1243,12 @@ export default &#123;
 <span class="token punctuation">&#125;</span>
 <span class="token comment">//函数的主体部分是一行代码，它使用了数组的indexOf方法来检查给定的字符串是否在valid_map数组中。</span>
 <span class="token comment">//首先，通过调用str.trim()方法去除字符串两端的空格，然后使用indexOf方法检查该字符串在valid_map数组中的索引位置。</span>
-<span class="token comment">//如果索引大于等于0，说明该字符串在数组中存在，函数返回true，否则返回false。 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token comment">//如果索引大于等于0，说明该字符串在数组中存在，函数返回true，否则返回false。 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 </li>
-<li><p>密码切换显示</p>
+<li>
+<p>密码切换显示</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-item</span> <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>svg-container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg-icon</span> <span class="token attr-name">icon-class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
@@ -1261,7 +1265,7 @@ export default &#123;
           <span class="token attr-name">@keyup.enter.native</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>handleLogin<span class="token punctuation">"</span></span>
         <span class="token punctuation">/></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>show-pwd<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>showPwd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg-icon</span> <span class="token attr-name">:icon-class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>passwordType === <span class="token punctuation">'</span>password<span class="token punctuation">'</span> ? <span class="token punctuation">'</span>eye<span class="token punctuation">'</span> : <span class="token punctuation">'</span>eye-open<span class="token punctuation">'</span><span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg-icon</span> <span class="token attr-name">:icon-class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>passwordType === 'password' ? 'eye' : 'eye-open'<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-form-item</span><span class="token punctuation">></span></span>
 /**
@@ -1275,7 +1279,6 @@ export default &#123;
    - auto-complete="on"：启用输入框的自动完成功能。 
    - @keyup.enter.native="handleLogin"：当用户在输入框中按下回车键时，调用Vue实例中的handleLogin方法。
 */<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"> <span class="token function">showPwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>passwordType <span class="token operator">===</span> <span class="token string">'password'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>passwordType <span class="token operator">=</span> <span class="token string">''</span>
@@ -1288,9 +1291,9 @@ export default &#123;
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token comment">//首先，它会检查密码框的类型是否为"password"。如果是，则将其类型设置为空字符串，即将密码框的内容显示出来。如果不是，则将其类型设置为"password"，即将密码框的内容隐藏起来。 然后，它会使用$nextTick方法来等待DOM更新完成后，再执行后续操作。在DOM更新完成后，它会使用$refs属性来获取名为"password"的元素，并调用其focus方法，将焦点设置在密码框上。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>发起登录请求</p>
+<li>
+<p>发起登录请求</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-button :loading&#x3D;&quot;loading&quot; type&#x3D;&quot;primary&quot; style&#x3D;&quot;width:100%;margin-bottom:30px;&quot; @click.native.prevent&#x3D;&quot;handleLogin&quot;&gt;登录&lt;&#x2F;el-button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;登录业务：发请求，带着用户名与密码给服务器（成功与失败）
     handleLogin() &#123;
       &#x2F;&#x2F;这里是在验证表单元素（用户名与密码）的是否符合规则
@@ -1314,7 +1317,6 @@ export default &#123;
         &#125;
       &#125;)
     &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>src\store\modules\user.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//actions</span>
 <span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
@@ -1334,7 +1336,6 @@ export default &#123;
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>src\utils\auth.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Cookies <span class="token keyword">from</span> <span class="token string">'js-cookie'</span>
 
@@ -1352,7 +1353,6 @@ export default &#123;
 <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">removeToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">return</span> Cookies<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>TokenKey<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>src\utils\request.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> MessageBox<span class="token punctuation">,</span> Message <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'element-ui'</span>
@@ -1441,7 +1441,8 @@ service<span class="token punctuation">.</span>interceptors<span class="token pu
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>权限控制</p>
+<li>
+<p>权限控制</p>
 <p><code>src\permission.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
 <span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store'</span>
@@ -1506,39 +1507,40 @@ router<span class="token punctuation">.</span><span class="token function">after
   <span class="token comment">// finish progress bar</span>
   NProgress<span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ol>
-<li>开始进度条：调用<code>NProgress.start()</code>方法开始显示进度条。  </li>
-<li>设置页面标题：根据目标路由的<code>meta.title</code>属性，调用<code>getPageTitle()</code>方法设置页面标题。  </li>
-<li>判断用户是否已登录：调用<code>getToken()</code>方法判断用户是否已登录，将结果保存在<code>hasToken</code>变量中。  </li>
-<li>如果用户已登录：    <ul>
-<li>如果目标路径是登录页：调用<code>next()</code>方法重定向到首页，并调用<code>NProgress.done()</code>方法结束进度条的显示。   </li>
-<li>否则，判断是否已获取用户信息：<ul>
+<li>开始进度条：调用<code>NProgress.start()</code>方法开始显示进度条。</li>
+<li>设置页面标题：根据目标路由的<code>meta.title</code>属性，调用<code>getPageTitle()</code>方法设置页面标题。</li>
+<li>判断用户是否已登录：调用<code>getToken()</code>方法判断用户是否已登录，将结果保存在<code>hasToken</code>变量中。</li>
+<li>如果用户已登录：
+<ul>
+<li>如果目标路径是登录页：调用<code>next()</code>方法重定向到首页，并调用<code>NProgress.done()</code>方法结束进度条的显示。</li>
+<li>否则，判断是否已获取用户信息：
+<ul>
 <li>如果已获取用户信息：调用<code>next()</code>方法继续路由跳转。</li>
-<li>否则，获取用户信息并跳转到目标路径：调用<code>store.dispatch(&#39;user/getInfo&#39;)</code>方法获取用户信息并调用<code>next(&#123;...to&#125;)</code>方法跳转到目标路径。</li>
+<li>否则，获取用户信息并跳转到目标路径：调用<code>store.dispatch('user/getInfo')</code>方法获取用户信息并调用<code>next(&#123;...to&#125;)</code>方法跳转到目标路径。</li>
 </ul>
 </li>
-<li>如果获取用户信息出错：调用<code>store.dispatch(&#39;user/resetToken&#39;)</code>方法移除<code>token</code>；调用<code>Message.error()</code>方法显示错误信息；跳转到登录页，并将目标路径作为参数传递；调用<code>NProgress.done()</code>方法结束进度条的显示。</li>
+<li>如果获取用户信息出错：调用<code>store.dispatch('user/resetToken')</code>方法移除<code>token</code>；调用<code>Message.error()</code>方法显示错误信息；跳转到登录页，并将目标路径作为参数传递；调用<code>NProgress.done()</code>方法结束进度条的显示。</li>
 </ul>
 </li>
-<li>如果用户未登录：    <ul>
+<li>如果用户未登录：
+<ul>
 <li>如果目标路径在白名单中：调用<code>next()</code>方法继续路由跳转。</li>
 <li>否则，跳转到登录页，并将目标路径作为参数传递，并调用<code>NProgress.done()</code>方法结束进度条的显示。</li>
 </ul>
 </li>
 </ol>
 </li>
-<li><p>登出</p>
+<li>
+<p>登出</p>
 <p><code>src\layout\components\Navbar.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;el-dropdown-item divided @click.native&#x3D;&quot;logout&quot;&gt;
             &lt;span style&#x3D;&quot;display:block;&quot;&gt;退出&lt;&#x2F;span&gt;
           &lt;&#x2F;el-dropdown-item&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">async</span> <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
       <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/logout'</span><span class="token punctuation">)</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>$router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/login?redirect=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>$route<span class="token punctuation">.</span>fullPath<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>src\store\modules\user.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//引入登录|退出登录|获取用户信息的接口函数</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> login<span class="token punctuation">,</span> logout<span class="token punctuation">,</span> getInfo <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/api/user'</span>
@@ -1563,7 +1565,6 @@ router<span class="token punctuation">.</span><span class="token function">after
       <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><code>src\router\index.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//任意理由：</span>
 
@@ -1581,10 +1582,9 @@ router<span class="token punctuation">.</span><span class="token function">after
   <span class="token keyword">const</span> newRouter <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
   router<span class="token punctuation">.</span>matcher <span class="token operator">=</span> newRouter<span class="token punctuation">.</span>matcher <span class="token comment">// reset router</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>将<code>resetRouter()</code>放置在<code>removeToken()</code>之后，可以确保在移除<code>token</code>后立即重置路由。这样做有以下几个好处：</p>
 <ol>
-<li>顺序性：按照先移除<code>token</code>，再重置路由的顺序，能够确保在重置路由时不会因为仍然存在<code>token</code>而导致路由的未授权访问。 </li>
+<li>顺序性：按照先移除<code>token</code>，再重置路由的顺序，能够确保在重置路由时不会因为仍然存在<code>token</code>而导致路由的未授权访问。</li>
 <li>完整性：移除<code>token</code>后，重置路由能够清理应用程序中与用户身份验证相关的状态，确保应用程序从一个干净的状态开始。</li>
 </ol>
 <blockquote>
@@ -1592,7 +1592,8 @@ router<span class="token punctuation">.</span><span class="token function">after
 </blockquote>
 </li>
 </ol>
-<h3 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h3><p><code>src\store\modules\user.js</code></p>
+<h3 id="路由控制">路由控制</h3>
+<p><code>src\store\modules\user.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//引入登录|退出登录|获取用户信息的接口函数</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> login<span class="token punctuation">,</span> logout<span class="token punctuation">,</span> getInfo <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/api/user'</span>
 <span class="token comment">// 获取token|设置token|删除token的函数</span>
@@ -1706,10 +1707,9 @@ router<span class="token punctuation">.</span><span class="token function">after
   actions
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>总结：</p>
 <ol>
-<li>动态路由配置：通过从服务器获取的菜单信息，根据不同的角色，返回的标记信息，构建了异步路由配置。这些异步路由配置包含了不同角色所能访问的页面和功能。这样做可以根据用户的角色动态生成路由，实现了动态路由的功能。  </li>
+<li>动态路由配置：通过从服务器获取的菜单信息，根据不同的角色，返回的标记信息，构建了异步路由配置。这些异步路由配置包含了不同角色所能访问的页面和功能。这样做可以根据用户的角色动态生成路由，实现了动态路由的功能。</li>
 <li>路由过滤与对比：通过 <code>computedAsyncRoutes</code> 函数，将异步路由配置与当前用户的路由进行对比，过滤出当前用户需要展示的异步路由。该函数使用<strong>递归</strong>的方式对比路由的子路由，确保所有层级的路由都可以正确匹配。</li>
 <li>路由添加与重置：通过 <code>SET_RESULTASYNCROUTES</code>  mutation，将过滤后的异步路由添加到Vue Router实例中。这样，用户在登录后，根据其角色权限，可以动态生成并展示相应的路由。</li>
 <li>路由重置与注销：在用户注销或退出登录时，通过调用 <code>resetRouter</code> 函数重置路由，将路由恢复到初始状态。这样做可以确保用户退出登录后，再次登录时从一个干净的状态开始。</li>

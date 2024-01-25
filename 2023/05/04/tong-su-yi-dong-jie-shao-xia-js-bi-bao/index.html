@@ -500,22 +500,26 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="JavaScript中的闭包"><a href="#JavaScript中的闭包" class="headerlink" title="JavaScript中的闭包"></a>JavaScript中的闭包</h1><blockquote>
+                <h1>JavaScript中的闭包</h1>
+<blockquote>
 <p>以下讨论中，Javascript均为ECMAScript的别名，仅代表ECMA-262协议的实现，不指代包括DOM、BOM在内的Web Javascript系统。</p>
 </blockquote>
-<h2 id="闭包概念"><a href="#闭包概念" class="headerlink" title="闭包概念"></a>闭包概念</h2><p>首先用一张图来直观看看JavaScript闭包：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/05/04/tong-su-yi-dong-jie-shao-xia-js-bi-bao/closure.png" alt="image-center"></p>
-<p>将闭包比喻成一个函数携带着一个背包。这张图就很简单地描述了这种关系：<strong>闭包 &#x3D; 函数 + 外部上下文</strong></p>
+<h2 id="闭包概念">闭包概念</h2>
+<p>首先用一张图来直观看看JavaScript闭包：</p>
+<p><img src="/medias/images/loading.gif" data-original="closure.png" alt="image-center"></p>
+<p>将闭包比喻成一个函数携带着一个背包。这张图就很简单地描述了这种关系：<strong>闭包 = 函数 + 外部上下文</strong></p>
 <p>其中闭包中的这个函数一般是由另一个函数创建、返回的，这样对于这个函数来讲，外部的函数在执行时创建出来的上下文对于它就是一个外部上下文，这个外部上下文中包含了外部函数中声明的所有变量，包括闭包函数本身。</p>
 <p>你可以将外部函数的外部函数执行时产生的上下文也理解为外部上下文，该上下文也属于闭包的一部分。层层而上，一直回溯到全局执行上下文，都是属于这个闭包。</p>
-<h2 id="闭包重点"><a href="#闭包重点" class="headerlink" title="闭包重点"></a>闭包重点</h2><ol>
+<h2 id="闭包重点">闭包重点</h2>
+<ol>
 <li><strong>闭包不是一个函数</strong>，而是一个函数和它的外部上下文的组合。</li>
 <li>闭包的产生并不影响外部上下文的回收，闭包中的外部上下文只是在创建闭包时创建的一个副本。当然，对于同级的闭包来讲，它们会引用同一个外部上下文的副本，而不是各自创建属于自己的副本。</li>
 <li>Javascript中所有函数都可以理解为闭包函数，因为即使是最外层定义的函数，它也有属于自己的外部上下文——<strong>全局上下文</strong>。</li>
 <li>不推荐嵌套过多层闭包，因为<u>每个闭包创建时都会把所有外部上下文回溯到全局上下文中的变量作为属于它的外部上下文部分创建拷贝存储起来</u>，如果嵌套层次过多会引起内存不必要的浪费。</li>
 <li>同样，不推荐使用没有必要的闭包。比如在一个函数中创建了另外一个函数，但是在这个内部函数中根本就不会引用到外部这个函数中声明的变量，这个内部函数产生的闭包会保存这些没有用处的变量，造成不必要的内存浪费。</li>
 </ol>
-<h2 id="闭包作用"><a href="#闭包作用" class="headerlink" title="闭包作用"></a>闭包作用</h2><p>初学者容易从教材中混淆以下概念，认为是闭包的作用：</p>
+<h2 id="闭包作用">闭包作用</h2>
+<p>初学者容易从教材中混淆以下概念，认为是闭包的作用：</p>
 <ol>
 <li>避免变量全局污染</li>
 <li>使数据私有化，外部无法修改内部数据</li>
@@ -537,7 +541,6 @@
 <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">//输出11,11,11</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这段代码其实没有用到闭包，完全是函数本身的作用，例如避免全局污染，数据私有化等。</p>
 <p>那么应该如何做使得变量a常驻在内存当中呢，即每次变量a的值递增1？</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
@@ -553,14 +556,13 @@
 <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">//输出11,12,13</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>也就是在fn()函数中<strong>嵌套一个函数</strong>，用到了<strong>外层函数的变量</strong>，此时形成了闭包。</p>
 <blockquote>
-<p> 注意：除第一次<code>let f = fn()</code>外，其余三次执行函数只执行了fn()函数中的匿名函数，即没有执行<code>let a = 10</code>这条语句，所以a没有被重复赋值，同时因为闭包的特点，a变量驻留在内存当中，从而可以自增。</p>
+<p>注意：除第一次<code>let f = fn()</code>外，其余三次执行函数只执行了fn()函数中的匿名函数，即没有执行<code>let a = 10</code>这条语句，所以a没有被重复赋值，同时因为闭包的特点，a变量驻留在内存当中，从而可以自增。</p>
 </blockquote>
 <p>由于闭包不影响外部上下文的回收，所以<strong>闭包本身不会造成内存泄露</strong>，但是如果闭包中引用了外部函数的变量或对象，而这些变量或对象没有被正确地释放，就会导致内存泄漏。</p>
 <blockquote>
-<p>内存泄漏：程序在运行过程中创建的对象变量是一个内存地址（指针），若该对象重新赋值一个新的指针，而之前的指针指向的内存未进行回收，则内存泄漏。这个现象一般出现在需要手动析构对象的语言中，如C&#x2F;C++。内存泄漏会导致无用的内存被占用且无法进行回收，程序长时间运行下去内存会只增不减直到内存溢出Crash。</p>
+<p>内存泄漏：程序在运行过程中创建的对象变量是一个内存地址（指针），若该对象重新赋值一个新的指针，而之前的指针指向的内存未进行回收，则内存泄漏。这个现象一般出现在需要手动析构对象的语言中，如C/C++。内存泄漏会导致无用的内存被占用且无法进行回收，程序长时间运行下去内存会只增不减直到内存溢出Crash。</p>
 </blockquote>
 <p>闭包在销毁前会一直保留外部上下文中的变量，如果闭包创建过多而没有及时被GC回收，<strong>可能会造成内存溢出（Out of Memory）</strong>。</p>
 <blockquote>

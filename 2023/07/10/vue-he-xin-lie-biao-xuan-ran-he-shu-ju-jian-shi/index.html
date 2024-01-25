@@ -7,11 +7,14 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Vue核心 列表渲染和数据监视, QT-7274">
     <meta name="description" content="更新记录
+
 2023-09-11：对于“如何选择key”作了补充。
 
-列表渲染React，Vue中的key有什么作用？
+列表渲染
+React，Vue中的key有什么作用？
 
-虚拟DOM中key的作用：key是虚拟DOM中对象的标识，当数据发生变化时，Vue会根据新数据生成新的虚拟DOM，随后V">
+
+虚拟DOM中key的作用：key是虚拟DOM中对象的标识，当数据发生变化时，Vue会根据新数据生成新的虚拟DOM，">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -505,39 +508,49 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a><font color='#3498db'>更新记录</font></h3><ul>
+                <h3 id="font-color-3498db-更新记录-font"><font color='#3498db'>更新记录</font></h3>
+<ul>
 <li>2023-09-11：对于“如何选择key”作了补充。</li>
 </ul>
-<h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><p><code>React</code>，<code>Vue</code>中的<code>key</code>有什么作用？</p>
+<h2 id="列表渲染">列表渲染</h2>
+<p><code>React</code>，<code>Vue</code>中的<code>key</code>有什么作用？</p>
 <ol>
-<li><p><code>虚拟DOM</code>中<code>key</code>的作用：<code>key</code>是<code>虚拟DOM</code>中对象的标识，当数据发生变化时，Vue会根据新数据生成新的<code>虚拟DOM</code>，随后Vue进行新<code>虚拟DOM</code>与旧<code>虚拟DOM</code>的差异比较，比较规则如下：</p>
+<li>
+<p><code>虚拟DOM</code>中<code>key</code>的作用：<code>key</code>是<code>虚拟DOM</code>中对象的标识，当数据发生变化时，Vue会根据新数据生成新的<code>虚拟DOM</code>，随后Vue进行新<code>虚拟DOM</code>与旧<code>虚拟DOM</code>的差异比较，比较规则如下：</p>
 </li>
-<li><p>比较规则：</p>
+<li>
+<p>比较规则：</p>
 <ol>
-<li>旧<code>虚拟DOM</code>中找到了与新<code>虚拟DOM</code>相同的<code>key</code><ul>
+<li>旧<code>虚拟DOM</code>中找到了与新<code>虚拟DOM</code>相同的<code>key</code>
+<ul>
 <li>若<code>虚拟DOM</code>中内容没变，直接使用之前的<code>真实DOM</code>。</li>
 <li>若<code>虚拟DOM</code>中内容改变，则生成新的<code>真实DOM</code>，随后替换掉页面中之前的<code>真实DOM</code>。</li>
 </ul>
 </li>
-<li>旧<code>虚拟DOM</code>中未找到与新<code>虚拟DOM</code>相同的<code>key</code><ul>
+<li>旧<code>虚拟DOM</code>中未找到与新<code>虚拟DOM</code>相同的<code>key</code>
+<ul>
 <li>创建新的<code>真实DOM</code>，随后渲染到页面。</li>
 </ul>
 </li>
 </ol>
 <p>图解：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/07/10/vue-he-xin-lie-biao-xuan-ran-he-shu-ju-jian-shi/1643033767087-2558e992-b48b-4b54-a9b8-86eb8534bd98.png" alt="image.png"></p>
+<p><img src="/medias/images/loading.gif" data-original="1643033767087-2558e992-b48b-4b54-a9b8-86eb8534bd98.png" alt="image.png"></p>
 </li>
-<li><p>使用index作为<code>key</code>可能会引发的问题</p>
+<li>
+<p>使用index作为<code>key</code>可能会引发的问题</p>
 <ul>
 <li>若对数据进行逆序添加、逆序删除等<strong>破坏顺序操作</strong>，会产生没有必要的<code>真实DOM</code>更新——页面效果正常，但浪费资源且效率低。</li>
 <li>若结构中还包含<strong>输入类的DOM</strong>：会产生错误DOM更新——界面出问题。</li>
 </ul>
 </li>
-<li><p>开发中如何选择<code>key</code></p>
+<li>
+<p>开发中如何选择<code>key</code></p>
 <ol>
-<li><p>最好使用每条数据的<strong>唯一标识</strong>作为<code>key</code>，比如id、手机号、身份证号、学号等唯一值。</p>
+<li>
+<p>最好使用每条数据的<strong>唯一标识</strong>作为<code>key</code>，比如id、手机号、身份证号、学号等唯一值。</p>
 </li>
-<li><p>如果不存在对数据的逆序添加、逆序删除等破坏顺序的操作，仅用于渲染列表，使用 <code>index</code> 作为<code>key</code>是没有问题的。</p>
+<li>
+<p>如果不存在对数据的逆序添加、逆序删除等破坏顺序的操作，仅用于渲染列表，使用 <code>index</code> 作为<code>key</code>是没有问题的。</p>
 <p>如果列表中进行数据更新、排序或过滤等操作，使用索引作为 <code>key</code> ，可能会导致列表项的重新排序或过滤时出现问题，因为索引是根据项的位置而不是唯一标识来分配的。</p>
 <p>代码示例：</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
@@ -563,49 +576,56 @@ export default &#123;
   &#125;
 &#125;;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>通过交换数组中最后一项和第一项的位置来改变列表的顺序：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">this.items.unshift(this.items.pop());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>然而，由于我们在 <code>v-for</code> 循环中使用索引作为 <code>key</code> ，当我们执行上述代码时，Vue会将最后一项的 <code>&lt;li&gt;</code> 元素与第一项的 <code>&lt;li&gt;</code> 元素进行交换，但是它们的 <code>key</code> 值并没有改变。这样就会导致Vue错误地认为这两个元素是相同的，从而无法正确地更新DOM，结果可能是两个元素的内容混乱或丢失。</p>
 </li>
-<li><p>即使没有写<code>:key=&quot;index&quot;</code>，Vue 也会帮我们把 <code>index</code> 作为 <code>key</code></p>
+<li>
+<p>即使没有写<code>:key=&quot;index&quot;</code>，Vue 也会帮我们把 <code>index</code> 作为 <code>key</code></p>
 </li>
-<li><p>如果使用索引作为 <code>key</code> ，当列表项的顺序发生变化时，Vue会重新创建和销毁组件实例。这<strong>可能会导致组件的状态丢失</strong>，例如输入框中的内容或选中的状态。使用唯一标识作为 <code>key</code> 可以避免这个问题，因为Vue会根据 <code>key</code> 来复用和保持组件实例的状态。</p>
+<li>
+<p>如果使用索引作为 <code>key</code> ，当列表项的顺序发生变化时，Vue会重新创建和销毁组件实例。这<strong>可能会导致组件的状态丢失</strong>，例如输入框中的内容或选中的状态。使用唯一标识作为 <code>key</code> 可以避免这个问题，因为Vue会根据 <code>key</code> 来复用和保持组件实例的状态。</p>
 </li>
 </ol>
 </li>
 </ol>
 <p>图解：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/07/10/vue-he-xin-lie-biao-xuan-ran-he-shu-ju-jian-shi/1643033764359-6a37a493-bb51-4b3b-8b14-822a3df68d6e.png" alt="image.png"></p>
-<h2 id="数据监视"><a href="#数据监视" class="headerlink" title="数据监视"></a>数据监视</h2><ol>
-<li><p>Vue会监视<code>data</code>中所有层次的数据。</p>
+<p><img src="/medias/images/loading.gif" data-original="1643033764359-6a37a493-bb51-4b3b-8b14-822a3df68d6e.png" alt="image.png"></p>
+<h2 id="数据监视">数据监视</h2>
+<ol>
+<li>
+<p>Vue会监视<code>data</code>中所有层次的数据。</p>
 </li>
-<li><p>如何监测<strong>对象</strong>中的数据？</p>
+<li>
+<p>如何监测<strong>对象</strong>中的数据？</p>
 <p>通过<code>setter</code>实现监视，且要在 <code>new Vue()</code> 时就传入要监测的数据</p>
 <ul>
-<li><p>对象创建后追加的属性，Vue默认不做响应式处理。直接在 <code>vm._data.student</code> 或者 <code>vm</code> 中添加该属性，是做不到响应式的，没有 <code>getter</code> 和 <code>setter</code> 方法。</p>
+<li>
+<p>对象创建后追加的属性，Vue默认不做响应式处理。直接在 <code>vm._data.student</code> 或者 <code>vm</code> 中添加该属性，是做不到响应式的，没有 <code>getter</code> 和 <code>setter</code> 方法。</p>
 </li>
-<li><p>如需给后添加的属性做响应式，请使用如下API</p>
+<li>
+<p>如需给后添加的属性做响应式，请使用如下API</p>
 <p><code>Vue.set(target, propertyName/index, value)</code></p>
 <p><code>vm.$set(target, propertyName/index, value)</code></p>
 </li>
 </ul>
 </li>
-<li><p>如何监测<strong>数组</strong>中的数据？</p>
+<li>
+<p>如何监测<strong>数组</strong>中的数据？</p>
 <p>通过包裹数组更新元素的方法实现，本质就是做了两件事</p>
 <ul>
 <li>调用原生对应的方法对数组进行更新</li>
 <li>重新解析模板，进而更新页面</li>
 </ul>
 </li>
-<li><p>在Vue修改数组中的某个元素一定要用如下方法</p>
+<li>
+<p>在Vue修改数组中的某个元素一定要用如下方法</p>
 <p><code>push()</code> <code>pop()</code> <code>unshift()</code> <code>shift()</code> <code>splice()</code> <code>sort()</code> <code>reverse()</code> 这几个方法被 Vue 重写了 <code>Vue.set()</code> 或 <code>vm.$set()</code> 。</p>
 <p><strong>push()</strong> 方法可向数组的末尾添加一个或多个元素，并返回新的长度。</p>
 <p><strong>pop()</strong> 方法用于删除并返回数组的最后一个元素。</p>
 <p><strong>shift()</strong> 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。</p>
 <p><strong>unshift()</strong> 方法可向数组的开头添加一个或更多元素，并返回新的长度。</p>
-<p><strong>splice()</strong> 方法向&#x2F;从数组中添加&#x2F;删除项目，然后返回被删除的项目。</p>
+<p><strong>splice()</strong> 方法向/从数组中添加/删除项目，然后返回被删除的项目。</p>
 <p><strong>sort()</strong> 方法用于对数组的元素进行排序。</p>
 <p><strong>reverse()</strong> 方法用于颠倒数组中元素的顺序。</p>
 <p><strong>替换数组</strong></p>
@@ -619,9 +639,11 @@ export default &#123;
 <blockquote>
 <p>注意：</p>
 <ul>
-<li><p><code>Vue.set()</code> 和 <code>vm.$set()</code> 不能给<code>vm</code>或<code>vm</code>的根数据对象（<code>data</code>等）添加属性。</p>
+<li>
+<p><code>Vue.set()</code> 和 <code>vm.$set()</code> 不能给<code>vm</code>或<code>vm</code>的根数据对象（<code>data</code>等）添加属性。</p>
 </li>
-<li><p>通过数组索引直接赋值去修改元素，页面并不会更新，因为Vue并没有像给对象一样给数组中的每个元素提供<code>getter</code>和<code>setter</code>函数，Vue无法监测到数据的改变。</p>
+<li>
+<p>通过数组索引直接赋值去修改元素，页面并不会更新，因为Vue并没有像给对象一样给数组中的每个元素提供<code>getter</code>和<code>setter</code>函数，Vue无法监测到数据的改变。</p>
 <p>但是若通过直接赋值<strong>修改数组中某个元素的属性</strong>时，页面会更新，因为Vue对数组中每个元素的<strong>属性</strong>都有其<code>setter</code>和<code>getter</code>方法。</p>
 </li>
 </ul>

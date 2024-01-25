@@ -6,10 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="MiVida社交平台-技巧汇总, QT-7274">
-    <meta name="description" content="组件控制版心控制使用组件插槽方法，将路由组件包裹起来，通过修改组件的样式来控制版心的大小：
+    <meta name="description" content="组件控制
+版心控制
+使用组件插槽方法，将路由组件包裹起来，通过修改组件的样式来控制版心的大小：
 &amp;lt;TheLayout&amp;gt;
   &amp;lt;router-view&amp;gt;&amp;lt;&amp;#x2F;router-view&amp;gt;
-&amp;lt;&amp;#x2F">
+&amp;lt;&amp;#x">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -507,11 +509,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="组件控制"><a href="#组件控制" class="headerlink" title="组件控制"></a>组件控制</h2><h3 id="版心控制"><a href="#版心控制" class="headerlink" title="版心控制"></a>版心控制</h3><p>使用组件插槽方法，将路由组件包裹起来，通过修改组件的样式来控制版心的大小：</p>
+                <h2 id="组件控制">组件控制</h2>
+<h3 id="版心控制">版心控制</h3>
+<p>使用组件插槽方法，将路由组件包裹起来，通过修改组件的样式来控制版心的大小：</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;TheLayout&gt;
   &lt;router-view&gt;&lt;&#x2F;router-view&gt;
 &lt;&#x2F;TheLayout&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p><code>TheLayout.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
   &lt;div class&#x3D;&quot;content&quot;&gt;
@@ -527,8 +530,8 @@
   margin-top: 88px;
 &#125;
 &lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="头像组件"><a href="#头像组件" class="headerlink" title="头像组件"></a>头像组件</h3><p><code>TheAvatar.vue</code></p>
+<h3 id="头像组件">头像组件</h3>
+<p><code>TheAvatar.vue</code></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
         &lt;img :src&#x3D;&quot;src || defaultAvatar&quot;  alt&#x3D;&quot;#&quot; class&#x3D;&quot;avatar&quot;&#x2F;&gt;
 &lt;&#x2F;template&gt;
@@ -562,21 +565,21 @@ defineProps(&#123;
   object-position: top center;
 &#125;
 &lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ol>
-<li>引入了 <code>defaultAvatar</code> 作为默认头像的路径。  </li>
-<li>定义了组件的参数，包括 <code>src</code> 、 <code>width</code> 和 <code>height</code> 。  </li>
+<li>引入了 <code>defaultAvatar</code> 作为默认头像的路径。</li>
+<li>定义了组件的参数，包括 <code>src</code> 、 <code>width</code> 和 <code>height</code> 。</li>
 <li>在模板中使用 <code>&lt;img&gt;</code> 标签来显示头像，通过 <code>:src</code> 属性绑定了一个 <code>src</code> 变量，如果 <code>src</code> 变量不存在，则使用 <code>defaultAvatar</code> 作为默认头像。</li>
 </ol>
 <blockquote>
 <p>注意样式：</p>
 <ol>
-<li>使用v-bind指令给元素的<code>width</code>属性和<code>height</code>绑定动态值，该值为变量<code>width</code>或<code>height</code>的值加上”<code>px</code>“。</li>
-<li>设置元素的对象适应方式为覆盖（cover），即保持宽高比例不变，将对象缩放到填满容器。 </li>
+<li>使用v-bind指令给元素的<code>width</code>属性和<code>height</code>绑定动态值，该值为变量<code>width</code>或<code>height</code>的值加上&quot;<code>px</code>&quot;。</li>
+<li>设置元素的对象适应方式为覆盖（cover），即保持宽高比例不变，将对象缩放到填满容器。</li>
 <li>设置元素的对象位置为顶部居中</li>
 </ol>
 </blockquote>
-<h2 id="样式技巧"><a href="#样式技巧" class="headerlink" title="样式技巧"></a>样式技巧</h2><p>大量的grid布局，例如：</p>
+<h2 id="样式技巧">样式技巧</h2>
+<p>大量的grid布局，例如：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.postMeta</span> <span class="token punctuation">&#123;</span>
       <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
       <span class="token property">grid-template-areas</span><span class="token punctuation">:</span>
@@ -597,21 +600,23 @@ defineProps(&#123;
       <span class="token selector">.postPubDate</span> <span class="token punctuation">&#123;</span>
       <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ol>
 <li>使用<code>grid-template-areas</code>属性来定义网格布局的区域。</li>
-<li><code>grid-template-columns: 42px 1fr 3fr;</code>它由三个值组成，用空格隔开。每个值代表一列的宽度。 <ul>
-<li><code>42px</code>：第一列的宽度为42像素。  </li>
-<li><code>1fr</code>：第二列的宽度为剩余空间的1份。这里的“fr”是“fraction”的缩写，表示比例。 </li>
+<li><code>grid-template-columns: 42px 1fr 3fr;</code>它由三个值组成，用空格隔开。每个值代表一列的宽度。
+<ul>
+<li><code>42px</code>：第一列的宽度为42像素。</li>
+<li><code>1fr</code>：第二列的宽度为剩余空间的1份。这里的“fr”是“fraction”的缩写，表示比例。</li>
 <li><code>3fr</code>：第三列的宽度为剩余空间的3份。同样，这里的“fr”表示比例。</li>
 </ul>
 </li>
-<li>在第一行定义了三个区域，分别是”<code>avatar</code>“、”<code>name</code>“和”<code>actions</code>“。 </li>
-<li>在第二行定义了三个区域，分别是”<code>pubDate</code>“、”<code>pubDate</code>“和”<code>actions</code>“。 </li>
+<li>在第一行定义了三个区域，分别是&quot;<code>avatar</code>&quot;、“<code>name</code>&quot;和&quot;<code>actions</code>”。</li>
+<li>在第二行定义了三个区域，分别是&quot;<code>pubDate</code>&quot;、“<code>pubDate</code>&quot;和&quot;<code>actions</code>”。</li>
 <li>这样就定义了一个2行3列的网格布局，每个区域的名称和位置都已经确定。</li>
 </ol>
-<h2 id="Vuex技巧"><a href="#Vuex技巧" class="headerlink" title="Vuex技巧"></a>Vuex技巧</h2><ol>
-<li><p>点赞和收藏功能实现：</p>
+<h2 id="Vuex技巧">Vuex技巧</h2>
+<ol>
+<li>
+<p>点赞和收藏功能实现：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//外部触发：@likeClick="$store.dispatch('toggleLike', post.id)"</span>
 <span class="token literal-property property">actions</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
 <span class="token keyword">async</span> <span class="token function">toggleFavor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> commit <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> id</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -640,9 +645,11 @@ defineProps(&#123;
       <span class="token punctuation">&#125;</span>
       post<span class="token punctuation">.</span>likedByMe <span class="token operator">=</span> isLike<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">&#125;</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h2 id="工具包"><a href="#工具包" class="headerlink" title="工具包"></a>工具包</h2><p>很常见的时间显示风格的功能实现：</p>
+<h2 id="工具包">工具包</h2>
+<p>很常见的时间显示风格的功能实现：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
  * 1. 将输入的日期字符串转换为一个日期对象，并赋值给变量date。 
  * 2. 创建一个表示当前时间的日期对象，并赋值给变量now。 
@@ -677,7 +684,6 @@ export function dateToRelative(dateStr) &#123;
     )&#125;-$&#123;(&quot;0&quot; + (date.getDate() + 1)).slice(-2)&#125;&#96;;
   &#125;
   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

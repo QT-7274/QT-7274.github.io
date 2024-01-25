@@ -6,13 +6,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="《深度学习图解》激活函数, QT-7274">
-    <meta name="description" content="什么是激活函数它是在预测时应用于一层神经元的函数。
+    <meta name="description" content="什么是激活函数
+它是在预测时应用于一层神经元的函数。
 因为我们一直在使用一个名为relu的激活函数（如下图所示），relu函数具有将所有负数变为0的效果：
 
 
 简单来说：激活函数指的是任何可以接受一个数字并返回另一个数字的函数。
 
-要使一个函">
+要使一个">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -506,23 +507,26 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="什么是激活函数"><a href="#什么是激活函数" class="headerlink" title="什么是激活函数"></a>什么是激活函数</h3><p><strong>它是在预测时应用于一层神经元的函数。</strong></p>
+                <h3 id="什么是激活函数">什么是激活函数</h3>
+<p><strong>它是在预测时应用于一层神经元的函数。</strong></p>
 <p>因为我们一直在使用一个名为relu的激活函数（如下图所示），relu函数具有将所有负数变为0的效果：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202120122848.png" alt="image-20231202120122848"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202120122848.png" alt="image-20231202120122848"></p>
 <blockquote>
 <p>简单来说：激活函数指的是任何可以接受一个数字并返回另一个数字的函数。</p>
 </blockquote>
 <p>要使一个函数作为激活函数，需要满足几个限制条件。使用不满足这些限制条件的函数作为激活函数通常不是好主意：</p>
 <ul>
-<li><p>约束1：<strong>函数必须连续且定义域是无穷的</strong></p>
-<p><strong>它必须对任何输入都有一个确定的输出。</strong>换句话说，你应该没有办法输入一个没有输出的数字，不管因为什么原因。</p>
+<li>
+<p>约束1：<strong>函数必须连续且定义域是无穷的</strong></p>
+<p>**它必须对任何输入都有一个确定的输出。**换句话说，你应该没有办法输入一个没有输出的数字，不管因为什么原因。</p>
 <p>例如下图中左边函数不是连续的，并不是每个x值都有y值；右边函数是连续的且定义域是无穷的，没有不能计算输出(y)的输入(x)：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202164747789.png" alt="image-20231202164747789"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202164747789.png" alt="image-20231202164747789"></p>
 </li>
-<li><p>约束2：<strong>好的激活函数是单调的，不会改变方向</strong></p>
+<li>
+<p>约束2：<strong>好的激活函数是单调的，不会改变方向</strong></p>
 <p>激活函数是单调的，它决不能改变方向，换句话说，它要么一直增加，要么一直减少。</p>
 <p>例如下图中左边函数不是一个理想的激活函数，因为它既没有单调递增，也没有单调递减；右边函数是单调递增的，没有任何两个x具有相同的y值：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202165748542.png" alt="image-20231202165748542"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202165748542.png" alt="image-20231202165748542"></p>
 <p>严格来说，这个特定的限制条件不是必需的。我们可以对非单调函数进行优化，但是我们需要考虑多个输入值映射到同一个输出值的意义：</p>
 <p>当神经网络进行学习时，实际上是在寻找合适的权重配置来给出特定的输出。倘若有多个正确答案，这个问题会变得困难得多，即会有多种方法得到相同的输出，那么网络就有多种可能的完美配置。</p>
 <p>这看似是一把双刃剑：在很多地方找到正确的答案，那么我们就更有可能找到它；现在找不到任何一个正确的方向以减少误差，因为理论上可在许多方向上取得进展。</p>
@@ -530,61 +534,74 @@
 <p>不幸的是，它的缺点更为重要，要进一步要就这个问题，可以深入了解凸优化和非凸优化。</p>
 </blockquote>
 </li>
-<li><p>约束3：<strong>好的激活函数是非线性的（扭曲或反转）</strong></p>
+<li>
+<p>约束3：<strong>好的激活函数是非线性的（扭曲或反转）</strong></p>
 <p>回顾下条件相关：必须允许神经元选择性地与输入神经元相互关联，使得将一个负值较大的信号从某个输入传输到某个神经元能够减少它与任何输入的相关性（在使用relu激活函数的情况下，它会迫使神经元的值降到0）。</p>
 <p>事实证明，这种现象是由<strong>带有曲线的函数</strong>促成的。此外，那些看起来像直线的函数，将传入的加权平均进行缩放——对某个对象的缩放（乘以一个常数，比如2）并不影响神经元与各种输入之间的关联程度，只是使整体上的相关性表现得更强或更弱。</p>
-<p><strong>但是这种线性激活函数并不会让一项权重影响神经元与其他权重之间的关联程度。</strong>你真正想要的是选择性关联——给定一个神经元及其激活函数，你希望某个传入的信号能够增加或减少这个神经元与其他所有传入信号的相关性——所有的非线性函数都可以完成这件事情（只是程度有所不同，接下来将逐一介绍）。</p>
+<p>**但是这种线性激活函数并不会让一项权重影响神经元与其他权重之间的关联程度。**你真正想要的是选择性关联——给定一个神经元及其激活函数，你希望某个传入的信号能够增加或减少这个神经元与其他所有传入信号的相关性——所有的非线性函数都可以完成这件事情（只是程度有所不同，接下来将逐一介绍）。</p>
 <p>如下图，左边函数被认为是线性函数，右边函数被认为是非线性函数，通常我们认为非线性函数更适合作为激活函数（当然也有例外，见稍后的讨论）：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202173408558.png" alt="image-20231202173408558"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202173408558.png" alt="image-20231202173408558"></p>
 </li>
-<li><p>约束4：<strong>合适的激活函数（及其导数）应该可以高效计算</strong></p>
+<li>
+<p>约束4：<strong>合适的激活函数（及其导数）应该可以高效计算</strong></p>
 <p>因为你将调用这个函数很多次（有时是数十亿次），所以不希望它的计算速度太慢，需要激活函数最近之所以变得流行，都是因为相对于表现力而言，<strong>它们很容易计算</strong>（relu就是一个很好的例子）。</p>
 </li>
 </ul>
-<h3 id="标准隐藏层激活函数"><a href="#标准隐藏层激活函数" class="headerlink" title="标准隐藏层激活函数"></a>标准隐藏层激活函数</h3><p>在无数可能得函数中，哪一个最常用？</p>
+<h3 id="标准隐藏层激活函数">标准隐藏层激活函数</h3>
+<p>在无数可能得函数中，哪一个最常用？</p>
 <p>即使可以使用无穷多个函数作为激活函数，但是有一组数量较少的激活函数可以满足绝大部分对激活函数的需求，而且大多数情况下，对这些激活函数的改进都很小。</p>
-<h4 id="激活函数：sigmoid"><a href="#激活函数：sigmoid" class="headerlink" title="激活函数：sigmoid"></a>激活函数：sigmoid</h4><p>sigmoid是一个伟大的激活函数，因为它能平滑地将输入从无穷大的空间压缩到0和1之间。很多情况下，这可以让你把单个神经元的输出解释为一个概率。因此，人们在隐藏层和输出层中使用这种非线性函数。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202180910085.png" alt="image-20231202180910085"></p>
+<h4 id="激活函数：sigmoid">激活函数：sigmoid</h4>
+<p>sigmoid是一个伟大的激活函数，因为它能平滑地将输入从无穷大的空间压缩到0和1之间。很多情况下，这可以让你把单个神经元的输出解释为一个概率。因此，人们在隐藏层和输出层中使用这种非线性函数。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202180910085.png" alt="image-20231202180910085"></p>
 <p><strong>对于隐藏层来说，tanh比sigmoid更合适。</strong></p>
 <p>sigmoid函数能够给出不同程度的正相关性，tanh可以完成一样的工作，只是它的取值在-1和1之间！</p>
 <p>这意味着，它可以引入一部分<strong>负相关性</strong>，虽然对于输出层来说，这项性质没有那么有用（除非需要预测的数据在-1和1之间），但是负相关性对于隐藏层来说作用很大：<strong>在许多问题中，tanh在隐藏层中的表现优于sigmoid。</strong></p>
-<h3 id="标准输出层激活函数"><a href="#标准输出层激活函数" class="headerlink" title="标准输出层激活函数"></a>标准输出层激活函数</h3><p>事实证明，对隐藏层来说最好的激活函数可能与对输出层来说最好的激活函数有很大的不同，尤其在面对分类问题的时候。总体上讲，输出层主要有三种类型。</p>
+<h3 id="标准输出层激活函数">标准输出层激活函数</h3>
+<p>事实证明，对隐藏层来说最好的激活函数可能与对输出层来说最好的激活函数有很大的不同，尤其在面对分类问题的时候。总体上讲，输出层主要有三种类型。</p>
 <ol>
-<li><p>类型1：<strong>预测原始数据集（没有激活函数）</strong></p>
+<li>
+<p>类型1：<strong>预测原始数据集（没有激活函数）</strong></p>
 <p>某些情况下，人们想要训练一个神经网络，将一个由数字构成的矩阵转换为另一个由数字构成的矩阵，其中输出范围（最小值和最大值之间的差）不是一个概率——例如气温测量。</p>
 </li>
-<li><p>类型2：<strong>预测不相关的“是”或“否”的概率（sigmoid）</strong></p>
+<li>
+<p>类型2：<strong>预测不相关的“是”或“否”的概率（sigmoid）</strong></p>
 <p>我们常常希望在一个神经网络中得到多个二元概率，就可以使用之前提到的激活函数。</p>
 <blockquote>
 <p>当神经网络有隐藏层时，同时预测多个结果是有好处的。通常网络在预测一个标签时会学习到对预测其他标签有用的东西。这个规律在不同问题上的表现有很大的不同，不过记住这点会有好处</p>
 </blockquote>
 <p>这些情况下，最好使用sigmoid激活函数，因为它能对每个输出节点分别建模。</p>
 </li>
-<li><p>类型3：<strong>预测“哪一个”的概率（softmax）</strong></p>
+<li>
+<p>类型3：<strong>预测“哪一个”的概率（softmax）</strong></p>
 <p>到目前为止，神经网络最常见的用途是从许多标签中选出一个标签。例如，在MNIST数字分类器中，你想要预测图像中是哪个数字。你可以使用sigmoid激活函数训练这个网络，并声明对应着最高输出概率的数字是最有可能的，这个网络效果还算好，但最好有一个激活函数对“<strong>当出现一个标签的可能性越大时，出现另一个标签的可能性就越小</strong>”这一概念进行建模。</p>
 <p>回顾一下如何执行权重更新：</p>
 <ol>
-<li><p>如果MNIST数字分类器应该将这张图像里面所写的数字预测为9。并且，我们假设进入最后一层(在应用激活函数之前)的原始加权和如下所示: </p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202184251771.png" alt="image-20231202184251771"></p>
+<li>
+<p>如果MNIST数字分类器应该将这张图像里面所写的数字预测为9。并且，我们假设进入最后一层(在应用激活函数之前)的原始加权和如下所示:</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202184251771.png" alt="image-20231202184251771"></p>
 <p>网络给最后一层的原始输入将每个节点的值都预测为0，只有对9号节点预测的值是100，可以说是完美的预测结果了。</p>
 </li>
-<li><p>现在，让我们看看当这些数字经过sigmoid激活函数处理后，会发生什么：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202184400425.png" alt="image-20231202184400425"></p>
+<li>
+<p>现在，让我们看看当这些数字经过sigmoid激活函数处理后，会发生什么：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202184400425.png" alt="image-20231202184400425"></p>
 <p>奇怪的是，网络现在似乎不那么确定了：9号节点所对应二队值仍然是最高的，但这张神经网络似乎认为还有50%的可能是其他数字。</p>
 </li>
-<li><p>softmax对输入有着不一样的解释：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202185114231.png" alt="image-20231202185114231"></p>
+<li>
+<p>softmax对输入有着不一样的解释：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202185114231.png" alt="image-20231202185114231"></p>
 <p>这看起来很棒，不仅9号节点对应的值是最高的，而且网络甚至没有怀疑它是任何可能的MNIST数字。这看起来像是sigmoid的一个理论缺陷，但是当你进行反向传播时，它会产生严重后果。</p>
 </li>
-<li><p>我们来看一下如何在sigmoid激活函数的输出上计算均方误差。理论上来讲，该网络的预测几乎是完美的，毫无疑问，它在反向传播中不会产生什么误差。但对于sigmoid来说则不是这样：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202185744159.png" alt="image-20231202185744159"></p>
+<li>
+<p>我们来看一下如何在sigmoid激活函数的输出上计算均方误差。理论上来讲，该网络的预测几乎是完美的，毫无疑问，它在反向传播中不会产生什么误差。但对于sigmoid来说则不是这样：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202185744159.png" alt="image-20231202185744159"></p>
 <p>误差一大堆，网络的权重将进行大规模更新，即使它的预测非常准确。</p>
 <p>原因是如果我们希望sigmoid达到0误差，它不仅要将真实输出所对应的节点预测为最大正数，它还必须将其他数字对应的节点都预测为0。</p>
 </li>
 </ol>
 </li>
 </ol>
-<h4 id="核心问题：输入具有相似性"><a href="#核心问题：输入具有相似性" class="headerlink" title="核心问题：输入具有相似性"></a>核心问题：输入具有相似性</h4><p><strong>不同数字具有相同特征，让神经网络相信这一点有好处。</strong></p>
+<h4 id="核心问题：输入具有相似性">核心问题：输入具有相似性</h4>
+<p><strong>不同数字具有相同特征，让神经网络相信这一点有好处。</strong></p>
 <p>例如2和3的上半部分呈现出的曲线及其相似，使用sigmoid进行训练会惩罚这个神经网络，即惩罚这个网络以2的独有特征之外的其他东西来识别2（即对2的上半部分的曲线进行识别的行为进行惩罚），因为这样做所依据的一部分模式和预测3相同。因此，当3出现时，标签2也会有一些概率（因为图像的一部分看起来像是数字2）。</p>
 <p>这样做有什么副作用呢？多数图像的中间部分的许多像素是相似的，所以神经网络会<strong>开始关注图像的边缘</strong>。所以有可能最重的权重出现在接近图像边缘的2的两个端点：</p>
 <ul>
@@ -594,39 +611,43 @@
 <p>稍微偏离中心或不当倾斜的3就可能意外触发这些单独的指标——这个神经网络没有学习到数字2的真正本质，因为它需要学习到2，还要学习到“非1”“非3”“非4”等。</p>
 <p>我们希望输出层的激活函数不会对类似的标签进行惩罚，相反我们希望它关注所有可能表示潜在信息的输入。</p>
 <p>softmax的概率总和为1，这也很好，你可以把任意预测解释为结果是特定标签的全局概率。</p>
-<h4 id="计算softmax"><a href="#计算softmax" class="headerlink" title="计算softmax"></a>计算softmax</h4><p><strong>softmax计算每个输入值的指数形式，然后除以该层的和。</strong></p>
+<h4 id="计算softmax">计算softmax</h4>
+<p><strong>softmax计算每个输入值的指数形式，然后除以该层的和。</strong></p>
 <p>让我们来看一下，对于上文中假定的神经网络输出值来说，应该如何进行softmax计算：</p>
 <ol>
-<li><p>softmax激活函数的输入：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202194816219.png" alt="image-20231202194816219"></p>
+<li>
+<p>softmax激活函数的输入：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202194816219.png" alt="image-20231202194816219"></p>
 <p>要对这一整层计算softmax，首先要计算每个值的指数形式。也就是对于每个值x，计算e的x次幂。幂函数的图像如下：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202195039324.png" alt="image-20231202195039324"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202195039324.png" alt="image-20231202195039324"></p>
 <blockquote>
 <p>注意：它会将所有输入都变成正数，原本是负数的变成很小的正数，原本是正数变成很大的正数。</p>
 </blockquote>
 </li>
-<li><p>所有的0都变成了1，而100变成了一个巨大的数字。如果有负数，它们就会被映射到0和1之间。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202195205795.png" alt="image-20231202195205795"></p>
+<li>
+<p>所有的0都变成了1，而100变成了一个巨大的数字。如果有负数，它们就会被映射到0和1之间。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202195205795.png" alt="image-20231202195205795"></p>
 </li>
-<li><p>下一步工作是对这一层中的所有节点求和，并将层中的每个值除以求得的和。这个动作能够有效地使标签9之外的所有数字为0。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202195717100.png" alt="image-20231202195717100"></p>
+<li>
+<p>下一步工作是对这一层中的所有节点求和，并将层中的每个值除以求得的和。这个动作能够有效地使标签9之外的所有数字为0。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202195717100.png" alt="image-20231202195717100"></p>
 </li>
 </ol>
 <blockquote>
 <p>softmax的好处是：神经网络对一个值的预测越高，它对所有其他值的预测就越低。它增加了信号衰减的锐度，鼓励网络以非常高的概率预测某项输出。</p>
 </blockquote>
 <p>要调整它的执行力度，可以在进行指数运算时使用略高于或略低于e的数做底。数值越小衰减越小，数值越大衰减越大，但大多数人还是坚持用e。</p>
-<h3 id="激活函数使用说明"><a href="#激活函数使用说明" class="headerlink" title="激活函数使用说明"></a>激活函数使用说明</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">layer_0 <span class="token operator">=</span> images<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>
+<h3 id="激活函数使用说明">激活函数使用说明</h3>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">layer_0 <span class="token operator">=</span> images<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>
 layer_1 <span class="token operator">=</span> relu<span class="token punctuation">(</span>np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>layer_0<span class="token punctuation">,</span>weights_0_1<span class="token punctuation">)</span><span class="token punctuation">)</span>
 layer_2 <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>layer_1<span class="token punctuation">,</span>weights_1_2<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>注意：某一层的输入是指应用非线性函数之前的值。在本例中，layer_1的输入是np.dot(layer_0,weights_0_1)，不要和前一层layer_0相混淆。</p>
 </blockquote>
 <p>在正向传播中，向某一层神经网络添加激活函数相对简单。相对来说，在反向传播中适当地处理激活函数所带来的影响则更加微妙一些。</p>
 <p>在之前，我们执行了一个有趣的操作来创建layer_1_delta变量，当relu强制layer_1的某个值为0时，我们也要将对应的增量delta乘以0——因为layer_1中为0的值对输出预测没有影响，所以它也不应该对权重更新有任何影响，它不对所产生的误差负责。</p>
 <p>这是激活函数奇妙之处的极端表现，我们来看一下relu函数的形状：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202201110075.png" alt="image-20231202201110075"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202201110075.png" alt="image-20231202201110075"></p>
 <p>即如果预测结果为正，则对该函数的输入进行（一点点）修改将会产生1:1的影响；如果预测结果为负，则对输入的微小修改将会产生0:1的影响（也就是没有影响）。</p>
 <p>因为增量delta这个时候的目的是告诉较早的层“下次让我的输入更高或更低”，所以这个delta非常有用。它考虑到这个节点是否对误差有贡献，并修改从下一层反向传播回来的增量delta。</p>
 <p>对于这一部分增量delta来说，斜率为1（正数），对于其他增量来说，斜率为0（负数）：</p>
@@ -642,31 +663,36 @@ layer_2 <span class="token operator">=</span> np<span class="token punctuation">
         
 relu <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token punctuation">(</span>x<span class="token operator">>=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">*</span> x <span class="token comment"># returns x if x > 0, return 0 otherwise</span>
 relu2deriv <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token operator">>=</span><span class="token number">0</span> <span class="token comment"># returns 1 for input > 0, return 0 otherwise 其实是relu函数的斜率</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>relu2deriv是一个特殊函数，它可以取relu的输出，并计算relu在这一点的斜率（它对输出向量中的所有值都这样做）。那么如何对所有非relu的其他非线性函数进行类似的操作呢？</p>
 <blockquote>
 <p><strong>斜率是用来表示对输入（一定量）更改会对输出带来多大影响的指示器</strong>，而且最终目标是调整权重以减少误差，如果对权重的调整几乎没有效果的话，这一步骤会鼓励网络保持原有的权重不变——通过将增量delta与斜率相乘来实现权重调整。</p>
 </blockquote>
-<h4 id="将增量与斜率相乘"><a href="#将增量与斜率相乘" class="headerlink" title="将增量与斜率相乘"></a>将增量与斜率相乘</h4><p><strong>要计算layer_delta，需要将反向传播的delta乘以该层的斜率。</strong></p>
+<h4 id="将增量与斜率相乘">将增量与斜率相乘</h4>
+<p><strong>要计算layer_delta，需要将反向传播的delta乘以该层的斜率。</strong></p>
 <p>对于relu来说很明显，神经元要么开着要么关着，对于sigmoid来说，可能稍微有点复杂：</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202202915606.png" alt="image-20231202202915606"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202202915606.png" alt="image-20231202202915606"></p>
 <ol>
-<li><p>当输入从任意方向逐渐接近0时，sigmoid函数对输入变化的敏感度也在逐渐增加。</p>
+<li>
+<p>当输入从任意方向逐渐接近0时，sigmoid函数对输入变化的敏感度也在逐渐增加。</p>
 </li>
-<li><p>但非常大的输入和非常小的输入所对应的斜率均接近于0，因此当输入变得非常大（趋向于正无穷）或非常小（趋向于负无穷）时，输入权重的微小变化与神经元所产生的误差相关性变弱。</p>
+<li>
+<p>但非常大的输入和非常小的输入所对应的斜率均接近于0，因此当输入变得非常大（趋向于正无穷）或非常小（趋向于负无穷）时，输入权重的微小变化与神经元所产生的误差相关性变弱。</p>
 <p>更广泛而言，许多隐藏节点与数字2的精确预测并没有什么关系——也许它们只用于数字8的预测。我们不应该把它们的权重连接弄得太乱，因为这可能会破坏它们在其他地方的用处。</p>
 </li>
-<li><p>与此同时，这也创造了黏性的概念。对于类似的训练示例来说，之前在一个方向上多次更新的权重，更有信心做出或高或低的预测。非线性激活函数的引入，有助于使偶尔出现的错误训练实例更难破坏已多次得到强化的学习结果。</p>
+<li>
+<p>与此同时，这也创造了黏性的概念。对于类似的训练示例来说，之前在一个方向上多次更新的权重，更有信心做出或高或低的预测。非线性激活函数的引入，有助于使偶尔出现的错误训练实例更难破坏已多次得到强化的学习结果。</p>
 </li>
 </ol>
-<h4 id="将输出转换为斜率（导数）"><a href="#将输出转换为斜率（导数）" class="headerlink" title="将输出转换为斜率（导数）"></a>将输出转换为斜率（导数）</h4><p><strong>多数优秀的激活函数可以将其输出转换为斜率（效率第一）</strong></p>
+<h4 id="将输出转换为斜率（导数）">将输出转换为斜率（导数）</h4>
+<p><strong>多数优秀的激活函数可以将其输出转换为斜率（效率第一）</strong></p>
 <p>一种有必要引入的新运算是，计算所使用的任何非线性函数的导数。</p>
 <p>大多数优秀的激活函数没有按照通常的习惯在曲线上的某一个点计算导数，而是尝试着采用另一种方法：<strong>用神经元层在正向传播时的输出来计算导数</strong>。这已经成为计算神经网络导数的标准实践，而且非常方便。</p>
-<p><img src="/medias/images/loading.gif" data-original="/2023/12/02/shen-du-xue-xi-tu-jie-ji-huo-han-shu/image-20231202225905109.png" alt="image-20231202225905109"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20231202225905109.png" alt="image-20231202225905109"></p>
 <blockquote>
 <p>注意：softmax的增量计算很特殊，因为它只用于最后一层。</p>
 </blockquote>
-<h3 id="升级MNIST网络"><a href="#升级MNIST网络" class="headerlink" title="升级MNIST网络"></a>升级MNIST网络</h3><ul>
+<h3 id="升级MNIST网络">升级MNIST网络</h3>
+<ul>
 <li>对于tanh来说，必须降低输入权重的标准差。记住，权重是被随机初始化的，我们用<code>np.random.random</code>来创建一个数值随机分布在0和1之间的矩阵。</li>
 <li>通过将它乘以0.2并减去0.1，可将这个矩阵值的随机分布范围重新调整在-0.1和0.1之间，这对于relu来说效果很好，但对tanh来说就不那么理想了——tanh喜欢随机分布范围更窄的初始化，所以需要将它调整在-0.01和0.01之间。</li>
 <li>去掉了误差计算，从技术角度看，softmax最好与一个称为交叉熵的误差函数一起使用，这个网络能够正常地为这个误差度量计算layer_2_delta，但是我们还没有分析为什么这样做。</li>
@@ -743,7 +769,6 @@ weights_1_2 <span class="token operator">=</span> <span class="token number">0.2
          <span class="token string">"I:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span> <span class="token operator">+</span> \
          <span class="token string">" Test-Acc:"</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>test_correct_cnt<span class="token operator">/</span><span class="token builtin">float</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>test_images<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">+</span>\
          <span class="token string">" Train-Acc:"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>correct_cnt<span class="token operator">/</span><span class="token builtin">float</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>images<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>输出：</p>
 <pre class="line-numbers language-none"><code class="language-none">I:0 Test-Acc:0.394 Train-Acc:0.156
 I:10 Test-Acc:0.6867 Train-Acc:0.723
@@ -775,7 +800,6 @@ I:260 Test-Acc:0.8684 Train-Acc:0.945
 I:270 Test-Acc:0.8703 Train-Acc:0.951
 I:280 Test-Acc:0.8699 Train-Acc:0.949
 I:290 Test-Acc:0.8701 Train-Acc:0.94<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>

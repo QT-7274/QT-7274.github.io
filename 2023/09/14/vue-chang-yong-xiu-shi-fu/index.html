@@ -6,9 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Vue常用修饰符, QT-7274">
-    <meta name="description" content="一、修饰符是什么在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号
+    <meta name="description" content="一、修饰符是什么
+在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号
 在Vue中，修饰符处理了许多DOM事件的细节，让我们不再需要花大量的时间去处理这些烦恼的事情，而能有更多的精力专注于程序的逻辑处理
-vue中修饰符分为以下五种：">
+vue中修饰符分为以下五种">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -502,7 +503,8 @@ vue中修饰符分为以下五种：">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、修饰符是什么"><a href="#一、修饰符是什么" class="headerlink" title="一、修饰符是什么"></a>一、修饰符是什么</h2><p>在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号</p>
+                <h2 id="一、修饰符是什么">一、修饰符是什么</h2>
+<p>在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号</p>
 <p>在<code>Vue</code>中，修饰符处理了许多<code>DOM</code>事件的细节，让我们不再需要花大量的时间去处理这些烦恼的事情，而能有更多的精力专注于程序的逻辑处理</p>
 <p><code>vue</code>中修饰符分为以下五种：</p>
 <ul>
@@ -512,37 +514,44 @@ vue中修饰符分为以下五种：">
 <li>键值修饰符</li>
 <li>v-bind修饰符</li>
 </ul>
-<h2 id="二、修饰符的作用"><a href="#二、修饰符的作用" class="headerlink" title="二、修饰符的作用"></a>二、修饰符的作用</h2><h3 id="表单修饰符"><a href="#表单修饰符" class="headerlink" title="表单修饰符"></a>表单修饰符</h3><p>在我们填写表单的时候用得最多的是<code>input</code>标签，指令用得最多的是<code>v-model</code></p>
+<h2 id="二、修饰符的作用">二、修饰符的作用</h2>
+<h3 id="表单修饰符">表单修饰符</h3>
+<p>在我们填写表单的时候用得最多的是<code>input</code>标签，指令用得最多的是<code>v-model</code></p>
 <p>关于表单的修饰符有如下：</p>
 <ul>
 <li>lazy</li>
 <li>trim</li>
 <li>number</li>
 </ul>
-<h4 id="lazy"><a href="#lazy" class="headerlink" title="lazy"></a>lazy</h4><p>在我们填完信息，光标离开标签的时候，才会将值赋予给<code>value</code>，也就是在<code>change</code>事件之后再进行信息同步</p>
+<h4 id="lazy">lazy</h4>
+<p>在我们填完信息，光标离开标签的时候，才会将值赋予给<code>value</code>，也就是在<code>change</code>事件之后再进行信息同步</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> v<span class="token operator">-</span>model<span class="token punctuation">.</span>lazy<span class="token operator">=</span><span class="token string">"value"</span><span class="token operator">></span>
 <span class="token operator">&lt;</span>p<span class="token operator">></span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span>value<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="trim"><a href="#trim" class="headerlink" title="trim"></a>trim</h4><p>自动过滤用户输入的首空格字符，而中间的空格不会过滤</p>
+<h4 id="trim">trim</h4>
+<p>自动过滤用户输入的首空格字符，而中间的空格不会过滤</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> v<span class="token operator">-</span>model<span class="token punctuation">.</span>trim<span class="token operator">=</span><span class="token string">"value"</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="number"><a href="#number" class="headerlink" title="number"></a>number</h4><p>自动将用户的输入值转为数值类型，但如果这个值无法被<code>parseFloat</code>解析，则会返回原来的值</p>
+<h4 id="number">number</h4>
+<p>自动将用户的输入值转为数值类型，但如果这个值无法被<code>parseFloat</code>解析，则会返回原来的值</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>input v<span class="token operator">-</span>model<span class="token punctuation">.</span>number<span class="token operator">=</span><span class="token string">"age"</span> type<span class="token operator">=</span><span class="token string">"number"</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h3><ol>
-<li><p><code>prevent</code>：阻止默认事件（常用），相当于调用了<code>event.preventDefault</code>方法。</p>
+<h3 id="事件修饰符">事件修饰符</h3>
+<ol>
+<li>
+<p><code>prevent</code>：阻止默认事件（常用），相当于调用了<code>event.preventDefault</code>方法。</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name"><span class="token namespace">v-on:</span>submit.prevent</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onSubmit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p><code>stop</code>：阻止事件冒泡（常用），相当于调用了<code>event.stopPropagation</code>方法。</p>
+<li>
+<p><code>stop</code>：阻止事件冒泡（常用），相当于调用了<code>event.stopPropagation</code>方法。</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shout(2)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click.stop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shout(1)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>ok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 //只输出1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><code>once</code>：事件只触发一次（常用）。</p>
+<li>
+<p><code>once</code>：事件只触发一次（常用）。</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click.once</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shout(1)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>ok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p><code>capture</code>：使用事件的捕获模式，使事件触发从包含这个元素的顶层开始往下触发。</p>
+<li>
+<p><code>capture</code>：使用事件的捕获模式，使事件触发从包含这个元素的顶层开始往下触发。</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">@click.capture</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shout(1)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     obj1
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">@click.capture</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shout(2)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -557,34 +566,35 @@ vue中修饰符分为以下五种：">
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 // 输出结构: 1 2 4 3 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p><code>self</code>：只有<code>event.target</code>是当前操作元素时才触发事件。</p>
+<li>
+<p><code>self</code>：只有<code>event.target</code>是当前操作元素时才触发事件。</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name"><span class="token namespace">v-on:</span>click.self</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>doThat<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <blockquote>
 <p>使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 <code>v-on:click.prevent.self</code> 会阻止<strong>所有的点击</strong>，而 <code>v-on:click.self.prevent</code> <strong>只会阻止对元素自身的点击</strong></p>
 </blockquote>
 </li>
-<li><p><code>passive</code>：事件的默认行为立即执行，无需等待事件回调执行完毕。在移动端，当我们在监听元素滚动事件的时候，会一直触发<code>onscroll</code>事件会让我们的网页变卡，因此我们使用这个修饰符的时候，相当于给<code>onscroll</code>事件整了一个<code>.lazy</code>修饰符</p>
+<li>
+<p><code>passive</code>：事件的默认行为立即执行，无需等待事件回调执行完毕。在移动端，当我们在监听元素滚动事件的时候，会一直触发<code>onscroll</code>事件会让我们的网页变卡，因此我们使用这个修饰符的时候，相当于给<code>onscroll</code>事件整了一个<code>.lazy</code>修饰符</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 --></span>
 <span class="token comment">&lt;!-- 而不会等待 `onScroll` 完成  --></span>
 <span class="token comment">&lt;!-- 这其中包含 `event.preventDefault()` 的情况 --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name"><span class="token namespace">v-on:</span>scroll.passive</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onScroll<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>不要把 <code>.passive</code> 和 <code>.prevent</code> 一起使用,因为 <code>.prevent</code> 将会被忽略，同时浏览器可能会向你展示一个警告。</p>
 <p><code>passive</code> 会告诉浏览器你不想阻止事件的默认行为</p>
 </blockquote>
 </li>
-<li><p><code>native</code></p>
+<li>
+<p><code>native</code></p>
 <p>让组件变成像<code>html</code>内置标签那样监听根元素的原生事件，否则组件上使用 <code>v-on</code> 只会监听自定义事件</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>my-component</span> <span class="token attr-name"><span class="token namespace">v-on:</span>click.native</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>doSomething<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>my-component</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <blockquote>
 <p>使用.native修饰符来操作普通HTML标签是会令事件失效的</p>
 </blockquote>
 </li>
 </ol>
-<h3 id="鼠标按钮修饰符"><a href="#鼠标按钮修饰符" class="headerlink" title="鼠标按钮修饰符"></a>鼠标按钮修饰符</h3><p>鼠标按钮修饰符针对的就是左键、右键、中键点击，有如下：</p>
+<h3 id="鼠标按钮修饰符">鼠标按钮修饰符</h3>
+<p>鼠标按钮修饰符针对的就是左键、右键、中键点击，有如下：</p>
 <ul>
 <li>left 左键点击</li>
 <li>right 右键点击</li>
@@ -593,8 +603,8 @@ vue中修饰符分为以下五种：">
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click.left</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shout(1)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>ok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click.right</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shout(1)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>ok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click.middle</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shout(1)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>ok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="键盘修饰符"><a href="#键盘修饰符" class="headerlink" title="键盘修饰符"></a>键盘修饰符</h3><p>键盘修饰符是用来修饰键盘事件（<code>onkeyup</code>，<code>onkeydown</code>）的，有如下：</p>
+<h3 id="键盘修饰符">键盘修饰符</h3>
+<p>键盘修饰符是用来修饰键盘事件（<code>onkeyup</code>，<code>onkeydown</code>）的，有如下：</p>
 <p><code>keyCode</code>存在很多，但<code>vue</code>为我们提供了别名，分为以下两种：</p>
 <ul>
 <li>普通键（enter、tab、delete、space、esc、up…）</li>
@@ -602,26 +612,25 @@ vue中修饰符分为以下五种：">
 </ul>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 只有按键为keyCode的时候才触发</span>
 <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> @keyup<span class="token punctuation">.</span>keyCode<span class="token operator">=</span><span class="token string">"shout()"</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>还可以通过以下方式自定义一些全局的键盘码别名</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>keyCodes<span class="token punctuation">.</span>f2 <span class="token operator">=</span> <span class="token number">113</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="v-bind修饰符"><a href="#v-bind修饰符" class="headerlink" title="v-bind修饰符"></a>v-bind修饰符</h3><p>v-bind修饰符主要是为<strong>属性</strong>进行操作，用来分别有如下：</p>
+<h3 id="v-bind修饰符">v-bind修饰符</h3>
+<p>v-bind修饰符主要是为<strong>属性</strong>进行操作，用来分别有如下：</p>
 <ul>
 <li>async</li>
 <li>prop</li>
 <li>came</li>
 </ul>
-<h4 id="async"><a href="#async" class="headerlink" title="async"></a>async</h4><p>能对<code>props</code>进行一个双向绑定，在父组件中将一个属性传递给子组件，并且子组件可以修改该属性的值，同时这个修改也会反映到父组件中。</p>
+<h4 id="async">async</h4>
+<p>能对<code>props</code>进行一个双向绑定，在父组件中将一个属性传递给子组件，并且子组件可以修改该属性的值，同时这个修改也会反映到父组件中。</p>
 <blockquote>
 <p>默认情况下， <code>props</code>  是单向数据流的，即父组件向子组件传递数据，子组件只能读取这些数据，不能修改。这样可以确保数据的单向性，使得数据流更加可追踪和可维护。</p>
-<p>在某些情况下，我们希望子组件能够修改  <code>props</code>  中的数据，并且这个修改能够反映到父组件中。这时就需要使用到双向绑定。 </p>
+<p>在某些情况下，我们希望子组件能够修改  <code>props</code>  中的数据，并且这个修改能够反映到父组件中。这时就需要使用到双向绑定。</p>
 </blockquote>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//父组件</span>
 <span class="token operator">&lt;</span>comp <span class="token operator">:</span>myMessage<span class="token punctuation">.</span>sync<span class="token operator">=</span><span class="token string">"bar"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>comp<span class="token operator">></span> 
 <span class="token comment">//子组件</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'update:myMessage'</span><span class="token punctuation">,</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>以上这种方法相当于以下的简写</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//父亲组件</span>
 <span class="token operator">&lt;</span>comp <span class="token operator">:</span>myMessage<span class="token operator">=</span><span class="token string">"bar"</span> @update<span class="token operator">:</span>myMessage<span class="token operator">=</span><span class="token string">"func"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>comp<span class="token operator">></span>
@@ -632,17 +641,17 @@ vue中修饰符分为以下五种：">
 <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'update:myMessage'</span><span class="token punctuation">,</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>使用<code>async</code>需要注意以下两点：</p>
 <ul>
 <li>使用<code>sync</code>的时候，子组件传递的事件名格式必须为<code>update:value</code>，其中<code>value</code>必须与子组件中<code>props</code>中声明的名称完全一致</li>
 <li>注意带有 <code>.sync</code> 修饰符的 <code>v-bind</code> 不能和表达式一起使用</li>
 <li>将 <code>v-bind.sync</code> 用在一个字面量的对象上，例如 <code>v-bind.sync=”&#123; title: doc.title &#125;”</code>，是无法正常工作的</li>
 </ul>
-<h4 id="props"><a href="#props" class="headerlink" title="props"></a>props</h4><p>设置自定义标签属性，避免暴露数据，防止污染HTML结构</p>
+<h4 id="props">props</h4>
+<p>设置自定义标签属性，避免暴露数据，防止污染HTML结构</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>uid<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>title1<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span> <span class="token attr-name">:index.prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>index<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="camel"><a href="#camel" class="headerlink" title="camel"></a>camel</h4><p>将命名变为驼峰命名法，如将<code>view-Box</code>属性名转换为 <code>viewBox</code></p>
+<h4 id="camel">camel</h4>
+<p>将命名变为驼峰命名法，如将<code>view-Box</code>属性名转换为 <code>viewBox</code></p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">v-model.camel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myValue<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
                 

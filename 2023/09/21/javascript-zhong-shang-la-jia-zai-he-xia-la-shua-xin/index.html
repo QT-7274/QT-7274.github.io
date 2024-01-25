@@ -6,13 +6,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JavaScript中上拉加载和下拉刷新, QT-7274">
-    <meta name="description" content="实现上拉加载及下拉刷新都依赖于用户交互
+    <meta name="description" content="实现
+上拉加载及下拉刷新都依赖于用户交互
 最重要的是要理解在什么场景，什么时机下触发交互动作
 上拉加载
+
 上拉加载的本质是页面触底，或者快要触底时的动作
 判断页面触底我们需要先了解一下下面几个属性
 
-scrollTop：滚动视窗的高度距离win">
+scrollTop：滚动视窗的高度距离w">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -506,9 +508,11 @@ scrollTop：滚动视窗的高度距离win">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>上拉加载及下拉刷新都依赖于用户交互</p>
+                <h2 id="实现">实现</h2>
+<p>上拉加载及下拉刷新都依赖于用户交互</p>
 <p>最重要的是要理解在什么场景，什么时机下触发交互动作</p>
-<h3 id="上拉加载"><a href="#上拉加载" class="headerlink" title="上拉加载"></a>上拉加载</h3><p><img src="/medias/images/loading.gif" data-original="/2023/09/21/javascript-zhong-shang-la-jia-zai-he-xia-la-shua-xin/df498a00-8ae3-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<h3 id="上拉加载">上拉加载</h3>
+<p><img src="/medias/images/loading.gif" data-original="df498a00-8ae3-11eb-ab90-d9ae814b240d.png" alt="img"></p>
 <p>上拉加载的本质是页面触底，或者快要触底时的动作</p>
 <p>判断页面触底我们需要先了解一下下面几个属性</p>
 <ul>
@@ -518,7 +522,6 @@ scrollTop：滚动视窗的高度距离win">
 </ul>
 <p>综上我们得出一个触底公式：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">scrollTop <span class="token operator">+</span> clientHeight <span class="token operator">>=</span> scrollHeight<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>简单实现</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> clientHeight  <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>clientHeight<span class="token punctuation">;</span> <span class="token comment">//浏览器高度</span>
 <span class="token keyword">let</span> scrollHeight <span class="token operator">=</span> document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>scrollHeight<span class="token punctuation">;</span>
@@ -529,8 +532,8 @@ scrollTop：滚动视窗的高度距离win">
 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>scrollTop <span class="token operator">+</span> clientHeight<span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token punctuation">(</span>scrollHeight <span class="token operator">-</span> distance<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"开始加载数据"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h3><p>下拉刷新的本质是页面本身置于顶部时，用户下拉时需要触发的动作</p>
+<h3 id="下拉刷新">下拉刷新</h3>
+<p>下拉刷新的本质是页面本身置于顶部时，用户下拉时需要触发的动作</p>
 <p>关于下拉刷新的原生实现，主要分成三步：</p>
 <ul>
 <li>监听原生<code>touchstart</code>事件，记录其初始位置的值，<code>e.touches[0].pageY</code>；</li>
@@ -550,7 +553,6 @@ scrollTop：滚动视窗的高度距离win">
         <span class="token operator">...</span>
     <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">></span>
 <span class="token operator">&lt;</span><span class="token operator">/</span>main<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>监听<code>touchstart</code>事件，记录初始的值</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> _element <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'refreshContainer'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     _refreshText <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.refreshText'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -562,7 +564,6 @@ _element<span class="token punctuation">.</span><span class="token function">add
     _element<span class="token punctuation">.</span>style<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token string">'relative'</span><span class="token punctuation">;</span>
     _element<span class="token punctuation">.</span>style<span class="token punctuation">.</span>transition <span class="token operator">=</span> <span class="token string">'transform 0s'</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>监听<code>touchmove</code>移动事件，记录滑动差值</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">_element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'touchmove'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// e.touches[0].pageY 当前位置</span>
@@ -577,7 +578,6 @@ _element<span class="token punctuation">.</span><span class="token function">add
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>                
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>最后，就是监听<code>touchend</code>离开的事件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">_element<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'touchend'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     _element<span class="token punctuation">.</span>style<span class="token punctuation">.</span>transition <span class="token operator">=</span> <span class="token string">'transform 0.5s ease 1s'</span><span class="token punctuation">;</span>
@@ -586,14 +586,14 @@ _element<span class="token punctuation">.</span><span class="token function">add
     <span class="token comment">// todo...</span>
 
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>从上面可以看到，在下拉到松手的过程中，经历了三个阶段：</p>
 <ul>
 <li>当前手势滑动位置与初始位置差值大于零时，提示正在进行下拉刷新操作</li>
 <li>下拉到一定值时，显示松手释放后的操作提示</li>
 <li>下拉到达设定最大值松手时，执行回调，提示正在进行更新操作</li>
 </ul>
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>在实际开发中，我们更多的是使用第三方库，下面以<code>better-scroll</code>进行举例：</p>
+<h2 id="案例">案例</h2>
+<p>在实际开发中，我们更多的是使用第三方库，下面以<code>better-scroll</code>进行举例：</p>
 <p>HTML结构</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"position-wrapper"</span><span class="token operator">></span>
     <span class="token operator">&lt;</span>div<span class="token operator">></span>
@@ -604,14 +604,12 @@ _element<span class="token punctuation">.</span><span class="token function">add
         <span class="token operator">&lt;</span>p <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"more"</span><span class="token operator">></span>查看更多<span class="token operator">&lt;</span><span class="token operator">/</span>p <span class="token operator">></span>
     <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
 <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>实例化上拉下拉插件，通过<code>use</code>来注册插件</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> BScroll <span class="token keyword">from</span> <span class="token string">"@better-scroll/core"</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> PullDown <span class="token keyword">from</span> <span class="token string">"@better-scroll/pull-down"</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> PullUp <span class="token keyword">from</span> <span class="token string">'@better-scroll/pull-up'</span><span class="token punctuation">;</span>
 BScroll<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>PullDown<span class="token punctuation">)</span><span class="token punctuation">;</span>
 BScroll<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>PullUp<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>实例化<code>BetterScroll</code>，并传入相关的参数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> pageNo <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>pageSize <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span>dataList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>isMore <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>  
 <span class="token keyword">var</span> scroll<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BScroll</span><span class="token punctuation">(</span><span class="token string">"#position-wrapper"</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
@@ -662,7 +660,6 @@ scroll<span class="token punctuation">.</span><span class="token function">on</s
     <span class="token keyword">if</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>length<span class="token operator">&lt;</span>pageSize<span class="token punctuation">)</span> isMore<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
     <span class="token comment">//将dataList渲染到html内容中</span>
 <span class="token punctuation">&#125;</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>注意点：</p>
 <p>使用<code>better-scroll</code>实现下拉刷新、上拉加载时要注意以下几点：</p>
 <ul>
