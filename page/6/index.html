@@ -352,27 +352,80 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/09/21/javascript-zhong-shang-la-jia-zai-he-xia-la-shua-xin/">
+                    <a href="/2023/09/20/javascript-zhong-this-dui-xiang-xiang-jie/">
                         <div class="card-image">
                             
-                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E5%B0%81%E9%9D%A2.webp" class="responsive-img" alt="JavaScript中上拉加载和下拉刷新">
+                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E5%B0%81%E9%9D%A2.webp" class="responsive-img" alt="JavaScript中this对象详解">
                             
-                            <span class="card-title">JavaScript中上拉加载和下拉刷新</span>
+                            <span class="card-title">JavaScript中this对象详解</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                实现
-上拉加载及下拉刷新都依赖于用户交互
-最重要的是要理解在什么场景，什么时机下触发交互动作
-上拉加载
+                                定义
+函数的 this 关键字在 JavaScript 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别
+在绝大多数情况下，函数的调用方式决定了 this 的值（运行时绑定）
+this 关键字是函数运行时自动生成的一个内部对
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-上拉加载的本质是页面触底，或者快要触底时的动作
-判断页面触底我们需要先了解一下下面几个属性
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                            <span class="chip bg-color">前端</span>
+                        </a>
+                        
+                        <a href="/tags/JavaScript/">
+                            <span class="chip bg-color">JavaScript</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/09/21/javascript-huan-cun-xiang-jie/">
+                        <div class="card-image">
+                            
+                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E5%B0%81%E9%9D%A2.webp" class="responsive-img" alt="JavaScript缓存详解">
+                            
+                            <span class="card-title">JavaScript缓存详解</span>
+                        </div>
+                    </a>
 
-scrollTop：滚动视窗的高度距离w
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                函数缓存
+概念
+函数缓存，就是将函数运算过的结果进行缓存
+本质上就是用空间（缓存存储）换时间（计算过程）
+常用于缓存数据计算结果和缓存对象
+const add = (a,b) => a+b;
+const calc = memoize(add
                             
                         </div>
                         <div class="publish-info">
@@ -412,39 +465,151 @@ scrollTop：滚动视窗的高度距离w
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/10/03/javascript-dai-ma-ti-mu/">
+                    <a href="/2023/09/21/javascript-zhong-de-la-ji-hui-shou-ji-zhi/">
                         <div class="card-image">
                             
-                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E5%B0%81%E9%9D%A2.webp" class="responsive-img" alt="JavaScript代码题目">
+                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E5%B0%81%E9%9D%A2.webp" class="responsive-img" alt="JavaScript中的垃圾回收机制">
                             
-                            <span class="card-title">JavaScript代码题目</span>
+                            <span class="card-title">JavaScript中的垃圾回收机制</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                类型问题
-
-
-var let 变量
-function sayHi() &#123;
-  console.log(name);
-  console.log(age);
-  var name &#x3D; &#39;Lydia&#39;;
-  
+                                概念
+内存泄漏（Memory leak）是在计算机科学中，由于疏忽或错误造成程序未能释放已经不再使用的内存
+并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-21
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    前端开发
+                                <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                            <span class="chip bg-color">前端</span>
+                        </a>
+                        
+                        <a href="/tags/JavaScript/">
+                            <span class="chip bg-color">JavaScript</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/09/21/javascript-zhong-shu-zi-jing-du-diu-shi/">
+                        <div class="card-image">
+                            
+                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E5%B0%81%E9%9D%A2.webp" class="responsive-img" alt="JavaScript中数字精度丢失">
+                            
+                            <span class="card-title">JavaScript中数字精度丢失</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                场景复现
+一个经典的面试题
+0.1 + 0.2 === 0.3 // false
+为什么是false呢?
+先看下面这个比喻
+比如一个数 1÷3=0.33333333…
+3会一直无限循环，数学可以表示，但是计算机要存储，方便下次取出来再使用，
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-21
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                            <span class="chip bg-color">前端</span>
+                        </a>
+                        
+                        <a href="/tags/JavaScript/">
+                            <span class="chip bg-color">JavaScript</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/09/21/javascript-zhong-shang-la-jia-zai-he-xia-la-shua-xin/">
+                        <div class="card-image">
+                            
+                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E5%B0%81%E9%9D%A2.webp" class="responsive-img" alt="JavaScript中上拉加载和下拉刷新">
+                            
+                            <span class="card-title">JavaScript中上拉加载和下拉刷新</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                实现
+上拉加载及下拉刷新都依赖于用户交互
+最重要的是要理解在什么场景，什么时机下触发交互动作
+上拉加载
+
+上拉加载的本质是页面触底，或者快要触底时的动作
+判断页面触底我们需要先了解一下下面几个属性
+
+scrollTop：滚动视窗的高度距离w
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-21
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    理论知识
                                 </a>
                                 
                                 
@@ -531,8 +696,6 @@ Number
                     
                 </div>
             </div>
-              <!-- 隐藏某个文章 -->
-            
               <!-- 隐藏某个文章 -->
             
               <!-- 隐藏某个文章 -->
@@ -809,116 +972,6 @@ src/pages/Register/index.vue
                         
                         <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
                             <span class="chip bg-color">项目开发</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2022/09/09/vue-xiang-mu-kai-fa-yu-bu-shu/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/vue-build.png" class="responsive-img" alt="Vue项目开发与部署">
-                            
-                            <span class="card-title">Vue项目开发与部署</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                本文介绍如何对Vue项目进行工程化管理，如何对项目打包以及调试。
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    前端开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E5%89%8D%E7%AB%AF/">
-                            <span class="chip bg-color">前端</span>
-                        </a>
-                        
-                        <a href="/tags/Vue/">
-                            <span class="chip bg-color">Vue</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/07/20/vue-he-xin-lu-you/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/maxresdefault.jpg" class="responsive-img" alt="Vue核心 路由">
-                            
-                            <span class="card-title">Vue核心 路由</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                基本路由
-
-
-安装vue-router，命令 npm i vue-router (vue-router的4版本以上只能在vue3中使用，vue2需要执行npm i vue-router@3)
-
-
-应用插件 Vue.use(VueRouter
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-20
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
-                                    前端开发
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E5%89%8D%E7%AB%AF/">
-                            <span class="chip bg-color">前端</span>
-                        </a>
-                        
-                        <a href="/tags/Vue/">
-                            <span class="chip bg-color">Vue</span>
                         </a>
                         
                     </div>

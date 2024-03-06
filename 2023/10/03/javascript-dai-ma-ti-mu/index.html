@@ -471,21 +471,21 @@ function sayHi() &amp;#123;
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-28
+                    2024-03-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    16.8k
+                    18.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    73 分
+                    79 分
                 </div>
                 
 
@@ -1717,7 +1717,28 @@ console.log(getUser(user))<span aria-hidden="true" class="line-numbers-rows"><sp
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const getUser &#x3D; user &#x3D;&gt; (&#123; name: user.name, age: user.age &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li>
-<p>都是</p>
+<p>作用域及闭包</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var callbacks &#x3D; []
+for (var i &#x3D; 0; i &lt; 4; i++) &#123;
+callbacks.push(function() &#123;
+console.log(i);
+&#125;);
+&#125;
+callbacks.forEach(cb &#x3D;&gt; cb());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>A：0, 1, 2, 3</li>
+<li>B：3, 3, 3, 3</li>
+<li>C：4, 4, 4, 4</li>
+<li>D：0, 0, 0, 0</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+<p><strong>Answer: C</strong></p>
+<p>所有的函数都是在同一个作用域中创建的，所以它们共享了同一个 <code>i</code> 变量。当这些函数被创建时，它们并没有保存 <code>i</code> 的当前值，而是保存了对 <code>i</code> 变量的引用。所以，当这些函数在 <code>forEach</code> 循环中被调用时，它们都会打印出 <code>i</code> 的当前值，也就是 <code>for</code> 循环结束后的值 <code>4</code>。</p>
+<p>使用 <code>let</code> 关键字代替 <code>var</code> 关键字来声明 <code>i</code> 变量。<code>let</code> 关键字会在每次循环中创建一个新的 <code>i</code> 变量，所以每个函数都会保存它被创建时的 <code>i</code> 值。</p>
+</li>
+<li>
+<p>是</p>
 </li>
 <li>
 <p>都是</p>
@@ -1817,16 +1838,120 @@ setTimeout(() &#x3D;&gt; &#123;
 <p>
 <p><strong>Answer: B</strong></p>
 <p><code>this</code>关键字的指向取决于使用它的位置。 在<strong>函数</strong>中，比如<code>getStatus</code>，<code>this</code>指向的是调用它的对象，上述例子中<code>data</code>对象调用了<code>getStatus</code>，因此<code>this</code>指向的就是<code>data</code>对象。 当我们打印<code>this.status</code>时，<code>data</code>对象的<code>status</code>属性被打印，即<code>&quot;🥑&quot;</code>。</p>
-<p>使用<code>call</code>方法，可以更改<code>this</code>指向的对象。<code>data.getStatus.call(this)</code>是将<code>this</code>的指向由<code>data</code>对象更改为全局对象。在全局对象上，有一个名为<code>status</code>的变量，其值为<code>”😎“</code>。 因此打印<code>this.status</code>时，会打印<code>“😎”</code>。</p>
+<p>使用<code>call</code>方法，可以更改<code>this</code>指向的对象。<code>data.getStatus.call(this)</code>是将<code>this</code>的指向由<code>data</code>对象更改为全局对象。在全局对象上，有一个名为<code>status</code>的变量，其值为<code>”😎“</code>。 因此打印<code>this.status</code>时，会打印<code>“😎”</code>。如果将此题的 <code>getStatus()</code>函数改为箭头函数，那么结果就不同了：箭头函数没有自己的this，this取决于外层代码块的，而且this无法被改变，所以输出<code>“😍”</code>和<code>“😍”</code></p>
+</li>
+<li>
+<p>this指向判断</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var name &#x3D; &quot;window&quot;;
+var person &#x3D; &#123;
+  name: &quot;person&quot;,
+  sayName: function () &#123;
+    console.log(this.name);
+  &#125;
+&#125;;
+function sayName() &#123;
+  var sss &#x3D; person.sayName;
+  sss(); 
+  person.sayName(); 
+  (person.sayName)(); 
+  (b &#x3D; person.sayName)(); 
+&#125;
+sayName();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<details><summary><b>Answer</b></summary>
+<p>
+<p><code>sss()</code>：独立函数调用，没有和任何对象关联。输出 <code>window</code></p>
+<p><code>person.sayName()</code>：和person对象关联。输出 <code>person</code></p>
+<p><code>(person.sayName)()</code>：加了括号代表优先级，但在这里并没有什么用，同上。输出 <code>person</code></p>
+<p><code>(b = person.sayName)()</code>：赋值应用默认绑定规则。输出 <code>window</code></p>
+</li>
+<li>
+<p>this指向与改变</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var name &#x3D; &#39;window&#39;
+var person1 &#x3D; &#123;
+  name: &#39;person1&#39;,
+  foo1: function () &#123;
+    console.log(this.name)
+  &#125;,
+  foo2: () &#x3D;&gt; console.log(this.name),
+  foo3: function () &#123;
+    return function () &#123;
+      console.log(this.name)
+    &#125;
+  &#125;,
+  foo4: function () &#123;
+    return () &#x3D;&gt; &#123;
+      console.log(this.name)
+    &#125;
+  &#125;
+&#125;
+
+var person2 &#x3D; &#123; name: &#39;person2&#39; &#125;
+
+person1.foo1(); 
+person1.foo1.call(person2); 
+
+person1.foo2();
+person1.foo2.call(person2);
+
+person1.foo3()();
+person1.foo3.call(person2)();
+person1.foo3().call(person2);
+
+person1.foo4()();
+person1.foo4.call(person2)();
+person1.foo4().call(person2);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<details><summary><b>Answer</b></summary>
+<p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">person1.foo1(); &#x2F;&#x2F; person1
+person1.foo1.call(person2); &#x2F;&#x2F; person2 
+
+person1.foo2(); &#x2F;&#x2F; window 箭头函数的this和外层代码块相关
+person1.foo2.call(person2); &#x2F;&#x2F; window 箭头函数的this不能被改变
+
+person1.foo3()(); &#x2F;&#x2F; window 作为普通函数被调用，没有明确的上下文对象
+person1.foo3.call(person2)(); &#x2F;&#x2F; window 虽然改变了foo3()的this指向，但其中的匿名函数仍然作为普通函数被调用
+person1.foo3().call(person2); &#x2F;&#x2F; person2 先返回了匿名函数，再改变这个函数的this指向，指向person2
+
+person1.foo4()(); &#x2F;&#x2F; person1 返回一个箭头函数，箭头函数的this和外层代码块相关，也就是person1的内部
+person1.foo4.call(person2)(); &#x2F;&#x2F; person2 改变了foo4的this指向
+person1.foo4().call(person2); &#x2F;&#x2F; person1 箭头函数的this无法被改变<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p>this和原型链的配合</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function A (cName) &#123;
+if (cName) &#123;
+this.name &#x3D; cName
+&#125;
+&#125;
+A.prototype.name &#x3D; &#39;XiaoMi&#39;
+var a &#x3D; new A()
+console.log(&#39;A&#39;, a.name)
+function B (cName) &#123;
+this.name &#x3D; cName
+&#125;
+B.prototype.name &#x3D; &#39;Xiaomi&#39;
+var b &#x3D; new B()
+console.log(&#39;B&#39;, b.name)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>A：A XiaoMi B Xiaomi</li>
+<li>B：A XiaoMi B undefined</li>
+<li>C：A undefined B undefined</li>
+<li>D：A undefined B XiaoMi</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+<p><strong>Answer: B</strong></p>
+<p>在 <code>A</code> 的构造函数中，只有当 <code>cName</code> 参数存在时，才会在实例上设置 <code>name</code> 属性。所以当我们使用 <code>new A()</code> 创建一个新的 <code>A</code> 实例 <code>a</code> 时，因为没有传入 <code>cName</code> 参数，所以 <code>a</code> 实例上没有 <code>name</code> 属性，当我们尝试访问 <code>a.name</code> 时，JavaScript 会在 <code>A</code> 的原型链上查找 <code>name</code> 属性，所以 <code>console.log('A', a.name)</code> 输出的是 <code>'A', 'XiaoMi'</code>。</p>
+<p>在 <code>B</code> 的构造函数中，无论 <code>cName</code> 参数是否存在，都会在实例上设置 <code>name</code> 属性。所以当我们使用 <code>new B()</code> 创建一个新的 <code>B</code> 实例 <code>b</code> 时，即使没有传入 <code>cName</code> 参数，<code>b</code> 实例上也会有一个 <code>name</code> 属性，但是它的值是 <code>undefined</code>，因为 <code>cName</code> 是 <code>undefined</code>。所以 <code>console.log('B', b.name)</code> 输出的是 <code>'B', undefined</code>。</p>
 </li>
 <li>
 <p>上的</p>
 </li>
 <li>
-<p>都是</p>
+<p>s</p>
 </li>
 <li>
-<p>上的</p>
+<p>是</p>
 </li>
 </ol>
 <h2 id="运算问题">运算问题</h2>
@@ -2054,7 +2179,21 @@ console.log(num2);<span aria-hidden="true" class="line-numbers-rows"><span></spa
 <p><code>num2</code>的值是<code>10</code>，因为我们将<code>num1</code>传递给了<code>increasePassedNumber</code>函数。<code>number</code>等于<code>10</code>（即<code>num1</code>的值）。同样，一元运算符<code>++</code>首先返回操作数的值，然后递增操作数的值。<code>number</code>的值是<code>10</code>，所以<code>num2</code>等于<code>10</code>。</p>
 </li>
 <li>
-<p>是</p>
+<p>运算优先级</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>A: 1</li>
+<li>B: 2</li>
+<li>C: 3</li>
+<li>D: undefined</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+<p><strong>Answer: A</strong></p>
+<p><code>?:</code> 条件运算符的优先级只比赋值运算符和逗号运算符更高，所以该代码表示：<code>(1 + 0)?1:2</code>，所以答案应该选A</p>
+</li>
+<li>
+<p>s</p>
 </li>
 <li>
 <p>上的</p>
@@ -2079,7 +2218,7 @@ console.log(num2);<span aria-hidden="true" class="line-numbers-rows"><span></spa
 <details><summary><b>Answer</b></summary>
 <p>
 **Answer: C**
-<p><strong>Answer: C</strong></p>
+**Answer: C**
 <p><code>[1, 2]</code>是我们的初始值。这是我们开始时的值，也是第一个累加器（<code>acc</code>）的值。在第一轮中，<code>acc</code>是<code>[1, 2]</code>，<code>cur</code>是<code>[0, 1]</code>。我们将它们连接起来，结果为<code>[1, 2, 0, 1]</code>。</p>
 <p>接下来，<code>[1, 2, 0, 1]</code>成为新的<code>acc</code>，<code>[2, 3]</code>成为<code>cur</code>。我们将它们连接起来，得到<code>[1, 2, 0, 1, 2, 3]</code>。</p>
 </li>
@@ -2326,7 +2465,24 @@ for (const [x, y] of Object.entries(person)) &#123;
 <p>第一个子阵列是<code>[“name”，“Lydia”]</code>，其中<code>x</code>等于<code>name</code>，而<code>y</code>等于<code>Lydia</code>。 第二个子阵列是<code>[“age”，21]</code>，其中<code>x</code>等于<code>age</code>，而<code>y</code>等于<code>21</code>。</p>
 </li>
 <li>
-<p>都是</p>
+<p>日期函数的输出</p>
+<p><code>new Date(2020,12,1).getMonth()</code> 的结果是()</p>
+<ul>
+<li>12</li>
+<li>11</li>
+<li>0</li>
+<li>13</li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+<p><strong>Answer: C</strong></p>
+<p><code>new Date()</code> 的参数的带构造器的形式为 <code>new Date(year, monthIndex, day)</code>，也就是月份索引从0开始，如果超过11，那么相当于到第二年，即12相应的索引为0。</p>
+<blockquote>
+<p>注意：如果直接 <code>new Date().getMonth()</code> 返回的结果为现实的月份 - 1。</p>
+</blockquote>
+</li>
+<li>
+<p>s</p>
 </li>
 <li>
 <p>是</p>
@@ -2577,6 +2733,41 @@ console.log(data)<span aria-hidden="true" class="line-numbers-rows"><span></span
 </li>
 <li>
 <p>都是</p>
+</li>
+</ol>
+<h2 id="正则表达式">正则表达式</h2>
+<ol>
+<li>
+<p>非捕获组</p>
+<p>下面能完全覆盖0~10000(不含10000)的整数或2位以内小数的正则表达式是：</p>
+<ul>
+<li>A: <code>/^-?\d&#123;1,4&#125;\.\d&#123;1,2&#125;?$/</code></li>
+<li>B: <code>/^-?\d&#123;5&#125;(?:\.\d&#123;1,2&#125;)?$/</code></li>
+<li>C: <code>/^-?\d&#123;1,4&#125;\.\d&#123;2&#125;?$/</code></li>
+<li>D: <code>/^-?\d&#123;1,4&#125;(?:\.\d&#123;1,2&#125;)?$/</code></li>
+</ul>
+<details><summary><b>Answer</b></summary>
+<p>
+<p><strong>Answer: D</strong></p>
+<ul>
+<li>首先注意是0-9999，即一位数字到四位数字：<code>d(1,4)</code></li>
+<li><code>(?:)</code> 是非捕获组，不进行存储供以后使用，这保证了正则表达式的性能，同时这在使用 “或” 字符 (|) 来组合一个模式的各个部分是很有用。例如， <code>'industr(?:y|ies)'</code> 就是一个比 <code>'industry|industries'</code> 更简略的表达式。</li>
+<li><code>\ .\d&#123;1,2&#125;</code> 表示匹配一个小数点和一个一到二位的整数</li>
+<li><code>(?: ...)?</code> 末尾的 <code>?</code> 表示或的意思，表示前面的内容可以出现0次或1次</li>
+<li><code>-?</code> 表示负号可以出现0次或1次</li>
+</ul>
+</li>
+<li>
+<p>是</p>
+</li>
+<li>
+<p>是</p>
+</li>
+<li>
+<p>是</p>
+</li>
+<li>
+<p>是</p>
 </li>
 </ol>
 

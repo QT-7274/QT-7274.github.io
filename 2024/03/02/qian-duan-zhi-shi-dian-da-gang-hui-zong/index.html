@@ -470,21 +470,21 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-03
+                    2024-03-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.1k
+                    5.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    14 分
+                    18 分
                 </div>
                 
 
@@ -564,6 +564,15 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 <blockquote>
 <p>后五个问题答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/10/08/liu-lan-qi-xiang-guan-xi-jie-ti-3/#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%E7%9A%84%EF%BC%9F">浏览器相关细节题（3） | QT-7274 (qblog.top)</a></p>
 </blockquote>
+<h3 id="什么是reflow">什么是reflow</h3>
+<p>提示：</p>
+<ul>
+<li>本质</li>
+<li><strong>合并</strong></li>
+<li>异步还是同步？</li>
+<li><strong>布局抖动</strong></li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/10/08/liu-lan-qi-xiang-guan-xi-jie-ti-3/#%E4%B8%BA%E4%BB%80%E4%B9%88-transform-%E7%9A%84%E6%95%88%E7%8E%87%E9%AB%98%EF%BC%9F">浏览器相关细节题（3） | QT-7274 (qblog.top)</a></p>
 <h3 id="Web攻击方式">Web攻击方式</h3>
 <blockquote>
 <p>腾讯</p>
@@ -605,6 +614,9 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 </ul>
 <p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/12/liu-lan-qi-huan-cun-xiang-jie/">浏览器缓存详解 | QT-7274 (qblog.top)</a></p>
 <h3 id="四次挥手">四次挥手</h3>
+<blockquote>
+<p>字节</p>
+</blockquote>
 <p>四次挥手是 TCP（传输控制协议）用来终止一个已经被建立的连接的过程。它包括以下四个步骤：</p>
 <ol>
 <li><strong>第一次挥手</strong>：客户端发送一个 FIN 包给服务器，表示它已经完成了数据的发送，要关闭连接。此时，客户端进入 FIN-WAIT-1 状态。</li>
@@ -614,6 +626,9 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 </ol>
 <p>这个过程被称为四次挥手，是因为在这个过程中，有四次重要的数据包的发送：两次 FIN 包的发送和两次 ACK 包的发送。</p>
 <h3 id="对首屏的理解">对首屏的理解</h3>
+<blockquote>
+<p>字节</p>
+</blockquote>
 <p>首屏时间是指从用户打开网页到首屏内容完全显示出来的时间。这是一个非常重要的性能指标，因为它直接影响到用户的体验。</p>
 <p>首屏时间包括以下几个阶段：</p>
 <ol>
@@ -641,11 +656,39 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 </blockquote>
 <p>提示：</p>
 <ul>
-<li>typeof 的返回值，存在的缺点</li>
+<li>typeof 的返回值，存在的缺点（<strong>注意null的特殊性</strong>）</li>
 <li>instanceof 的返回值，存在的缺点</li>
 <li>通用方法</li>
 </ul>
 <p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/20/javascript-zhong-de-lei-xing-pan-duan-xiang-jie/#instanceof">JavaScript中的类型判断详解 | QT-7274 (qblog.top)</a></p>
+<h3 id="数组的常用方法">数组的常用方法</h3>
+<p>提示：</p>
+<ul>
+<li>增添方法（<strong>是否影响原数组</strong>）
+<ul>
+<li>push()：参数+作用+返回值</li>
+<li>unshift()：参数+作用+返回值</li>
+<li>splice()：参数+作用+返回值</li>
+<li>concat()：参数+作用+返回值</li>
+</ul>
+</li>
+<li>删除方法
+<ul>
+<li>pop()</li>
+<li>shift()</li>
+<li>splice()</li>
+<li>slice()</li>
+</ul>
+</li>
+<li>查询方法
+<ul>
+<li>indexOf()</li>
+<li>includes()</li>
+<li>find()</li>
+</ul>
+</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/08/javascript-xiang-guan-xi-jie-ti/#%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F">JavaScript相关细节题 | QT-7274 (qblog.top)</a></p>
 <h3 id="原型链">原型链</h3>
 <blockquote>
 <p>字节</p>
@@ -660,6 +703,65 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 <li><code>Function</code>对象的<code>__proto__</code>会指向自己的原型对象，最终还是继承自<code>Object</code>对象</li>
 </ul>
 <p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/JavaScript/prototype.html#%E4%B8%80%E3%80%81%E5%8E%9F%E5%9E%8B">面试官：JavaScript原型，原型链 ? 有什么特点？ | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<h3 id="DOM和BOM">DOM和BOM</h3>
+<blockquote>
+<p>字节</p>
+</blockquote>
+<p>DOM：</p>
+<ul>
+<li>全称</li>
+<li>作用：<strong>它提供了对文档的结构化的表述，并定义了一种方式可以使从程序中对该结构进行访问，从而改变文档的结构，样式和内容</strong></li>
+<li>操作</li>
+</ul>
+<p>BOM：</p>
+<ul>
+<li>
+<p>全称</p>
+</li>
+<li>
+<p>作用：<strong>它提供了独立于内容与浏览器窗口进行交互的对象 —— 其作用就是和浏览器做一些交互效果等</strong></p>
+<blockquote>
+<p>浏览器的全部内容可以看成DOM，整个浏览器可以看成BOM</p>
+</blockquote>
+</li>
+<li>
+<p>BOM的核心对象：<code>window</code>（表示浏览器的一个实例）</p>
+</li>
+<li>
+<p><code>location</code>：除 <code>hash</code> 外，只要修改 <code>location</code> 的一个属性，就会导致页面重新加载新URL</p>
+</li>
+<li>
+<p><code>navigator</code>、<code>screen</code>、<code>history</code></p>
+</li>
+</ul>
+<p>答案：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/interview/JavaScript/BOM.html#%E9%9D%A2%E8%AF%95%E5%AE%98-%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9bom%E7%9A%84%E7%90%86%E8%A7%A3-%E5%B8%B8%E8%A7%81%E7%9A%84bom%E5%AF%B9%E8%B1%A1%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%93%AA%E4%BA%9B">面试官：说说你对BOM的理解，常见的BOM对象你了解哪些？ | web前端面试 - 面试官系列 (vue3js.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/interview/JavaScript/Dom.html#%E9%9D%A2%E8%AF%95%E5%AE%98-dom%E5%B8%B8%E8%A7%81%E7%9A%84%E6%93%8D%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B">面试官：DOM常见的操作有哪些？ | web前端面试 - 面试官系列 (vue3js.cn)</a></li>
+</ul>
+<h3 id="变量提升">变量提升</h3>
+<ul>
+<li>
+<p>变量提升：指变量和函数<strong>声明</strong>在代码编译阶段被提升到它们所在的作用域的顶部。</p>
+</li>
+<li>
+<p>只有在非严格模式下才会变量提升。</p>
+</li>
+<li>
+<p><strong>先提升函数，再提升变量</strong>：也就是说如果在同一个作用域中同时声明了一个函数和一个变量，并且它们的名字相同，那么<strong>函数声明会覆盖变量声明</strong>。</p>
+</li>
+<li>
+<p>只有声明的变量会提升，初始化不会提升：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(a); &#x2F;&#x2F; 输出：undefined
+var a &#x3D; 5;
+console.log(a); &#x2F;&#x2F; 输出：5
+
+&#x2F;&#x2F; 因为a的声明被提升到了代码的顶部，但是初始化并没有提升，所以第一次打印是undefined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p>只有声明的函数才会提升，初始化不会提升。</p>
+</li>
+</ul>
 <h2 id="操作系统相关">操作系统相关</h2>
 <h3 id="进程和线程">进程和线程</h3>
 <blockquote>
@@ -717,6 +819,12 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 <li><strong>数据分发</strong>：当网络数据到达计算机时，操作系统会根据数据包的目标端口，将数据分发给监听在该端口上的服务或进程。</li>
 </ol>
 <h2 id="CSS相关">CSS相关</h2>
+<p>盒模型</p>
+<blockquote>
+<p>字节</p>
+</blockquote>
+<p>提示：盒子的大小=？</p>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/06/26/css-zhong-de-he-zi-mo-xing/">CSS中的盒子模型 | QT-7274 (qblog.top)</a></p>
 <h3 id="align-content-和-align-self-的区别"><code>align-content</code> 和 <code>align-self</code> 的区别</h3>
 <blockquote>
 <p>金山云</p>
@@ -916,6 +1024,27 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 <li>缺点：两点</li>
 </ul>
 <p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/08/vue-xiang-guan-xi-jie-ti/#%E4%BD%BF%E7%94%A8%E8%BF%87Vue-SSR%E5%90%97%EF%BC%9F%E8%AF%B4%E8%AF%B4-SSR%EF%BC%9F">Vue相关细节题 | QT-7274 (qblog.top)</a></p>
+<h3 id="Vue和React区别">Vue和React区别</h3>
+<blockquote>
+<p>字节</p>
+</blockquote>
+<ol>
+<li><strong>模板 vs JSX</strong>：Vue.js 使用基于 HTML 的模板语法，这使得 Vue.js 的学习曲线相对较平缓，尤其是对于那些已经熟悉 HTML 的开发者。而 React 使用 JSX，这是一种将 JavaScript 和 HTML 混合在一起的语法，对于那些喜欢在 JavaScript 中处理一切的开发者来说，这可能更有吸引力。</li>
+<li><strong>数据绑定</strong>：Vue.js 提供了双向数据绑定，这意味着当你在输入框中输入内容时，你的数据模型会自动更新，反之亦然。而 React 只提供了单向数据流，这意味着你需要手动处理输入框的变化事件，并更新你的数据模型。</li>
+<li><strong>状态管理</strong>：React 通常与 Redux 一起使用，以提供集中式的状态管理。而 Vue.js 有一个官方的状态管理库 Vuex，它的 API 设计更加简洁，更易于理解和使用。</li>
+<li><strong>社区和生态系统</strong>：React 的社区和生态系统更加成熟，有许多高质量的第三方库可以使用。而 Vue.js 的社区和生态系统虽然也在快速发展，但相比 React 还是稍微小一些。</li>
+</ol>
+<h3 id="修改ElementUI的样式">修改ElementUI的样式</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<ul>
+<li>全局样式覆盖</li>
+<li>局部样式覆盖</li>
+<li>::deep修改</li>
+<li>修改ElementUI的 Sass 变量</li>
+<li>直接修改源代码</li>
+</ul>
 
                 
             </div>
@@ -1426,30 +1555,29 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/03/02/qian-duan-zhi-shi-dian-da-gang-hui-zong/">
+                <a href="/2024/03/05/this-de-bang-ding-gui-ze-xiang-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/21.jpg" class="responsive-img" alt="前端知识点大纲汇总">
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/1.jpg" class="responsive-img" alt="this的绑定规则详解">
                         
-                        <span class="card-title">前端知识点大纲汇总</span>
+                        <span class="card-title">this的绑定规则详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            转载于稀土掘金——作者CoderBin
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-02
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-05
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1462,12 +1590,15 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/%E5%89%8D%E7%AB%AF/">
                         <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>
