@@ -470,21 +470,21 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-06
+                    2024-03-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.1k
+                    7.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    18 分
+                    27 分
                 </div>
                 
 
@@ -604,7 +604,7 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 </ul>
 <h3 id="浏览器缓存">浏览器缓存</h3>
 <blockquote>
-<p>腾讯</p>
+<p>腾讯、滴滴</p>
 </blockquote>
 <p>提示：</p>
 <ul>
@@ -662,6 +662,9 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 </ul>
 <p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/20/javascript-zhong-de-lei-xing-pan-duan-xiang-jie/#instanceof">JavaScript中的类型判断详解 | QT-7274 (qblog.top)</a></p>
 <h3 id="数组的常用方法">数组的常用方法</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
 <p>提示：</p>
 <ul>
 <li>增添方法（<strong>是否影响原数组</strong>）
@@ -685,6 +688,15 @@ https的工作原理：建立ssl-传输（公钥）-协商-加密-解密-通信
 <li>indexOf()</li>
 <li>includes()</li>
 <li>find()</li>
+</ul>
+</li>
+<li>迭代方法
+<ul>
+<li>some()</li>
+<li>every()</li>
+<li>forEach()</li>
+<li>filter()</li>
+<li>map()</li>
 </ul>
 </li>
 </ul>
@@ -762,6 +774,150 @@ console.log(a); &#x2F;&#x2F; 输出：5
 <p>只有声明的函数才会提升，初始化不会提升。</p>
 </li>
 </ul>
+<h3 id="this的绑定规则">this的绑定规则</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>默认绑定</li>
+<li>隐式绑定
+<ul>
+<li>一般的对象调用</li>
+<li>对象属性引用链</li>
+<li>隐式丢失</li>
+</ul>
+</li>
+<li>显示绑定</li>
+<li>new绑定</li>
+<li>绑定的优先级</li>
+<li>绑定的例外情况</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2024/03/05/this-de-bang-ding-gui-ze-xiang-jie/">this的绑定规则详解 | QT-7274 (qblog.top)</a></p>
+<h3 id="深拷贝和浅拷贝">深拷贝和浅拷贝</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<h4 id="如何实现数组的浅拷贝">如何实现数组的浅拷贝</h4>
+<blockquote>
+<p>小鹅通</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>使用 <code>Array.prototype.slice()</code> 方法</strong>：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> copy <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p><strong>使用 <code>Array.prototype.concat()</code> 方法</strong>：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> copy <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p><strong>使用扩展运算符（<code>...</code>）</strong>：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 2, 3];
+let copy &#x3D; [...arr];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li>
+<p><strong>使用 <code>Array.from()</code> 方法</strong>：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 2, 3];
+let copy &#x3D; Array.from(arr);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<h3 id="事件循环">事件循环</h3>
+<blockquote>
+<p>字节、小鹅通</p>
+</blockquote>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/20/javascript-shi-jian-xun-huan/">JavaScript事件循环 | QT-7274 (qblog.top)</a></p>
+<h4 id="练习题">练习题</h4>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(&#39;script start&#39;); 
+
+setTimeout(function () &#123;
+  console.log(&#39;setTimeout&#39;); 
+&#125;, 0);
+
+Promise.resolve().then(function () &#123;
+  console.log(&#39;promise1&#39;);
+&#125;).then(function () &#123;
+  console.log(&#39;promise2&#39;); 
+&#125;);
+
+async function async1() &#123;
+  console.log(&#39;async1 start&#39;); 
+  await async2(); 
+  console.log(&#39;async1 end&#39;);
+&#125;
+
+async function async2() &#123;
+  console.log(&#39;async2&#39;);
+&#125;
+
+async1(); 
+
+new Promise(function (resolve) &#123;
+  console.log(&#39;promise3&#39;); 
+  resolve(&#39;foo&#39;);
+&#125;).then(function () &#123;
+  console.log(&#39;promise4&#39;); 
+&#125;).then(new Promise(function (resolve) &#123;
+  console.log(&#39;promise8&#39;)
+  resolve()
+&#125;).then(function()&#123;
+  console.log(&#39;promise5&#39;)
+&#125;));
+
+console.log(&#39;script end&#39;); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol>
+<li>
+<p>先执行同步代码：</p>
+<ul>
+<li><code>console.log('script start')</code></li>
+<li><code>async1()</code>
+<ul>
+<li><code>console.log('async1 start')</code></li>
+<li><code>await async2()</code>
+<ul>
+<li><code>console.log('async2')</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>console.log('promise3')</code></li>
+<li><code>console.log('promise8')</code></li>
+<li><code>console.log('script end')</code></li>
+</ul>
+</li>
+<li>
+<p>在执行微队列任务：</p>
+<ul>
+<li>
+<p><code>console.log('promise1')</code></p>
+</li>
+<li>
+<p><code>console.log('async1 end');</code></p>
+</li>
+<li>
+<p><code>console.log('promise4');</code></p>
+</li>
+<li>
+<p><code>console.log('promise5')</code></p>
+</li>
+</ul>
+<blockquote>
+<p>注意因为promise8的优先级（同步任务）是比promise1（微任务）高的，所以promise5自然在promise2之前进入微队列。</p>
+</blockquote>
+<ul>
+<li><code>console.log('promise2')</code></li>
+</ul>
+</li>
+<li>
+<p>最后执行宏任务：</p>
+<ul>
+<li><code>console.log('setTimeout')</code></li>
+</ul>
+</li>
+</ol>
 <h2 id="操作系统相关">操作系统相关</h2>
 <h3 id="进程和线程">进程和线程</h3>
 <blockquote>
@@ -851,7 +1007,7 @@ console.log(a); &#x2F;&#x2F; 输出：5
 </ul>
 <h3 id="BFC">BFC</h3>
 <blockquote>
-<p>字节</p>
+<p>字节、小鹅通、腾讯</p>
 </blockquote>
 <p>提示：</p>
 <ul>
@@ -870,6 +1026,107 @@ console.log(a); &#x2F;&#x2F; 输出：5
 <li>宽高未知：定位两种+布局三种</li>
 </ul>
 <p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/18/css-shui-ping-chui-zhi-ju-zhong-xiang-jie/">CSS水平垂直居中详解 | QT-7274 (qblog.top)</a></p>
+<h3 id="修改ElementUI的样式">修改ElementUI的样式</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<ul>
+<li>
+<p>全局样式覆盖</p>
+<p>在你的全局样式文件（如 <code>App.vue</code> 或 <code>main.js</code> 引入的 CSS 文件）中，写入针对 ElementUI 组件的 CSS 样式。由于 CSS 的特性，后面的样式会覆盖前面的样式，所以你的自定义样式会覆盖 ElementUI 的默认样式。</p>
+<blockquote>
+<p>注意，由于 ElementUI 的样式是通过类选择器应用的，所以你可能需要使用 <code>!important</code> 来覆盖默认样式。</p>
+</blockquote>
+</li>
+<li>
+<p>局部样式覆盖</p>
+<p>在你的 Vue 组件中，你可以在 <code>&lt;style&gt;</code> 标签中写入针对 ElementUI 组件的 CSS 样式。如果你只想在这个组件中覆盖样式，你需要使用 <code>scoped</code> 属性。</p>
+<blockquote>
+<p>注意，如果你使用 <code>scoped</code>，你的样式只会应用到这个组件中的 ElementUI 组件。如果你想覆盖全局的 ElementUI 样式，你需要去掉 <code>scoped</code>。</p>
+</blockquote>
+</li>
+<li>
+<p>::deep修改</p>
+<p>这是因为 ElementUI 的样式是在组件的 Shadow DOM 中，而 <code>::v-deep</code> 可以帮助我们穿透 Shadow DOM，修改其内部的样式。</p>
+<blockquote>
+<p>注意，<code>::v-deep</code> 只能在 Vue 组件的 <code>&lt;style&gt;</code> 标签中使用，并且需要配合 <code>scoped</code> 使用。如果你在全局样式文件中使用 <code>::v-deep</code>，可能会无法生效。</p>
+</blockquote>
+</li>
+<li>
+<p>修改ElementUI的 Sass 变量</p>
+<p>ElementUI 的样式是基于 Sass 的，你可以通过修改 Sass 变量来改变 ElementUI 的默认样式。首先，你需要在你的项目中安装 <code>sass-loader</code> 和 <code>node-sass</code>，然后在你的样式文件中引入 ElementUI 的样式文件，并修改你想要改变的变量。</p>
+</li>
+<li>
+<p>直接修改源代码</p>
+</li>
+</ul>
+<h3 id="盒模型">盒模型</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>盒子的分类</li>
+<li>盒子的组成</li>
+<li>盒子的大小</li>
+<li>四个属性的特点</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/06/26/css-zhong-de-he-zi-mo-xing/">CSS中的盒子模型 | QT-7274 (qblog.top)</a></p>
+<h3 id="粘性定位的原理">粘性定位的原理</h3>
+<blockquote>
+<p>小鹅通</p>
+</blockquote>
+<p>它是相对定位和固定定位的混合体：元素在滚动到一定位置之前表现为相对定位，当元素滚动到指定位置时，它会变为固定定位。</p>
+<p>工作原理如下：</p>
+<ul>
+<li>当元素在视口（viewport）内，且未达到指定的偏移位置时，元素表现为相对定位。此时，元素会按照正常的文档流进行布局，不会脱离文档流。</li>
+<li>当页面滚动，使元素达到或超过指定的偏移位置时，元素会变为固定定位。此时，元素会固定在视口的某个位置，不会随着页面的滚动而移动。</li>
+<li>当页面继续滚动，<strong>使元素的父容器滚出视口时</strong>，元素会再次变为相对定位，恢复到正常的文档流中。</li>
+</ul>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.sticky</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> sticky<span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="HTML的块级元素和行内元素">HTML的块级元素和行内元素</h3>
+<blockquote>
+<p>腾讯</p>
+</blockquote>
+<p><strong>块级元素</strong>包括：</p>
+<ul>
+<li><code>&lt;div&gt;</code></li>
+<li><code>&lt;h1&gt;</code> 到 <code>&lt;h6&gt;</code></li>
+<li><code>&lt;p&gt;</code></li>
+<li><code>&lt;form&gt;</code></li>
+<li><code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;section&gt;</code> 等</li>
+</ul>
+<p>块级元素的特点：</p>
+<ul>
+<li>默认情况下，块级元素会独占一行，即使设置了宽度，其后的元素也会换行显示。</li>
+<li>可以设置宽度、高度、外边距和内边距。</li>
+</ul>
+<p><strong>行内元素</strong>包括：</p>
+<ul>
+<li><code>&lt;span&gt;</code></li>
+<li><code>&lt;a&gt;</code></li>
+<li><code>&lt;img&gt;</code></li>
+<li><code>&lt;button&gt;</code></li>
+<li><code>&lt;input&gt;</code></li>
+<li><code>&lt;label&gt;</code></li>
+<li><code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code> 等</li>
+</ul>
+<p>行内元素的特点：</p>
+<ul>
+<li>行内元素不会独占一行，多个行内元素会在一行内从左到右依次排列。</li>
+<li>默认情况下，不能设置宽度和高度（除非设置了 <code>display: inline-block</code>），只能设置左右的外边距和内边距。</li>
+</ul>
+<p><strong>行内块元素</strong>包括：</p>
+<ul>
+<li><code>&lt;img&gt;</code></li>
+<li><code>&lt;input&gt;</code></li>
+</ul>
+<p>行内块元素的特点：</p>
+<p>行内块级元素是块级元素和行内元素的混合体。它像行内元素一样，不会独占一行，可以和其他元素并排显示。同时，它又像块级元素一样，可以设置宽度和高度。</p>
+<h3 id="positon定位及区别">positon定位及区别</h3>
 <h2 id="ES6相关">ES6相关</h2>
 <h3 id="箭头函数和普通函数的区别">箭头函数和普通函数的区别</h3>
 <blockquote>
@@ -1034,17 +1291,149 @@ console.log(a); &#x2F;&#x2F; 输出：5
 <li><strong>状态管理</strong>：React 通常与 Redux 一起使用，以提供集中式的状态管理。而 Vue.js 有一个官方的状态管理库 Vuex，它的 API 设计更加简洁，更易于理解和使用。</li>
 <li><strong>社区和生态系统</strong>：React 的社区和生态系统更加成熟，有许多高质量的第三方库可以使用。而 Vue.js 的社区和生态系统虽然也在快速发展，但相比 React 还是稍微小一些。</li>
 </ol>
-<h3 id="修改ElementUI的样式">修改ElementUI的样式</h3>
+<h3 id="Computed和Watch的区别">Computed和Watch的区别</h3>
 <blockquote>
 <p>滴滴</p>
 </blockquote>
+<p>提示：</p>
 <ul>
-<li>全局样式覆盖</li>
-<li>局部样式覆盖</li>
-<li>::deep修改</li>
-<li>修改ElementUI的 Sass 变量</li>
-<li>直接修改源代码</li>
+<li>作用</li>
+<li>应用场景</li>
 </ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/08/vue-xiang-guan-xi-jie-ti/#computed-%E5%92%8C-watch-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%BF%90%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F">Vue相关细节题 | QT-7274 (qblog.top)</a></p>
+<h3 id="v-if和v-show的区别">v-if和v-show的区别</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>触发条件带来的影响</li>
+<li>生命周期函数</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/08/11/shang-pin-hui-xing-neng-you-hua/#v-if-or-v-show%EF%BC%9F">尚品汇-性能优化 | QT-7274 (qblog.top)</a></p>
+<h3 id="diff算法">diff算法</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>两个特点</li>
+<li>在Vue中的作用</li>
+<li>比较方式：深度优先，同层比较</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/vue/diff.html#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88">面试官：你了解vue的diff算法吗？说说看 | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<h3 id="生命周期">生命周期</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<p>提升：</p>
+<ul>
+<li>流程</li>
+<li>各阶段的使用场景</li>
+<li>数据请求在created和mounted的区别</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/07/10/vue-he-xin-vue-sheng-ming-zhou-qi/">Vue核心 Vue生命周期 | QT-7274 (qblog.top)</a></p>
+<h3 id="Vue2和Vue3的区别">Vue2和Vue3的区别</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>速度更快</li>
+<li>体积减小</li>
+<li>更容易维护</li>
+<li>更好的TS支持</li>
+<li>其他细节改变</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/13/vue3-he-vue2-de-qu-bie/">Vue3和Vue2的区别 | QT-7274 (qblog.top)</a></p>
+<p>相关拓展：</p>
+<ul>
+<li>Vue3的性能优化</li>
+<li>Vue3的Tree shaking算法</li>
+</ul>
+<h3 id="Vue3的性能优化">Vue3的性能优化</h3>
+<p>提示：</p>
+<ul>
+<li>vue2的性能浪费</li>
+<li>diff算法优化：静态标记</li>
+<li>静态提升</li>
+<li>事件监听缓存</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/13/vue3-he-vue2-de-qu-bie/">Vue3和Vue2的区别 | QT-7274 (qblog.top)</a></p>
+<p>相关拓展：</p>
+<ul>
+<li>Vue3的Tree shaking</li>
+</ul>
+<h3 id="Vue3的Tree-shaking">Vue3的Tree shaking</h3>
+<p>提示：</p>
+<ul>
+<li>传统方法和Tree shaking 的区别</li>
+<li>Vue2的缺点：生产代码+无法检测</li>
+<li>Vue3的优点：分块</li>
+<li>Tree shaking的优点</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/14/vue3-0-zhong-treeshaking-te-xing/">Vue3.0中Treeshaking特性 | QT-7274 (qblog.top)</a></p>
+<h3 id="Vue的双向绑定的原理">Vue的双向绑定的原理</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>双向绑定的概念</li>
+<li>双向绑定的组成：MVVM</li>
+<li>编译 – 获取 – 定义 – 需要 – 通知</li>
+</ul>
+<p>答案：[Vue相关细节题 | QT-7274 (qblog.top)](<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/08/vue-xiang-guan-xi-jie-ti/#Vue">https://qblog.top/2023/09/08/vue-xiang-guan-xi-jie-ti/#Vue</a> 是如何实现数据双向绑定的？)</p>
+<h3 id="虚拟DOM">虚拟DOM</h3>
+<blockquote>
+<p>滴滴</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>为什么要用到虚拟DOM</li>
+<li>什么是虚拟DOM</li>
+<li>如何实现虚拟DOM
+<ul>
+<li>用JS对象模拟DOM树</li>
+<li>渲染用JS表示的DOM对象</li>
+<li>比较两棵虚拟DOM树的差异</li>
+<li>将两个虚拟DOM对象的差异应用到真正的DOM树</li>
+</ul>
+</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/15/vue-xu-ni-dom-xiang-jie/">Vue虚拟DOM详解 | QT-7274 (qblog.top)</a></p>
+<h3 id="nextTick-的原理">$nextTick()的原理</h3>
+<blockquote>
+<p>小鹅通</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>身份：它是一个生命周期钩子</li>
+<li>作用</li>
+<li>使用场景</li>
+<li>实现原理
+<ul>
+<li>实现原理主要涉及到JavaScript 的事件循环（Event Loop）和微任务队列（Microtask Queue）。【详见：JavaScript事件循环】</li>
+<li>Vue.js 的 DOM 更新是异步的，当数据改变时，Vue.js 不会立即更新 DOM，而是将需要更新的组件添加到一个异步队列中。然后，在事件循环的微任务队列中，Vue.js 会清空异步队列，更新所有需要更新的组件。这个过程被称为 “异步更新队列”。</li>
+<li><code>$nextTick()</code> 方法就是基于这个异步更新队列实现的。当你调用 <code>$nextTick()</code> 方法时，**Vue.js 会将你提供的回调函数添加到一个单独的队列中，这个队列会在异步更新队列清空后执行。**这样，你就可以确保你的代码在 DOM 更新后执行。</li>
+</ul>
+</li>
+</ul>
+<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/07/18/vue-he-xin-nexttick-guo-du-yu-dong-hua/">Vue核心 $nextTick 过渡与动画 | QT-7274 (qblog.top)</a></p>
+<p>相关拓展：</p>
+<ul>
+<li>JavaScript中的事件循环</li>
+</ul>
+<h3 id="Vite打包工具的构建流程">Vite打包工具的构建流程</h3>
+<ol>
+<li><strong>读取配置</strong>：Vite 首先会读取用户的配置文件（默认为 <code>vite.config.js</code>），并根据配置文件中的设置初始化构建环境。</li>
+<li><strong>模块解析</strong>：Vite 会解析入口文件（默认为 <code>index.html</code>），找出所有的模块依赖。Vite 使用了 ES Module 的静态导入特性，可以在不执行代码的情况下解析出所有的模块依赖。</li>
+<li><strong>模块转换</strong>：对于 JavaScript 模块，Vite 会使用 esbuild 进行转换，这比传统的 Babel 转换要快得多。对于 Vue、React 等框架的模块，Vite 会使用对应的插件进行转换。</li>
+<li><strong>模块优化</strong>：Vite 会预编译依赖模块，将其转换为可以直接在浏览器中运行的 ES Module 格式，大大提高了页面的加载速度。</li>
+<li><strong>代码拆分</strong>：Vite 会根据模块的依赖关系进行代码拆分，生成多个 chunk，以实现代码的按需加载。</li>
+<li><strong>静态资源处理</strong>：Vite 会处理和优化静态资源，如图片、样式文件等。</li>
+<li><strong>构建输出</strong>：最后，Vite 会将转换和优化后的代码输出到构建目录（默认为 <code>dist</code>）。</li>
+</ol>
 
                 
             </div>
