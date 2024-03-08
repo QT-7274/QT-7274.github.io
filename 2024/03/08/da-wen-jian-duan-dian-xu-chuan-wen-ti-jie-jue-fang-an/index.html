@@ -5,8 +5,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="浏览器相关细节题（2）, QT-7274">
-    <meta name="description" content="本篇主要针对浏览器中HTML和CSS相关知识">
+    <meta name="keywords" content="大文件断点续传问题解决方案, QT-7274">
+    <meta name="description" content="本文主要讨论断点续传可能遇到的问题及解决方案，仅限理论知识补充">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +20,7 @@
 
     
 
-    <title>浏览器相关细节题（2） | QT-7274</title>
+    <title>大文件断点续传问题解决方案 | QT-7274</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -306,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%89%8D%E7%AB%AF.webp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">浏览器相关细节题（2）</h1>
+                    <h1 class="description center-align post-title">大文件断点续传问题解决方案</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                                 <span class="chip bg-color">前端</span>
                             </a>
                         
-                            <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">
-                                <span class="chip bg-color">浏览器</span>
+                            <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">
+                                <span class="chip bg-color">理论知识</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9B%B8%E5%85%B3/" class="post-category">
-                                浏览器相关
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                前端开发
                             </a>
                         
                     </div>
@@ -456,28 +456,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-10-08
+                    2024-03-08
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-07
+                    2024-03-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.8k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    13 分
+                    4 分
                 </div>
                 
 
@@ -500,460 +500,84 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="什么是渐进增强和优雅降级"><a class="markdownIt-Anchor" href="#什么是渐进增强和优雅降级"></a> 什么是“渐进增强”和“优雅降级”？</h2>
-<ul>
-<li>
-<p>渐进增强</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>先针对低版本浏览器构建页面，保证最基本的功能，然后再针对高版本浏览器进行功能的追加，交互的改进等，以达到更好的用户体验。</p>
-</li>
-<li>
-<p>优雅降级</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>先针对高版本的浏览器构建完整的页面，然后再针对低版本的浏览器兼容处理。</p>
-</li>
-</ul>
-<h2 id="html顶部的doctype的作用是什么"><a class="markdownIt-Anchor" href="#html顶部的doctype的作用是什么"></a> HTML顶部的&lt;!DOCTYPE&gt;的作用是什么？</h2>
-<ul>
-<li>
-<p>作用</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>它位于HTML文档中的第一行，用于告知浏览器应该用什么文档标准来解析这个文档。在HTML5中，我们只需要这样写就可以了：<code>&lt;!DOCTYPE&gt;</code></p>
-</li>
-</ul>
-<h2 id="说一说html语义化"><a class="markdownIt-Anchor" href="#说一说html语义化"></a> 说一说HTML语义化？</h2>
-<ul>
-<li>
-<p>语义化</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>HTML5新增的主要结构元素有6个：header、nav、article、aside、section、footer</p>
-<ul>
-<li>HTML语义化可以提高代码的可读性，<strong>便于开发调试和后期维护</strong>。</li>
-<li>搜索引擎通过HTML标签来识别页面的结构，HTML语义化可以更好地实现<strong>搜索引擎优化</strong>（即SEO）</li>
-</ul>
-<p>加分项：HTML5语义化标签并没有广泛使用，例如淘宝、京东。原因可能为HTML5语义化标签的兼容性，为了确保网站在各种浏览器上正常显示，开发者可能更倾向于使用传统的div和span等标签；可能为许多现有的网站和应用程序使用传统的标签结构，将它们迁移到HTML5语义化标签可能需要大量的工作和修改。</p>
-</li>
-</ul>
-<h2 id="块级元素有哪些行内元素有哪些空元素有哪些"><a class="markdownIt-Anchor" href="#块级元素有哪些行内元素有哪些空元素有哪些"></a> 块级元素有哪些？行内元素有哪些？空元素有哪些？</h2>
-<ul>
-<li>
-<p>概念</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>其中，空元素就是我们所说的自闭合元素。</p>
-<ul>
-<li>块级元素：div、p、ul、ol、h1~h6等</li>
-<li>行内元素：strong、em、span、a等</li>
-<li>空元素：meta、link、hr、br、img、input等</li>
-</ul>
-</li>
-</ul>
-<h2 id="label元素的作用是什么具体是怎么使用的"><a class="markdownIt-Anchor" href="#label元素的作用是什么具体是怎么使用的"></a> label元素的作用是什么？具体是怎么使用的？</h2>
-<ul>
-<li>
-<p>概念</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>label 元素用于将某个表单元素和某段说明文字关联起来，它主要有两个方面的作用。</p>
-<ul>
-<li>从<strong>语义</strong>上绑定了label元素和表单元素。</li>
-<li>增强了<strong>鼠标可用性</strong>，使得我们单击label中的文本时，其所关联的表单元素也会获得焦点。</li>
-</ul>
-</li>
-</ul>
-<h2 id="说一下h1与title-strong与b-em与i3组标签之间的区别"><a class="markdownIt-Anchor" href="#说一下h1与title-strong与b-em与i3组标签之间的区别"></a> 说一下h1与title、strong与b、em与i，3组标签之间的区别</h2>
-<ul>
-<li>
-<p>h1与title</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>title定义的是地址栏的标题，h1表示的是文章的标题。</p>
-</li>
-<li>
-<p>strong与b</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>strong是一个有语义的标签，用来加粗文本，带有强调的语义，搜索引擎会赋予一定的权重。</p>
-<p>b是一个无语义的标签，仅仅用来加粗文本。</p>
-<p>为了HTML语义化，我们应该使用strong，而不是b。</p>
-</li>
-<li>
-<p>em与i</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>em是一个有语义的标签，使得文本变成斜体，带有强调的语义，搜索引擎会赋予一定的权重。</p>
-<p>i是一个无语义的标签，仅仅使得文本变成斜体。</p>
-<p>为了HTML语义化，我们应该使用em，而不是i。</p>
-</li>
-</ul>
-<h2 id="img标签中的alt和title这两个属性有什么区别"><a class="markdownIt-Anchor" href="#img标签中的alt和title这两个属性有什么区别"></a> img标签中的alt和title这两个属性有什么区别？</h2>
-<ul>
-<li>
-<p>概念</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>alt属性用于描述图片，这个描述文字是给<strong>搜索引擎</strong>看的。当图片无法显示时，页面会显示alt中的文字。</li>
-<li>title属性也是用于描述图片的，不过这个描述文字是给<strong>用户</strong>看的。当鼠标指针移到图片上时，图片会显示title中的文字。</li>
-</ul>
-</li>
-</ul>
-<h2 id="页面导入样式时使用-link-和使用-import-有什么区别呢"><a class="markdownIt-Anchor" href="#页面导入样式时使用-link-和使用-import-有什么区别呢"></a> 页面导入样式时，使用 link 和使用 @import 有什么区别呢？</h2>
-<ul>
-<li>
-<p>概念</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>页面代码是从上到下进行渲染的，如果使用link方式，会先加载 CSS 后加载 HTML 。</li>
-<li>如果使用 @import 方式，会先加载 HTML 后加载 CSS 。</li>
-<li>如果 HTML 在 CSS 之前加载，页面用户体验就会非常差，因此一般情况下，我们只会用 link 方式，而不是 @import 方式。</li>
-</ul>
-</li>
-</ul>
-<h2 id="哪些-css-属性可以继承哪些可以不继承请列举几个"><a class="markdownIt-Anchor" href="#哪些-css-属性可以继承哪些可以不继承请列举几个"></a> 哪些 CSS 属性可以继承，哪些可以不继承？请列举几个。</h2>
-<ul>
-<li>
-<p>概念</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>可以继承的属性：font-family、font-size、font-weight、color等。</li>
-<li>不可继承的属性：width、height、padding、margin、border等。</li>
-</ul>
-</li>
-</ul>
-<h2 id="为什么要初始化-css-样式"><a class="markdownIt-Anchor" href="#为什么要初始化-css-样式"></a> 为什么要初始化 CSS 样式？</h2>
-<ul>
-<li>
-<p>原因</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>不同的浏览器中，有些标签的默认样式是不一样的。如果没有对 CSS 进行初始化，往往会出现浏览器之间的页面显示差异。</li>
-<li>初始化 CSS 样式，可以让 HTML 元素具有相同的初始样式，然后再对元素进行统一定义，这样就可以让页面在不同的浏览器中产生相同的结果。</li>
-</ul>
-</li>
-</ul>
-<h2 id="简述一下-src-和-href-的区别"><a class="markdownIt-Anchor" href="#简述一下-src-和-href-的区别"></a> 简述一下 src 和 href 的区别</h2>
-<ul>
-<li>
-<p>区别</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>src 是 source 的缩写，表示来源地址，在img、script、iframe等元素上使用。src引入的内容，<strong>会插入到当前元素的位置</strong>，它是页面必不可少的内容。</li>
-<li>href 是 Hypertext Reference 的缩写，表示超文本引用，在a、link 等元素上使用。href 引入的内容，<strong>并不会插入到当前元素的位置，仅仅表示在当前文档和引用资源之间建立联系。</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="请详细说一下-inline-元素和-inline-block-元素的区别-不需要说相同点"><a class="markdownIt-Anchor" href="#请详细说一下-inline-元素和-inline-block-元素的区别-不需要说相同点"></a> 请详细说一下 inline 元素和 inline-block 元素的区别。（不需要说相同点）</h2>
-<ul>
-<li>
-<p>区别</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>inline 元素无法定义宽度和高度，但是 inline-block 元素可以。</li>
-<li>inline 元素（img，input）只能定义 margin-left 和 margin-right，不能定义 margin-top 和 margin-bottom，而 inline-block 元素可以定义4个方向的 margin。</li>
-</ul>
-</li>
-</ul>
-<h2 id="displaynone-和-visibilityhidden-二者有什么区别"><a class="markdownIt-Anchor" href="#displaynone-和-visibilityhidden-二者有什么区别"></a> display:none  和 visibility:hidden 二者有什么区别？</h2>
-<ul>
-<li>
-<p>区别</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>display:none 的元素被隐藏之后，<strong>不占据原来的位置</strong>。visibility:hidden 的元素被隐藏之后，<strong>还会占据原来的位置</strong>。</li>
-<li>从搜索引擎优化的角度来看，display:none 隐藏的内容是<strong>不会纳入权重</strong>的考虑范围内的。</li>
-</ul>
-</li>
-</ul>
-<h2 id="inline-block-元素之间产生空隙的原因是什么怎么去除空隙"><a class="markdownIt-Anchor" href="#inline-block-元素之间产生空隙的原因是什么怎么去除空隙"></a> inline-block 元素之间产生空隙的原因是什么？怎么去除空隙？</h2>
-<ul>
-<li>
-<p>原因</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>产生原因：HTML 代码中的换行、空格、Tab 等空白符，<strong>在字体大小不为0的情况下，会占据一定宽度，因此使用 inline-block 会产生一定的空隙</strong>。</li>
-<li>解决方法：<strong>为父元素定义 font-size: 0</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="使用纯-css-来实现一个三角形的原理是什么"><a class="markdownIt-Anchor" href="#使用纯-css-来实现一个三角形的原理是什么"></a> 使用纯 CSS 来实现一个三角形的原理是什么？</h2>
-<ul>
-<li>
-<p>原理</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>元素的宽度和高度都定义为0</li>
-<li>border 设置得足够大</li>
-<li>使用 transparent 值把 3 个方向的边框隐藏掉。</li>
-</ul>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token property">width</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-	<span class="token property">height</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-	<span class="token property">border-width</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
-	<span class="token property">border-style</span><span class="token punctuation">:</span> solid<span class="token punctuation">;</span>
-	<span class="token property">border-color</span><span class="token punctuation">:</span> red transparent transparent transparent
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<h2 id="清除浮动都有哪些方式每个方式都有哪些优缺点"><a class="markdownIt-Anchor" href="#清除浮动都有哪些方式每个方式都有哪些优缺点"></a> 清除浮动都有哪些方式？每个方式都有哪些优缺点？</h2>
-<ul>
-<li>
-<p>方式</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>常见的清除浮动的方式有3种：clear:both、overflow:hidden、::after 伪元素</p>
+                <h3 id="切片上传失败怎么办"><a class="markdownIt-Anchor" href="#切片上传失败怎么办"></a> 切片上传失败怎么办</h3>
+<p>通常的做法是重新上传这个切片。以下是一种可能的处理步骤：</p>
 <ol>
-<li>
-<p>clear:both</p>
-<p>这种方式需要多增加一个无意义的标签。</p>
-</li>
-<li>
-<p>overflow:hidden</p>
-<p>这种方式虽然不会增加多余的标签，<strong>但是会隐藏超出父元素的内容部分</strong>。</p>
-</li>
-<li>
-<p>::after 伪元素</p>
-<p>这种方式不会增加无意义的标签，也不会隐藏超出父元素的内容部分。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.clearfix::after</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token property">clear</span><span class="token punctuation">:</span>both<span class="token punctuation">;</span>
-	<span class="token property">content</span><span class="token punctuation">:</span><span class="token string">''</span><span class="token punctuation">;</span>
-	<span class="token property">display</span><span class="token punctuation">:</span>block<span class="token punctuation">;</span>
-	<span class="token property">height</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
-	<span class="token property">visibility</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
+<li>捕获上传失败的错误：当你尝试上传一个切片时，你应该使用 try-catch 语句或者 promise 的 <code>.catch</code> 方法来捕获可能发生的错误。</li>
+<li>重试上传：在捕获到错误后，你可以立即尝试重新上传这个切片。为了避免无限重试，你应该设置一个最大重试次数。</li>
+<li>延迟重试：如果立即重试仍然失败，你可以等待一段时间后再尝试重新上传。这可以通过 <code>setTimeout</code> 函数来实现。</li>
+<li>记录失败的切片：如果重试多次后仍然失败，你应该记录下这个切片的信息，以便用户在网络条件改善后可以继续上传这个切片。</li>
+<li>提示用户：在切片上传失败并且重试多次后，你应该通知用户上传失败，并给出相应的错误信息和建议。</li>
 </ol>
-</li>
-</ul>
-<h2 id="如何实现块元素的水平居中和垂直居中如何实现行内元素的水平居中和垂直居中"><a class="markdownIt-Anchor" href="#如何实现块元素的水平居中和垂直居中如何实现行内元素的水平居中和垂直居中"></a> 如何实现块元素的水平居中和垂直居中？如何实现行内元素的水平居中和垂直居中？</h2>
-<p>详见：<a href="https://qt-7274.github.io/2023/09/18/css-shui-ping-chui-zhi-ju-zhong-xiang-jie/">CSS水平垂直居中详解 | QT-7274 (qblog.top)</a></p>
-<h2 id="如何实现两栏布局"><a class="markdownIt-Anchor" href="#如何实现两栏布局"></a> 如何实现两栏布局？</h2>
-<p>详见：<a href="https://qt-7274.github.io/2023/09/02/css-zhong-de-bu-ju-hui-zong/#%E4%B8%A4%E6%A0%8F%E5%B8%83%E5%B1%80">CSS中的布局汇总 | QT-7274 (qblog.top)</a></p>
-<h2 id="如何实现三栏布局至少说三种"><a class="markdownIt-Anchor" href="#如何实现三栏布局至少说三种"></a> 如何实现三栏布局？(至少说三种)</h2>
-<p>详见：<a href="https://qt-7274.github.io/2023/09/02/css-zhong-de-bu-ju-hui-zong/#%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80">CSS中的布局汇总 | QT-7274 (qblog.top)</a></p>
-<h2 id="如何创建一个新的bfc"><a class="markdownIt-Anchor" href="#如何创建一个新的bfc"></a> 如何创建一个新的BFC</h2>
-<ul>
-<li>
-<p>概念</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>如果一个元素具备以下任何条件，则该元素都会创建一个新的BFC。</p>
-<ul>
-<li>float 的值不为 none。</li>
-<li>position 的值不是 static 和 relative。</li>
-<li>overflow 的值不是 visible。</li>
-<li>display 的值为inline-block、table-cell、table-caption 中的任意一个。</li>
-</ul>
-</li>
-</ul>
-<h2 id="bfc-都有什么特点简单说一下"><a class="markdownIt-Anchor" href="#bfc-都有什么特点简单说一下"></a> BFC 都有什么特点？简单说一下。</h2>
-<ul>
-<li>
-<p>特点</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>BFC 有以下6个方面的特点（尽量多回答）。</p>
-<ul>
-<li>在一个BFC内部，盒子会在垂直方向上一个接一个排列。</li>
-<li>在一个BFC内部，相邻的 margin-top 和 margin-bottom 会叠加。</li>
-<li>在一个BFC内部，每一个元素的左外边界会紧贴着包含盒子的容器的左边，即使是浮动元素也是如此。</li>
-<li>在一个BFC内部，如果存在内容元素是一个新的 BFC ，并且存在内部元素是浮动元素，则该 BFC 的区域不会与 float 元素的区域重叠。</li>
-<li>BFC 就是页面上的一个隔离的盒子，该盒子内部的子元素不会影响外面的元素。</li>
-<li>计算一个 BFC 的高度时，其内部浮动元素的高度也会参与计算。</li>
-</ul>
-</li>
-</ul>
-<h2 id="为什么一般推荐将-css-中的link放置在-head-之间而将-javascript-中的script放置在body之前你知道有哪些例外吗"><a class="markdownIt-Anchor" href="#为什么一般推荐将-css-中的link放置在-head-之间而将-javascript-中的script放置在body之前你知道有哪些例外吗"></a> 为什么一般推荐将 CSS 中的link放置在 head 之间，而将 JavaScript 中的script放置在body之前？你知道有哪些例外吗？</h2>
-<ul>
-<li>
-<p>原因</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>浏览器是从上到下来解析一个页面的，如果外部CSS文件放到<body></body>中，那么浏览器会先解析HTML，再解析CSS。此时用户看到的是一个没有样式的页面，这样的用户体验是非常差的。</li>
-<li>对于外部 JavaScript 文件，如果放到页面的顶部，那么浏览器就会先解析 JavaScript，然后再去解析 CSS。如果外部 JavaScript 文件过大，那么页面渲染和交互都会被阻塞。</li>
-<li>如果希望在 DOM 加载前就执行外部 JavaScript 文件，此时 <script> 应该放置在 <head></head>中。</li>
-<li>对于加了defer、async 的 <script> 也可以放到 head 标签内。</li>
-</ul>
-</li>
-</ul>
-<h2 id="如果一个页面的图片很多怎么做性能优化"><a class="markdownIt-Anchor" href="#如果一个页面的图片很多怎么做性能优化"></a> 如果一个页面的图片很多，怎么做性能优化？</h2>
-<ul>
-<li>
-<p>优化方案</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>对于一些小图标，尽量使用 iconfont 来实现。</li>
-<li>无法使用 iconfont 实现的，尽量使用“雪碧图”来实现。</li>
-<li>使用 lazyload.js 来实现图片懒加载。</li>
-<li>一定要压缩图片，推荐使用 tinypng 这个在线工具。</li>
-</ul>
-</li>
-</ul>
-<h2 id="unicode-与-utf-8-这两种编码方式有什么关系"><a class="markdownIt-Anchor" href="#unicode-与-utf-8-这两种编码方式有什么关系"></a> unicode 与 utf-8 这两种编码方式有什么关系？</h2>
-<ul>
-<li>
-<p>关系</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>unicode 是一个很大的字符集合，它包含了世界上所有的字符，因此文件很大。utf-8 准确来说，也是属于 unicode，<strong>只不过它是 unicode 的一种具体实现方式。</strong></li>
-<li>utf-8 采用<strong>变长</strong>的方式来存储字符，比如一个字节就可以表示的字符，那就用一位字节来存储，需要两位字节表示的就用两位字节来存储，以此类推。这种方式可以尽量缩小文件，方便存储和传输。</li>
-</ul>
-</li>
-</ul>
-<h2 id="介绍下浮动"><a class="markdownIt-Anchor" href="#介绍下浮动"></a> 介绍下浮动</h2>
-<h3 id="元素浮动后的特点"><a class="markdownIt-Anchor" href="#元素浮动后的特点"></a> 元素浮动后的特点</h3>
-<ul>
-<li>
-<p>特点</p>
-<details><summary><b>答案</b></summary>
-<p>
+<h3 id="上传过程中刷新页面怎么办"><a class="markdownIt-Anchor" href="#上传过程中刷新页面怎么办"></a> 上传过程中刷新页面怎么办</h3>
+<p>你可以将上传的进度和已上传的文件切片信息存储在客户端（例如使用 localStorage 或 IndexedDB）。以下是一种可能的处理步骤：</p>
 <ol>
-<li>🤢脱离文档流。</li>
-<li>😊不管浮动前是什么元素，浮动后：默认宽与高都是被内容<strong>撑开</strong>（尽可能小），而且可以设置宽高。</li>
-<li>😊不会独占一行，可以与其他元素共用一行。</li>
-<li>😊不会 <code>margin</code> 合并，也不会 <code>margin</code> 塌陷，能够完美的设置四个方向的 <code>margin</code> 和 <code>padding</code> 。</li>
-<li>😊不会像行内块一样被当做文本处理（没有行内块的空白问题）。</li>
+<li>在开始上传文件之前，将文件切片并存储每个切片的信息（例如切片的索引和大小）。</li>
+<li>在上传每个切片时，更新并保存上传的进度。</li>
+<li>如果用户刷新了页面，你可以从存储中读取已上传的切片信息和上传进度，然后从上次的进度继续上传。</li>
+<li>如果所有的切片都上传成功，你可以发送一个请求给服务器，告诉它所有的切片都已上传，服务器可以将这些切片合并成完整的文件。</li>
 </ol>
-</li>
-</ul>
-<h3 id="浮动产生的影响及解决方案"><a class="markdownIt-Anchor" href="#浮动产生的影响及解决方案"></a> 浮动产生的影响及解决方案</h3>
-<h4 id="产生影响"><a class="markdownIt-Anchor" href="#产生影响"></a> 产生影响</h4>
-<ul>
-<li>
-<p>影响</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>对兄弟元素的影响： 后面的兄弟元素，会占据浮动元素之前的位置，在浮动元素的下面；对前面的兄弟<br />
-无影响。<br />
-对父元素的影响： 不能撑起父元素的高度，导致父元素高度塌陷；但父元素的宽度依然束缚浮动的元<br />
-素。</p>
-</li>
-</ul>
-<h4 id="解决方案"><a class="markdownIt-Anchor" href="#解决方案"></a> 解决方案</h4>
-<ul>
-<li>
-<p>方案</p>
-<details><summary><b>答案</b></summary>
-<p>
+<p>请注意，这种方法需要服务器支持文件切片的上传和合并，以及客户端支持文件的切片和存储。</p>
+<h3 id="如何进行并行上传"><a class="markdownIt-Anchor" href="#如何进行并行上传"></a> 如何进行并行上传</h3>
+<p>在 JavaScript 中，你可以使用 Promise.all 或者 Promise.allSettled 方法来并行上传多个文件切片。以下是一个简单的示例：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 假设你有一个数组，其中包含了所有的文件切片
+let fileChunks &#x3D; [...];
+
+&#x2F;&#x2F; 假设你有一个函数，可以用来上传一个文件切片
+function uploadChunk(chunk) &#123;
+  &#x2F;&#x2F; 这个函数应该返回一个 Promise
+&#125;
+
+&#x2F;&#x2F; 创建一个数组，其中包含了所有上传文件切片的 Promise
+let uploadPromises &#x3D; fileChunks.map(chunk &#x3D;&gt; uploadChunk(chunk));
+
+&#x2F;&#x2F; 使用 Promise.all 来并行上传所有的文件切片
+Promise.all(uploadPromises)
+  .then(() &#x3D;&gt; &#123;
+    console.log(&#39;所有的文件切片都已上传成功&#39;);
+  &#125;)
+  .catch(error &#x3D;&gt; &#123;
+    console.log(&#39;有一些文件切片上传失败&#39;, error);
+  &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>请注意，这个示例假设你的网络和服务器都可以处理并行上传的负载。如果并行上传的数量太大，可能会导致网络拥塞或者服务器压力过大。在实际的应用中，你可能需要限制并行上传的数量，例如使用 Promise Pool。</p>
+<h4 id="promise-pool"><a class="markdownIt-Anchor" href="#promise-pool"></a> Promise Pool</h4>
+<p><code>Promise Pool</code> 是一种用于限制并发 Promise 数量的工具。在 JavaScript 中，你可以使用第三方库如 <code>es6-promise-pool</code> 或 <code>promise-pool-executor</code> 来实现这个功能。</p>
+<p>以下是一个使用 <code>es6-promise-pool</code> 的示例：</p>
+<p>首先，你需要安装 <code>es6-promise-pool</code>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> es6-promise-pool<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后，你可以使用 <code>PromisePool</code> 来限制并发的 Promise 数量：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const PromisePool &#x3D; require(&#39;es6-promise-pool&#39;);
+
+&#x2F;&#x2F; 假设你有一个数组，其中包含了所有的文件切片
+let fileChunks &#x3D; [...];
+
+&#x2F;&#x2F; 假设你有一个函数，可以用来上传一个文件切片
+function uploadChunk(chunk) &#123;
+  &#x2F;&#x2F; 这个函数应该返回一个 Promise
+&#125;
+
+&#x2F;&#x2F; 创建一个生成器函数，用于生成上传文件切片的 Promise
+function* uploadGenerator() &#123;
+  for (let chunk of fileChunks) &#123;
+    yield uploadChunk(chunk);
+  &#125;
+&#125;
+
+&#x2F;&#x2F; 创建一个 PromisePool，限制并发的 Promise 数量为 3
+const pool &#x3D; new PromisePool(uploadGenerator(), 3);
+
+pool.start()
+  .then(() &#x3D;&gt; &#123;
+    console.log(&#39;所有的文件切片都已上传成功&#39;);
+  &#125;)
+  .catch(error &#x3D;&gt; &#123;
+    console.log(&#39;有一些文件切片上传失败&#39;, error);
+  &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="切片什么时候按数量切什么时候按大小切"><a class="markdownIt-Anchor" href="#切片什么时候按数量切什么时候按大小切"></a> 切片什么时候按数量切，什么时候按大小切</h3>
 <ol>
-<li>
-<p>方案一： 给父元素指定高度。</p>
-</li>
-<li>
-<p>方案二： 给父元素也设置浮动，带来其他影响。</p>
-</li>
-<li>
-<p>方案三： 给父元素设置 <code>overflow: hidden</code> 。</p>
-</li>
-<li>
-<p>方案四： 在所有浮动元素的最后面，添加一个块级元素，并给该块级元素设置 <code>clear: both</code> 。</p>
-</li>
-<li>
-<p>方案五： 给浮动元素的父元素，设置伪元素，通过伪元素清除浮动，原理与方案四相同。===&gt; 推荐使用</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.parent::after</span> <span class="token punctuation">&#123;</span>
-<span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">;</span>
-<span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
-<span class="token property">clear</span><span class="token punctuation">:</span>both<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
+<li><strong>按大小切片</strong>：<strong>如果你的网络环境不稳定，或者你需要上传的文件非常大</strong>，那么按大小切片可能是一个好的选择。这样可以减少因网络问题导致的上传失败，因为每个切片的大小都较小。此外，如果服务器对上传文件的大小有限制，那么按大小切片也是必要的。</li>
+<li><strong>按数量切片</strong>：如果你需要并行处理<strong>多个</strong>文件，那么按数量切片可能更合适。这样可以将文件分配给多个处理器进行处理。此外，如果你的文件数量非常大，但每个文件的大小都较小，那么按数量切片可以减少处理每个文件的开销。</li>
 </ol>
-</li>
-</ul>
-<blockquote>
-<p>布局中的一个原则：设置浮动的时候，<strong>兄弟元素要么全都浮动，要么全都不浮动。</strong></p>
-</blockquote>
-<h2 id="说一说样式优先级的规则是什么"><a class="markdownIt-Anchor" href="#说一说样式优先级的规则是什么"></a> 说一说样式优先级的规则是什么？</h2>
-<p>详见：<a href="https://qt-7274.github.io/2023/10/02/css-shu-xing-ji-suan-guo-cheng/">CSS属性计算过程 | QT-7274 (qblog.top)</a></p>
-<ul>
-<li>
-<p>规则</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ol>
-<li>
-<p>原则</p>
-<p>使用就近原则，同权重情况下样式定义最近者为准</p>
-</li>
-<li>
-<p>优先级</p>
-<p>同权重下：</p>
-<p>!important &gt; 内联样式（style）&gt; ID选择器（id）&gt; 类选择器（class）= 属性选择器 = 伪类选择器&gt; 标签选择器 = 伪元素选择器 = 后代选择器 &gt; 子选择器 = 相邻选择器 &gt; 通配符选择器</p>
-</li>
-</ol>
-</li>
-<li>
-<p>加分项：</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ul>
-<li>使用 !important 要谨慎，一定要优先考虑使用样式规则的优先级来解决问题而不是 !important，只有在需要覆盖全站或外部 CSS 的特定页面中使用 !important</li>
-<li>永远不要在你的插件中使用 !important</li>
-<li>!important 优先级比较指的是相同的样式属性，不同样式属性优先级比较失效</li>
-</ul>
-</li>
-</ul>
-<h2 id="说一说-css-尺寸设置的单位"><a class="markdownIt-Anchor" href="#说一说-css-尺寸设置的单位"></a> 说一说 CSS 尺寸设置的单位</h2>
-<p>详见：<a href="https://qt-7274.github.io/2023/09/12/xiang-ying-shi-bu-ju-de-chang-yong-jie-jue-fang-an-dui-bi/">响应式布局的常用解决方案对比 | QT-7274 (qblog.top)</a></p>
-<h2 id="说几个未知宽高元素水平垂直居中方法"><a class="markdownIt-Anchor" href="#说几个未知宽高元素水平垂直居中方法"></a> 说几个未知宽高元素水平垂直居中方法</h2>
-<p>详见：<a href="https://qt-7274.github.io/2023/09/18/css-shui-ping-chui-zhi-ju-zhong-xiang-jie/#%E5%88%A9%E7%94%A8%E5%AE%9A%E4%BD%8D-margin-auto-%E5%AE%BD%E9%AB%98%E6%9C%AA%E7%9F%A5">CSS水平垂直居中详解 | QT-7274 (qblog.top)</a></p>
-<h2 id="css中color的3种表示方法"><a class="markdownIt-Anchor" href="#css中color的3种表示方法"></a> CSS中color的3种表示方法</h2>
-<ul>
-<li>
-<p>方法</p>
-<details><summary><b>答案</b></summary>
-<p>
-<ol>
-<li>关键字表示法：使用预定义的颜色名称来表示，例如red、blue、green等。</li>
-<li>十六进制表示法：使用#符号后跟6位十六进制值来表示颜色，每两位表示红、绿、蓝（RGB）分量的值。例如，#FF0000表示红色。</li>
-<li>RGB表示法：使用rgb()函数来表示颜色，其中参数为红、绿、蓝（RGB）分量的整数值，取值范围为0-255。例如，rgb(255, 0, 0)表示红色。</li>
-</ol>
-</li>
-</ul>
-<h2 id="rgba和opacity的区别"><a class="markdownIt-Anchor" href="#rgba和opacity的区别"></a> rgba和opacity的区别</h2>
-<ul>
-<li>
-<p>区别</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>rgba是一种颜色表示方法，可以设置元素的颜色和透明度，而opacity是用于设置元素整体透明度的属性，会同时影响元素及其子元素的透明度。</p>
-</li>
-</ul>
-<h2 id="介绍一下-flex-盒子模型"><a class="markdownIt-Anchor" href="#介绍一下-flex-盒子模型"></a> 介绍一下 flex 盒子模型</h2>
-<p>详见：<a href="https://qt-7274.github.io/2023/06/26/css-zhong-de-he-zi-mo-xing/#%E4%BC%B8%E7%BC%A9%E7%9B%92%E6%A8%A1%E5%9E%8B">CSS中的盒子模型 | QT-7274 (qblog.top)</a></p>
-<ul>
-<li>
-<p>概念</p>
-<details><summary><b>答案</b></summary>
-<p>
-<p>Flex模型（Flexbox）是一种用于布局和排列元素的CSS布局模型。<strong>它提供了一种灵活的方式来创建响应式和可自适应的布局</strong>。</p>
-<p>Flex模型基于一个容器和其内部的弹性子元素。容器通过设置 display: flex; 将其内容定义为Flex容器。然后，通过设置不同的属性和值来控制子元素的布局和行为。</p>
-<ol>
-<li><code>flex-direction</code> ：指定Flex容器中子元素的排列方向，可以是水平方向（row或row-reverse）或垂直方向（column或column-reverse）。</li>
-<li><code>flex-wrap</code> ：控制子元素是否换行，可以是单行（nowrap）、多行（wrap）或多行反向（wrap-reverse）。</li>
-<li><code>justify-content</code> ：定义子元素在主轴上的对齐方式，可以是居中对齐、起始对齐、末尾对齐、两端对齐或均匀分布。</li>
-<li><code>align-items</code> ：定义子元素在交叉轴上的对齐方式，可以是居中对齐、起始对齐、末尾对齐、基线对齐或拉伸对齐。</li>
-<li><code>align-content</code> ：当子元素换行时，定义多行的对齐方式，可以是居中对齐、起始对齐、末尾对齐、两端对齐或均匀分布。</li>
-<li><code>flex</code> ：定义子元素的伸缩性，可以设置子元素的伸缩比例、基准值和最小尺寸。</li>
-</ol>
-</li>
-</ul>
 
                 
             </div>
@@ -980,7 +604,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qt-7274.github.io/2023/10/08/liu-lan-qi-xiang-guan-xi-jie-ti-2/">https://qt-7274.github.io/2023/10/08/liu-lan-qi-xiang-guan-xi-jie-ti-2/</a>
+                    <a href="https://qt-7274.github.io/2024/03/08/da-wen-jian-duan-dian-xu-chuan-wen-ti-jie-jue-fang-an/">https://qt-7274.github.io/2024/03/08/da-wen-jian-duan-dian-xu-chuan-wen-ti-jie-jue-fang-an/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1022,8 +646,8 @@
                                     <span class="chip bg-color">前端</span>
                                 </a>
                             
-                                <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">
-                                    <span class="chip bg-color">浏览器</span>
+                                <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">
+                                    <span class="chip bg-color">理论知识</span>
                                 </a>
                             
                         </div>
@@ -1468,40 +1092,43 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/10/08/liu-lan-qi-xiang-guan-xi-jie-ti-3/">
+                <a href="/2024/03/08/da-wen-jian-duan-dian-xu-chuan-wen-ti-jie-jue-fang-an/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/%E5%89%8D%E7%AB%AF.webp" class="responsive-img" alt="浏览器相关细节题（3）">
                         
-                        <span class="card-title">浏览器相关细节题（3）</span>
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/6.jpg" class="responsive-img" alt="大文件断点续传问题解决方案">
+                        
+                        <span class="card-title">大文件断点续传问题解决方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本篇主要针对浏览器中的引擎和原理相关
+                            本文主要讨论断点续传可能遇到的问题及解决方案，仅限理论知识补充
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9B%B8%E5%85%B3/" class="post-category">
-                                    浏览器相关
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1509,8 +1136,8 @@
                         <span class="chip bg-color">前端</span>
                     </a>
                     
-                    <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">
-                        <span class="chip bg-color">浏览器</span>
+                    <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">理论知识</span>
                     </a>
                     
                 </div>
@@ -1524,23 +1151,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/10/03/javascript-dai-ma-ti-mu/">
+                <a href="/2024/03/05/this-de-bang-ding-gui-ze-xiang-jie/">
                     <div class="card-image">
                         
-                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/JavaScript%E5%B0%81%E9%9D%A2.webp" class="responsive-img" alt="JavaScript代码题目">
                         
-                        <span class="card-title">JavaScript代码题目</span>
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/1.jpg" class="responsive-img" alt="this的绑定规则详解">
+                        
+                        <span class="card-title">this的绑定规则详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            转载于稀土掘金——作者CoderBin
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-05
                             </span>
                         <span class="publish-author">
                             
