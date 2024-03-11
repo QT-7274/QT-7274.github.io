@@ -472,21 +472,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-28
+                    2024-03-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    7 分
                 </div>
                 
 
@@ -515,12 +515,12 @@
 <li>基本类型</li>
 <li>引用类型</li>
 </ul>
-<p>基本类型数据保存在在栈内存中</p>
-<p>引用类型数据保存在堆内存中，引用数据类型的变量是一个指向堆内存中实际对象的引用，存在栈中</p>
+<p>基本类型数据保存在在<strong>栈</strong>内存中</p>
+<p>引用类型数据保存在<strong>堆</strong>内存中，引用数据类型的变量是一个指向堆内存中实际对象的<strong>引用</strong>，存在栈中</p>
 <h2 id="浅拷贝">浅拷贝</h2>
 <p>浅拷贝，指的是创建新的数据，这个数据有着原始数据属性值的一份精确拷贝</p>
 <p>如果属性是基本类型，拷贝的就是基本类型的值。如果属性是引用类型，拷贝的就是内存地址</p>
-<p>即浅拷贝是拷贝一层，深层次的引用类型则共享内存地址</p>
+<p>即浅拷贝是<strong>拷贝一层</strong>，深层次的引用类型则共享内存地址</p>
 <p>下面简单实现一个浅拷贝</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">shallowClone</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">const</span> newObj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
@@ -531,6 +531,35 @@
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> newObj<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是这个浅拷贝存在问题：无法正确处理一些数据类型。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span> <span class="token operator">||</span> obj <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       <span class="token keyword">return</span> obj<span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span>
+
+   <span class="token keyword">let</span> cloneObj<span class="token punctuation">;</span>
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       cloneObj <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>obj<span class="token punctuation">]</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">Date</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       cloneObj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">RegExp</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       cloneObj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+       cloneObj <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+       <span class="token comment">// Object.create(proto) 方法创建一个新的对象，并将这个新对象的原型设置为 proto。这意味着新对象将继承 proto 对象的属性。</span>
+       <span class="token comment">// Object.getPrototypeOf(obj) 方法返回对象 obj 的原型。在 JavaScript 中，每个对象都有一个原型，对象的属性可以继承自其原型。</span>
+       <span class="token comment">// 所以，Object.create(Object.getPrototypeOf(obj)) 创建了一个新的对象，这个新对象的原型与 obj 的原型相同，这意味着新对象将继承 obj 的原型属性。</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+               cloneObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+           <span class="token punctuation">&#125;</span>
+       <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span>
+
+   <span class="token keyword">return</span> cloneObj<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>为什么使用 <code>for...in</code> ：用于遍历对象的所有可枚举属性，包括其原型链上的属性。这对于检查对象的所有属性（包括继承的属性）非常有用。</p>
+<p>为什么使用 <code>for...of</code>：循环用于遍历可迭代对象（如数组、字符串、Set、Map等）的元素。<strong>它不能用于普通的对象，因为普通的对象不是可迭代的。</strong></p>
+</blockquote>
 <p>在<code>JavaScript</code>中，存在浅拷贝的现象有：</p>
 <ul>
 <li><code>Object.assign</code></li>
@@ -600,12 +629,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>但是这种方式存在弊端：</p>
 <p><strong>缺点：</strong></p>
 <blockquote>
-<p>如果obj里面有时间对象，转换过后，时间将只是字符串的形式<br>
-如果obj有RegExp, Error 对象，则序列化的结果将只得到空对象<br>
-如果obj里面有函数，undefined，序列化后的结果会把函数或undefined丢失<br>
-如果obj里有NaN，Infinity 和 -Infinity，则序列化的结果会变成null<br>
-JSON.stringify() 只能序列化对象的可枚举的自由属性，例如 如果obj中的对象是由构造函数生成的，则使用JSON.parse(JSON.stringify),则会丢弃对象的constructor<br>
-如果对象中存在循环引用的情况也无法正确实现深拷贝</p>
+<ul>
+<li>如果obj里面有时间对象，转换过后，时间将只是字符串的形式</li>
+<li>如果obj有RegExp, Error 对象，则序列化的结果将只得到空对象</li>
+<li>如果obj里面有函数，undefined，序列化后的结果会把函数或undefined丢失</li>
+<li>如果obj里有NaN，Infinity 和 -Infinity，则序列化的结果会变成null</li>
+<li>JSON.stringify() 只能序列化对象的可枚举的自由属性，例如 如果obj中的对象是由构造函数生成的，则使用JSON.parse(JSON.stringify),则会丢弃对象的constructor</li>
+<li>如果对象中存在循环引用的情况也无法正确实现深拷贝</li>
+</ul>
 </blockquote>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
     <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'A'</span><span class="token punctuation">,</span>
@@ -615,7 +646,7 @@ JSON.stringify() 只能序列化对象的可枚举的自由属性，例如 如�
 <span class="token punctuation">&#125;</span>
 <span class="token keyword">const</span> obj2 <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#123;name: "A"&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="循环递归">循环递归</h3>
+<h3 id="循环递归实现深拷贝">循环递归实现深拷贝</h3>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function deepClone(obj, hash &#x3D; new WeakMap()) &#123;
   if (obj &#x3D;&#x3D;&#x3D; null) return obj; &#x2F;&#x2F; 如果是null或者undefined我就不进行拷贝操作
   if (obj instanceof Date) return new Date(obj);
