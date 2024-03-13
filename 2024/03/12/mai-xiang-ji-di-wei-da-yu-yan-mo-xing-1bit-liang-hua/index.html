@@ -536,7 +536,7 @@
 </li>
 <li>
 <p>最近的研究希望利用量化感知训练（QuantizationAware Training，QAT）来克服 PTQ 面临的瓶颈。LLM-QAT （Liu 等人，2023 年）在量化过程中引入了一些可学习的参数，取得了显著的效果。OmniQuant （Shao 等人，2023 年）整合了可学习的等价变换，在 2 bit量化方面取得了可喜的成果。然而，现有的方法在将模型权重压缩到 1 位时效果下降，难以保持有效性。</p>
-<p>主要问题是在如此低的位宽下会出现严重的精度损失。**这种精度的损失极大地影响了线性投影运算（表示为 WX，其中 W 是权重矩阵，X 是输入），这是 LLM 的基本组成部分。**精度的急剧降低导致在此操作期间丢失的信息增加，从而影响模型的整体性能。</p>
+<p>主要问题是在如此低的位宽下会出现严重的精度损失。<strong>这种精度的损失极大地影响了线性投影运算</strong>（表示为 WX，其中 W 是权重矩阵，X 是输入），这是 LLM 的基本组成部分。精度的急剧降低导致在此操作期间丢失的信息增加，从而影响模型的整体性能。</p>
 <blockquote>
 <p><code>Recent researches hope to leverage Quantization Aware Training (QAT) to overcome the bottlenecks faced by PTQ. LLM-QAT (Liu et al., 2023) introduces a few learnable parameters into the quantization process, achieving notable results. OmniQuant (Shao et al., 2023), integrating learnable equivalent transformation, presents promising results in 2-bit quantization. However, existing methods decline when compressing model weights to 1 bit, struggling to maintain effectiveness.</code></p>
 </blockquote>
@@ -616,11 +616,11 @@ $$<br>
 <li>一个是 INT1 格式的符号矩阵 $W_{\pm 1}$ ，</li>
 <li>一个是 FP16 格式的值向量 $\boldsymbol{g/h}$ 。</li>
 </ul>
-<p>为了借助完全训练过的权重初始化 1 位模型，作者引入了权重矩阵 W 的符号-值无关分解（SVID），可表述为：</p>
-<p>$$<br>
-\boldsymbol{W}=\boldsymbol{W}<em>{sign} \odot \boldsymbol{W}</em>{value}<br>
-$$</p>
-<p>其中：</p>
+<p>为了借助完全训练过的权重初始化 1 位模型，作者引入了权重矩阵 W 的符号-值无关分解（SVID），可表述为：<br>
+$$<br>
+\boldsymbol{W}=\boldsymbol{W}_{sign} \odot \boldsymbol{W}_{value}<br>
+$$<br>
+其中：</p>
 <ul>
 <li>$\boldsymbol{W}_{value} = |\boldsymbol{W}|$</li>
 <li>$\boldsymbol{W}_{sign} = \text{Sign}(\boldsymbol{W})$</li>
@@ -637,57 +637,57 @@ $$<br>
 \boldsymbol{XW}^T \approx [(\boldsymbol{X} \odot \boldsymbol{b}^T)\boldsymbol{W}_{sign}^{T}]\odot \boldsymbol{a}^T \tag{5}<br>
 $$<br>
 <strong>这弥补了量化模型的结构与原始权重之间的差距。</strong></p>
-<p>它表明，如果作者将 $\boldsymbol{W}<em>{sign}$  赋值为 $\boldsymbol{W}</em>{\pm 1}$ ，将  $\boldsymbol{a}^T$ 赋值为  h ，将  $\boldsymbol{b}^T$ 赋值为 g ，那么量化模型就是原始模型的近似初始化。</p>
-<p>此外，与先还原原始矩阵  $\boldsymbol{W}$ 相比（如公式 (4)），公式 (5) 中的计算顺序由于无需还原 FP16W，因此可以在内存中节省大约一个 FP16 格式的矩阵$ \boldsymbol{W}$。</p>
-<p>**SVID 的主要目的是让符号矩阵参与矩阵的近似，而不是仅仅依赖 FP16 格式的值向量。**为了证明符号矩阵在矩阵逼近中的作用，作者提出了以下命题。</p>
+<p>它表明，如果作者将$\boldsymbol{W}_{sign}$赋值为$\boldsymbol{W}_{\pm 1}$，将$\boldsymbol{a}^T$赋值为  h ，将$\boldsymbol{b}^T$赋值为 g ，那么量化模型就是原始模型的近似初始化。</p>
+<p>此外，与先还原原始矩阵$\boldsymbol{W}$相比（如公式 (4)），公式 (5) 中的计算顺序由于无需还原 FP16W，因此可以在内存中节省大约一个 FP16 格式的矩阵$\boldsymbol{W}$。</p>
+<p><strong>SVID 的主要目的是让符号矩阵参与矩阵的近似</strong>，而不是仅仅依赖 FP16 格式的值向量。为了证明符号矩阵在矩阵逼近中的作用，作者提出了以下命题。</p>
 <h3 id="命题2">命题2</h3>
-<p>给定矩阵$ \boldsymbol{W}$  和 $|\boldsymbol{W}| $， $\boldsymbol{W}=\boldsymbol{W}_{sign}\cdot |\boldsymbol{W}| $。</p>
+<p>给定矩阵$\boldsymbol{W}$和$|\boldsymbol{W}|$， $\boldsymbol{W}=\boldsymbol{W}_{sign}\cdot |\boldsymbol{W}|$。</p>
 <p>作者按以下方式分解这些矩阵：<br>
 $$<br>
 \boldsymbol{W}= \boldsymbol{ab}^T+\boldsymbol{E}_1  和  |\boldsymbol{W}| = \boldsymbol{\widetilde{a}\widetilde{b}}^T+\boldsymbol{E}_2<br>
 $$<br>
 其中：</p>
 <ul>
-<li>$ \boldsymbol{E}_i $表示误差矩阵。</li>
+<li>$\boldsymbol{E}_i$表示误差矩阵。</li>
 </ul>
 <p>从 Frobenius-norm 的角度来看，SVID 更接近原始矩阵 $\boldsymbol{W}$ ：<br>
 $$<br>
-\lVert \boldsymbol{W} - \boldsymbol{W}<em>{sign} \odot \boldsymbol{\widetilde{a}\widetilde{b}}^T \rVert</em>{F}^2 \le \lVert \boldsymbol{W} - \boldsymbol{ab}^T \rVert_F^2 \tag{6}<br>
+\lVert \boldsymbol{W} - \boldsymbol{W}_{sign} \odot \boldsymbol{\widetilde{a}\widetilde{b}}^T \rVert_{F}^2 \le \lVert \boldsymbol{W} - \boldsymbol{ab}^T \rVert_F^2 \tag{6}<br>
 $$<br>
-它清楚地表明了符号矩阵$ \boldsymbol{W}_{sign} $在矩阵逼近中的实际作用。</p>
-<p>需要注意的是，<strong>由于大多数参数的精度都很低，因此要精确地近似权重矩阵 $\boldsymbol{W}$ 是相当具有挑战性的</strong>。SVID 的目的不是精确复制原始模型的参数，而是利用原始模型的大量训练，为进一步训练提供一个有效的起点。</p>
+它清楚地表明了符号矩阵$\boldsymbol{W}_{sign}$在矩阵逼近中的实际作用。</p>
+<p>需要注意的是，<strong>由于大多数参数的精度都很低，因此要精确地近似权重矩阵$\boldsymbol{W}$是相当具有挑战性的</strong>。SVID 的目的不是精确复制原始模型的参数，而是利用原始模型的大量训练，为进一步训练提供一个有效的起点。</p>
 <h3 id="知识蒸馏">知识蒸馏</h3>
 <p>作者采用量化感知知识蒸馏(quantization-aware knowledge distillation)技术，将知识从原始模型（即教师模型）迁移到量化模型（即学生模型）。</p>
-<p>在学生模型中，矩阵 $\boldsymbol{W}$ 中的元素和公式 (3) 中的向量 $\boldsymbol{g/h}$ 将被训练。</p>
+<p>在学生模型中，矩阵 $\boldsymbol{W}$ 中的元素和公式 (3) 中的向量$\boldsymbol{g/h}$将被训练。</p>
 <p>作者使用基于交叉熵的对数和基于隐藏状态的均方误差全精度教师模型来指导量化的学生模型（Sun et al.） 不使用语言建模损失。交叉熵定义为：<br>
 $$<br>
-\mathcal{L}<em>{CE}=-\frac{1}{n_s}\sum</em>{i=1}^{n_s}{\sum_c{P_{c}^{\mathcal{T}}\left( \boldsymbol{o}<em>i \right) \log P</em>{c}^{\mathcal{S}}\left( \boldsymbol{o}_i \right)}} \tag{7}<br>
+\mathcal{L}_{CE}=-\frac{1}{n_s}\sum_{i=1}^{n_s}{\sum_c{P_{c}^{\mathcal{T}}\left( \boldsymbol{o}_i \right) \log P_{c}^{\mathcal{S}}\left( \boldsymbol{o}_i \right)}} \tag{7}<br>
 $$<br>
 其中：</p>
 <ul>
 <li>c 表示类别数</li>
 <li>n_s 表示当前批次的训练样本数</li>
-<li>$\mathcal{T}$ 和 $\mathcal{S}$ 分别是教师模型和学生模型</li>
+<li>$\mathcal{T}$和$\mathcal{S}$分别是教师模型和学生模型</li>
 </ul>
 <p>隐藏状态的误差定义为：<br>
 $$<br>
-\mathcal{L}<em>{MSE}=\sum</em>{i=1}^{n_s}{\sum_{j=1}^{n_l}{\lVert \frac{\boldsymbol{q}<em>{i,j}^{\mathcal{T}}}{\lVert \boldsymbol{q}</em>{i,j}^{\mathcal{T}} \rVert <em>2}-\frac{\boldsymbol{q}</em>{i,j}^{\mathcal{S}}}{\lVert \boldsymbol{q}<em>{i,j}^{\mathcal{S}} \rVert} \rVert}</em>{2}^{2}} \tag{8}<br>
+\mathcal{L}_{MSE}=\sum_{i=1}^{n_s}{\sum_{j=1}^{n_l}{\lVert \frac{\boldsymbol{q}_{i,j}^{\mathcal{T}}}{\lVert \boldsymbol{q}_{i,j}^{\mathcal{T}} \rVert _2}-\frac{\boldsymbol{q}_{i,j}^{\mathcal{S}}}{\lVert \boldsymbol{q}_{i,j}^{\mathcal{S}} \rVert} \rVert}_{2}^{2}} \tag{8}<br>
 $$<br>
 其中：</p>
 <ul>
 <li>n_l 表示层数</li>
-<li>$\boldsymbol{q}$ 表示隐藏状态。</li>
+<li>$\boldsymbol{q}$表示隐藏状态。</li>
 </ul>
 <p>因此最终的目标函数可以表示为：<br>
 $$<br>
-\mathcal{L}<em>{KD} = \mathcal{L}</em>{CE} + \alpha \mathcal{L}_{MSE} \tag{9}<br>
+\mathcal{L}_{KD} = \mathcal{L}_{CE} + \alpha \mathcal{L}_{MSE} \tag{9}<br>
 $$<br>
 其中：</p>
 <ul>
 <li>$ \alpha $是平衡交叉熵损失和中间层特征重要性的超参数。</li>
 </ul>
 <h2 id="主要结果">主要结果</h2>
-<p><img src="/medias/images/loading.gif" data-original="640.png" alt="图片"></p>
+<p><img src="/medias/images/loading.gif" data-original="F:/hexo/source/_posts/640.png" alt="图片"></p>
 <ul>
 <li>
 <p>在各种模型大小下，作者的 1 bit权重量化方法在 W2A16 设置下明显优于其他方法。</p>
@@ -718,21 +718,21 @@ $$<br>
 <li>常识推理：虽然其他模型比作者的模型参数更多，训练更全面，但作者的模型在常识推理方面仍有优势。这反映了从更大的 7B 模型中继承的优势。</li>
 <li>世界知识：在世界知识方面，尽管作者的模型<strong>在社会科学领域损失较大</strong>，但在其他领域却优于经过全面训练的 Pythia-1B。这些结果证明了 OneBit 的实用性。</li>
 </ul>
-<p><img src="/medias/images/loading.gif" data-original="640-17103051386823.png" alt="图片"></p>
-<p><img src="/medias/images/loading.gif" data-original="640-17103051458836.png" alt="图片"></p>
+<p><img src="/medias/images/loading.gif" data-original="F:/hexo/source/_posts/640-17103051386823.png" alt="图片"></p>
+<p><img src="/medias/images/loading.gif" data-original="F:/hexo/source/_posts/640-17103051458836.png" alt="图片"></p>
 <h2 id="分析和讨论">分析和讨论</h2>
 <h3 id="效率">效率</h3>
 <p>显然，将模型权重量化为极低位可以大幅度减少其内存占用。实际上，如表3所示，随着模型规模的增大，压缩比也在不断提高。这一点对于大型模型来说尤为重要，因为它使得将这类模型部署到单个GPU上成为可能，从而极大地提高了模型的实际应用性和灵活性。</p>
-<p><img src="/medias/images/loading.gif" data-original="640-17103051778509.png" alt="图片"></p>
+<p><img src="/medias/images/loading.gif" data-original="F:/hexo/source/_posts/640-17103051778509.png" alt="图片"></p>
 <p>虽然该方法在实施过程中可能会导致一定的性能损失，但如图4所示，它在空间占用和模型性能之间达到了良好的平衡。</p>
-<p><img src="/medias/images/loading.gif" data-original="640-171030518808212.png" alt="图片"></p>
+<p><img src="/medias/images/loading.gif" data-original="F:/hexo/source/_posts/640-171030518808212.png" alt="图片"></p>
 <p>比如只需使用原始模型空间的0.2倍，即可实现与FP16相当的性能表现。</p>
 <p>此外，通过将权重量化为±1，能够进一步加速CPU上的矩阵乘法操作。</p>
 <p>这是因为在这种量化方式下，原本需要进行的浮点乘法可以转换为速度更快的位操作，显著提升计算效率。<strong>因此，该方法的内存占用显著减少，更符合个人电脑和智能手机等设备的部署需求。</strong></p>
 <h3 id="鲁棒性">鲁棒性</h3>
 <p><strong>极低比特量化使训练过程对学习率高度敏感</strong>，当学习率过小或过大时，使模型难以收敛。这主要是由于权重元素在+1和-1之间波动时产生的梯度幅度较大，导致Linear层输出显著波动。</p>
 <p>下图显示了另一种1位量化架构BitNet在使用不同学习率训练时的表现，可以看到非常不稳定：</p>
-<p><img src="/medias/images/loading.gif" data-original="640-171030528286115.png" alt="图片"></p>
+<p><img src="/medias/images/loading.gif" data-original="F:/hexo/source/_posts/640-171030528286115.png" alt="图片"></p>
 <p>而OneBit通过引入两个FP16格式的值向量来补充必要的浮点数值精度，同时限制了量化后矩阵乘法结果的波动范围，从而提高了模型的鲁棒性，展现出更稳定的训练过程，并且对学习率不敏感。</p>
 <h3 id="不同组件的影响">不同组件的影响</h3>
 <p>OneBit主要的可变组件包括Post-LayerNorm、参数初始化等。</p>
@@ -740,7 +740,7 @@ $$<br>
 <li>Post-LayerNorm：在量化感知训练期间，模型存在浮点数溢出的问题，尤其在模型深度增加时，激活值容易急剧增长。为应对此问题，本文选择了Post-LayerNorm策略，而非Pre-LayerNorm。因为在实际应用中，Pre-LayerNorm有时可能无法有效地控制激活值的增长。</li>
 <li>参数初始化：在使用SVID做参数初始化时，非负矩阵分解和奇异值分解均可用于分解|W|，但推荐使用奇异值分解。它能加快训练收敛速度，如下图所示，NMF初始化有助于获得更好的性能。</li>
 </ul>
-<p><img src="/medias/images/loading.gif" data-original="640-171030531938518.png" alt="图片"></p>
+<p><img src="/medias/images/loading.gif" data-original="F:/hexo/source/_posts/640-171030531938518.png" alt="图片"></p>
 <h2 id="总结">总结</h2>
 <p>OneBit框架提出了一种大胆的1位量化方法，极大地减少了模型部署时的存储和计算开销。尽管存在一些性能损失，但其在模型压缩和部署效率方面的潜力是显而易见的，为研究极低位量化模型提供了一条新的探索途径。</p>
 <h2 id="限制">限制</h2>
@@ -1483,7 +1483,7 @@ $$<br>
 </main>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
