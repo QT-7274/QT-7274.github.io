@@ -6,10 +6,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="适用于大规模Transformers的8bit矩阵乘法——LLM.int8(), QT-7274">
-    <meta name="description" content=" 摘要
+    <meta name="description" content="摘要
 作者设计了一种方法——通过在Transformers的前馈和注意力投影层中实现8位整数（Int8）矩阵乘法来减少运行大型语言模型（LLM）所需的GPU内存。
 
-We develop a procedure for Int8 matr">
+We develop a procedure for Int8 matri">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -36,7 +36,9 @@ We develop a procedure for Int8 matr">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
     
 <body>
@@ -309,7 +311,7 @@ We develop a procedure for Int8 matr">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/image-20240216131753065.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -466,7 +468,7 @@ We develop a procedure for Int8 matr">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-02-16
+                    2024-03-12
                 </div>
                 
 
@@ -503,7 +505,7 @@ We develop a procedure for Int8 matr">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
+                <h2 id="摘要">摘要</h2>
 <p>作者设计了一种方法——<strong>通过在Transformers的前馈和注意力投影层中实现8位整数（Int8）矩阵乘法来减少运行大型语言模型（LLM）所需的GPU内存。</strong></p>
 <blockquote>
 <p><code>We develop a procedure for Int8 matrix multiplication for feed-forward and attention projection layers in transformers, which cut the memory needed for inference by half while retaining full precision performance.</code></p>
@@ -528,7 +530,7 @@ We develop a procedure for Int8 matr">
 <p><strong>该方案分离异常值特征维度，使用 16 位精度进行处理，而绝大多数（超过 99.9%）值以 8 位精度处理。</strong></p>
 </li>
 </ol>
-<h2 id="问题及挑战"><a class="markdownIt-Anchor" href="#问题及挑战"></a> 问题及挑战</h2>
+<h2 id="问题及挑战">问题及挑战</h2>
 <ol>
 <li>
 <p>Vaswani等人（2017年）等人引用的LLM，已成为自然语言处理（NLP）的标准配置，但会占用大量内存，特别是对于具有超过67亿个参数的模型。这些模型中的前馈和注意力投影层用于执行矩阵乘法运算，占模型参数和计算负载的大部分——分别为 95% 和 65-85%。</p>
@@ -539,7 +541,7 @@ We develop a procedure for Int8 matr">
 <li>
 <p>8 位量化减小了参数的大小，从而减少了内存使用量。但是，现有的Transformers量化方法通常会导致性能下降，需要在训练后进行额外的调整，并且尚未有效地应用于大于3.5亿个参数的模型。在不损失性能的情况下进行量化的挑战，尤其是对于具有数十亿个参数的模型，仍未解决。</p>
 <blockquote>
-<p><code>While these methods reduce memory use, they degrade performance, usually require tuning quantization further after training, and have only been studied for models with less than 350M parameters.</code></p>
+<p><code>While these methods reduce memory use, they degrade performance, usually require tuning quantization further after training, and have only been studied for models with less than 350M parameters. </code></p>
 </blockquote>
 </li>
 </ol>
@@ -554,25 +556,25 @@ We develop a procedure for Int8 matr">
 <li>
 <p><strong>需要精确表示在超过67亿个参数的模型中系统地出现在所有Transformers层上的大量级异常特征。</strong></p>
 <blockquote>
-<p><code>the need to explicitly represent the sparse but systematic large magnitude outlier features that ruin quantization precision once they emerge in all transformer layers starting at scales of 6.7B parameters.</code></p>
+<p><code> the need to explicitly represent the sparse but systematic large magnitude outlier features that ruin quantization precision once they emerge in all transformer layers starting at scales of 6.7B parameters.</code></p>
 </blockquote>
 <p>如果考虑不当，这些异常值特征会显著降低量化精度，C4 评估中令人困惑的增加和零点精度的降低就证明了这一点。</p>
 </li>
 </ul>
-<h2 id="实现过程"><a class="markdownIt-Anchor" href="#实现过程"></a> 实现过程</h2>
-<h3 id="矩阵乘法作为独立的内积"><a class="markdownIt-Anchor" href="#矩阵乘法作为独立的内积"></a> 矩阵乘法作为独立的内积</h3>
+<h2 id="实现过程">实现过程</h2>
+<h3 id="矩阵乘法作为独立的内积">矩阵乘法作为独立的内积</h3>
 <p>神经网络中的矩阵乘法，特别是在Transformers的前馈层和注意力层中，涉及计算成对向量的点积，矩阵乘法可以被视为一系列独立的行向量和列向量的内积。</p>
-<h3 id="单独的量化标准化常数"><a class="markdownIt-Anchor" href="#单独的量化标准化常数"></a> 单独的量化标准化常数</h3>
+<h3 id="单独的量化标准化常数">单独的量化标准化常数</h3>
 <p>为了便于从较高的精度（例如 32 位浮点数）到较低精度（例如 8 位整数）的量化，通常使用标准化常量在可以用较低精度格式表示的范围内缩放值。与均匀量化不同，均匀量化对整个矩阵使用单一缩放系数，而向量量化对<strong>每个内积使用唯一的归一化常数</strong>。这种方法通过根据每个向量对的特定动态范围调整缩放来提高量化过程的精度。</p>
 <blockquote>
-<p><code>As such, we can use a separate quantization nor-malization constant for each inner product to improve quantization precision.</code></p>
+<p><code>As such, we can use a separate quantization nor-malization constant for each inner product to improve quantization precision. </code></p>
 </blockquote>
-<h3 id="使用非规范化恢复输出"><a class="markdownIt-Anchor" href="#使用非规范化恢复输出"></a> 使用非规范化恢复输出</h3>
+<h3 id="使用非规范化恢复输出">使用非规范化恢复输出</h3>
 <p>量化后，为了获得矩阵乘法的正确输出，本文描述了非规范化步骤。这包括使用相应行列归一化常数的外积，将量化乘积缩放回其原始比例。</p>
 <blockquote>
 <p><code>We can recover the output of the matrix multiplication by de-normalizing by the outer product of column and row normalization constants before we perform the next operation.</code></p>
 </blockquote>
-<h3 id="大型transformers中的特征维度异常值"><a class="markdownIt-Anchor" href="#大型transformers中的特征维度异常值"></a> 大型Transformers中的特征维度异常值</h3>
+<h3 id="大型Transformers中的特征维度异常值">大型Transformers中的特征维度异常值</h3>
 <p>在将Transformers模型扩展到超过67亿个参数的背景下，<strong>推理过程中隐藏状态的特征维度中出现极端异常值。</strong></p>
 <blockquote>
 <p><code>it is critical to understand the emergence of extreme outliers in the feature dimensions of the hidden states during inference.</code></p>
@@ -592,7 +594,7 @@ We develop a procedure for Int8 matr">
 <li><strong>删除相同数量的随机特征</strong>使概率最多降低 0.3% ，并使困惑度降低约 0.1%。（影响较小）</li>
 </ul>
 <p>这种比较突出表明，<strong>尽管异常值特征仅占所有输入特征的0.1％，但异常值特征对模型性能的影响非常大。</strong></p>
-<p><img src="/medias/images/loading.gif" data-original="image-20240216131809277.png" alt="image-20240216131809277" /></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20240216131809277.png" alt="image-20240216131809277"></p>
 <p>上图对OPT模型使用不同的量化方法时四个不同数据集（Winogrande、HellasWag、PIQA和Lambada）的零点精度的比较分析。</p>
 <blockquote>
 <p>零点精度是指模型在未进行任何微调的情况下执行任务的性能，这是衡量模型泛化能力的指标。</p>
@@ -603,8 +605,8 @@ We develop a procedure for Int8 matr">
 <p><code>We can see once systematic outliers occur at a scale of 6.7B parameters, regular quantization methods fail, while LLM.int8() maintains 16-bit accuracy.</code></p>
 </blockquote>
 <p>这表明 LLM.int8 () 通过其新颖的量化方法（包括向量量化和混合精度分解方案）有效地解决了系统异常值的问题。后者将异常特征维度隔离到更高精度（16 位）的计算中，从而确保即使大多数计算都以较低的 8 位精度执行，模型的性能也不会降低。这一结果突显了LLM.int8 () 在保持模型准确性的同时显著降低大规模语言模型的内存要求方面的功效。</p>
-<h2 id="实现图解"><a class="markdownIt-Anchor" href="#实现图解"></a> 实现图解</h2>
-<p><img src="/medias/images/loading.gif" data-original="image-20240216131753065.png" alt="image-20240216131753065" /></p>
+<h2 id="实现图解">实现图解</h2>
+<p><img src="/medias/images/loading.gif" data-original="image-20240216131753065.png" alt="image-20240216131753065"></p>
 <ol>
 <li>
 <p>从 16 位浮点输入 (Xf_16) 和权重 (Wf_16) 开始，<strong>分析识别量级较大的分量</strong>，这些分量被称为 “异常值特征矩阵”。这些异常值使用更高精度的 16 位乘法进行处理，以保持它们对模型性能的贡献。</p>
@@ -628,11 +630,11 @@ We develop a procedure for Int8 matr">
 <blockquote>
 <p>总结：<strong>对大多数矩阵乘法使用 8 位计算，从而在推理过程中节省大量内存，同时通过选择性地对关键特征使用 16 位计算来保持模型的准确性。</strong></p>
 </blockquote>
-<h2 id="背景"><a class="markdownIt-Anchor" href="#背景"></a> 背景</h2>
-<h3 id="absmax-量化"><a class="markdownIt-Anchor" href="#absmax-量化"></a> Absmax 量化</h3>
+<h2 id="背景">背景</h2>
+<h3 id="Absmax-量化">Absmax 量化</h3>
 <p>它找到列表中最大的数字（绝对最大值），并用它来缩小所有其他数字，但比例仍然相同。</p>
 <p>具体方程就是将原始数字乘以 127，然后除以最大数字，对这个结果进行四舍五入到整数——因为 8 位数据类型不能包含分数。</p>
-<h3 id="zeropoint量化"><a class="markdownIt-Anchor" href="#zeropoint量化"></a> Zeropoint量化</h3>
+<h3 id="Zeropoint量化">Zeropoint量化</h3>
 <p>它通过拉伸或缩小数字（缩放）然后向上或向下移动（移动）来更改数字组，使它们适合从 -127 到 127 的一组特定值。</p>
 <blockquote>
 <p>有时，如果没有这种方法，某些值将根本无法使用。例如，如果我们在使用名为 ReLU 的函数后只有正数，则-1、-2、-3 等负值将被浪费。零点量化确保我们也使用这些负值。</p>
@@ -644,8 +646,8 @@ We develop a procedure for Int8 matr">
 <li>第三个是是用计算出的拉伸量乘以原始16位的数据，四舍五入后得到8位数据。</li>
 </ul>
 <p>经过数学运算后（例如乘法），最终我们得到一个32位大整数，如果要变为原来数据，将其除以原始数字的拉伸量。</p>
-<h3 id="具有-16-位浮点输入和输出的-int8-矩阵乘法"><a class="markdownIt-Anchor" href="#具有-16-位浮点输入和输出的-int8-矩阵乘法"></a> 具有 16 位浮点输入和输出的 Int8 矩阵乘法</h3>
-<p><img src="/medias/images/loading.gif" data-original="image-20240216153133926.png" alt="image-20240216153133926" /></p>
+<h3 id="具有-16-位浮点输入和输出的-Int8-矩阵乘法">具有 16 位浮点输入和输出的 Int8 矩阵乘法</h3>
+<p><img src="/medias/images/loading.gif" data-original="image-20240216153133926.png" alt="image-20240216153133926"></p>
 <blockquote>
 <p>Given hidden states X<sub>f16</sub> ∈ R<sup>s×h</sup> and weights W<sub>f16</sub> ∈ R<sup>h×o</sup> with sequence dimension s, feature dimension h, and output dimension o</p>
 </blockquote>
@@ -654,7 +656,7 @@ We develop a procedure for Int8 matr">
 <li>“c<sub>xf16</sub>” 和 “c<sub>wf16</sub>” 是Absmax量化的张量缩放常数s<sub>x</sub>和s<sub>w</sub>，或是Zeropoint的张量缩放常数nd<sub>x</sub>和nd<sub>w</sub></li>
 <li>量化后，将调整后的8位数字相乘，然后我们使用另一个特殊数字（S<sub>f16</sub>）将结果调整回16位格式。</li>
 </ul>
-<h2 id="大规模-int8-矩阵乘法"><a class="markdownIt-Anchor" href="#大规模-int8-矩阵乘法"></a> 大规模 Int8 矩阵乘法</h2>
+<h2 id="大规模-Int8-矩阵乘法">大规模 Int8 矩阵乘法</h2>
 <p>作者用了一个很有趣的例子解释了量化的核心思想：量化就像通过使用较短的单词来减轻一本沉重的书籍的负担，但仍在努力保持故事不变。 通常，我们使用一个短词（<strong>缩放常量</strong>）来替换整本书中的许多长词（值）（<strong>张量</strong>）。</p>
 <p>如果书中有一个很长又奇怪的单词（<strong>异常值</strong>），我们可能不得不用一个<strong>不太短的词来表示所有的单词</strong>，<strong>这样书就不会像我们想要的那么轻。</strong></p>
 <blockquote>
@@ -664,7 +666,7 @@ We develop a procedure for Int8 matr">
 <blockquote>
 <p><strong>LLM.int8() 方法就像一种特殊的写作方式，使用简短的文字和微小的笔迹来写这本书，在不改变故事的情况下尽可能地简化书本。</strong></p>
 </blockquote>
-<h3 id="实验步骤"><a class="markdownIt-Anchor" href="#实验步骤"></a> 实验步骤</h3>
+<h3 id="实验步骤">实验步骤</h3>
 <ol>
 <li>
 <p>作者将几个公开可用的预训练语言模型的大小扩展到最多 175B 个参数时，我们测量了量化方法的稳健性。关键问题不在于量化方法对于特定模型的表现如何，而是随着规模的扩大，这种方法的表现趋势。</p>
@@ -694,13 +696,13 @@ We develop a procedure for Int8 matr">
 <p>使用名为NVIDIA A40 GPU的强大计算机部件来进行此项测试。</p>
 </li>
 </ol>
-<h3 id="实验结果"><a class="markdownIt-Anchor" href="#实验结果"></a> 实验结果</h3>
+<h3 id="实验结果">实验结果</h3>
 <ul>
 <li>LLM.int8() 是唯一一种随着模型大小的增加而保持高质量的方法，这与其他变得更差的方法不同。</li>
 <li>在另一项测试中，LLM.int8() 即使模型非常大，也能与16位模型的质量相匹配。</li>
 <li>LLM.int8() 对于小型模型较慢，但对于超大型模型则更快，而且它可以节省内存。</li>
 </ul>
-<h2 id="讨论与限制"><a class="markdownIt-Anchor" href="#讨论与限制"></a> 讨论与限制</h2>
+<h2 id="讨论与限制">讨论与限制</h2>
 <ul>
 <li>
 <p>只查看了 Int8 数字，而不是另一种叫做 FP8 的数字，因为现在大多数计算机都无法使用 FP8。</p>
@@ -1297,8 +1299,7 @@ We develop a procedure for Int8 matr">
                 <a href="/2024/01/09/shi-yong-gong-ju-he-ping-tai-diao-shi-he-yun-duan-xun-lian-dai-ma/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/2.jpg" class="responsive-img" alt="使用工具和平台调试和云端训练代码">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/debugger-4.png" class="responsive-img" alt="使用工具和平台调试和云端训练代码">
                         
                         <span class="card-title">使用工具和平台调试和云端训练代码</span>
                     </div>
@@ -1328,16 +1329,16 @@ We develop a procedure for Int8 matr">
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
-                        <span class="chip bg-color">工具</span>
-                    </a>
-                    
                     <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
                         <span class="chip bg-color">深度学习</span>
                     </a>
                     
                     <a href="/tags/%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C/">
                         <span class="chip bg-color">论文工作</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">工具</span>
                     </a>
                     
                 </div>

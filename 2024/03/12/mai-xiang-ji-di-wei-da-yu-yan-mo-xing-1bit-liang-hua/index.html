@@ -1,0 +1,1756 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="迈向极低位大语言模型——1bit量化, QT-7274">
+    <meta name="description" content="直接越过2bit这一量化级别，对LLM大语言模型进行1bit量化尝试！">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>迈向极低位大语言模型——1bit量化 | QT-7274</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+    
+<body>
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    <div>
+                    
+                    <img src="/medias/images/loading.gif" data-original="/medias/logo.gif" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">QT-7274</span>
+                </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+    <div class="mobile-head bg-color">
+      <div>
+        
+        <img no-lazy src="/medias/logo.gif" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">QT-7274</div>
+        <div class="logo-desc">
+          
+              Never really desperate, only the lost of the soul.
+              
+            </div>
+      </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/QT-7274/QT-7274.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #003a8c;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/QT-7274/QT-7274.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">迈向极低位大语言模型——1bit量化</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">深度学习</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C/">
+                                <span class="chip bg-color">论文工作</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                深度学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-03-12
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-03-13
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    19 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="摘要">摘要</h2>
+<p>当量化技术中的位宽（用于表示每种权重的位数）急剧减少时，通常会导致模型性能的大幅下降。</p>
+<p>为了缓解这种问题，作者提出了一种开创性的方法—— <strong>OneBit，该方法将 LLM 权重矩阵量化为 1 位值。这代表了一种激进的量化形式，旨在尽可能降低位宽。</strong></p>
+<p>OneBit 包含：</p>
+<ul>
+<li><strong>量化感知训练 (QAT) 框架</strong>，该框架包括一种以 1 位形式表示参数的独特方法，可增强 LLM 的量化能力。</li>
+<li>采用基于<strong>矩阵分解</strong>的参数初始化策略，加速了 QAT 过程的收敛。</li>
+</ul>
+<blockquote>
+<p><code>For this target, we introduce a 1-bit quantization-aware training (QAT) framework named OneBit, including a novel 1-bit parameter representation method to better quantize LLMs as well as an effective parameter initialization method based on matrix decomposition to improve the convergence speed of the QAT framework. </code></p>
+</blockquote>
+<h2 id="问题和挑战">问题和挑战</h2>
+<ol>
+<li>
+<p>但是，基于 Transformer 的 LLM 的部署充满了困难，这主要是由于它们的高计算需求和大量的内存占用量。随着 LLM 参数数量的增加，操作它们所需的资源也会相应增加。</p>
+<blockquote>
+<p>Despite their popularity, deploying transformer-based LLMs presents significant challenges due to their computational intensity and considerable memory requirements as the parameters of LLMs become more and more.</p>
+</blockquote>
+</li>
+<li>
+<p>许多人（Dettmers 等人，2022 年；Frantar 等人，2022 年；Frantar 和 Alistarh，2023 年）致力于减少 LLM 的计算和内存开销，同时仍保留其大部分原始模型功能。在这些努力中，量化技术得到了广泛关注，尤其是训练后量化（Post-Training PTQ），因为它的迁移(transfering)成本更低。GPTQ（Frantar 等人，2022 年）、SpQR（Dettmers 等人，2023 年b）和 AWQ（Lin 等人，2023 年）等开创性研究成功地将 LLM 的权重矩阵压缩为 4 bit值，同时保持了 LLM 的主要能力。高效量化实现了时间和空间效率以及模型性能之间的平衡，是 LLM 优化的重大进展。</p>
+<blockquote>
+<p><code>Among these efforts, quantization has gained widespread attention, particularly Post-Training Quantization (PTQ), benefitted from its lower transferring costs. Seminal studies such as GPTQ (Frantar et al., 2022), SpQR (Dettmers et al., 2023b), and AWQ (Lin et al., 2023) successfully compress the weight matrices of LLMs to 4-bit values while maintaining the main abilities of LLMs. Efficient quantization represents significant advances in LLM optimization, by achieving a balance between time and space efficiency as well as model performance.</code></p>
+</blockquote>
+</li>
+<li>
+<p>尽管 PTQ 可以有效地将权重矩阵压缩为至少 3 位表示形式，但随着位宽的进一步降低，其有效性会大大降低。如下图所示：</p>
+<blockquote>
+<p><code>Unfortunately, the efficacy of PTQ rapidly diminishes when the quantization bit-width is extremely low, as shown in Figure 1.</code></p>
+</blockquote>
+<p><img src="/medias/images/loading.gif" data-original="image-20240312202645704.png" alt="image-20240312202645704"></p>
+</li>
+<li>
+<p>最近的研究希望利用量化感知训练（QuantizationAware Training，QAT）来克服 PTQ 面临的瓶颈。LLM-QAT （Liu 等人，2023 年）在量化过程中引入了一些可学习的参数，取得了显著的效果。OmniQuant （Shao 等人，2023 年）整合了可学习的等价变换，在 2 bit量化方面取得了可喜的成果。然而，现有的方法在将模型权重压缩到 1 位时效果下降，难以保持有效性。</p>
+<p>主要问题是在如此低的位宽下会出现严重的精度损失。**这种精度的损失极大地影响了线性投影运算（表示为 WX，其中 W 是权重矩阵，X 是输入），这是 LLM 的基本组成部分。**精度的急剧降低导致在此操作期间丢失的信息增加，从而影响模型的整体性能。</p>
+<blockquote>
+<p><code>Recent researches hope to leverage Quantization Aware Training (QAT) to overcome the bottlenecks faced by PTQ. LLM-QAT (Liu et al., 2023) introduces a few learnable parameters into the quantization process, achieving notable results. OmniQuant (Shao et al., 2023), integrating learnable equivalent transformation, presents promising results in 2-bit quantization. However, existing methods decline when compressing model weights to 1 bit, struggling to maintain effectiveness.</code></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="方法介绍">方法介绍</h2>
+<ol>
+<li>作者提出了一种新颖的<strong>线性层与符号值无关分解法</strong>（Sign-Value-Independent Decomoisition, SVID），以使用约 1 bit值来表示 LLM。
+<ul>
+<li>每个原始高位(high-bit)权重矩阵被分解为<strong>一个符号矩阵</strong>（±1）和<strong>两个值向量</strong>(value vectors)。
+<ul>
+<li>值向量以较低的成本提供了线性投影所需的浮点精度，并<strong>有助于轻松训练模型</strong>。</li>
+<li>符号矩阵以较小的空间成本保持了原始权重矩阵的高秩，从而<strong>保留了较高的信息容量</strong>。</li>
+</ul>
+</li>
+<li>SVID 为 1 bit模型提供了更好的参数初始化，作者采用<strong>量化感知知识蒸馏法</strong>(quantization-aware knowledge distillation)，将原始模型的能力迁移到所提出的 1 bit对应模型中。</li>
+</ul>
+</li>
+<li>作者提出用 SVID <strong>将高位矩阵分解为低位矩阵</strong>，这对作者的 1 位架构的初始化至关重要。实验证明，基于 SVID 的初始化可以提高模型性能和收敛速度。</li>
+<li>广泛的实验证明，作者的方法在 OPT、LLaMA 和 LLaMA2 中的模型规模从 1.3B 到 13B 不等时都能很好地发挥作用，这也展示了它的通用性。</li>
+</ol>
+<h2 id="方法实现">方法实现</h2>
+<h3 id="背景">背景</h3>
+<p>模型量化的主要思路是将 FP32 或 FP16 格式模型中的每个权重矩阵 \boldsymbol{W}  压缩成低比特对应格式。具体来说，作者通常将transformer中线性层的权重矩阵量化为 8 位、4 位甚至 2 位。</p>
+<p>大多数量化研究主要采用四舍五入法（Round-To-Nearest, RTN），即将权重  w 四舍五入到量化网格中最接近的值。它可以表述为：<br>
+$$<br>
+\hat{w} = \text{Clip}(\lfloor \frac{w}{s} \rceil + z,\ 0,\ 2^N -1) \tag{1}<br>
+$$<br>
+其中：</p>
+<ul>
+<li>s  表示量化缩放参数，</li>
+<li>z  表示零点参数，</li>
+<li>N  表示量化位宽。</li>
+<li>$\text{Clip}(\cdot)$将结果截断在 0 到 2^N - 1 的范围内。</li>
+</ul>
+<p>随着位宽越来越小，量化网格也越来越稀疏。当作者将 LLM 量化为 1bit 值时，量化模型中只有 2 个可用的数字可供选择。</p>
+<p>现有研究（Dettmers 和 Zettlemoyer，2023 年）指出，<strong>基于 RTN 方法的量化可以在 4 位水平上获得最佳性能</strong>。如之前的图示所示，进一步压缩（如将模型量化为 2 位值）会导致性能大幅下降（Shao 等人，2023 年）。</p>
+<p>此外，<strong>当  N 等于 1 时，基于 RTN 方法的量化本质上等同于设置一个阈值</strong>，阈值两侧的权重 w  被转换为相应的整数值 $\hat{w}$ 。在这种情况下，公式 (1) 中的参数 s  和  z 实际上就失去了实际意义。因此，当将权重量化为 1 bit时，元素向 RTN 运算会大大降低权重矩阵 W 的精度，从而导致量化模型的性能不佳。</p>
+<blockquote>
+<p>当 N 等于 1 时，基于舍入到最近 (RTN) 方法的量化过程简化为每个权重的二进制决策，将其分配给 0 或 1，在考虑符号后相当于 -1 或 +1。这是因为 1 位量化值<strong>只有两种可能的状态</strong>。在这种情况下，方程 (1) 中的比例参数和零点参数 (z) 变得多余，因为量化网格是最稀疏的，不会在两种状态之间提供渐变。<strong>参数 s 和 z 旨在调整量化范围和中心，但由于只有两种可能的结果，它们在微调量化过程中的作用被否定了，因此它们实际上毫无意义！</strong></p>
+</blockquote>
+<h3 id="1-bit-线性架构">1 bit 线性架构</h3>
+<p>由于 1 bit权重量化的精度损失严重，将线性层中的权重矩阵直接从 FP32/16 转换为基于 RTN 的 1 bit格式具有挑战性。Wang 等人（2023 年）通过研究纯 1 bit权重矩阵的能力，从头开始训练 1 bit模型，探索了这种可能性。在 W1A16 设置中，他们的线性层设计为：<br>
+$$<br>
+\begin{align} W_{\pm} = \text{Sign}[\boldsymbol{W} - \text{Mean}(\boldsymbol{W})]\newline<br>
+\ \eta = \text{Mean}[\text{Abs}(\boldsymbol{W} - \text{Mean}(\boldsymbol{W}))]\newline<br>
+\ \boldsymbol{Y} = \eta \cdot \text{LayerNorm}(\boldsymbol{X}) \boldsymbol{W}_{\pm}^T \end{align} \tag{2}<br>
+$$<br>
+其中：</p>
+<ul>
+<li>$\boldsymbol{W}$  表示 m×n 形的量化权重矩阵</li>
+<li>$W_{\pm 1}$ 表示 1 bit量化矩阵</li>
+<li>$\boldsymbol{X}$ 是线性层的输入</li>
+<li>$\boldsymbol{Y}$ 是输出</li>
+<li>$\text{Sign}(\cdot) $、 $\text{Mean}(\cdot)$ 和 $\text{Abs}(\cdot)$ 函数返回符号矩阵、平均值和绝对值矩阵。</li>
+</ul>
+<p>遗憾的是，这种方法降低了计算需求，<strong>但也导致性能明显下降</strong>（Wang 等人，2023 年）。</p>
+<p>受 Wang 等人（2023）的启发，作者还使用函数 $\text{Sign}(\cdot)$ 对权重矩阵进行量化，量化后的矩阵元素被设置为 +1 或 -1。</p>
+<p>此外，作者还注意到，虽然 $\boldsymbol{W}_{\pm 1}$ 保持了 $\boldsymbol{W}$ 的高秩，但遗漏的浮点精度仍然会破坏模型性能。</p>
+<p>因此，与之前的研究不同，作者<strong>引入了两个 FP16 格式的值向量</strong>，以减少量化过程中的精度损失。作者提出的线性层设计如下：<br>
+$$<br>
+\begin{align} W_{\pm 1} = \text{Sign}(\boldsymbol{W})\newline<br>
+\ \boldsymbol{Y} = [(\boldsymbol{X}\odot \boldsymbol{g}) \boldsymbol{W}_{\pm 1}^T]\odot \boldsymbol{h}\newline<br>
+\ \boldsymbol{Z} = \text{LayerNorm}(\boldsymbol{Y}) \end{align} \tag{3}<br>
+$$<br>
+其中：</p>
+<ul>
+<li>g 和 h 是两个 FP16 值向量。</li>
+</ul>
+<blockquote>
+<p>注意，作者在公式 (3) 中使用括号指定了计算顺序，以尽量减少时间和空间成本。</p>
+</blockquote>
+<p>Wang 等人（2023 年）与 OneBit 的主要区别在于额外的参数 g 和 h 。例如，当作者量化一个形状为 4096×4096 的权重矩阵时，量化结果的平均位宽为 1.0073。</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20240312205927836.png" alt="image-20240312205927836"></p>
+<p>在作者提出的 1 bit架构中，权重矩阵 $\boldsymbol{W}$ 在数学上分为两个部分：</p>
+<ul>
+<li>一个是 INT1 格式的符号矩阵 $W_{\pm 1}$ ，</li>
+<li>一个是 FP16 格式的值向量 $\boldsymbol{g/h}$ 。</li>
+</ul>
+<p>为了借助完全训练过的权重初始化 1 位模型，作者引入了权重矩阵 W 的符号-值无关分解（SVID），可表述为：</p>
+<p>$$<br>
+\boldsymbol{W}=\boldsymbol{W}<em>{sign} \odot \boldsymbol{W}</em>{value}<br>
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$\boldsymbol{W}_{value} = |\boldsymbol{W}|$</li>
+<li>$\boldsymbol{W}_{sign} = \text{Sign}(\boldsymbol{W})$</li>
+</ul>
+<p>对于  $\boldsymbol{W}_{value}$ ，作者进一步将其近似分解为两个向量  a 和 b  的外积，这也被称为 rank-1 近似。</p>
+<p>因此，作者提出的矩阵分解方法可以表示为：<br>
+$$<br>
+\boldsymbol{W} \approx \boldsymbol{W}_{sign} \cdot (\boldsymbol{ab}^T) \tag{4}<br>
+$$</p>
+<p>作者可以采用一些广泛使用的矩阵分解方法来进行 rank-1 近似，如 SVD（Beltrami，1990 年）和 NMF（Paatero 和 Tapper，1994 年）。</p>
+<h3 id="命题-1">命题 1</h3>
+<p>给定权重矩阵 $\boldsymbol{W}$ 和输入 $\boldsymbol{X}$ 后，线性层可根据 SVID 重构如下：<br>
+$$<br>
+\boldsymbol{XW}^T \approx [(\boldsymbol{X} \odot \boldsymbol{b}^T)\boldsymbol{W}_{sign}^{T}]\odot \boldsymbol{a}^T \tag{5}<br>
+$$<br>
+<strong>这弥补了量化模型的结构与原始权重之间的差距。</strong></p>
+<p>它表明，如果作者将 $\boldsymbol{W}<em>{sign}$  赋值为 $\boldsymbol{W}</em>{\pm 1}$ ，将  $\boldsymbol{a}^T$ 赋值为  h ，将  $\boldsymbol{b}^T$ 赋值为 g ，那么量化模型就是原始模型的近似初始化。</p>
+<p>此外，与先还原原始矩阵  $\boldsymbol{W}$ 相比（如公式 (4)），公式 (5) 中的计算顺序由于无需还原 FP16W，因此可以在内存中节省大约一个 FP16 格式的矩阵$ \boldsymbol{W}$。</p>
+<p>**SVID 的主要目的是让符号矩阵参与矩阵的近似，而不是仅仅依赖 FP16 格式的值向量。**为了证明符号矩阵在矩阵逼近中的作用，作者提出了以下命题。</p>
+<h3 id="命题2">命题2</h3>
+<p>给定矩阵$ \boldsymbol{W}$  和 $|\boldsymbol{W}| $， $\boldsymbol{W}=\boldsymbol{W}_{sign}\cdot |\boldsymbol{W}| $。</p>
+<p>作者按以下方式分解这些矩阵：<br>
+$$<br>
+\boldsymbol{W}= \boldsymbol{ab}^T+\boldsymbol{E}_1  和  |\boldsymbol{W}| = \boldsymbol{\widetilde{a}\widetilde{b}}^T+\boldsymbol{E}_2<br>
+$$<br>
+其中：</p>
+<ul>
+<li>$ \boldsymbol{E}_i $表示误差矩阵。</li>
+</ul>
+<p>从 Frobenius-norm 的角度来看，SVID 更接近原始矩阵 $\boldsymbol{W}$ ：<br>
+$$<br>
+\lVert \boldsymbol{W} - \boldsymbol{W}<em>{sign} \odot \boldsymbol{\widetilde{a}\widetilde{b}}^T \rVert</em>{F}^2 \le \lVert \boldsymbol{W} - \boldsymbol{ab}^T \rVert_F^2 \tag{6}<br>
+$$<br>
+它清楚地表明了符号矩阵$ \boldsymbol{W}_{sign} $在矩阵逼近中的实际作用。</p>
+<p>需要注意的是，<strong>由于大多数参数的精度都很低，因此要精确地近似权重矩阵 $\boldsymbol{W}$ 是相当具有挑战性的</strong>。SVID 的目的不是精确复制原始模型的参数，而是利用原始模型的大量训练，为进一步训练提供一个有效的起点。</p>
+<h3 id="知识蒸馏">知识蒸馏</h3>
+<p>作者采用量化感知知识蒸馏(quantization-aware knowledge distillation)技术，将知识从原始模型（即教师模型）迁移到量化模型（即学生模型）。</p>
+<p>在学生模型中，矩阵 $\boldsymbol{W}$ 中的元素和公式 (3) 中的向量 $\boldsymbol{g/h}$ 将被训练。</p>
+<p>作者使用基于交叉熵的对数和基于隐藏状态的均方误差全精度教师模型来指导量化的学生模型（Sun et al.） 不使用语言建模损失。交叉熵定义为：<br>
+$$<br>
+\mathcal{L}<em>{CE}=-\frac{1}{n_s}\sum</em>{i=1}^{n_s}{\sum_c{P_{c}^{\mathcal{T}}\left( \boldsymbol{o}<em>i \right) \log P</em>{c}^{\mathcal{S}}\left( \boldsymbol{o}_i \right)}} \tag{7}<br>
+$$<br>
+其中：</p>
+<ul>
+<li>c 表示类别数</li>
+<li>n_s 表示当前批次的训练样本数</li>
+<li>$\mathcal{T}$ 和 $\mathcal{S}$ 分别是教师模型和学生模型</li>
+</ul>
+<p>隐藏状态的误差定义为：<br>
+$$<br>
+\mathcal{L}<em>{MSE}=\sum</em>{i=1}^{n_s}{\sum_{j=1}^{n_l}{\lVert \frac{\boldsymbol{q}<em>{i,j}^{\mathcal{T}}}{\lVert \boldsymbol{q}</em>{i,j}^{\mathcal{T}} \rVert <em>2}-\frac{\boldsymbol{q}</em>{i,j}^{\mathcal{S}}}{\lVert \boldsymbol{q}<em>{i,j}^{\mathcal{S}} \rVert} \rVert}</em>{2}^{2}} \tag{8}<br>
+$$<br>
+其中：</p>
+<ul>
+<li>n_l 表示层数</li>
+<li>$\boldsymbol{q}$ 表示隐藏状态。</li>
+</ul>
+<p>因此最终的目标函数可以表示为：<br>
+$$<br>
+\mathcal{L}<em>{KD} = \mathcal{L}</em>{CE} + \alpha \mathcal{L}_{MSE} \tag{9}<br>
+$$<br>
+其中：</p>
+<ul>
+<li>$ \alpha $是平衡交叉熵损失和中间层特征重要性的超参数。</li>
+</ul>
+<h2 id="主要结果">主要结果</h2>
+<p><img src="/medias/images/loading.gif" data-original="640.png" alt="图片"></p>
+<ul>
+<li>
+<p>在各种模型大小下，作者的 1 bit权重量化方法在 W2A16 设置下明显优于其他方法。</p>
+<p>此外，随着模型规模的增大，基于 QAT 的方法的有效性持续提高，而 PTQ 方法、 GPTQ 的结果可能会随着模型规模的增大而下降（例如，在 LLaMA 上从 7B 到 13B）。这表明，<strong>基于 QAT 的方法可以在极低位量化时获得稳定的结果</strong>。</p>
+</li>
+<li>
+<p><strong>具体来说，随着模型大小的增加，作者的方法更接近 FP16 的性能</strong>。</p>
+<blockquote>
+<p>例如，当从 LLaMA-7B 扩展到 LLaMA-13B 时，FP16 模型的困惑度仅降低了 0.59，而作者的方法则降低了 1.20。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>在困惑度方面，只有作者的方法取得了与最强 FP16 基准线相当的结果。</strong></p>
+<blockquote>
+<p>例如，作者的方法在 LLaMA-13B 模型的 Wiki2 数据集上取得了 9.18 的成绩，而 FP16 基线为 5.09。其他方法的性能损失很大，尽管它们使用的是 2 bit量化，比作者的 1 bit量化要多。对于 GPTQ 和 LLM-QAT，量化后的性能下降相当严重。至于 OmniQuant，尽管在 W2A16 设置下它是最强的基线，但与作者的 W1A16 设置相比，它仍然遭受了更大的性能损失。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>在零样本精度方面，虽然所有方法都不可避免地会出现一些性能下降，但在大多数模型中，作者的方法取得了最接近 FP16 基准线的性能。</strong></p>
+<blockquote>
+<p>在 OPT-1.3B/2.7B 模型上，作者的方法在 PIQA 和 ARC-e 等大多数任务上的性能损失较小。此外，与排名第二的基线 OmniQuant 相比，其他任务的性能损失可以忽略不计。在 LLaMA-7B 模型上，除 ARC-e/ARCc 外，作者的方法在所有任务上的表现都明显优于 OmniQuant，平均整体提高约 4%。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="在实际问题中的表现">在实际问题中的表现</h2>
+<p>重点专注：<strong>常识推理</strong>(commonsense reasoning)和<strong>世界知识</strong>(world knowledge)。</p>
+<ul>
+<li>常识推理：虽然其他模型比作者的模型参数更多，训练更全面，但作者的模型在常识推理方面仍有优势。这反映了从更大的 7B 模型中继承的优势。</li>
+<li>世界知识：在世界知识方面，尽管作者的模型<strong>在社会科学领域损失较大</strong>，但在其他领域却优于经过全面训练的 Pythia-1B。这些结果证明了 OneBit 的实用性。</li>
+</ul>
+<p><img src="/medias/images/loading.gif" data-original="640-17103051386823.png" alt="图片"></p>
+<p><img src="/medias/images/loading.gif" data-original="640-17103051458836.png" alt="图片"></p>
+<h2 id="分析和讨论">分析和讨论</h2>
+<h3 id="效率">效率</h3>
+<p>显然，将模型权重量化为极低位可以大幅度减少其内存占用。实际上，如表3所示，随着模型规模的增大，压缩比也在不断提高。这一点对于大型模型来说尤为重要，因为它使得将这类模型部署到单个GPU上成为可能，从而极大地提高了模型的实际应用性和灵活性。</p>
+<p><img src="/medias/images/loading.gif" data-original="640-17103051778509.png" alt="图片"></p>
+<p>虽然该方法在实施过程中可能会导致一定的性能损失，但如图4所示，它在空间占用和模型性能之间达到了良好的平衡。</p>
+<p><img src="/medias/images/loading.gif" data-original="640-171030518808212.png" alt="图片"></p>
+<p>比如只需使用原始模型空间的0.2倍，即可实现与FP16相当的性能表现。</p>
+<p>此外，通过将权重量化为±1，能够进一步加速CPU上的矩阵乘法操作。</p>
+<p>这是因为在这种量化方式下，原本需要进行的浮点乘法可以转换为速度更快的位操作，显著提升计算效率。<strong>因此，该方法的内存占用显著减少，更符合个人电脑和智能手机等设备的部署需求。</strong></p>
+<h3 id="鲁棒性">鲁棒性</h3>
+<p><strong>极低比特量化使训练过程对学习率高度敏感</strong>，当学习率过小或过大时，使模型难以收敛。这主要是由于权重元素在+1和-1之间波动时产生的梯度幅度较大，导致Linear层输出显著波动。</p>
+<p>下图显示了另一种1位量化架构BitNet在使用不同学习率训练时的表现，可以看到非常不稳定：</p>
+<p><img src="/medias/images/loading.gif" data-original="640-171030528286115.png" alt="图片"></p>
+<p>而OneBit通过引入两个FP16格式的值向量来补充必要的浮点数值精度，同时限制了量化后矩阵乘法结果的波动范围，从而提高了模型的鲁棒性，展现出更稳定的训练过程，并且对学习率不敏感。</p>
+<h3 id="不同组件的影响">不同组件的影响</h3>
+<p>OneBit主要的可变组件包括Post-LayerNorm、参数初始化等。</p>
+<ul>
+<li>Post-LayerNorm：在量化感知训练期间，模型存在浮点数溢出的问题，尤其在模型深度增加时，激活值容易急剧增长。为应对此问题，本文选择了Post-LayerNorm策略，而非Pre-LayerNorm。因为在实际应用中，Pre-LayerNorm有时可能无法有效地控制激活值的增长。</li>
+<li>参数初始化：在使用SVID做参数初始化时，非负矩阵分解和奇异值分解均可用于分解|W|，但推荐使用奇异值分解。它能加快训练收敛速度，如下图所示，NMF初始化有助于获得更好的性能。</li>
+</ul>
+<p><img src="/medias/images/loading.gif" data-original="640-171030531938518.png" alt="图片"></p>
+<h2 id="总结">总结</h2>
+<p>OneBit框架提出了一种大胆的1位量化方法，极大地减少了模型部署时的存储和计算开销。尽管存在一些性能损失，但其在模型压缩和部署效率方面的潜力是显而易见的，为研究极低位量化模型提供了一条新的探索途径。</p>
+<h2 id="限制">限制</h2>
+<p>尽管作者提出的方法大大减少了 LLM 的内存占用，为高效部署 LLM 带来了希望，但仍然存在一些局限性。</p>
+<ol>
+<li>首先，与原始模型相比，作者的<strong>超低位量化不可避免地会造成性能损失</strong>。</li>
+<li>此外，作者还不了解 1 位量化模型最佳参数背后的数学原理，因此<strong>只能通过代价高昂的 KD 过程来实现能力转移</strong>。幸运的是，这种代价是一次性的。</li>
+<li>此外，由于 1 位量化的特殊性，作者的方法<strong>无法自然扩展到更高的位宽</strong>。</li>
+<li>最后，作者<strong>没有考虑激活量化的问题</strong>，将其作为未来的工作。</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">QT-7274</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://qt-7274.github.io/2024/03/12/mai-xiang-ji-di-wei-da-yu-yan-mo-xing-1bit-liang-hua/">https://qt-7274.github.io/2024/03/12/mai-xiang-ji-di-wei-da-yu-yan-mo-xing-1bit-liang-hua/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">QT-7274</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">深度学习</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C/">
+                                    <span class="chip bg-color">论文工作</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.gif") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid;">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'tzmyy70PpnbbxclXN4jYmjPA-gzGzoHsz',
+        appKey: 'TCY55mH7vS6x5sVr1bCLm5Gg',
+        serverURLs: '',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        requiredFields: ['nick','mail'],
+        enableQQ: 'true',
+        lang: 'zh-cn',
+        placeholder: '😉畅所欲言！\n📲请文明评论，禁止恶意评论🚫 \n⚠️公开网络空间，请不要发表任何包含个人或其他人的隐私信息🔐',
+        master: ["f18e9f29c8274571d5a0752aca9310ef"],
+        friends:["0aa4f09d8249581a4380a6fc541062e7","6a66a1ba019c52f168d99313efbef39a"]
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2024/03/12/mai-xiang-ji-di-wei-da-yu-yan-mo-xing-1bit-liang-hua/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/0.jpg" class="responsive-img" alt="迈向极低位大语言模型——1bit量化">
+                        
+                        <span class="card-title">迈向极低位大语言模型——1bit量化</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            直接越过2bit这一量化级别，对LLM大语言模型进行1bit量化尝试！
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%BA%E6%96%87%E5%B7%A5%E4%BD%9C/">
+                        <span class="chip bg-color">论文工作</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/03/11/qt-de-zhuo-you-jian-shang-ji/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/pic4023671.webp" class="responsive-img" alt="QT的桌游鉴赏集">
+                        
+                        <span class="card-title">QT的桌游鉴赏集</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            桌面游戏的触感和机制是很多电子游戏望尘莫及的。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%A1%8C%E9%9D%A2%E6%B8%B8%E6%88%8F/" class="post-category">
+                                    桌面游戏
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B8%B8%E6%88%8F/">
+                        <span class="chip bg-color">游戏</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">QT-7274</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/QT-7274" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2531376773@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2531376773" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2531376773" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+    <a  class="tooltipped" target="_blank" data-tooltip="微信联系我: Q5268368" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>

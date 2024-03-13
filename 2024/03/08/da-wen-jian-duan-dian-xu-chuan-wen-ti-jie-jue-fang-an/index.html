@@ -33,7 +33,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
     
 <body>
@@ -306,7 +308,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/v2-eb1a07597aed42ee9640a88ce318868b_1440w.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -463,7 +465,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-09
+                    2024-03-12
                 </div>
                 
 
@@ -500,7 +502,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="切片上传失败怎么办"><a class="markdownIt-Anchor" href="#切片上传失败怎么办"></a> 切片上传失败怎么办</h3>
+                <h3 id="切片上传失败怎么办">切片上传失败怎么办</h3>
 <p>通常的做法是重新上传这个切片。以下是一种可能的处理步骤：</p>
 <ol>
 <li>捕获上传失败的错误：当你尝试上传一个切片时，你应该使用 try-catch 语句或者 promise 的 <code>.catch</code> 方法来捕获可能发生的错误。</li>
@@ -509,7 +511,7 @@
 <li>记录失败的切片：如果重试多次后仍然失败，你应该记录下这个切片的信息，以便用户在网络条件改善后可以继续上传这个切片。</li>
 <li>提示用户：在切片上传失败并且重试多次后，你应该通知用户上传失败，并给出相应的错误信息和建议。</li>
 </ol>
-<h3 id="上传过程中刷新页面怎么办"><a class="markdownIt-Anchor" href="#上传过程中刷新页面怎么办"></a> 上传过程中刷新页面怎么办</h3>
+<h3 id="上传过程中刷新页面怎么办">上传过程中刷新页面怎么办</h3>
 <p>你可以将上传的进度和已上传的文件切片信息存储在客户端（例如使用 localStorage 或 IndexedDB）。以下是一种可能的处理步骤：</p>
 <ol>
 <li>在开始上传文件之前，将文件切片并存储每个切片的信息（例如切片的索引和大小）。</li>
@@ -518,7 +520,7 @@
 <li>如果所有的切片都上传成功，你可以发送一个请求给服务器，告诉它所有的切片都已上传，服务器可以将这些切片合并成完整的文件。</li>
 </ol>
 <p>请注意，这种方法需要服务器支持文件切片的上传和合并，以及客户端支持文件的切片和存储。</p>
-<h3 id="如何进行并行上传"><a class="markdownIt-Anchor" href="#如何进行并行上传"></a> 如何进行并行上传</h3>
+<h3 id="如何进行并行上传">如何进行并行上传</h3>
 <p>在 JavaScript 中，你可以使用 Promise.all 或者 Promise.allSettled 方法来并行上传多个文件切片。以下是一个简单的示例：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 假设你有一个数组，其中包含了所有的文件切片
 let fileChunks &#x3D; [...];
@@ -540,7 +542,7 @@ Promise.all(uploadPromises)
     console.log(&#39;有一些文件切片上传失败&#39;, error);
   &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>请注意，这个示例假设你的网络和服务器都可以处理并行上传的负载。如果并行上传的数量太大，可能会导致网络拥塞或者服务器压力过大。在实际的应用中，你可能需要限制并行上传的数量，例如使用 Promise Pool。</p>
-<h4 id="promise-pool"><a class="markdownIt-Anchor" href="#promise-pool"></a> Promise Pool</h4>
+<h4 id="Promise-Pool">Promise Pool</h4>
 <p><code>Promise Pool</code> 是一种用于限制并发 Promise 数量的工具。在 JavaScript 中，你可以使用第三方库如 <code>es6-promise-pool</code> 或 <code>promise-pool-executor</code> 来实现这个功能。</p>
 <p>以下是一个使用 <code>es6-promise-pool</code> 的示例：</p>
 <p>首先，你需要安装 <code>es6-promise-pool</code>：</p>
@@ -573,7 +575,7 @@ pool.start()
   .catch(error &#x3D;&gt; &#123;
     console.log(&#39;有一些文件切片上传失败&#39;, error);
   &#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="切片什么时候按数量切什么时候按大小切"><a class="markdownIt-Anchor" href="#切片什么时候按数量切什么时候按大小切"></a> 切片什么时候按数量切，什么时候按大小切</h3>
+<h3 id="切片什么时候按数量切，什么时候按大小切">切片什么时候按数量切，什么时候按大小切</h3>
 <ol>
 <li><strong>按大小切片</strong>：<strong>如果你的网络环境不稳定，或者你需要上传的文件非常大</strong>，那么按大小切片可能是一个好的选择。这样可以减少因网络问题导致的上传失败，因为每个切片的大小都较小。此外，如果服务器对上传文件的大小有限制，那么按大小切片也是必要的。</li>
 <li><strong>按数量切片</strong>：如果你需要并行处理<strong>多个</strong>文件，那么按数量切片可能更合适。这样可以将文件分配给多个处理器进行处理。此外，如果你的文件数量非常大，但每个文件的大小都较小，那么按数量切片可以减少处理每个文件的开销。</li>
@@ -1099,8 +1101,7 @@ pool.start()
                 <a href="/2024/03/11/qt-de-zhuo-you-jian-shang-ji/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/22.jpg" class="responsive-img" alt="QT的桌游鉴赏集">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/pic4023671.webp" class="responsive-img" alt="QT的桌游鉴赏集">
                         
                         <span class="card-title">QT的桌游鉴赏集</span>
                     </div>
@@ -1148,8 +1149,7 @@ pool.start()
                 <a href="/2024/03/05/this-de-bang-ding-gui-ze-xiang-jie/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/1.jpg" class="responsive-img" alt="this的绑定规则详解">
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/610e97e1abaa1.jpg" class="responsive-img" alt="this的绑定规则详解">
                         
                         <span class="card-title">this的绑定规则详解</span>
                     </div>

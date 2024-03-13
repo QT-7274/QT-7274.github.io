@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JavaScript代码题目, QT-7274">
-    <meta name="description" content=" 类型问题
+    <meta name="description" content="类型问题
 
 
 var let 变量
@@ -14,7 +14,7 @@ function sayHi() &amp;#123;
   console.log(name);
   console.log(age);
   var name &amp;#x3D; &amp;#39;Lydia&amp;#39;;
- ">
+  ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -41,7 +41,9 @@ function sayHi() &amp;#123;
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
     
 <body>
@@ -471,7 +473,7 @@ function sayHi() &amp;#123;
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-08
+                    2024-03-12
                 </div>
                 
 
@@ -508,7 +510,7 @@ function sayHi() &amp;#123;
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="类型问题"><a class="markdownIt-Anchor" href="#类型问题"></a> 类型问题</h2>
+                <h2 id="类型问题">类型问题</h2>
 <ol>
 <li>
 <p>var let 变量</p>
@@ -620,7 +622,7 @@ console.log(num);<span aria-hidden="true" class="line-numbers-rows"><span></span
 <p>使用<code>let</code>或<code>const</code>无法这样做，因为它们是块作用域的。</p>
 </li>
 <li>
-<p>检测键的存在</p>
+<p><strong>检测键的存在</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const obj &#x3D; &#123; 1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39; &#125;;
 const set &#x3D; new Set([1, 2, 3, 4, 5]);
 
@@ -677,7 +679,7 @@ console.log(name.giveLydiaPizza())<span aria-hidden="true" class="line-numbers-r
 <p><code>String</code>是一个内置的构造函数，我们可以向其添加属性。我刚刚向其原型添加了一个方法。原始字符串会自动转换为由字符串原型函数生成的字符串对象。因此，所有字符串（字符串对象）都可以访问该方法！这意味着，如果您向字符串原型添加一个方法，那么<strong>所有</strong>字符串都可以使用该方法。</p>
 </li>
 <li>
-<p>将对象作为键</p>
+<p><strong>将对象作为键</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const a &#x3D; &#123;&#125;;
 const b &#x3D; &#123; key: &#39;b&#39; &#125;;
 const c &#x3D; &#123; key: &#39;c&#39; &#125;;
@@ -715,7 +717,7 @@ console.log(a[b]);<span aria-hidden="true" class="line-numbers-rows"><span></spa
 <p><code>typeof 1</code> 返回 <code>&quot;number&quot;</code>. <code>typeof &quot;number&quot;</code> 返回 <code>&quot;string&quot;</code></p>
 </li>
 <li>
-<p>数组定义</p>
+<p><strong>数组定义</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const numbers &#x3D; [1, 2, 3];
 numbers[10] &#x3D; 11;
 console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -751,7 +753,7 @@ console.log(numbers);<span aria-hidden="true" class="line-numbers-rows"><span></
 <p><code>1</code> 是真值。<code>!1</code> 返回 <code>false</code>。<code>!false</code> 返回 <code>true</code>。</p>
 </li>
 <li>
-<p>对象的引用</p>
+<p><strong>对象的引用</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let person &#x3D; &#123; name: &#39;Lydia&#39; &#125;;
 const members &#x3D; [person];
 person &#x3D; null;
@@ -817,7 +819,7 @@ let x &#x3D; y; <span aria-hidden="true" class="line-numbers-rows"><span></span>
 <p>然而，当我们将<code>y</code>设置为<code>10</code>时，我们创建了一个全局变量<code>y</code>。这个值可以在我们的代码的任何地方访问。<code>y</code>已经定义，并且具有<code>&quot;number&quot;</code>类型的值。<code>console.log(typeof y)</code>返回<code>&quot;number&quot;</code>。</p>
 </li>
 <li>
-<p>数组赋值</p>
+<p><strong>数组赋值</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const numbers &#x3D; [1, 2, 3, 4, 5];
 const [y] &#x3D; numbers;
 
@@ -854,7 +856,7 @@ console.log(Symbol(&#39;foo&#39;) &#x3D;&#x3D;&#x3D; Symbol(&#39;foo&#39;))<span
 <p>每个<code>Symbol</code>都是完全唯一的。传递给<code>Symbol</code>的参数只是给<code>Symbol</code>的一个描述。 <code>Symbol</code>的值不依赖于传递的参数。 当我们测试相等时，我们创建了两个全新的符号：第一个<code>Symbol('foo')</code>，第二个<code>Symbol('foo')</code>，这两个值是唯一的，彼此不相等，因此返回<code>false</code>。</p>
 </li>
 <li>
-<p>对象解构</p>
+<p><strong>对象解构</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const &#123; name: myName &#125; &#x3D; &#123; name: &quot;Lydia&quot; &#125;;
 
 console.log(name);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -949,7 +951,7 @@ console.log(one, two, three)<span aria-hidden="true" class="line-numbers-rows"><
 </ul>
 <details><summary><b>Answer</b></summary>
 <p>
-<p><strong>Answer: B</strong></p>
+<p><strong>Answer: C</strong></p>
 <p>使用<code>||</code>运算符，我们可以返回第一个真值。 <strong>如果所有值都是假值，则返回最后一个值。</strong></p>
 <p><code>(false || &#123;&#125; || null)</code>：空对象<code>&#123;&#125;</code>是一个真值。 这是第一个（也是唯一的）真值，它将被返回。<code>one</code>等于<code>&#123;&#125;</code>。</p>
 <p><code>(null || false ||&quot;&quot;)</code>：所有值都是假值。 这意味着返回传递的值<code>&quot;&quot;</code>。 <code>two</code>等于<code>&quot;&quot;</code>。</p>
@@ -974,7 +976,7 @@ You should$&#123;&#39;&#39; &amp;&amp; &#96;n&#39;t&#96;&#125; see a therapist a
 <p><code>&quot;&quot;</code>是一个假值。 如果左侧值是假的，则不返回任何内容。 <code>n't</code>不会被退回。</p>
 </li>
 <li>
-<p>变量提升和函数作用域</p>
+<p><strong>变量提升和函数作用域</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var x &#x3D; 1;
 function foo() &#123;
   x &#x3D; 10;
@@ -1062,10 +1064,10 @@ console.log(sayHelloWorld());<span aria-hidden="true" class="line-numbers-rows">
 <p>是</p>
 </li>
 </ol>
-<h2 id="类的问题"><a class="markdownIt-Anchor" href="#类的问题"></a> 类的问题</h2>
+<h2 id="类的问题">类的问题</h2>
 <ol>
 <li>
-<p>类中方法调用</p>
+<p><strong>类中方法调用</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Chameleon &#123;
   static colorChange(newColor) &#123;
     this.newColor &#x3D; newColor;
@@ -1093,35 +1095,43 @@ console.log(freddie.colorChange(&#39;orange&#39;));<span aria-hidden="true" clas
 <li>
 <p>原型添加方法与删除</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Dog &#123;
-  constructor(name) &#123;
-    this.name &#x3D; name;
-  &#125;
-&#125;
-
-Dog.prototype.bark &#x3D; function() &#123;
-  console.log(&#96;Woof I am $&#123;this.name&#125;&#96;);
-&#125;;
-
-const pet &#x3D; new Dog(&#39;Mara&#39;);
-
-pet.bark();
-
-delete Dog.prototype.bark;
-
-pet.bark();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+     constructor(name) &#123;
+       this.name &#x3D; name;
+     &#125;
+   &#125;
+   
+   Dog.prototype.bark &#x3D; function() &#123;
+     console.log(&#96;Woof I am $&#123;this.name&#125;&#96;);
+   &#125;;
+   
+   const pet &#x3D; new Dog(&#39;Mara&#39;);
+   
+   pet.bark();
+   
+   delete Dog.prototype.bark;
+   
+   pet.bark();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>A: <code>&quot;Woof I am Mara&quot;</code>, <code>TypeError</code></li>
-<li>B: <code>&quot;Woof I am Mara&quot;</code>, <code>&quot;Woof I am Mara&quot;</code></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p>B: <code>&quot;Woof I am Mara&quot;</code>, <code>&quot;Woof I am Mara&quot;</code></p>
+<ul>
 <li>C: <code>&quot;Woof I am Mara&quot;</code>, <code>undefined</code></li>
 <li>D: <code>TypeError</code>, <code>TypeError</code></li>
 </ul>
-<details><summary><b>Answer</b></summary>
+ <details><summary><b>Answer</b></summary>
+</li>
+</ul>
 <p>
-**Answer: A**
+   **Answer: A**
 <p><strong>Answer: A</strong></p>
 <p>我们可以使用<code>delete</code>关键字从对象中删除属性，也可以从原型上删除属性。通过从原型上删除属性，该属性将不再在原型链中可用。在这种情况下，在删除了<code>Dog.prototype.bark</code>之后，<code>bark</code>函数在原型上不再可用，但我们仍然尝试访问它。</p>
 <p>当我们试图调用不是函数的东西时，会抛出<code>TypeError</code>错误。在这种情况下，抛出的错误是<code>TypeError: pet.bark is not a function</code>，因为<code>pet.bark</code>是<code>undefined</code>。</p>
-</li>
+<ol start="3">
 <li>
 <p>使用哪个构造函数可以成功继承<code>Dog</code>类？</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">class Dog &#123;
@@ -1236,7 +1246,7 @@ console.log(obj instanceof Parent);<span aria-hidden="true" class="line-numbers-
 <p>所以，当执行 <code>console.log(obj instanceof Parent);</code> 时，检测 <code>obj</code> 的原型链上是否包含 <code>Parent</code> 的原型，结果为 <code>true</code>，所以输出的是 <code>true</code>。</p>
 </li>
 <li>
-<p>基于原型的继承和函数引用相等性</p>
+<p><strong>基于原型的继承和函数引用相等性</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Person(name) &#123;
   this.name &#x3D; name;
 &#125;
@@ -1266,7 +1276,7 @@ console.log(person1.greet &#x3D;&#x3D;&#x3D; person2.greet);  <span aria-hidd
 <p>是</p>
 </li>
 </ol>
-<h2 id="函数问题"><a class="markdownIt-Anchor" href="#函数问题"></a> 函数问题</h2>
+<h2 id="函数问题">函数问题</h2>
 <ol>
 <li>
 <p>循环变量</p>
@@ -1309,7 +1319,7 @@ bark.animal &#x3D; &#39;dog&#39;;<span aria-hidden="true" class="line-numbers-ro
 <p>函数是一种特殊类型的对象。你自己编写的代码并不是实际的函数。函数是一个带有属性的对象。这个属性是可调用的。</p>
 </li>
 <li>
-<p>原型方法</p>
+<p><strong>原型方法</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function Person(firstName, lastName) &#123;
   this.firstName &#x3D; firstName;
   this.lastName &#x3D; lastName;
@@ -1361,7 +1371,7 @@ console.log(sarah);<span aria-hidden="true" class="line-numbers-rows"><span></sp
 <p>在JavaScript中，如果我们想要创建一个正确的对象，我们可以使用<code>return</code>语句或者使用<code>new</code>关键字。如果我们使用<code>return</code>语句，我们可以在函数内部返回一个新的对象，这个对象将成为函数的返回值。如果我们使用<code>new</code>关键字，我们可以创建一个新的空对象，并将它作为函数内部的<code>this</code>关键字的值。然后，我们可以在函数内部使用<code>this</code>关键字来设置新对象的属性和方法。最后，函数将返回这个新对象。无论是使用<code>return</code>语句还是使用<code>new</code>关键字，我们都可以创建一个正确的对象。</p>
 </li>
 <li>
-<p>函数参数</p>
+<p><strong>函数参数</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getAge(...args) &#123;
   console.log(typeof args);
 &#125;
@@ -1379,7 +1389,7 @@ getAge(21);<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 <p>rest参数（…args）允许我们将所有剩余的参数“收集”到一个数组中。数组是一个对象，因此typeof args返回&quot;object&quot;。这意味着我们可以使用数组的方法来操作这些参数。例如，我们可以使用args.length来获取传递的参数的数量，或者使用args.forEach来遍历这些参数。使用rest参数可以使函数更加灵活，因为它允许我们接受任意数量的参数。</p>
 </li>
 <li>
-<p>严格模式</p>
+<p><strong>严格模式</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getAge() &#123;
   &#39;use strict&#39;;
   age &#x3D; 21;
@@ -1400,7 +1410,7 @@ getAge();<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <p>使用&quot;use strict&quot;可以确保不会意外地声明全局变量。在上面的代码中，我们没有声明变量age，但由于我们使用了&quot;use strict&quot;，它会抛出一个引用错误。如果我们没有使用&quot;use strict&quot;，它仍然可以工作，因为属性age会被添加到全局对象中。使用&quot;use strict&quot;可以帮助我们避免一些常见的错误，例如意外地声明全局变量或使用未声明的变量。它还可以使代码更加严格，从而提高代码的可读性和可维护性。</p>
 </li>
 <li>
-<p>异常捕获</p>
+<p><strong>异常捕获</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">(() &#x3D;&gt; &#123;
   let x, y;
   try &#123;
@@ -1461,7 +1471,7 @@ console.log(gen.next().value);<span aria-hidden="true" class="line-numbers-rows"
 <p><strong>Answer: C</strong></p>
 <p>常规函数在调用后无法在执行过程中被中止。然而，生成器函数可以在执行过程中被&quot;停止&quot;，并且稍后可以从停止的地方继续执行。每当生成器函数遇到一个 <code>yield</code> 关键字时，函数会生成 yield 关键字后指定的值。需要注意的是，在这种情况下，<strong>生成器函数不返回该值，而是生成该值</strong>。</p>
 <p>首先，我们使用 <code>i</code> 等于 <code>10</code> 初始化生成器函数。我们使用 <code>next()</code> 方法调用生成器函数。第一次调用生成器函数时，<code>i</code> 等于 <code>10</code>。它遇到第一个 <code>yield</code> 关键字：生成 <code>yield</code> 后面指定的 <code>i</code> 的值。生成器现在被&quot;暂停&quot;，并且输出 <code>10</code>。</p>
-<p>然后，我们再次使用 <code>next()</code> 方法调用函数。它从上次停止的地方开始继续执行，仍然将 <code>i</code> 设为 <code>10</code>。现在，它遇到下一个 <code>yield</code> 关键字，并生成 <code>i * 2</code> 的值。<code>i</code>等于 <code>10</code>，所以返回 <code>10 * 2</code>，即 <code>20</code>。这样就得到了 <code>10, 20</code> 的输出。</p>
+<p>然后，我们再次使用 <code>next()</code> 方法调用函数。它从上次停止的地方开始继续执行，仍然将 <code>i</code> 设为 <code>10</code>。现在，它遇到下一个 <code>yield</code> 关键字，并生成 <code>i * 2</code> 的值。<code>i </code>等于 <code>10</code>，所以返回 <code>10 * 2</code>，即 <code>20</code>。这样就得到了 <code>10, 20</code> 的输出。</p>
 </li>
 <li>
 <p>Promise 方法</p>
@@ -1657,7 +1667,7 @@ console.log(addFunction(5 * 2));<span aria-hidden="true" class="line-numbers-row
 
 console.log(sayHi())<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li>A: <code>Hi there,</code></li>
+<li>A: <code>Hi there, </code></li>
 <li>B: <code>Hi there, undefined</code></li>
 <li>C: <code>Hi there, null</code></li>
 <li>D: <code>ReferenceError</code></li>
@@ -1805,13 +1815,13 @@ console.log(nums(1, 2))<span aria-hidden="true" class="line-numbers-rows"><span>
 <p>
 <p><strong>Answer: B</strong></p>
 <p>在 JavaScript 中，我们不必显式地编写分号 (<code>;</code>)，但是 JavaScript 引擎仍然在语句之后自动添加分号。这称为<strong>自动分号插入</strong>。例如，一个语句可以是变量，或者像<code>throw</code>、<code>return</code>、<code>break</code>这样的关键字。</p>
-<p>在这里，我们在新的一行上写了一个<code>return</code>语句和另一个值<code>a + b</code>。然而，由于它是一个新行，引擎并不知道它实际上是我们想要返回的值。相反，它会在<code>return</code>后面自动添加分号。你可以这样看：</p>
+<p>在这里，我们在新的一行上写了一个<code>return</code>语句和另一个值<code>a + b </code>。然而，由于它是一个新行，引擎并不知道它实际上是我们想要返回的值。相反，它会在<code>return</code>后面自动添加分号。你可以这样看：</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">return;
 a + b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>这意味着永远不会到达<code>a + b</code>，因为函数在<code>return</code>关键字之后停止运行。如果没有返回值，就像这里，函数返回<code>undefined</code>。注意，在<code>if/else</code>语句之后没有自动插入！</p>
 </li>
 <li>
-<p>箭头函数的返回值</p>
+<p><strong>箭头函数的返回值</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const getList &#x3D; ([x, ...y]) &#x3D;&gt; [x, y]
 const getUser &#x3D; user &#x3D;&gt; &#123; name: user.name, age: user.age &#125;
 
@@ -1896,6 +1906,8 @@ finalResult();<span aria-hidden="true" class="line-numbers-rows"><span></span><s
     return userData;
 &#125;
 console.log(typeof userData());<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<details><summary><b>Answer</b></summary>
+<p>
 <p><code>userData</code> 函数返回它自己（函数引用）。</p>
 <p>因此，调用 <code>typeof userData()</code> 的结果将是 <code>'function'</code>。因为 <code>typeof</code> 对除 <code>function</code> 之外的引用数据类型均返回 <code>object</code>。</p>
 </li>
@@ -1906,7 +1918,7 @@ console.log(typeof userData());<span aria-hidden="true" class="line-numbers-rows
 <p>都是</p>
 </li>
 </ol>
-<h2 id="this作用域"><a class="markdownIt-Anchor" href="#this作用域"></a> this作用域</h2>
+<h2 id="this作用域">this作用域</h2>
 <ol>
 <li>
 <p>箭头函数的作用域</p>
@@ -1929,7 +1941,7 @@ console.log(shape.perimeter());<span aria-hidden="true" class="line-numbers-rows
 <details><summary><b>Answer</b></summary>
 <p>
 <p><strong>Answer: B</strong></p>
-<p>请注意，<code>diameter</code>的值是一个正则函数，而<code>perimeter</code>的值是一个箭头函数。对于箭头函数，<code>this</code>关键字指的是它当前周围的作用域，这与常规函数不同！这意味着当我们调用 <code>perimeter</code> 时，它不是指形状对象，而是指它周围的范围（例如 window对象）。<br />
+<p>请注意，<code>diameter</code>的值是一个正则函数，而<code>perimeter</code>的值是一个箭头函数。对于箭头函数，<code>this</code>关键字指的是它当前周围的作用域，这与常规函数不同！这意味着当我们调用 <code>perimeter</code> 时，它不是指形状对象，而是指它周围的范围（例如 window对象）。<br>
 该对象没有值<code>radius</code>，返回 <code>NaN</code>。</p>
 </li>
 <li>
@@ -2079,7 +2091,7 @@ person1.foo4.call(person2)(); &#x2F;&#x2F; person2 改变了foo4的this指向
 person1.foo4().call(person2); &#x2F;&#x2F; person1 箭头函数的this无法被改变<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>
-<p>this和原型链的配合</p>
+<p><strong>this和原型链的配合</strong></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function A (cName) &#123;
 if (cName) &#123;
 this.name &#x3D; cName
@@ -2116,7 +2128,7 @@ console.log(&#39;B&#39;, b.name)<span aria-hidden="true" class="line-numbers-row
 <p>是</p>
 </li>
 </ol>
-<h2 id="运算问题"><a class="markdownIt-Anchor" href="#运算问题"></a> 运算问题</h2>
+<h2 id="运算问题">运算问题</h2>
 <ol>
 <li>
 <p>计算转换</p>
@@ -2191,11 +2203,11 @@ console.log(number);<span aria-hidden="true" class="line-numbers-rows"><span></s
 <p>
 <p><strong>Answer: C</strong></p>
 <p>后缀一元运算符<code>++</code>：</p>
-<p>返回值（此处返回<code>0</code>）<br />
-增加值（数字现在为<code>1</code>）<br />
+<p>返回值（此处返回<code>0</code>）<br>
+增加值（数字现在为<code>1</code>）<br>
 前缀一元运算符 <code>++</code>：</p>
-<p>增加值（数字现在为<code>2</code>）<br />
-返回值（此处返回<code>2</code>）<br />
+<p>增加值（数字现在为<code>2</code>）<br>
+返回值（此处返回<code>2</code>）<br>
 这将返回<code>0 2 2</code>。</p>
 </li>
 <li>
@@ -2244,7 +2256,7 @@ checkAge(&#123; age: 18 &#125;);<span aria-hidden="true" class="line-numbers-row
 <p>JavaScript中比较相等性时，原始值是按照它们的值进行比较的，而对象是按照它们的引用进行比较的。JavaScript会检查这些对象是否具有指向内存中相同位置的引用。</p>
 <p>我们比较的两个对象没有这个引用：我们作为参数传递的对象与我们用来检查相等性的对象在内存中引用的位置不同。因此，它们被认为是不相等的。</p>
 <blockquote>
-<p>在JavaScript中，<mark>和</mark>=都用于比较两个值的相等性。==运算符比较两个值是否相等，但它会进行类型转换。如果两个值的类型不同，==运算符会尝试将它们转换为相同的类型，然后再进行比较。例如，如果我们比较数字1和字符串&quot;1&quot;，==运算符会将字符串&quot;1&quot;转换为数字1，然后再进行比较。如果两个值的类型相同，==运算符会直接比较它们的值。</p>
+<p>在JavaScript中，==和===都用于比较两个值的相等性。==运算符比较两个值是否相等，但它会进行类型转换。如果两个值的类型不同，==运算符会尝试将它们转换为相同的类型，然后再进行比较。例如，如果我们比较数字1和字符串&quot;1&quot;，==运算符会将字符串&quot;1&quot;转换为数字1，然后再进行比较。如果两个值的类型相同，==运算符会直接比较它们的值。</p>
 </blockquote>
 <p>这就是为什么 <code>&#123; age: 18 &#125; === &#123; age: 18 &#125;</code> 和 <code>&#123; age: 18 &#125; == &#123; age: 18 &#125;</code> 返回 <code>false</code>.</p>
 </li>
@@ -2374,7 +2386,7 @@ console.log(x); <span aria-hidden="true" class="line-numbers-rows"><span></span>
 <p>上的</p>
 </li>
 </ol>
-<h2 id="内置方法"><a class="markdownIt-Anchor" href="#内置方法"></a> 内置方法</h2>
+<h2 id="内置方法">内置方法</h2>
 <ol>
 <li>
 <p>reduce方法</p>
@@ -2537,7 +2549,7 @@ console.log(name.padStart(13))
 console.log(name.padStart(2))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>A: <code>&quot;Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code></li>
-<li>B: <code>&quot; Lydia Hallie&quot;</code>, <code>&quot; Lydia Hallie&quot;</code> (<code>&quot;[13x whitespace]Lydia Hallie&quot;</code>, <code>&quot;[2x whitespace]Lydia Hallie&quot;</code>)</li>
+<li>B: <code>&quot;           Lydia Hallie&quot;</code>, <code>&quot;  Lydia Hallie&quot;</code> (<code>&quot;[13x whitespace]Lydia Hallie&quot;</code>, <code>&quot;[2x whitespace]Lydia Hallie&quot;</code>)</li>
 <li>C: <code>&quot; Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code> (<code>&quot;[1x whitespace]Lydia Hallie&quot;</code>, <code>&quot;Lydia Hallie&quot;</code>)</li>
 <li>D: <code>&quot;Lydia Hallie&quot;</code>, <code>&quot;Lyd&quot;</code></li>
 </ul>
@@ -2552,10 +2564,10 @@ console.log(name.padStart(2))<span aria-hidden="true" class="line-numbers-rows">
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">console.log(String.raw&#96;Hello\nworld&#96;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>A: <code>Hello world!</code></li>
-<li>B: <code>Hello</code><br />
+<li>B: <code>Hello</code><br>
 <code>world</code></li>
 <li>C: <code>Hello\nworld</code></li>
-<li>D: <code>Hello\n</code><br />
+<li>D: <code>Hello\n</code><br>
 <code>world</code></li>
 </ul>
 <details><summary><b>Answer</b></summary>
@@ -2663,7 +2675,7 @@ for (const [x, y] of Object.entries(person)) &#123;
 <p>是</p>
 </li>
 </ol>
-<h2 id="概念问题"><a class="markdownIt-Anchor" href="#概念问题"></a> 概念问题</h2>
+<h2 id="概念问题">概念问题</h2>
 <ol>
 <li>
 <p>事件传播的三个阶段顺序？</p>
@@ -2910,7 +2922,7 @@ console.log(data)<span aria-hidden="true" class="line-numbers-rows"><span></span
 <p>都是</p>
 </li>
 </ol>
-<h2 id="正则表达式"><a class="markdownIt-Anchor" href="#正则表达式"></a> 正则表达式</h2>
+<h2 id="正则表达式">正则表达式</h2>
 <ol>
 <li>
 <p>非捕获组</p>
