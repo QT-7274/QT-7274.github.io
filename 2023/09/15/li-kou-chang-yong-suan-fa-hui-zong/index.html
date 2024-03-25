@@ -467,21 +467,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-21
+                    2024-03-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    15.4k
+                    16.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    65 分
+                    69 分
                 </div>
                 
 
@@ -907,6 +907,9 @@ var slidingWindow &#x3D; function(s) &#123;
 
 
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>注意：不能将计算最大和放在内部while循环之外，否则例如[-1]的最大子数组和变成0了，测试无法通过。</p>
+</blockquote>
 <h3 id="239-滑动窗口最大值"><a href="#239-滑动窗口最大值" class="headerlink" title="239 滑动窗口最大值"></a>239 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/description/">滑动窗口最大值</a></h3><p>使用一个队列充当不断滑动的窗口，每次滑动记录其中的最大值：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240321165319914.png" alt="image-20240321165319914"></p>
 <p>如何在 <code>O(1)</code> 时间计算最大值，只需要一个特殊的数据结构「单调队列」，<code>push</code> 方法依然在队尾添加元素，<strong>但是要把前面比自己小的元素都删掉</strong>，直到遇到更大的元素才停止删除。</p>
@@ -1494,7 +1497,10 @@ var minAddToMakeValid &#x3D; function(s) &#123;
 
     return res + need;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="子串"><a href="#子串" class="headerlink" title="子串"></a>子串</h2><h3 id="560-和为-K-的子数组"><a href="#560-和为-K-的子数组" class="headerlink" title="560 和为 K 的子数组"></a>560 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subarray-sum-equals-k/description/">和为 K 的子数组</a></h3><p>假设我们有一个数组[1, 2, 3, 1, 2, 1, 3]，我们想找出和为6的子数组。</p>
+<h2 id="子串"><a href="#子串" class="headerlink" title="子串"></a>子串</h2><h3 id="560-和为-K-的子数组"><a href="#560-和为-K-的子数组" class="headerlink" title="560 和为 K 的子数组"></a>560 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subarray-sum-equals-k/description/">和为 K 的子数组</a></h3><blockquote>
+<p>前缀和：用于处理和为target的这种问题，无论是数组还是二叉树</p>
+</blockquote>
+<p>假设我们有一个数组[1, 2, 3, 1, 2, 1, 3]，我们想找出和为6的子数组。</p>
 <p>我们首先计算累计和数组，得到[1, 3, 6, 7, 9, 10, 13]。这个累计和数组表示的是从数组的开始到每个位置的元素和。</p>
 <p>现在，我们看累计和数组中的第三个元素6，它表示的是原数组中前三个元素的和。如果我们从这个累计和中减去目标值6，得到0。这意味着，从原数组的开始到当前位置，有一个子数组的和等于目标值。这个子数组就是[1, 2, 3]。</p>
 <p>再看累计和数组中的第五个元素9，它表示的是原数组中前五个元素的和。如果我们从这个累计和中减去目标值6，得到3。这个3在累计和数组中存在，位置是第二个元素。这意味着，从原数组的第二个位置到当前位置，有一个子数组的和等于目标值。这个子数组就是[2, 3, 1]。</p>
@@ -1510,6 +1516,148 @@ var minAddToMakeValid &#x3D; function(s) &#123;
        cul.set(sum, (cul.get(sum)||0) + 1); &#x2F;&#x2F; 记录sum出现的次数
    &#125;
    return res;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><blockquote>
+<p>充分利用JavaScript的特性：闭包——可以访问外部作用域的变量来完成递归函数！</p>
+</blockquote>
+<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><h4 id="94-二叉树的中序遍历"><a href="#94-二叉树的中序遍历" class="headerlink" title="94 二叉树的中序遍历"></a>94 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/description/">二叉树的中序遍历</a></h4><h4 id="144-二叉树的前序遍历"><a href="#144-二叉树的前序遍历" class="headerlink" title="144 二叉树的前序遍历"></a>144 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/description/">二叉树的前序遍历</a></h4><h4 id="145-二叉树的后序遍历"><a href="#145-二叉树的后序遍历" class="headerlink" title="145 二叉树的后序遍历"></a>145 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-postorder-traversal/description/">二叉树的后序遍历</a></h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var inorderTraversal &#x3D; function(root) &#123;
+    var res &#x3D; []
+    const traverse &#x3D; function(node)
+    &#123;
+        if(node &#x3D;&#x3D; null) return;
+    &#x2F;&#x2F; 中序遍历
+        traverse(node.left)
+        res.push(node.val)
+        traverse(node.right)
+    &#125;
+    
+    traverse(root)
+
+    return res
+
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="二叉树的特性"><a href="#二叉树的特性" class="headerlink" title="二叉树的特性"></a>二叉树的特性</h3><h4 id="104二叉树的最大深度"><a href="#104二叉树的最大深度" class="headerlink" title="104二叉树的最大深度"></a>104<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/description/">二叉树的最大深度</a></h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;***** 解法一，回溯算法思路 *****&#x2F;
+var maxDepth &#x3D; function(root) &#123;
+    let res &#x3D; 0
+    let deepth &#x3D; 0;
+    let traverse &#x3D; function(node)&#123;
+        
+        if(node &#x3D;&#x3D; null) return;
+        deepth++
+        if(node.left &#x3D;&#x3D; null &amp;&amp; node.right &#x3D;&#x3D; null)
+        &#123;
+            res &#x3D; Math.max(deepth,res)
+        &#125;
+        traverse(node.left)
+        traverse(node.right)
+        deepth--
+    &#125;
+    traverse(root)
+    return res
+&#125;;
+&#x2F;**
+ * 解法二，动态规划思路
+ *&#x2F;
+var maxDepth &#x3D; function(root) &#123;
+    if (root &#x3D;&#x3D; null) &#123;
+        return 0;
+    &#125;
+    &#x2F;&#x2F; 利用定义，计算左右子树的最大深度
+    var leftMax &#x3D; maxDepth(root.left);
+    var rightMax &#x3D; maxDepth(root.right);
+    &#x2F;&#x2F; 整棵树的最大深度等于左右子树的最大深度取最大值，
+    &#x2F;&#x2F; 然后再加上根节点自己
+    var res &#x3D; Math.max(leftMax, rightMax) + 1;
+
+    return res;
+ &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="543-二叉树的直径"><a href="#543-二叉树的直径" class="headerlink" title="543 二叉树的直径"></a>543 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/diameter-of-binary-tree/description/">二叉树的直径</a></h4><blockquote>
+<p>所谓二叉树的直径，就是左右子树的最大深度之和，和之前计算二叉树的最大深度没有什么区别。</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var diameterOfBinaryTree &#x3D; function(root) &#123;
+    let maxDiameter &#x3D; 0;
+    &#x2F;**
+     * 递归获取深度
+     * @param &#123;TreeNode&#125; root 
+     * @return &#123;number&#125;
+     *&#x2F;
+    &#x2F;&#x2F; 我们应该把计算「直径」的逻辑放在后序位置，准确说应该是放在 maxDepth 的后序位置，因为 maxDepth 的后序位置是知道左右子树的最大深度的。
+    const maxDepth &#x3D; function(root) &#123;
+        if (root &#x3D;&#x3D;&#x3D; null) &#123;
+            return 0;
+        &#125;
+        let leftMax &#x3D; maxDepth(root.left);
+        let rightMax &#x3D; maxDepth(root.right);
+        &#x2F;&#x2F; 后序位置，顺便计算最大直径
+        let myDiameter &#x3D; leftMax + rightMax;
+        maxDiameter &#x3D; Math.max(maxDiameter, myDiameter);
+        return 1 + Math.max(leftMax, rightMax);
+    &#125;
+    maxDepth(root);
+    return maxDiameter;
+    &#x2F;&#x2F; 遇到子树问题，首先想到的是给函数设置返回值，然后在后序位置做文章。
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="226-翻转二叉树"><a href="#226-翻转二叉树" class="headerlink" title="226 翻转二叉树"></a>226 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/description/">翻转二叉树</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
+ * 「遍历」的思路
+ *&#x2F;
+var invertTree &#x3D; function(root) &#123;
+
+    let traverse &#x3D; function(root)
+    &#123;
+        if(root &#x3D;&#x3D;&#x3D; null) return;
+
+        [root.left, root.right] &#x3D; [root.right, root.left]
+
+        traverse(root.left)
+        traverse(root.right)
+    &#125;
+
+    traverse(root)
+    return root
+&#125;;
+&#x2F;**
+ * 「分解问题」的思路
+ *&#x2F;
+var invertTree &#x3D; function(root) &#123;
+    let invert &#x3D; function(root)
+    &#123;
+        if(root &#x3D;&#x3D; null) return null
+
+        let left &#x3D; invert(root.left)
+        let right &#x3D; invert(root.right)
+
+        root.left &#x3D; right
+        root.right &#x3D; left
+
+        return root
+    &#125;   
+    
+    return invert(root)
+
+&#125;;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="101-对称二叉树"><a href="#101-对称二叉树" class="headerlink" title="101 对称二叉树"></a>101 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/description/">对称二叉树</a></h3><blockquote>
+<p>思路：可以将此棵二叉树沿对称轴分成两棵树：</p>
+<ol>
+<li>两棵树的左右子树均为null，那肯定是对称的</li>
+<li>有一棵树的左（右）子树为null，那肯定是不对称的</li>
+<li>两棵树的左右子树节点的值不相同，那肯定不对称的</li>
+</ol>
+<p>递归思路：<strong>对比两棵树的同侧节点（相对于原本的二棵树的同侧） + 对比两棵树的内侧节点（左树的右节点/右树的左节点）</strong></p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var isSymmetric &#x3D; function(root) &#123;
+
+    let traverse &#x3D; function(left,right)
+    &#123;
+
+        if(left &#x3D;&#x3D; null &amp;&amp; right &#x3D;&#x3D; null) return true
+        if(left &#x3D;&#x3D; null || right &#x3D;&#x3D; null) return false
+        if(left.val !&#x3D;&#x3D; right.val) return false
+
+        return traverse(left.left,right.right) &amp;&amp; traverse(left.right,right.left)
+    &#125;
+
+    return  traverse(root,root)
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="普通数组"><a href="#普通数组" class="headerlink" title="普通数组"></a>普通数组</h2><h3 id="53-合并区间"><a href="#53-合并区间" class="headerlink" title="53 合并区间"></a>53 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals/description/">合并区间</a></h3><p>一个区间可以表示为 <code>[start, end]</code>，先按区间的 <code>start</code> 排序：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240321175708952.png" alt="image-20240321175708952"></p>
 <p><strong>显然，对于几个相交区间合并后的结果区间 <code>x</code>，<code>x.start</code> 一定是这些相交区间中 <code>start</code> 最小的，<code>x.end</code> 一定是这些相交区间中 <code>end</code> 最大的</strong>：</p>
