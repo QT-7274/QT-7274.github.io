@@ -467,21 +467,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-24
+                    2024-03-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    16.3k
+                    27.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    69 分
+                    128 分
                 </div>
                 
 
@@ -1752,7 +1752,1516 @@ var invertTree &#x3D; function(root) &#123;
 <blockquote>
 <p>例如，如果我们要检查正整数 1 是否存在，我们会查看索引为 0 的位置，而不是索引为 1 的位置。如果我们要检查正整数 2 是否存在，我们会查看索引为 1 的位置，而不是索引为 2 的位置。以此类推，如果我们要检查正整数 x 是否存在，我们会查看索引为 x-1 的位置。</p>
 </blockquote>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509 斐波那契数"></a>509 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/description/">斐波那契数</a></h3><p>1.<strong>暴力递归</strong></p>
+<h3 id="238-除自身以外数组的乘积"><a href="#238-除自身以外数组的乘积" class="headerlink" title="238 除自身以外数组的乘积"></a>238 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/product-of-array-except-self/description/">除自身以外数组的乘积</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var productExceptSelf &#x3D; function(nums) &#123;
+    let n &#x3D; nums.length;
+    let left &#x3D; 1, right &#x3D; 1;
+    let res &#x3D; new Array(n).fill(1);
+
+    for(let i &#x3D; 0; i &lt; n; ++i) &#123;
+        
+        res[i] *&#x3D; left;
+        left *&#x3D; nums[i];
+
+        res[n - 1 - i] *&#x3D; right;
+        right *&#x3D; nums[n - 1 - i]; &#x2F;&#x2F;在下一次迭代（i&#x3D;1）中，right 的值会被更新为 nums[n - 1]，然后这个值会被乘到 res 的倒数第二个元素上。以此类推，right 会依次累乘 nums 的元素，然后这些乘积会被乘到 res 的元素上。这样，res[i] 就会等于 nums[i] 右边所有元素的乘积。
+    &#125;
+
+    return res;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h2><h3 id="54-螺旋矩阵"><a href="#54-螺旋矩阵" class="headerlink" title="54 螺旋矩阵"></a>54 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix/description/">螺旋矩阵</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var spiralOrder &#x3D; function(matrix) &#123;
+    var m &#x3D; matrix.length, n &#x3D; matrix[0].length;
+    var upper_bound &#x3D; 0, lower_bound &#x3D; m - 1;
+    var left_bound &#x3D; 0, right_bound &#x3D; n - 1;
+    var res &#x3D; [];
+    &#x2F;&#x2F; res.length &#x3D;&#x3D; m * n 则遍历完整个数组
+    while (res.length &lt; m * n) &#123;
+        if (upper_bound &lt;&#x3D; lower_bound) &#123;
+            &#x2F;&#x2F; 在顶部从左向右遍历
+            for (var j &#x3D; left_bound; j &lt;&#x3D; right_bound; j++) &#123;
+                res.push(matrix[upper_bound][j]);
+            &#125;
+            &#x2F;&#x2F; 上边界下移
+            upper_bound++;
+        &#125;
+        
+        if (left_bound &lt;&#x3D; right_bound) &#123;
+            &#x2F;&#x2F; 在右侧从上向下遍历
+            for (var i &#x3D; upper_bound; i &lt;&#x3D; lower_bound; i++) &#123;
+                res.push(matrix[i][right_bound]);
+            &#125;
+            &#x2F;&#x2F; 右边界左移
+            right_bound--;
+        &#125;
+        
+        if (upper_bound &lt;&#x3D; lower_bound) &#123;
+            &#x2F;&#x2F; 在底部从右向左遍历
+            for (var j &#x3D; right_bound; j &gt;&#x3D; left_bound; j--) &#123;
+                res.push(matrix[lower_bound][j]);
+            &#125;
+            &#x2F;&#x2F; 下边界上移
+            lower_bound--;
+        &#125;
+        
+        if (left_bound &lt;&#x3D; right_bound) &#123;
+            &#x2F;&#x2F; 在左侧从下向上遍历
+            for (var i &#x3D; lower_bound; i &gt;&#x3D; upper_bound; i--) &#123;
+                res.push(matrix[i][left_bound]);
+            &#125;
+            &#x2F;&#x2F; 左边界右移
+            left_bound++;
+        &#125;
+    &#125;
+    return res;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="73-矩阵置零"><a href="#73-矩阵置零" class="headerlink" title="73 矩阵置零"></a>73 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/set-matrix-zeroes/description/">矩阵置零</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var setZeroes &#x3D; function(matrix) &#123;
+    &#x2F;&#x2F; let m &#x3D; matrix.length; &#x2F;&#x2F; 行数
+    &#x2F;&#x2F; let n &#x3D; matrix[0].length; &#x2F;&#x2F; 列数
+    &#x2F;&#x2F; let stack &#x3D; [];
+    &#x2F;&#x2F; for (let i &#x3D; 0; i &lt; m; i++) &#123;
+    &#x2F;&#x2F;     for (let j &#x3D; 0; j &lt; n; j++) &#123;
+    &#x2F;&#x2F;         if (matrix[i][j] &#x3D;&#x3D;&#x3D; 0)
+    &#x2F;&#x2F;             stack.push([i, j]); &#x2F;&#x2F; 先使用栈存储
+    &#x2F;&#x2F;     &#125;
+    &#x2F;&#x2F; &#125;
+    &#x2F;&#x2F; while (stack.length &gt; 0) &#123;
+    &#x2F;&#x2F;     let temp &#x3D; stack.pop();
+    &#x2F;&#x2F;     for (let i &#x3D; 0; i &lt; n; i++)
+    &#x2F;&#x2F;         matrix[temp[0]][i] &#x3D; 0;
+    &#x2F;&#x2F;     for (let i &#x3D; 0; i &lt; m; i++)
+    &#x2F;&#x2F;         matrix[i][temp[1]] &#x3D; 0;
+    &#x2F;&#x2F; &#125;
+
+    &#x2F;&#x2F;第二种空间复杂度
+    
+        let m &#x3D; matrix.length;
+        let n &#x3D; matrix[0].length;
+        let row &#x3D; new Array(m).fill(false); &#x2F;&#x2F; 标记某行是否有0
+        let col &#x3D; new Array(n).fill(false);
+        &#x2F;&#x2F; 遍历矩阵查找0
+        for (let i &#x3D; 0; i &lt; m; i++) &#123;
+            for (let j &#x3D; 0; j &lt; n; j++) &#123;
+                if (matrix[i][j] &#x3D;&#x3D;&#x3D; 0) &#123;
+                    &#x2F;&#x2F; 有0 -&gt; 将对应的行和列置为true
+                    row[i] &#x3D; true;
+                    col[j] &#x3D; true;
+                &#125;
+            &#125;
+        &#125;
+        &#x2F;&#x2F; 再根据row和col更新矩阵的值
+        for (let i &#x3D; 0; i &lt; m; i++) &#123;
+            for (let j &#x3D; 0; j &lt; n; j++) &#123;
+                if (row[i] &#x3D;&#x3D;&#x3D; true || col[j] &#x3D;&#x3D;&#x3D; true)
+                    matrix[i][j] &#x3D; 0;
+            &#125;
+        &#125;
+    
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="151-旋转图像"><a href="#151-旋转图像" class="headerlink" title="151 旋转图像"></a>151 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-image/description/">旋转图像</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var rotate &#x3D; function(matrix) &#123;
+    var n &#x3D; matrix.length;
+    &#x2F;&#x2F; 先沿对角线镜像对称二维矩阵
+    for (var i &#x3D; 0; i &lt; n; i++) &#123;
+        for (var j &#x3D; i; j &lt; n; j++) &#123;
+            &#x2F;&#x2F; swap(matrix[i][j], matrix[j][i]);
+            var temp &#x3D; matrix[i][j];
+            matrix[i][j] &#x3D; matrix[j][i];
+            matrix[j][i] &#x3D; temp;
+        &#125;
+    &#125;
+    &#x2F;&#x2F; 然后反转二维矩阵的每一行
+    for (var row of matrix) &#123;
+        reverse(row);
+    &#125;
+&#125;
+
+var reverse &#x3D; function(arr) &#123;
+    var i &#x3D; 0, j &#x3D; arr.length - 1;
+    while (j &gt; i) &#123;
+        &#x2F;&#x2F; swap(arr[i], arr[j]);
+        var temp &#x3D; arr[i];
+        arr[i] &#x3D; arr[j];
+        arr[j] &#x3D; temp;
+        i++;
+        j--;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="240搜索二维矩阵-II"><a href="#240搜索二维矩阵-II" class="headerlink" title="240搜索二维矩阵 II"></a>240<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/description/">搜索二维矩阵 II</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var searchMatrix &#x3D; function(matrix, target) &#123;
+    var m &#x3D; matrix.length, n &#x3D; matrix[0].length;
+    &#x2F;&#x2F; 初始化在右上角
+    var i &#x3D; 0, j &#x3D; n - 1;
+    while (i &lt; m &amp;&amp; j &gt;&#x3D; 0) &#123;
+        if (matrix[i][j] &#x3D;&#x3D; target) &#123;
+            return true;
+        &#125;
+        if (matrix[i][j] &lt; target) &#123;
+            &#x2F;&#x2F; 需要大一点，往下移动
+            i++;
+        &#125; else &#123;
+            &#x2F;&#x2F; 需要小一点，往左移动
+            j--;
+        &#125;
+    &#125;
+    &#x2F;&#x2F; while 循环中没有找到，则 target 不存在
+    return false;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160 相交链表"></a>160 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/description/">相交链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var getIntersectionNode &#x3D; function(headA, headB) &#123;
+    let p1 &#x3D; headA, p2 &#x3D; headB;
+
+    while(p1 !&#x3D;&#x3D; p2)
+    &#123;
+        if(p1 &#x3D;&#x3D;&#x3D; null) p1 &#x3D; headB;
+        else    p1 &#x3D; p1.next;
+
+        if(p2 &#x3D;&#x3D;&#x3D; null) p2 &#x3D; headA;
+        else    p2 &#x3D; p2.next
+    &#125;
+
+    return p2 &#x2F;&#x2F; 返回 p1 或 p2 都可以
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseList &#x3D; function(head) &#123;
+    &#x2F;&#x2F; 如果链表为空或者只有一个节点的时候，反转结果就是它自己，直接返回即可。
+    if(head &#x3D;&#x3D;&#x3D; null || head.next &#x3D;&#x3D;&#x3D; null)
+    &#123;
+        return head
+    &#125;
+
+    var last &#x3D; reverseList(head.next)
+    head.next.next &#x3D; head
+
+    head.next &#x3D; null
+
+    return last
+
+
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="234-回文链表"><a href="#234-回文链表" class="headerlink" title="234 回文链表"></a>234 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-linked-list/description/">回文链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var isPalindrome &#x3D; function(head) &#123;
+    let [slow, fast] &#x3D; [head, head]
+
+    while(fast !&#x3D;&#x3D; null &amp;&amp; fast.next !&#x3D;&#x3D; null)
+    &#123;
+        slow &#x3D; slow.next
+        fast &#x3D; fast.next.next
+    &#125;
+
+    if(fast!&#x3D;null) &#x2F;&#x2F; 说明链表长度为奇数，slow还要前进一步
+    &#123;
+        slow &#x3D; slow.next
+    &#125;
+
+    let left &#x3D; head
+    let right &#x3D; reverse(slow)
+
+    while(right !&#x3D;&#x3D;null)
+    &#123;
+        if(left.val !&#x3D;&#x3D; right.val) return false
+        left &#x3D; left.next
+        right &#x3D; right.next
+    &#125;
+
+    return true
+&#125;;
+
+function reverse(head)
+&#123;
+    &#x2F;&#x2F; let [pre, cur] &#x3D; [null, head]
+
+    &#x2F;&#x2F; while(cur !&#x3D;&#x3D; null)
+    &#x2F;&#x2F; &#123;
+    &#x2F;&#x2F;     let next &#x3D; cur.next
+    &#x2F;&#x2F;     cur.next &#x3D; pre
+    &#x2F;&#x2F;     pre &#x3D; cur
+    &#x2F;&#x2F;     cur &#x3D; next
+    &#x2F;&#x2F; &#125;
+
+    &#x2F;&#x2F; return pre
+    &#x2F;&#x2F; 如果链表为空或者只有一个节点的时候，反转结果就是它自己，直接返回即可。
+    if(head &#x3D;&#x3D;&#x3D; null || head.next &#x3D;&#x3D;&#x3D; null)
+    &#123;
+        return head
+    &#125;
+
+    var last &#x3D; reverse(head.next)
+    head.next.next &#x3D; head
+
+    head.next &#x3D; null
+
+    return last
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="141-环形链表"><a href="#141-环形链表" class="headerlink" title="141 环形链表"></a>141 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle/description/">环形链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var hasCycle &#x3D; function (head) &#123;
+    &#x2F;&#x2F; 每当慢指针前进一步 快指针就前进两步 如果fast最终遇到空指针说明没有环，如果fast和slow相遇说明有环
+
+    let slow &#x3D; head;
+    let fast &#x3D; head;
+
+    while (fast !&#x3D; null &amp;&amp; fast.next !&#x3D; null) &#123;
+        slow &#x3D; slow.next
+        fast &#x3D; fast.next.next
+
+        if (slow &#x3D;&#x3D;&#x3D; fast) &#123;
+            return true
+        &#125;
+    &#125;
+    return false
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="142-环形链表-II"><a href="#142-环形链表-II" class="headerlink" title="142 环形链表 II"></a>142 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/description/">环形链表 II</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var detectCycle &#x3D; function(head) &#123;
+    let fast &#x3D; head,slow &#x3D; head;
+
+    while(fast!&#x3D;&#x3D;null &amp;&amp; fast.next!&#x3D;&#x3D;null)
+    &#123;
+        fast &#x3D; fast.next.next
+        slow &#x3D; slow.next
+
+        if(fast &#x3D;&#x3D;&#x3D; slow) break
+        
+
+    &#125;
+
+    if(fast &#x3D;&#x3D;&#x3D; null ||  fast.next &#x3D;&#x3D;&#x3D; null)
+    &#123;
+        return null
+    &#125;
+
+    slow &#x3D; head;
+
+    while(slow !&#x3D;&#x3D; fast)
+    &#123;
+        slow &#x3D; slow.next
+        fast &#x3D; fast.next
+    &#125;
+
+    return slow
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21 合并两个有序链表"></a>21 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/description/">合并两个有序链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mergeTwoLists &#x3D; function(list1, list2) &#123;
+    let dummy &#x3D; new ListNode(-1) ,p &#x3D; dummy
+
+    let p1 &#x3D; list1, p2 &#x3D; list2
+
+    while(p1 !&#x3D; null  &amp;&amp;  p2!&#x3D;null)
+    &#123;
+        if(p1.val &gt; p2.val)
+        &#123;
+            p.next &#x3D; p2
+            p2 &#x3D; p2.next
+        &#125;else&#123;
+            p.next &#x3D; p1
+            p1 &#x3D; p1.next
+        &#125;
+
+        p &#x3D; p.next
+    &#125;
+
+    if(p1!&#x3D;&#x3D;null)
+    &#123;
+        p.next &#x3D; p1
+    &#125;
+
+    if(p2 !&#x3D;&#x3D; null)
+    &#123;
+        p.next &#x3D; p2
+    &#125;
+
+    return dummy.next
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2 两数相加"></a>2 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-two-numbers/description/">两数相加</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var addTwoNumbers &#x3D; function(l1, l2) &#123;
+    let p1 &#x3D; l1, p2 &#x3D; l2
+
+    let dummy &#x3D; new ListNode(-1)
+
+    let p &#x3D; dummy
+
+    let carry &#x3D; 0
+
+    while(p1 !&#x3D;&#x3D; null || p2 !&#x3D;&#x3D; null || carry &gt; 0 )
+    &#123;
+        let val &#x3D; carry
+
+        if(p1 !&#x3D;&#x3D; null)
+        &#123;
+            val +&#x3D; p1.val
+            p1 &#x3D; p1.next
+        &#125;
+
+        if( p2 !&#x3D;&#x3D; null)
+        &#123;
+            val +&#x3D; p2.val
+            p2 &#x3D; p2.next
+        &#125;
+
+        carry &#x3D; Math.floor( val &#x2F; 10)
+        val &#x3D; val % 10
+
+        p.next &#x3D; new ListNode(val)
+
+        p &#x3D; p.next
+    &#125;
+
+    return dummy.next
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="19-删除链表的倒数第-N-个结点"><a href="#19-删除链表的倒数第-N-个结点" class="headerlink" title="19 删除链表的倒数第 N 个结点"></a>19 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/">删除链表的倒数第 N 个结点</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var removeNthFromEnd &#x3D; function(head, n) &#123;
+    let dummy &#x3D; new ListNode(-1)
+    dummy.next &#x3D; head
+
+    let x &#x3D; findFromEnd(dummy, n + 1)
+
+    x.next &#x3D; x.next.next
+
+    return dummy.next
+
+&#125;;
+
+var findFromEnd &#x3D; function(head, k)
+&#123;
+    let p1 &#x3D; head
+
+    for(let i &#x3D; 0; i &lt; k; i++)
+    &#123;
+        p1 &#x3D; p1.next
+    &#125;
+
+    let p2 &#x3D; head
+
+    while(p1 !&#x3D;&#x3D; null)
+    &#123;
+        p1 &#x3D; p1.next
+        p2 &#x3D; p2.next
+    &#125;
+
+    return p2
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24 两两交换链表中的节点"></a>24 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/description/">两两交换链表中的节点</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var swapPairs &#x3D; function(head) &#123;
+    if(head &#x3D;&#x3D; null || head.next &#x3D;&#x3D; null)
+    &#123;
+        return head
+    &#125;
+
+    let first &#x3D; head
+    let second &#x3D; head.next
+    let others &#x3D; head.next.next
+    second.next &#x3D; first
+
+    first.next &#x3D; swapPairs(others)
+
+    return second
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="25-K-个一组翻转链表"><a href="#25-K-个一组翻转链表" class="headerlink" title="25 K 个一组翻转链表"></a>25 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-nodes-in-k-group/description/">K 个一组翻转链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseKGroup &#x3D; function(head, k) &#123;
+    if(!head) return null
+
+    let a &#x3D; head, b &#x3D; head
+
+    for(let i &#x3D;0 ; i&lt; k; i++)
+    &#123;   
+        &#x2F;&#x2F; 不足 k 个，不需要反转
+        if(!b) return head
+
+        b &#x3D; b.next
+    &#125;
+
+    let newHead &#x3D; reverse(a, b)
+
+    a.next &#x3D; reverseKGroup(b, k) &#x2F;&#x2F; ?为什么是b
+
+    return newHead
+&#125;;
+
+var reverse &#x3D; function(a,b)&#123;
+    let pre &#x3D; null, cur &#x3D; a, nxt &#x3D; b
+
+    while(cur !&#x3D;&#x3D; b) &#x2F;&#x2F; ?
+    &#123;
+        nxt &#x3D; cur.next
+        cur.next &#x3D; pre
+        pre &#x3D; cur
+        cur &#x3D; nxt
+    &#125;
+
+    return pre
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="138-随机链表的复制"><a href="#138-随机链表的复制" class="headerlink" title="138 随机链表的复制"></a>138 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/copy-list-with-random-pointer/description/">随机链表的复制</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var copyRandomList &#x3D; function(head) &#123;
+    const originToClone &#x3D; new Map()
+
+    for(let p &#x3D; head; p !&#x3D;&#x3D; null; p &#x3D; p.next)
+    &#123;
+        if(!originToClone.has(p))
+        &#123;
+            originToClone.set(p, new Node(p.val))
+        &#125;
+    &#125;
+
+    for(let p &#x3D; head; p !&#x3D;&#x3D; null; p &#x3D; p.next)
+    &#123;
+        if(p.next !&#x3D; null)&#123;
+            originToClone.get(p).next &#x3D; originToClone.get(p.next)
+        &#125;
+
+        if (p.random !&#x3D;&#x3D; null) &#123;
+            originToClone.get(p).random &#x3D; originToClone.get(p.random);
+        &#125;
+    &#125;
+
+    &#x2F;&#x2F; 返回克隆之后的头结点
+    return originToClone.get(head);
+&#125;;
+
+&#x2F;&#x2F; 用递归的方式进行遍历
+var copyRandomList2 &#x3D; function(head) &#123;
+    const visited &#x3D; new Set();
+    const originToClone &#x3D; new Map();
+
+    const traverse &#x3D; (node) &#x3D;&gt; &#123;
+        if (node &#x3D;&#x3D;&#x3D; null) &#123;
+            return;
+        &#125;
+        if (visited.has(node)) &#123;
+            return;
+        &#125;
+        &#x2F;&#x2F; 前序位置，标记为已访问
+        visited.add(node);
+        &#x2F;&#x2F; 前序位置，克隆节点
+        if (!originToClone.has(node)) &#123;
+            originToClone.set(node, new Node(node.val));
+        &#125;
+        const cloneNode &#x3D; originToClone.get(node);
+
+        &#x2F;&#x2F; 递归遍历邻居节点，并构建克隆图
+        &#x2F;&#x2F; 递归之后，邻居节点一定存在 originToClone 中
+        traverse(node.next);
+        cloneNode.next &#x3D; originToClone.get(node.next);
+
+        traverse(node.random);
+        cloneNode.random &#x3D; originToClone.get(node.random);
+    &#125;;
+
+    traverse(head);
+    return originToClone.get(head);
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="148-排序链表"><a href="#148-排序链表" class="headerlink" title="148 排序链表"></a>148 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-list/description/">排序链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var sortList &#x3D; function(head) &#123;
+&#x2F;&#x2F; 找到链表的中点，我们可以使用快慢指针的方法，当快指针到达链表的末尾时，慢指针就在链表的中点。
+&#x2F;&#x2F; 分割链表，将链表从中点分割为两部分。
+&#x2F;&#x2F; 对每一部分链表进行排序，我们可以使用递归的方式，对每一部分链表再次进行上述的步骤。
+&#x2F;&#x2F; 合并两个已排序的链表，我们可以使用一个新的头节点，然后比较两个链表的头节点，将较小的节点接在新的头节点后，然后移动较小节点所在的链表的头节点，直到两个链表都为空。
+
+if (head &#x3D;&#x3D;&#x3D; null || head.next &#x3D;&#x3D;&#x3D; null) &#123;
+    return head;
+&#125;
+
+let slow &#x3D; head, fast &#x3D; head.next;
+    while (fast !&#x3D;&#x3D; null &amp;&amp; fast.next !&#x3D;&#x3D; null) &#123;
+        slow &#x3D; slow.next;
+        fast &#x3D; fast.next.next;
+    &#125;
+
+    let mid &#x3D; slow.next;
+    slow.next &#x3D; null;
+
+    let left &#x3D; sortList(head);
+    let right &#x3D; sortList(mid);
+
+    let dummyHead &#x3D; new ListNode(0);
+    let temp &#x3D; dummyHead;
+
+    while (left !&#x3D;&#x3D; null &amp;&amp; right !&#x3D;&#x3D; null) &#123;
+        if (left.val &lt; right.val) &#123;
+            dummyHead.next &#x3D; left;
+            left &#x3D; left.next;
+        &#125; else &#123;
+            dummyHead.next &#x3D; right;
+            right &#x3D; right.next;
+        &#125;
+        dummyHead &#x3D; dummyHead.next;
+    &#125;
+    dummyHead.next &#x3D; left !&#x3D;&#x3D; null ? left : right;
+
+    return temp.next;
+
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="23-合并-K-个升序链表"><a href="#23-合并-K-个升序链表" class="headerlink" title="23 合并 K 个升序链表"></a>23 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-k-sorted-lists/description/">合并 K 个升序链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mergeKLists &#x3D; function(lists) &#123;
+    if (lists.length &#x3D;&#x3D; 0) return null;
+    &#x2F;&#x2F; 虚拟头结点
+    let dummy &#x3D; new ListNode(-1);
+    let p &#x3D; dummy;
+    &#x2F;&#x2F; 优先级队列，最小堆
+    let pq &#x3D; new PriorityQueue(
+        lists.length, (a, b) &#x3D;&gt; (a.val - b.val));
+    &#x2F;&#x2F; 将 k 个链表的头结点加入最小堆
+    for (let head of lists) &#123;
+        if (head !&#x3D; null)
+            pq.add(head);
+    &#125;
+
+    while (!pq.isEmpty()) &#123;
+        &#x2F;&#x2F; 获取最小节点，接到结果链表中
+        let node &#x3D; pq.poll();
+        p.next &#x3D; node;
+        if (node.next !&#x3D; null) &#123;
+            pq.add(node.next);
+        &#125;
+        &#x2F;&#x2F; p 指针不断前进
+        p &#x3D; p.next;
+    &#125;
+    return dummy.next;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="146-LRU-缓存"><a href="#146-LRU-缓存" class="headerlink" title="146 LRU 缓存"></a>146 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lru-cache/description/">LRU 缓存</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
+ * @param &#123;number&#125; capacity
+ *&#x2F;
+var LRUCache &#x3D; function(capacity) &#123;
+    this.capacity &#x3D; capacity;
+    this.map &#x3D; new Map();
+&#125;;
+
+&#x2F;** 
+ * @param &#123;number&#125; key
+ * @return &#123;number&#125;
+ *&#x2F;
+LRUCache.prototype.get &#x3D; function(key) &#123;
+    &#x2F;&#x2F; 在get操作中，如果键存在于Map中，我们返回对应的值，并将这个键移动到Map的末尾，表示它是最近使用的。如果键不存在于Map中，我们返回-1
+    if (this.map.has(key)) &#123;
+        let value &#x3D; this.map.get(key);
+        this.map.delete(key);
+        this.map.set(key, value);
+        return value;
+    &#125; else &#123;
+        return -1;
+    &#125;
+&#125;;
+
+&#x2F;** 
+ * @param &#123;number&#125; key 
+ * @param &#123;number&#125; value
+ * @return &#123;void&#125;
+ *&#x2F;
+LRUCache.prototype.put &#x3D; function(key, value) &#123;
+    &#x2F;&#x2F; 在put操作中，如果键已经存在于Map中，我们更新对应的值，并将这个键移动到Map的末尾。如果键不存在于Map中，我们需要插入这个键值对。在插入之前，我们需要检查Map的大小是否已经达到了容量上限，如果达到了，我们需要删除Map的第一个键值对，因为它是最久未使用的。然后我们将新的键值对插入到Map的末尾。
+    if (this.map.has(key)) &#123;
+        this.map.delete(key);
+    &#125; else if (this.map.size &gt;&#x3D; this.capacity) &#123;
+        let firstKey &#x3D; this.map.keys().next().value;
+        this.map.delete(firstKey);
+    &#125;
+    this.map.set(key, value);
+&#125;;  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><h3 id="200-岛屿数量"><a href="#200-岛屿数量" class="headerlink" title="200 岛屿数量"></a>200 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-islands/description/">岛屿数量</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var numIslands &#x3D; function(grid) &#123;
+    var res &#x3D; 0;
+    var m &#x3D; grid.length, n &#x3D; grid[0].length;
+    &#x2F;&#x2F; 遍历 grid
+    for (var i &#x3D; 0; i &lt; m; i++) &#123;
+        for (var j &#x3D; 0; j &lt; n; j++) &#123;
+            if (grid[i][j] &#x3D;&#x3D; &#39;1&#39;) &#123;
+                &#x2F;&#x2F; 每发现一个岛屿，岛屿数量加一
+                res++;
+                &#x2F;&#x2F; 然后使用 DFS 将岛屿淹了
+                dfs(grid, i, j);
+            &#125;
+        &#125;
+    &#125;
+    return res;
+&#125;;
+
+&#x2F;&#x2F; 从 (i, j) 开始，将与之相邻的陆地都变成海水
+function dfs(grid, i, j) &#123;
+    var m &#x3D; grid.length, n &#x3D; grid[0].length;
+    if (i &lt; 0 || j &lt; 0 || i &gt;&#x3D; m || j &gt;&#x3D; n) &#123;
+        &#x2F;&#x2F; 超出索引边界
+        return;
+    &#125;
+    if (grid[i][j] &#x3D;&#x3D; &#39;0&#39;) &#123;
+        &#x2F;&#x2F; 已经是海水了
+        return;
+    &#125;
+    &#x2F;&#x2F; 将 (i, j) 变成海水
+    grid[i][j] &#x3D; &#39;0&#39;;
+    &#x2F;&#x2F; 淹没上下左右的陆地
+    dfs(grid, i + 1, j);
+    dfs(grid, i, j + 1);
+    dfs(grid, i - 1, j);
+    dfs(grid, i, j - 1);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="994-腐烂的橘子"><a href="#994-腐烂的橘子" class="headerlink" title="994 腐烂的橘子"></a>994 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotting-oranges/description/">腐烂的橘子</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var orangesRotting &#x3D; function(grid) &#123;
+    let queue &#x3D; [];
+    let freshOranges &#x3D; 0;
+    let minutes &#x3D; 0;
+
+    &#x2F;&#x2F; 遍历网格，将所有腐烂的橘子的位置放入队列，同时计算新鲜橘子的数量
+    for (let i &#x3D; 0; i &lt; grid.length; i++) &#123;
+        for (let j &#x3D; 0; j &lt; grid[0].length; j++) &#123;
+            if (grid[i][j] &#x3D;&#x3D;&#x3D; 2) &#123;
+                queue.push([i, j]);
+            &#125; else if (grid[i][j] &#x3D;&#x3D;&#x3D; 1) &#123;
+                freshOranges++;
+            &#125;
+        &#125;
+    &#125;
+
+    &#x2F;&#x2F; 定义四个方向
+    let directions &#x3D; [[-1, 0], [1, 0], [0, -1], [0, 1]];
+
+    &#x2F;&#x2F; 开始广度优先搜索
+    while (queue.length &amp;&amp; freshOranges) &#123;
+        let size &#x3D; queue.length;
+        for (let i &#x3D; 0; i &lt; size; i++) &#123;
+            let [x, y] &#x3D; queue.shift();
+            for (let [dx, dy] of directions) &#123;
+                let nx &#x3D; x + dx;
+                let ny &#x3D; y + dy;
+                if (nx &gt;&#x3D; 0 &amp;&amp; nx &lt; grid.length &amp;&amp; ny &gt;&#x3D; 0 &amp;&amp; ny &lt; grid[0].length &amp;&amp; grid[nx][ny] &#x3D;&#x3D;&#x3D; 1) &#123;
+                    grid[nx][ny] &#x3D; 2;
+                    queue.push([nx, ny]);
+                    freshOranges--;
+                &#125;
+            &#125;
+        &#125;
+        minutes++;
+    &#125;
+
+    &#x2F;&#x2F; 如果还有新鲜橘子，返回 -1
+    if (freshOranges !&#x3D;&#x3D; 0) &#123;
+        return -1;
+    &#125;
+
+    return minutes;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="207-课程表"><a href="#207-课程表" class="headerlink" title="207 课程表"></a>207 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/course-schedule/description/">课程表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function traverse(graph, s, visited, onPath, hasCycle) &#123;
+    if (onPath[s]) &#123;
+        &#x2F;&#x2F; 出现环
+        hasCycle[0] &#x3D; true;
+        return;
+    &#125;
+
+    if (visited[s] || hasCycle[0]) &#123;
+        &#x2F;&#x2F; 如果已经找到了环，也不用再遍历了
+        return;
+    &#125;
+    &#x2F;&#x2F; 前序遍历代码位置
+    visited[s] &#x3D; true;
+    onPath[s] &#x3D; true;
+    for (let t of graph[s]) &#123;
+        traverse(graph, t, visited, onPath, hasCycle);
+    &#125;
+    &#x2F;&#x2F; 后序遍历代码位置
+    onPath[s] &#x3D; false;
+&#125;
+
+function buildGraph(numCourses, prerequisites) &#123;
+    &#x2F;&#x2F; 图中共有 numCourses 个节点
+    const graph &#x3D; new Array(numCourses).fill(0).map(() &#x3D;&gt; []);
+    for (let edge of prerequisites) &#123;
+        const from &#x3D; edge[1];
+        const to &#x3D; edge[0];
+        &#x2F;&#x2F; 修完课程 from 才能修课程 to
+        &#x2F;&#x2F; 在图中添加一条从 from 指向 to 的有向边
+        graph[from].push(to);
+    &#125;
+    return graph;
+&#125;
+
+var canFinish &#x3D; function(numCourses, prerequisites) &#123;
+    &#x2F;&#x2F; 记录一次 traverse 递归经过的节点
+    const onPath &#x3D; new Array(numCourses).fill(false);
+    &#x2F;&#x2F; 记录遍历过的节点，防止走回头路
+    const visited &#x3D; new Array(numCourses).fill(false);
+    &#x2F;&#x2F; 记录图中是否有环
+    let hasCycle &#x3D; [false];
+
+    const graph &#x3D; buildGraph(numCourses, prerequisites);
+
+    for (let i &#x3D; 0; i &lt; numCourses; i++) &#123;
+        &#x2F;&#x2F; 遍历图中的所有节点
+        traverse(graph, i, visited, onPath, hasCycle);
+    &#125;
+
+    &#x2F;&#x2F; 只要没有循环依赖可以完成所有课程
+    return !hasCycle[0];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><h3 id="全排列"><a href="#全排列" class="headerlink" title="全排列"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/description/">全排列</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var permute &#x3D; function(nums) &#123;
+    let res &#x3D; [];
+    let track &#x3D; [];
+    let used &#x3D; new Array(nums.length).fill(false);
+    &#x2F;&#x2F; 路径：记录在 track 中
+    &#x2F;&#x2F; 选择列表：nums 中不存在于 track 的那些元素（used[i] 为 false）
+    &#x2F;&#x2F; 结束条件：nums 中的元素全都在 track 中出现
+    const backtrack &#x3D; (nums, track, used) &#x3D;&gt; &#123;
+        &#x2F;&#x2F; 触发结束条件
+        if (track.length &#x3D;&#x3D;&#x3D; nums.length) &#123;
+            res.push([...track]);
+            return;
+        &#125;
+
+        for (let i &#x3D; 0; i &lt; nums.length; i++) &#123;
+            &#x2F;&#x2F; 排除不合法的选择
+            if (used[i]) &#123;
+                &#x2F;&#x2F; nums[i] 已经在 track 中，跳过
+                continue;
+            &#125;
+            &#x2F;&#x2F; 做选择
+            track.push(nums[i]);
+            used[i] &#x3D; true;
+            &#x2F;&#x2F; 进入下一层决策树
+            backtrack(nums, track, used);
+            &#x2F;&#x2F; 取消选择
+            track.pop();
+            used[i] &#x3D; false;
+        &#125;
+    &#125;
+    backtrack(nums, track, used);
+    return res;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="子集"><a href="#子集" class="headerlink" title="子集"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/description/">子集</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var subsets &#x3D; function(nums) &#123;
+    var res &#x3D; [];
+    var track &#x3D; [];
+    &#x2F;&#x2F; 记录走过的路径
+    backtrack(nums, 0, track);
+    return res;
+
+    function backtrack(nums, start, track) &#123;
+        res.push([...track]);
+        for (var i &#x3D; start; i &lt; nums.length; i++) &#123;
+            &#x2F;&#x2F; 做选择
+            track.push(nums[i]);
+            &#x2F;&#x2F; 回溯
+            backtrack(nums, i + 1, track);
+            &#x2F;&#x2F; 撤销选择
+            track.pop();
+        &#125;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="电话号码的字母组合"><a href="#电话号码的字母组合" class="headerlink" title="电话号码的字母组合"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/description/">电话号码的字母组合</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var letterCombinations &#x3D; function(digits) &#123;
+    &#x2F;&#x2F; 每个数字到字母的映射
+    const mapping &#x3D; [&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;];
+
+    const res &#x3D; [];
+
+    function backtrack(start, sb) &#123;
+        if (sb.length &#x3D;&#x3D;&#x3D; digits.length) &#123;
+            &#x2F;&#x2F; 到达回溯树底部
+            res.push(sb.join(&#39;&#39;));
+            return;
+        &#125;
+        &#x2F;&#x2F; 回溯算法框架
+        for (let i &#x3D; start; i &lt; digits.length; i++) &#123;
+            const digit &#x3D; digits.charAt(i) - &#39;0&#39;;
+            for (const c of mapping[digit]) &#123;
+                &#x2F;&#x2F; 做选择
+                sb.push(c);
+                &#x2F;&#x2F; 递归下一层回溯树
+                backtrack(i + 1, sb);
+                &#x2F;&#x2F; 撤销选择
+                sb.pop();
+            &#125;
+        &#125;
+    &#125;
+
+    if (digits.length &#x3D;&#x3D;&#x3D; 0) &#123;
+        return res;
+    &#125;
+    &#x2F;&#x2F; 从 digits[0] 开始进行回溯
+    backtrack(0, []);
+    return res;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="组合总和"><a href="#组合总和" class="headerlink" title="组合总和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/description/">组合总和</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var combinationSum &#x3D; function(candidates, target) &#123;
+    let res &#x3D; [];
+    let track &#x3D; [];
+    
+    backtrack(candidates, 0, target, 0, track);
+    
+    return res;
+    
+    function backtrack(candidates, start, target, sum, track) &#123;
+        if (sum &#x3D;&#x3D;&#x3D; target) &#123;
+            &#x2F;&#x2F; 找到目标和
+            res.push([...track]);
+            return;
+        &#125;
+
+        if (sum &gt; target) &#123;
+            &#x2F;&#x2F; 超过目标和，直接结束
+            return;
+        &#125;
+
+        &#x2F;&#x2F; 回溯算法框架
+        for (let i &#x3D; start; i &lt; candidates.length; i++) &#123;
+            &#x2F;&#x2F; 选择 candidates[i]
+            track.push(candidates[i]);
+            sum +&#x3D; candidates[i];
+            &#x2F;&#x2F; 递归遍历下一层回溯树
+            backtrack(candidates, i, target, sum, track);
+            &#x2F;&#x2F; 撤销选择 candidates[i]
+            sum -&#x3D; candidates[i];
+            track.pop();
+        &#125;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="括号生成"><a href="#括号生成" class="headerlink" title="括号生成"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/generate-parentheses/description/">括号生成</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var generateParenthesis &#x3D; function(n) &#123;
+    if (n &#x3D;&#x3D;&#x3D; 0) return [];
+    &#x2F;&#x2F; 记录所有合法的括号组合
+    var res &#x3D; [];
+    &#x2F;&#x2F; 回溯过程中的路径
+    var track &#x3D; &quot;&quot;;
+    &#x2F;&#x2F; 可用的左括号和右括号数量初始化为 n
+    backtrack(n, n, track, res);
+    return res;
+&#125;;
+
+&#x2F;&#x2F; 可用的左括号数量为 left 个，可用的右括号数量为 right 个
+function backtrack(left, right, track, res) &#123;
+    &#x2F;&#x2F; 若左括号剩下的多，说明不合法
+    if (right &lt; left) return;
+    &#x2F;&#x2F; 数量小于 0 肯定是不合法的
+    if (left &lt; 0 || right &lt; 0) return;
+    &#x2F;&#x2F; 当所有括号都恰好用完时，得到一个合法的括号组合
+    if (left &#x3D;&#x3D;&#x3D; 0 &amp;&amp; right &#x3D;&#x3D;&#x3D; 0) &#123;
+        res.push(track);
+        return;
+    &#125;
+
+    &#x2F;&#x2F; 尝试放一个左括号
+    track +&#x3D; &#39;(&#39;; &#x2F;&#x2F; 选择
+    backtrack(left - 1, right, track, res);
+    track &#x3D; track.slice(0, -1); &#x2F;&#x2F; 撤消选择
+
+    &#x2F;&#x2F; 尝试放一个右括号
+    track +&#x3D; &#39;)&#39;; &#x2F;&#x2F; 选择
+    backtrack(left, right - 1, track, res);
+    track &#x3D; track.slice(0, -1); &#x2F;&#x2F; 撤消选择
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="单词搜索"><a href="#单词搜索" class="headerlink" title="单词搜索"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-search/description/">单词搜索</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dfs(board, i, j, word, p) &#123;
+    &#x2F;&#x2F; 当整个 word 已经被匹配完，找到了一个答案
+    if (p &#x3D;&#x3D; word.length) &#123;
+        return true;
+    &#125;
+    let m &#x3D; board.length, n &#x3D; board[0].length;
+    &#x2F;&#x2F; 如果越界了，直接返回
+    if (i &lt; 0 || j &lt; 0 || i &gt;&#x3D; m || j &gt;&#x3D; n) &#123;
+        return false;
+    &#125;
+    &#x2F;&#x2F; 如果当前字符和 word 的当前字符不相等，返回
+    if (board[i][j] !&#x3D; word.charAt(p)) &#123;
+        return false;
+    &#125;
+    &#x2F;&#x2F; 已经匹配过的字符，我们给它添一个负号作为标记，避免走回头路
+    let tmp &#x3D; board[i][j];
+    board[i][j] &#x3D; &#39;&#x2F;&#39;;
+    &#x2F;&#x2F; word[p] 被 board[i][j] 匹配，开始向四周搜索 word[p+1..]
+    let res &#x3D; dfs(board, i + 1, j, word, p + 1) ||
+              dfs(board, i, j + 1, word, p + 1) ||
+              dfs(board, i - 1, j, word, p + 1) ||
+              dfs(board, i, j - 1, word, p + 1);
+    &#x2F;&#x2F; 恢复 board[i][j] 的值
+    board[i][j] &#x3D; tmp;
+    return res;
+&#125;
+
+var exist &#x3D; function(board, word) &#123;
+    let m &#x3D; board.length, n &#x3D; board[0].length;
+    for (let i &#x3D; 0; i &lt; m; i++) &#123;
+        for (let j &#x3D; 0; j &lt; n; j++) &#123;
+            if (dfs(board, i, j, word, 0)) &#123;
+                return true;
+            &#125;
+        &#125;
+    &#125;
+    return false;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="分割回文串"><a href="#分割回文串" class="headerlink" title="分割回文串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/description/">分割回文串</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var partition &#x3D; function(s) &#123;
+    &#x2F;&#x2F; 创建空结果列表和空路径列表
+    let res &#x3D; [];
+    let track &#x3D; [];
+
+    &#x2F;&#x2F; 执行回溯算法
+    backtrack(s, 0);
+    &#x2F;&#x2F; 返回最终结果列表
+    return res;
+
+    &#x2F;&#x2F; 回溯算法框架
+    function backtrack(s, start) &#123;
+        &#x2F;&#x2F; 当前字符串遍历完毕，将路径列表加入结果列表
+        if (start &#x3D;&#x3D;&#x3D; s.length) &#123;
+            res.push([...track]);
+            return;
+        &#125;
+        &#x2F;&#x2F; 从起始位置开始枚举所有可能的回文子串
+        for (let i &#x3D; start; i &lt; s.length; i++) &#123;
+            &#x2F;&#x2F; 如果 s[start...i] 不是回文串，结束循环
+            if (!isPalindrome(s, start, i)) &#123;
+                continue;
+            &#125;
+            &#x2F;&#x2F; 如果是回文串，将回文串加入路径列表中
+            track.push(s.substring(start,i+1));
+            &#x2F;&#x2F; 回溯算法向下遍历
+            backtrack(s,i+1);
+            &#x2F;&#x2F; 恢复状态
+            track.pop();
+        &#125;
+    &#125;
+    
+    &#x2F;&#x2F; 判断 s 的子串是否为回文串（双指针方法）
+    function isPalindrome(s, lo, hi) &#123;
+        while (lo &lt; hi) &#123;
+            if (s[lo] !&#x3D;&#x3D; s[hi]) &#123;
+                return false;
+            &#125;
+            lo++;
+            hi--;
+        &#125;
+        return true;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="35-搜索插入位置"><a href="#35-搜索插入位置" class="headerlink" title="35 搜索插入位置"></a>35 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-insert-position/description/">搜索插入位置</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var searchInsert &#x3D; function(nums, target) &#123;
+    return left_bound(nums, target);
+&#125;;
+
+&#x2F;**
+ * 搜索左侧边界的二分算法
+ * @param &#123;number[]&#125; nums
+ * @param &#123;number&#125; target
+ * @return &#123;number&#125;
+ *&#x2F;
+var left_bound &#x3D; function(nums, target) &#123;
+    if (nums.length &#x3D;&#x3D; 0) return -1;
+    let left &#x3D; 0;
+    let right &#x3D; nums.length; &#x2F;&#x2F; 注意
+
+    while (left &lt; right) &#123; &#x2F;&#x2F; 注意
+        let mid &#x3D; left + Math.floor((right - left) &#x2F; 2);
+        if (nums[mid] &#x3D;&#x3D; target) &#123;
+            right &#x3D; mid;
+        &#125; else if (nums[mid] &lt; target) &#123;
+            left &#x3D; mid + 1;
+        &#125; else if (nums[mid] &gt; target) &#123;
+            right &#x3D; mid; &#x2F;&#x2F; 注意
+        &#125;
+    &#125;
+    return left;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="74-搜索二维矩阵"><a href="#74-搜索二维矩阵" class="headerlink" title="74 搜索二维矩阵"></a>74 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix/description/">搜索二维矩阵</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 注意：javascript 代码由 chatGPT🤖 根据我的 java 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
+&#x2F;&#x2F; 本代码已经通过力扣的测试用例，应该可直接成功提交。
+
+var searchMatrix &#x3D; function(matrix, target) &#123;
+    var m &#x3D; matrix.length, n &#x3D; matrix[0].length;
+    &#x2F;&#x2F; 把二维数组映射到一维
+    var left &#x3D; 0, right &#x3D; m * n - 1;
+    &#x2F;&#x2F; 前文讲的标准的二分搜索框架
+    while(left &lt;&#x3D; right) &#123;
+        var mid &#x3D; left + Math.floor((right - left) &#x2F; 2);
+        if(get(matrix, mid) &#x3D;&#x3D; target)
+            return true;
+        else if (get(matrix, mid) &lt; target)
+            left &#x3D; mid + 1;
+        else if (get(matrix, mid) &gt; target)
+            right &#x3D; mid - 1;
+    &#125;
+    return false;
+&#125;;
+
+&#x2F;&#x2F; 通过一维坐标访问二维数组中的元素
+var get &#x3D; function(matrix, index) &#123;
+    var m &#x3D; matrix.length, n &#x3D; matrix[0].length;
+    &#x2F;&#x2F; 计算二维中的横纵坐标
+    var i &#x3D; Math.floor(index &#x2F; n), j &#x3D; index % n;
+    return matrix[i][j];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="34-在排序数组中查找元素的第一个和最后一个位置"><a href="#34-在排序数组中查找元素的第一个和最后一个位置" class="headerlink" title="34 在排序数组中查找元素的第一个和最后一个位置"></a>34 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/description/">在排序数组中查找元素的第一个和最后一个位置</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var searchRange &#x3D; function(nums, target) &#123;
+  return [left_bound(nums, target), right_bound(nums, target)];
+&#125;;
+
+var left_bound &#x3D; function(nums, target) &#123;
+  let left &#x3D; 0,
+    right &#x3D; nums.length - 1;
+  &#x2F;&#x2F; 搜索区间为 [left, right]
+  while (left &lt;&#x3D; right) &#123;
+    let mid &#x3D; left + Math.floor((right - left) &#x2F; 2);
+    if (nums[mid] &lt; target) &#123;
+      &#x2F;&#x2F; 搜索区间变为 [mid+1, right]
+      left &#x3D; mid + 1;
+    &#125; else if (nums[mid] &gt; target) &#123;
+      &#x2F;&#x2F; 搜索区间变为 [left, mid-1]
+      right &#x3D; mid - 1;
+    &#125; else if (nums[mid] &#x3D;&#x3D;&#x3D; target) &#123;
+      &#x2F;&#x2F; 收缩右侧边界
+      right &#x3D; mid - 1;
+    &#125;
+  &#125;
+  &#x2F;&#x2F; 检查出界情况
+  if (left &gt;&#x3D; nums.length || nums[left] !&#x3D;&#x3D; target) &#123;
+
+
+    return -1;
+  &#125;
+  return left;
+&#125;;
+
+var right_bound &#x3D; function(nums, target) &#123;
+  let left &#x3D; 0,right &#x3D; nums.length - 1;
+  while (left &lt;&#x3D; right) &#123;
+    let mid &#x3D; left + Math.floor((right - left) &#x2F; 2);
+    if (nums[mid] &lt; target) &#123;
+      left &#x3D; mid + 1;
+    &#125; else if (nums[mid] &gt; target) &#123;
+      right &#x3D; mid - 1;
+    &#125; else if (nums[mid] &#x3D;&#x3D;&#x3D; target) &#123;
+      &#x2F;&#x2F; 这里改成收缩左侧边界即可
+      left &#x3D; mid + 1;
+    &#125;
+  &#125;
+  &#x2F;&#x2F; 这里改为检查 right 越界的情况，见下图
+  if (right &lt; 0 || nums[right] !&#x3D;&#x3D; target) &#123;
+
+
+    return -1;
+  &#125;
+  return right;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="33-搜索旋转排序数组"><a href="#33-搜索旋转排序数组" class="headerlink" title="33 搜索旋转排序数组"></a>33 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-rotated-sorted-array/description/">搜索旋转排序数组</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var search &#x3D; function(nums, target) &#123;
+    let left &#x3D; 0, right &#x3D; nums.length - 1;
+    while (left &lt;&#x3D; right) &#123;
+        let mid &#x3D; Math.floor((left + right) &#x2F; 2);
+        if (nums[mid] &#x3D;&#x3D;&#x3D; target) &#123;
+            return mid;
+        &#125;
+        if (nums[mid] &gt;&#x3D; nums[left]) &#123;
+            if (target &gt;&#x3D; nums[left] &amp;&amp; target &lt; nums[mid]) &#123;
+                right &#x3D; mid - 1;
+            &#125; else &#123;
+                left &#x3D; mid + 1;
+            &#125;
+        &#125; else &#123;
+            if (target &gt; nums[mid] &amp;&amp; target &lt;&#x3D; nums[right]) &#123;
+                left &#x3D; mid + 1;
+            &#125; else &#123;
+                right &#x3D; mid - 1;
+            &#125;
+        &#125;
+    &#125;
+    return -1;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="153-寻找旋转排序数组中的最小值"><a href="#153-寻找旋转排序数组中的最小值" class="headerlink" title="153 寻找旋转排序数组中的最小值"></a>153 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/description/">寻找旋转排序数组中的最小值</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var findMin &#x3D; function(nums) &#123;
+    let left &#x3D; 0, right &#x3D; nums.length - 1;
+    while (left &lt; right) &#123;
+        let mid &#x3D; Math.floor((left + right) &#x2F; 2);
+        if (nums[mid] &gt; nums[right]) &#123;
+            left &#x3D; mid + 1;
+        &#125; else &#123;
+            right &#x3D; mid;
+        &#125;
+    &#125;
+    return nums[left];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="20-有效的括号-1"><a href="#20-有效的括号-1" class="headerlink" title="20 有效的括号"></a>20 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/description/">有效的括号</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var isValid &#x3D; function (s) &#123;
+    let left &#x3D; [];
+    for (let i &#x3D; 0; i &lt; s.length; i++) &#123;
+        let c &#x3D; s.charAt(i);
+        if (c &#x3D;&#x3D;&#x3D; &quot;&#123;&quot; || c &#x3D;&#x3D;&#x3D; &quot;[&quot; || c &#x3D;&#x3D;&#x3D; &quot;(&quot;) &#123;
+            left.push(c);
+        &#125; else if (left.length !&#x3D;&#x3D; 0 &amp;&amp; matchLeft(c) &#x3D;&#x3D;&#x3D; left[left.length - 1]) &#123;
+            left.pop();
+        &#125; else &#123;
+            return false;
+        &#125;
+    &#125;
+
+    return left.length &#x3D;&#x3D;&#x3D; 0;
+&#125;;
+
+function matchLeft(c) &#123;
+    if (c &#x3D;&#x3D;&#x3D; &quot;)&quot;) return &quot;(&quot;;
+    if (c &#x3D;&#x3D;&#x3D; &quot;&#125;&quot;) return &quot;&#123;&quot;;
+    return &quot;[&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="155-最小栈"><a href="#155-最小栈" class="headerlink" title="155 最小栈"></a>155 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-stack/description/">最小栈</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var MinStack &#x3D; function() &#123;
+    this.stk &#x3D; []
+
+    this.minStk &#x3D; []
+&#125;;
+
+&#x2F;** 
+ * @param &#123;number&#125; val
+ * @return &#123;void&#125;
+ *&#x2F;
+MinStack.prototype.push &#x3D; function(val) &#123;
+        this.stk.push(val)
+
+        if(this.minStk.length &#x3D;&#x3D;&#x3D; 0 || val &lt;&#x3D; this.minStk[this.minStk.length - 1])&#123;
+            this.minStk.push(val)
+        &#125;
+&#125;;
+
+&#x2F;**
+ * @return &#123;void&#125;
+ *&#x2F;
+MinStack.prototype.pop &#x3D; function() &#123;
+    &#x2F;&#x2F; 出栈的是最小值，最小值栈也出栈
+    if(this.minStk[this.minStk.length - 1] &#x3D;&#x3D;&#x3D; this.stk[this.stk.length - 1])&#123;
+        this.minStk.pop()
+    &#125;
+
+    this.stk.pop()
+&#125;;
+
+&#x2F;**
+ * @return &#123;number&#125;
+ *&#x2F;
+MinStack.prototype.top &#x3D; function() &#123;
+    return this.stk[this.stk.length - 1]
+&#125;;
+
+&#x2F;**
+ * @return &#123;number&#125;
+ *&#x2F;
+MinStack.prototype.getMin &#x3D; function() &#123;
+    return this.minStk[this.minStk.length - 1]
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="394-字符串解码"><a href="#394-字符串解码" class="headerlink" title="394 字符串解码"></a>394 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/decode-string/description/">字符串解码</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var decodeString &#x3D; function(s) &#123;
+    &#x2F;&#x2F; 我们可以使用两个栈，一个用来保存数字，一个用来保存字符串。
+    &#x2F;&#x2F; 遍历输入字符串，如果遇到数字，我们更新当前的数字；
+    &#x2F;&#x2F; 如果遇到&#39;[&#39;，我们把当前的数字和字符串分别压入对应的栈，并重置数字和字符串；
+    &#x2F;&#x2F; 如果遇到&#39;]&#39;，我们把栈顶的数字和字符串弹出，然后把弹出的字符串重复弹出的数字次，然后加到当前的字符串后面；
+    &#x2F;&#x2F; 如果遇到字母，我们直接加到当前的字符串后面。
+
+    let numStack &#x3D; []
+    let strStack &#x3D; []
+
+    let num &#x3D; 0
+    let str &#x3D; &#39;&#39;
+
+    for(let ch of s)&#123;
+        if(!isNaN(ch))&#123; &#x2F;&#x2F; 可替换为 ch &gt;&#x3D; &#39;0&#39; &amp;&amp; ch &lt;&#x3D; &#39;9&#39;，isNaN() 函数用于检查其参数是否是非数字值。
+            num &#x3D; num*10 + Number(ch)
+        &#125;else if(ch &#x3D;&#x3D;&#x3D; &#39;[&#39;)&#123;
+            numStack.push(num)
+            strStack.push(str)
+            num &#x3D; 0
+            str &#x3D; &#39;&#39;
+        &#125;else if(ch &#x3D;&#x3D;&#x3D; &#39;]&#39;)&#123;
+            let repeatTimes &#x3D; numStack.pop()
+            str &#x3D; strStack.pop() + str.repeat(repeatTimes)
+        &#125;else&#123;
+            str +&#x3D; ch
+        &#125;
+
+    &#125;
+    return str
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="739-每日温度"><a href="#739-每日温度" class="headerlink" title="739 每日温度"></a>739 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/daily-temperatures/description/">每日温度</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var dailyTemperatures &#x3D; function(temperatures) &#123;
+    &#x2F;&#x2F; 我们可以使用一个单调递减的栈，栈中存储的是温度的索引。
+    &#x2F;&#x2F; 遍历温度数组，如果当前温度大于栈顶索引对应的温度，那么就找到了栈顶索引天数之后的更高的温度，计算两者之间的天数差，然后将栈顶索引出栈。
+    &#x2F;&#x2F; 如果当前温度小于等于栈顶索引对应的温度，或者栈为空，那么就将当前温度的索引入栈。
+    &#x2F;&#x2F; 遍历结束后，栈中剩余的索引对应的天数之后都不会有更高的温度，所以将对应的结果设为0。
+    let stack &#x3D; []
+    let res &#x3D; new Array(temperatures.length).fill(0)
+
+    for(let i &#x3D; 0; i &lt; temperatures.length; i++)&#123;
+        while(stack.length &gt; 0 &amp;&amp; temperatures[i] &gt; temperatures[stack[stack.length - 1]])
+        &#123;
+            let index &#x3D; stack.pop()
+            res[index] &#x3D; i - index
+        &#125;
+        stack.push(i) &#x2F;&#x2F; 入栈温度的索引，因为前一个温度比当前温度高的已经出栈了
+    &#125;
+     return res
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><h3 id="215-数组中的第K个最大元素"><a href="#215-数组中的第K个最大元素" class="headerlink" title="215 数组中的第K个最大元素"></a>215 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">数组中的第K个最大元素</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var findKthLargest &#x3D; function (nums, k) &#123;
+    let heap &#x3D; nums.slice(0, k); &#x2F;&#x2F; 取前k个元素，为什么不直接用nums.slice(0, k).sort((a, b) &#x3D;&gt; b - a)呢？因为这样时间复杂度是O(nlogn)，而我们可以用O(n)的时间复杂度构建一个最小堆 
+    buildHeap(heap); &#x2F;&#x2F; 构建最小堆
+    for(let i &#x3D; k; i &lt; nums.length; i++) &#123;
+        &#x2F;&#x2F; 如果它比堆顶元素小，那么就不用管它，因为它肯定不是前k个最大元素之一
+        &#x2F;&#x2F; 堆的大小始终是k
+        if(nums[i] &gt; heap[0]) &#123; &#x2F;&#x2F; 如果它比堆顶元素大（也就是堆中的最小元素），那么就替换堆顶元素，然后调整堆
+            heap[0] &#x3D; nums[i];
+            adjustHeap(heap, 0); &#x2F;&#x2F; 调整堆 使其满足最小堆的性质
+        &#125;
+    &#125;
+    return heap[0];
+
+    
+&#125;;
+
+function buildHeap(nums) &#123;
+    &#x2F;&#x2F; 从数组的中间位置开始遍历，因为最后一个非叶子节点的索引是Math.floor(nums.length &#x2F; 2) - 1
+    &#x2F;&#x2F; 为什么要从数组的中间位置开始遍历呢？这是因为在二叉堆中，位置i的元素的子节点是在位置2i+1和2i+2。所以，数组的后半部分的元素都是叶子节点，没有子节点，不需要调整。只有前半部分的元素可能有子节点，需要调整。
+    for (let i &#x3D; Math.floor(nums.length &#x2F; 2) - 1; i &gt;&#x3D; 0; i--) &#123;
+        adjustHeap(nums, i);
+    &#125;
+&#125;
+
+function adjustHeap(nums, i) &#123;
+    let minIndex &#x3D; i;
+    let left &#x3D; 2 * i + 1;
+    let right &#x3D; 2 * i + 2;
+    if (left &lt; nums.length &amp;&amp; nums[left] &lt; nums[minIndex]) &#123; &#x2F;&#x2F; 先检查左子节点是否合法，然后是否小于根节点
+        minIndex &#x3D; left;
+    &#125;
+    if (right &lt; nums.length &amp;&amp; nums[right] &lt; nums[minIndex]) &#123; &#x2F;&#x2F; 同理右节点
+        minIndex &#x3D; right;
+    &#125;
+    if (minIndex !&#x3D;&#x3D; i) &#123; &#x2F;&#x2F; 如果minIndex不等于i（前面代码因为左右节点被改变过minIndex），说明左右子节点中有比根节点小的，需要交换
+        [nums[i], nums[minIndex]] &#x3D; [nums[minIndex], nums[i]];
+        adjustHeap(nums, minIndex);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="347-前-K-个高频元素"><a href="#347-前-K-个高频元素" class="headerlink" title="347 前 K 个高频元素"></a>347 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/description/">前 K 个高频元素</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var topKFrequent &#x3D; function (nums, k) &#123;
+    &#x2F;&#x2F; 我们可以使用一个小顶堆来存储频率最高的k个元素：
+    &#x2F;&#x2F; 首先，我们需要创建一个哈希表来存储每个元素及其出现的频率。
+    &#x2F;&#x2F; 然后，我们创建一个小顶堆，并将哈希表中的元素及其频率添加到堆中。我们可以设置堆的比较函数，使得频率较低的元素优先级较高。
+    &#x2F;&#x2F; 当堆的大小超过k时，我们就移除堆顶的元素。
+    &#x2F;&#x2F; 最后，堆中剩下的元素就是出现频率前k高的元素。
+
+    let map &#x3D; new Map()
+    for (let n of nums) &#123;
+        map.set(n, (map.get(n) || 0) + 1)
+    &#125;
+
+    let heap &#x3D; Array.from(map.keys()).slice(0, k); &#x2F;&#x2F; 包含了map的前k个键
+    buildHeap(heap, map)
+
+    for (let key of Array.from(map.keys()).slice(k)) &#123;
+        if (map.get(key) &gt; map.get(heap[0])) &#123;
+            heap[0] &#x3D; key
+            adjustHeap(heap, 0,map)
+        &#125;
+    &#125;
+
+    return heap
+&#125;;
+
+function buildHeap(nums, map) &#123;
+    &#x2F;&#x2F; 从数组的中间位置开始遍历，因为最后一个非叶子节点的索引是Math.floor(nums.length &#x2F; 2) - 1
+    &#x2F;&#x2F; 为什么要从数组的中间位置开始遍历呢？这是因为在二叉堆中，位置i的元素的子节点是在位置2i+1和2i+2。所以，数组的后半部分的元素都是叶子节点，没有子节点，不需要调整。只有前半部分的元素可能有子节点，需要调整。
+    for (let i &#x3D; Math.floor(nums.length &#x2F; 2) - 1; i &gt;&#x3D; 0; i--) &#123;
+        adjustHeap(nums, i, map);
+    &#125;
+&#125;
+
+function adjustHeap(nums, i, map) &#123;
+    let minIndex &#x3D; i;
+    let left &#x3D; 2 * i + 1;
+    let right &#x3D; 2 * i + 2;
+
+    if (left &lt; nums.length &amp;&amp; map.get(nums[left]) &lt; map.get(nums[minIndex])) &#123; &#x2F;&#x2F; 先检查左子节点是否合法，然后是否小于根节点
+        minIndex &#x3D; left;
+    &#125;
+    if (right &lt; nums.length &amp;&amp; map.get(nums[right]) &lt; map.get(nums[minIndex])) &#123; &#x2F;&#x2F; 同理右节点
+        minIndex &#x3D; right;
+    &#125;
+    if (minIndex !&#x3D;&#x3D; i) &#123; &#x2F;&#x2F; 如果minIndex不等于i（前面代码因为左右节点被改变过minIndex），说明左右子节点中有比根节点小的，需要交换
+        [nums[i], nums[minIndex]] &#x3D; [nums[minIndex], nums[i]];
+        adjustHeap(nums, minIndex,map);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121 买卖股票的最佳时机"></a>121 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/">买卖股票的最佳时机</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var maxProfit &#x3D; function(prices) &#123;
+    var n &#x3D; prices.length;
+    var dp &#x3D; Array.from(&#123; length: n &#125;, () &#x3D;&gt; new Array(2).fill(0));
+    for (var i &#x3D; 0; i &lt; n; i++) &#123;
+        if (i - 1 &#x3D;&#x3D; -1) &#123;
+            dp[i][0] &#x3D; 0;
+            &#x2F;&#x2F; 根据状态转移方程可得：
+            &#x2F;&#x2F;   dp[i][0] 
+            &#x2F;&#x2F; &#x3D; max(dp[-1][0], dp[-1][1] + prices[i])
+            &#x2F;&#x2F; &#x3D; max(0, -infinity + prices[i]) &#x3D; 0
+        
+            dp[i][1] &#x3D; -prices[i];
+            &#x2F;&#x2F; 根据状态转移方程可得：
+            &#x2F;&#x2F;   dp[i][1] 
+            &#x2F;&#x2F; &#x3D; max(dp[-1][1], dp[-1][0] - prices[i])
+            &#x2F;&#x2F; &#x3D; max(-infinity, 0 - prices[i]) 
+            &#x2F;&#x2F; &#x3D; -prices[i]
+            continue;
+        &#125;
+        dp[i][0] &#x3D; Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);
+        dp[i][1] &#x3D; Math.max(dp[i-1][1], -prices[i]);
+    &#125;
+    return dp[n - 1][0];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="55-跳跃游戏"><a href="#55-跳跃游戏" class="headerlink" title="55 跳跃游戏"></a>55 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/description/">跳跃游戏</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var canJump &#x3D; function(nums) &#123;
+    let n &#x3D; nums.length;
+    let farthest &#x3D; 0;
+    for (let i &#x3D; 0; i &lt; n - 1; i++) &#123;
+        &#x2F;&#x2F; 不断计算能跳到的最远距离
+        farthest &#x3D; Math.max(farthest, i + nums[i]);
+        &#x2F;&#x2F; 可能碰到了 0，卡住跳不动了
+        if (farthest &lt;&#x3D; i) &#123;
+            return false;
+        &#125;
+    &#125;
+    return farthest &gt;&#x3D; n - 1;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="45-跳跃游戏-II"><a href="#45-跳跃游戏-II" class="headerlink" title="45 跳跃游戏 II"></a>45 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/description/">跳跃游戏 II</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var jump &#x3D; function(nums) &#123;
+    const n &#x3D; nums.length;
+    let end &#x3D; 0, farthest &#x3D; 0, jumps &#x3D; 0;
+    for (let i &#x3D; 0; i &lt; n - 1; i++) &#123;
+        farthest &#x3D; Math.max(nums[i] + i, farthest);
+        if (end &#x3D;&#x3D;&#x3D; i) &#123;
+            jumps++;
+            end &#x3D; farthest;
+        &#125;
+    &#125;
+    return jumps;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="763-划分字母区间"><a href="#763-划分字母区间" class="headerlink" title="763 划分字母区间"></a>763 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels/description/">划分字母区间</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var partitionLabels &#x3D; function (s) &#123;
+    let hash &#x3D; &#123;&#125;
+    for (let x &#x3D; 0; x &lt; s.length; x++) &#123;
+      let now &#x3D; s[x]
+      if (!hash[now]) hash[now] &#x3D; new Array(2).fill(x)
+      else hash[now][1] &#x3D; x
+    &#125;
+  
+  
+    &#x2F;&#x2F;初始化完成 之后完全就是 力扣56.题  56. 合并区间
+    let arr &#x3D; Object.values(hash)
+    arr &#x3D; arr.sort((a, b) &#x3D;&gt; &#123;
+      return a[0] - b[0]
+    &#125;)
+  
+    let stack &#x3D; [arr[0]]
+    for (let x of arr) &#123;
+      if (x[0] &lt;&#x3D; stack[stack.length - 1][1]) &#123;
+        stack[stack.length - 1][1] &#x3D; Math.max(stack[stack.length - 1][1], x[1])
+      &#125; else &#123;
+        stack.push(x)
+      &#125;
+    &#125;
+    stack.map((item, index) &#x3D;&gt; (stack[index] &#x3D; item[1] - item[0] + 1))
+    return stack
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="118-杨辉三角"><a href="#118-杨辉三角" class="headerlink" title="118 杨辉三角"></a>118 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pascals-triangle/description/">杨辉三角</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var generate &#x3D; function(numRows) &#123;
+    let memo &#x3D; [];
+    return dp(numRows);
+
+    function dp(n) &#123;
+        if (n &#x3D;&#x3D;&#x3D; 0) return [];
+        if (n &#x3D;&#x3D;&#x3D; 1) return [[1]];
+        if (n &#x3D;&#x3D;&#x3D; 2) return [[1], [1, 1]];
+        if (memo[n]) return memo[n];
+
+        let res &#x3D; dp(n - 1);
+        let newRow &#x3D; [1];
+        let lastRow &#x3D; res[res.length - 1]; &#x2F;&#x2F; 上一行，因为如果一个数组有n个元素，那么最后一个元素的索引是n-1
+        for (let i &#x3D; 1; i &lt; lastRow.length; i++) &#123;
+            newRow[i] &#x3D; lastRow[i - 1] + lastRow[i];
+        &#125;
+
+        newRow.push(1);
+        res.push(newRow);
+
+        memo[n] &#x3D; res;
+        return res;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="198-打家劫舍"><a href="#198-打家劫舍" class="headerlink" title="198 打家劫舍"></a>198 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber/description/">打家劫舍</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var rob &#x3D; function(nums) &#123;
+    &#x2F;&#x2F; 在每间房子面前，你只有两个选择，要么偷，要么不偷
+    &#x2F;&#x2F; 如果选择偷，那下一步就去下下家；如果选择不偷，那下一步就去下家
+    &#x2F;&#x2F; 状态转移方程：int res &#x3D; Math.max(dp(nums, start + 1), nums[start] + dp(nums, start + 2));
+
+    let memo &#x3D; new Array(nums.length).fill(-1);
+
+    return dp(nums, 0, memo); &#x2F;&#x2F; 强盗从0号房间开始抢劫
+
+    function dp(nums, start, memo) &#123;
+
+        if(start &gt;&#x3D; nums.length) &#123;
+            return 0; &#x2F;&#x2F; 到最后一个房间了，没有房间可抢了
+        &#125;
+
+        if(memo[start] !&#x3D;&#x3D; -1) return memo[start]; &#x2F;&#x2F; 备忘录有值，直接返回
+        &#x2F;&#x2F; 注意选择偷当前房子的情况。在这种情况下，你不能偷下一间房子（因为不能偷连续的两间房子），所以你的收益是当前房子的价值加上从下下间房子开始的最大收益。
+        let res &#x3D; Math.max(dp(nums, start + 1, memo), nums[start] + dp(nums, start + 2, memo)); &#x2F;&#x2F; 偷或者不偷
+
+        memo[start] &#x3D; res; &#x2F;&#x2F; 记录备忘录
+
+        return res;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="279-完全平方数"><a href="#279-完全平方数" class="headerlink" title="279 完全平方数"></a>279 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/perfect-squares/description/">完全平方数</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var numSquares &#x3D; function(n) &#123;
+  let memo &#x3D; new Array(n + 1).fill(0);
+  
+  return dp(memo,n)
+
+  function dp(memo, n)
+  &#123;
+    if( n &#x3D;&#x3D;&#x3D; 0) return 0;
+    if(memo[n] !&#x3D;&#x3D; 0) return memo[n];
+    let res &#x3D; n; &#x2F;&#x2F; 最多可以被表示为n个完全平方数的和
+    for(let i &#x3D; 1; i * i &lt;&#x3D; n; i++)
+    &#123;
+      res &#x3D; Math.min(res, 1 + dp(memo, n - i * i));
+    &#125;
+
+    memo[n] &#x3D; res;
+
+    return res;
+  &#125;
+
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="139-单词拆分"><a href="#139-单词拆分" class="headerlink" title="139 单词拆分"></a>139 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/description/">单词拆分</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var wordBreak &#x3D; function(s, wordDict) &#123;
+    let memo &#x3D; new Array(s.length).fill(-1);
+
+    return dp(s,wordDict,0,memo)
+
+&#125;;
+
+function dp(s,wordDict,start,memo)&#123; &#x2F;&#x2F; 从start位置开始，是否可以拆分成wordDict中的单词
+    if(start &#x3D;&#x3D;&#x3D; s.length) return true;
+    if(memo[start] !&#x3D;&#x3D; -1) return memo[start];
+    for(let word of wordDict)&#123;
+        let len &#x3D; word.length &#x2F;&#x2F; 字典中单个单词的长度
+
+        if(start + len &gt; s.length) continue;
+        let subStr &#x3D; s.substring(start,start + len);
+        if(subStr !&#x3D;&#x3D; word) continue;
+
+        if (dp(s,wordDict,start + len,memo))&#123;
+            memo[start] &#x3D; true;
+            return true;
+        &#125;
+
+    &#125;
+    memo[start] &#x3D; false;
+    return false;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="300-最长递增子序列"><a href="#300-最长递增子序列" class="headerlink" title="300 最长递增子序列"></a>300 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-subsequence/description/">最长递增子序列</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var lengthOfLIS &#x3D; function(nums) &#123;
+    let len &#x3D; nums.length
+
+    let dp &#x3D; new Array(len).fill(1)
+
+    for(let i &#x3D; 0; i &lt; len; i++)&#123;
+        for(let j &#x3D; 0; j &lt; i; j++)&#123;
+            if(nums[i] &gt; nums[j])
+            &#123;
+                dp[i] &#x3D; Math.max(dp[i], dp[j] + 1)
+            &#125;
+        &#125;
+    &#125;
+
+    let res &#x3D; 0;
+
+    for(let i &#x3D; 0; i &lt; dp.length;i++)
+    &#123;
+        res &#x3D; Math.max(res, dp[i]);
+    &#125;
+
+    return res
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="416-分割等和子集"><a href="#416-分割等和子集" class="headerlink" title="416 分割等和子集"></a>416 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/description/">分割等和子集</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var canPartition &#x3D; function(nums) &#123;
+    let sum &#x3D; 0;
+    for(let i &#x3D; 0; i &lt; nums.length; i++)
+    &#123;
+        sum +&#x3D; nums[i];
+    &#125;
+    if(sum % 2 !&#x3D;&#x3D; 0) return false; &#x2F;&#x2F; 如果和为奇数，直接返回false
+
+    let target &#x3D; sum &#x2F; 2;
+    let memo &#x3D; new Array(nums.length).fill().map(() &#x3D;&gt; new Array(target + 1).fill(-1));
+    return dp(nums, 0, target, memo);
+
+    function dp(nums, index, target, memo)
+    &#123;
+        if(target &#x3D;&#x3D;&#x3D; 0) return true; &#x2F;&#x2F; 如果target为0，说明找到了
+        if(index &#x3D;&#x3D;&#x3D; nums.length || target &lt; 0) return false; &#x2F;&#x2F; 如果index越界或者target小于0，说明没找到
+        if(memo[index][target] !&#x3D;&#x3D; -1) return memo[index][target]; &#x2F;&#x2F; 如果备忘录有值，直接返回
+        &#x2F;&#x2F; 选择当前数或者不选择当前数
+        let res &#x3D; dp(nums, index + 1, target, memo) || dp(nums, index + 1, target - nums[index], memo);
+        memo[index][target] &#x3D; res; &#x2F;&#x2F; 记录备忘录
+        return res;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509 斐波那契数"></a>509 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/description/">斐波那契数</a></h3><p>1.<strong>暴力递归</strong></p>
 <p>斐波那契数列的数学形式就是递归的，写成代码就是这样：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">fib</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token constant">N</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">N</span> <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">||</span> <span class="token constant">N</span> <span class="token operator">===</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
@@ -1970,7 +3479,7 @@ var dp[i] &#x3D; Math.max(nums[i], nums[i] + dp[i - 1]);<span aria-hidden="true"
     &#125;
     return res;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="递归反转整个链表"><a href="#递归反转整个链表" class="headerlink" title="递归反转整个链表"></a>递归反转整个链表</h3><h4 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></h4><p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
+<h3 id="递归反转整个链表"><a href="#递归反转整个链表" class="headerlink" title="递归反转整个链表"></a>递归反转整个链表</h3><h4 id="206-反转链表-1"><a href="#206-反转链表-1" class="headerlink" title="206 反转链表"></a>206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></h4><p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
 <p><img src="/medias/images/loading.gif" data-original="title.png" alt="img"></p>
 <p><strong>注意这里的索引是从 1 开始的</strong>。迭代的思路大概是：先用一个 for 循环找到第 <code>m</code> 个位置，然后再用一个 for 循环将 <code>m</code> 和 <code>n</code> 之间的元素反转。但是我们的递归解法不用一个 for 循环，纯递归实现反转。</p>
 <h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a>思路</h5><ol>
@@ -2106,6 +3615,232 @@ last &#x3D; 3
     return head;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="92-反转链表-II"><a href="#92-反转链表-II" class="headerlink" title="92 反转链表 II"></a>92 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list-ii/description/">反转链表 II</a></h4><p>给你单链表的头指针 <code>head</code> 和两个整数 <code>left</code> 和 <code>right</code> ，其中 <code>left &lt;= right</code> 。请你反转从位置 <code>left</code> 到位置 <code>right</code> 的链表节点，返回 <strong>反转后的链表</strong> 。</p>
+<h2 id="多维动态规划"><a href="#多维动态规划" class="headerlink" title="多维动态规划"></a>多维动态规划</h2><h3 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62 不同路径"></a>62 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/description/">不同路径</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var uniquePaths &#x3D; function (m, n) &#123;
+
+    const memo &#x3D; new Array(m).fill(0).map(() &#x3D;&gt; new Array(n).fill(0));
+
+    return dp(m - 1, n - 1) &#x2F;&#x2F; 因为数组索引是从0开始的，所以要减一
+
+    function dp(x, y) &#123;
+        if(x &#x3D;&#x3D;&#x3D; 0 &amp;&amp; y &#x3D;&#x3D;&#x3D; 0 )
+        &#123;
+            return 1
+        &#125;
+
+        if(x &lt; 0 || y &lt; 0) return 0;
+
+        if(memo[x][y] &gt; 0) return memo[x][y] &#x2F;&#x2F; 如果有值，直接返回，表示有路径
+
+        memo[x][y] &#x3D; dp(x -1,y) + dp(x, y -1)
+
+        return memo[x][y]
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="64-最小路径和"><a href="#64-最小路径和" class="headerlink" title="64 最小路径和"></a>64 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-path-sum/description/">最小路径和</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var minPathSum &#x3D; function(grid) &#123;
+    const memo &#x3D; new Array(grid.length).fill(-1).map(() &#x3D;&gt; new Array(grid[0].length).fill(-1));
+
+    return dp(grid,grid.length - 1, grid[0].length - 1) &#x2F;&#x2F; 因为数组索引是从0开始的，所以要减一，行和列
+
+
+    function dp(grid,i,j)&#123;
+        if(i&#x3D;&#x3D;&#x3D;0 &amp;&amp; j&#x3D;&#x3D;&#x3D;0) return grid[0][0] &#x2F;&#x2F; 如果是起点，直接返回
+        if(i&lt;0 || j&lt;0) return Number.MAX_VALUE &#x2F;&#x2F; 如果是负数，返回最大值
+
+        if(memo[i][j] !&#x3D;&#x3D; -1) return memo[i][j] &#x2F;&#x2F; 如果有值，直接返回
+
+        memo[i][j] &#x3D; Math.min(dp(grid,i-1,j),dp(grid,i,j-1)) + grid[i][j] &#x2F;&#x2F; 先取当前格子左边格子和上边格子的最小路径和，然后加上当前格子的值，就得到了到达当前格子的最小路径和。
+
+        return memo[i][j]
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="5-最长回文子串-1"><a href="#5-最长回文子串-1" class="headerlink" title="5 最长回文子串"></a>5 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/description/">最长回文子串</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var longestPalindrome &#x3D; function(s) &#123;
+
+    let res &#x3D; &quot;&quot;;
+    for(let i &#x3D; 0; i &lt; s.length;i++)
+    &#123;
+        let s1 &#x3D; palindrome(s,i,i) &#x2F;&#x2F; 回文子串长度为奇数
+        let s2 &#x3D; palindrome(s,i,i+1) &#x2F;&#x2F; 回文子串长度为偶数
+        res &#x3D; res.length &gt; s1.length ? res : s1;
+        res &#x3D; res.length &gt; s2.length ? res : s2 &#x2F;&#x2F; 保留最长的回文子串
+    &#125;
+    return res
+
+&#125;;
+
+function palindrome(s, left, right)&#123;
+    
+    &#x2F;&#x2F; 从中间往两边扩散
+    while(left &gt;&#x3D; 0 &amp;&amp; right &lt; s.length &amp;&amp; s.charAt(left) &#x3D;&#x3D;&#x3D; s.charAt(right))
+    &#123;
+        left--
+        right++
+    &#125;
+
+    return s.substring(left + 1, right)
+
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="1143-最长公共子序列"><a href="#1143-最长公共子序列" class="headerlink" title="1143 最长公共子序列"></a>1143 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/description/">最长公共子序列</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var longestCommonSubsequence &#x3D; function(s1, s2) &#123; 
+    &#x2F;&#x2F; 子序列不需要连续，但是必须保持原来的顺序
+    const m &#x3D; s1.length, n &#x3D; s2.length;
+    &#x2F;&#x2F; 定义：s1[0..i-1] 和 s2[0..j-1] 的 lcs 长度为 dp[i][j]，也就是我们的目标返回最长公共子序列的长度
+    const dp &#x3D; new Array(m + 1).fill(0).map(() &#x3D;&gt; new Array(n + 1).fill(0)); &#x2F;&#x2F; 如果m或n为0，那么m+1或n+1为1，所以dp[0][..]和dp[..][0]都是0
+    &#x2F;&#x2F; 目标：s1[0..m-1] 和 s2[0..n-1] 的 lcs 长度，即 dp[m][n]
+    &#x2F;&#x2F; base case: dp[0][..] &#x3D; dp[..][0] &#x3D; 0
+
+    for (let i &#x3D; 1; i &lt;&#x3D; m; i++) &#123; &#x2F;&#x2F; 因为dp[0][..] 和 dp[..][0] 被用作边界条件，表示当 s1 或 s2 为空字符串时的情况。，所以要从1开始循环
+        for (let j &#x3D; 1; j &lt;&#x3D; n; j++) &#123;
+            &#x2F;&#x2F; 现在 i 和 j 从 1 开始，所以要减一
+            if (s1.charAt(i - 1) &#x3D;&#x3D;&#x3D; s2.charAt(j - 1)) &#123; 
+                &#x2F;&#x2F; s1[i-1] 和 s2[j-1] 必然在 lcs 中
+                dp[i][j] &#x3D; 1 + dp[i - 1][j - 1];
+            &#125; else &#123;
+                &#x2F;&#x2F; s1[i-1] 和 s2[j-1] 至少有一个不在 lcs 中
+                &#x2F;&#x2F; 不包含 s1 的第 i 个字符，也就是说，我们要找的是 s1 的前 i - 1 个字符和 s2 的前 j 个字符的最长公共子序列，这个长度是 dp[i - 1][j]。
+                &#x2F;&#x2F; 不包含 s2 的第 j 个字符，也就是说，我们要找的是 s1 的前 i 个字符和 s2 的前 j - 1 个字符的最长公共子序列，这个长度是 dp[i][j - 1]。
+                dp[i][j] &#x3D; Math.max(dp[i][j - 1], dp[i - 1][j]);
+            &#125;
+        &#125;
+    &#125;
+
+    return dp[m][n];
+
+&#x2F;&#x2F;     let dp &#x3D; new Array(m + 1).fill(&quot;&quot;).map(() &#x3D;&gt; new Array(n + 1).fill(&quot;&quot;));
+
+&#x2F;&#x2F; for (let i &#x3D; 1; i &lt;&#x3D; m; i++) &#123;
+&#x2F;&#x2F;     for (let j &#x3D; 1; j &lt;&#x3D; n; j++) &#123;
+&#x2F;&#x2F;         if (s1.charAt(i - 1) &#x3D;&#x3D;&#x3D; s2.charAt(j - 1)) &#123;
+&#x2F;&#x2F;             dp[i][j] &#x3D; dp[i - 1][j - 1] + s1.charAt(i - 1);
+&#x2F;&#x2F;         &#125; else &#123;
+&#x2F;&#x2F;             dp[i][j] &#x3D; dp[i - 1][j].length &gt; dp[i][j - 1].length ? dp[i - 1][j] : dp[i][j - 1];
+&#x2F;&#x2F;         &#125;
+&#x2F;&#x2F;     &#125;
+&#x2F;&#x2F; &#125;
+
+&#x2F;&#x2F; return dp[m][n];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="72-编辑距离"><a href="#72-编辑距离" class="headerlink" title="72 编辑距离"></a>72 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/description/">编辑距离</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var minDistance &#x3D; function(s1, s2) &#123;
+    let m &#x3D; s1.length, n &#x3D; s2.length;
+    let dp &#x3D; new Array(m + 1).fill(0).map(() &#x3D;&gt; new Array(n + 1).fill(0));
+    &#x2F;&#x2F; base case
+    for (let i &#x3D; 1; i &lt;&#x3D; m; i++)
+        dp[i][0] &#x3D; i; &#x2F;&#x2F; dp[i][0] 表示 s1 的前 i 个字符转换成空字符串所需要的最小编辑距离，显然就是 i 次删除操作，
+    for (let j &#x3D; 1; j &lt;&#x3D; n; j++)
+        dp[0][j] &#x3D; j; &#x2F;&#x2F; dp[0][j] 表示空字符串转换成 s2 的前 j 个字符所需要的最小编辑距离，显然就是 j 次插入操作，所以 dp[0][j] &#x3D; j。
+    &#x2F;&#x2F; 自底向上求解
+    for (let i &#x3D; 1; i &lt;&#x3D; m; i++)
+        for (let j &#x3D; 1; j &lt;&#x3D; n; j++)
+            if (s1.charAt(i - 1) &#x3D;&#x3D; s2.charAt(j - 1))
+                dp[i][j] &#x3D; dp[i - 1][j - 1];
+            else
+                dp[i][j] &#x3D; Math.min(
+                    dp[i - 1][j] + 1,
+
+
+                    dp[i][j - 1] + 1,
+
+
+                    dp[i - 1][j - 1] + 1
+
+
+                );
+    &#x2F;&#x2F; 储存着整个 s1 和 s2 的最小编辑距离
+    return dp[m][n];
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><h3 id="136只出现一次的数字"><a href="#136只出现一次的数字" class="headerlink" title="136只出现一次的数字"></a>136<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/single-number/description/">只出现一次的数字</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var singleNumber &#x3D; function(nums) &#123;
+    &#x2F;&#x2F; 一个数和它本身做异或运算结果为 0，即 a ^ a &#x3D; 0；一个数和 0 做异或运算的结果为它本身，即 a ^ 0 &#x3D; a。
+    let res &#x3D; 0
+    for(let n of nums)
+    &#123;
+        res ^&#x3D; n
+    &#125;
+
+    return res
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="169-多数元素"><a href="#169-多数元素" class="headerlink" title="169 多数元素"></a>169 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/majority-element/description/">多数元素</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var majorityElement &#x3D; function(nums) &#123;
+    &#x2F;&#x2F; let target &#x3D; 0
+
+    &#x2F;&#x2F; let count &#x3D; 0
+
+    &#x2F;&#x2F; for(let i &#x3D; 0 ; i &lt; nums.length;i++)
+    &#x2F;&#x2F; &#123;
+    &#x2F;&#x2F;     if(count &#x3D;&#x3D;&#x3D;0)
+    &#x2F;&#x2F;     &#123;
+    &#x2F;&#x2F;         target &#x3D; nums[i]
+    &#x2F;&#x2F;         count &#x3D; 1
+    &#x2F;&#x2F;     &#125;else if(nums[i] &#x3D;&#x3D;&#x3D; target)
+    &#x2F;&#x2F;     &#123;
+    &#x2F;&#x2F;         count++
+    &#x2F;&#x2F;     &#125;else&#123;
+    &#x2F;&#x2F;         count--
+    &#x2F;&#x2F;     &#125;
+    &#x2F;&#x2F; &#125;
+
+    &#x2F;&#x2F; return target
+    let target &#x3D; 0
+    let map &#x3D; new Map()
+
+    for(let n of nums)
+    &#123;
+        map.set(n, (map.get(n)||0)+1) 
+
+        if(map.get(n) &gt; Math.floor(nums.length &#x2F; 2))
+        &#123;
+            target &#x3D; n
+        &#125;
+    &#125;
+
+    return target
+   
+
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="75-颜色分类"><a href="#75-颜色分类" class="headerlink" title="75 颜色分类"></a>75 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-colors/description/">颜色分类</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var sortColors &#x3D; function(nums) &#123;
+    let num0 &#x3D; 0;
+    let num1 &#x3D; 0;
+    let num2 &#x3D; 0;
+    for(let i &#x3D; 0; i &lt; nums.length; i++)&#123;
+        if(nums[i] &#x3D;&#x3D;&#x3D; 0)&#123;
+            nums[num2++] &#x3D; 2;
+            nums[num1++] &#x3D; 1;
+            nums[num0++] &#x3D; 0;
+        &#125;
+        else if(nums[i] &#x3D;&#x3D;&#x3D; 1)&#123;
+            nums[num2++] &#x3D; 2;
+            nums[num1++] &#x3D; 1;
+        &#125;
+        else&#123;
+            nums[num2++] &#x3D; 2;
+        &#125;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="31-下一个排列"><a href="#31-下一个排列" class="headerlink" title="31 下一个排列"></a>31 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-permutation/description/">下一个排列</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var nextPermutation &#x3D; function(nums) &#123;
+    for (let i &#x3D; nums.length - 1; i &gt;&#x3D; 0; i--) &#123;
+        for (let j &#x3D; nums.length - 1; j &gt; i; j--) &#123;
+            if (nums[j] &gt; nums[i]) &#123;
+                [nums[j], nums[i]] &#x3D; [nums[i], nums[j]]; &#x2F;&#x2F; swap nums[j] and nums[i]
+                nums.splice(i + 1, nums.length - i - 1, ...nums.slice(i + 1).reverse()); &#x2F;&#x2F; 从索引 i + 1 的位置开始，删除 nums.length - i - 1 个元素，然后插入 nums.slice(i + 1).reverse() 这个数组的所有元素。
+                return;
+            &#125;
+        &#125;
+    &#125;
+    &#x2F;&#x2F; If we reach here, the entire array is reversed, so we reverse it
+    nums.reverse();
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="287-寻找重复数"><a href="#287-寻找重复数" class="headerlink" title="287 寻找重复数"></a>287 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-duplicate-number/description/">寻找重复数</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var findDuplicate &#x3D; function(nums) &#123;
+    let fast &#x3D; 0, slow &#x3D; 0;
+    while(true) &#123;
+        fast &#x3D; nums[nums[fast]]; &#x2F;&#x2F; 快指针每次移动两步，慢指针每次移动一步
+        slow &#x3D; nums[slow];
+        if(slow &#x3D;&#x3D;&#x3D; fast) &#123;
+            fast &#x3D; 0; &#x2F;&#x2F; 当快慢指针第一次相遇后，如果我们将快指针重新置为起点（这里是0），然后快慢指针以相同的速度（这里是每次一步）前进，那么当它们再次相遇时，相遇的地点就是环的入口。
+            while(nums[slow] !&#x3D;&#x3D; nums[fast]) &#123;
+                fast &#x3D; nums[fast];
+                slow &#x3D; nums[slow];
+            &#125;
+            return nums[slow];
+        &#125;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
