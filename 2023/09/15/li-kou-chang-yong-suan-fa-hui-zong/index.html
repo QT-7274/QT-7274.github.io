@@ -467,21 +467,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-26
+                    2024-03-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    27.6k
+                    28.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    128 分
+                    133 分
                 </div>
                 
 
@@ -1535,6 +1535,31 @@ var minAddToMakeValid &#x3D; function(s) &#123;
     return res
 
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="102-二叉树的层序遍历"><a href="#102-二叉树的层序遍历" class="headerlink" title="102 二叉树的层序遍历"></a>102 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal/description/">二叉树的层序遍历</a></h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var levelOrder &#x3D; function(root) &#123;
+    let res &#x3D; []
+    if(root &#x3D;&#x3D; null) return res
+    let q &#x3D; []
+    q.push(root)
+    
+    while(q.length)
+    &#123;
+        let sz &#x3D; q.length
+        let level &#x3D; []
+        
+        for(let i &#x3D; 0; i &lt; sz;i++)
+            &#123;
+                let cur &#x3D; q.shift()
+                level.push(cur.val)
+                
+                if(cur.left) q.push(cur.left)
+                if(cur.right) q.push(cur.right)
+            &#125;
+       res.push(level)
+            
+    &#125;
+    return res
+    
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="二叉树的特性"><a href="#二叉树的特性" class="headerlink" title="二叉树的特性"></a>二叉树的特性</h3><h4 id="104二叉树的最大深度"><a href="#104二叉树的最大深度" class="headerlink" title="104二叉树的最大深度"></a>104<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/description/">二叉树的最大深度</a></h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;***** 解法一，回溯算法思路 *****&#x2F;
 var maxDepth &#x3D; function(root) &#123;
     let res &#x3D; 0
@@ -1596,7 +1621,7 @@ var maxDepth &#x3D; function(root) &#123;
     return maxDiameter;
     &#x2F;&#x2F; 遇到子树问题，首先想到的是给函数设置返回值，然后在后序位置做文章。
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="226-翻转二叉树"><a href="#226-翻转二叉树" class="headerlink" title="226 翻转二叉树"></a>226 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/description/">翻转二叉树</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
+<h3 id="二叉树的操作"><a href="#二叉树的操作" class="headerlink" title="二叉树的操作"></a>二叉树的操作</h3><h4 id="226-翻转二叉树"><a href="#226-翻转二叉树" class="headerlink" title="226 翻转二叉树"></a>226 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/description/">翻转二叉树</a></h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
  * 「遍历」的思路
  *&#x2F;
 var invertTree &#x3D; function(root) &#123;
@@ -1635,7 +1660,7 @@ var invertTree &#x3D; function(root) &#123;
 
 &#125;;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="101-对称二叉树"><a href="#101-对称二叉树" class="headerlink" title="101 对称二叉树"></a>101 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/description/">对称二叉树</a></h3><blockquote>
+<h4 id="101-对称二叉树"><a href="#101-对称二叉树" class="headerlink" title="101 对称二叉树"></a>101 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/description/">对称二叉树</a></h4><blockquote>
 <p>思路：可以将此棵二叉树沿对称轴分成两棵树：</p>
 <ol>
 <li>两棵树的左右子树均为null，那肯定是对称的</li>
@@ -1658,6 +1683,137 @@ var invertTree &#x3D; function(root) &#123;
 
     return  traverse(root,root)
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="114-二叉树展开为链表"><a href="#114-二叉树展开为链表" class="headerlink" title="114 二叉树展开为链表"></a>114 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/description/">二叉树展开为链表</a></h4><blockquote>
+<ol>
+<li>将 <code>root</code> 的左子树和右子树拉平。</li>
+<li>将 <code>root</code> 的右子树接到左子树下方，然后将整个左子树作为右子树。</li>
+</ol>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var flatten &#x3D; function(root) &#123;
+    
+    function traverse(root)&#123;
+        
+        if(root &#x3D;&#x3D; null) return
+
+        traverse(root.left)
+        traverse(root.right)
+
+        let left &#x3D; root.left
+        let right &#x3D; root.right
+
+        root.left &#x3D; null
+        root.right &#x3D; left
+
+        let p &#x3D; root
+        while(p.right)
+        &#123;
+            p &#x3D; p.right
+        &#125;
+        p.right &#x3D; right
+
+    &#125;
+
+    traverse(root)
+    return root
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="437-路径总和-III"><a href="#437-路径总和-III" class="headerlink" title="437 路径总和 III"></a>437 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum-iii/description/">路径总和 III</a></h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var pathSum &#x3D; function(root, targetSum) &#123;
+    let prefix &#x3D; new Map();
+    prefix.set(0, 1);
+    return dfs(root, prefix, 0, targetSum);
+&#125;;
+
+function dfs(root, prefix,currSum, targetSum)&#123;
+    if(root &#x3D;&#x3D; null) return 0
+    let res &#x3D; 0
+    currSum +&#x3D; root.val
+
+    res +&#x3D; prefix.get(currSum - targetSum) || 0
+
+    prefix.set(currSum,(prefix.get(currSum)||0)+1)
+    res +&#x3D; dfs(root.left, prefix, currSum, targetSum) + dfs(root.right, prefix, currSum, targetSum);
+    &#x2F;&#x2F; 这行代码是在遍历完当前节点的左子树和右子树后，回溯到当前节点的操作。它将当前路径和 currSum 在哈希表 prefix 中的计数减一。这是因为在回溯到当前节点后，当前路径和 currSum 不再有效，所以需要将其在哈希表中的计数减一。
+    prefix.set(currSum, prefix.get(currSum) - 1);
+
+    return res
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236 二叉树的最近公共祖先"></a>236 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/description/">二叉树的最近公共祖先</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var lowestCommonAncestor &#x3D; function(root, p, q) &#123;
+    if (root &#x3D;&#x3D;&#x3D; null) return null;
+    if (root &#x3D;&#x3D;&#x3D; p || root &#x3D;&#x3D;&#x3D; q) return root; &#x2F;&#x2F; 只有一个节点在root为根的树中
+
+    var left &#x3D; lowestCommonAncestor(root.left, p, q);
+    var right &#x3D; lowestCommonAncestor(root.right, p, q);
+
+     &#x2F;&#x2F; 情况 1
+     if (left !&#x3D;&#x3D; null &amp;&amp; right !&#x3D;&#x3D; null) &#123;
+        return root;
+    &#125;
+    &#x2F;&#x2F; 情况 2
+    if (left &#x3D;&#x3D;&#x3D; null &amp;&amp; right &#x3D;&#x3D;&#x3D; null) &#123;
+        return null;
+    &#125;
+    &#x2F;&#x2F; 情况 3
+    return left &#x3D;&#x3D;&#x3D; null ? right : left;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><blockquote>
+<p><strong>有效</strong> 二叉搜索树定义如下：</p>
+<ul>
+<li>节点的左子树只包含 <strong>小于</strong> 当前节点的数。</li>
+<li>节点的右子树只包含 <strong>大于</strong> 当前节点的数。</li>
+<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
+</ul>
+</blockquote>
+<h4 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108 将有序数组转换为二叉搜索树"></a>108 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/description/">将有序数组转换为二叉搜索树</a></h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var sortedArrayToBST &#x3D; function(nums) &#123;
+    if (!nums.length) return null;
+    let mid &#x3D; Math.floor(nums.length &#x2F; 2);
+    let root &#x3D; new TreeNode(nums[mid]);
+    root.left &#x3D; sortedArrayToBST(nums.slice(0, mid));
+    root.right &#x3D; sortedArrayToBST(nums.slice(mid + 1));
+    return root;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98 验证二叉搜索树"></a>98 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/description/">验证二叉搜索树</a></h3><p>初学者做这题很容易有误区：BST 不是左小右大么，那我只要检查 <code>root.val &gt; root.left.val</code> 且 <code>root.val &lt; root.right.val</code> 不就行了？</p>
+<blockquote>
+<p>这样是不对的，因为 BST 左小右大的特性是指 <code>root.val</code> 要比<strong>左子树的所有节点都更大，要比右子树的所有节点都小</strong>，你只检查左右两个子节点当然是不够的。</p>
+</blockquote>
+<p>正确解法是通过使用<strong>辅助函数</strong>，增加函数参数列表，在参数中携带额外信息，将这种约束传递给子树的所有节点，这也是二叉搜索树算法的一个小技巧吧。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var isValidBST &#x3D; function(root) &#123;
+    &#x2F;&#x2F; 正确解法是通过使用辅助函数，增加函数参数列表，在参数中携带额外信息，将这种约束传递给子树的所有节点，这也是二叉搜索树算法的一个小技巧吧。
+    return helper(root, null, null);
+
+&#125;;
+
+var helper &#x3D; function(root,min,max)
+&#123;
+    if(root &#x3D;&#x3D; null) return true
+    if(min !&#x3D; null &amp;&amp; root.val &lt;&#x3D; min.val) return false
+    if(max !&#x3D; null &amp;&amp; root.val &gt;&#x3D; max.val) return false
+     &#x2F;&#x2F; 限定左子树的最大值是root.val，右子树的最小值是root.val
+    return helper(root.left,min,root) &amp;&amp; helper(root.right,root,max)
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="230-二叉搜索树中第K小的元素"><a href="#230-二叉搜索树中第K小的元素" class="headerlink" title="230 二叉搜索树中第K小的元素"></a>230 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-smallest-element-in-a-bst/description/">二叉搜索树中第K小的元素</a></h3><blockquote>
+<p>注意：<strong>BST的中序遍历是升序的！</strong>所以可以通过维护变量找到第k小的元素，同理第k大的元素</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var kthSmallest &#x3D; function(root, k) &#123;
+    let res &#x3D; 0
+    let rank &#x3D; 0
+
+    const traverse &#x3D; function(root)&#123;
+        if(root &#x3D;&#x3D; null) return;
+
+        traverse(root.left)
+        rank++
+        if(rank &#x3D;&#x3D; k)
+        &#123;
+            res &#x3D; root.val
+            return
+        &#125;
+
+        traverse(root.right)
+    &#125;
+
+    traverse(root)
+    return res
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="普通数组"><a href="#普通数组" class="headerlink" title="普通数组"></a>普通数组</h2><h3 id="53-合并区间"><a href="#53-合并区间" class="headerlink" title="53 合并区间"></a>53 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals/description/">合并区间</a></h3><p>一个区间可以表示为 <code>[start, end]</code>，先按区间的 <code>start</code> 排序：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240321175708952.png" alt="image-20240321175708952"></p>
 <p><strong>显然，对于几个相交区间合并后的结果区间 <code>x</code>，<code>x.start</code> 一定是这些相交区间中 <code>start</code> 最小的，<code>x.end</code> 一定是这些相交区间中 <code>end</code> 最大的</strong>：</p>

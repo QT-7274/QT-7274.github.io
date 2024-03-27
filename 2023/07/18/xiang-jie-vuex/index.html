@@ -6,15 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="详解Vuex, QT-7274">
-    <meta name="description" content="Vuex
-概念
-专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对Vue应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。
+    <meta name="description" content="Vuex概念专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对Vue应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。
 
 
 使用场景
-
 多个组件依赖于同一状态
-来自不同组件的">
+来自不同组件的行为需">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -473,21 +470,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-26
+                    2024-03-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    10 分
                 </div>
                 
 
@@ -510,25 +507,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Vuex">Vuex</h2>
-<h3 id="概念">概念</h3>
-<p>专门在<code>Vue</code>中实现集中式状态（数据）管理的一个<code>Vue</code>插件，对<code>Vue</code>应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。</p>
+                <h2 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>专门在<code>Vue</code>中实现集中式状态（数据）管理的一个<code>Vue</code>插件，对<code>Vue</code>应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。</p>
 <p><img src="/medias/images/loading.gif" data-original="1643034632699-15503880-2c10-44e1-bf8f-c088d0896ba6.png" alt="img"></p>
 <p><img src="/medias/images/loading.gif" data-original="1643034632949-1f50dc65-b44d-4b00-bed1-10222a2e87e5.png" alt="img"></p>
-<h3 id="使用场景">使用场景</h3>
-<ol>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
 <li>多个组件依赖于同一状态</li>
 <li>来自不同组件的行为需要变更同一状态</li>
 </ol>
-<h3 id="工作原理">工作原理</h3>
-<p><img src="/medias/images/loading.gif" data-original="1643034632508-417c8676-569a-41e1-b7db-223fafbedfd7.png" alt="image.png"></p>
-<h3 id="搭建Vuex环境">搭建Vuex环境</h3>
-<ol>
-<li>
-<p>下载安装<code>vuex</code> <code>npm i vuex</code></p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p><img src="/medias/images/loading.gif" data-original="1643034632508-417c8676-569a-41e1-b7db-223fafbedfd7.png" alt="image.png"></p>
+<ul>
+<li>Vue Components：Vue组件。HTML页面上，负责接收用户操作等交互行为，执行dispatch方法触发对应action进行回应。</li>
+<li>dispatch：操作行为触发方法，是唯一能执行action的方法。</li>
+<li>actions：操作行为处理模块。负责处理Vue Components接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作。该模块提供了Promise的封装，以支持action的链式触发。</li>
+<li>commit：状态改变提交操作方法。对mutation进行提交，是唯一能执行mutation的方法。</li>
+<li>mutations：状态改变操作方法。是Vuex修改state的唯一推荐方法，其他修改方式在严格模式下将会报错。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些hook暴露出来，以进行state的监控等。</li>
+<li>state：页面状态管理容器对象。集中存储Vue components中data对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用Vue的细粒度数据响应机制来进行高效的状态更新。</li>
+<li>getters：state对象读取方法。图中没有单独列出该模块，应该被包含在了render中，Vue Components通过该方法读取全局state对象。</li>
+</ul>
+<h3 id="搭建Vuex环境"><a href="#搭建Vuex环境" class="headerlink" title="搭建Vuex环境"></a>搭建Vuex环境</h3><ol>
+<li><p>下载安装<code>vuex</code> <code>npm i vuex</code></p>
 </li>
-<li>
-<p>创建 <code>src/store/index.js</code> 该文件用于创建<code>Vuex</code>中最为核心的<code>store</code></p>
+<li><p>创建 <code>src/store/index.js</code> 该文件用于创建<code>Vuex</code>中最为核心的<code>store</code></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import Vue from &#39;vue&#39;
 import Vuex from &#39;vuex&#39;
 
@@ -545,8 +544,7 @@ export default new Vuex.Store(&#123;
 	state,
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>在 <code>src/main.js</code> 中创建<code>vm</code>时传入<code>store</code>配置项</p>
+<li><p>在 <code>src/main.js</code> 中创建<code>vm</code>时传入<code>store</code>配置项</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
 <span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
 <span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store'</span>
@@ -561,17 +559,13 @@ export default new Vuex.Store(&#123;
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
-<h3 id="使用Vuex编写">使用Vuex编写</h3>
-<p>Vuex的基本使用</p>
+<h3 id="使用Vuex编写"><a href="#使用Vuex编写" class="headerlink" title="使用Vuex编写"></a>使用Vuex编写</h3><p>Vuex的基本使用</p>
 <ol>
-<li>
-<p>初始化数据<code>state</code>，配置<code>actions</code>、<code>mutations</code>，操作文件<code>store.js</code></p>
+<li><p>初始化数据<code>state</code>，配置<code>actions</code>、<code>mutations</code>，操作文件<code>store.js</code></p>
 </li>
-<li>
-<p>组件中读取vuex中的数据<code>$store.state.数据</code></p>
+<li><p>组件中读取vuex中的数据<code>$store.state.数据</code></p>
 </li>
-<li>
-<p>组件中修改vuex中的数据<code>$store.dispatch('action中的方法名',数据)</code>或<code>$store.commit('mutations中的方法名',数据)</code></p>
+<li><p>组件中修改vuex中的数据<code>$store.dispatch(&#39;action中的方法名&#39;,数据)</code>或<code>$store.commit(&#39;mutations中的方法名&#39;,数据)</code></p>
 <p>注意：若没有网络请求或其他业务逻辑，组件中也可越过<code>acitons</code>，即不写<code>dispatch</code>，直接编写<code>commit</code></p>
 </li>
 </ol>
@@ -670,13 +664,10 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 	&#125;
 &lt;&#x2F;style&gt;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="getters配置项">getters配置项</h3>
-<ol>
-<li>
-<p>概念：当<code>state</code>中的数据需要经过加工后再使用时，可以使用<code>getters</code>加工，相当于全<strong>局计算属性</strong>。</p>
+<h3 id="getters配置项"><a href="#getters配置项" class="headerlink" title="getters配置项"></a>getters配置项</h3><ol>
+<li><p>概念：当<code>state</code>中的数据需要经过加工后再使用时，可以使用<code>getters</code>加工，相当于全<strong>局计算属性</strong>。</p>
 </li>
-<li>
-<p>在<code>store.js</code>中追加<code>getters</code>配置</p>
+<li><p>在<code>store.js</code>中追加<code>getters</code>配置</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">...</span><span class="token operator">...</span>
 <span class="token keyword">const</span> getters <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
 	<span class="token function">bigSum</span><span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -690,14 +681,11 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 	getters
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>组件中读取数据<code>$store.getters.bigSum</code></p>
+<li><p>组件中读取数据<code>$store.getters.bigSum</code></p>
 </li>
 </ol>
-<h3 id="四个map方法的使用">四个map方法的使用</h3>
-<ol>
-<li>
-<p><strong>mapState方法</strong>：用于帮助映射<code>state</code>中的数据为<strong>计算属性</strong></p>
+<h3 id="四个map方法的使用"><a href="#四个map方法的使用" class="headerlink" title="四个map方法的使用"></a>四个map方法的使用</h3><ol>
+<li><p><strong>mapState方法</strong>：用于帮助映射<code>state</code>中的数据为<strong>计算属性</strong></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;script&gt;
 	import &#123;mapState,mapGetters&#125; from &#39;vuex&#39;
 	export default &#123;
@@ -727,8 +715,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 	&#125;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p><strong>mapGetters方法</strong>：用于帮助映射<code>getters</code>中的数据为<strong>计算属性</strong></p>
+<li><p><strong>mapGetters方法</strong>：用于帮助映射<code>getters</code>中的数据为<strong>计算属性</strong></p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;script&gt;
 	import &#123;mapState,mapGetters&#125; from &#39;vuex&#39;
 	export default &#123;
@@ -751,8 +738,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 	&#125;
 &lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p><strong>mapActions方法</strong>：用于帮助生成<code>actions</code>对话的方法，即包含<code>$store.dispatch(xxx)</code>的函数</p>
+<li><p><strong>mapActions方法</strong>：用于帮助生成<code>actions</code>对话的方法，即包含<code>$store.dispatch(xxx)</code>的函数</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script<span class="token operator">></span>
 	<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>mapState<span class="token punctuation">,</span>mapGetters<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>
 	<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
@@ -778,8 +764,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 	<span class="token punctuation">&#125;</span>
 <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p><strong>mapMutations方法</strong>：用于帮助生成与<code>mutations</code>对话的方法，即包含<code>$store.commit(xxx)</code>的函数</p>
+<li><p><strong>mapMutations方法</strong>：用于帮助生成与<code>mutations</code>对话的方法，即包含<code>$store.commit(xxx)</code>的函数</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;script&gt;
 	import &#123;mapState,mapGetters&#125; from &#39;vuex&#39;
 	export default &#123;
@@ -809,13 +794,10 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 </blockquote>
 </li>
 </ol>
-<h3 id="模块化-命名空间">模块化+命名空间</h3>
-<ol>
-<li>
-<p>目的：让代码更好维护，让多种数据分类更加明确</p>
+<h3 id="模块化-命名空间"><a href="#模块化-命名空间" class="headerlink" title="模块化+命名空间"></a>模块化+命名空间</h3><ol>
+<li><p>目的：让代码更好维护，让多种数据分类更加明确</p>
 </li>
-<li>
-<p>修改<code>store.js</code></p>
+<li><p>修改<code>store.js</code></p>
 <p>为了解决不同模块命名冲突的问题，将不同模块的<code>namespaced: true</code>，之后在不同页面中引入<code>getters</code> <code>actions</code> <code>mutations</code>时，需要加上所属的模块名</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> countAbout <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
 	<span class="token literal-property property">namespaced</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -842,29 +824,25 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>开启命名空间后，组件中读取<code>state</code>数据</p>
+<li><p>开启命名空间后，组件中读取<code>state</code>数据</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 方式一：自己直接读取
 this.$store.state.personAbout.list
 &#x2F;&#x2F; 方式二：借助mapState读取
 ...mapState(&#39;countAbout&#39;, [&#39;sum&#39;,&#39;school&#39;,&#39;subject&#39;])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>开启命名空间后，组件中读取<code>getters</code>数据</p>
+<li><p>开启命名空间后，组件中读取<code>getters</code>数据</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 方式一：自己直接读取</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>getters<span class="token punctuation">[</span><span class="token string">'personAbout/firstPersonName'</span><span class="token punctuation">]</span>
 <span class="token comment">// 方式二：借助mapGetters读取</span>
 <span class="token operator">...</span><span class="token function">mapGetters</span><span class="token punctuation">(</span><span class="token string">'countAbout'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'bigSum'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>开启命名空间后，组件中调用<code>dispatch</code></p>
+<li><p>开启命名空间后，组件中调用<code>dispatch</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 方式一：自己直接dispatch</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'personAbout/addPersonWang'</span><span class="token punctuation">,</span>person<span class="token punctuation">)</span>
 <span class="token comment">// 方式二：借助mapActions：</span>
 <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token string">'countAbout'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">incrementOdd</span><span class="token operator">:</span> <span class="token string">'jiaOdd'</span><span class="token punctuation">,</span> <span class="token literal-property property">incrementWait</span><span class="token operator">:</span><span class="token string">'jiaWait'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>开启命名空间后，组件中调用<code>commit</code></p>
+<li><p>开启命名空间后，组件中调用<code>commit</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 方式一：自己直接commit</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'personAbout/ADD_PERSON'</span><span class="token punctuation">,</span>person<span class="token punctuation">)</span>
 <span class="token comment">// 方式二：借助mapMutations：</span>
