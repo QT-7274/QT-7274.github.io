@@ -467,21 +467,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-27
+                    2024-03-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    28.7k
+                    29.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    133 分
+                    136 分
                 </div>
                 
 
@@ -3275,6 +3275,77 @@ function adjustHeap(nums, i, map) &#123;
     stack.map((item, index) &#x3D;&gt; (stack[index] &#x3D; item[1] - item[0] + 1))
     return stack
   &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="大数"><a href="#大数" class="headerlink" title="大数"></a>大数</h2><h3 id="大数相加"><a href="#大数相加" class="headerlink" title="大数相加"></a>大数相加</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var addStrings &#x3D; function (num1, num2) &#123;
+    &#x2F;&#x2F; 此题需要考虑进位
+    let i &#x3D; num1.length - 1;
+    let j &#x3D; num2.length - 1;
+    let array &#x3D; [];
+    let carry &#x3D; 0
+    
+    while (i &gt;&#x3D; 0 || j &gt;&#x3D; 0 || carry !&#x3D;&#x3D; 0) &#123;
+        let val1 &#x3D; i &gt;&#x3D; 0 ? parseInt(num1[i]) : 0;
+        let val2 &#x3D; j &gt;&#x3D; 0 ? parseInt(num2[j]) : 0;
+        let sum &#x3D; val1 + val2 + carry;
+        array.unshift(sum % 10);
+        carry &#x3D; Math.floor(sum &#x2F; 10);
+        i--;
+        j--;
+    &#125;
+
+    return array.join(&#39;&#39;)
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="大数相减"><a href="#大数相减" class="headerlink" title="大数相减"></a>大数相减</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function compare(num1, num2) &#123;
+    if (num1.length &lt; num2.length)
+        return false;
+    else if (num1.length &gt; num2.length)
+        return true;
+    else
+        return num1 &gt; num2;
+&#125;
+
+function subtractString(num1, num2) &#123;
+    let sign &#x3D; &#39;+&#39;; &#x2F;&#x2F; 正负号
+    &#x2F;&#x2F; 让 num1 &gt; num2，如果 num1 &lt; num2，那么结果就是 -(num2 - num1)
+    &#x2F;&#x2F; 可以先将 num1 和 num2 交换，和前面情况统一
+    if (!compare(num1, num2)) &#123;
+        sign &#x3D; &#39;-&#39;;
+        let temp &#x3D; num2;
+        num2 &#x3D; num1;
+        num1 &#x3D; temp;
+    &#125;
+
+    let len1 &#x3D; num1.length - 1;
+    let len2 &#x3D; num2.length - 1;
+    let result &#x3D; &#39;&#39;;
+    let borrow &#x3D; 0; &#x2F;&#x2F; 借位
+
+    while (len1 &gt;&#x3D; 0 || len2 &gt;&#x3D; 0) &#123;
+        let n1 &#x3D; len1 &gt;&#x3D; 0 ? parseInt(num1[len1--]) : 0;
+        let n2 &#x3D; len2 &gt;&#x3D; 0 ? parseInt(num2[len2--]) : 0;
+
+        let num &#x3D; n1 - n2 - borrow;
+        borrow &#x3D; 0;
+        if (num &lt; 0) &#123; &#x2F;&#x2F; 需要向前借位
+            borrow &#x3D; 1;
+            num +&#x3D; 10;
+        &#125;
+        result &#x3D; num + result;
+    &#125;
+
+    &#x2F;&#x2F; 需要先翻转
+    result &#x3D; result.split(&#39;&#39;).reverse().join(&#39;&#39;);
+    &#x2F;&#x2F; 去掉前面没用的 &#39;0&#39;
+    let index &#x3D; 0;
+    while (index &lt; result.length &amp;&amp; result[index] &#x3D;&#x3D;&#x3D; &#39;0&#39;) &#123;
+        index++;
+    &#125;
+    &#x2F;&#x2F; 如果两个数相同，直接返回 &quot;0&quot;
+    if (index &#x3D;&#x3D;&#x3D; result.length)
+        return &quot;0&quot;;
+    if (sign &#x3D;&#x3D;&#x3D; &#39;+&#39;) &#x2F;&#x2F; 如果正数
+        return result.substring(index);
+    else return sign + result.substring(index); &#x2F;&#x2F; 负数需要返回
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="118-杨辉三角"><a href="#118-杨辉三角" class="headerlink" title="118 杨辉三角"></a>118 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pascals-triangle/description/">杨辉三角</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var generate &#x3D; function(numRows) &#123;
     let memo &#x3D; [];
     return dp(numRows);
