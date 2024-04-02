@@ -467,21 +467,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-29
+                    2024-04-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    26.8k
+                    26.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    131 分
+                    130 分
                 </div>
                 
 
@@ -1140,6 +1140,53 @@ console.log(myIndexOf(&#39;zhpp&#39;,&#39;pp&#39;)); &#x2F;&#x2F; 2<span aria-hi
 <span class="token keyword">let</span> ans <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">line</span> <span class="token operator">=></span> line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\s+</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> <span class="token function">Number</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 <span class="token comment">// trim 方法用于去除字符串的首尾空白字符，split('\n') 用于按照换行符分割字符串，split(/\s+/) 用于按照一个或多个空格分割字符串，map(Number) 用于将每个元素转换为数字。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="判断一个字符串是否为驼峰字符串"><a href="#判断一个字符串是否为驼峰字符串" class="headerlink" title="判断一个字符串是否为驼峰字符串"></a>判断一个字符串是否为驼峰字符串</h3><blockquote>
+<p> 例如：judge(&#39;ByteDance&#39;,&#39;BD&#39;) -&gt; true judge(&#39;Bytedance&#39;,&#39;BD&#39;) -&gt; false</p>
+</blockquote>
+<ul>
+<li><details><summary><b>答案</b></summary><p>
+
+
+</li>
+</ul>
+  <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function judge(str,abbr)&#123;
+    &#x2F;&#x2F; 使用正则表达式 &#x2F;[A-Z][a-z]*&#x2F;g 匹配字符串中的所有以大写字母开头的单词，并将它们的首字母取出来。
+  return str.match(&#x2F;[A-Z][a-z]*&#x2F;g).map(item&#x3D;&gt;item[0]).join(&#39;&#39;) &#x3D;&#x3D;&#x3D; abbr
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="压缩字符串"><a href="#压缩字符串" class="headerlink" title="压缩字符串"></a>压缩字符串</h3><blockquote>
+<p>例如：将abbccccaaa-&gt;a1b2c4a3</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let char &#x3D; &#39;abbccccaaa&#39;
+
+function ShortenStr(str) &#123;
+  let res &#x3D; &#39;&#39;
+  let count &#x3D; 1
+  for (let i &#x3D; 1; i &lt;&#x3D; str.length; i++) &#123;
+    if (str[i] &#x3D;&#x3D;&#x3D; str[i - 1]) &#123;
+      count++
+    &#125; else &#123;
+      res +&#x3D; str[i - 1] + count
+      count &#x3D; 1
+    &#125;
+  &#125;
+  return res
+&#125;
+
+console.log(ShortenChar(char))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="字符串转数字"><a href="#字符串转数字" class="headerlink" title="字符串转数字"></a>字符串转数字</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 如果不是大数的情况
+&#x2F;&#x2F; 1. parseInt
+let str &#x3D; &#39;123&#39;;
+let res &#x3D; parseInt(str);
+&#x2F;&#x2F; 2. +
+let res1 &#x3D; +str;
+&#x2F;&#x2F; 3. ~~
+let res2 &#x3D; ~~str;
+&#x2F;&#x2F; 4. Number
+let res3 &#x3D; Number(str);
+
+
+&#x2F;&#x2F; 如果是大数的情况
+let res4 &#x3D; BigInt(str);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="功能复现"><a href="#功能复现" class="headerlink" title="功能复现"></a>功能复现</h2><h3 id="手写用-ES6proxy-如何实现-arr-1-的访问"><a href="#手写用-ES6proxy-如何实现-arr-1-的访问" class="headerlink" title="手写用 ES6proxy 如何实现 arr[-1] 的访问"></a>手写用 ES6proxy 如何实现 arr[-1] 的访问</h3><ul>
 <li><p><details><summary><b>答案</b></summary></p>
 <p>
@@ -1572,48 +1619,109 @@ let merged &#x3D; [...new Set([...arr1,...arr2])];
 console.log(merged); &#x2F;&#x2F; 输出：[1 ,2 ,3 ,4 ，5]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>filter</p>
-</li>
-</ol>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> arr2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> merged <span class="token operator">=</span> arr1<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item<span class="token punctuation">,</span>index<span class="token punctuation">,</span>arr</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
 <span class="token comment">// 使用  indexOf()  方法判断当前元素在数组中的第一个索引位置是否与当前索引位置相同，如果相同则表示该元素是第一次出现，保留该元素。</span>
     <span class="token keyword">return</span> arr<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token operator">===</span> index<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>merged<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出：[1 ,2 ,3 ,4 ，5]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3><h2 id="字符串类-1"><a href="#字符串类-1" class="headerlink" title="字符串类"></a>字符串类</h2><h3 id="判断一个字符串是否为驼峰字符串"><a href="#判断一个字符串是否为驼峰字符串" class="headerlink" title="判断一个字符串是否为驼峰字符串"></a>判断一个字符串是否为驼峰字符串</h3><blockquote>
-<p> 例如：judge(&#39;ByteDance&#39;,&#39;BD&#39;) -&gt; true judge(&#39;Bytedance&#39;,&#39;BD&#39;) -&gt; false</p>
-</blockquote>
-<ul>
-<li><p><details><summary><b>答案</b></summary></p>
-<p>
-
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function judge(str,abbr)&#123;
-    &#x2F;&#x2F; 使用正则表达式 &#x2F;[A-Z][a-z]*&#x2F;g 匹配字符串中的所有以大写字母开头的单词，并将它们的首字母取出来。
-  return str.match(&#x2F;[A-Z][a-z]*&#x2F;g).map(item&#x3D;&gt;item[0]).join(&#39;&#39;) &#x3D;&#x3D;&#x3D; abbr
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>merged<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出：[1 ,2 ,3 ,4,5]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-</ul>
-<h3 id="压缩字符串"><a href="#压缩字符串" class="headerlink" title="压缩字符串"></a>压缩字符串</h3><blockquote>
-<p>例如：将abbccccaaa-&gt;a1b2c4a3</p>
-</blockquote>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let char &#x3D; &#39;abbccccaaa&#39;
-
-function ShortenStr(str) &#123;
-  let res &#x3D; &#39;&#39;
-  let count &#x3D; 1
-  for (let i &#x3D; 1; i &lt;&#x3D; str.length; i++) &#123;
-    if (str[i] &#x3D;&#x3D;&#x3D; str[i - 1]) &#123;
-      count++
-    &#125; else &#123;
-      res +&#x3D; str[i - 1] + count
-      count &#x3D; 1
-    &#125;
+</ol>
+<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><p>数组去重的十种方法：</p>
+<ol>
+<li><p>Set</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 2, 3, 2, 1];
+let uniqueArr &#x3D; [...new Set(arr)];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>Filter</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 2, 3, 2, 1];
+let uniqueArr &#x3D; arr.filter((item,index,array) &#x3D;&gt; array.indexOf(item) &#x3D;&#x3D;&#x3D; index);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>Reduce</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 2, 3 ,4 ,5 ,6];
+const result&#x3D;arr.reduce((unique,item)&#x3D;&gt;&#123;
+    return unique.includes(item)?unique:[...unique,item]
+  &#125;,[]);
+ console.log(result)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>Map</p>
+<pre class="line-numbers language-none"><code class="language-none">function uniq(arr)&#123;
+    const res&#x3D;new Map();
+    return arr.filter(a&#x3D;&gt;!res.has(a)&amp;&amp;res.set(a,a))
   &#125;
-  return res
+  uniq([0,-0,+0]) &#x2F;&#x2F; 输出[0,-0]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>双层循环 + splice</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123;
+let len&#x3D;array.length;
+for(let i&#x3D;0;i&lt;len;i++)&#123;
+ for(let j&#x3D;i+1;j&lt;len;j++)&#123;
+ if(array[i]&#x3D;&#x3D;array[j])&#123;
+ array.splice(j--,1);
+ &#125;
+ &#125;
+&#125;
+return array;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>排序后相邻比较</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123;
+array.sort();
+let temp&#x3D;[];
+for(let i&#x3D;0;i&lt;array.length;i++)&#123;
+if( array[i] !&#x3D;&#x3D; temp[temp.length-1])&#123;
+temp.push( array[i])
+&#125;
+&#125;
+return temp;
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>利用对象属性名称不能相同原理进行去重</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123; 
+var n&#x3D;&#123;&#125;,r&#x3D;[]; &#x2F;&#x2F;n为hash表,r为临时数组 
+for(var i&#x3D;0; i&lt;array.length; i++) &#x2F;&#x2F;遍历当前数组 
+&#123; 
+if (!n[array[i]]) &#x2F;&#x2F;如果hash表中没有当前项 
+&#123; 
+n[array[i]] &#x3D; true; &#x2F;&#x2F;存入hash表 
+r.push(array[i]); &#x2F;&#x2F;把当前数组的元素存入临时数组中
+ &#125; 
+&#125; 
+
+return r; 
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>includes方法:判断新数组是否含有老数组的某一项，没有则push进新数组</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(arr)&#123;
+let newArr&#x3D;[];
+for(let i&#x3D;0;i&lt;arr.length;i++)&#123;
+if(!newArr.includes(arr[i]))&#123;
+newArr.push(arr[i]);
+&#125;
+&#125;
+return newArr;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>lastIndexOf</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123;
+return array.filter((item,index,array)&#x3D;&gt;array.lastIndexOf(item)&#x3D;&#x3D;&#x3D;index);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>every</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123;
+let newArr&#x3D;[];
+for(let i&#x3D;0;i&lt;array.length;i++)&#123;
+if(newArr.every(item&#x3D;&gt;item!&#x3D;&#x3D;array[i]))&#123;
+newArr.push(array[i]);
+&#125;
 &#125;
 
-console.log(ShortenChar(char))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+return newArr;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
 <h2 id="算法类"><a href="#算法类" class="headerlink" title="算法类"></a>算法类</h2><h3 id="使用递归完成1到100的累加"><a href="#使用递归完成1到100的累加" class="headerlink" title="使用递归完成1到100的累加"></a>使用递归完成1到100的累加</h3><ul>
 <li><p><details><summary><b>答案</b></summary></p>
 <p>
@@ -2257,7 +2365,40 @@ let a &#x3D; createFunction();
 console.log(a()); &#x2F;&#x2F; 输出：1
 console.log(a()); &#x2F;&#x2F; 输出：2
 console.log(a()); &#x2F;&#x2F; 输出：1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h3><h2 id="原理类"><a href="#原理类" class="headerlink" title="原理类"></a>原理类</h2><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function deepClone(obj, hash &#x3D; new WeakMap()) &#123;
+<h3 id="实现一个同时实现sum-x-y-和sum-x-y"><a href="#实现一个同时实现sum-x-y-和sum-x-y" class="headerlink" title="实现一个同时实现sum(x,y)和sum(x)(y)"></a>实现一个同时实现sum(x,y)和sum(x)(y)</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 答案一
+function sum(a,b)&#123;
+  if(b) &#123;
+    return a+b
+  &#125;else&#123;
+    return function(c)&#123;
+      return a+c
+    &#125;
+  &#125;
+&#125;
+&#x2F;&#x2F; 答案二
+function sum()&#123;
+  var arg&#x3D;arguments
+  if(arg.length&#x3D;&#x3D;2) &#123;
+    return arg[0]+arg[1];
+  &#125;else&#123;
+    return function(c)&#123;
+      return arg[0]+c
+    &#125;
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="柯里化函数"><a href="#柯里化函数" class="headerlink" title="柯里化函数"></a>柯里化函数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function myCurrying(fn) &#123;
+  function curried(...args) &#123;
+    if (args.length &gt;&#x3D; fn.length) &#123;
+      return fn.apply(this, args);
+    &#125; else &#123;
+      return function (...args2) &#123;
+        return curried.apply(this, args.concat(args2));
+      &#125;;
+    &#125;
+  &#125;
+  return curried;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3><h2 id="原理类"><a href="#原理类" class="headerlink" title="原理类"></a>原理类</h2><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function deepClone(obj, hash &#x3D; new WeakMap()) &#123;
   if (obj &#x3D;&#x3D;&#x3D; null) return obj; &#x2F;&#x2F; 如果是null或者undefined我就不进行拷贝操作
   if (obj instanceof Date) return new Date(obj);
   if (obj instanceof RegExp) return new RegExp(obj);
@@ -3477,7 +3618,90 @@ runningTask--;
 return null;
 &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="应用类"><a href="#应用类" class="headerlink" title="应用类"></a>应用类</h2><h3 id="手写防抖（debounce）"><a href="#手写防抖（debounce）" class="headerlink" title="手写防抖（debounce）"></a>手写防抖（debounce）</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// debounce</span>
+<h3 id="封装一个工具函数输入一个promiseA返回一个promiseB如果超过1s没返回则抛出异常，如果正常则输出正确的值。"><a href="#封装一个工具函数输入一个promiseA返回一个promiseB如果超过1s没返回则抛出异常，如果正常则输出正确的值。" class="headerlink" title="封装一个工具函数输入一个promiseA返回一个promiseB如果超过1s没返回则抛出异常，如果正常则输出正确的值。"></a>封装一个工具函数输入一个promiseA返回一个promiseB如果超过1s没返回则抛出异常，如果正常则输出正确的值。</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function promiseUtil(promise) &#123;
+  return Promise.race([
+    promise,
+    new Promise((_, reject) &#x3D;&gt; &#123;
+      setTimeout(() &#x3D;&gt; &#123;
+        reject(&quot;error&quot;);
+      &#125;, 1000);
+    &#125;),
+  ]);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="请求5s未完成就终止（和上一个题其实是一样的）"><a href="#请求5s未完成就终止（和上一个题其实是一样的）" class="headerlink" title="请求5s未完成就终止（和上一个题其实是一样的）"></a>请求5s未完成就终止（和上一个题其实是一样的）</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const funWait &#x3D; (call, timeout &#x3D; 5000) &#x3D;&gt; &#123;
+  let wait &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
+    setTimeout(() &#x3D;&gt; &#123;
+      reject(&#39;请求超时&#39;)
+    &#125;, timeout)
+  &#125;)
+  return Promise.race([call(), wait])
+&#125;
+
+const t &#x3D; () &#x3D;&gt; new Promise(resolve &#x3D;&gt; setTimeout(resolve, 4000))
+const t2 &#x3D; () &#x3D;&gt; new Promise(resolve &#x3D;&gt; setTimeout(resolve, 6000))
+funWait(t).then(res &#x3D;&gt; &#123;
+  console.log(&quot;t1 resolve&quot;)
+&#125;).catch(err &#x3D;&gt; &#123;
+  console.log(&quot;t1 timeout&quot;)
+&#125;)
+funWait(t2).then(res &#x3D;&gt; &#123;
+  console.log(&quot;t2 resolve&quot;)
+&#125;).catch(err &#x3D;&gt; &#123;
+  console.log(&quot;t2 timeout&quot;, err)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Promise-retry-超时重新请求，并在重试一定次数依然失败时输出缓存内容"><a href="#Promise-retry-超时重新请求，并在重试一定次数依然失败时输出缓存内容" class="headerlink" title="Promise.retry 超时重新请求，并在重试一定次数依然失败时输出缓存内容"></a>Promise.retry 超时重新请求，并在重试一定次数依然失败时输出缓存内容</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * 超时重新请求，并在重试一定次数依然失败时输出缓存内容
+ * @param &#123;*&#125; promiseFactory 一个返回 Promise 的函数，表示要执行的异步操作。
+ * @param &#123;*&#125; maxRetries 一个整数，表示最大的重试次数。
+ * @param &#123;*&#125; timeout 一个整数，表示每次重试的间隔时间（单位为毫秒）。
+ * @param &#123;*&#125; cache 一个可选的参数，表示缓存的内容，如果重试多次依然失败，则会返回该缓存内容。
+ * @returns promise
+ */</span>
+<span class="token keyword">function</span> <span class="token function">retry</span><span class="token punctuation">(</span><span class="token parameter">promiseFactory<span class="token punctuation">,</span> maxRetries<span class="token punctuation">,</span> timeout<span class="token punctuation">,</span> cache<span class="token operator">=</span><span class="token keyword">null</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> retries <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">executePromise</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token function">promiseFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>resolve<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          retries<span class="token operator">++</span><span class="token punctuation">;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>retries <span class="token operator">>=</span> maxRetries<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cache<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+              <span class="token function">resolve</span><span class="token punctuation">(</span>cache<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+              <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+          <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">setTimeout</span><span class="token punctuation">(</span>executePromise<span class="token punctuation">,</span> timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">executePromise</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// ----------test----------</span>
+<span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">fetchData</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 返回一个 Promise 对象，表示异步请求数据</span>
+    <span class="token keyword">return</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'http://example.com/data'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token operator">=></span> response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 处理数据</span>
+        <span class="token keyword">return</span> data<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  <span class="token function">retry</span><span class="token punctuation">(</span>fetchData<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">,</span> <span class="token string">'缓存内容'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 成功获取数据</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 请求失败或超时，并且重试多次依然失败</span>
+      console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h3><h2 id="应用类"><a href="#应用类" class="headerlink" title="应用类"></a>应用类</h2><h3 id="JavaScript常规应用实现"><a href="#JavaScript常规应用实现" class="headerlink" title="JavaScript常规应用实现"></a>JavaScript常规应用实现</h3><h4 id="手写防抖（debounce）"><a href="#手写防抖（debounce）" class="headerlink" title="手写防抖（debounce）"></a>手写防抖（debounce）</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// debounce</span>
 <span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> delay<span class="token operator">=</span><span class="token number">500</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// timer 写在闭包中，因此防抖也是闭包的一个应用</span>
     <span class="token keyword">let</span> timer <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
@@ -3497,7 +3721,7 @@ return null;
 input1<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'keyup'</span><span class="token punctuation">,</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>input1<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="手写节流（throttle）"><a href="#手写节流（throttle）" class="headerlink" title="手写节流（throttle）"></a>手写节流（throttle）</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 节流</span>
+<h4 id="手写节流（throttle）"><a href="#手写节流（throttle）" class="headerlink" title="手写节流（throttle）"></a>手写节流（throttle）</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 节流</span>
 <span class="token keyword">function</span> <span class="token function">throttle</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> delay <span class="token operator">=</span> <span class="token number">100</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">let</span> timer <span class="token operator">=</span> <span class="token keyword">null</span>
 
@@ -3523,7 +3747,47 @@ div1<span class="token punctuation">.</span><span class="token function">addEven
 <p>防抖函数的作用是在指定的时间间隔内，<strong>只有最后一次函数调用会被执行</strong>。当连续触发函数时，防抖函数会清除之前设置的定时器，并重新设置一个新的定时器，延迟一段时间后执行函数。这样可以确保只有在指定的时间间隔内没有新的函数调用时，才会执行函数。   </p>
 <p>节流函数的作用是在指定的时间间隔内，限制函数的执行频率。当连续触发函数时，节流函数会在<strong>指定的时间间隔内执行一次函数</strong>，然后<strong>忽略后续的函数调用</strong>，直到过了指定的时间间隔后，才会再次执行函数。 </p>
 </blockquote>
-<h3 id="DOM题目"><a href="#DOM题目" class="headerlink" title="DOM题目"></a>DOM题目</h3><blockquote>
+<h4 id="判断两个对象是否相等"><a href="#判断两个对象是否相等" class="headerlink" title="判断两个对象是否相等"></a>判断两个对象是否相等</h4><h5 id="调库"><a href="#调库" class="headerlink" title="调库"></a>调库</h5><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;*
+ * @param x &#123;Object&#125; 对象1
+ * @param y &#123;Object&#125; 对象2
+ * @return  &#123;Boolean&#125; true 为相等，false 为不等
+ *&#x2F;
+
+console.log(_.isEqual(x, y))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;*
+ * @param x &#123;Object&#125; 对象1
+ * @param y &#123;Object&#125; 对象2
+ * @return  &#123;Boolean&#125; true 为相等，false 为不等
+ *&#x2F;
+
+const deepEqual &#x3D; function(x, y) &#123;
+    &#x2F;&#x2F; 指向同一内存时
+    if (x &#x3D;&#x3D;&#x3D; y) &#123;
+        return true;
+    &#125; else if ((typeof x &#x3D;&#x3D;&#x3D; &#39;object&#39; &amp;&amp; x !&#x3D; null) &amp;&amp; (typeof y &#x3D;&#x3D;&#x3D; &#39;object&#39; &amp;&amp; y !&#x3D; null)) &#123;
+        if (Object.keys(x).length !&#x3D; Object.keys(y).length) &#123;
+            return false;
+        &#125;
+        for (let prop in x) &#123;
+            if (y.hasOwnProperty(prop)) &#123;
+                if (!deepEqual(x[prop], y[prop])) &#123;
+                    return false;
+                &#125;
+            &#125; else &#123;
+                return false;
+            &#125;
+        &#125; 
+        return true;
+    &#125; 
+    return false;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>实现代码中，以下边界情况无法处理：</p>
+<ul>
+<li>其中某个属性本身是一个对象</li>
+<li>某个属性的值为 <code>NaN</code></li>
+<li>一个对象的属性的值为 <code>undefined</code>，另一个对象中没有这个属性</li>
+</ul>
+<h3 id="-2"><a href="#-2" class="headerlink" title=" "></a> </h3><h3 id="一次性处理海量DOM节点"><a href="#一次性处理海量DOM节点" class="headerlink" title="一次性处理海量DOM节点"></a>一次性处理海量DOM节点</h3><blockquote>
 <p>假设一个 <code>ul</code> 下有一万个 <code>li</code>，<code>li</code> 的 <code>innerHTML</code> 是从 <code>0</code> 到 <code>9999</code>，当点击某个 <code>li</code> 时输出该 <code>li</code> 代表的值，如何实现</p>
 </blockquote>
 <p>采用事件委托：</p>
@@ -3580,12 +3844,12 @@ loadImg(url).then(img &#x3D;&gt; &#123;
 const observer &#x3D; new IntersectionObserver(entries &#x3D;&gt; &#123;
     entries.forEach(entry &#x3D;&gt; &#123;
         &#x2F;&#x2F; 判断当前元素是否可见
-        if (entry.isIntersecting) &#123;
+        if (entry.isIntersecting) &#123; &#x2F;&#x2F; 如果一个条目时交叉的（即对应的元素在视口中）
             &#x2F;&#x2F; 创建一个自定义属性data-src存放真正要显示的图片路径，原本img自带的src放一张默认图片
             const img &#x3D; entry.target
-            const data_src &#x3D; img.getAttribute(&#39;data-src&#39;)
+            const data_src &#x3D; img.getAttribute(&#39;data-src&#39;) &#x2F;&#x2F; 该属性包含了真正的图片URL
             img.setAttribute(&#39;src&#39;, data_src)
-            &#x2F;&#x2F; 解除观察，有几张图片就触发几次
+            &#x2F;&#x2F; 解除观察，有几张图片就触发几次，因为图片已经开始加载
             observer.unobserve(img)
         &#125;
     &#125;)
@@ -3595,133 +3859,6 @@ images.forEach(image &#x3D;&gt; &#123;
     &#x2F;&#x2F; 对每一个图片对象进行观察
     observer.observe(image)
 &#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><p>数组去重的十种方法：</p>
-<ol>
-<li><p>Set</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 2, 3, 2, 1];
-let uniqueArr &#x3D; [...new Set(arr)];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><p>Filter</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 2, 3, 2, 1];
-let uniqueArr &#x3D; arr.filter((item,index,array) &#x3D;&gt; array.indexOf(item) &#x3D;&#x3D;&#x3D; index);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><p>Reduce</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let arr &#x3D; [1, 2, 3 ,4 ,5 ,6];
-const result&#x3D;arr.reduce((unique,item)&#x3D;&gt;&#123;
-    return unique.includes(item)?unique:[...unique,item]
-  &#125;,[]);
- console.log(result)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>Map</p>
-<pre class="line-numbers language-none"><code class="language-none">function uniq(arr)&#123;
-    const res&#x3D;new Map();
-    return arr.filter(a&#x3D;&gt;!res.has(a)&amp;&amp;res.set(a,a))
-  &#125;
-  uniq([0,-0,+0]) &#x2F;&#x2F; 输出[0,-0]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>双层循环 + splice</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123;
-let len&#x3D;array.length;
-for(let i&#x3D;0;i&lt;len;i++)&#123;
- for(let j&#x3D;i+1;j&lt;len;j++)&#123;
- if(array[i]&#x3D;&#x3D;array[j])&#123;
- array.splice(j--,1);
- &#125;
- &#125;
-&#125;
-return array;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>排序后相邻比较</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123;
-array.sort();
-let temp&#x3D;[];
-for(let i&#x3D;0;i&lt;array.length;i++)&#123;
-if( array[i] !&#x3D;&#x3D; temp[temp.length-1])&#123;
-temp.push( array[i])
-&#125;
-&#125;
-return temp;
-&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>利用对象属性名称不能相同原理进行去重</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123; 
-var n&#x3D;&#123;&#125;,r&#x3D;[]; &#x2F;&#x2F;n为hash表,r为临时数组 
-for(var i&#x3D;0; i&lt;array.length; i++) &#x2F;&#x2F;遍历当前数组 
-&#123; 
-if (!n[array[i]]) &#x2F;&#x2F;如果hash表中没有当前项 
-&#123; 
-n[array[i]] &#x3D; true; &#x2F;&#x2F;存入hash表 
-r.push(array[i]); &#x2F;&#x2F;把当前数组的元素存入临时数组中
- &#125; 
-&#125; 
-
-return r; 
-
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>includes方法:判断新数组是否含有老数组的某一项，没有则push进新数组</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(arr)&#123;
-let newArr&#x3D;[];
-for(let i&#x3D;0;i&lt;arr.length;i++)&#123;
-if(!newArr.includes(arr[i]))&#123;
-newArr.push(arr[i]);
-&#125;
-&#125;
-return newArr;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>lastIndexOf</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123;
-return array.filter((item,index,array)&#x3D;&gt;array.lastIndexOf(item)&#x3D;&#x3D;&#x3D;index);
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>every</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function dedupe(array)&#123;
-let newArr&#x3D;[];
-for(let i&#x3D;0;i&lt;array.length;i++)&#123;
-if(newArr.every(item&#x3D;&gt;item!&#x3D;&#x3D;array[i]))&#123;
-newArr.push(array[i]);
-&#125;
-&#125;
-
-return newArr;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ol>
-<h3 id="实现一个同时实现sum-x-y-和sum-x-y"><a href="#实现一个同时实现sum-x-y-和sum-x-y" class="headerlink" title="实现一个同时实现sum(x,y)和sum(x)(y)"></a>实现一个同时实现sum(x,y)和sum(x)(y)</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 答案一
-function sum(a,b)&#123;
-  if(b) &#123;
-    return a+b
-  &#125;else&#123;
-    return function(c)&#123;
-      return a+c
-    &#125;
-  &#125;
-&#125;
-&#x2F;&#x2F; 答案二
-function sum()&#123;
-  var arg&#x3D;arguments
-  if(arg.length&#x3D;&#x3D;2) &#123;
-    return arg[0]+arg[1];
-  &#125;else&#123;
-    return function(c)&#123;
-      return arg[0]+c
-    &#125;
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="柯里化函数"><a href="#柯里化函数" class="headerlink" title="柯里化函数"></a>柯里化函数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function myCurrying(fn) &#123;
-  function curried(...args) &#123;
-    if (args.length &gt;&#x3D; fn.length) &#123;
-      return fn.apply(this, args);
-    &#125; else &#123;
-      return function (...args2) &#123;
-        return curried.apply(this, args.concat(args2));
-      &#125;;
-    &#125;
-  &#125;
-  return curried;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="无限动画"><a href="#无限动画" class="headerlink" title="无限动画"></a>无限动画</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const box &#x3D; document.getElementById(&#39;box&#39;);
 let rotation &#x3D; 0; &#x2F;&#x2F; 初始旋转角度为 0
 
@@ -3732,26 +3869,6 @@ function animate() &#123;
 &#125;
 
 requestAnimationFrame(animate); &#x2F;&#x2F; 启动动画<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="一个字符串中是否出现某串字符-出现的话返回索引"><a href="#一个字符串中是否出现某串字符-出现的话返回索引" class="headerlink" title="一个字符串中是否出现某串字符,出现的话返回索引"></a>一个字符串中是否出现某串字符,出现的话返回索引</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function getIndexOf(str, sub) &#123;
-  const reg &#x3D; new RegExp(sub, &#39;g&#39;);
-  let result &#x3D; -1;
-  str.replaceAll(reg, (_, index) &#x3D;&gt; &#123; if (result &#x3D;&#x3D;&#x3D; -1 &amp;&amp; index !&#x3D;&#x3D; void 0) result &#x3D; index &#125;);
-  return result;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="字符串转数字"><a href="#字符串转数字" class="headerlink" title="字符串转数字"></a>字符串转数字</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 如果不是大数的情况
-&#x2F;&#x2F; 1. parseInt
-let str &#x3D; &#39;123&#39;;
-let res &#x3D; parseInt(str);
-&#x2F;&#x2F; 2. +
-let res1 &#x3D; +str;
-&#x2F;&#x2F; 3. ~~
-let res2 &#x3D; ~~str;
-&#x2F;&#x2F; 4. Number
-let res3 &#x3D; Number(str);
-
-
-&#x2F;&#x2F; 如果是大数的情况
-let res4 &#x3D; BigInt(str);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="如何用-ajax-原生实现一个-post-请求"><a href="#如何用-ajax-原生实现一个-post-请求" class="headerlink" title="如何用 ajax 原生实现一个 post 请求"></a>如何用 ajax 原生实现一个 <code>post</code> 请求</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function ajax_post(url, data) &#123;
     &#x2F;&#x2F; 1. 异步对象 ajax
     var ajax &#x3D; new XMLHttpRequest();
@@ -3807,46 +3924,6 @@ let res4 &#x3D; BigInt(str);<span aria-hidden="true" class="line-numbers-rows"><
     <span class="token keyword">await</span> <span class="token function">delayPrint</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="判断两个对象是否相等"><a href="#判断两个对象是否相等" class="headerlink" title="判断两个对象是否相等"></a>判断两个对象是否相等</h3><h4 id="调库"><a href="#调库" class="headerlink" title="调库"></a>调库</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;*
- * @param x &#123;Object&#125; 对象1
- * @param y &#123;Object&#125; 对象2
- * @return  &#123;Boolean&#125; true 为相等，false 为不等
- *&#x2F;
-
-console.log(_.isEqual(x, y))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;*
- * @param x &#123;Object&#125; 对象1
- * @param y &#123;Object&#125; 对象2
- * @return  &#123;Boolean&#125; true 为相等，false 为不等
- *&#x2F;
-
-const deepEqual &#x3D; function(x, y) &#123;
-    &#x2F;&#x2F; 指向同一内存时
-    if (x &#x3D;&#x3D;&#x3D; y) &#123;
-        return true;
-    &#125; else if ((typeof x &#x3D;&#x3D;&#x3D; &#39;object&#39; &amp;&amp; x !&#x3D; null) &amp;&amp; (typeof y &#x3D;&#x3D;&#x3D; &#39;object&#39; &amp;&amp; y !&#x3D; null)) &#123;
-        if (Object.keys(x).length !&#x3D; Object.keys(y).length) &#123;
-            return false;
-        &#125;
-        for (let prop in x) &#123;
-            if (y.hasOwnProperty(prop)) &#123;
-                if (!deepEqual(x[prop], y[prop])) &#123;
-                    return false;
-                &#125;
-            &#125; else &#123;
-                return false;
-            &#125;
-        &#125; 
-        return true;
-    &#125; 
-    return false;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>实现代码中，以下边界情况无法处理：</p>
-<ul>
-<li>其中某个属性本身是一个对象</li>
-<li>某个属性的值为 <code>NaN</code></li>
-<li>一个对象的属性的值为 <code>undefined</code>，另一个对象中没有这个属性</li>
-</ul>
 <h3 id="正则表达式模板字符串"><a href="#正则表达式模板字符串" class="headerlink" title="正则表达式模板字符串"></a>正则表达式模板字符串</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token class-name">String</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">render</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&#123;&#123;[.\s\S]*?&#125;&#125;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token parameter">match</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> match<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">""</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -3985,37 +4062,7 @@ runStep()<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <span class="token punctuation">&#125;</span>
 
 <span class="token function">runStep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="超时工具函数实现"><a href="#超时工具函数实现" class="headerlink" title="超时工具函数实现"></a>超时工具函数实现</h3><h4 id="封装一个工具函数输入一个promiseA返回一个promiseB如果超过1s没返回则抛出异常如果正常则输出正确的值。"><a href="#封装一个工具函数输入一个promiseA返回一个promiseB如果超过1s没返回则抛出异常如果正常则输出正确的值。" class="headerlink" title="封装一个工具函数输入一个promiseA返回一个promiseB如果超过1s没返回则抛出异常如果正常则输出正确的值。"></a>封装一个工具函数输入一个promiseA返回一个promiseB如果超过1s没返回则抛出异常如果正常则输出正确的值。</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function promiseUtil(promise) &#123;
-  return Promise.race([
-    promise,
-    new Promise((_, reject) &#x3D;&gt; &#123;
-      setTimeout(() &#x3D;&gt; &#123;
-        reject(&quot;error&quot;);
-      &#125;, 1000);
-    &#125;),
-  ]);
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="请求5s未完成就终止（和上一个题其实是一样的）"><a href="#请求5s未完成就终止（和上一个题其实是一样的）" class="headerlink" title="请求5s未完成就终止（和上一个题其实是一样的）"></a>请求5s未完成就终止（和上一个题其实是一样的）</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const funWait &#x3D; (call, timeout &#x3D; 5000) &#x3D;&gt; &#123;
-  let wait &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
-    setTimeout(() &#x3D;&gt; &#123;
-      reject(&#39;请求超时&#39;)
-    &#125;, timeout)
-  &#125;)
-  return Promise.race([call(), wait])
-&#125;
-const t &#x3D; () &#x3D;&gt; new Promise(resolve &#x3D;&gt; setTimeout(resolve, 4000))
-const t2 &#x3D; () &#x3D;&gt; new Promise(resolve &#x3D;&gt; setTimeout(resolve, 6000))
-funWait(t).then(res &#x3D;&gt; &#123;
-  console.log(&quot;t1 resolve&quot;)
-&#125;).catch(err &#x3D;&gt; &#123;
-  console.log(&quot;t1 timeout&quot;)
-&#125;)
-funWait(t2).then(res &#x3D;&gt; &#123;
-  console.log(&quot;t2 resolve&quot;)
-&#125;).catch(err &#x3D;&gt; &#123;
-  console.log(&quot;t2 timeout&quot;, err)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="sleep函数实现"><a href="#sleep函数实现" class="headerlink" title="sleep函数实现"></a>sleep函数实现</h4><p><code>sleep</code>  函数是一种用于在代码执行过程中暂停一段时间的函数。它通常用于模拟延迟操作或控制代码的执行速度。</p>
+<h3 id="sleep函数实现"><a href="#sleep函数实现" class="headerlink" title="sleep函数实现"></a>sleep函数实现</h3><p><code>sleep</code>  函数是一种用于在代码执行过程中暂停一段时间的函数。它通常用于模拟延迟操作或控制代码的执行速度。</p>
 <h5 id="普通版本"><a href="#普通版本" class="headerlink" title="普通版本"></a>普通版本</h5><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function sleep (slTime) &#123;
     let start &#x3D; new Date()
     while(new Date - start &lt;&#x3D; slTime) &#123;&#125;
@@ -4043,62 +4090,6 @@ console.log(t6 - t5)<span aria-hidden="true" class="line-numbers-rows"><span></s
 	        <span class="token keyword">const</span> t2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>t2 <span class="token operator">-</span> t1<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="Promise-retry-超时重新请求，并在重试一定次数依然失败时输出缓存内容"><a href="#Promise-retry-超时重新请求，并在重试一定次数依然失败时输出缓存内容" class="headerlink" title="Promise.retry 超时重新请求，并在重试一定次数依然失败时输出缓存内容"></a>Promise.retry 超时重新请求，并在重试一定次数依然失败时输出缓存内容</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
- * 超时重新请求，并在重试一定次数依然失败时输出缓存内容
- * @param &#123;*&#125; promiseFactory 一个返回 Promise 的函数，表示要执行的异步操作。
- * @param &#123;*&#125; maxRetries 一个整数，表示最大的重试次数。
- * @param &#123;*&#125; timeout 一个整数，表示每次重试的间隔时间（单位为毫秒）。
- * @param &#123;*&#125; cache 一个可选的参数，表示缓存的内容，如果重试多次依然失败，则会返回该缓存内容。
- * @returns promise
- */</span>
-<span class="token keyword">function</span> <span class="token function">retry</span><span class="token punctuation">(</span><span class="token parameter">promiseFactory<span class="token punctuation">,</span> maxRetries<span class="token punctuation">,</span> timeout<span class="token punctuation">,</span> cache<span class="token operator">=</span><span class="token keyword">null</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> retries <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> <span class="token function-variable function">executePromise</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-      <span class="token function">promiseFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>resolve<span class="token punctuation">)</span>
-        <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-          retries<span class="token operator">++</span><span class="token punctuation">;</span>
-          <span class="token keyword">if</span> <span class="token punctuation">(</span>retries <span class="token operator">>=</span> maxRetries<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>cache<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-              <span class="token function">resolve</span><span class="token punctuation">(</span>cache<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-              <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-          <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-            <span class="token function">setTimeout</span><span class="token punctuation">(</span>executePromise<span class="token punctuation">,</span> timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token function">executePromise</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">// ----------test----------</span>
-<span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">const</span> <span class="token function-variable function">fetchData</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 返回一个 Promise 对象，表示异步请求数据</span>
-    <span class="token keyword">return</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'http://example.com/data'</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token operator">=></span> response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 处理数据</span>
-        <span class="token keyword">return</span> data<span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-  <span class="token function">retry</span><span class="token punctuation">(</span>fetchData<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">,</span> <span class="token string">'缓存内容'</span><span class="token punctuation">)</span>
-    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-      <span class="token comment">// 成功获取数据</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-      <span class="token comment">// 请求失败或超时，并且重试多次依然失败</span>
-      console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="并发多个请求，返回先得到response的。函数输入为url数组，输出为第一个返回的response的结果。"><a href="#并发多个请求，返回先得到response的。函数输入为url数组，输出为第一个返回的response的结果。" class="headerlink" title="并发多个请求，返回先得到response的。函数输入为url数组，输出为第一个返回的response的结果。"></a>并发多个请求，返回先得到response的。函数输入为url数组，输出为第一个返回的response的结果。</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function main(urls:string[]) &#123;
-const promises&#x3D; urls.map((url)&#x3D;&gt;axios.get(url))
-return Promise.race(promises)
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="JS异步数据流，实现并发异步请求，结果顺序输出"><a href="#JS异步数据流，实现并发异步请求，结果顺序输出" class="headerlink" title="JS异步数据流，实现并发异步请求，结果顺序输出"></a>JS异步数据流，实现并发异步请求，结果顺序输出</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;JS异步数据流，实现并发异步请求，结果顺序输出
 const timer &#x3D; [3000, 2000, 1000, 5000, 5000];
 function myTimeout(timer) &#123;
@@ -4347,7 +4338,8 @@ console.log(obj) &#x2F;&#x2F;&#123;b:&#39;哈哈哈&#39;&#125;<span aria-hidden=
         map.has(item) ? map.set(item, map.get(item) + 1) : map.set(item, 1);
     &#125;
     return Array.from(map.entries()).sort((a, b) &#x3D;&gt; b[1] - a[1]).slice(0, 3);
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &#x2F;&#x2F; 如果只需要键，那么.map(item&#x3D;&gt;item[0])
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="URL反转"><a href="#URL反转" class="headerlink" title="URL反转"></a>URL反转</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 时间复杂度O(n) 空间复杂度O(1)
 function reverseURL(url) &#123;
     const arr &#x3D; [];
@@ -4414,16 +4406,6 @@ function judge(A, B) &#123;
   return -1;
 &#125;
 console.log(judge(A, B));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="多行字符串转二维数组"><a href="#多行字符串转二维数组" class="headerlink" title="多行字符串转二维数组"></a>多行字符串转二维数组</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const str &#x3D; &#96; 1 21    3
-4 5  6
-7   8 9 &#96;;        &#x2F;* 多行字符串要用反引号 *&#x2F;
-const arr &#x3D; str.split(&#39;\n&#39;); &#x2F;* 根据换行符分割 *&#x2F;
-const res &#x3D; [];
-for (const subarr of arr) &#123;
-  let line &#x3D; subarr.trim().split(&#x2F;\s+&#x2F;g)
-  res.push(line);
-&#125;
-console.log(res);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="实现内存函数缓存函数"><a href="#实现内存函数缓存函数" class="headerlink" title="实现内存函数缓存函数"></a>实现内存函数缓存函数</h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const cachedFn &#x3D; (function (fn) &#123;
   let cache &#x3D; &#123;&#125;;
   return function (...args) &#123;

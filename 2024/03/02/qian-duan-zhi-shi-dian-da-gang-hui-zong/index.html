@@ -462,21 +462,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-29
+                    2024-04-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    14k
+                    17k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    52 分
+                    64 分
                 </div>
                 
 
@@ -633,7 +633,7 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
 
     <span class="token keyword">function</span> <span class="token function">lazyLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         lazyImages<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">img</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>img<span class="token punctuation">.</span>offsetTop <span class="token operator">&lt;</span> window<span class="token punctuation">.</span>innerHeight <span class="token operator">+</span> window<span class="token punctuation">.</span>scrollY<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>img<span class="token punctuation">.</span>offsetTop <span class="token operator">&lt;</span> window<span class="token punctuation">.</span>innerHeight <span class="token operator">+</span> window<span class="token punctuation">.</span>scrollY<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// offsetTop:表示元素的顶部边缘相对于其offsetParent元素顶部的距离（最近的具有定位的祖先元素，如果没有则为body)</span>
                 img<span class="token punctuation">.</span>src <span class="token operator">=</span> img<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">"data-src"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                 img<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">"lazy-load"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">&#125;</span>
@@ -643,7 +643,7 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
     <span class="token function">lazyLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"scroll"</span><span class="token punctuation">,</span> lazyLoad<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="使用Intersection-Observer-API"><a href="#使用Intersection-Observer-API" class="headerlink" title="使用Intersection Observer API"></a>使用Intersection Observer API</h4><p><code>Intersection Observer API</code>提供了一种异步监听目标元素与其祖先元素或顶级文档<code>viewport</code>交叉状态的方式。这种方法更为高效且易于管理。</p>
+<h4 id="使用Intersection-Observer-API"><a href="#使用Intersection-Observer-API" class="headerlink" title="使用Intersection Observer API"></a>使用Intersection Observer API</h4><p><code>Intersection Observer API</code>提供了一种异步监听目标元素与其祖先元素或顶级文档<code>viewport</code>交叉状态的方式。当被观察的元素进入或离开视口时，会触发一个回调函数。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">document<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"DOMContentLoaded"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">var</span> lazyImages <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">"img.lazy-load"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> imageObserver <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">IntersectionObserver</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">entries<span class="token punctuation">,</span> observer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -662,6 +662,48 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="登录鉴权相关"><a href="#登录鉴权相关" class="headerlink" title="登录鉴权相关"></a>登录鉴权相关</h2><p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/07/25/node-js-zhong-de-deng-lu-jian-quan/#登录鉴权-Cookie">Node.js中的登录鉴权 | QT-7274 (qblog.top)</a></p>
+<h3 id="什么是cookie"><a href="#什么是cookie" class="headerlink" title="什么是cookie"></a>什么是cookie</h3><p>提示：</p>
+<ul>
+<li>HTTP无状态：维护一个状态用来告知服务端前后两个请求是否来自同一浏览器</li>
+<li>cookie存储在客户端</li>
+<li>cookie不可跨域</li>
+<li>属性值都有哪些</li>
+</ul>
+<h3 id="cookie的问题"><a href="#cookie的问题" class="headerlink" title="cookie的问题"></a>cookie的问题</h3><p>提示：</p>
+<ul>
+<li>因为存储在客户端，使用前需要验证合法性</li>
+<li>能存储的容量有限</li>
+<li>无法跨域</li>
+<li>移动端对cookie支持不是很好，session需要基于cookie实现</li>
+</ul>
+<h3 id="什么是session"><a href="#什么是session" class="headerlink" title="什么是session"></a>什么是session</h3><p><code>Session</code>是另一种记录客户状态的机制，不同的是<code>Cookie</code>保存在客户端浏览器中，而<code>Session</code>保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是<code>Session</code>。客户端浏览器再次访问时只需要从该<code>Session</code>中查找该客户的状态就可以了<code>session</code>是一种特殊的<code>cookie</code>。</p>
+<h3 id="cookie和session的联系"><a href="#cookie和session的联系" class="headerlink" title="cookie和session的联系"></a>cookie和session的联系</h3><p><strong><code>session</code> 认证流程：</strong></p>
+<ul>
+<li>用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的 <code>Session</code></li>
+<li>请求返回时将此 <code>Session</code> 的唯一标识信息 <code>SessionID</code> 返回给浏览器</li>
+<li>浏览器接收到服务器返回的 <code>SessionID</code> 信息后，会将此信息存入到 <code>Cookie</code> 中，同时 <code>Cookie</code> 记录此 <code>SessionID</code> 属于哪个域名</li>
+<li>当用户第二次访问服务器的时候，请求会自动判断此域名下是否存在 <code>Cookie</code> 信息，如果存在自动将 <code>Cookie</code> 信息也发送给服务端，服务端会从 <code>Cookie</code> 中获取 <code>SessionID</code>，再根据 <code>SessionID</code> 查找对应的 <code>Session</code> 信息，如果没有找到说明用户没有登录或者登录失效，如果找到 <code>Session</code> 证明用户已经登录可执行后面操作。</li>
+</ul>
+<h3 id="cookie和session的区别"><a href="#cookie和session的区别" class="headerlink" title="cookie和session的区别"></a>cookie和session的区别</h3><ul>
+<li><strong>安全性</strong>： <code>Session</code> 比 <code>Cookie</code> 安全，<code>Session</code> 是存储在服务器端的，<code>Cookie</code> 是存储在客户端的。</li>
+<li><strong>存取值的类型不同</strong>：<code>Cookie</code> 只支持存字符串数据，想要设置其他类型的数据，需要将其转换成字符串，<code>Session</code> 可以存任意数据类型。</li>
+<li><strong>有效期不同</strong>： <code>Cookie</code> 可设置为长时间保持，比如我们经常使用的默认登录功能，<code>Session</code> 一般失效时间较短，客户端关闭（默认情况下）或者 <code>Session</code> 超时都会失效。</li>
+<li><strong>存储大小不同</strong>： 单个 <code>Cookie</code> 保存的数据不能超过 4K，<code>Session</code> 可存储数据远高于 <code>Cookie</code>，但是当访问量过多，会占用过多的服务器资源。</li>
+</ul>
+<h3 id="什么是Token"><a href="#什么是Token" class="headerlink" title="什么是Token"></a>什么是Token</h3><h3 id="JWT的优势"><a href="#JWT的优势" class="headerlink" title="JWT的优势"></a>JWT的优势</h3><p><strong>区别：</strong></p>
+<ul>
+<li><strong>Token</strong>：服务端验证客户端发送过来的 <code>Token</code> 时，还需要查询数据库获取用户信息，然后验证 <code>Token</code> 是否有效。</li>
+<li><strong>JWT</strong>： 将 <code>Token</code> 和 <code>Payload</code> 加密后存储于客户端，服务端只需要使用密钥解密进行校验（校验也是 JWT 自己实现的）即可，不需要查询或者减少查询数据库，因为 JWT 自包含了用户信息和加密的数据。</li>
+</ul>
+<p>对比传统的<code>session</code>认证方式，JWT的优势是：</p>
+<ul>
+<li>简洁：JWT Token数据量小，传输速度也很快</li>
+<li>因为JWT Token是以JSON加密形式保存在客户端的，所以JWT是跨语言的，原则上任何web形式都支持</li>
+<li>不需要在服务端保存会话信息，也就是说不依赖于<code>cookie</code>和<code>session</code>，所以没有了传统<code>session</code>认证的弊端，特别适用于分布式微服务</li>
+<li>单点登录友好：使用<code>session</code>进行身份认证的话，由于<code>cookie</code>无法跨域，难以实现单点登录。但是，使用<code>token</code>进行认证的话， <code>token</code>可以被保存在客户端的任意位置的内存中，不一定是<code>cookie</code>，所以不依赖<code>cookie</code>，不会存在这些问题</li>
+<li>适合移动端应用：使用<code>session</code>进行身份认证的话，需要保存一份信息在服务器端，而且这种方式会依赖到<code>cookie</code>（需要 <code>cookie</code> 保存 <code>sessionId</code>），所以不适合移动端</li>
+</ul>
 <h2 id="浏览器相关"><a href="#浏览器相关" class="headerlink" title="浏览器相关"></a>浏览器相关</h2><h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><blockquote>
 <p>腾讯</p>
 </blockquote>
@@ -1024,6 +1066,39 @@ console.log(a); &#x2F;&#x2F; 输出：5
 &#125;
 
 trickyQuestion();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">let a &#x3D; 0, b &#x3D; 0;
+function fn(a) &#123;
+  fn &#x3D; function fn2(b) &#123;
+    console.log(a, b)
+    console.log(++a+b)
+  &#125;
+  console.log(&#39;a&#39;, a++)
+&#125;
+fn(1); &#x2F;&#x2F; a, 1
+fn(2); &#x2F;&#x2F; 2, 2   5
+&#x2F;&#x2F; 不带修饰符的变量的赋值会沿着向上查找作用域中的值，直到window，所以第一次执行fn后，fn内部的fn现在成了全局变量<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    a <span class="token operator">=</span> <span class="token number">5</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>a<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    a<span class="token punctuation">,</span>
+    <span class="token literal-property property">c</span><span class="token operator">:</span> b
+<span class="token punctuation">&#125;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//在立即执行函数中，首先 console.log(a) 输出 undefined，因为在函数作用域内有 var a 的声明，所以 a 在整个函数作用域内都存在，但在赋值之前，其值为 undefined，这就是 JavaScript 的变量提升（hoisting）。</span>
+
+<span class="token comment">//然后 a = 5，但这个 a 是函数作用域内的 a，并不影响全局的 a，所以 console.log(window.a) 输出的是全局的 a，即 10。</span>
+
+<span class="token comment">//接着 var a = 20，这个 a 也是函数作用域内的 a，所以 console.log(a) 输出的是 20。</span>
+
+<span class="token comment">//对于 var b = &#123; a, c: b &#125;，这是 ES6 的对象字面量属性值简写，等价于 var b = &#123; a: a, c: b &#125;，但在 b 被赋值之前，b 是 undefined，所以 b.c 的值是 undefined，console.log(b.c) 输出的是 undefined。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>答案：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6933377315573497864">彻底解决 JS 变量提升| 一题一图，超详细包教包会😉 - 掘金 (juejin.cn)</a></p>
 <h3 id="this的绑定规则"><a href="#this的绑定规则" class="headerlink" title="this的绑定规则"></a>this的绑定规则</h3><blockquote>
 <p>滴滴</p>
 </blockquote>
@@ -1552,6 +1627,108 @@ _timerSetInterval(()&#x3D;&gt;&#123;console.log(new Date()),1000&#125;)<span ari
 <blockquote>
 <p>注意：继承 <code>Object</code> 的子类有一个行为差异，即无法通过super方法向父类 <code>Object</code> 传参，这是因为ES6改变了 <code>Object</code> 构造函数的行为，一旦发现 <code>Object</code> 构造函数的行为，一旦发现 <code>Object</code> 方法不是通过 <code>new Object()</code> 这种形式调用，ES6 规定 <code>Object</code> 构造函数会忽略参数。</p>
 </blockquote>
+<h2 id="项目相关"><a href="#项目相关" class="headerlink" title="项目相关"></a>项目相关</h2><h3 id="Three-js"><a href="#Three-js" class="headerlink" title="Three.js"></a>Three.js</h3><ul>
+<li><p>在页面<strong>关闭销毁</strong>和<strong>跳转离开</strong>时清除代码中 <strong>定时器</strong>，<strong>事件监听</strong> 和<strong>动画帧</strong>等相关方法。释放场景中的材质内存，清除场景和模型相关信息</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 清除模型数据
+onClearModelData()&#123;
+	cancelAnimationFrame(this.rotationAnimationFrame)
+	cancelAnimationFrame(this.renderAnimation)
+	cancelAnimationFrame(this.animationFrame)
+	this.container.removeEventListener(&#39;click&#39;, this.onMouseClickModel)
+	this.container.removeEventListener(&#39;mousedown&#39;, this.onMouseDownModel)
+	this.container.removeEventListener(&#39;mousemove&#39;, this.onMouseMoveModel)
+	window.removeEventListener(&quot;resize&quot;, this.onWindowResize)
+	&#x2F;&#x2F; 材质释放内存
+ 	this.scene.traverse((v) &#x3D;&gt; &#123;
+		  if (v.type &#x3D;&#x3D;&#x3D; &#39;Mesh&#39;) &#123;
+		     v.geometry.dispose();
+		     v.material.dispose();
+	    	&#125;
+	  &#125;)
+	  &#x2F;&#x2F; 清除场景和模型相关信息
+         this.model.clear()
+          this.scene.clear()
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>只在需要的时候渲染 如果在没有操作的时候，让循环一直渲染属于浪费资源，接下来我来带给大家一个只在需要时渲染的方法。</p>
+<ul>
+<li><p>首先在循环渲染中加入一个判断，如果判断值为true时，才可以循环渲染：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var renderEnabled;
+function animate() &#123;
+ 
+    if (renderEnabled) &#123;
+        renderer.render(scene, camera);
+    &#125;
+ 
+    requestAnimationFrame(animate);
+&#125;
+ 
+animate();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>然后设置一个延迟器函数，每次调用后，可以将<code>renderEnabled</code>设置为<code>true</code>，并延迟三秒将其设置为<code>false</code>，这个延迟时间大家可以根据需求来修改：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F;调用一次可以渲染三秒
+let timeOut &#x3D; null;
+function timeRender() &#123;
+	&#x2F;&#x2F;设置为可渲染状态
+    renderEnabled &#x3D; true;
+    &#x2F;&#x2F;清除上次的延迟器
+    if (timeOut) &#123;
+        clearTimeout(timeOut);
+    &#125;
+ 
+    timeOut &#x3D; setTimeout(function () &#123;
+        renderEnabled &#x3D; false;
+    &#125;, 3000);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>接下来，我们在需要的时候调用这个<code>timeRender()</code>方法即可，比如在相机控制器更新后的回调中：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">controls.addEventListener(&#39;change&#39;, function()&#123;
+    timeRender();
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="tailwindCSS"><a href="#tailwindCSS" class="headerlink" title="tailwindCSS"></a>tailwindCSS</h3><ol>
+<li>原子化 CSS (Atomic CSS)</li>
+</ol>
+<p>CSS 原子化是指定义一组表示单一用途样式单元的类。</p>
+<p>另外还有 CSS 组件化，了解两者可参考文章 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39476410">「CSS 思维」组件化 VS 原子化</a> 。</p>
+<p><code>TailwindCss</code> 将类名拆到了最小的单位，我们只需要用到一定数量的原子类，就能完成一个复杂的页面样式。这也是为啥使用 <code>TailwindCss</code> 的 <strong>tree-shake</strong> 后，压缩后的 css 体积可以降低到 10kb 以下的原因。</p>
+<ol>
+<li>较好的语义化</li>
+</ol>
+<p>使用 <code>TailwindCss</code> 你不用花精力来定义类名，你可以使用内置具有良好语义化的类名，实现样式效果。你也可以一定程度定义符合你自己规则的类名，例如加上统一的前缀。</p>
+<blockquote>
+<p><code>TailwindCss</code> 语义化也并不完美，默认的命名方案有一定的记忆成本。在后面最佳实践，会具体谈谈这个问题，提供一些其他解决方案。</p>
+</blockquote>
+<ol>
+<li>约束性</li>
+</ol>
+<p>使用 <code>TailwindCss</code> 功能类，是从预定义的设计系统中选择样式，这使得构建统一的 UI 变得更加容易。这也是 CSS 原子化与直接使用内联样式有着明显差异，<code>TailwindCss</code> 具有约束性。</p>
+<ol>
+<li>响应式</li>
+</ol>
+<p><code>TailwindCss</code> 中的每个功能类都可以有条件的应用于不同的断点（breakpoints），在不同分辨率设备上，可以轻松切换属性。内联样式中，无法使用媒体查询。</p>
+<p>答案：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/397880385">TailwindCSS 基本介绍与最佳实践 - 知乎 (zhihu.com)</a></p>
+<p>解决了哪些问题？</p>
+<ul>
+<li><p>CSS类命名</p>
+</li>
+<li><p>样式冲突</p>
+<p>样式冲突这个问题其实起因还要归结于 CSS 类命名。为了复用，我们在一个 class 上挂一些常用的规则，比如说：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.left</span> <span class="token punctuation">&#123;</span> <span class="token property">float</span><span class="token punctuation">:</span> left <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>模块复用</p>
+</li>
+</ul>
+<p>这个实现版本，对比第一版，有以下区别：</p>
+<ol>
+<li><strong>我们没有自定义任何的 css class，使用的所有的 css class 都直接来源于 Tailwind CSS</strong>，这样就没有了命名的困扰问题，同时也解决了 css 膨胀的问题。当然 html 体积也变大了，但是因为 class 中使用的是有限集合内的、高度重复的 class 名称，在 Gzip、Brotli 这些压缩算法的作用下，是可以基本忽略的。</li>
+<li><strong>每一个 class 一般只对应一条 css 规则</strong>，如 p-6 对应 padding: 1.5rem，h-12对应 height: 3rem，原子性的 class 颗粒度自然更容易在其他地方复用，而且原子化的 css  规范/思想，强制开发人员在为 html 标签定义样式时，写全所有需要的 class ，大大减少了不同 html 标签的 class 之间的相互影响。</li>
+<li>「Atomic/Utility-First CSS」的使用，让样式重构/整体修改变得更加容易。我们可以通过覆盖原子颗粒度的 class ，变更应用的整体样式，例如，覆盖 text-xl 为 2rem，这样所以使用到 text-xl class 的字体大小都会变成 2rem。</li>
+</ol>
+<p>答案：<a target="_blank" rel="noopener" href="https://juejin.cn/s/tailwindcss 面试题">tailwindcss 面试题-掘金 (juejin.cn)</a></p>
 <h2 id="Vue相关"><a href="#Vue相关" class="headerlink" title="Vue相关"></a>Vue相关</h2><h3 id="Vue通信方式"><a href="#Vue通信方式" class="headerlink" title="Vue通信方式"></a>Vue通信方式</h3><blockquote>
 <p>金山云</p>
 </blockquote>
@@ -1662,9 +1839,33 @@ _timerSetInterval(()&#x3D;&gt;&#123;console.log(new Date()),1000&#125;)<span ari
 <li>在Vue中的作用</li>
 <li>比较方式：深度优先，同层比较</li>
 </ul>
-<p>Vue 的 diff 过程可以概括为：oldCh 和 newCh 各有两个头尾的变量oldStartIndex、oldEndIndex 和 newStartIndex、newEndIndex，它们会将新节点和旧节点进行两两对比，即一共有4种比较方式：newStartIndex 和 oldStartIndex、newEndIndex 和 oldEndIndex、newStartIndex 和 oldEndIndex、newEndIndex 和 oldStartIndex，如果以上 4 中比较都没匹配，如果设置了key，就会用 key 再进行比较，在比较的过程中，遍历会往中间靠，一旦 StartIdx &gt; Endldx 表明 oldCh和 newCh 至少有一个已经遍历完了，就会结束比较。</p>
-<p>Vue 中 key 的作用是：<strong>key 是为 Vue 中 vnode 的唯一标记，通过这个key，我们的 diff 操作可以更准确、更快速。</strong></p>
-<p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/vue/diff.html#一、是什么">面试官：你了解vue的diff算法吗？说说看 | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<p>然后我们接着进入 <code>diff</code> 过程，每一轮都是同样的对比，其中某一项命中了，就递归的进入 <code>patchVnode</code> 针对单个 <code>vnode</code> 进行的过程（如果这个 <code>vnode</code> 又有 <code>children</code>，那么还会来到这个 <code>diff children</code> 的过程 ）：</p>
+<ol>
+<li>旧首节点和新首节点用 <code>sameNode</code> 对比。</li>
+<li>旧尾节点和新尾节点用 <code>sameNode</code> 对比</li>
+<li>旧首节点和新尾节点用 <code>sameNode</code> 对比</li>
+<li>旧尾节点和新首节点用 <code>sameNode</code> 对比</li>
+<li>如果以上逻辑都匹配不到，再把所有旧子节点的 <code>key</code> 做一个映射到旧节点下标的 <code>key -&gt; index</code> 表，然后用新 <code>vnode</code> 的 <code>key</code> 去找出在旧节点中可以复用的位置。</li>
+</ol>
+<p>然后不停的把匹配到的指针向内部收缩，直到新旧节点有一端的指针相遇（说明这个端的节点都被patch过了）。</p>
+<p>在指针相遇以后，还有两种比较特殊的情况：</p>
+<ol>
+<li>有新节点需要加入。 如果更新完以后，<code>oldStartIdx &gt; oldEndIdx</code>，说明旧节点都被 <code>patch</code> 完了，但是有可能还有新的节点没有被处理到。接着会去判断是否要新增子节点。</li>
+<li>有旧节点需要删除。 如果新节点先patch完了，那么此时会走 <code>newStartIdx &gt; newEndIdx</code>  的逻辑，那么就会去删除多余的旧子节点。</li>
+</ol>
+<blockquote>
+<p>总结如下：
+1、使用了相同的key不一定会复用dom，使用了不同的key肯定会销毁旧的dom创建新的dom产生消耗
+2、使用key是为了更加合理的销毁和复用dom
+1）合理的销毁：比如在动态表单验证中，如果使用index作为key，会产生删除上面的表单item，但是在使用了index作为key后，会产生错误的复用效果，导致删除后的某些状态依旧停留在下一个item中
+2）合理的复用：在一些展示信息list中使用key在数据发生乱序后能够合理的复用dom，减少消耗</p>
+</blockquote>
+<p>答案：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/interview/vue/diff.html#一、是什么">面试官：你了解vue的diff算法吗？说说看 | web前端面试 - 面试官系列 (vue3js.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904113587634184?searchId=20240330204435BBB070DCACAF2FDA90CE">为什么 Vue 中不要用 index 作为 key？（diff 算法详解） - 掘金 (juejin.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7026534614931865637?searchId=20240330204435BBB070DCACAF2FDA90CE">一文彻底弄懂diff算法的key作用 - 掘金 (juejin.cn)</a></li>
+</ul>
 <h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><blockquote>
 <p>滴滴</p>
 </blockquote>
