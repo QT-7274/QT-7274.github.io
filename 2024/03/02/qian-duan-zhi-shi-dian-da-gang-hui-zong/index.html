@@ -462,21 +462,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-04-01
+                    2024-04-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    17k
+                    25.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    64 分
+                    99 分
                 </div>
                 
 
@@ -560,40 +560,58 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
 <span class="token comment">//需要插入的次数</span>
 <span class="token keyword">const</span> times <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>total<span class="token operator">/</span>once<span class="token punctuation">)</span>
 <span class="token comment">//当前插入的次数</span>
-<span class="token keyword">const</span> curTimes <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> curTimes <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token comment">//需要插入的位置</span>
-<span class="token keyword">const</span> ul <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span>‘ul’<span class="token punctuation">)</span>
+<span class="token keyword">const</span> ul <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'ul'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">let</span> frag <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createDocumetFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>once<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token keyword">let</span> li <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span>‘li’<span class="token punctuation">)</span>
-		li<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>i<span class="token operator">+</span>curTimes<span class="token operator">*</span>once<span class="token punctuation">)</span>
-		frag<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>li<span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	curTimes<span class="token operator">++</span><span class="token punctuation">;</span>
-	ul<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>frag<span class="token punctuation">)</span>
-	<span class="token keyword">if</span><span class="token punctuation">(</span>curTimes<span class="token operator">&lt;</span>times<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		window<span class="token punctuation">.</span><span class="token function">requestAnimationFrag</span><span class="token punctuation">(</span>add<span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
+    <span class="token keyword">let</span> frag <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createDocumentFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> once<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> li <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        li<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>i <span class="token operator">+</span> curTimes <span class="token operator">*</span> once<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        frag<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>li<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    curTimes<span class="token operator">++</span><span class="token punctuation">;</span>
+    ul<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>frag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>curTimes <span class="token operator">&lt;</span> times<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        window<span class="token punctuation">.</span><span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span>add<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
-<h3 id="Webpack和Vite的区别"><a href="#Webpack和Vite的区别" class="headerlink" title="Webpack和Vite的区别"></a>Webpack和Vite的区别</h3><p><strong>1.开发模式不同</strong></p>
-<p>Webpack在开发模式下依然会对所有模块进行打包操作，虽然提供了热更新，但大型项目中依然可能会出现启动和编译缓慢的问题；而Vite则采用了基于ES Module的开发服务器，只有在需要时才会编译对应的模块，大幅度提升了开发环境的响应速度。</p>
-<p><strong>2.打包效率不同</strong></p>
-<p>Webpack在打包时，会把所有的模块打包成一个bundle，这会导致初次加载速度较慢；而Vite则利用了浏览器对ES Module的原生支持，<strong>只打包和缓存实际改动的模块</strong>，从而极大提高了打包效率。</p>
-<p><strong>3.插件生态不同</strong></p>
-<p>Webpack的插件生态非常丰富，有大量社区和官方插件可以选择，覆盖了前端开发的各个方面；而Vite的插件生态尽管在不断发展，但相比Webpack来说还显得较为稀少。</p>
-<p><strong>4.配置复杂度不同</strong></p>
-<p>Webpack的配置相对复杂，对新手不够友好；而Vite在设计上更注重开箱即用，大部分场景下用户无需自己写配置文件。</p>
-<p><strong>5.热更新机制不同</strong></p>
-<p>Webpack的热更新需要整个模块链重新打包和替换，对于大型项目可能会有延迟；Vite的热更新则只会针对改动的模块进行更新，提高了更新速度</p>
+<blockquote>
+<p>知识链：setTimeout和setInterval相关知识点🔜setTimeout和setInterval的互相实现🔜requestAnimationFrame相关知识点🔜$nextTick()的实现原理🔜JavaScript事件循环</p>
+</blockquote>
+<h3 id="Webpack和Vite的区别"><a href="#Webpack和Vite的区别" class="headerlink" title="Webpack和Vite的区别"></a>Webpack和Vite的区别</h3><h4 id="运行原理"><a href="#运行原理" class="headerlink" title="运行原理"></a>运行原理</h4><h5 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h5><p>当我们使用webpack启动项目时，webpack会根据我们配置文件（<code>webpack.config.js</code>） 中的入口文件（<code>entry</code>），分析出项目项目所有依赖关系，然后打包成一个文件（<code>bundle.js</code>），交给浏览器去加载渲染。</p>
+<p><strong>这样就会带来一个问题，项目越大，需要打包的东西越多，启动时间越长。</strong></p>
+<h5 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h5><p>在<code>&lt;script type=&quot;module&quot;&gt;</code>中，浏览器遇到内部的import引用时，会自动发起http请求，去加载对应的模块。</p>
+<p>vite也正是利用了<code>ES module</code>这个特性，使用vite运行项目时，首先会用<code>esbuild</code>进行预构建，将所有模块转换为<code>es module</code>，不需要对我们整个项目进行编译打包，而是在浏览器需要加载某个模块时，<strong>拦截浏览器发出的请求</strong>，根据请求进行<code>按需编译</code>，然后返回给浏览器。</p>
+<p>这样一来，首次启动项目（冷启动）时，自然也就比webpack快很多了，并且项目大小对vite启动速度的影响也很小。</p>
+<h4 id="构建方式"><a href="#构建方式" class="headerlink" title="构建方式"></a>构建方式</h4><h5 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h5><p>webpack是基于<code>nodejs</code>运行的，但<code>js</code>只能单线程运行，无法利用多核CPU的优势，当项目越来越大时，构建速度也就越来越慢了。</p>
+<h5 id="vite"><a href="#vite" class="headerlink" title="vite"></a>vite</h5><p>vite<code>预构建</code>与<code>按需编译</code>的过程，都是使用<code>esbuild</code>完成的。</p>
+<p><code>esbuild</code>是用<code>go</code>语言编写的，可以充分利用多核CPU的优势，所以vite开发环境下的<code>预构建</code>与<code>按需编译</code>速度，都是非常快的。</p>
+<h4 id="http2"><a href="#http2" class="headerlink" title="http2"></a>http2</h4><p>vite充分利用了http2可以并发请求的优势，这也是速度快的一个主要原因。 接下来，我们了解一下<strong>http2</strong>的来龙去脉。</p>
+<p>在之前http1的时候，浏览器对同一个域名的请求，是有并发限制的，一般为6个，如果并发请求6个以上，就会造成阻塞问题，所以在http1的时代，我们要减少打包产物的文件数量，减少并发请求，来提高项目的加载速度。</p>
+<p>2015年以后，http2出现了，他可以并发发送多个请求，不会出现http1的并发限制。这时候，将打包产物分成多个小模块，并行去加载，反而会更快。</p>
+<p>vite也充分利用了这一优势，对项目资源进行了合理的拆分，访问项目时，同时加载多个模块，来提升项目访问速度。</p>
+<h4 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h4><p><strong>我们首先来了解一下什么是HMR。</strong></p>
+<p>模块热替换(hot module replacement - HMR)，该功能可以实现应用程序运行过程中，替换、添加或删除模块，而无需重新加载整个页面，也就是我们常说的<code>热更新</code>。</p>
+<p>vite与webpack虽然都支持HMR,但两个工具的实现原理是不一样的。</p>
+<h5 id="webpack-1"><a href="#webpack-1" class="headerlink" title="webpack"></a>webpack</h5><p>webpack项目中，每次修改文件，都会对整个项目重新进行打包，这对大项目来说，是非常不友好的。</p>
+<blockquote>
+<p>这里对整个项目，我理解的是整个项目的模块依赖关系重新梳理编译，这个是最花时间的，至于更新，应该都是对目前正在编辑的模块更新。</p>
+</blockquote>
+<p>虽然webpack现在有了缓存机制，但还是无法从根本上解决这个问题。</p>
+<h5 id="vite-1"><a href="#vite-1" class="headerlink" title="vite"></a>vite</h5><p>vite项目中，监听到文件变更后，会用<code>websocket</code>通知浏览器，重新发起新的请求，只对该模块进行重新编译，然后进行替换。</p>
+<p>并且基于<code>es module</code>的特性，vite利用浏览器的缓存策略，针对源码模块（我们自己写的代码）做了<code>协商缓存</code>处理，针对依赖模块（第三方库）做了<code>强缓存</code>处理，这样我们项目的访问的速度也就更快了。</p>
+<blockquote>
+<p>知识链：webpack实现原理🔜ES module相关知识🔜http协议相关🔜websocket实现原理🔜JavaScript事件循环</p>
+</blockquote>
 <h3 id="路由懒加载"><a href="#路由懒加载" class="headerlink" title="路由懒加载"></a>路由懒加载</h3><ol>
 <li><p>因为懒加载是对子模块（子组件）进行延后加载。如果子模块（子组件）不单独打包，而是和别的模块掺和在一起，那其他模块加载时就会将整个文件加载出来了，这样子模块（子组件）就被提前加载出来了。所以， <strong>要实现懒加载，就得先将进行懒加载的子模块（子组件）分离出来。</strong></p>
 <p><strong>懒加载实现的前提：ES6的动态加载模块 - import（）</strong></p>
 <blockquote>
 <p>调用import()之处，被作为分离的模块起点，意思是，被请求的模块和它引用的所有子模块，会分离到一个单独的 chunk 中。
----- 来自《webpack - 模块方法》的import（）小节</p>
+---- 来自《webpack - 模块方法》的import()小节</p>
 </blockquote>
 </li>
 <li><p><strong>小知识点：<code>import()</code>中的注释。</strong> 我们注意到，<code>import()</code>括号里面有一串注释，如：</p>
@@ -609,7 +627,7 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p><strong>无论使用函数声明还是函数表达式创建函数，函数被创建后并不会立即执行函数内部的代码，只有等到函数被调用之后，才执行内部的代码。</strong> 相信对于这个函数特性，大家都十分清楚地。看到这里，大家对于懒加载的实现可能已经有了思路。</p>
-<p><strong>只要将需要进行懒加载的<code>子模块文件（children chunk）</code>的引入语句（<code>本文特指import（）</code>）放到一个函数内部。然后再需要加载的时候执行该函数。这样就可以实现懒加载（按需加载）。这也就是是懒加载（按需加载）的原理了</strong></p>
+<p><strong>只要将需要进行懒加载的<code>子模块文件（children chunk）</code>的引入语句（<code>本文特指import()</code>）放到一个函数内部。然后再需要加载的时候执行该函数。这样就可以实现懒加载（按需加载）。这也就是是懒加载（按需加载）的原理了</strong></p>
 </li>
 <li><p>webpack提供的require.ensure()实现懒加载：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">1</span>：vue<span class="token operator">-</span>router配置路由，使用webpack的require<span class="token punctuation">.</span>ensure技术，也可以实现按需加载。
@@ -621,6 +639,358 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
 <span class="token number">7</span>：第四个参数是单独打包的chunk的文件名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
+<h3 id="路由级权限"><a href="#路由级权限" class="headerlink" title="路由级权限"></a>路由级权限</h3><h4 id="简单角色动态路由"><a href="#简单角色动态路由" class="headerlink" title="简单角色动态路由"></a>简单角色动态路由</h4><h5 id="配置路由文件，定义路由信息"><a href="#配置路由文件，定义路由信息" class="headerlink" title="配置路由文件，定义路由信息"></a>配置路由文件，定义路由信息</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> VueRouter <span class="token keyword">from</span> <span class="token string">"vue-router"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">"@/store"</span><span class="token punctuation">;</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>VueRouter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 默认静态路由</span>
+<span class="token keyword">const</span> routes <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/login"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"login"</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/views/login/index.vue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// 动态配置的路由（配置权限）</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> asyncRoutes <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/test1"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Test1"</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/views/test1/index.vue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"admin"</span><span class="token punctuation">,</span> <span class="token string">"editor"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">//  拥有这些角色权限的用户才能访问</span>
+      <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"测试1"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"children1"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Test1Children1"</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/views/test1/test1-children1/index.vue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"admin"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"测试1子路由1"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"children2"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Test1Children2"</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/views/test1/test1-children2/index.vue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"editor"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"测试1子路由2"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"children3"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Test1Children3"</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/views/test1/test1-children3/index.vue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"admin"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"测试1子路由3"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/test2"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Test2"</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/views/test2/index.vue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"admin"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"测试2"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// 创建一个路由器实例</span>
+<span class="token keyword">const</span> <span class="token function-variable function">createRouter</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span>
+  <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">mode</span><span class="token operator">:</span> <span class="token string">'hash'</span><span class="token punctuation">,</span>
+    routes<span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 创建路由器</span>
+<span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 重置路由器</span>
+<span class="token comment">// 在Vue Router中，一旦路由器被创建并且路由被添加，你就不能再添加更多的路由。这可能会在某些情况下造成问题，例如，当你需要基于用户角色动态添加路由时。</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">resetRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> newRouter <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token comment">// 重置router对象</span>
+  router<span class="token punctuation">.</span>matcher <span class="token operator">=</span> newRouter<span class="token punctuation">.</span>matcher<span class="token punctuation">;</span>
+  <span class="token comment">// 提交用户路由的清除状态的mutation</span>
+  store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">"user/CLEAR_ROUTERS"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> router<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="permission模块，集成封装根据权限过滤路由的vuex方法"><a href="#permission模块，集成封装根据权限过滤路由的vuex方法" class="headerlink" title="permission模块，集成封装根据权限过滤路由的vuex方法"></a>permission模块，集成封装根据权限过滤路由的vuex方法</h5><p>写入<code>generateRoutes</code>方法，方便项目中全局调用，传入<code>角色权限数组</code>来进行路由过滤（一般是请求到的数组</p>
+<p>根据 <strong>权限角色</strong> 来 <strong>过滤动态配置路由</strong> 得到<strong>需要生成的路由信息</strong></p>
+<p><code>/src/store/modules/permission.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> asyncRoutes <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"@/router"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 动态配置的路由</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">SET_ROUTES</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> routes</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>routes <span class="token operator">=</span> routes<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">/**
+   * 生成路由
+   * @param &#123;Object&#125; commit - 提交方法
+   * @param &#123;Array&#125; roles - 用户角色权限数组
+   * @returns &#123;Promise&#125; - 返回一个Promise对象，用于异步处理
+   */</span>
+  <span class="token function">generateRoutes</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> commit <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> roles</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">let</span> accessedRoutes <span class="token operator">=</span> <span class="token function">filterAsyncRoutes</span><span class="token punctuation">(</span>asyncRoutes<span class="token punctuation">,</span> roles<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 传入动态配置路由数组,角色权限数组</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>accessedRoutes<span class="token punctuation">,</span> <span class="token string">'accessedRoutes'</span><span class="token punctuation">)</span>
+      <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">"SET_ROUTES"</span><span class="token punctuation">,</span> accessedRoutes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">resolve</span><span class="token punctuation">(</span>accessedRoutes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">namespaced</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  state<span class="token punctuation">,</span>
+  mutations<span class="token punctuation">,</span>
+  actions<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在action异步 <strong>generateRoutes</strong> 方法中调用 <strong>filterAsyncRoutes</strong> 方法对 <strong>asyncRoutes</strong> 数组进行过滤</p>
+<p><strong>filterAsyncRoutes</strong> 方法使用递归进行过滤直到没有children字段为止</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
+ * 使用 meta.role 确定当前用户是否具有权限
+ * @param &#123;Array&#125; roles - 用户的角色列表
+ * @param &#123;Object&#125; route - 路由对象
+ * @returns &#123;boolean&#125; - 如果用户具有访问权限则返回true，否则返回false
+ *&#x2F;
+function hasPermission(roles, route) &#123;
+  if (route.meta &amp;&amp; route.meta.roles) &#123;
+      &#x2F;&#x2F; 如果路由的roles属性包含用户的任何一个角色，那么some方法就会返回true，表示用户有权限访问这个路由。
+    return roles.some(role &#x3D;&gt; route.meta.roles.includes(role))
+  &#125; else &#123;
+    return true
+  &#125;
+&#125;
+&#x2F;**
+ * 通过递归筛选异步路由表
+ * @param routes - asyncRoutes 动态配置的路由
+ * @param roles - 用户的角色列表
+ *&#x2F;
+export function filterAsyncRoutes(routes, roles) &#123;
+  &#x2F;&#x2F; 初始化结果数组
+  const res &#x3D; []
+  &#x2F;&#x2F; 遍历路由数组
+  routes.forEach(route &#x3D;&gt; &#123;
+    &#x2F;&#x2F; 创建临时变量，复制route对象
+    const tmp &#x3D; &#123; ...route &#125;
+    &#x2F;&#x2F; 判断是否有权限
+    if (hasPermission(roles, tmp)) &#123;
+      &#x2F;&#x2F; 如果有权限，继续遍历子路由
+      if (tmp.children) &#123;
+        &#x2F;&#x2F; 递归调用filterAsyncRoutes函数，过滤子路由
+        tmp.children &#x3D; filterAsyncRoutes(tmp.children, roles)
+      &#125;
+      &#x2F;&#x2F; 将符合条件的路由添加到结果数组中
+      res.push(tmp)
+    &#125;
+  &#125;)
+  &#x2F;&#x2F; 返回结果数组
+  return res
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="user模块，模拟获取用户信息方法"><a href="#user模块，模拟获取用户信息方法" class="headerlink" title="user模块，模拟获取用户信息方法"></a>user模块，模拟获取用户信息方法</h5><p>创建vuex模块 user.js ，用于模拟接口获取用户角色信息并保存状态</p>
+<p><code>/src/store/modules/user.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">userInfo</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token comment">// 用户信息</span>
+  <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 角色权限数组</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token constant">SET_USERINFO</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> userInfo</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>userInfo <span class="token operator">=</span> userInfo<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token constant">SET_ROLES</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> roles</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    state<span class="token punctuation">.</span>roles <span class="token operator">=</span> roles<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 获取用户信息方法</span>
+  <span class="token function">getInfo</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> commit <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">avatar</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"admin"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">introduction</span><span class="token operator">:</span> <span class="token string">"I am a super administrator"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">status</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">email</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">phone</span><span class="token operator">:</span> <span class="token string">"1234567890"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">createTime</span><span class="token operator">:</span> <span class="token string">"2016-11-22 10:30:30"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">lastLoginTime</span><span class="token operator">:</span> <span class="token string">"2019-05-27 10:30:30"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">lastLoginIp</span><span class="token operator">:</span> <span class="token string">"127.0.0.1"</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">"SET_USERINFO"</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置用户信息</span>
+      <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">"SET_ROLES"</span><span class="token punctuation">,</span> data<span class="token punctuation">.</span>roles<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置角色权限</span>
+      <span class="token comment">// 延时模拟异步</span>
+      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token function">resolve</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">namespaced</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  state<span class="token punctuation">,</span>
+  mutations<span class="token punctuation">,</span>
+  actions<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="创建全局路由守卫，控制路由权限并动态生成路由"><a href="#创建全局路由守卫，控制路由权限并动态生成路由" class="headerlink" title="创建全局路由守卫，控制路由权限并动态生成路由"></a>创建全局路由守卫，控制路由权限并动态生成路由</h5><p>定义好了上述的一系列方法，那么在什么时机调用，并且添加到路由中呢？</p>
+<p><strong>1 =&gt;</strong>  正确的时机应当是 用户已经登录并取得得用户信息后，再根据用户角色过滤路由，最后生成路由</p>
+<p><strong>2 =&gt;</strong>  当用户退出登录或者未登录时，清空用户信息以及路由，恢复为初始状态，跳转回登录页</p>
+<p>使用 vue-router的全局路由守卫 定义一个路由权限文件 进行权限控制</p>
+<p><code>/src/router/permission.js</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> router<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> resetRouter <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"@/router"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">"@/store"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> whiteList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"/login"</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 路由白名单，无需登录便可以访问的路由</span>
+
+router<span class="token punctuation">.</span><span class="token function">beforeResolve</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> from<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 获取用户登录的token</span>
+  <span class="token keyword">const</span> hasToken <span class="token operator">=</span> <span class="token string">"xxxxxxxx"</span><span class="token punctuation">;</span> <span class="token comment">// getToken() // 这里用虚拟值代替，表示已登录</span>
+
+  <span class="token comment">// 判断当前用户是否登录</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>hasToken<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>to<span class="token punctuation">.</span>path <span class="token operator">===</span> <span class="token string">"/login"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 如果当前用户已经登录，则跳转到首页</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 从store user模块中获取用户权限角色，如果有角色则代表已经获取了用户信息登录中，直接放行</span>
+      <span class="token keyword">const</span> hasRoles <span class="token operator">=</span> store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>user<span class="token punctuation">.</span>roles <span class="token operator">&amp;&amp;</span> store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>user<span class="token punctuation">.</span>roles<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>hasRoles<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 获取了token，但是没有角色，则调用获取用户信息接口获取角色权限数组</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">// 调用获取存储用户信息，并取得角色权限数组，例如 ['admin'] or ,['developer','editor']</span>
+           <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> roles <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">"user/getInfo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token comment">// 获取用户角色权限数组后调用vuex的generateRoutes方法过滤掉没有权限的路由表并返回</span>
+          <span class="token keyword">const</span> accessRoutes <span class="token operator">=</span> <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">"permission/generateRoutes"</span><span class="token punctuation">,</span> roles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token comment">// 使用addRoute将 动态配置的路由 添加到 layout 首页子级中</span>
+          router<span class="token punctuation">.</span><span class="token function">addRoute</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"home"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">redirect</span><span class="token operator">:</span> accessRoutes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>path<span class="token punctuation">,</span>
+            <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/views/layout"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"首页"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token comment">// 路由元信息</span>
+            <span class="token literal-property property">children</span><span class="token operator">:</span> accessRoutes<span class="token punctuation">,</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token comment">// 然后再添加404导航路由，防止刷新后默认导向404页</span>
+          router<span class="token punctuation">.</span><span class="token function">addRoute</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"/404"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">"/404"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">hidden</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"@/views/notFoundPage.vue"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          router<span class="token punctuation">.</span><span class="token function">addRoute</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">"*"</span><span class="token punctuation">,</span> <span class="token literal-property property">redirect</span><span class="token operator">:</span> <span class="token string">"/404"</span><span class="token punctuation">,</span> <span class="token literal-property property">hidden</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token comment">// 设置replace:true，这样导航就不会留下历史记录</span>
+          <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token operator">...</span>to<span class="token punctuation">,</span> <span class="token literal-property property">replace</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">// 捕获错误异常退出登录清除用户信息</span>
+          <span class="token function">resetRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 重置路由</span>
+          <span class="token comment">// await store.dispatch("user/resetToken");</span>
+          <span class="token function">next</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/login?redirect=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>to<span class="token punctuation">.</span>path<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 用户未登录</span>
+    <span class="token function">resetRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 重置路由</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>whiteList<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>to<span class="token punctuation">.</span>path<span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 需要跳转的路由是否是白名单whiteList中的路由，若是，则直接跳转</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 需要跳转的路由不是白名单whiteList中的路由，直接跳转到登录页</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/login?redirect=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>to<span class="token punctuation">.</span>path<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>为防止<strong>页面刷新时会重置路由后找不到对应的路由地址</strong>会导向404页，所以将404页放在等待接口返回用户信息获取完成，动态添加路由后再添加。将404页面的路由放在动态添加路由之后，那么在动态添加路由的过程中，用户正在访问的路由就有可能被添加进来，从而避免被重定向到404页面。因为一旦用户正在访问的路由被添加，那么它就不再是未定义的路由，就不会被404页面的路由匹配。</p>
+</blockquote>
+<h3 id="按钮级权限"><a href="#按钮级权限" class="headerlink" title="按钮级权限"></a>按钮级权限</h3><p>Vue的自定义指令通过<code>Vue.directive</code>方法来创建：</p>
+<ul>
+<li><code>bind</code>：指令第一次绑定到元素时调用。在这里可以执行一次性的初始化设置。</li>
+<li><code>inserted</code>：被绑定元素插入父元素时调用。注意，父元素可能还未存在，所以不能进行DOM操作。</li>
+<li><code>update</code>：被绑定元素所在的组件更新时调用，但是可能发生在其子组件更新之前。可以比较更新前后的值，执行相应的操作。</li>
+<li><code>componentUpdated</code>：被绑定元素所在的组件及其子组件全部更新后调用。可以执行操作，例如更新DOM。</li>
+<li><code>unbind</code>：指令与元素解绑时调用。可以执行清理操作。</li>
+</ul>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Vue.directive(&#39;my-directive&#39;, &#123;
+  bind(el, binding, vnode) &#123;
+    &#x2F;&#x2F; 初始化设置
+  &#125;,
+  inserted(el, binding, vnode) &#123;
+    &#x2F;&#x2F; 元素插入父元素时调用
+  &#125;,
+  update(el, binding, vnode) &#123;
+    &#x2F;&#x2F; 组件更新时调用
+  &#125;,
+  componentUpdated(el, binding, vnode) &#123;
+    &#x2F;&#x2F; 组件及子组件更新后调用
+  &#125;,
+  unbind(el, binding, vnode) &#123;
+    &#x2F;&#x2F; 解绑时调用
+  &#125;
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一般常见的方案有：</p>
+<ul>
+<li>将按钮封装成组件，然后通过 props 传递参数，来控制是否显示or可操作</li>
+<li>封装一个组件，通过插槽形式传递按钮，再通过prop传值控制</li>
+<li>写一个自定义指令，通过 value 控制元素是否显示</li>
+</ul>
+<p>相比 v-if 的好处有以下几点：</p>
+<ol>
+<li>可以轻松地扩展权限控制功能。</li>
+<li>支持多个权限码、支持异步获取权限等。</li>
+<li>语义化效果更加明显。</li>
+</ol>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 全局自定义指令
+Vue.directive(&quot;permission&quot;, &#123;
+  &#x2F;&#x2F; 在元素被插入到 DOM 中时触发
+  inserted(el, binding) &#123;
+    &#x2F;&#x2F; 如果绑定值为 false，则从父节点中移除元素
+    if (!binding.value) &#123;
+      el.parentNode.removeChild(el); &#x2F;&#x2F; 移除元素
+    &#125;
+  &#125;,
+  &#x2F;&#x2F; 在元素更新时触发
+  update(el, binding) &#123;
+    &#x2F;&#x2F; 如果绑定值为 true
+    if (binding.value) &#123;
+      &#x2F;&#x2F; 如果元素没有父节点（即之前被移除了）
+      if (!el.parentNode) &#123;
+        &#x2F;&#x2F; 将元素插入到原来的位置
+        el.__v_originalParent.insertBefore(el, el.__v_anchor || null);
+      &#125;
+    &#125; else &#123;
+      &#x2F;&#x2F; 如果元素有父节点
+      if (el.parentNode) &#123;
+        &#x2F;&#x2F; 创建一个注释节点作为替换元素的占位符
+        el.__v_anchor &#x3D; document.createComment(&quot;&quot;);
+        el.__v_originalParent &#x3D; el.parentNode;
+        &#x2F;&#x2F; 用注释节点替换原来的元素
+        el.parentNode.replaceChild(el.__v_anchor, el); 
+      &#125;
+    &#125;
+  &#125;,
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>加入请求后的改进代码：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Vue.directive(&quot;permission&quot;, &#123;
+  async inserted(el, binding) &#123;
+    el.style.display &#x3D; &quot;none&quot;;
+    try &#123;
+      const hasPermission &#x3D; await checkPermission(binding.value);
+      if (hasPermission) &#123;
+        el.style.display &#x3D; &quot;&quot;;
+      &#125; else if (el.parentNode) &#123;
+        el.parentNode.removeChild(el);
+      &#125;
+    &#125; catch (error) &#123;
+      console.error(&#39;Error checking permission:&#39;, error);
+      if (el.parentNode) &#123;
+        el.parentNode.removeChild(el);
+      &#125;
+    &#125;
+  &#125;,
+  ...
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h3><h4 id="使用原生JavaScript实现"><a href="#使用原生JavaScript实现" class="headerlink" title="使用原生JavaScript实现"></a>使用原生JavaScript实现</h4><ol>
 <li><strong>HTML结构调整</strong>：在<code>&lt;img&gt;</code>标签的<code>src</code>属性中不直接设置图片地址，而是使用自定义属性（如<code>data-src</code>）来存储图片地址。</li>
 </ol>
@@ -662,6 +1032,437 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
     <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="首屏加载时间"><a href="#首屏加载时间" class="headerlink" title="首屏加载时间"></a>首屏加载时间</h3><h4 id="对首屏的理解"><a href="#对首屏的理解" class="headerlink" title="对首屏的理解"></a>对首屏的理解</h4><blockquote>
+<p>字节</p>
+</blockquote>
+<p>首屏时间是指从用户打开网页到首屏内容完全显示出来的时间。这是一个非常重要的性能指标，因为它直接影响到用户的体验。</p>
+<p>首屏时间包括以下几个阶段：</p>
+<ol>
+<li><strong>DNS 解析时间</strong>：浏览器将网站的域名解析为 IP 地址的时间。</li>
+<li><strong>TCP 连接时间</strong>：浏览器与服务器建立 TCP 连接的时间。</li>
+<li><strong>HTTP 请求和响应时间</strong>：浏览器发送 HTTP 请求并接收到 HTTP 响应的时间。</li>
+<li><strong>DOM 解析时间</strong>：浏览器解析 HTML 文档，构建 DOM 树的时间。</li>
+<li><strong>CSSOM 构建时间</strong>：浏览器解析 CSS 文件，构建 CSSOM 树的时间。</li>
+<li><strong>JavaScript 执行时间</strong>：浏览器执行 JavaScript 代码的时间。</li>
+<li><strong>渲染时间</strong>：浏览器将 DOM 树和 CSSOM 树合并为渲染树，计算布局，绘制页面的时间。</li>
+</ol>
+<p>首屏时间的计算方法有很多种，不同的方法可能会得到不同的结果。一般来说，首屏时间应该包括上述所有阶段的时间。</p>
+<h4 id="获取首屏加载时间"><a href="#获取首屏加载时间" class="headerlink" title="获取首屏加载时间"></a>获取首屏加载时间</h4><p>在浏览器控制台中使用 <code>performance.timing.loadEventEnd</code> -<code>performance.timing.navigationStart</code> 来获取页面加载所需的总时间</p>
+<blockquote>
+<ul>
+<li><code>performance.timing.loadEventEnd</code> 表示浏览器加载完页面上的所有资源（如图像、CSS、JavaScript 等）的时间点。它表示浏览器完成了页面加载的所有工作，并且可以开始对页面进行渲染和交互。</li>
+<li><code>performance.timing.navigationStart</code> 表示浏览器开始加载页面的时间点。它表示浏览器接收到请求并开始加载页面的第一个字节的时间点。</li>
+</ul>
+</blockquote>
+<h4 id="gzip压缩"><a href="#gzip压缩" class="headerlink" title="gzip压缩"></a>gzip压缩</h4><h5 id="nginx-开启"><a href="#nginx-开启" class="headerlink" title="nginx 开启"></a>nginx 开启</h5><p>在部署前端页面的<code>nginx</code>服务中，修改<code>server</code>项配置，以开启gzip压缩</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">server <span class="token punctuation">&#123;</span>
+    listen       <span class="token number">8080</span><span class="token punctuation">;</span>
+    server_name  <span class="token operator">**</span><span class="token operator">**</span><span class="token operator">**</span><span class="token operator">**</span><span class="token operator">**</span><span class="token operator">**</span><span class="token punctuation">;</span>
+ 
+    # 开启gzip
+    gzip on<span class="token punctuation">;</span>
+    # 进行压缩的文件类型。
+	gzip_types text<span class="token operator">/</span>plain text<span class="token operator">/</span>css application<span class="token operator">/</span>javascript application<span class="token operator">/</span>json<span class="token punctuation">;</span>
+	# 是否在http header中添加Vary<span class="token operator">:</span> Accept<span class="token operator">-</span>Encoding，建议开启
+	gzip_vary on<span class="token punctuation">;</span>
+	# 允许使用预压缩的 <span class="token punctuation">.</span>gz 文件
+	gzip_static on<span class="token punctuation">;</span>
+	# 设置 Gzip 压缩级别
+	gzip_comp_level <span class="token number">5</span><span class="token punctuation">;</span>
+	# 设置响应数据的最小长度以启用 Gzip 压缩
+	gzip_min_length <span class="token number">256</span><span class="token punctuation">;</span>
+	# 指定启用压缩的代理列表
+	gzip_proxied any<span class="token punctuation">;</span>
+	# 禁用 Gzip 压缩的浏览器 User<span class="token operator">-</span>Agent 列表
+	gzip_disable <span class="token string">"msie6"</span><span class="token punctuation">;</span>
+	# 配置内存缓冲区的数量和大小
+	gzip_buffers <span class="token number">16</span> 8k<span class="token punctuation">;</span>
+    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="vue2-vue-cli-项目中配置"><a href="#vue2-vue-cli-项目中配置" class="headerlink" title="vue2 + vue-cli 项目中配置"></a>vue2 + vue-cli 项目中配置</h5><h5 id="vue3-vite-项目中配置"><a href="#vue3-vite-项目中配置" class="headerlink" title="vue3 + vite 项目中配置"></a>vue3 + vite 项目中配置</h5><p>安装 <strong>vite </strong>压缩插件 <strong>vite-plugin-compression</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i vite-plugin-compression --save-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在 <code>vite.config.js</code> 文件中添加以下配置：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> compression <span class="token keyword">from</span> <span class="token string">'vite-plugin-compression'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token function">compression</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">algorithm</span><span class="token operator">:</span> <span class="token string">'gzip'</span><span class="token punctuation">,</span> <span class="token comment">// 压缩算法，可选['gzip'，'brotliCompress'，'deflate'，'deflateRaw']</span>
+      <span class="token literal-property property">threshold</span><span class="token operator">:</span> <span class="token number">10240</span><span class="token punctuation">,</span> <span class="token comment">// 如果体积大于10kb阈值，则进行压缩，参数单位为b</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>配置好之后，打开浏览器访问，<strong>F12</strong>查看控制台，如果该文件资源的响应头里显示有<code>Content-Encoding: gzip</code> 标识，表示浏览器支持并且启用了<strong>gzip</strong>压缩的资源</p>
+<h4 id="cdn"><a href="#cdn" class="headerlink" title="cdn"></a>cdn</h4><blockquote>
+<p>CDN（内容分发网络）是一种用于加速网络内容传输的技术和架构。它通过将内容分布到全球各地的服务器节点，使得用户可以从离他们更近的服务器上获取所需的内容，从而减少了网络延迟和提高了内容的传输速度。</p>
+<p>CDN 的使用一般是通过将静态资源（如图片、样式表、脚本等）部署到 CDN 提供商的服务器上，并在网页中引用 CDN 上的资源链接。</p>
+<p>使用 CDN 可以加速网站的加载速度，改善用户体验，并减轻服务器的负载压力。</p>
+</blockquote>
+<h4 id="异步加载方案"><a href="#异步加载方案" class="headerlink" title="异步加载方案"></a>异步加载方案</h4><h5 id="路由懒加载-1"><a href="#路由懒加载-1" class="headerlink" title="路由懒加载"></a>路由懒加载</h5><h5 id="按需异步加载组件"><a href="#按需异步加载组件" class="headerlink" title="按需异步加载组件"></a>按需异步加载组件</h5><p>全局注册使用：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">Vue.component(&#39;async-example&#39;, function (resolve, reject) &#123;
+  setTimeout(function () &#123;
+    &#x2F;&#x2F; 向 &#96;resolve&#96; 回调传递组件定义
+    resolve(&#123;
+      template: &#39;&lt;div&gt;I am async!&lt;&#x2F;div&gt;&#39;
+    &#125;)
+  &#125;, 1000)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>局部注册使用：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">components: &#123;
+    &#39;my-component&#39;: () &#x3D;&gt; import(&#39;.&#x2F;my-async-component&#39;)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h5 id="依赖按需引入"><a href="#依赖按需引入" class="headerlink" title="依赖按需引入"></a>依赖按需引入</h5><h3 id="白屏检测方案"><a href="#白屏检测方案" class="headerlink" title="白屏检测方案"></a>白屏检测方案</h3><p><a href="https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fxy-sea%2Fweb-see">web-see</a> 前端监控方案，提供了 <strong>采样对比+白屏修正机制</strong> 的检测方案，兼容有骨架屏、无骨架屏这两种情况，来解决开发者的白屏之忧</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">import webSee from &#39;web-see&#39;;
+
+Vue.use(webSee, &#123;
+  dsn: &#39;http:&#x2F;&#x2F;localhost:8083&#x2F;reportData&#39;, &#x2F;&#x2F; 上报的地址
+  apikey: &#39;project1&#39;, &#x2F;&#x2F; 项目唯一的id
+  userId: &#39;89757&#39;, &#x2F;&#x2F; 用户id
+  silentWhiteScreen: true, &#x2F;&#x2F; 开启白屏检测
+  skeletonProject: true, &#x2F;&#x2F; 项目是否有骨架屏
+  whiteBoxElements: [&#39;html&#39;, &#39;body&#39;, &#39;#app&#39;, &#39;#root&#39;] &#x2F;&#x2F; 白屏检测的容器列表
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="白屏检测方案的实现流程"><a href="#白屏检测方案的实现流程" class="headerlink" title="白屏检测方案的实现流程"></a>白屏检测方案的实现流程</h3><p>详见：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7176206226903007292?searchId=20240408104421B1C5AEC4BE8517554634#heading-2">前端白屏的检测方案，让你知道自己的页面白了 - 掘金 (juejin.cn)</a></p>
+<h3 id="技术方案调研"><a href="#技术方案调研" class="headerlink" title="技术方案调研"></a>技术方案调研</h3><ul>
+<li><p>检测根节点是否渲染</p>
+</li>
+<li><p>Mutation Observer监听DOM变化</p>
+</li>
+<li><p>页面截图检测</p>
+</li>
+<li><p>采样对比</p>
+<p>该方法是对页面取关键点，进行采样对比，在准确性、易用性等方面均表现良好，也是最终采用的方案</p>
+<p>对于有骨架屏的项目，通过对比前后获取的 dom 元素是否一致，来判断页面是否变化（这块后面专门讲解）</p>
+<p>采样对比代码：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 监听页面白屏
+function whiteScreen() &#123;
+  &#x2F;&#x2F; 页面加载完毕
+  function onload(callback) &#123;
+    if (document.readyState &#x3D;&#x3D;&#x3D; &#39;complete&#39;) &#123;
+      callback();
+    &#125; else &#123;
+      window.addEventListener(&#39;load&#39;, callback);
+    &#125;
+  &#125;
+  &#x2F;&#x2F; 定义外层容器元素的集合
+  let containerElements &#x3D; [&#39;html&#39;, &#39;body&#39;, &#39;#app&#39;, &#39;#root&#39;];
+  &#x2F;&#x2F; 容器元素个数
+  let emptyPoints &#x3D; 0;
+  &#x2F;&#x2F; 选中dom的名称
+  function getSelector(element) &#123;
+    if (element.id) &#123;
+      return &quot;#&quot; + element.id;
+    &#125; else if (element.className) &#123;&#x2F;&#x2F; div home &#x3D;&gt; div.home
+      return &quot;.&quot; + element.className.split(&#39; &#39;).filter(item &#x3D;&gt; !!item).join(&#39;.&#39;);
+    &#125; else &#123;
+      return element.nodeName.toLowerCase();
+    &#125;
+  &#125;
+  &#x2F;&#x2F; 是否为容器节点
+  function isContainer(element) &#123;
+    let selector &#x3D; getSelector(element);
+    if (containerElements.indexOf(selector) !&#x3D; -1) &#123;
+      emptyPoints++;
+    &#125;
+  &#125;
+  onload(() &#x3D;&gt; &#123;
+    &#x2F;&#x2F; 页面加载完毕初始化
+    for (let i &#x3D; 1; i &lt;&#x3D; 9; i++) &#123;
+      let xElements &#x3D; document.elementsFromPoint(window.innerWidth * i &#x2F; 10, window.innerHeight &#x2F; 2);
+      let yElements &#x3D; document.elementsFromPoint(window.innerWidth &#x2F; 2, window.innerHeight * i &#x2F; 10);
+      isContainer(xElements[0]);
+      &#x2F;&#x2F; 中心点只计算一次
+      if (i !&#x3D; 5) &#123;
+        isContainer(yElements[0]);
+      &#125;
+    &#125;
+    &#x2F;&#x2F; 17个点都是容器节点算作白屏
+    if (emptyPoints &#x3D;&#x3D; 17) &#123;
+      &#x2F;&#x2F; 获取白屏信息
+      console.log(&#123;
+        status: &#39;error&#39;
+      &#125;);
+    &#125;
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="白屏修正机制"><a href="#白屏修正机制" class="headerlink" title="白屏修正机制"></a>白屏修正机制</h3><p>若首次检测页面为白屏后，任务还没有完成，特别是手机端的项目，有可能是用户网络环境不好，关键的JS资源或接口请求还没有返回，导致的页面白屏</p>
+<p>需要使用轮询检测，来确保白屏检测结果的正确性，直到页面的正常渲染，这就是<strong>白屏修正机制</strong></p>
+<p>轮询代码：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 采样对比</span>
+<span class="token keyword">function</span> <span class="token function">sampling</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> emptyPoints <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  ……
+  <span class="token comment">// 页面正常渲染，停止轮询</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>emptyPoints <span class="token operator">!=</span> <span class="token number">17</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>whiteLoopTimer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">clearTimeout</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>whiteLoopTimer<span class="token punctuation">)</span>
+      window<span class="token punctuation">.</span>whiteLoopTimer <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 开启轮询</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>window<span class="token punctuation">.</span>whiteLoopTimer<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">whiteLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// 通过轮询不断修改之前的检测结果，直到页面正常渲染</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">status</span><span class="token operator">:</span> emptyPoints <span class="token operator">==</span> <span class="token number">17</span> <span class="token operator">?</span> <span class="token string">'error'</span> <span class="token operator">:</span> <span class="token string">'ok'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// 白屏轮询</span>
+<span class="token keyword">function</span> <span class="token function">whiteLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  window<span class="token punctuation">.</span>whiteLoopTimer <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token function">sampling</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Vue性能优化之虚拟列表"><a href="#Vue性能优化之虚拟列表" class="headerlink" title="Vue性能优化之虚拟列表"></a>Vue性能优化之虚拟列表</h3><h4 id="需要解决那些问题？"><a href="#需要解决那些问题？" class="headerlink" title="需要解决那些问题？"></a>需要解决那些问题？</h4><ul>
+<li>容器的高度(列表的高度)</li>
+<li>列表项的高度</li>
+<li>可视区域展示多少条数据</li>
+<li>可视区域展示哪部分数据</li>
+<li>让可视区域可以一直滚动</li>
+</ul>
+<h4 id="逐个分析上面的问题"><a href="#逐个分析上面的问题" class="headerlink" title="逐个分析上面的问题"></a>逐个分析上面的问题</h4><ul>
+<li><p>容器的高度(列表的高度)：这个可以自己设置一个高度</p>
+</li>
+<li><p>列表项的高度,也可以自己设置一个高度</p>
+</li>
+<li><p>可视区域展示多少条数据：可以通过计算得到，公式为：<code>容器的高度/列表项的高度</code></p>
+</li>
+<li><p>可视区域展示哪部分数据：我们可以通过设置<code>开始下标</code>和<code>结束下标</code>，来截取数据</p>
+<p>假设初始时，<code>开始下标</code>是0，那<code>结束下标</code>就是 <code>开始下标+可视区域的条数</code>，<code>结束下标</code>是随<code>开始下标</code>和<code>可视区域的条数</code>变化而变化的；然后随着滚动，<code>开始下标</code>要发生变化，只要更新<code>开始下标</code>,<code>结束下标</code>就能计算出来，那我们怎么去更新<code>开始下标</code>呢？<code>开始下标</code>怎么计算？</p>
+<p>如果我们知道被滚动条卷进去了多少个<code>列表项</code>，那就能知道现在的<code>开始下标</code>是多少了；我们知道，列表项的高度，如果能再知道<code>滚动条卷进去了多少高度</code>，用<code>卷进去的高度/列表项高度</code>就可以得到卷进去多少个了；<code>scrollTop</code>属性刚好可以得到滚动条卷入的高度</p>
+</li>
+<li><p>让可视区域可以一直滚动：我们是通过滚动去改变可视区域的数据，而不是增加数据，所以我们需要想办法让可视区域可以滚动，直到没有数据了才停止滚动；可以<code>padding</code>进行占位，比如我们有1000条数据，每条数据占40px高度，可视区域显示20条数据，那我们初始的时候，<code>padding-top</code>为0，<code>padding-bottom</code>为(1000-20)*40;随着滚动，上下<code>padding</code>也会发生变化，当<code>padding-top</code>为0代表在滚动到顶部了，<code>padding-bottom</code>为0代表滚动到底部了。<code>pading-top</code>随着开始下标变大而变大（开始下标乘以40）,开始下标为0，则<code>padding-top</code>为0；<code>padding-bottom</code>随着结束下标变大而减小((数据总条数-结束下标)乘以40),数据总条数等于结束下标，则<code>padding-bottom</code>为0；也就是让可视区域随着滚动条一起移动</p>
+</li>
+</ul>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+import &#123; computed, onMounted, reactive, ref &#125; from &#39;vue&#39;;
+
+const containHeight &#x3D; ref&lt;number&gt;(800)  &#x2F;&#x2F; 容器高度
+const listContainerRef &#x3D; ref&lt;HTMLElement&gt;() &#x2F;&#x2F; 容器引用
+const listRef &#x3D; ref&lt;HTMLElement&gt;() &#x2F;&#x2F; 列表引用
+
+const itemHeight &#x3D; ref&lt;number&gt;(40) &#x2F;&#x2F; 列表项高度
+
+const dataList &#x3D; reactive&lt;Array&lt;string&gt;&gt;([]) &#x2F;&#x2F; 所有数据
+let startIndex &#x3D; ref&lt;number&gt;(0) &#x2F;&#x2F; 开始下标
+
+const containHeightpx &#x3D; computed&lt;string&gt;(() &#x3D;&gt; &#123; &#x2F;&#x2F;容器高度,用于样式
+  return containHeight.value + &#39;px&#39;
+&#125;)
+
+const itemHeightpx &#x3D; computed&lt;string&gt;(() &#x3D;&gt; &#123; &#x2F;&#x2F;列表项高度,用于样式
+  return itemHeight.value + &#39;px&#39;
+&#125;)
+
+&#x2F;&#x2F; 可视区域数量
+const showNum &#x3D; computed(() &#x3D;&gt; &#123;
+  return ~~(containHeight.value &#x2F; itemHeight.value)  &#x2F;&#x2F; ~~转换成数字类型，有向下取整的妙用
+&#125;)
+
+&#x2F;&#x2F; 结束下标 &#x3D; 开始下标 + 可视区域数量
+const endIndex &#x3D; computed(() &#x3D;&gt; &#123;
+  return startIndex.value + showNum.value
+&#125;)
+
+&#x2F;&#x2F; 展示的列表
+const showList &#x3D; computed(() &#x3D;&gt; &#123;
+  return dataList.slice(startIndex.value, endIndex.value)
+&#125;)
+
+&#x2F;&#x2F; 列表的padding
+const listStyle &#x3D; computed(() &#x3D;&gt; &#123;
+  return &#123;
+    paddingTop: startIndex.value * itemHeight.value + &#39;px&#39;,
+    paddingBottom: (dataList.length - endIndex.value) * itemHeight.value + &#39;px&#39;
+  &#125;
+&#125;)
+
+&#x2F;&#x2F; 初始化加载数据
+onMounted(() &#x3D;&gt; &#123;
+  for (let index &#x3D; 1; index &lt;&#x3D; 1000; index++) &#123;
+    dataList.push(&#96;列表项---$&#123;index&#125;&#96;)
+  &#125;
+&#125;)
+
+&#x2F;&#x2F; 监听滚动条的变化
+const listContainerScroll &#x3D; () &#x3D;&gt; &#123;
+  console.log(startIndex.value, endIndex.value);
+
+  &#x2F;&#x2F; 获取滚动条卷入的高度
+  let scrollTop &#x3D; listContainerRef.value!.scrollTop
+
+  &#x2F;&#x2F; 更新开始下标
+  startIndex.value &#x3D; Math.floor(scrollTop &#x2F; itemHeight.value);
+
+  &#x2F;&#x2F; 剩下的会通过计算属性自动变化
+
+&#125;
+
+&lt;&#x2F;script&gt;
+
+&lt;template&gt;
+  &lt;div ref&#x3D;&quot;listContainerRef&quot; class&#x3D;&quot;listContainerClass&quot; @scroll&#x3D;&quot;listContainerScroll&quot;&gt;
+    &lt;div ref&#x3D;&quot;listRef&quot; :style&#x3D;&quot;listStyle&quot;&gt;
+      &lt;div v-for&#x3D;&quot;(item, index) in showList&quot; :key&#x3D;&quot;index&quot; class&#x3D;&quot;itemClass&quot;&gt;
+        &#123;&#123; item &#125;&#125;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;div&gt;
+    &lt;div&gt;没有更多了....&lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;style lang&#x3D;&quot;scss&quot; scoped&gt;
+.listContainerClass &#123;
+  height: v-bind(containHeightpx);
+  overflow: auto;
+  border: 1px solid black;
+
+  .itemClass &#123;
+    height: v-bind(itemHeightpx);
+  &#125;
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="封装优化一下"><a href="#封装优化一下" class="headerlink" title="封装优化一下"></a>封装优化一下</h4><ul>
+<li>把它变成一个公用组件，可以通过传值的方式使用</li>
+<li>给滚动事件加上防抖功能(加了防抖，所以渲染的数量增大点，防止出现空白)</li>
+</ul>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+
+
+import &#123; debounce &#125; from &#39;lodash&#39;;
+import &#123; computed, PropType, ref &#125; from &#39;vue&#39;;
+
+const props &#x3D; defineProps(&#123;
+  &#x2F;&#x2F; 容器高度
+  containHeight: &#123;
+    type: Number,
+    default: 800
+  &#125;,
+  &#x2F;&#x2F; 列表项高度
+  itemHeight: &#123;
+    type: Number,
+    default: 40
+  &#125;,
+
+  dataList: &#123;
+    type: Object as PropType&lt;any&gt;,
+    default: () &#x3D;&gt; []
+  &#125;
+
+&#125;)
+
+
+const listContainerRef &#x3D; ref&lt;HTMLElement&gt;() &#x2F;&#x2F; 容器引用
+const listRef &#x3D; ref&lt;HTMLElement&gt;() &#x2F;&#x2F; 列表引用
+
+let startIndex &#x3D; ref&lt;number&gt;(0) &#x2F;&#x2F; 开始下标
+
+const containHeightpx &#x3D; computed&lt;string&gt;(() &#x3D;&gt; &#123; &#x2F;&#x2F;容器高度,用于样式
+  return props.containHeight + &#39;px&#39;
+&#125;)
+
+const itemHeightpx &#x3D; computed&lt;string&gt;(() &#x3D;&gt; &#123; &#x2F;&#x2F;列表项高度,用于样式
+  return props.itemHeight + &#39;px&#39;
+&#125;)
+
+&#x2F;&#x2F; 可视区域数量
+const showNum &#x3D; computed(() &#x3D;&gt; &#123;
+  return ~~(props.containHeight &#x2F; props.itemHeight) * 2  &#x2F;&#x2F; 由于加了防抖，所以渲染的数量增大点，防止出现空白
+&#125;)
+
+&#x2F;&#x2F; 结束下标 &#x3D; 开始下标 + 可视区域数量
+const endIndex &#x3D; computed(() &#x3D;&gt; &#123;
+  return startIndex.value + showNum.value
+&#125;)
+
+&#x2F;&#x2F; 展示的列表
+const showList &#x3D; computed(() &#x3D;&gt; &#123;
+  return props.dataList.slice(startIndex.value, endIndex.value)
+&#125;)
+
+&#x2F;&#x2F; 列表的padding
+const listStyle &#x3D; computed(() &#x3D;&gt; &#123;
+  return &#123;
+    paddingTop: startIndex.value * props.itemHeight + &#39;px&#39;,
+    paddingBottom: (props.dataList.length - endIndex.value) * props.itemHeight + &#39;px&#39;
+  &#125;
+&#125;)
+
+
+&#x2F;&#x2F; 监听滚动条的变化
+const scrollEvent &#x3D; () &#x3D;&gt; &#123;
+
+  console.log(startIndex.value, endIndex.value);
+
+  &#x2F;&#x2F; 获取滚动条卷入的高度
+  let scrollTop &#x3D; listContainerRef.value!.scrollTop
+
+  &#x2F;&#x2F; 更新开始下标
+  startIndex.value &#x3D; Math.floor(scrollTop &#x2F; props.itemHeight);
+
+  &#x2F;&#x2F; 剩下的会通过计算属性自动变化
+
+&#125;
+
+
+const listContainerScroll &#x3D; debounce(scrollEvent, 20)
+
+&lt;&#x2F;script&gt;
+
+&lt;template&gt;
+  &lt;div ref&#x3D;&quot;listContainerRef&quot; class&#x3D;&quot;listContainerClass&quot; @scroll&#x3D;&quot;listContainerScroll&quot;&gt;
+    &lt;div ref&#x3D;&quot;listRef&quot; :style&#x3D;&quot;listStyle&quot;&gt;
+      &lt;div v-for&#x3D;&quot;(item, index) in showList&quot; :key&#x3D;&quot;index&quot; class&#x3D;&quot;itemClass&quot;&gt;
+        &lt;slot :item&#x3D;&quot;item&quot;&gt;&lt;&#x2F;slot&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;div&gt;
+    &lt;div&gt;没有更多了....&lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;style lang&#x3D;&quot;scss&quot; scoped&gt;
+.listContainerClass &#123;
+  height: v-bind(containHeightpx);
+  overflow: auto;
+  border: 1px solid black;
+
+  .itemClass &#123;
+    height: v-bind(itemHeightpx);
+  &#125;
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+import VirtualList from &#39;@&#x2F;components&#x2F;virtualList&#x2F;index.vue&#39;
+import &#123; onMounted, reactive &#125; from &#39;vue&#39;;
+
+const dataList &#x3D; reactive&lt;any&gt;([])
+
+onMounted(() &#x3D;&gt; &#123;
+  for (let index &#x3D; 0; index &lt; 1000; index++) &#123;
+    dataList.push(&#123;
+      id: index,
+      title: &#39;列表项&#39;
+    &#125;)
+
+  &#125;
+&#125;)
+&lt;&#x2F;script&gt;
+
+&lt;template&gt;
+  &lt;VirtualList :dataList&#x3D;&quot;dataList&quot; :containHeight&#x3D;&quot;600&quot; :itemHeight&#x3D;&quot;30&quot;&gt;
+    &lt;template #default&#x3D;&quot;&#123; item &#125;&quot;&gt;
+      &#123;&#123; item.title &#125;&#125;-&#123;&#123; item.id &#125;&#125;
+    &lt;&#x2F;template&gt;
+  &lt;&#x2F;VirtualList&gt;
+&lt;&#x2F;template&gt;
+
+&lt;style lang&#x3D;&quot;scss&quot; scoped&gt;
+
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="登录鉴权相关"><a href="#登录鉴权相关" class="headerlink" title="登录鉴权相关"></a>登录鉴权相关</h2><p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/07/25/node-js-zhong-de-deng-lu-jian-quan/#登录鉴权-Cookie">Node.js中的登录鉴权 | QT-7274 (qblog.top)</a></p>
 <h3 id="什么是cookie"><a href="#什么是cookie" class="headerlink" title="什么是cookie"></a>什么是cookie</h3><p>提示：</p>
 <ul>
@@ -704,6 +1505,85 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
 <li>单点登录友好：使用<code>session</code>进行身份认证的话，由于<code>cookie</code>无法跨域，难以实现单点登录。但是，使用<code>token</code>进行认证的话， <code>token</code>可以被保存在客户端的任意位置的内存中，不一定是<code>cookie</code>，所以不依赖<code>cookie</code>，不会存在这些问题</li>
 <li>适合移动端应用：使用<code>session</code>进行身份认证的话，需要保存一份信息在服务器端，而且这种方式会依赖到<code>cookie</code>（需要 <code>cookie</code> 保存 <code>sessionId</code>），所以不适合移动端</li>
 </ul>
+<h2 id="setTimeout、setInterval、requestAnimationFrame"><a href="#setTimeout、setInterval、requestAnimationFrame" class="headerlink" title="setTimeout、setInterval、requestAnimationFrame"></a>setTimeout、setInterval、requestAnimationFrame</h2><h3 id="setTimout"><a href="#setTimout" class="headerlink" title="setTimout"></a>setTimout</h3><h4 id="使用SetTimeout进行优化"><a href="#使用SetTimeout进行优化" class="headerlink" title="使用SetTimeout进行优化"></a>使用SetTimeout进行优化</h4><p>详见本文——优化相关章节中的【一次加载大量DOM】</p>
+<h4 id="setTimeout的定义和用法"><a href="#setTimeout的定义和用法" class="headerlink" title="setTimeout的定义和用法"></a>setTimeout的定义和用法</h4><ul>
+<li>定义：用于在指定的毫秒数<strong>后</strong>调用函数或计算表达式。</li>
+<li>参数：<ul>
+<li>第一个参数function，必填的，回调函数，可以是一个函数，也可以是一个函数名。</li>
+<li>第二个参数delay，可选的，延迟时间，单位是ms。</li>
+<li>第三个参数param1,param2,param3...,可选的，是传递给回调函数的参数，比较不常用到，在IE9 及其更早版本不支持该参数。</li>
+</ul>
+</li>
+<li>返回值：返回一个 ID（数字），可以将这个ID传递给<code>clearTimeout()</code>来取消执行。</li>
+</ul>
+<h4 id="setTimeout的最短延迟时间"><a href="#setTimeout的最短延迟时间" class="headerlink" title="setTimeout的最短延迟时间"></a>setTimeout的最短延迟时间</h4><p>第二个参数delay未设置的时候，默认为0，意味着“马上”执行，或者尽快执行。</p>
+<p>但是有一个规定如下</p>
+<blockquote>
+<p>If timeout is less than 0, then set timeout to 0. If nesting level is greater than 5, and timeout is less than 4, then set timeout to 4.</p>
+</blockquote>
+<p>上面的意思是说，如果延迟时间短于0，则将延迟时间设置为0。<strong>如果嵌套级别大于5，延迟时间短于4ms，则将延迟时间设置为4ms。</strong></p>
+<p>还有另外一种情况。为了节电，<strong>对于那些不处于当前窗口的页面，浏览器会将最短延时限制扩大到1000ms。</strong></p>
+<h3 id="setInterval"><a href="#setInterval" class="headerlink" title="setInterval"></a>setInterval</h3><h4 id="setInterval的定义和用法"><a href="#setInterval的定义和用法" class="headerlink" title="setInterval的定义和用法"></a>setInterval的定义和用法</h4><ul>
+<li>定义：可按照指定的<strong>周期</strong>（以毫秒计）来调用函数或计算表达式。</li>
+<li>参数：<ul>
+<li>第一个参数function，必填的，回调函数，可以是一个函数，也可以是一个函数名。</li>
+<li>第二个参数delay，可选的，间隔时间，单位是ms。</li>
+<li>第三个参数param1,param2,param3...,可选的，是传递给回调函数的参数，比较不常用到，在IE9 及其更早版本不支持该参数。</li>
+</ul>
+</li>
+<li>返回值：返回一个 ID（数字），可以将这个ID传递给<code>clearInterval()</code>来取消执行。</li>
+</ul>
+<h4 id="setInterval的最短间隔时间"><a href="#setInterval的最短间隔时间" class="headerlink" title="setInterval的最短间隔时间"></a>setInterval的最短间隔时间</h4><p>在John Resig的新书《Javascript忍者的秘密》一书中提到</p>
+<blockquote>
+<p>Browsers all have a 10ms minimum delay on OSX and a(approximately) 15ms delay on Windows.</p>
+</blockquote>
+<p>在苹果机上的最短间隔时间是10毫秒,在Windows系统上的最短间隔时间大约是15毫秒。</p>
+<p>大多数电脑显示器的刷新频率是60HZ，大概相当于每秒钟重绘60次。因此，最平滑的动画效的最佳循环间隔是1000ms/60，约等于16.6ms。</p>
+<p>综上所述，我认为setInterval的最短间隔时间应该为16.6ms。</p>
+<h4 id="setInterval的间隔时间设置问题"><a href="#setInterval的间隔时间设置问题" class="headerlink" title="setInterval的间隔时间设置问题"></a>setInterval的间隔时间设置问题</h4><p><strong>setInterval的间隔时间一定要比回调函数的执行时间大</strong></p>
+<p><code>setInterval</code>函数的工作方式是，每隔指定的间隔时间，就将回调函数添加到任务队列中。如果回调函数的执行时间大于这个间隔时间，那么回调函数的执行可能会和下一次的调度重叠。</p>
+<p>这是因为JavaScript是单线程的，一次只能执行一个任务。如果回调函数的执行时间过长，那么在它执行结束之前，下一个间隔时间可能已经到达，此时新的回调函数就会被添加到任务队列中。如果前一个回调函数还没有执行完，那么新的回调函数就必须等待，这就可能导致实际的间隔时间小于预期。</p>
+<p>但是在很多情况下，我们并不能清晰的知道回调函数的执行时间，为了能按照一定的间隔周期性的触发定时器，可以用以下方法实现：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">setTimeout(function handlerInterval()&#123;
+    &#x2F;&#x2F; do something
+    setTimeout(handlerInterval,100); 
+    &#x2F;&#x2F; 执行完处理程序的内容后，在末尾再间隔100毫秒来调用该程序，这样就能保证一定是100毫秒的周期调用
+&#125;,100)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="setTimeout为什么不准时"><a href="#setTimeout为什么不准时" class="headerlink" title="setTimeout为什么不准时"></a>setTimeout为什么不准时</h3><ol>
+<li><p>如果嵌套级别大于5，延迟时间短于4ms，则将延迟时间设置为4ms。</p>
+</li>
+<li><p>对于那些不处于当前窗口的页面，浏览器会将最短延时限制扩大到1000ms。</p>
+</li>
+<li><p><code>setTimeout</code> 在 JavaScript 中并不是完全准确的。这是因为 JavaScript 是单线程的，<code>setTimeout</code> 只是将回调函数放入任务队列等待执行，而实际执行时间取决于当前执行栈中的任务何时完成。</p>
+<p>这使得 <code>requestAnimationFrame</code> 在动画场景下比 <code>setTimeout</code> 更准确，因为它能确保在每一帧刷新时都执行，而 <code>setTimeout</code> 可能会因为 JavaScript 的事件循环或其他原因而有所延迟。</p>
+<p>然而，<code>requestAnimationFrame</code> 并不能用来替代 <code>setTimeout</code> 来实现一个准确的定时器，因为它的执行频率是固定的，并且当标签页不在前台时，<code>requestAnimationFrame</code> 的运行会被暂停。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function _timerSetInterval(fn, delay, ...args) &#123;
+    let current &#x3D; Date.now();
+    let timer &#x3D; null;
+
+    const task &#x3D; () &#x3D;&gt; &#123;
+        current +&#x3D; delay;
+        timer &#x3D; setTimeout(() &#x3D;&gt; &#123;
+            fn.apply(this, args);
+            task();
+        &#125;, Math.max(0, current - Date.now()));
+    &#125;;
+
+    task();
+    return () &#x3D;&gt; clearTimeout(timer);
+&#125;
+
+_timerSetInterval(() &#x3D;&gt; &#123;console.log(new Date())&#125;, 1000);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p><code>requestAnimationFrame()</code>是一个浏览器提供的API，用于在下一次重绘之前执行一段代码。这通常发生在屏幕刷新的时候，也就是每秒60次。这个API主要用于动画效果的实现，因为它可以确保回调函数在屏幕刷新的每一帧中都被执行一次，从而实现流畅的动画效果。</p>
+<p>以往的JS动画通常是用setTimeout或setInterval定时器来实现，这种实现方法存在的问题，一是上面提到的“掉帧”，二是无法掌握回调函数的执行时机，三是系统性能的浪费，当页面转为后台运行时并不会自动停止。</p>
+<blockquote>
+<p>当然，requestAnimationFrame并非完美，因为是在主线程上执行的，当主线程非常繁忙时，requestAnimationFrame的效果就大打折扣。</p>
+</blockquote>
+<h4 id="requestAnimationFrame和-nextTick-的区别"><a href="#requestAnimationFrame和-nextTick-的区别" class="headerlink" title="requestAnimationFrame和 $nextTick()的区别"></a>requestAnimationFrame和 $nextTick()的区别</h4><p><code>$nextTick()</code>的回调函数会在当前宏任务结束后，下一个宏任务开始前执行，也就是在微任务队列完成后立即执行。这是因为<code>$nextTick()</code>的内部实现使用了微任务队列。</p>
+<p><code>requestAnimationFrame()</code>的回调函数会在下一次重绘之前执行，这通常在下一个宏任务开始之前，但在所有微任务完成之后。然而，这并不意味着它会立即在微任务队列完成后执行，因为浏览器还需要处理其他的任务，如渲染和垃圾回收，这可能会导致<code>requestAnimationFrame()</code>的回调函数延迟执行。</p>
+<p>因此，如果你在同一个宏任务中调用了<code>$nextTick()</code>和<code>requestAnimationFrame()</code>，那么<code>$nextTick()</code>的回调函数会先执行，然后是<code>requestAnimationFrame()</code>的回调函数。</p>
 <h2 id="浏览器相关"><a href="#浏览器相关" class="headerlink" title="浏览器相关"></a>浏览器相关</h2><h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><blockquote>
 <p>腾讯</p>
 </blockquote>
@@ -713,7 +1593,11 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
 <li><strong>区别</strong>：优缺点</li>
 <li>https的<strong>工作原理</strong>：建立ssl-传输（公钥）-协商-加密-解密-通信</li>
 </ul>
-<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/08/liu-lan-qi-xiang-guan-xi-jie-ti-1/#HTTP-和-HTTPS">浏览器相关细节题（1） | QT-7274 (qblog.top)</a></p>
+<p>答案：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://qblog.top/2023/09/08/liu-lan-qi-xiang-guan-xi-jie-ti-1/#HTTP-和-HTTPS">浏览器相关细节题（1） | QT-7274 (qblog.top)</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/HTTPS.html">面试官：为什么说HTTPS比HTTP安全? HTTPS是如何保证安全的？ | web前端面试 - 面试官系列 (vue3js.cn)</a></li>
+</ul>
 <p>相关拓展：</p>
 <ul>
 <li>对称加密和非对称加密</li>
@@ -733,7 +1617,18 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
 <h3 id="常见状态码"><a href="#常见状态码" class="headerlink" title="常见状态码"></a>常见状态码</h3><blockquote>
 <p>腾讯</p>
 </blockquote>
-<p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/08/liu-lan-qi-xiang-guan-xi-jie-ti-1/#❗常见状态码">浏览器相关细节题（1） | QT-7274 (qblog.top)</a></p>
+<p>答案：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/status.html">面试官：说说HTTP 常见的状态码有哪些，适用场景？ | web前端面试 - 面试官系列 (vue3js.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://qblog.top/2023/09/08/liu-lan-qi-xiang-guan-xi-jie-ti-1/#❗常见状态码">浏览器相关细节题（1） | QT-7274 (qblog.top)</a></li>
+</ul>
+<h3 id="TCP和UDP的区别和应用场景"><a href="#TCP和UDP的区别和应用场景" class="headerlink" title="TCP和UDP的区别和应用场景"></a>TCP和UDP的区别和应用场景</h3><p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/UDP_TCP.html">面试官：如何理解UDP 和 TCP? 区别? 应用场景? | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<h3 id="如何理解OSI七层模型"><a href="#如何理解OSI七层模型" class="headerlink" title="如何理解OSI七层模型"></a>如何理解OSI七层模型</h3><p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/OSI.html">面试官：如何理解OSI七层模型? | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<h3 id="DNS协议-是什么？说说DNS-完整的查询过程"><a href="#DNS协议-是什么？说说DNS-完整的查询过程" class="headerlink" title="DNS协议 是什么？说说DNS 完整的查询过程?"></a>DNS协议 是什么？说说DNS 完整的查询过程?</h3><p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/DNS.html">面试官：DNS协议 是什么？说说DNS 完整的查询过程? | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<h3 id="如何理解CDN？说说实现原理？"><a href="#如何理解CDN？说说实现原理？" class="headerlink" title="如何理解CDN？说说实现原理？"></a>如何理解CDN？说说实现原理？</h3><p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/CDN.html">面试官：如何理解CDN？说说实现原理？ | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<h3 id="GET和POST的区别"><a href="#GET和POST的区别" class="headerlink" title="GET和POST的区别"></a>GET和POST的区别</h3><p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/GET_POST.html">面试官：说一下 GET 和 POST 的区别？ | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<h3 id="HTTP请求头及其作用"><a href="#HTTP请求头及其作用" class="headerlink" title="HTTP请求头及其作用"></a>HTTP请求头及其作用</h3><p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/headers.html">面试官：说说 HTTP 常见的请求头有哪些? 作用？ | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
+<h3 id="WebSocket的理解"><a href="#WebSocket的理解" class="headerlink" title="WebSocket的理解"></a>WebSocket的理解</h3><p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/WebSocket.html">面试官：说说对WebSocket的理解？应用场景？ | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
 <h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><blockquote>
 <p>腾讯、字节</p>
 </blockquote>
@@ -831,21 +1726,6 @@ while (index - currIndex &#x3D;&#x3D; 1) &#123;
 <li>为什么不是两次握手？</li>
 </ul>
 <p>答案：<a target="_blank" rel="noopener" href="https://vue3js.cn/interview/http/handshakes_waves.html#一、三次握手">面试官：说说TCP为什么需要三次握手和四次挥手？ | web前端面试 - 面试官系列 (vue3js.cn)</a></p>
-<h3 id="对首屏的理解"><a href="#对首屏的理解" class="headerlink" title="对首屏的理解"></a>对首屏的理解</h3><blockquote>
-<p>字节</p>
-</blockquote>
-<p>首屏时间是指从用户打开网页到首屏内容完全显示出来的时间。这是一个非常重要的性能指标，因为它直接影响到用户的体验。</p>
-<p>首屏时间包括以下几个阶段：</p>
-<ol>
-<li><strong>DNS 解析时间</strong>：浏览器将网站的域名解析为 IP 地址的时间。</li>
-<li><strong>TCP 连接时间</strong>：浏览器与服务器建立 TCP 连接的时间。</li>
-<li><strong>HTTP 请求和响应时间</strong>：浏览器发送 HTTP 请求并接收到 HTTP 响应的时间。</li>
-<li><strong>DOM 解析时间</strong>：浏览器解析 HTML 文档，构建 DOM 树的时间。</li>
-<li><strong>CSSOM 构建时间</strong>：浏览器解析 CSS 文件，构建 CSSOM 树的时间。</li>
-<li><strong>JavaScript 执行时间</strong>：浏览器执行 JavaScript 代码的时间。</li>
-<li><strong>渲染时间</strong>：浏览器将 DOM 树和 CSSOM 树合并为渲染树，计算布局，绘制页面的时间。</li>
-</ol>
-<p>首屏时间的计算方法有很多种，不同的方法可能会得到不同的结果。一般来说，首屏时间应该包括上述所有阶段的时间。</p>
 <h3 id="Content-Type参数"><a href="#Content-Type参数" class="headerlink" title="Content-Type参数"></a>Content-Type参数</h3><p>HTTP协议头中的<code>Content-Type</code>参数用于指示请求或响应中携带的实体正文（body）的MIME类型（Multipurpose Internet Mail Extensions）。它告诉客户端或服务器如何解释正文的内容。</p>
 <p>Content-Type参数值的MIME类型通常以type/subtype的形式表示，其中type表示主类型（Top-Level Type），subtype表示子类型（Subtype）。type是广义的数据类型，而subtype则更具体地描述了数据的类型。</p>
 <p>以下是<code>Content-Type</code>参数的一些常见取值及其含义：</p>
@@ -1241,27 +2121,6 @@ console.log(&#39;script end&#39;); <span aria-hidden="true" class="line-numbers-
 </blockquote>
 <p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/05/04/tong-su-yi-dong-jie-shao-xia-js-bi-bao/">通俗易懂介绍下JS闭包 | QT-7274 (qblog.top)</a></p>
 <h3 id="事件冒泡及经历的阶段"><a href="#事件冒泡及经历的阶段" class="headerlink" title="事件冒泡及经历的阶段"></a>事件冒泡及经历的阶段</h3><p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/10/03/javascript-dai-ma-ti-mu/#概念问题">JavaScript代码题目 | QT-7274 (qblog.top)</a></p>
-<h3 id="setTimeout是准时的么？"><a href="#setTimeout是准时的么？" class="headerlink" title="setTimeout是准时的么？"></a>setTimeout是准时的么？</h3><p><code>setTimeout</code> 在 JavaScript 中并不是完全准确的。这是因为 JavaScript 是单线程的，<code>setTimeout</code> 只是将回调函数放入任务队列等待执行，而实际执行时间取决于当前执行栈中的任务何时完成。</p>
-<p>这使得 <code>requestAnimationFrame</code> 在动画场景下比 <code>setTimeout</code> 更准确，因为它能确保在每一帧刷新时都执行，而 <code>setTimeout</code> 可能会因为 JavaScript 的事件循环或其他原因而有所延迟。</p>
-<p>然而，<code>requestAnimationFrame</code> 并不能用来替代 <code>setTimeout</code> 来实现一个准确的定时器，因为它的执行频率是固定的，并且当标签页不在前台时，<code>requestAnimationFrame</code> 的运行会被暂停。</p>
-<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 系统补偿时间
-function _timerSetInterval(fn, delay, ...args) &#123;
-    let current &#x3D; Date.now();
-    let timer &#x3D; null;
-  
-    const task &#x3D; () &#x3D;&gt; &#123;
-      current +&#x3D; delay;
-      timer &#x3D; setTimeout(() &#x3D;&gt; &#123;
-        fn.apply(this, args);
-        task();
-      &#125;, current - Date.now());
-    &#125;;
-  
-    task();
-    return () &#x3D;&gt; clearTimeout(timer);
-  &#125;
-
-_timerSetInterval(()&#x3D;&gt;&#123;console.log(new Date()),1000&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="发布订阅者模式"><a href="#发布订阅者模式" class="headerlink" title="发布订阅者模式"></a>发布订阅者模式</h3><p><strong>发布-订阅模式</strong>其实是一种对象间一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到状态改变的通知。</p>
 <ul>
 <li><strong>订阅者</strong>（Subscriber）把自己想订阅的事件 <strong>注册</strong>（Subscribe）到调度中心（Event Channel）;</li>
@@ -1354,7 +2213,7 @@ _timerSetInterval(()&#x3D;&gt;&#123;console.log(new Date()),1000&#125;)<span ari
 <li><strong>区分连接</strong>：在 TCP 或 UDP 协议中，一个完整的连接由源 IP 地址、源端口、目标 IP 地址和目标端口四个元素组成。这样即使从同一个 IP 地址发出多个连接请求，只要源端口不同，就可以被视为不同的连接。</li>
 <li><strong>数据分发</strong>：当网络数据到达计算机时，操作系统会根据数据包的目标端口，将数据分发给监听在该端口上的服务或进程。</li>
 </ol>
-<h2 id="CSS相关"><a href="#CSS相关" class="headerlink" title="CSS相关"></a>CSS相关</h2><h3 id="rem-em-vh-vw"><a href="#rem-em-vh-vw" class="headerlink" title="rem em vh vw"></a>rem em vh vw</h3><p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/20/javascript-zhong-new-cao-zuo-fu-xiang-jie/#流程">JavaScript中new操作符详解 | QT-7274 (qblog.top)</a></p>
+<h2 id="CSS相关"><a href="#CSS相关" class="headerlink" title="CSS相关"></a>CSS相关</h2><h3 id="rem-em-vh-vw"><a href="#rem-em-vh-vw" class="headerlink" title="rem em vh vw"></a>rem em vh vw</h3><p>答案：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/12/xiang-ying-shi-bu-ju-de-chang-yong-jie-jue-fang-an-dui-bi/">响应式布局的常用解决方案对比 | QT-7274 (qblog.top)</a></p>
 <h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><blockquote>
 <p>字节</p>
 </blockquote>

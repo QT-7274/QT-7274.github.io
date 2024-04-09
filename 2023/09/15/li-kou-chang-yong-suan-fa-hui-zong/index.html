@@ -6,9 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="力扣常用算法汇总, QT-7274">
-    <meta name="description" content="力扣哈希表49 字母异位词分组var groupAnagrams &amp;#x3D; function(strs) &amp;#123;
-    let codeToGroup &amp;#x3D; new Map();
-    for (let s of st">
+    <meta name="description" content="本文基本所有算法的思路都是参考 https://labuladong.online/algo/home/">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -467,21 +465,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-29
+                    2024-04-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    29.1k
+                    30.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    136 分
+                    140 分
                 </div>
                 
 
@@ -2059,7 +2057,12 @@ var reverse &#x3D; function(arr) &#123;
     &#x2F;&#x2F; while 循环中没有找到，则 target 不存在
     return false;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160 相交链表"></a>160 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/description/">相交链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var getIntersectionNode &#x3D; function(headA, headB) &#123;
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160 相交链表"></a>160 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/description/">相交链表</a></h3><blockquote>
+<p>关键：通过某些方式，让 <code>p1</code> 和 <code>p2</code> 能够同时到达相交节点 <code>c1</code></p>
+</blockquote>
+<p>如果用两个指针 <code>p1</code> 和 <code>p2</code> 分别在两条链表上前进，我们可以让 <code>p1</code> 遍历完链表 <code>A</code> 之后开始遍历链表 <code>B</code>，让 <code>p2</code> 遍历完链表 <code>B</code> 之后开始遍历链表 <code>A</code>，这样相当于「逻辑上」两条链表接在了一起。</p>
+<p>如果这样进行拼接，就可以让 <code>p1</code> 和 <code>p2</code> 同时进入公共部分，也就是同时到达相交节点 <code>c1</code>：</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var getIntersectionNode &#x3D; function(headA, headB) &#123;
     let p1 &#x3D; headA, p2 &#x3D; headB;
 
     while(p1 !&#x3D;&#x3D; p2)
@@ -2073,7 +2076,15 @@ var reverse &#x3D; function(arr) &#123;
 
     return p2 &#x2F;&#x2F; 返回 p1 或 p2 都可以
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseList &#x3D; function(head) &#123;
+<h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></h3><p>反转函数的作用：<strong>输入一个节点 <code>head</code>，将「以 <code>head</code> 为起点」的链表反转，并返回反转之后的头结点</strong>。</p>
+<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404115800017.png" alt="image-20240404115800017"></p>
+<p>反转完成后，整个链表变成了这样：</p>
+<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404115853610.png" alt="image-20240404115853610"></p>
+<p>根据函数定义，<code>reverse</code> 函数会返回反转之后的头结点，用last接收：</p>
+<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404115912911.png" alt="image-20240404115912911"></p>
+<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404120032938.png" alt="image-20240404120032938"></p>
+<p>至此，链表被翻转过来了。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseList &#x3D; function(head) &#123;
     &#x2F;&#x2F; 如果链表为空或者只有一个节点的时候，反转结果就是它自己，直接返回即可。
     if(head &#x3D;&#x3D;&#x3D; null || head.next &#x3D;&#x3D;&#x3D; null)
     &#123;
@@ -2089,7 +2100,23 @@ var reverse &#x3D; function(arr) &#123;
 
 
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="234-回文链表"><a href="#234-回文链表" class="headerlink" title="234 回文链表"></a>234 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-linked-list/description/">回文链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var isPalindrome &#x3D; function(head) &#123;
+<h3 id="234-回文链表"><a href="#234-回文链表" class="headerlink" title="234 回文链表"></a>234 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-linked-list/description/">回文链表</a></h3><blockquote>
+<p>关键：</p>
+<ol>
+<li>找到链表的中点</li>
+<li>从中点的下一个节点开始反转链表</li>
+<li>对比 [从头到中点的链表] === [从中点的下一个节点到末尾的链表]</li>
+</ol>
+</blockquote>
+<p>那么如何找到链表的中点以及中点的下一个节点呢？</p>
+<blockquote>
+<ul>
+<li>使用双指针技巧，快指针前进两步慢指针前进一步，当快指针为null或快指针.next为null，那么慢指针对应的节点就是链表的中点。</li>
+<li>对于链表长度为奇数的情况，由于慢指针对应的节点为中点，所以还应该慢指针还应该前进一步才能找到下一个节点。</li>
+</ul>
+</blockquote>
+<p>那么如何反转链表呢？参考 206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var isPalindrome &#x3D; function(head) &#123;
     let [slow, fast] &#x3D; [head, head]
 
     while(fast !&#x3D;&#x3D; null &amp;&amp; fast.next !&#x3D;&#x3D; null)
@@ -2142,7 +2169,11 @@ function reverse(head)
 
     return last
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="141-环形链表"><a href="#141-环形链表" class="headerlink" title="141 环形链表"></a>141 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle/description/">环形链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var hasCycle &#x3D; function (head) &#123;
+<h3 id="141-环形链表"><a href="#141-环形链表" class="headerlink" title="141 环形链表"></a>141 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle/description/">环形链表</a></h3><blockquote>
+<p>关键：</p>
+<p>使用双指针技巧，如果fast指针最终遇到空指针说明没有环，如果fast和slow相遇说明有环。</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var hasCycle &#x3D; function (head) &#123;
     &#x2F;&#x2F; 每当慢指针前进一步 快指针就前进两步 如果fast最终遇到空指针说明没有环，如果fast和slow相遇说明有环
 
     let slow &#x3D; head;
@@ -2158,7 +2189,27 @@ function reverse(head)
     &#125;
     return false
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="142-环形链表-II"><a href="#142-环形链表-II" class="headerlink" title="142 环形链表 II"></a>142 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/description/">环形链表 II</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var detectCycle &#x3D; function(head) &#123;
+<h3 id="142-环形链表-II"><a href="#142-环形链表-II" class="headerlink" title="142 环形链表 II"></a>142 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/description/">环形链表 II</a></h3><p>关键：</p>
+<ul>
+<li>使用双指针技巧，如果fast指针最终遇到空指针说明没有环，如果fast和slow相遇<strong>说明有环</strong>。</li>
+<li>当快慢指针相遇时，让其中任一个指针指向头节点，然后让它俩以相同速度前进，再次相遇时所在的节点位置就是环开始的位置。</li>
+</ul>
+<p>原理说明：</p>
+<ol>
+<li><p>我们假设快慢指针相遇时，慢指针 <code>slow</code> 走了 <code>k</code> 步，那么快指针 <code>fast</code> 一定走了 <code>2k</code> 步：</p>
+<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404122059205.png" alt="image-20240404122059205"></p>
+</li>
+<li><p><code>fast</code> 一定比 <code>slow</code> 多走了 <code>k</code> 步，这多走的 <code>k</code> 步其实就是 <code>fast</code> 指针在环里转圈圈，所以 <code>k</code> 的值就是环长度的「整数倍」。</p>
+</li>
+<li><p>假设相遇点距环的起点的距离为 <code>m</code>，那么结合上图的 <code>slow</code> 指针，环的起点距头结点 <code>head</code> 的距离为 <code>k - m</code>，也就是说如果从 <code>head</code> 前进 <code>k - m</code> 步就能到达环起点。</p>
+</li>
+<li><p>巧的是，如果从相遇点继续前进 <code>k - m</code> 步，也恰好到达环起点：</p>
+<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404122114574.png" alt="image-20240404122114574"></p>
+</li>
+<li><p>所以，只要我们把快慢指针中的任一个重新指向 <code>head</code>，然后两个指针同速前进，<code>k - m</code> 步后一定会相遇，相遇之处就是环的起点了。</p>
+</li>
+</ol>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var detectCycle &#x3D; function(head) &#123;
     let fast &#x3D; head,slow &#x3D; head;
 
     while(fast!&#x3D;&#x3D;null &amp;&amp; fast.next!&#x3D;&#x3D;null)
@@ -2186,7 +2237,18 @@ function reverse(head)
 
     return slow
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21 合并两个有序链表"></a>21 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/description/">合并两个有序链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mergeTwoLists &#x3D; function(list1, list2) &#123;
+<h3 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21 合并两个有序链表"></a>21 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/description/">合并两个有序链表</a></h3><blockquote>
+<p>关键：</p>
+<p>归并排序的思想，利用两个链表的指针交替前进，最终将剩余元素也拼接到新链表上。</p>
+<p>技巧：</p>
+<p><strong>虚拟头结点处理新链表</strong></p>
+<p>虚拟头结点技巧，避免处理空指针的情况</p>
+<ul>
+<li>否则在开始合并链表时，我们需要先判断list1和list2哪个链表的头节点的值更小，然后将这个节点设置为新链表的头节点。</li>
+<li>其次，我们需要在每次插入新节点时，都需要判断新链表p是否为空，如果为空，就需要将新节点设置为头节点：p = newNode。</li>
+</ul>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mergeTwoLists &#x3D; function(list1, list2) &#123;
     let dummy &#x3D; new ListNode(-1) ,p &#x3D; dummy
 
     let p1 &#x3D; list1, p2 &#x3D; list2
@@ -2217,7 +2279,11 @@ function reverse(head)
 
     return dummy.next
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2 两数相加"></a>2 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-two-numbers/description/">两数相加</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var addTwoNumbers &#x3D; function(l1, l2) &#123;
+<h3 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2 两数相加"></a>2 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-two-numbers/description/">两数相加</a></h3><blockquote>
+<p>关键：</p>
+<p>注意链表每个节点只能有一个值，所以要考虑进位的问题</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var addTwoNumbers &#x3D; function(l1, l2) &#123;
     let p1 &#x3D; l1, p2 &#x3D; l2
 
     let dummy &#x3D; new ListNode(-1)
@@ -2252,7 +2318,14 @@ function reverse(head)
 
     return dummy.next
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="19-删除链表的倒数第-N-个结点"><a href="#19-删除链表的倒数第-N-个结点" class="headerlink" title="19 删除链表的倒数第 N 个结点"></a>19 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/">删除链表的倒数第 N 个结点</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var removeNthFromEnd &#x3D; function(head, n) &#123;
+<h3 id="19-删除链表的倒数第-N-个结点"><a href="#19-删除链表的倒数第-N-个结点" class="headerlink" title="19 删除链表的倒数第 N 个结点"></a>19 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/">删除链表的倒数第 N 个结点</a></h3><blockquote>
+<p>关键：</p>
+<ul>
+<li>删除某个节点，必须要知道前一个节点的引用</li>
+<li>利用双指针的技巧，先让快指针前进k步，然后快慢指针以相同的步伐前进，最后慢指针的位置就是倒数第k个元素的引用</li>
+</ul>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var removeNthFromEnd &#x3D; function(head, n) &#123;
     let dummy &#x3D; new ListNode(-1)
     dummy.next &#x3D; head
 
@@ -2283,7 +2356,11 @@ var findFromEnd &#x3D; function(head, k)
 
     return p2
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24 两两交换链表中的节点"></a>24 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/description/">两两交换链表中的节点</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var swapPairs &#x3D; function(head) &#123;
+<h3 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24 两两交换链表中的节点"></a>24 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/description/">两两交换链表中的节点</a></h3><blockquote>
+<p>关键：</p>
+<p>注意维护节点的引用，利用递归完成对后续节点的交换，并链接到之前的节点上</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var swapPairs &#x3D; function(head) &#123;
     if(head &#x3D;&#x3D; null || head.next &#x3D;&#x3D; null)
     &#123;
         return head
@@ -2298,14 +2375,20 @@ var findFromEnd &#x3D; function(head, k)
 
     return second
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="25-K-个一组翻转链表"><a href="#25-K-个一组翻转链表" class="headerlink" title="25 K 个一组翻转链表"></a>25 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-nodes-in-k-group/description/">K 个一组翻转链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseKGroup &#x3D; function(head, k) &#123;
+<h3 id="25-K-个一组翻转链表"><a href="#25-K-个一组翻转链表" class="headerlink" title="25 K 个一组翻转链表"></a>25 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-nodes-in-k-group/description/">K 个一组翻转链表</a></h3><blockquote>
+<p>关键：</p>
+<ul>
+<li>先让一个指针前进k步，找到需要反转链表的末尾</li>
+<li>使用反转链表函数反转该区间，然后递归实现全部链表部分反转</li>
+</ul>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseKGroup &#x3D; function(head, k) &#123;
     if(!head) return null
 
     let a &#x3D; head, b &#x3D; head
 
     for(let i &#x3D;0 ; i&lt; k; i++)
     &#123;   
-        &#x2F;&#x2F; 不足 k 个，不需要反转
         if(!b) return head
 
         b &#x3D; b.next
@@ -2313,7 +2396,7 @@ var findFromEnd &#x3D; function(head, k)
 
     let newHead &#x3D; reverse(a, b)
 
-    a.next &#x3D; reverseKGroup(b, k) &#x2F;&#x2F; ?为什么是b
+    a.next &#x3D; reverseKGroup(b, k) 
 
     return newHead
 &#125;;
@@ -2330,8 +2413,13 @@ var reverse &#x3D; function(a,b)&#123;
     &#125;
 
     return pre
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="138-随机链表的复制"><a href="#138-随机链表的复制" class="headerlink" title="138 随机链表的复制"></a>138 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/copy-list-with-random-pointer/description/">随机链表的复制</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var copyRandomList &#x3D; function(head) &#123;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="138-随机链表的复制"><a href="#138-随机链表的复制" class="headerlink" title="138 随机链表的复制"></a>138 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/copy-list-with-random-pointer/description/">随机链表的复制</a></h3><blockquote>
+<p><strong>对于数据结构复制，甭管他怎么变，你就记住最简单的方式：一个哈希表 + 两次遍历</strong>。</p>
+<p>第一次遍历专门克隆节点，借助哈希表把原始节点和克隆节点的映射存储起来；第二次专门组装节点，照着原数据结构的样子，把克隆节点的指针组装起来。</p>
+<p>题目如果让你克隆带随机指针的二叉树，或者克隆图，都是一样的，只不过是遍历的方式从 for 循环迭代遍历变成 <code>traverse</code> 递归函数遍历罢了。</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var copyRandomList &#x3D; function(head) &#123;
     const originToClone &#x3D; new Map()
 
     for(let p &#x3D; head; p !&#x3D;&#x3D; null; p &#x3D; p.next)
@@ -2429,32 +2517,49 @@ let slow &#x3D; head, fast &#x3D; head.next;
     return temp.next;
 
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="23-合并-K-个升序链表"><a href="#23-合并-K-个升序链表" class="headerlink" title="23 合并 K 个升序链表"></a>23 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-k-sorted-lists/description/">合并 K 个升序链表</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mergeKLists &#x3D; function(lists) &#123;
-    if (lists.length &#x3D;&#x3D; 0) return null;
-    &#x2F;&#x2F; 虚拟头结点
-    let dummy &#x3D; new ListNode(-1);
-    let p &#x3D; dummy;
-    &#x2F;&#x2F; 优先级队列，最小堆
-    let pq &#x3D; new PriorityQueue(
-        lists.length, (a, b) &#x3D;&gt; (a.val - b.val));
-    &#x2F;&#x2F; 将 k 个链表的头结点加入最小堆
-    for (let head of lists) &#123;
-        if (head !&#x3D; null)
-            pq.add(head);
+<h3 id="23-合并-K-个升序链表"><a href="#23-合并-K-个升序链表" class="headerlink" title="23 合并 K 个升序链表"></a>23 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-k-sorted-lists/description/">合并 K 个升序链表</a></h3><blockquote>
+<p>关键：</p>
+<p>使用了分治的思想，每次从 <code>lists</code> 中取出两个链表 <code>a</code> 和 <code>b</code>，然后将它们合并为一个链表 <code>h</code>，最后将 <code>h</code> 添加回 <code>lists</code>。</p>
+</blockquote>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var mergeKLists &#x3D; function(lists) &#123;
+
+    if(lists.length &#x3D;&#x3D;&#x3D; 0) return null
+    while(lists.length &gt; 1)
+    &#123;
+        let a &#x3D; lists.shift()
+        let b &#x3D; lists.shift()
+
+        let h &#x3D; mergeTwoLists(a,b)
+        lists.push(h)
+    &#125;
+    return lists[0]
+    
+&#125;;
+
+var mergeTwoLists &#x3D; function(a, b)
+&#123;
+    let dummy &#x3D; new ListNode(-1)
+    let p &#x3D; dummy
+    let p1 &#x3D; a,p2&#x3D;b
+    while(p1 &amp;&amp; p2)
+    &#123;
+        if(p1.val &lt; p2.val)
+        &#123;
+            p.next &#x3D; p1
+            p1 &#x3D; p1.next
+        &#125;else&#123;
+            p.next &#x3D; p2
+            p2 &#x3D; p2.next
+        &#125;
+        p &#x3D; p.next
     &#125;
 
-    while (!pq.isEmpty()) &#123;
-        &#x2F;&#x2F; 获取最小节点，接到结果链表中
-        let node &#x3D; pq.poll();
-        p.next &#x3D; node;
-        if (node.next !&#x3D; null) &#123;
-            pq.add(node.next);
-        &#125;
-        &#x2F;&#x2F; p 指针不断前进
-        p &#x3D; p.next;
-    &#125;
-    return dummy.next;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    p.next &#x3D; p1 || p2
+
+    return dummy.next
+
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="146-LRU-缓存"><a href="#146-LRU-缓存" class="headerlink" title="146 LRU 缓存"></a>146 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lru-cache/description/">LRU 缓存</a></h3><pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;**
  * @param &#123;number&#125; capacity
  *&#x2F;
