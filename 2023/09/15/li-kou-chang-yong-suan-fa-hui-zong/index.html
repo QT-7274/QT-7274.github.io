@@ -437,6 +437,10 @@
                                 <span class="chip bg-color">算法</span>
                             </a>
                         
+                            <a href="/tags/%E8%83%9C%E5%A4%A9/">
+                                <span class="chip bg-color">胜天</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -465,7 +469,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-04-12
+                    2024-04-15
                 </div>
                 
 
@@ -2077,12 +2081,12 @@ var reverse &#x3D; function(arr) &#123;
     return p2 &#x2F;&#x2F; 返回 p1 或 p2 都可以
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/description/">反转链表</a></h3><p>反转函数的作用：<strong>输入一个节点 <code>head</code>，将「以 <code>head</code> 为起点」的链表反转，并返回反转之后的头结点</strong>。</p>
-<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404115800017.png" alt="image-20240404115800017"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20240404115800017.png" alt="image-20240404115800017"></p>
 <p>反转完成后，整个链表变成了这样：</p>
-<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404115853610.png" alt="image-20240404115853610"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20240404115853610.png" alt="image-20240404115853610"></p>
 <p>根据函数定义，<code>reverse</code> 函数会返回反转之后的头结点，用last接收：</p>
-<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404115912911.png" alt="image-20240404115912911"></p>
-<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404120032938.png" alt="image-20240404120032938"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20240404115912911.png" alt="image-20240404115912911"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20240404120032938.png" alt="image-20240404120032938"></p>
 <p>至此，链表被翻转过来了。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">var reverseList &#x3D; function(head) &#123;
     &#x2F;&#x2F; 如果链表为空或者只有一个节点的时候，反转结果就是它自己，直接返回即可。
@@ -2197,14 +2201,14 @@ function reverse(head)
 <p>原理说明：</p>
 <ol>
 <li><p>我们假设快慢指针相遇时，慢指针 <code>slow</code> 走了 <code>k</code> 步，那么快指针 <code>fast</code> 一定走了 <code>2k</code> 步：</p>
-<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404122059205.png" alt="image-20240404122059205"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20240404122059205.png" alt="image-20240404122059205"></p>
 </li>
 <li><p><code>fast</code> 一定比 <code>slow</code> 多走了 <code>k</code> 步，这多走的 <code>k</code> 步其实就是 <code>fast</code> 指针在环里转圈圈，所以 <code>k</code> 的值就是环长度的「整数倍」。</p>
 </li>
 <li><p>假设相遇点距环的起点的距离为 <code>m</code>，那么结合上图的 <code>slow</code> 指针，环的起点距头结点 <code>head</code> 的距离为 <code>k - m</code>，也就是说如果从 <code>head</code> 前进 <code>k - m</code> 步就能到达环起点。</p>
 </li>
 <li><p>巧的是，如果从相遇点继续前进 <code>k - m</code> 步，也恰好到达环起点：</p>
-<p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240404122114574.png" alt="image-20240404122114574"></p>
+<p><img src="/medias/images/loading.gif" data-original="image-20240404122114574.png" alt="image-20240404122114574"></p>
 </li>
 <li><p>所以，只要我们把快慢指针中的任一个重新指向 <code>head</code>，然后两个指针同速前进，<code>k - m</code> 步后一定会相遇，相遇之处就是环的起点了。</p>
 </li>
@@ -4205,7 +4209,7 @@ var uniquePaths &#x3D; function(m, n) &#123;
         &#125;
     &#125;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="笔试题目"><a href="#笔试题目" class="headerlink" title="笔试题目"></a>笔试题目</h2><h3 id="小顶堆求最大值"><a href="#小顶堆求最大值" class="headerlink" title="小顶堆求最大值"></a>小顶堆求最大值</h3><p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240409123602355.png" alt="image-20240409123602355"></p>
+<h2 id="笔试题目"><a href="#笔试题目" class="headerlink" title="笔试题目"></a>笔试题目</h2><h3 id="小顶堆求最大值"><a href="#小顶堆求最大值" class="headerlink" title="小顶堆求最大值"></a>小顶堆求最大值</h3><p><img src="/medias/images/loading.gif" data-original="image-20240409123602355.png" alt="image-20240409123602355"></p>
 <h4 id="堆实现"><a href="#堆实现" class="headerlink" title="堆实现"></a>堆实现</h4><ul>
 <li>定义了一个最小堆的类，然后在<code>maxScore</code>函数中，我们使用这个最小堆来存储所有账号的分数。</li>
 <li>每次比赛后，我们从堆中取出最小的分数，加上比赛的分数变化值，然后再放回堆中。</li>
@@ -4324,7 +4328,7 @@ let a &#x3D; [1145, 1200, 1300, 1500, 1600]; &#x2F;&#x2F; 每个账号的分数
 let b &#x3D; [10, 270, 450,500]; &#x2F;&#x2F; 每次比赛完后分数的变化值
 
 maxScore(n, m, a, b); &#x2F;&#x2F; 输出：1600 1600 1650 1800<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="删除数组区间后使得原数组有序的选择方案"><a href="#删除数组区间后使得原数组有序的选择方案" class="headerlink" title="删除数组区间后使得原数组有序的选择方案"></a>删除数组区间后使得原数组有序的选择方案</h3><p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240409130914485.png" alt="image-20240409130914485"></p>
+<h3 id="删除数组区间后使得原数组有序的选择方案"><a href="#删除数组区间后使得原数组有序的选择方案" class="headerlink" title="删除数组区间后使得原数组有序的选择方案"></a>删除数组区间后使得原数组有序的选择方案</h3><p><img src="/medias/images/loading.gif" data-original="image-20240409130914485.png" alt="image-20240409130914485"></p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">function solve(n, a) &#123;
   &#x2F;&#x2F; 初始化左右指针
   let left &#x3D; 0, right &#x3D; n - 1;
@@ -4362,7 +4366,7 @@ maxScore(n, m, a, b); &#x2F;&#x2F; 输出：1600 1600 1650 1800<span aria-hidden
 let n &#x3D; 3;
 let a &#x3D; [1, 2, 1];
 console.log(solve(n, a)); &#x2F;&#x2F; 输出：2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="有限次数修改数组"><a href="#有限次数修改数组" class="headerlink" title="有限次数修改数组"></a>有限次数修改数组</h3><p><img src="/medias/images/loading.gif" data-original="力扣常用算法汇总/image-20240409133234145.png" alt="image-20240409133234145"></p>
+<h3 id="有限次数修改数组"><a href="#有限次数修改数组" class="headerlink" title="有限次数修改数组"></a>有限次数修改数组</h3><p><img src="/medias/images/loading.gif" data-original="image-20240409133234145.png" alt="image-20240409133234145"></p>
 <p>我们的目标是找到一个 k 值，使得在最多 m 次修改内，可以将所有的 &#39;W&#39; 修改为 &#39;R&#39;。</p>
 <ul>
 <li>如果一个较大的 k 值可以满足条件，那么更大的 k 值也一定可以满足条件，因为我们可以选择修改更少的字符。</li>
@@ -4471,6 +4475,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
                             
                                 <a href="/tags/%E7%AE%97%E6%B3%95/">
                                     <span class="chip bg-color">算法</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%83%9C%E5%A4%A9/">
+                                    <span class="chip bg-color">胜天</span>
                                 </a>
                             
                         </div>
@@ -4958,6 +4966,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     
                     <a href="/tags/%E7%AE%97%E6%B3%95/">
                         <span class="chip bg-color">算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%83%9C%E5%A4%A9/">
+                        <span class="chip bg-color">胜天</span>
                     </a>
                     
                 </div>
