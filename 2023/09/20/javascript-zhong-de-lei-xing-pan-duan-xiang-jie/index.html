@@ -6,14 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JavaScript中的类型判断详解, QT-7274">
-    <meta name="description" content="typeof
-typeof 操作符返回一个字符串，表示未经计算的操作数的类型
+    <meta name="description" content="typeoftypeof 操作符返回一个字符串，表示未经计算的操作数的类型
 使用方法如下：
 typeof operand
 typeof(operand)
 operand表示对象或原始值的表达式，其类型将被返回
 举个例子
-typeof 1 ">
+typeof 1 /">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -472,7 +471,7 @@ typeof 1 ">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-11
+                    2024-04-17
                 </div>
                 
 
@@ -509,8 +508,7 @@ typeof 1 ">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="typeof">typeof</h2>
-<p><code>typeof</code> 操作符返回一个字符串，表示未经计算的操作数的类型</p>
+                <h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p><code>typeof</code> 操作符返回一个字符串，表示未经计算的操作数的类型</p>
 <p>使用方法如下：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">typeof</span> operand
 <span class="token keyword">typeof</span><span class="token punctuation">(</span>operand<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -526,7 +524,10 @@ typeof 1 ">
 <span class="token keyword">typeof</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 'object'</span>
 <span class="token keyword">typeof</span> console <span class="token comment">// 'object'</span>
 <span class="token keyword">typeof</span> console<span class="token punctuation">.</span>log <span class="token comment">// 'function'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>从上面例子，前6个都是基础数据类型。虽然<code>typeof null</code>为<code>object</code>，但这只是<code>JavaScript</code> 存在的一个悠久 <code>Bug</code>，不代表<code>null</code>就是引用数据类型，并且<code>null</code>本身也不是对象</p>
+<p>从上面例子，前6个都是基础数据类型。虽然<code>typeof null</code>为<code>object</code>，但这只是<code>JavaScript</code> 存在的一个悠久 <code>Bug</code>，不代表<code>null</code>就是引用数据类型，并且<code>null</code>本身也不是对象。</p>
+<blockquote>
+<p>在JS的最初版本中使用的是32位系统，为了性能考虑使用低位存储变量的类型信息，000开头代表是对象然而null表示为全零，所以将它错误的判断为object。</p>
+</blockquote>
 <p>所以，<code>null</code>在 <code>typeof</code>之后返回的是有问题的结果，不能作为判断<code>null</code>的方法。如果你需要在 <code>if</code> 语句中判断是否为 <code>null</code>，直接通过<code>===null</code>来判断就好</p>
 <blockquote>
 <p>⚠️同时，可以发现引用类型数据，用<code>typeof</code>来判断的话，除了<code>function</code>会被识别出来之外，其余的都输出<code>object</code></p>
@@ -535,8 +536,7 @@ typeof 1 ">
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> a <span class="token operator">!=</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token comment">//变量存在</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="instanceof">instanceof</h2>
-<p><code>instanceof</code> 运算符用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上</p>
+<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><p><code>instanceof</code> 运算符用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上</p>
 <p>使用如下：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">object <span class="token keyword">instanceof</span> <span class="token class-name">constructor</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><code>object</code>为实例对象，<code>constructor</code>为构造函数</p>
@@ -565,8 +565,7 @@ str <span class="token keyword">instanceof</span> <span class="token class-name"
 <blockquote>
 <p>JavaScript 的基础数据类型（<code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>、<code>symbol</code> 和 <code>bigint</code>）并不是对象，它们没有原型链，所以 <code>instanceof</code> 不能用来检测它们。</p>
 </blockquote>
-<h2 id="区别">区别</h2>
-<p><code>typeof</code>与<code>instanceof</code>都是判断数据类型的方法，区别如下：</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p><code>typeof</code>与<code>instanceof</code>都是判断数据类型的方法，区别如下：</p>
 <ul>
 <li><code>typeof</code>会返回一个变量的基本类型，<code>instanceof</code>返回的是一个布尔值</li>
 <li><code>instanceof</code> 可以准确地判断复杂引用数据类型，但是不能正确判断基础数据类型</li>
