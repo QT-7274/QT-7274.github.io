@@ -1,0 +1,2386 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="JavaScript安全指南, QT-7274">
+    <meta name="description" content="
+
+  目录
+
+
+-   [1 JavaScript页面类](#1)
+    *   [I. 代码实现](#1.1)
+        +   [1.1 原生DOM API的安全操作](#1.1.1)
+        +   [1.2 流行框">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>JavaScript安全指南 | QT-7274</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+    
+<body>
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    <div>
+                    
+                    <img src="/medias/images/loading.gif" data-original="/medias/logo.gif" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">QT-7274</span>
+                </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+    <div class="mobile-head bg-color">
+      <div>
+        
+        <img no-lazy src="/medias/logo.gif" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">QT-7274</div>
+        <div class="logo-desc">
+          
+              Never really desperate, only the lost of the soul.
+              
+            </div>
+      </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/QT-7274/QT-7274.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #003a8c;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/QT-7274/QT-7274.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">JavaScript安全指南</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">
+                                <span class="chip bg-color">前端开发</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                前端开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-06-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-06-10
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    8.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    35 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <!-- markdown="1" is required for GitHub Pages to render the TOC properly. -->
+<details markdown="1">
+  <summary>目录</summary>
+
+
+-   [1 JavaScript页面类](#1)
+    *   [I. 代码实现](#1.1)
+        +   [1.1 原生DOM API的安全操作](#1.1.1)
+        +   [1.2 流行框架/库的安全操作](#1.1.2)
+        +   [1.3 页面重定向](#1.1.3)
+        +   [1.4 JSON解析/动态执行](#1.1.4)
+        +   [1.5 跨域通讯](#1.1.5)
+    *   [II. 配置&环境](#1.2)
+        +   [2.1 敏感/配置信息](#1.2.1)
+        +   [2.2 第三方组件/资源](#1.2.2)
+        +   [2.3 纵深安全防护](#1.2.3)
+
+-   [2 Node.js后台类](#2)
+    *   [I. 代码实现](#2.1)
+        +   [1.1 输入验证](#2.1.1)
+        +   [1.2 执行命令](#2.1.2)
+        +   [1.3 文件操作](#2.1.3)
+        +   [1.4 网络请求](#2.1.4)
+        +   [1.5 数据输出](#2.1.5)
+        +   [1.6 响应输出](#2.1.6)
+        +   [1.7 执行代码](#2.1.7)
+        +   [1.8 Web跨域](#2.1.8)
+        +   [1.9 SQL操作](#2.1.9)
+        +   [1.10 NoSQL操作](#2.1.10)
+        +   [1.11 服务器端渲染（SSR）](#2.1.11)
+        +   [1.12 URL跳转](#2.1.12)
+        +   [1.13 Cookie与登录态](#2.1.13)
+    *   [II. 配置&环境](#2.2)
+        +   [2.1 敏感/配置信息](#2.2.1)
+        +   [2.2 第三方组件/资源](#2.2.2)
+        +   [2.3 纵深安全防护](#2.2.3)
+
+</details>
+
+<p><a id="1"></a></p>
+<h2 id="JavaScript页面类"><a href="#JavaScript页面类" class="headerlink" title="JavaScript页面类"></a>JavaScript页面类</h2><p><a id="1.1"></a></p>
+<h3 id="I-代码实现"><a href="#I-代码实现" class="headerlink" title="I. 代码实现"></a>I. 代码实现</h3><p><a id="1.1.1"></a></p>
+<h4 id="1-1-原生DOM-API的安全操作"><a href="#1-1-原生DOM-API的安全操作" class="headerlink" title="1.1 原生DOM API的安全操作"></a>1.1 原生DOM API的安全操作</h4><p><strong>1.1.1【必须】HTML标签操作，限定/过滤传入变量值</strong></p>
+<ul>
+<li>使用<code>innerHTML=</code>、<code>outerHTML=</code>、<code>document.write()</code>、<code>document.writeln()</code>时，如变量值外部可控，应对特殊字符（<code>&amp;, &lt;, &gt;, &quot;, &#39;</code>）做编码转义，或使用安全的DOM API替代，包括：<code>innerText=</code></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 假设 params 为用户输入， text 为 DOM 节点</span>
+<span class="token comment">// bad：将不可信内容带入HTML标签操作</span>
+<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> user <span class="token punctuation">&#125;</span> <span class="token operator">=</span> params<span class="token punctuation">;</span>
+<span class="token comment">// ...</span>
+text<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Follow @</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>user<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: innerHTML操作前，对特殊字符编码转义</span>
+<span class="token keyword">function</span> <span class="token function">htmlEncode</span><span class="token punctuation">(</span><span class="token parameter">iStr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">let</span> sStr <span class="token operator">=</span> iStr<span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&amp;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;amp;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">></span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;gt;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;lt;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;quot;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;#39;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> sStr<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">&#123;</span> user <span class="token punctuation">&#125;</span> <span class="token operator">=</span> params<span class="token punctuation">;</span>
+user <span class="token operator">=</span> <span class="token function">htmlEncode</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ...</span>
+text<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Follow @</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>user<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: 使用安全的DOM API替代innerHTML</span>
+<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> user <span class="token punctuation">&#125;</span> <span class="token operator">=</span> params<span class="token punctuation">;</span>
+<span class="token comment">// ...</span>
+text<span class="token punctuation">.</span>innerText <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Follow @</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>user<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>如果不进行转义，那么例如<code>&lt;script&gt;alert(&#39;hacked&#39;)&lt;/script&gt;</code>这样的脚本就会被执行，而经过转义以后，会被转义为<code>&amp;lt;script&amp;gt;alert(&#39;hacked&#39;)&amp;lt;/script&amp;gt;</code>，有效防止XSS攻击。</p>
+</blockquote>
+<p><strong>1.1.2【必须】HTML属性操作，限定/过滤传入变量值</strong></p>
+<ul>
+<li><p>使用<code>element.setAttribute(name, value);</code>时，如第一个参数值<code>name</code>外部可控，应用白名单限定允许操作的属性范围。</p>
+</li>
+<li><p>使用<code>element.setAttribute(name, value);</code>时，操作<code>a.href</code>、<code>ifame.src</code>、<code>form.action</code>、<code>embed.src</code>、<code>object.data</code>、<code>link.href</code>、<code>area.href</code>、<code>input.formaction</code>、<code>button.formaction</code>属性时，如第二个参数值<code>value</code>外部可控，应参考<em>JavaScript页面类规范1.3.1</em>部分，限定页面重定向或引入资源的目标地址。</p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// good: setAttribute操作前，限定引入资源的目标地址</span>
+<span class="token keyword">function</span> <span class="token function">addExternalCss</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">const</span> t <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'link'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	t<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">'href'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">,</span>
+	t<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">'rel'</span><span class="token punctuation">,</span> <span class="token string">'stylesheet'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	t<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">,</span> <span class="token string">'text/css'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	document<span class="token punctuation">.</span>head<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">validURL</span><span class="token punctuation">(</span><span class="token parameter">sUrl</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(https?:\/\/)?[\w\-.]+\.(qq|tencent)\.com($|\/|\\)</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^[\w][\w/.\-_%]+$</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^[/\\][^/\\]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">let</span> sUrl <span class="token operator">=</span> <span class="token string">"https://evil.com/1.css"</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">validURL</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">addExternalCss</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a id="1.1.2"></a></p>
+<h4 id="1-2-流行框架-库的安全操作"><a href="#1-2-流行框架-库的安全操作" class="headerlink" title="1.2 流行框架/库的安全操作"></a>1.2 流行框架/库的安全操作</h4><p><strong>1.2.1【必须】限定/过滤传入jQuery不安全函数的变量值</strong></p>
+<ul>
+<li>使用<code>.html()</code>、<code>.append()</code>、<code>.prepend()</code>、<code>.wrap()</code>、<code>.replaceWith()</code>、<code>.wrapAll()</code>、<code>.wrapInner()</code>、<code>.after()</code>、<code>.before()</code>时，如变量值外部可控，应对特殊字符（<code>&amp;, &lt;, &gt;, &quot;, &#39;</code>）做编码转义。</li>
+<li>引入<code>jQuery 1.x（等于或低于1.12）、jQuery2.x（等于或低于2.2）</code>，且使用<code>$()</code>时，应优先考虑替换为最新版本。如一定需要使用，应对传入参数值中的特殊字符（<code>&amp;, &lt;, &gt;, &quot;, &#39;</code>）做编码转义。</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad：将不可信内容，带入jQuery不安全函数.after()操作</span>
+<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> user <span class="token punctuation">&#125;</span> <span class="token operator">=</span> params<span class="token punctuation">;</span>
+<span class="token comment">// ...</span>
+<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"p"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">after</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: jQuery不安全函数.html()操作前，对特殊字符编码转义</span>
+<span class="token keyword">function</span> <span class="token function">htmlEncode</span><span class="token punctuation">(</span><span class="token parameter">iStr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">let</span> sStr <span class="token operator">=</span> iStr<span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&amp;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;amp;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">></span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;gt;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;lt;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;quot;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sStr <span class="token operator">=</span> sStr<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">,</span> <span class="token string">"&amp;#39;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> sStr<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// const user = params.user;</span>
+user <span class="token operator">=</span> <span class="token function">htmlEncode</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ...</span>
+<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"p"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>使用<code>.attr()</code>操作<code>a.href</code>、<code>ifame.src</code>、<code>form.action</code>、<code>embed.src</code>、<code>object.data</code>、<code>link.href</code>、<code>area.href</code>、<code>input.formaction</code>、<code>button.formaction</code>属性时，应参考<em>JavaScript页面类规范1.3.1</em>部分，限定重定向的资源目标地址。</p>
+</li>
+<li><p>使用<code>.attr(attributeName, value)</code>时，如第一个参数值<code>attributeName</code>外部可控，应用白名单限定允许操作的属性范围。</p>
+</li>
+<li><p>使用<code>$.getScript(url [, success ])</code>时，如第一个参数值<code>url</code>外部可控（如：从URL取值拼接，请求jsonp接口），应限定可控变量值的字符集范围为：<code>[a-zA-Z0-9_-]+</code>。</p>
+</li>
+</ul>
+<p><strong>1.2.2【必须】限定/过滤传入Vue.js不安全函数的变量值</strong></p>
+<ul>
+<li>使用<code>v-html</code>时，不允许对用户提供的内容使用HTML插值。如业务需要，应先对不可信内容做富文本过滤。</li>
+</ul>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">// bad：直接渲染外部传入的不可信内容
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-html</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>userProvidedHtml<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+// good：使用富文本过滤库处理不可信内容后渲染
+<span class="token comment">&lt;!-- 使用 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-xss-html</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>&#123;'mode': 'whitelist', dirty: html, options: options&#125;<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- 配置 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+	<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+	<span class="token literal-property property">el</span><span class="token operator">:</span> <span class="token string">"#app"</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+		<span class="token literal-property property">options</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+			<span class="token literal-property property">whiteList</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+				<span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"href"</span><span class="token punctuation">,</span> <span class="token string">"title"</span><span class="token punctuation">,</span> <span class="token string">"target"</span><span class="token punctuation">,</span> <span class="token string">"class"</span><span class="token punctuation">,</span> <span class="token string">"id"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+				<span class="token literal-property property">div</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"class"</span><span class="token punctuation">,</span> <span class="token string">"id"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+				<span class="token literal-property property">span</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"class"</span><span class="token punctuation">,</span> <span class="token string">"id"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+				<span class="token literal-property property">img</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"src"</span><span class="token punctuation">,</span> <span class="token string">"alt"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+			<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>使用<code>v-bind</code>操作<code>a.href</code>、<code>ifame.src</code>、<code>form.action</code>、<code>embed.src</code>、<code>object.data</code>、<code>link.href</code>、<code>area.href</code>、<code>input.formaction</code>、<code>button.formaction</code>时，应确保后端已参考<em>JavaScript页面类规范1.3.1</em>部分，限定了供前端调用的重定向目标地址。</p>
+</li>
+<li><p>使用<code>v-bind</code>操作<code>style</code>属性时，应只允许外部控制特定、可控的CSS属性值</p>
+</li>
+</ul>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">// bad：v-bind允许外部可控值，自定义CSS属性及数值
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name"><span class="token namespace">v-bind:</span>href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sanitizedUrl<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">v-bind:</span>style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>userProvidedStyles<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+click me
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+
+// good：v-bind只允许外部提供特性、可控的CSS属性值
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name"><span class="token namespace">v-bind:</span>href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sanitizedUrl<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">v-bind:</span>style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>&#123;
+color: userProvidedColor,
+background: userProvidedBackground
+&#125;<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
+click me
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a id="1.1.3"></a></p>
+<h4 id="1-3-页面重定向"><a href="#1-3-页面重定向" class="headerlink" title="1.3 页面重定向"></a>1.3 页面重定向</h4><p><strong>1.3.1【必须】限定跳转目标地址</strong></p>
+<ul>
+<li><p>使用白名单，限定重定向地址的协议前缀（默认只允许HTTP、HTTPS）、域名（默认只允许公司根域），或指定为固定值；</p>
+</li>
+<li><p>适用场景包括，使用函数方法：<code>location.href</code>、<code>window.open()</code>、<code>location.assign()</code>、<code>location.replace()</code>；赋值或更新HTML属性：<code>a.href</code>、<code>ifame.src</code>、<code>form.action</code>、<code>embed.src</code>、<code>object.data</code>、<code>link.href</code>、<code>area.href</code>、<code>input.formaction</code>、<code>button.formaction</code>；</p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad: 跳转至外部可控的不可信地址</span>
+<span class="token keyword">const</span> sTargetUrl <span class="token operator">=</span> <span class="token function">getURLParam</span><span class="token punctuation">(</span><span class="token string">"target"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+location<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>sTargetUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: 白名单限定重定向地址</span>
+<span class="token keyword">function</span> <span class="token function">validURL</span><span class="token punctuation">(</span><span class="token parameter">sUrl</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(https?:\/\/)?[\w\-.]+\.(qq|tencent)\.com($|\/|\\)</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^[\w][\w/.\-_%]+$</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^[/\\][^/\\]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> sTargetUrl <span class="token operator">=</span> <span class="token function">getURLParam</span><span class="token punctuation">(</span><span class="token string">"target"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">validURL</span><span class="token punctuation">(</span>sTargetUrl<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	location<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>sTargetUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// good: 制定重定向地址为固定值</span>
+<span class="token keyword">const</span> sTargetUrl <span class="token operator">=</span> <span class="token string">"http://www.qq.com"</span><span class="token punctuation">;</span>
+location<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>sTargetUrl<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<ul>
+<li><code>/^(https?:\/\/)?[\w\-.]+\.(qq|tencent)\.com($|\/|\\)/i</code><ul>
+<li><code>^</code>：匹配输入字符串的开始位置。</li>
+<li><code>(https?:\/\/)?</code>：匹配 <code>http://</code> 或 <code>https://</code>。<code>?</code> 表示前面的元素（在这里是 <code>https?:\/\/</code>）可以出现一次或者不出现。这意味着这个正则表达式可以匹配以 <code>http://</code> 或 <code>https://</code> 开头的URL，也可以匹配没有这些前缀的URL。</li>
+<li><code>[\w\-.]+</code>：匹配一个或多个字母、数字、下划线、破折号或点。这部分用于匹配URL的主机部分。</li>
+<li><code>\.(qq|tencent)\.com</code>：匹配 <code>.qq.com</code> 或 <code>.tencent.com</code>。这部分用于限制URL必须是 <code>qq.com</code> 或 <code>tencent.com</code> 的子域。</li>
+<li><code>($|\/|\\)</code>：匹配输入字符串的结束位置、斜杠或反斜杠。这意味着URL可以以斜杠或反斜杠结尾，也可以没有这些后缀。</li>
+<li><code>i</code>：这是一个修饰符，表示正则表达式不区分大小写。</li>
+</ul>
+</li>
+<li><code>/^[\w][\w/.-_%]+$/i</code><ul>
+<li><code>^</code>：匹配输入字符串的开始位置。</li>
+<li><code>[\w]</code>：匹配任何字母数字字符，等同于 <code>[a-zA-Z0-9_]</code>。这部分用于匹配字符串的第一个字符，这个字符必须是字母、数字或下划线。</li>
+<li><code>[\w/.\-_%]+</code>：匹配一个或多个字母、数字、下划线、斜杠、点、破折号或百分号。这部分用于匹配字符串的剩余部分。</li>
+<li><code>$</code>：匹配输入字符串的结束位置。</li>
+<li><code>i</code>：这是一个修饰符，表示正则表达式不区分大小写。</li>
+</ul>
+</li>
+<li><code>/^[/\\][^/\\]/i</code><ul>
+<li><code>^</code>：匹配输入字符串的开始位置。</li>
+<li><code>[/\\]</code>：匹配一个斜杠或反斜杠。注意，反斜杠在正则表达式中是一个特殊字符，所以需要使用另一个反斜杠进行转义。</li>
+<li><code>[^/\\]</code>：匹配除斜杠和反斜杠以外的任何字符。在字符集（<code>[]</code>）内部，<code>^</code> 是一个否定符号，表示匹配除列出的字符以外的任何字符。</li>
+<li><code>i</code>：这是一个修饰符，表示正则表达式不区分大小写。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><a id="1.1.4"></a></p>
+<h4 id="1-4-JSON解析-动态执行"><a href="#1-4-JSON解析-动态执行" class="headerlink" title="1.4 JSON解析/动态执行"></a>1.4 JSON解析/动态执行</h4><p><strong>1.4.1【必须】使用安全的JSON解析方式</strong></p>
+<ul>
+<li>应使用<code>JSON.parse()</code>解析JSON字符串。低版本浏览器，应使用安全的<a target="_blank" rel="noopener" href="https://github.com/douglascrockford/JSON-js/blob/master/json2.js">Polyfill封装</a></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad: 直接调用eval解析json</span>
+<span class="token keyword">const</span> sUserInput <span class="token operator">=</span> <span class="token function">getURLParam</span><span class="token punctuation">(</span><span class="token string">"json_val"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> jsonstr1 <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#123;"name":"a","company":"b","value":"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>sUserInput<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"&#125;</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> json1 <span class="token operator">=</span> <span class="token function">eval</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>jsonstr1<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">)</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: 使用JSON.parse解析</span>
+<span class="token keyword">const</span> sUserInput <span class="token operator">=</span> <span class="token function">getURLParam</span><span class="token punctuation">(</span><span class="token string">"json_val"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>sUserInput<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">k<span class="token punctuation">,</span> v</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token operator">===</span> <span class="token string">""</span><span class="token punctuation">)</span> <span class="token keyword">return</span> v<span class="token punctuation">;</span>
+	<span class="token keyword">return</span> v <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: 低版本浏览器，使用安全的Polyfill封装（基于eval）</span>
+<span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">"https://github.com/douglascrockford/JSON-js/blob/master/json2.js"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> sUserInput <span class="token operator">=</span> <span class="token function">getURLParam</span><span class="token punctuation">(</span><span class="token string">"json_val"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>sUserInput<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a id="1.1.5"></a></p>
+<h4 id="1-5-跨域通讯"><a href="#1-5-跨域通讯" class="headerlink" title="1.5 跨域通讯"></a>1.5 跨域通讯</h4><p><strong>1.5.1【必须】使用安全的前端跨域通信方式</strong></p>
+<ul>
+<li>具有隔离登录态（如：p_skey）、涉及用户高敏感信息的业务（如：微信网页版、QQ空间、QQ邮箱、公众平台），禁止通过<code>document.domain</code>降域，实现前端跨域通讯，应使用postMessage替代。</li>
+</ul>
+<p><strong>1.5.2【必须】使用postMessage应限定Origin</strong></p>
+<ul>
+<li><p>在message事件监听回调中，应先使用<code>event.origin</code>校验来源，再执行具体操作。</p>
+</li>
+<li><p>校验来源时，应使用<code>===</code>判断，禁止使用<code>indexOf()</code></p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad: 使用indexOf校验Origin值</span>
+window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">~</span>e<span class="token punctuation">.</span>origin<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">"https://a.qq.com"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// ...</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// ...</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: 使用postMessage时，限定Origin，且使用===判断</span>
+window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>origin <span class="token operator">===</span> <span class="token string">"https://a.qq.com"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// ...</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>在校验来源时，使用 <code>===</code> 判断而禁止使用 <code>indexOf()</code>，是因为 <code>indexOf()</code> 可能会导致误判。</p>
+<p>例如，如果你的网站是 <code>https://a.qq.com</code>，使用 <code>indexOf()</code> 可能会误判 <code>https://a.qq.com.evil.com</code> 为合法来源。而 <code>https://a.qq.com.evil.com</code> 可能是一个恶意网站，它可以发送 <code>postMessage</code> 到你的网站，进行跨站脚本攻击。</p>
+</blockquote>
+<p><a id="1.2"></a></p>
+<h3 id="II-配置-amp-环境"><a href="#II-配置-amp-环境" class="headerlink" title="II. 配置&amp;环境"></a>II. 配置&amp;环境</h3><p><a id="1.2.1"></a></p>
+<h4 id="2-1-敏感-配置信息"><a href="#2-1-敏感-配置信息" class="headerlink" title="2.1 敏感/配置信息"></a>2.1 敏感/配置信息</h4><p><strong>2.1.1【必须】禁止明文硬编码AK/SK</strong></p>
+<ul>
+<li>禁止前端页面的JS明文硬编码AK/SK类密钥，应封装成后台接口，AK/SK保存在后端配置中心或密钥管理系统</li>
+</ul>
+<p><a id="1.2.2"></a></p>
+<h4 id="2-2-第三方组件-资源"><a href="#2-2-第三方组件-资源" class="headerlink" title="2.2 第三方组件/资源"></a>2.2 第三方组件/资源</h4><p><strong>2.2.1【必须】使用可信范围内的统计组件</strong></p>
+<p><strong>2.2.2 【必须】禁止引入非可信来源的第三方JS</strong></p>
+<p><a id="1.2.3"></a></p>
+<h4 id="2-3-纵深安全防护"><a href="#2-3-纵深安全防护" class="headerlink" title="2.3 纵深安全防护"></a>2.3 纵深安全防护</h4><p><strong>2.3.1【推荐】部署CSP，并启用严格模式</strong></p>
+<p><a id="2"></a></p>
+<h2 id="Node-js后台类"><a href="#Node-js后台类" class="headerlink" title="Node.js后台类"></a>Node.js后台类</h2><p><a id="2.1"></a></p>
+<h3 id="I-代码实现-1"><a href="#I-代码实现-1" class="headerlink" title="I. 代码实现"></a>I. 代码实现</h3><p><a id="2.1.1"></a></p>
+<h4 id="1-1-输入验证"><a href="#1-1-输入验证" class="headerlink" title="1.1 输入验证"></a>1.1 输入验证</h4><p><strong>1.1.1【必须】按类型进行数据校验</strong></p>
+<ul>
+<li>所有程序外部输入的参数值，应进行数据校验。校验内容包括但不限于：数据长度、数据范围、数据类型与格式。校验不通过，应拒绝。</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad：未进行输入验证</span>
+Router<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/vulxss"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> txt <span class="token punctuation">&#125;</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">;</span>
+	res<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">"Content-Type"</span><span class="token punctuation">,</span> <span class="token string">"text/html"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+		<span class="token literal-property property">data</span><span class="token operator">:</span> txt<span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good：按数据类型，进行输入验证</span>
+<span class="token keyword">const</span> Router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> validator <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"validator"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Router<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/email_with_validator"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">const</span> txt <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">.</span>txt <span class="token operator">||</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>validator<span class="token punctuation">.</span><span class="token function">isEmail</span><span class="token punctuation">(</span>txt<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+			<span class="token literal-property property">data</span><span class="token operator">:</span> txt<span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">err</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><em>关联漏洞：纵深防护措施 - 安全性增强特性</em></p>
+<p><a id="2.1.2"></a></p>
+<h4 id="1-2-执行命令"><a href="#1-2-执行命令" class="headerlink" title="1.2 执行命令"></a>1.2 执行命令</h4><p><strong>1.2.1 【必须】使用child_process执行系统命令，应限定或校验命令和参数的内容</strong></p>
+<ul>
+<li><p>适用场景包括：<code>child_process.exec</code>, <code>child_process.execSync</code>, <code>child_process.spawn</code>, <code>child_process.spawnSync</code>, <code>child_process.execFile</code>, <code>child_process.execFileSync</code></p>
+</li>
+<li><p>调用上述函数，应首先考虑限定范围，供用户选择。</p>
+</li>
+<li><p>使用<code>child_process.exec</code>或<code>child_process.execSync</code>时，如果可枚举输入的参数内容或者格式，则应限定白名单。如果无法枚举命令或参数，则必须过滤或者转义指定符号，包括：<code>|;&amp;$()&gt;&lt;`!</code></p>
+</li>
+<li><p>使用<code>child_process.spawn</code> 或<code>child_process.execFile</code>时，应校验传入的命令和参数在可控列表内。</p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> Router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> validator <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"validator"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> exec <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'child_process'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// bad：未限定或过滤，直接执行命令</span>
+Router<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/vul_cmd_inject"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">const</span> txt <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">.</span>txt <span class="token operator">||</span> <span class="token string">"echo 1"</span><span class="token punctuation">;</span>
+	<span class="token function">exec</span><span class="token punctuation">(</span>txt<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> stdout<span class="token punctuation">,</span> stderr</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">err</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+		res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>stdout<span class="token punctuation">,</span> stderr<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good：通过白名单，限定外部可执行命令范围</span>
+Router<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/not_vul_cmd_inject"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">const</span> txt <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">.</span>txt <span class="token operator">||</span> <span class="token string">"echo 1"</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> phone <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">.</span>phone <span class="token operator">||</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token keyword">const</span> cmdList <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    	<span class="token literal-property property">sendmsg</span><span class="token operator">:</span> <span class="token string">"./sendmsg "</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>txt <span class="token keyword">in</span> cmdList <span class="token operator">&amp;&amp;</span> validator<span class="token punctuation">.</span><span class="token function">isMobilePhone</span><span class="token punctuation">(</span>phone<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">exec</span><span class="token punctuation">(</span>cmdList<span class="token punctuation">[</span>txt<span class="token punctuation">]</span> <span class="token operator">+</span> phone<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> stdout<span class="token punctuation">,</span> stderr</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">err</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+          res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>stdout<span class="token punctuation">,</span> stderr<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+			<span class="token literal-property property">err</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+			<span class="token literal-property property">tips</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">you can use '</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>cmdList<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">'</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good：执行命令前，过滤/转义指定符号</span>
+Router<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/not_vul_cmd_inject"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">const</span> txt <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">.</span>txt <span class="token operator">||</span> <span class="token string">"echo 1"</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> phone <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">.</span>phone <span class="token operator">||</span> <span class="token string">""</span><span class="token punctuation">;</span>
+	<span class="token keyword">const</span> cmdList <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    	<span class="token literal-property property">sendmsg</span><span class="token operator">:</span> <span class="token string">"./sendmsg "</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	phone <span class="token operator">=</span> phone<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">(\||;|&amp;|\$\(|\(|\)|>|&lt;|\`|!)</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>txt <span class="token keyword">in</span> cmdList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">exec</span><span class="token punctuation">(</span>cmdList<span class="token punctuation">[</span>txt<span class="token punctuation">]</span> <span class="token operator">+</span> phone<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> stdout<span class="token punctuation">,</span> stderr</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">err</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+          res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>stdout<span class="token punctuation">,</span> stderr<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+			<span class="token literal-property property">err</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+			<span class="token literal-property property">tips</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">you can use '</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>cmdList<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">'</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><em>关联漏洞：高风险 - 任意命令执行</em></p>
+<blockquote>
+<p>使用 <code>child_process.spawn</code> 方法可以更安全地执行命令，因为它允许你将命令和参数作为单独的元素传递，这样可以有效防止命令注入攻击。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">const &#123; spawn &#125; &#x3D; require(&#39;child_process&#39;);
+
+&#x2F;&#x2F; 假设这是从用户输入获取的电话号码
+const userPhone &#x3D; &#39;1234567890&#39;;
+
+&#x2F;&#x2F; 安全地构造命令和参数
+const command &#x3D; &#39;sendmsg&#39;;
+const args &#x3D; [userPhone];
+
+&#x2F;&#x2F; 使用 spawn 执行命令
+const child &#x3D; spawn(command, args);
+
+&#x2F;&#x2F; 收集输出数据
+let output &#x3D; &#39;&#39;;
+child.stdout.on(&#39;data&#39;, (data) &#x3D;&gt; &#123;
+  output +&#x3D; data.toString();
+&#125;);
+
+child.stderr.on(&#39;data&#39;, (data) &#x3D;&gt; &#123;
+  console.error(&#96;stderr: $&#123;data&#125;&#96;);
+&#125;);
+
+&#x2F;&#x2F; 命令执行完成
+child.on(&#39;close&#39;, (code) &#x3D;&gt; &#123;
+  console.log(&#96;子进程退出，退出码 $&#123;code&#125;&#96;);
+  console.log(output); &#x2F;&#x2F; 打印命令的输出
+&#125;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这种方法的关键优势在于，它不通过 shell 来执行命令，而是直接在操作系统层面上创建新进程来运行指定的命令和参数，这样可以更精确地控制命令的执行，提高了安全性。</p>
+</blockquote>
+<p><a id="2.1.3"></a></p>
+<h4 id="1-3-文件操作"><a href="#1-3-文件操作" class="headerlink" title="1.3 文件操作"></a>1.3 文件操作</h4><p><strong>1.3.1 【必须】限定文件操作的后缀范围</strong></p>
+<ul>
+<li>按业务需求，使用白名单限定后缀范围。</li>
+</ul>
+<p><strong>1.3.2 【必须】校验并限定文件路径范围</strong></p>
+<ul>
+<li>应固定上传、访问文件的路径。若需要拼接外部可控变量值，检查是否包含<code>..</code>、<code>.</code>路径穿越字符。如存在，应拒绝。</li>
+<li>使用<code>fs</code>模块下的函数方法时，应对第一个参数即路径部分做校验，检查是否包含路径穿越字符<code>.</code>或<code>..</code>。涉及方法包括但不限于：<code>fs.truncate</code>、<code>fs.truncateSync</code>、<code>fs.chown</code>、<code>fs.chownSync</code>、<code>fs.lchown</code>、<code>fs.lchownSync</code>、<code>fs.stat</code>、<code>fs.lchmodSync</code>、<code>fs.lstat</code>、<code>fs.statSync</code>、<code>fs.lstatSync</code>、<code>fs.readlink</code>、<code>fs.unlink</code>、<code>fs.unlinkSync</code>、<code>fs.rmdir</code>、<code>fs.rmdirSync</code>、<code>fs.mkdir</code>、<code>fs.mkdirSync</code>、<code>fs.readdir</code>、<code>fs.readdirSync</code>、<code>fs.openSync</code>、<code>fs.open</code>、<code>fs.createReadStream</code>、<code>fs.createWriteStream</code></li>
+<li>使用express框架的<code>sendFile</code>方法时，应对第一个参数即路径部分做校验，检查是否包含路径穿越字符<code>.</code>或<code>..</code></li>
+<li>校验时，应使用<code>path</code>模块处理前的路径参数值，或判断处理过后的路径是否穿越出了当前工作目录。涉及方法包括但不限于：<code>path.resolve</code>、<code>path.join</code>、<code>path.normalize</code>等</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"fs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"path"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> filename <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">.</span>ufile<span class="token punctuation">;</span>
+<span class="token keyword">let</span> root <span class="token operator">=</span> <span class="token string">'/data/ufile'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// bad：未检查文件名/路径</span>
+fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span>root <span class="token operator">+</span> filename<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">异步读取: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>data<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// bad：使用path处理过后的路径参数值做校验，仍可能有路径穿越风险</span>
+filename <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>filename<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good：检查了文件名/路径，是否包含路径穿越字符</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>filename<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">".."</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	filename <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>1.3.3 【必须】安全地处理上传文件名</strong></p>
+<ul>
+<li>将上传文件重命名为16位以上的随机字符串保存。</li>
+<li>如需原样保留文件名，应检查是否包含<code>..</code>、<code>.</code>路径穿越字符。如存在，应拒绝。</li>
+</ul>
+<p><strong>1.3.4 【必须】敏感资源文件，应有加密、鉴权和水印等加固措施</strong></p>
+<ul>
+<li>用户上传的<code>身份证</code>、<code>银行卡</code>等图片，属敏感资源文件，应采取安全加固。</li>
+<li>指向此类文件的URL，应保证不可预测性；同时，确保无接口会批量展示此类资源的URL。</li>
+<li>访问敏感资源文件时，应进行权限控制。默认情况下，仅用户可查看、操作自身敏感资源文件。</li>
+<li>图片类文件应添加业务水印，表明该图片仅可用于当前业务使用。</li>
+</ul>
+<p><a id="2.1.4"></a></p>
+<h4 id="1-4-网络请求"><a href="#1-4-网络请求" class="headerlink" title="1.4 网络请求"></a>1.4 网络请求</h4><p><strong>1.4.1 【必须】限定访问网络资源地址范围</strong></p>
+<ul>
+<li><p>应固定程序访问网络资源地址的<code>协议</code>、<code>域名</code>、<code>路径</code>范围。</p>
+</li>
+<li><p>若业务需要，外部可指定访问网络资源地址，应禁止访问内网私有地址段及域名。</p>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 以RFC定义的专有网络为例，如有自定义私有网段亦应加入禁止访问列表。
+10.0.0.0&#x2F;8
+172.16.0.0&#x2F;12
+192.168.0.0&#x2F;16
+127.0.0.0&#x2F;8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>1.4.2 【推荐】请求网络资源，应加密传输</strong></p>
+<ul>
+<li>应优先选用https协议请求网络资源</li>
+</ul>
+<p><em>关联漏洞：高风险 - SSRF，高风险 - HTTP劫持</em></p>
+<p><a id="2.1.5"></a></p>
+<h4 id="1-5-数据输出"><a href="#1-5-数据输出" class="headerlink" title="1.5 数据输出"></a>1.5 数据输出</h4><p><strong>1.5.1 【必须】高敏感信息禁止存储、展示</strong></p>
+<ul>
+<li>口令、密保答案、生理标识等鉴权信息禁止展示</li>
+<li>非金融类业务，信用卡cvv码及日志禁止存储</li>
+</ul>
+<p><strong>1.5.2【必须】一般敏感信息脱敏展示</strong></p>
+<ul>
+<li>身份证只显示第一位和最后一位字符，如：<code>3*********************1</code></li>
+<li>移动电话号码隐藏中间6位字符，如：<code>134***************48</code></li>
+<li>工作地址/家庭地址最多显示到<code>区</code>一级</li>
+<li>银行卡号仅显示最后4位字符，如：<code>*********************8639</code></li>
+</ul>
+<p><strong>1.5.3 【推荐】返回的字段按业务需要输出</strong></p>
+<ul>
+<li>按需输出，避免不必要的用户信息泄露</li>
+<li>用户敏感数据应在服务器后台处理后输出，不可以先输出到客户端，再通过客户端代码来处理展示</li>
+</ul>
+<p><em>关联漏洞：高风险 - 用户敏感信息泄露</em></p>
+<p><a id="2.1.6"></a></p>
+<h4 id="1-6-响应输出"><a href="#1-6-响应输出" class="headerlink" title="1.6 响应输出"></a>1.6 响应输出</h4><p><strong>1.6.1 【必须】设置正确的HTTP响应包类型</strong></p>
+<ul>
+<li>响应头Content-Type与实际响应内容，应保持一致。如：API响应数据类型是json，则响应头使用<code>application/json</code>；若为xml，则设置为<code>text/xml</code>。</li>
+</ul>
+<p><strong>1.6.2 【必须】添加安全响应头</strong></p>
+<ul>
+<li>所有接口、页面，添加响应头 <code>X-Content-Type-Options: nosniff</code>。</li>
+<li>所有接口、页面，添加响应头<code>X-Frame-Options</code>。按需合理设置其允许范围，包括：<code>DENY</code>、<code>SAMEORIGIN</code>、<code>ALLOW-FROM origin</code>。用法参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options">MDN文档</a></li>
+<li>推荐使用组件： <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/helmet">helmet</a> </li>
+</ul>
+<p><strong>1.6.3 【必须】外部输入拼接到响应页面前，进行编码处理</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>编码规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输出点在HTML标签之间</td>
+<td>需要对以下6个特殊字符进行HTML实体编码(&amp;, &lt;, &gt;, &quot;, &#39;,/)。<br/>示例：<br/>&amp; --&gt; &amp;amp;<br/>&lt; --&gt; &amp;lt;<br/>&gt;--&gt; &amp;gt;<br/>&quot; --&gt; &amp;quot;<br/>&#39; --&gt; &amp;#x27;  <br/>/ --&gt; &amp;#x2F;</td>
+</tr>
+<tr>
+<td>输出点在HTML标签普通属性内（如href、src、style等，on事件除外）</td>
+<td>要对数据进行HTML属性编码。<br/>编码规则：除了阿拉伯数字和字母，对其他所有的字符进行编码，只要该字符的ASCII码小于256。编码后输出的格式为&#xHH;(以&amp;#x开头，HH则是指该字符对应的十六进制数字，分号作为结束符)</td>
+</tr>
+<tr>
+<td>输出点在JS内的数据中</td>
+<td>需要进行js编码<br/>编码规则：<br/>除了阿拉伯数字和字母，对其他所有的字符进行编码，只要该字符的ASCII码小于256。编码后输出的格式为 \xHH （以 \x 开头，HH则是指该字符对应的十六进制数字）<br/>Tips：这种场景仅限于外部数据拼接在js里被引号括起来的变量值中。除此之外禁止直接将代码拼接在js代码中。</td>
+</tr>
+<tr>
+<td>输出点在CSS中（Style属性）</td>
+<td>需要进行CSS编码<br/>编码规则：<br/>除了阿拉伯数字和字母，对其他所有的字符进行编码，只要该字符的ASCII码小于256。编码后输出的格式为 \HH （以 \ 开头，HH则是指该字符对应的十六进制数字）</td>
+</tr>
+<tr>
+<td>输出点在URL属性中</td>
+<td>对这些数据进行URL编码<br/>Tips：除此之外，所有链接类属性应该校验其协议。禁止JavaScript、data和Vb伪协议。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>1.6.4 【必须】响应禁止展示物理资源、程序内部代码逻辑等敏感信息</strong></p>
+<ul>
+<li>业务生产（正式）环境，应用异常时，响应内容禁止展示敏感信息。包括但不限于：<code>物理路径</code>、<code>程序内部源代码</code>、<code>调试日志</code>、<code>内部账号名</code>、<code>内网ip地址</code>等。</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; bad
+Access denied for user &#39;xxx&#39;@&#39;xx.xxx.xxx.162&#39; (using password: NO)&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>1.6.5 【推荐】添加安全纵深防御措施</strong></p>
+<ul>
+<li>部署CSP，规则中应引入最新的严格模式特性<code>nonce-</code></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// good：使用helmet组件安全地配置响应头</span>
+<span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"express"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> helmet <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"helmet"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">helmet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good：正确配置Content-Type、添加了安全响应头，引入了CSP</span>
+Router<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">"Content-Type"</span><span class="token punctuation">,</span> <span class="token string">"application/json"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">"X-Content-Type-Options"</span><span class="token punctuation">,</span> <span class="token string">"nosniff"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">"X-Frame-Options"</span><span class="token punctuation">,</span> <span class="token string">"SAMEORIGIN"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">"Content-Security-Policy"</span><span class="token punctuation">,</span> <span class="token string">"script-src 'self'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><em>关联漏洞：中风险 - XSS、中风险 - 跳转漏洞</em></p>
+<p><a id="2.1.7"></a></p>
+<h4 id="1-7-执行代码"><a href="#1-7-执行代码" class="headerlink" title="1.7 执行代码"></a>1.7 执行代码</h4><p><strong>1.7.1 【必须】安全的代码执行方式</strong></p>
+<ul>
+<li>禁止使用 <code>eval</code> 函数</li>
+<li>禁止使用<code>new Function(&quot;input&quot;)()</code> 来创建函数</li>
+<li>使用 <code>setInteval</code>，<code>setTimeout</code>，应校验传入的参数</li>
+</ul>
+<p><em>关联漏洞：高风险 - 代码执行漏洞</em></p>
+<p><a id="2.1.8"></a></p>
+<h4 id="1-8-Web跨域"><a href="#1-8-Web跨域" class="headerlink" title="1.8 Web跨域"></a>1.8 Web跨域</h4><p><strong>1.8.1 【必须】限定JSONP接口的callback字符集范围</strong></p>
+<ul>
+<li>JSONP接口的callback函数名为固定白名单。如callback函数名可用户自定义，应限制函数名仅包含 字母、数字和下划线。如：<code>[a-zA-Z0-9_-]+</code></li>
+</ul>
+<p><strong>1.8.2 【必须】安全的CORS配置</strong></p>
+<ul>
+<li>使用CORS，应对请求头Origin值做严格过滤、校验。具体来说，可以使用“全等于”判断，或使用严格的正则进行判断。如：<code>^https://domain\.qq\.com$</code></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// good：使用全等于，校验请求的Origin</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>req<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>origin <span class="token operator">===</span> <span class="token string">'https://domain.qq.com'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">'Access-Control-Allow-Origin'</span><span class="token punctuation">,</span> req<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>origin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    res<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">'Access-Control-Allow-Credentials'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><em>关联漏洞：中风险 - XSS，中风险 - CSRF，中风险 - CORS配置不当</em></p>
+<p><a id="2.1.9"></a></p>
+<h4 id="1-9-SQL操作"><a href="#1-9-SQL操作" class="headerlink" title="1.9 SQL操作"></a>1.9 SQL操作</h4><p><strong>1.9.1 【必须】SQL语句默认使用预编译并绑定变量</strong></p>
+<ul>
+<li><p>应使用预编译绑定变量的形式编写sql语句，保持查询语句和数据相分离</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad：拼接SQL语句查询，存在安全风险</span>
+<span class="token keyword">const</span> mysql  <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"mysql"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> connection <span class="token operator">=</span> mysql<span class="token punctuation">.</span><span class="token function">createConnection</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+connection<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> sql <span class="token operator">=</span> util<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"SELECT * from some_table WHERE Id = %s and Name = %s"</span><span class="token punctuation">,</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>id<span class="token punctuation">,</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+connection<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// handle err..</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+
+<span class="token comment">// good：使用预编译绑定变量构造SQL语句</span>
+<span class="token keyword">const</span> mysql  <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"mysql"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> connection <span class="token operator">=</span> mysql<span class="token punctuation">.</span><span class="token function">createConnection</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+connection<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> sql <span class="token operator">=</span> <span class="token string">"SELECT * from some_table WHERE Id = ? and Name = ?"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> sqlParams <span class="token operator">=</span> <span class="token punctuation">[</span>req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>id<span class="token punctuation">,</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+connection<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span> sqlParams<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// handle err..</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>对于表名、列名等无法进行预编译的场景，如：<code>__user_input__</code> 拼接到比如 <code>limit</code>, <code>order by</code>, <code>group by</code> , <code>from tablename</code>语句中。请使用以下方法：</p>
+<p><em>方案1：使用白名单校验表名/列名</em></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// good</span>
+<span class="token keyword">const</span> tableSuffix <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>type<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"expected1"</span><span class="token punctuation">,</span> <span class="token string">"expected2"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>tableSuffix<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// 不在表名白名单中，拒绝请求</span>
+	<span class="token keyword">return</span> <span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">const</span> sql <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">SELECT * from t_business_</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>tableSuffix<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+connection<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// handle err..</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><em>方案2：使用反引号包裹表名/列名，并过滤 <code>__user_input__</code> 中的反引号</em></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// good</span>
+<span class="token keyword">let</span> <span class="token punctuation">&#123;</span> orderType <span class="token punctuation">&#125;</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+<span class="token comment">// 过滤掉__user_input__中的反引号</span>
+orderType <span class="token operator">=</span> orderType<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"`"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> sql <span class="token operator">=</span> util<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"SELECT * from t_business_feeds order by `%s`"</span><span class="token punctuation">,</span> orderType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+connection<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// handle err..</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><em>方案3：将 <code>__user_input__</code> 转换为整数</em></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// good</span>
+<span class="token keyword">let</span> <span class="token punctuation">&#123;</span> orderType <span class="token punctuation">&#125;</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+<span class="token comment">// 强制转换为整数</span>
+orderType <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>orderType<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> sql <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">SELECT * from t_business_feeds order by </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>orderType<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+connection<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// handle err..</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p><strong>1.9.2 【必须】安全的ORM操作</strong></p>
+<ul>
+<li><p>使用安全的ORM组件进行数据库操作。如 <code>sequelize</code> 等</p>
+</li>
+<li><p>禁止<code>__user_input__</code>以拼接的方式直接传入ORM的各类raw方法</p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//bad: adonisjs ORM</span>
+<span class="token comment">//参考：https://adonisjs.com/docs/3.2/security-introduction#_sql_injection</span>
+<span class="token keyword">const</span> username <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">param</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> users <span class="token operator">=</span> <span class="token keyword">yield</span> Database
+  <span class="token punctuation">.</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">"users"</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span>Database<span class="token punctuation">.</span><span class="token function">raw</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">username = </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>username<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//good: adonisjs ORM</span>
+<span class="token keyword">const</span> username <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">param</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> users <span class="token operator">=</span> <span class="token keyword">yield</span> Database
+  <span class="token punctuation">.</span><span class="token function">table</span><span class="token punctuation">(</span><span class="token string">'users'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span>Database<span class="token punctuation">.</span><span class="token function">raw</span><span class="token punctuation">(</span><span class="token string">"username = ?"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>username<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>使用ORM进行Update/Insert操作时，应限制操作字段范围</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/*
+good
+假设该api用于插入用户的基本信息，使用传入的req.body通过Sequelize的create方法实现
+假设User包含字段：username,email,isAdmin，
+其中,isAdmin将会用于是否系统管理员的鉴权，默认值为false
+*/</span>
+<span class="token comment">// Sequelize: 只允许变更username、email字段值</span>
+User<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>body<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">fields</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">,</span> <span class="token string">"email"</span><span class="token punctuation">]</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">user</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// handle the rest..</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>为什么要这么做？</strong>
+在上述案例中，若不限定fields值，攻击者将可传入<code>&#123;&quot;username&quot;:&quot;boo&quot;,&quot;email&quot;:&quot;foo@boo.com&quot;,&quot;isAdmin&quot;:true&#125;</code>将自己变为<code>Admin</code>，产生垂直越权漏洞。</p>
+</blockquote>
+<p><em>关联漏洞：高风险 - SQL注入，中风险 - Mass Assignment 逻辑漏洞</em></p>
+<p><a id="2.1.10"></a></p>
+<h4 id="1-10-NoSQL操作"><a href="#1-10-NoSQL操作" class="headerlink" title="1.10 NoSQL操作"></a>1.10 NoSQL操作</h4><p><strong>1.10.1 【必须】校验参数值类型</strong></p>
+<ul>
+<li>将HTTP参数值代入NoSQL操作前，应校验类型。如非功能需要，禁止对象（Object）类型传入。</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad：执行NOSQL操作前，未作任何判断</span>
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">username</span><span class="token operator">:</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>username<span class="token punctuation">,</span> <span class="token literal-property property">password</span><span class="token operator">:</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>password <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> users</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// **TODO:** handle the rest</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good：在进入nosql前先判断`__USER_INPUT__`是否为字符串。</span>
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>username <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>username <span class="token operator">!==</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"username must be a string"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>password <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>password <span class="token operator">!==</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"password must be a string"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	db<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">username</span><span class="token operator">:</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>username<span class="token punctuation">,</span> <span class="token literal-property property">password</span><span class="token operator">:</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>password <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> users</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// **TODO:** handle the rest</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>为什么要这么做？</strong></p>
+<p>JavaScript中，从http或socket接收的数据可能不是单纯的字符串，而是被黑客精心构造的对象(Object)。在本例中：</p>
+<ul>
+<li>期望接收的POST数据：<code>username=foo&amp;password=bar</code> </li>
+<li>期望的等价条件查询sql语句：<code>select * from users where username = &#39;foo&#39; and password = &#39;bar&#39;</code></li>
+<li>黑客的精心构造的攻击POST数据：<code>username[$ne]=null&amp;password[$ne]=null</code>或JSON格式：<code>&#123;&quot;username&quot;: &#123;&quot;$ne&quot;: null&#125;,&quot;password&quot;: &#123;&quot;$ne&quot;: null&#125;&#125;</code></li>
+<li>黑客篡改后的等价条件查询sql语句：<code>select * from users where username != null &amp; password != null</code></li>
+<li>黑客攻击结果：绕过正常逻辑，在不知道他人的username/password的情况登录他人账号。</li>
+</ul>
+</blockquote>
+<p><strong>1.10.2 【必须】NoSQL操作前，应校验权限/角色</strong></p>
+<ul>
+<li>执行NoSQL增、删、改、查逻辑前，应校验权限</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 使用express、mongodb(mongoose)实现的删除文章demo</span>
+<span class="token comment">// bad：在删除文章前未做权限校验</span>
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"/deleteArticle"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	db<span class="token punctuation">.</span>articles<span class="token punctuation">.</span><span class="token function">deleteOne</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">article_id</span><span class="token operator">:</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>article_id <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> users</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// TODO: handle the rest</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good：进入nosql语句前先进行权限校验</span>
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"/deleteArticle"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token function">checkPriviledge</span><span class="token punctuation">(</span>ctx<span class="token punctuation">.</span>uin<span class="token punctuation">,</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>article_id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	db<span class="token punctuation">.</span>articles<span class="token punctuation">.</span><span class="token function">deleteOne</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">article_id</span><span class="token operator">:</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>article_id <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> users</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// TODO: handle the rest</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><em>关联漏洞：高风险 - 越权操作，高风险 - NoSQL注入</em></p>
+<p><a id="2.1.11"></a></p>
+<h4 id="1-11-服务器端渲染（SSR）"><a href="#1-11-服务器端渲染（SSR）" class="headerlink" title="1.11 服务器端渲染（SSR）"></a>1.11 服务器端渲染（SSR）</h4><p><strong>1.11.1 【必须】安全的Vue服务器端渲染(Vue SSR)</strong></p>
+<ul>
+<li><p>禁止直接将不受信的外部内容传入<code>&#123;&#123;&#123; data &#125;&#125;&#125;</code>表达式中</p>
+</li>
+<li><p>模板内容禁止被污染</p>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad: 将用户输入替换进模板</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+	<span class="token literal-property property">template</span><span class="token operator">:</span> appTemplate<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">"word"</span><span class="token punctuation">,</span> __USER_INPUT__<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+renderer<span class="token punctuation">.</span><span class="token function">renderToString</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>对已渲染的HTML文本内容（renderToString后的html内容）。如需再拼不受信的外部输入，应先进行安全过滤，具体请参考<strong>1.6.3</strong></li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad: 渲染后的html再拼接不受信的外部输入</span>
+<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	renderer<span class="token punctuation">.</span><span class="token function">renderToString</span><span class="token punctuation">(</span>component<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> html</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">let</span> htmlOutput <span class="token operator">=</span> html<span class="token punctuation">;</span>
+		htmlOutput <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>__USER_INPUT__<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+		<span class="token function">resolve</span><span class="token punctuation">(</span>htmlOutput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>1.11.2 【必须】安全地使用EJS、LoDash、UnderScore进行服务器端渲染</strong></p>
+<ul>
+<li><p>使用render函数时，模板内容禁止被污染</p>
+<p>lodash.Template:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad: 将用户输入送进模板</span>
+<span class="token keyword">const</span> compiled <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">template</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;b></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>__USER_INPUT__<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;%- value %>&lt;/b></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">compiled</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">"hello"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>ejs:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bad: 将用户输入送进模板</span>
+<span class="token keyword">const</span> ejs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"ejs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> people <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"geddy"</span><span class="token punctuation">,</span> <span class="token string">"neil"</span><span class="token punctuation">,</span> <span class="token string">"alex"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> html <span class="token operator">=</span> ejs<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;%= people.join(", "); %></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>__USER_INPUT__<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> people <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>Ejs、LoDash、UnderScore提供的HTML插值模板默认形似<code>&lt;%= data %&gt;</code>，尽管在默认情况下<code>&lt;%= data %&gt;</code>存在过滤，在编写HTML插值模板时需注意:</p>
+<ol>
+<li>用户输入流入html属性值时，必须使用双引号包裹：<code>&lt;base data-id = &quot;&lt;%= __USER_INPUT__ %&gt;&quot;&gt;</code></li>
+<li>用户输入流入<code>&lt;script&gt;&lt;/script&gt;</code>标签或on*的html属性中时，如<code>&lt;script&gt;var id = &lt;%= __USER_INPUT__ %&gt;&lt;/script&gt;</code> ，须按照1.6.3中的做法或白名单方法进行过滤，框架/组件的过滤在此处不起作用</li>
+</ol>
+</li>
+</ul>
+<p><strong>1.11.3 【必须】在自行实现状态存储容器并将其JSON.Stringify序列化后注入到HTML时，必须进行安全过滤</strong></p>
+<p><a id="2.1.12"></a></p>
+<h4 id="1-12-URL跳转"><a href="#1-12-URL跳转" class="headerlink" title="1.12 URL跳转"></a>1.12 URL跳转</h4><p><strong>1.12.1【必须】限定跳转目标地址</strong></p>
+<ul>
+<li>适用场景包括：</li>
+</ul>
+<ol>
+<li>使用30x返回码并在Header中设置Location进行跳转</li>
+<li>在返回页面中打印<code>&lt;script&gt;location.href=__Redirection_URL__&lt;/script&gt;</code></li>
+</ol>
+<ul>
+<li>使用白名单，限定重定向地址的协议前缀（默认只允许HTTP、HTTPS）、域名（默认只允许公司根域），或指定为固定值；</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 使用express实现的登录成功后的回调跳转页面</span>
+
+<span class="token comment">// bad: 未校验页面重定向地址</span>
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// 若未登录用户访问其他页面，则让用户导向到该处理函数进行登录</span>
+  <span class="token comment">// 使用参数loginCallbackUrl记录先前尝试访问的url，在登录成功后跳转回loginCallbackUrl:</span>
+	<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> loginCallbackUrl <span class="token punctuation">&#125;</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>loginCallbackUrl<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    	res<span class="token punctuation">.</span><span class="token function">redirect</span><span class="token punctuation">(</span>loginCallbackUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: 白名单限定重定向地址</span>
+<span class="token keyword">function</span> <span class="token function">isValidURL</span><span class="token punctuation">(</span><span class="token parameter">sUrl</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(https?:\/\/)?[\w\-.]+\.(qq|tencent)\.com($|\/|\\)</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^[\w][\w/.\-_%]+$</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^[/\\][^/\\]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// 若未登录用户访问其他页面，则让用户导向到该处理函数进行登录</span>
+  <span class="token comment">// 使用参数loginCallbackUrl记录先前尝试访问的url，在登录成功后跳转回loginCallbackUrl:</span>
+	<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> loginCallbackUrl <span class="token punctuation">&#125;</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>loginCallbackUrl <span class="token operator">&amp;&amp;</span> <span class="token function">isValidUrl</span><span class="token punctuation">(</span>loginCallbackUrl<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    	res<span class="token punctuation">.</span><span class="token function">redirect</span><span class="token punctuation">(</span>loginCallbackUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// good: 白名单限定重定向地址，通过返回html实现</span>
+<span class="token keyword">function</span> <span class="token function">isValidURL</span><span class="token punctuation">(</span><span class="token parameter">sUrl</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(https?:\/\/)?[\w\-.]+\.(qq|tencent)\.com($|\/|\\)</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^[\w][\w/.\-_%]+$</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^[/\\][^/\\]</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>sUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// 若未登录用户访问其他页面，则让用户导向到该处理函数进行登录</span>
+  <span class="token comment">// 使用参数loginCallbackUrl记录先前尝试访问的url，在登录成功后跳转回loginCallbackUrl:</span>
+	<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> loginCallbackUrl <span class="token punctuation">&#125;</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>query<span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>loginCallbackUrl <span class="token operator">&amp;&amp;</span> <span class="token function">isValidUrl</span><span class="token punctuation">(</span>loginCallbackUrl<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// 使用encodeURI，过滤左右尖括号与双引号，防止逃逸出包裹的双引号</span>
+		<span class="token keyword">const</span> redirectHtml <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;script>location.href = "</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token function">encodeURI</span><span class="token punctuation">(</span>loginCallbackUrl<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">";&lt;/script></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    	res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span>redirectHtml<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><em>关联漏洞：中风险 - 任意URL跳转漏洞</em></p>
+<p><a id="2.1.13"></a></p>
+<h4 id="1-13-Cookie与登录态"><a href="#1-13-Cookie与登录态" class="headerlink" title="1.13 Cookie与登录态"></a>1.13 Cookie与登录态</h4><p><strong>1.13.1【推荐】为Cookies中存储的关键登录态信息添加http-only保护</strong></p>
+<p><em>关联漏洞：纵深防护措施 - 安全性增强特性</em></p>
+<p><a id="2.2"></a></p>
+<h3 id="II-配置-amp-环境-1"><a href="#II-配置-amp-环境-1" class="headerlink" title="II. 配置&amp;环境"></a>II. 配置&amp;环境</h3><p><a id="2.2.1"></a></p>
+<h4 id="2-1-依赖库"><a href="#2-1-依赖库" class="headerlink" title="2.1 依赖库"></a>2.1 依赖库</h4><p><strong>2.1.1【必须】使用安全的依赖库</strong></p>
+<ul>
+<li>使用自动工具，检查依赖库是否存在后门/漏洞，保持最新版本</li>
+</ul>
+<p><a id="2.2.2"></a></p>
+<h4 id="2-2-运行环境"><a href="#2-2-运行环境" class="headerlink" title="2.2 运行环境"></a>2.2 运行环境</h4><p><strong>2.2.1 【必须】使用非root用户运行Node.js</strong></p>
+<p><a id="2.2.3"></a></p>
+<h4 id="2-3-配置信息"><a href="#2-3-配置信息" class="headerlink" title="2.3 配置信息"></a>2.3 配置信息</h4><p><strong>2.3.1【必须】禁止硬编码认证凭证</strong></p>
+<ul>
+<li>禁止在源码中硬编码<code>AK/SK</code>、<code>数据库账密</code>、<code>私钥证书</code>等配置信息</li>
+<li>应使用配置系统或KMS密钥管理系统。</li>
+</ul>
+<p><strong>2.3.2【必须】禁止硬编码IP配置</strong></p>
+<ul>
+<li>禁止在源码中硬编码<code>IP</code>信息</li>
+</ul>
+<blockquote>
+<p><strong>为什么要这么做？</strong></p>
+<p>硬编码IP可能会导致后续机器裁撤或变更时产生额外的工作量，影响系统的可靠性。</p>
+</blockquote>
+<p><strong>2.3.3【必须】禁止硬编码员工敏感信息</strong></p>
+<ul>
+<li>禁止在源代码中含员工敏感信息，包括但不限于：<code>员工ID</code>、<code>手机号</code>、<code>微信/QQ号</code>等。</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">QT-7274</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://qt-7274.github.io/2024/06/09/javascript-an-quan-zhi-nan/">https://qt-7274.github.io/2024/06/09/javascript-an-quan-zhi-nan/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">QT-7274</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">
+                                    <span class="chip bg-color">前端开发</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/images/loading.gif" data-original="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.gif") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid;">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'tzmyy70PpnbbxclXN4jYmjPA-gzGzoHsz',
+        appKey: 'TCY55mH7vS6x5sVr1bCLm5Gg',
+        serverURLs: '',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        requiredFields: ['nick','mail'],
+        enableQQ: 'true',
+        lang: 'zh-cn',
+        placeholder: '😉畅所欲言！\n📲请文明评论，禁止恶意评论🚫 \n⚠️公开网络空间，请不要发表任何包含个人或其他人的隐私信息🔐',
+        master: ["f18e9f29c8274571d5a0752aca9310ef"],
+        friends:["0aa4f09d8249581a4380a6fc541062e7","6a66a1ba019c52f168d99313efbef39a"]
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2024/07/06/qian-duan-shou-ping-jian-ce-shi-jian-fang-an/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/images/loading.gif" data-original="/medias/featureimages/19.jpg" class="responsive-img" alt="前端首屏检测时间方案">
+                        
+                        <span class="card-title">前端首屏检测时间方案</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-07-06
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">
+                        <span class="chip bg-color">前端开发</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%96%B9%E6%A1%88/">
+                        <span class="chip bg-color">方案</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/05/19/react-xiang-mu-ji-shi-tong-xun/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/images/loading.gif" data-original="https://roseblog.oss-cn-beijing.aliyuncs.com/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/62c26f23691984dc6aa6b998_meta-image-2022-07-04T123525.142.webp" class="responsive-img" alt="React项目——即时通讯">
+                        
+                        <span class="card-title">React项目——即时通讯</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-05-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="post-category">
+                                    前端开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
+                        <span class="chip bg-color">项目开发</span>
+                    </a>
+                    
+                    <a href="/tags/React/">
+                        <span class="chip bg-color">React</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">QT-7274</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/QT-7274" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2531376773@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2531376773" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2531376773" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+    <a  class="tooltipped" target="_blank" data-tooltip="微信联系我: Q5268368" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>
