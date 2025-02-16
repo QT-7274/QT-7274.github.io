@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="虚拟DOM和DIFF算法, QT-7274">
-    <meta name="description" content="总结性说明虚拟DOM和diff算法。">
+    <meta name="description" content="总结性说明虚拟DOM和diff算法">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -503,30 +503,38 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>虚拟DOM部分内容详见<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/15/vue-xu-ni-dom-xiang-jie/">Vue虚拟DOM详解 | QT-7274 (qblog.top)</a></p>
-<h2 id="diff算法"><a href="#diff算法" class="headerlink" title="diff算法"></a>diff算法</h2><p>现在如果要明确两个树结构的差异并进行转换，大致会分为一下两个步骤：
-第一阶段：<strong>先循环遍历每一个节点进行比较</strong>，即针对旧树的每一个节点，都与新树的所有节点进行比较；
+<h2 id="diff算法">diff算法</h2>
+<p>现在如果要明确两个树结构的差异并进行转换，大致会分为一下两个步骤：<br>
+第一阶段：<strong>先循环遍历每一个节点进行比较</strong>，即针对旧树的每一个节点，都与新树的所有节点进行比较；<br>
 第二阶段：在遍历比较结束后，为了做出必要的修改，<strong>再次遍历整个树进行实际的操作</strong>（添加、删除、修改等）。</p>
-<h3 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h3><ol>
-<li><p>初始化一个空数组<code>result</code>，用于存储比较结果。</p>
+<h3 id="代码详解">代码详解</h3>
+<ol>
+<li>
+<p>初始化一个空数组<code>result</code>，用于存储比较结果。</p>
 </li>
-<li><p>定义<code>diff</code>函数，接受两个参数：<code>beforeLeaf</code>和<code>afterLeaf</code>，分别表示两个要比较的HTML元素树。</p>
+<li>
+<p>定义<code>diff</code>函数，接受两个参数：<code>beforeLeaf</code>和<code>afterLeaf</code>，分别表示两个要比较的HTML元素树。</p>
 </li>
-<li><p>获取两个元素树中较大的子节点数量，并将其赋值给变量<code>count</code>。</p>
+<li>
+<p>获取两个元素树中较大的子节点数量，并将其赋值给变量<code>count</code>。</p>
 </li>
-<li><p>使用 <code>for</code></p>
+<li>
+<p>使用 <code>for</code></p>
 <p>循环遍历从0到 <code>count-1</code> 的索引。</p>
 <ul>
 <li>如果<code>beforeLeaf</code>的子节点不存在，将<code>afterLeaf</code>的子节点添加到<code>result</code>数组中，类型为&quot;add&quot;。</li>
 <li>如果<code>afterLeaf</code>的子节点不存在，将<code>beforeLeaf</code>的子节点从<code>result</code>数组中移除，类型为&quot;remove&quot;。</li>
 <li>如果两个子节点的标签名不同，将<code>beforeLeaf</code>的子节点移除，将<code>afterLeaf</code>的子节点添加到<code>result</code>数组中，类型分别为&quot;remove&quot;和&quot;add&quot;。</li>
-<li>如果两个子节点的标签名相同但内容不同，进行以下操作：<ul>
+<li>如果两个子节点的标签名相同但内容不同，进行以下操作：
+<ul>
 <li>如果子节点没有子节点，将<code>beforeLeaf</code>的子节点替换为<code>afterLeaf</code>的子节点，类型为&quot;changed&quot;，并记录更改后的HTML内容。</li>
 <li>如果子节点有子节点，递归调用<code>diff</code>函数进行比较。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>返回存储了所有差异的<code>result</code>数组。</p>
+<li>
+<p>返回存储了所有差异的<code>result</code>数组。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 定义一个空数组，用于存储比较结果
 let result &#x3D; [];
 
@@ -576,23 +584,32 @@ const diff &#x3D; function (beforeLeaf, afterLeaf) &#123;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
-<h2 id="Vue中的diff算法"><a href="#Vue中的diff算法" class="headerlink" title="Vue中的diff算法"></a>Vue中的diff算法</h2><p>当数据发生改变时，Vue的响应式更新会调用Dep.notify()方法来通知所有订阅者，每个订阅者便会调用patch方法修改真实DOM，更新视图。</p>
+<h2 id="Vue中的diff算法">Vue中的diff算法</h2>
+<p>当数据发生改变时，Vue的响应式更新会调用Dep.notify()方法来通知所有订阅者，每个订阅者便会调用patch方法修改真实DOM，更新视图。</p>
 <p>如果符合SameNode，就不会渲染Vnode重新创建DOM节点，而是在原有的DOM节点上进行修补，尽可能复用原有的DOM节点——以上的思想主要体现在patchNode方法中。</p>
-<h3 id="patchNode代码详解"><a href="#patchNode代码详解" class="headerlink" title="patchNode代码详解"></a>patchNode代码详解</h3><p>主要目的是比较新旧虚拟节点（<code>oldVnode</code> 和 <code>vnode</code>），并根据它们之间的差异来更新实际的DOM元素（<code>elm</code>）。</p>
+<h3 id="patchNode代码详解">patchNode代码详解</h3>
+<p>主要目的是比较新旧虚拟节点（<code>oldVnode</code> 和 <code>vnode</code>），并根据它们之间的差异来更新实际的DOM元素（<code>elm</code>）。</p>
 <ol>
-<li><p>首先，获取旧虚拟节点的子节点（<code>oldCh</code>）和新虚拟节点的子节点（<code>ch</code>）。</p>
+<li>
+<p>首先，获取旧虚拟节点的子节点（<code>oldCh</code>）和新虚拟节点的子节点（<code>ch</code>）。</p>
 </li>
-<li><p>接下来，检查新虚拟节点（<code>vnode</code>）的文本内容是否为<code>undefined</code>。如果是，说明它有子节点。</p>
+<li>
+<p>接下来，检查新虚拟节点（<code>vnode</code>）的文本内容是否为<code>undefined</code>。如果是，说明它有子节点。</p>
 </li>
-<li><p>如果新旧虚拟节点都有子节点（<code>oldCh</code> 和 <code>ch</code> 都不为 <code>undefined</code>），则比较它们的子节点是否相同。如果不同，调用 <code>updateChildren</code> 函数来更新实际DOM元素的子节点。</p>
+<li>
+<p>如果新旧虚拟节点都有子节点（<code>oldCh</code> 和 <code>ch</code> 都不为 <code>undefined</code>），则比较它们的子节点是否相同。如果不同，调用 <code>updateChildren</code> 函数来更新实际DOM元素的子节点。</p>
 </li>
-<li><p>如果只有新虚拟节点有子节点（<code>ch</code> 不为 <code>undefined</code>，<code>oldCh</code> 为 <code>undefined</code>），首先检查旧虚拟节点是否有文本内容。如果有，<strong>清空实际DOM元素的文本内容</strong>。然后，使用 <code>addVnodes</code> 函数将新虚拟节点的子节点添加到实际DOM元素中。</p>
+<li>
+<p>如果只有新虚拟节点有子节点（<code>ch</code> 不为 <code>undefined</code>，<code>oldCh</code> 为 <code>undefined</code>），首先检查旧虚拟节点是否有文本内容。如果有，<strong>清空实际DOM元素的文本内容</strong>。然后，使用 <code>addVnodes</code> 函数将新虚拟节点的子节点添加到实际DOM元素中。</p>
 </li>
-<li><p>如果只有旧虚拟节点有子节点（<code>oldCh</code> 不为 <code>undefined</code>，<code>ch</code> 为 <code>undefined</code>），使用 <code>removeVnodes</code> 函数从实际DOM元素中移除旧虚拟节点的子节点。</p>
+<li>
+<p>如果只有旧虚拟节点有子节点（<code>oldCh</code> 不为 <code>undefined</code>，<code>ch</code> 为 <code>undefined</code>），使用 <code>removeVnodes</code> 函数从实际DOM元素中移除旧虚拟节点的子节点。</p>
 </li>
-<li><p>如果旧虚拟节点有文本内容，但新虚拟节点没有子节点，清空实际DOM元素的文本内容。</p>
+<li>
+<p>如果旧虚拟节点有文本内容，但新虚拟节点没有子节点，清空实际DOM元素的文本内容。</p>
 </li>
-<li><p>如果新旧虚拟节点都只有文本内容，且它们的文本内容不同，使用 <code>nodeOps.setTextContent</code> 函数更新实际DOM元素的文本内容。</p>
+<li>
+<p>如果新旧虚拟节点都只有文本内容，且它们的文本内容不同，使用 <code>nodeOps.setTextContent</code> 函数更新实际DOM元素的文本内容。</p>
 <pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">&#x2F;&#x2F; 获取旧的虚拟节点和新的虚拟节点的子节点
 const oldCh &#x3D; oldVnode.children;
 const ch &#x3D; vnode.children;
@@ -657,16 +674,19 @@ else if (oldVnode.text !&#x3D;&#x3D; vnode.text) &#123;
 <li><strong>oldVnode和Vnode都只有文本子节点</strong></li>
 </ul>
 <p>如果他们都有文字节点且内容不相等，那么就用Vnode的文字节点值替换oldVnode所对应的真实DOM的文字节点值</p>
-<p>拓展：
-1、使用了相同的key不一定会复用dom，使用了不同的key肯定会销毁旧的dom创建新的dom产生消耗
-2、使用key是为了更加合理的销毁和复用dom
-1）合理的销毁：比如在动态表单验证中，如果使用index作为key，会产生删除上面的表单item，但是在使用了index作为key后，会产生错误的复用效果，导致删除后的某些状态依旧停留在下一个item中
+</blockquote>
+<blockquote>
+<p>拓展：<br>
+1、使用了相同的key不一定会复用dom，使用了不同的key肯定会销毁旧的dom创建新的dom产生消耗<br>
+2、使用key是为了更加合理的销毁和复用dom<br>
+1）合理的销毁：比如在动态表单验证中，如果使用index作为key，会产生删除上面的表单item，但是在使用了index作为key后，会产生错误的复用效果，导致删除后的某些状态依旧停留在下一个item中<br>
 2）合理的复用：在一些展示信息list中使用key在数据发生乱序后能够合理的复用dom，减少消耗</p>
 </blockquote>
-<h3 id="Vue3-x与Vue2-x中diff算法"><a href="#Vue3-x与Vue2-x中diff算法" class="headerlink" title="Vue3.x与Vue2.x中diff算法"></a>Vue3.x与Vue2.x中diff算法</h3><p>参考文章：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/13/vue3-he-vue2-de-qu-bie/#diff算法优化">Vue3和Vue2的区别 | QT-7274 (qblog.top)</a></p>
+<h3 id="Vue3-x与Vue2-x中diff算法">Vue3.x与Vue2.x中diff算法</h3>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://qblog.top/2023/09/13/vue3-he-vue2-de-qu-bie/#diff%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96">Vue3和Vue2的区别 | QT-7274 (qblog.top)</a></p>
 <p>相关文章：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://vue3js.cn/interview/vue/diff.html#一、是什么">面试官：你了解vue的diff算法吗？说说看 | web前端面试 - 面试官系列 (vue3js.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/interview/vue/diff.html#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88">面试官：你了解vue的diff算法吗？说说看 | web前端面试 - 面试官系列 (vue3js.cn)</a></li>
 <li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904113587634184?searchId=20240330204435BBB070DCACAF2FDA90CE">为什么 Vue 中不要用 index 作为 key？（diff 算法详解） - 掘金 (juejin.cn)</a></li>
 <li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7026534614931865637?searchId=20240330204435BBB070DCACAF2FDA90CE">一文彻底弄懂diff算法的key作用 - 掘金 (juejin.cn)</a></li>
 </ul>
@@ -1409,7 +1429,7 @@ else if (oldVnode.text !&#x3D;&#x3D; vnode.text) &#123;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2024</span>
+                <span id="year">2019-2025</span>
             
             <a href="/about" target="_blank">QT-7274</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
