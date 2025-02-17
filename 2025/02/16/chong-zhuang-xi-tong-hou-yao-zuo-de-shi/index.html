@@ -6,8 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="重装系统后要做的事, QT-7274">
-    <meta name="description" content="t 是esttest
-">
+    <meta name="description" content="重装系统或者购买新机器后，需要对计算机进行一系列初始配置。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -434,10 +433,23 @@
                                 <span class="chip bg-color">工具</span>
                             </a>
                         
+                            <a href="/tags/%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">系统</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                系统
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -453,14 +465,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-02-16
+                    2025-02-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3
+                    485
                 </div>
                 
 
@@ -490,7 +502,64 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>t 是esttest</p>
+                <h2 id="优先级最高">优先级最高</h2>
+<h3 id="机械革命专属">机械革命专属</h3>
+<h4 id="无线网卡驱动安装">无线网卡驱动安装</h4>
+<p>机械革命官网，下载无线网卡驱动，并根据这张图进行安装：</p>
+<p><img src="/medias/images/loading.gif" data-original="image-20250216232124442.png" alt="image-20250216232124442"></p>
+<h4 id="机械革命控制台安装">机械革命控制台安装</h4>
+<h3 id="驱动安装">驱动安装</h3>
+<ol>
+<li>无线网卡驱动安装</li>
+<li>GeForce Experience 显卡驱动安装</li>
+<li></li>
+</ol>
+<h3 id="软件安装">软件安装</h3>
+<ol>
+<li>Everything：安装后可检索之前硬盘中的文件以及安装包</li>
+<li>搜狗输入法：安装后提升输入体验</li>
+<li>Office Tools Plus：<a target="_blank" rel="noopener" href="https://otp.landian.vip/zh-cn/download.html">下载 | Office Tool Plus</a> 如有需要可以部署visio</li>
+<li>geek：软件卸载软件</li>
+<li>Snipaste：截图软件，常用</li>
+<li>typora：文字编辑软件，破解版教程如下文所示</li>
+<li>Cursor：编程软件</li>
+<li>Chrome浏览器：浏览器软件</li>
+<li>阿里云盘：资料备份软件</li>
+<li>Tim：聊天软件</li>
+<li>WeChat：聊天软件</li>
+<li>QQ音乐：音乐播放软件</li>
+</ol>
+<h2 id="特殊软件安装">特殊软件安装</h2>
+<h3 id="Typora破解版安装">Typora破解版安装</h3>
+<p>教程详见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_61621323/article/details/141036982">Typora 免费安装教程（已支持最新版 1.9.5）_typora免费安装-CSDN博客</a></p>
+<h2 id="个人博客重启">个人博客重启</h2>
+<p>教程详见：<a target="_blank" rel="noopener" href="https://www.bilibili.com/opus/558098508697872931">2021最全hexo搭建博客+matery美化+使用（保姆级教程） - 哔哩哔哩</a></p>
+<ol>
+<li>node.js：安装后 node -v 验证</li>
+<li>git：<a target="_blank" rel="noopener" href="https://git-scm.com/download/win%EF%BC%8C%E5%AE%89%E8%A3%85git%E5%90%8E%EF%BC%8C%E5%90%8E%E7%BB%AD%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8git">https://git-scm.com/download/win，安装git后，后续命令行安装使用git</a> bash</li>
+<li>cnpm：<code>npm install -g cnpm --registry==https://registry.npm.taobao.org</code></li>
+<li>hexo：<code>cnpm install -g hexo-cli</code></li>
+</ol>
+<p>适用于之前已经创建过仓库，部署过博客并且已在个人域名上部署：</p>
+<ol>
+<li>
+<p>找到C:\Users\xxx.ssh文件夹并删除</p>
+</li>
+<li>
+<p>在C:\Users\xxx.ssh文件夹下右键打开Git Bash Here输入命令：<code>ssh-keygen -t rsa -C github邮件地址</code>  生成.ssh秘钥，输入后连敲三次回车</p>
+</li>
+<li>
+<p>打开.ssh\id_rsa.pub文件，记事本打开并复制里面的内容</p>
+</li>
+<li>
+<p>打开github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key，把复制的内容粘贴进去</p>
+</li>
+<li>
+<p>配置</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name <span class="token string">"xxxxx"</span><span class="token punctuation">;</span>// 你的github用户名，非昵称
+$ <span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email  <span class="token string">"xxxxx"</span><span class="token punctuation">;</span>// 填写你的github注册邮箱<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ol>
 
                 
             </div>
@@ -557,6 +626,10 @@
                             
                                 <a href="/tags/%E5%B7%A5%E5%85%B7/">
                                     <span class="chip bg-color">工具</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">系统</span>
                                 </a>
                             
                         </div>
@@ -1018,7 +1091,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            重装系统或者购买新机器后，需要对计算机进行一系列初始配置。
                         
                     </div>
                     <div class="publish-info">
@@ -1027,8 +1100,12 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            QT-7274
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    系统
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -1039,6 +1116,10 @@
                     
                     <a href="/tags/%E5%B7%A5%E5%85%B7/">
                         <span class="chip bg-color">工具</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">系统</span>
                     </a>
                     
                 </div>
