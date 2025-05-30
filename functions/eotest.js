@@ -1,6 +1,6 @@
 export function onRequest({request}) {
   const geo = request.eo.geo;
-  
+  console.log(geo);
   const res = JSON.stringify({
     geo: geo,
   });
