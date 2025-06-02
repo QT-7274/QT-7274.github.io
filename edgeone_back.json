@@ -1,0 +1,145 @@
+{
+  "name": "hexo-blog",
+  "headers": [
+    {
+      "source": "/medias/*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/css/*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/js/*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/libs/*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "*.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "*.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "*.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "*.gif",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/search.xml",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/functions/*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    }
+  ],
+  "caches": [
+    {
+      "source": "/medias/*",
+      "cacheTtl": 31536000
+    },
+    {
+      "source": "/css/*",
+      "cacheTtl": 31536000
+    },
+    {
+      "source": "/js/*",
+      "cacheTtl": 31536000
+    },
+    {
+      "source": "/libs/*",
+      "cacheTtl": 31536000
+    },
+    {
+      "source": "*.png",
+      "cacheTtl": 2592000
+    },
+    {
+      "source": "*.jpg",
+      "cacheTtl": 2592000
+    },
+    {
+      "source": "*.webp",
+      "cacheTtl": 2592000
+    },
+    {
+      "source": "*.gif",
+      "cacheTtl": 2592000
+    },
+    {
+      "source": "/search.xml",
+      "cacheTtl": 3600
+    },
+    {
+      "source": "/functions/*",
+      "cacheTtl": 0
+    },
+    {
+      "source": "/index.html",
+      "cacheTtl": 3600
+    },
+    {
+      "source": "/*/index.html",
+      "cacheTtl": 3600
+    }
+  ]
+}
