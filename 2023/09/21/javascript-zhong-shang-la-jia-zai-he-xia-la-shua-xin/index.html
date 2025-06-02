@@ -6,15 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JavaScript中上拉加载和下拉刷新, QT-7274">
-    <meta name="description" content="实现
-上拉加载及下拉刷新都依赖于用户交互
+    <meta name="description" content="实现上拉加载及下拉刷新都依赖于用户交互
 最重要的是要理解在什么场景，什么时机下触发交互动作
 上拉加载
-
 上拉加载的本质是页面触底，或者快要触底时的动作
 判断页面触底我们需要先了解一下下面几个属性
 
-scrollTop：滚动视窗的高度距离w">
+scrollTop：滚动视窗的高度距离win">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -510,11 +508,9 @@ scrollTop：滚动视窗的高度距离w">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="实现">实现</h2>
-<p>上拉加载及下拉刷新都依赖于用户交互</p>
+                <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>上拉加载及下拉刷新都依赖于用户交互</p>
 <p>最重要的是要理解在什么场景，什么时机下触发交互动作</p>
-<h3 id="上拉加载">上拉加载</h3>
-<p><img src="/medias/images/loading.gif" data-original="df498a00-8ae3-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<h3 id="上拉加载"><a href="#上拉加载" class="headerlink" title="上拉加载"></a>上拉加载</h3><p><img src="/medias/images/loading.gif" data-original="df498a00-8ae3-11eb-ab90-d9ae814b240d.png" alt="img"></p>
 <p>上拉加载的本质是页面触底，或者快要触底时的动作</p>
 <p>判断页面触底我们需要先了解一下下面几个属性</p>
 <ul>
@@ -534,8 +530,7 @@ scrollTop：滚动视窗的高度距离w">
 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>scrollTop <span class="token operator">+</span> clientHeight<span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token punctuation">(</span>scrollHeight <span class="token operator">-</span> distance<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"开始加载数据"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="下拉刷新">下拉刷新</h3>
-<p>下拉刷新的本质是页面本身置于顶部时，用户下拉时需要触发的动作</p>
+<h3 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h3><p>下拉刷新的本质是页面本身置于顶部时，用户下拉时需要触发的动作</p>
 <p>关于下拉刷新的原生实现，主要分成三步：</p>
 <ul>
 <li>监听原生<code>touchstart</code>事件，记录其初始位置的值，<code>e.touches[0].pageY</code>；</li>
@@ -594,8 +589,7 @@ _element<span class="token punctuation">.</span><span class="token function">add
 <li>下拉到一定值时，显示松手释放后的操作提示</li>
 <li>下拉到达设定最大值松手时，执行回调，提示正在进行更新操作</li>
 </ul>
-<h2 id="案例">案例</h2>
-<p>在实际开发中，我们更多的是使用第三方库，下面以<code>better-scroll</code>进行举例：</p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>在实际开发中，我们更多的是使用第三方库，下面以<code>better-scroll</code>进行举例：</p>
 <p>HTML结构</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"position-wrapper"</span><span class="token operator">></span>
     <span class="token operator">&lt;</span>div<span class="token operator">></span>

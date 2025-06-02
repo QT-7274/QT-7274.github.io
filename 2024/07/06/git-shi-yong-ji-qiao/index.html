@@ -498,22 +498,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="将几个commit压缩成一个">将几个commit压缩成一个</h2>
-<ol>
-<li>
-<p><code>git log</code></p>
+                <h2 id="将几个commit压缩成一个"><a href="#将几个commit压缩成一个" class="headerlink" title="将几个commit压缩成一个"></a>将几个commit压缩成一个</h2><ol>
+<li><p><code>git log</code> </p>
 </li>
-<li>
-<p><code>git rebase -i HEAD~3</code> （假设你之前有三个提交）</p>
+<li><p><code>git rebase -i HEAD~3</code> （假设你之前有三个提交）</p>
 </li>
-<li>
-<p>在打开的文本编辑器中，你会看到列出的提交，默认情况下每行都以 <code>pick</code> 开头。要合并提交，你需要将除了第一个提交之外的其他提交前面的 <code>pick</code> 改为 <code>s</code> 或 <code>squash</code>。这表示你想要将这些提交合并到它们上面的提交中</p>
+<li><p>在打开的文本编辑器中，你会看到列出的提交，默认情况下每行都以 <code>pick</code> 开头。要合并提交，你需要将除了第一个提交之外的其他提交前面的 <code>pick</code> 改为 <code>s</code> 或 <code>squash</code>。这表示你想要将这些提交合并到它们上面的提交中</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pick e3a1b35 第一个提交
 s 7c3d2c4 第二个提交
 s 4d3e4f5 第三个提交<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>Git 会打开一个新的编辑器窗口，让你编辑一个新的提交信息，这个信息将用于合并后的提交。这里你可以输入一个新的提交信息，描述这几个提交的整体更改，或者保留其中一个提交的信息。</p>
+<li><p>Git 会打开一个新的编辑器窗口，让你编辑一个新的提交信息，这个信息将用于合并后的提交。这里你可以输入一个新的提交信息，描述这几个提交的整体更改，或者保留其中一个提交的信息。</p>
 </li>
 </ol>
 <blockquote>
@@ -533,58 +528,43 @@ s 4d3e4f5 第三个提交<span aria-hidden="true" class="line-numbers-rows"><spa
 <span class="token comment"># m, merge [-C&lt;commit> | -c&lt;commit>]&lt;label> [# &lt;oneline>]</span>
 <span class="token comment"># . 使用原始合并提交的日志消息（如果没有指定原始合并提交，则使用 oneline）创建一个合并提交</span>
 <span class="token comment"># . 使用 -c&lt;commit> 选项可以重写提交信息</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="找回丢失的commit节点或分支">找回丢失的commit节点或分支</h2>
-<ol>
-<li>
-<p><code>git reflog</code> 查看你的 Git 操作历史，包括提交、重置、合并等操作。</p>
+<h2 id="找回丢失的commit节点或分支"><a href="#找回丢失的commit节点或分支" class="headerlink" title="找回丢失的commit节点或分支"></a>找回丢失的commit节点或分支</h2><ol>
+<li><p><code>git reflog</code> 查看你的 Git 操作历史，包括提交、重置、合并等操作。</p>
 <p>这个命令会列出你的 HEAD 指针最近指向的历史，帮助你找到要恢复的提交的哈希值。</p>
 </li>
-<li>
-<p><code>git reset --hard [哈希值]</code></p>
+<li><p><code>git reset --hard [哈希值]</code></p>
 <blockquote>
 <p>注意：这个操作是不可逆的，它会丢弃自那个提交以来的所有更改。</p>
 </blockquote>
 </li>
-<li>
-<p><code>git log</code> 查看当前的提交历史，确认你已经成功恢复到了期望的状态。</p>
+<li><p><code>git log</code> 查看当前的提交历史，确认你已经成功恢复到了期望的状态。</p>
 </li>
 </ol>
-<h2 id="获得一个干净的工作空间">获得一个干净的工作空间</h2>
-<ol>
-<li>
-<p><code>git status</code> 查看当前的工作目录和暂存区状态，了解哪些文件被修改或未跟踪。</p>
+<h2 id="获得一个干净的工作空间"><a href="#获得一个干净的工作空间" class="headerlink" title="获得一个干净的工作空间"></a>获得一个干净的工作空间</h2><ol>
+<li><p><code>git status</code> 查看当前的工作目录和暂存区状态，了解哪些文件被修改或未跟踪。</p>
 <blockquote>
 <p>注意：用 <code>git reset --hard HEAD</code> 或 <code>git checkout -f</code> 来恢复干净工作目录，但这两个操作都会丢失文件，不符合我们使用版本控制的初衷，不推荐。</p>
 </blockquote>
 </li>
-<li>
-<p><code>git stash push -u</code></p>
+<li><p><code>git stash push -u</code></p>
 <blockquote>
 <p>仅仅是临时清理工作目录和暂存区的更改，将它们保存在 Git 的 stash 中，而不是永久删除。这意味着你之前的工作目录的更改还是存在的，只是被临时保存起来了。当你需要恢复这些更改时，可以通过 <code>git stash pop</code> 或 <code>git stash apply</code> 命令来恢复它们到工作目录中。</p>
 </blockquote>
 </li>
-<li>
-<p>如果后面发现这部分变更是需要的，可以执行 <code>git stash pop</code> 或 <code>git stash apply</code> 来恢复。</p>
+<li><p>如果后面发现这部分变更是需要的，可以执行 <code>git stash pop</code> 或 <code>git stash apply</code> 来恢复。</p>
 </li>
 </ol>
-<h2 id="修改最近一个commit">修改最近一个commit</h2>
-<ol>
-<li>
-<p><code>git log</code></p>
+<h2 id="修改最近一个commit"><a href="#修改最近一个commit" class="headerlink" title="修改最近一个commit"></a>修改最近一个commit</h2><ol>
+<li><p><code>git log</code></p>
 </li>
-<li>
-<p><code>git show HEAD</code></p>
+<li><p><code>git show HEAD</code></p>
 </li>
-<li>
-<p><code>git add [修改的文件]</code> 命令将这些文件暂存。如果想要暂存所有修改过的文件，可以使用 <code>git add .</code>。</p>
+<li><p><code>git add [修改的文件]</code> 命令将这些文件暂存。如果想要暂存所有修改过的文件，可以使用 <code>git add .</code>。</p>
 </li>
-<li>
-<p><code>git commit --amend</code> 命令修改最近的提交。这个命令会打开你的默认文本编辑器，允许你修改提交消息。如果你不想修改提交消息，可以直接保存并关闭编辑器。这个命令不仅可以修改提交消息，还可以将新暂存的更改添加到最近的提交中。</p>
+<li><p><code>git commit --amend</code> 命令修改最近的提交。这个命令会打开你的默认文本编辑器，允许你修改提交消息。如果你不想修改提交消息，可以直接保存并关闭编辑器。这个命令不仅可以修改提交消息，还可以将新暂存的更改添加到最近的提交中。</p>
 <blockquote>
 <p>如果你不想修改提交消息，可以添加 <code>--no-edit</code> 选项来保留原来的提交消息。</p>
 <p><code>git commit --amend --no-edit</code></p>
-</blockquote>
-<blockquote>
 <p>注意：<code>git commit --amend</code> 会替换最后一次提交。如果这个提交已经被推送到远程仓库，你将需要强制推送（<code>git push --force</code>），这可能会影响其他协作者。</p>
 <p>因此，只有在确定没有其他人基于这个提交工作时，才应该使用这个命令。</p>
 </blockquote>

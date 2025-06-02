@@ -506,37 +506,28 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="VScode调试代码">VScode调试代码</h3>
-<ol>
-<li>
-<p>一定先要在VScode的客户端中直接选择Python解释器（自己虚拟环境的），而不是通过设置之类的，因为那样有些解释器是找不到的：</p>
+                <h3 id="VScode调试代码"><a href="#VScode调试代码" class="headerlink" title="VScode调试代码"></a>VScode调试代码</h3><ol>
+<li><p>一定先要在VScode的客户端中直接选择Python解释器（自己虚拟环境的），而不是通过设置之类的，因为那样有些解释器是找不到的：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240109195107094.png" alt="image-20240109195107094"></p>
 </li>
-<li>
-<p>启动VScode的调试功能，注意启动调试功能后，会生成一个launch.json文件：</p>
+<li><p>启动VScode的调试功能，注意启动调试功能后，会生成一个launch.json文件：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240109195221363.png" alt="image-20240109195221363"></p>
 </li>
-<li>
-<p>注意：该文件默认调试从当前文件开始调试，所以一般从主文件main.py文件启动调试功能：</p>
+<li><p>注意：该文件默认调试从当前文件开始调试，所以一般从主文件main.py文件启动调试功能：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240109195321275.png" alt="image-20240109195321275"></p>
 </li>
-<li>
-<p>注意：如果执行文件需要命令行参数，在VScode中要在launch.json文件中添加<code>args</code>数组，而在PyCharm中可在配置项中手动选择初始配置文件。</p>
+<li><p>注意：如果执行文件需要命令行参数，在VScode中要在launch.json文件中添加<code>args</code>数组，而在PyCharm中可在配置项中手动选择初始配置文件。</p>
 </li>
 </ol>
-<h3 id="VScode启动Tensorboard">VScode启动Tensorboard</h3>
-<ol>
-<li>
-<p>切换到正确的输出目录（<strong>注意不是具体工程所在的目录！</strong>）：</p>
+<h3 id="VScode启动Tensorboard"><a href="#VScode启动Tensorboard" class="headerlink" title="VScode启动Tensorboard"></a>VScode启动Tensorboard</h3><ol>
+<li><p>切换到正确的输出目录（<strong>注意不是具体工程所在的目录！</strong>）：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240109195853690.png" alt="image-20240109195853690"></p>
 <p>如上图所示，是切换到out目录，而不是下面的具体工程目录</p>
 </li>
-<li>
-<p>执行tensorboard命令行命令：</p>
+<li><p>执行tensorboard命令行命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tensorboard <span class="token parameter variable">--logdir</span><span class="token operator">=</span>./<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>输出相关信息：</p>
+<li><p>输出相关信息：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">TensorFlow installation not found - running with reduced feature set.
 I0109 <span class="token number">19</span>:34:57.516272  <span class="token number">7692</span> plugin.py:429<span class="token punctuation">]</span> Monitor runs begin
 Serving TensorBoard on localhost<span class="token punctuation">;</span> to expose to the network, use a proxy or pass <span class="token parameter variable">--bind_all</span>
@@ -546,12 +537,10 @@ TensorBoard <span class="token number">2.10</span>.0 at http://localhost:6006/ <
 </blockquote>
 </li>
 </ol>
-<h3 id="Colab-Conda-云端训练代码">Colab + Conda 云端训练代码</h3>
-<blockquote>
+<h3 id="Colab-Conda-云端训练代码"><a href="#Colab-Conda-云端训练代码" class="headerlink" title="Colab + Conda 云端训练代码"></a>Colab + Conda 云端训练代码</h3><blockquote>
 <p>本次项目直接运行就行，没有用到预训练文件和数据集文件，如果项目以后需要提前准备这些数据集，我会更新教程。</p>
 </blockquote>
-<h4 id="查看云端设备信息及更改运行时类型为GPU">查看云端设备信息及更改运行时类型为GPU</h4>
-<p>新建笔记本，以下是常见的查看设备信息指令：</p>
+<h4 id="查看云端设备信息及更改运行时类型为GPU"><a href="#查看云端设备信息及更改运行时类型为GPU" class="headerlink" title="查看云端设备信息及更改运行时类型为GPU"></a>查看云端设备信息及更改运行时类型为GPU</h4><p>新建笔记本，以下是常见的查看设备信息指令：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240109200622945.png" alt="image-20240109200622945"></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"============查看GPU信息================"</span><span class="token punctuation">)</span>
 <span class="token comment"># 查看GPU信息</span>
@@ -571,14 +560,12 @@ TensorBoard <span class="token number">2.10</span>.0 at http://localhost:6006/ <
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"=============查看内存容量==============="</span><span class="token punctuation">)</span>
 <span class="token comment"># 查看内存容量</span>
 !cat <span class="token operator">/</span>proc<span class="token operator">/</span>meminfo <span class="token operator">|</span> grep MemTotal<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="挂载谷歌云端硬盘">挂载谷歌云端硬盘</h4>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> google<span class="token punctuation">.</span>colab <span class="token keyword">import</span> drive
+<h4 id="挂载谷歌云端硬盘"><a href="#挂载谷歌云端硬盘" class="headerlink" title="挂载谷歌云端硬盘"></a>挂载谷歌云端硬盘</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> google<span class="token punctuation">.</span>colab <span class="token keyword">import</span> drive
 drive<span class="token punctuation">.</span>mount<span class="token punctuation">(</span><span class="token string">'/content/gdrive'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>切换到代码所在的工作目录（可以复制路径）：</p>
 <pre class="line-numbers language-none"><code class="language-none">%cd &#x2F;content&#x2F;gdrive&#x2F;MyDrive&#x2F;Colab Notebooks&#x2F;lsq-net-master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="/medias/images/loading.gif" data-original="image-20240109201002063.png" alt="image-20240109201002063"></p>
-<h4 id="安装MiniConda">安装MiniConda</h4>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">%%bash
+<h4 id="安装MiniConda"><a href="#安装MiniConda" class="headerlink" title="安装MiniConda"></a>安装MiniConda</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">%%bash
 <span class="token assign-left variable">MINICONDA_INSTALLER_SCRIPT</span><span class="token operator">=</span>Miniconda3-py39_4.10.3-Linux-x86_64.sh
 <span class="token assign-left variable">MINICONDA_PREFIX</span><span class="token operator">=</span>/usr/local
 <span class="token function">wget</span> https://repo.anaconda.com/miniconda/<span class="token variable">$MINICONDA_INSTALLER_SCRIPT</span>
@@ -587,12 +574,10 @@ drive<span class="token punctuation">.</span>mount<span class="token punctuation
 <blockquote>
 <p>注意：此处的MiniConda版本和你当前的python版本有关，当前python版本为3.10，但是MiniConda最新的版本支持到python3.9，但我安装了这个版本在这个项目目前也没有什么问题。</p>
 </blockquote>
-<h4 id="将Conda安装的包添加到python路径中">将Conda安装的包添加到python路径中</h4>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> sys
+<h4 id="将Conda安装的包添加到python路径中"><a href="#将Conda安装的包添加到python路径中" class="headerlink" title="将Conda安装的包添加到python路径中"></a>将Conda安装的包添加到python路径中</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> sys
 sys<span class="token punctuation">.</span>path<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string">"/usr/local/lib/python3.10/site-packages"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h4 id="使用Conda安装各种包">使用Conda安装各种包</h4>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">!</span>conda <span class="token function">install</span> tensorboard<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="使用Conda安装各种包"><a href="#使用Conda安装各种包" class="headerlink" title="使用Conda安装各种包"></a>使用Conda安装各种包</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">!</span>conda <span class="token function">install</span> tensorboard<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">!</span>conda <span class="token function">install</span> scikit-learn pyyaml munch<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>注意：使用conda安装pytorch和torchvision的老生常谈问题——版本不正确导致默认下载的cpu版本。</p>

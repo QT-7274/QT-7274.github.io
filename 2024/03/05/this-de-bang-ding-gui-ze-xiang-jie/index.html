@@ -503,9 +503,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>单纯的把 <code>this</code> 理解为指向函数自身是错误的，<code>this</code>  实际上是在函数<strong>被调用</strong>时发生的绑定，它指向什么完全取决于函数<strong>在哪里被调用</strong>。</p>
-<h2 id="绑定规则">绑定规则</h2>
-<h3 id="默认绑定">默认绑定</h3>
-<p>首先要介绍的是最常用的函数调用类型：<strong>独立函数调用</strong>。可以把这条规则看作是无法应用其他规则时的默认规则。</p>
+<h2 id="绑定规则"><a href="#绑定规则" class="headerlink" title="绑定规则"></a>绑定规则</h2><h3 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h3><p>首先要介绍的是最常用的函数调用类型：<strong>独立函数调用</strong>。可以把这条规则看作是无法应用其他规则时的默认规则。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
@@ -515,8 +513,7 @@
 <li>我们可以看到当调用 <code>foo()</code> 时，<code>this.a</code> 被解析成了全局变量 <code>a</code>。为什么？因为在本例中，<strong>函数调用时应用了 <code>this</code> 的默认绑定，因此 <code>this</code> 指向全局对象</strong>。</li>
 <li>那么我们怎么知道这里应用了默认绑定呢？可以通过分析调用位置来看看 <code>foo()</code> 是如何调 用的。在代码中，<code>foo()</code> <strong>是直接使用不带任何修饰的函数引用进行调用的，因此只能使用默认绑定，无法应用其他规则</strong></li>
 <li>这条规则也解释了上面 count 的代码中，为什么函数里面的<code>this</code>指向了<code>window</code>，因为 <code>foo</code> 是<strong>属于独立函数调用的，触发了默认绑定，从而指向全局window</strong>。（浏览器中全局是 window对象，node 中是空对象{}）</li>
-<li>属于默认绑定规则的还有：
-<ul>
+<li>属于默认绑定规则的还有：<ul>
 <li>函数调用链（一个函数又调用另外一个函数）</li>
 <li>将函数作为参数，传入到另一个函数中</li>
 </ul>
@@ -526,9 +523,7 @@
 <blockquote>
 <p><strong>结论：默认绑定的 <code>this</code>，都指向全局。</strong></p>
 </blockquote>
-<h3 id="隐式绑定">隐式绑定</h3>
-<h4 id="一般的对象调用">一般的对象调用</h4>
-<p>这一条需要考虑的规则是调用位置是否有上下文对象，或者说<strong>是通过某个对象发起的函数调用</strong></p>
+<h3 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h3><h4 id="一般的对象调用"><a href="#一般的对象调用" class="headerlink" title="一般的对象调用"></a>一般的对象调用</h4><p>这一条需要考虑的规则是调用位置是否有上下文对象，或者说<strong>是通过某个对象发起的函数调用</strong></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
@@ -544,8 +539,7 @@ obj<span class="token punctuation">.</span><span class="token function">foo</spa
 <li>调用位置会使用 obj 上下文来引用函数，因此你可以说函数被调用时 obj 对象“拥 有”或者“包含”它。</li>
 <li><code>foo()</code> 被调用时，它的前面确实加上了对 <code>obj</code> 的引用。当函数引用有上下文对象时，<strong>隐式绑定规则会把函数调用中的 <code>this</code> 绑定到这个上下文对象</strong>。因为调用 <code>foo()</code> 时 <code>this</code> 被绑定到 <code>obj</code> 上，因此 <code>this.a</code> 和 <code>obj.a</code> 是一样的。</li>
 </ol>
-<h4 id="对象属性引用链">对象属性引用链</h4>
-<p>对象属性引用链中只有<strong>上一层或者说最后一层</strong>在调用位置中起作用。举例来说：</p>
+<h4 id="对象属性引用链"><a href="#对象属性引用链" class="headerlink" title="对象属性引用链"></a>对象属性引用链</h4><p>对象属性引用链中只有<strong>上一层或者说最后一层</strong>在调用位置中起作用。举例来说：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
@@ -562,8 +556,7 @@ obj<span class="token punctuation">.</span><span class="token function">foo</spa
 
 obj1<span class="token punctuation">.</span>obj2<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最终 <code>this</code> 指向的是 <code>obj2</code></p>
-<h4 id="隐式丢失">隐式丢失</h4>
-<p>一个最常见的 this 绑定问题就是被隐式绑定的函数会丢失绑定对象，也就是说它会应用<strong>默认绑定</strong>，从而把 this 绑定到全局对象或者 undefined 上（取决于是否是严格模式）</p>
+<h4 id="隐式丢失"><a href="#隐式丢失" class="headerlink" title="隐式丢失"></a>隐式丢失</h4><p>一个最常见的 this 绑定问题就是被隐式绑定的函数会丢失绑定对象，也就是说它会应用<strong>默认绑定</strong>，从而把 this 绑定到全局对象或者 undefined 上（取决于是否是严格模式）</p>
 <p><strong>第一种情况：将对象里的函数赋值给一个变量</strong></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
@@ -600,9 +593,7 @@ obj1<span class="token punctuation">.</span>obj2<span class="token punctuation">
 <blockquote>
 <p><strong>结论：隐式绑定的 this，指向调用函数的上下文对象。</strong></p>
 </blockquote>
-<h3 id="显示绑定">显示绑定</h3>
-<h4 id="使用-call-…-和-apply-…">使用 call(…) 和 apply(…)</h4>
-<p>如果我们不想在对象内部包含函数引用，而想在某个对象上强制调用函数，该怎么做呢？ <strong>可以使用函数的 <code>call(..)</code> 和 <code>apply(..)</code> 方法</strong></p>
+<h3 id="显示绑定"><a href="#显示绑定" class="headerlink" title="显示绑定"></a>显示绑定</h3><h4 id="使用-call-和-apply"><a href="#使用-call-和-apply" class="headerlink" title="使用 call(...) 和 apply(...)"></a>使用 call(...) 和 apply(...)</h4><p>如果我们不想在对象内部包含函数引用，而想在某个对象上强制调用函数，该怎么做呢？ <strong>可以使用函数的 <code>call(..)</code> 和 <code>apply(..)</code> 方法</strong></p>
 <ul>
 <li>JavaScript 提供的绝大多数函数以及你自 己创建的所有函数都可以使用 <code>call(..)</code> 和 <code>apply(..)</code> 方法。</li>
 </ul>
@@ -618,17 +609,16 @@ obj1<span class="token punctuation">.</span>obj2<span class="token punctuation">
 <span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token comment">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
 <li>通过 <code>foo.call(..)</code>，我们可以在调用 <code>foo</code> 时强制把它的 <code>this</code> 绑定到 <code>obj</code> 上。</li>
-<li>如果你传入了一个原始值（字符串类型、布尔类型或者数字类型）来当作 this 的绑定对 象，这个原始值会被转换成它的对象形式（也就是 new String(…)、new Boolean(…) 或者 new Number(…)）。这通常被称为“装箱”。</li>
+<li>如果你传入了一个原始值（字符串类型、布尔类型或者数字类型）来当作 this 的绑定对 象，这个原始值会被转换成它的对象形式（也就是 new String(..)、new Boolean(..) 或者 new Number(..)）。这通常被称为“装箱”。</li>
 </ol>
 <blockquote>
-<p>从 this 绑定的角度来说，call(…) 和 apply(…) 是一样的，它们的区别体现在参数上：第一个参数是相同的，后面的参数，call为参数列表，apply为数组，他们内部的实现原理也不难理解，详细请看以下两个手写方法</p>
+<p>从 this 绑定的角度来说，call(..) 和 apply(..) 是一样的，它们的区别体现在参数上：第一个参数是相同的，后面的参数，call为参数列表，apply为数组，他们内部的实现原理也不难理解，详细请看以下两个手写方法</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7128028573520101390">手写 call 方法 超级详细 ⚡⚡⚡</a></li>
 <li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7128213514006560775">手写 apply 方法 超级详细 ⚡⚡⚡</a></li>
 </ul>
 </blockquote>
-<h4 id="硬绑定（一个函数总是显示的绑定到一个对象上）">硬绑定（一个函数总是显示的绑定到一个对象上）</h4>
-<p>由于硬绑定是一种非常常用的模式，所以 ES5 提供了内置的方法 <code>Function.prototype.bind</code>， 它的用法如下</p>
+<h4 id="硬绑定（一个函数总是显示的绑定到一个对象上）"><a href="#硬绑定（一个函数总是显示的绑定到一个对象上）" class="headerlink" title="硬绑定（一个函数总是显示的绑定到一个对象上）"></a>硬绑定（一个函数总是显示的绑定到一个对象上）</h4><p>由于硬绑定是一种非常常用的模式，所以 ES5 提供了内置的方法 <code>Function.prototype.bind</code>， 它的用法如下</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">num</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">,</span> num<span class="token punctuation">)</span>
   <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">+</span> num
@@ -647,12 +637,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>调用 <code>bind(...)</code> 方法，会返回一个新函数，那么这个新函数的 <code>this</code>，永远指向我们传入的<code>obj</code>对象</p>
 <blockquote>
 <p>注意：<code>bind(...)</code> 方法不会立即执行。</p>
-</blockquote>
-<blockquote>
 <p>关于 bind 方法的简单实现，可以前往：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7128553917348053028">手写 bind 方法，超级详细 ⚡</a></p>
 </blockquote>
-<h4 id="API调用的-“上下文（内置函数）">API调用的 “上下文（内置函数）</h4>
-<p>第三方库的许多函数，以及 JavaScript 语言和宿主环境中许多新的内置函数，都提供了一个可选的参数，通常被称为“上下文”（context），其作用和 <code>bind(..)</code> 一样，确保你的回调函数使用指定的 <code>this</code>。例如：</p>
+<h4 id="API调用的-“上下文（内置函数）"><a href="#API调用的-“上下文（内置函数）" class="headerlink" title="API调用的 “上下文（内置函数）"></a>API调用的 “上下文（内置函数）</h4><p>第三方库的许多函数，以及 JavaScript 语言和宿主环境中许多新的内置函数，都提供了一个可选的参数，通常被称为“上下文”（context），其作用和 <code>bind(..)</code> 一样，确保你的回调函数使用指定的 <code>this</code>。例如：</p>
 <p><strong>（1）数组方法 <code>forEach()</code></strong></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">el</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>id<span class="token punctuation">)</span>
@@ -669,7 +656,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">// 2 bin </span>
 <span class="token comment">// 3 bin</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li>调用 foo(…) 时把 this 绑定到 obj 身上</li>
+<li>调用 foo(..) 时把 this 绑定到 obj 身上</li>
 </ul>
 <p><strong>（2）<code>setTimeout()</code></strong></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -681,8 +668,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p><strong>结论：显式绑定的 this，指向我们指定的绑定对象。</strong></p>
 </blockquote>
-<h3 id="new-绑定">new 绑定</h3>
-<p>在 JavaScript 中，普通函数可以使用 <code>new</code> 操作符去调用，此时的普通函数则被称为 <strong>“构造函数”</strong>。没错，凡是由 <code>new</code> 操作符调用的函数，都称为 <strong>“构造函数”</strong></p>
+<h3 id="new-绑定"><a href="#new-绑定" class="headerlink" title="new 绑定"></a>new 绑定</h3><p>在 JavaScript 中，普通函数可以使用 <code>new</code> 操作符去调用，此时的普通函数则被称为 <strong>“构造函数”</strong>。没错，凡是由 <code>new</code> 操作符调用的函数，都称为 <strong>“构造函数”</strong></p>
 <p>使用 new 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。</p>
 <ol>
 <li>在内存中创建一个新对象。</li>
@@ -702,15 +688,12 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p><strong>结论：new 绑定的 this，都指向通过 new 调用的函数的实例对象（就是该函数）</strong></p>
 </blockquote>
-<h2 id="绑定规则的优先级">绑定规则的优先级</h2>
-<p>现在我们已经了解了函数调用中 this 绑定的四条规则，你需要做的就是找到函数的调用位置并判断应当应用哪条规则。但是，如果某个调用位置可以应用多条规则呢？所以就需要有绑定规则的优先级。</p>
+<h2 id="绑定规则的优先级"><a href="#绑定规则的优先级" class="headerlink" title="绑定规则的优先级"></a>绑定规则的优先级</h2><p>现在我们已经了解了函数调用中 this 绑定的四条规则，你需要做的就是找到函数的调用位置并判断应当应用哪条规则。但是，如果某个调用位置可以应用多条规则呢？所以就需要有绑定规则的优先级。</p>
 <p>它们之间的优先级关系为：</p>
 <p><strong>默认绑定 &lt; 隐式绑定 &lt; 显示绑定（bind） &lt; new绑定</strong></p>
 <p>这里提前列出优先级，想看详细代码解析的可以往下看，也可以直接拖到最后面的例题部分</p>
-<h3 id="默认绑定的优先级最低">默认绑定的优先级最低</h3>
-<p>毫无疑问，默认规则的优先级是最低的，因为存在其他规则时，就会通过其他规则的方式来绑定this</p>
-<h3 id="隐式绑定和显式绑定的优先级比较">隐式绑定和显式绑定的优先级比较</h3>
-<p>测试一下即可知道，有以下代码：</p>
+<h3 id="默认绑定的优先级最低"><a href="#默认绑定的优先级最低" class="headerlink" title="默认绑定的优先级最低"></a>默认绑定的优先级最低</h3><p>毫无疑问，默认规则的优先级是最低的，因为存在其他规则时，就会通过其他规则的方式来绑定this</p>
+<h3 id="隐式绑定和显式绑定的优先级比较"><a href="#隐式绑定和显式绑定的优先级比较" class="headerlink" title="隐式绑定和显式绑定的优先级比较"></a>隐式绑定和显式绑定的优先级比较</h3><p>测试一下即可知道，有以下代码：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
@@ -728,8 +711,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">// 同时使用隐式绑定和显示绑定</span>
 obj1<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj2<span class="token punctuation">)</span> <span class="token comment">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看到，输出的结果为 2，说明 <code>foo</code> 函数内 <code>this</code> 指向的是 <code>obj2</code>，而 obj2 是通过显示绑定调用的，所以：<strong>显示绑定的优先级更高</strong></p>
-<h3 id="隐式绑定和-new-绑定的优先级比较">隐式绑定和 new 绑定的优先级比较</h3>
-<p>有以下测试代码：</p>
+<h3 id="隐式绑定和-new-绑定的优先级比较"><a href="#隐式绑定和-new-绑定的优先级比较" class="headerlink" title="隐式绑定和 new 绑定的优先级比较"></a>隐式绑定和 new 绑定的优先级比较</h3><p>有以下测试代码：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
@@ -742,8 +724,7 @@ obj1<span class="token punctuation">.</span><span class="token function">foo</sp
 <span class="token comment">// 同时使用隐式绑定和new绑定</span>
 <span class="token keyword">new</span> <span class="token class-name">obj<span class="token punctuation">.</span>foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// foo对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最后 <code>foo</code> 函数输出的 <code>this</code> 为 foo 对象，说明new绑定优先级更高（否则应该输出 obj 对象），所以：<strong>new 绑定的优先级更高</strong></p>
-<h3 id="new-绑定和显示绑定的优先级比较">new 绑定和显示绑定的优先级比较</h3>
-<p>最后，new 绑定和显式绑定谁的优先级更高呢？</p>
+<h3 id="new-绑定和显示绑定的优先级比较"><a href="#new-绑定和显示绑定的优先级比较" class="headerlink" title="new 绑定和显示绑定的优先级比较"></a>new 绑定和显示绑定的优先级比较</h3><p>最后，new 绑定和显式绑定谁的优先级更高呢？</p>
 <blockquote>
 <p>new绑定和call、apply是不允许同时使用的，只能和 bind 相比较，如下：</p>
 </blockquote>
@@ -772,8 +753,7 @@ obj1<span class="token punctuation">.</span><span class="token function">foo</sp
 <blockquote>
 <p><strong>优先级结论：默认绑定 &lt; 隐式绑定 &lt; 显示绑定（bind）&lt; new绑定</strong></p>
 </blockquote>
-<h2 id="判断this">判断this</h2>
-<p>现在我们可以根据优先级来判断函数在某个调用位置应用的是哪条规则。可以按照下面的 顺序来进行判断：</p>
+<h2 id="判断this"><a href="#判断this" class="headerlink" title="判断this"></a>判断this</h2><p>现在我们可以根据优先级来判断函数在某个调用位置应用的是哪条规则。可以按照下面的 顺序来进行判断：</p>
 <ol>
 <li>函数是否在 new 中调用（new 绑定）？如果是的话 this 绑定的是新创建的对象。 var bar = new foo()</li>
 <li>函数是否通过 call、apply（显式绑定）或者硬绑定调用？如果是的话，this 绑定的是 指定的对象。 var bar = foo.call(obj2)</li>
@@ -781,14 +761,11 @@ obj1<span class="token punctuation">.</span><span class="token function">foo</sp
 <li>如果都不是的话，使用默认绑定。如果在严格模式下，就绑定到 undefined，否则绑定 到全局对象。 var bar = foo()</li>
 </ol>
 <p>就是这样。对于正常的函数调用来说，理解了这些知识你就可以明白 this 的绑定原理了。 不过……凡事总有例外</p>
-<h2 id="绑定例外">绑定例外</h2>
-<blockquote>
+<h2 id="绑定例外"><a href="#绑定例外" class="headerlink" title="绑定例外"></a>绑定例外</h2><blockquote>
 <p>规则总有例外，这里也一样。在某些场景下 this 的绑定行为会出乎意料，你认为应当应用其他绑定规则时，实际上应用的可能是默认绑定规则。</p>
 </blockquote>
-<h3 id="箭头函数">箭头函数</h3>
-<p>箭头函数不使用 this 的四种标准规则，而是根据外层（函数或者全局）作用域来决定 this。</p>
-<h3 id="忽略的this">忽略的this</h3>
-<p>如果你把 null 或者 undefined 作为 this 的绑定对象传入 call、apply 或者 bind，这些值在调用时会被忽略，实际应用的是默认绑定规则：</p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数不使用 this 的四种标准规则，而是根据外层（函数或者全局）作用域来决定 this。</p>
+<h3 id="忽略的this"><a href="#忽略的this" class="headerlink" title="忽略的this"></a>忽略的this</h3><p>如果你把 null 或者 undefined 作为 this 的绑定对象传入 call、apply 或者 bind，这些值在调用时会被忽略，实际应用的是默认绑定规则：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
@@ -799,8 +776,7 @@ obj1<span class="token punctuation">.</span><span class="token function">foo</sp
 <span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token comment">// 2</span>
 <span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最后输出的结果都是 2，说明 <code>this</code> 指向的是全局 <code>window</code></p>
-<h3 id="间接引用">间接引用</h3>
-<p>另一个需要注意的是，你有可能（有意或者无意地）创建一个函数的<strong>间接引用</strong>，在这种情况下，调用这个函数会应用默认绑定规则。 间接引用最容易在赋值时发生：</p>
+<h3 id="间接引用"><a href="#间接引用" class="headerlink" title="间接引用"></a>间接引用</h3><p>另一个需要注意的是，你有可能（有意或者无意地）创建一个函数的<strong>间接引用</strong>，在这种情况下，调用这个函数会应用默认绑定规则。 间接引用最容易在赋值时发生：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
@@ -813,8 +789,7 @@ o<span class="token punctuation">.</span><span class="token function">foo</span>
 <span class="token comment">// 函数赋值</span>
 <span class="token punctuation">(</span>p<span class="token punctuation">.</span>foo <span class="token operator">=</span> o<span class="token punctuation">.</span>foo<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>赋值表达式 <code>p.foo = o.foo</code> 的返回值是目标函数的引用，因此调用位置是 <code>foo()</code> 属于独立函数调用，而不是 <code>p.foo()</code> 或者 <code>o.foo()</code>。根据我们之前说过的，这里会应用默认绑定。</p>
-<h2 id="总结">总结</h2>
-<p>如果要判断一个运行中函数的 this 绑定，就需要找到这个函数的直接调用位置。找到之后就可以顺序应用下面这四条规则来判断 this 的绑定对象。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果要判断一个运行中函数的 this 绑定，就需要找到这个函数的直接调用位置。找到之后就可以顺序应用下面这四条规则来判断 this 的绑定对象。</p>
 <ol>
 <li>由 new 调用？绑定到新创建的对象。</li>
 <li>由 call 或者 apply（或者 bind）调用？绑定到指定的对象。</li>

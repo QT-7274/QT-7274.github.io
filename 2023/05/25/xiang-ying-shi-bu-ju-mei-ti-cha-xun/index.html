@@ -502,109 +502,44 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>媒体查询</h1>
-<p>CSS中的媒体查询是一种技术，用于根据不同的设备和屏幕尺寸应用不同的样式。通过使用媒体查询，可以为不同的设备和屏幕尺寸提供不同的样式，从而优化用户体验。</p>
-<h2 id="媒体查询的引入方法">媒体查询的引入方法</h2>
-<ol>
-<li>
-<p>使用@media属性进行媒体查询：</p>
+                <h1 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h1><p>CSS中的媒体查询是一种技术，用于根据不同的设备和屏幕尺寸应用不同的样式。通过使用媒体查询，可以为不同的设备和屏幕尺寸提供不同的样式，从而优化用户体验。</p>
+<h2 id="媒体查询的引入方法"><a href="#媒体查询的引入方法" class="headerlink" title="媒体查询的引入方法"></a>媒体查询的引入方法</h2><ol>
+<li><p>使用@media属性进行媒体查询：</p>
 <pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">@media mediatype and (condition) &#123;
   &#x2F;* CSS rules go here *&#x2F;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li>
-<p><code>mediatype</code> 表示媒体类型，可以是 <code>all</code>（所有媒体设备）、<code>print</code>（打印设备）、<code>screen</code>（计算机屏幕）等等。</p>
+<li><p><code>mediatype</code> 表示媒体类型，可以是 <code>all</code>（所有媒体设备）、<code>print</code>（打印设备）、<code>screen</code>（计算机屏幕）等等。</p>
 </li>
-<li>
-<p><code>condition</code> 表示媒体特性，具体值如下：</p>
-<table>
-<thead>
-<tr>
-<th>值</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>width</code></td>
-<td>检测视口宽度。</td>
-</tr>
-<tr>
-<td><code>max-width</code></td>
-<td>检测视口最大宽度。</td>
-</tr>
-<tr>
-<td><code>min-width</code></td>
-<td>检测视口最小宽度。</td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>检测视口高度。</td>
-</tr>
-<tr>
-<td><code>max-height</code></td>
-<td>检测视口最大高度。</td>
-</tr>
-<tr>
-<td><code>min-height</code></td>
-<td>检测视口最小高度。</td>
-</tr>
-<tr>
-<td><code>device-width</code></td>
-<td>检测设备屏幕的宽度。</td>
-</tr>
-<tr>
-<td><code>max-device-width</code></td>
-<td>检测设备屏幕的最大宽度。</td>
-</tr>
-<tr>
-<td><code>min-device-width</code></td>
-<td>检测设备屏幕的最小宽度。</td>
-</tr>
-<tr>
-<td><code>orientation</code></td>
-<td>检测视口的旋转方向（是否横屏）。 1. portrait ：视口处于纵向，即高度大于等于宽度。 2. landscape ：视口处于横向，即宽度大于高度。</td>
-</tr>
-</tbody>
-</table>
+<li><p><code>condition</code> 表示媒体特性，具体值如下：</p>
+<p>| 值                 | 含义                                                         |
+| ------------------ | ------------------------------------------------------------ |
+| <code>width</code>            | 检测视口宽度。                                               |
+| <code>max-width</code>        | 检测视口最大宽度。                                           |
+| <code>min-width</code>        | 检测视口最小宽度。                                           |
+| <code>height</code>           | 检测视口高度。                                               |
+| <code>max-height</code>       | 检测视口最大高度。                                           |
+| <code>min-height</code>       | 检测视口最小高度。                                           |
+| <code>device-width</code>     | 检测设备屏幕的宽度。                                         |
+| <code>max-device-width</code> | 检测设备屏幕的最大宽度。                                     |
+| <code>min-device-width</code> | 检测设备屏幕的最小宽度。                                     |
+| <code>orientation</code>      | 检测视口的旋转方向（是否横屏）。 1. portrait ：视口处于纵向，即高度大于等于宽度。 2. landscape ：视口处于横向，即宽度大于高度。 |</p>
 <blockquote>
 <p>完整列表请参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media">https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media</a></p>
 </blockquote>
 </li>
-<li>
-<p>运算符</p>
-<table>
-<thead>
-<tr>
-<th>值</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>and</code></td>
-<td>并且</td>
-</tr>
-<tr>
-<td><code>,</code> 或 <code>or</code></td>
-<td>或</td>
-</tr>
-<tr>
-<td><code>not</code></td>
-<td>否定</td>
-</tr>
-<tr>
-<td><code>only</code></td>
-<td>肯定</td>
-</tr>
-</tbody>
-</table>
+<li><p>运算符</p>
+<p>| 值          | 含义 |
+| ----------- | ---- |
+| <code>and</code>       | 并且 |
+| <code>,</code> 或 <code>or</code> | 或   |
+| <code>not</code>       | 否定 |
+| <code>only</code>      | 肯定 |</p>
 <blockquote>
 <p>完整列表请参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media">https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media</a></p>
 </blockquote>
 </li>
-<li>
-<p>常用阈值</p>
+<li><p>常用阈值</p>
 <p>在实际开发中，会将屏幕划分成几个区间，例如：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20230705193220269.png" alt="image-20230705193220269"></p>
 </li>
@@ -620,19 +555,16 @@
   &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>在<code>&lt;style&gt;</code>标签中使用媒体查询：</p>
+<li><p>在<code>&lt;style&gt;</code>标签中使用媒体查询：</p>
 <pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">&lt;style media&#x3D;&quot;mediatype and (condition)&quot;&gt;
   &#x2F;* 样式规则 *&#x2F;
 &lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>在HTML文档中使用标签进行媒体查询：</p>
+<li><p>在HTML文档中使用标签进行媒体查询：</p>
 <pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">&lt;link rel&#x3D;&quot;stylesheet&quot; media&#x3D;&quot;(max-width: 768px)&quot; href&#x3D;&quot;small-screen.css&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这样，在屏幕宽度小于等于768px时，就会加载small-screen.css样式表，从而应用相应的样式规则。</p>
 </li>
-<li>
-<p>使用@import规则引入带有媒体查询的样式表：</p>
+<li><p>使用@import规则引入带有媒体查询的样式表：</p>
 <pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">@import url(&quot;small-screen.css&quot;) screen and (max-width: 768px);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ol>
