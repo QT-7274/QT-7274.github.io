@@ -6,15 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="React开发——环境配置, QT-7274">
-    <meta name="description" content="不同的构建方式
-在你的项目中开始使用React有多种方式，从附加一组从CDN提供React的标签，到强大的工具链和框架，这些工具链和框架具有高度可配置性，允许增加可扩展性和优化。
+    <meta name="description" content="不同的构建方式在你的项目中开始使用React有多种方式，从附加一组从CDN提供React的标签，到强大的工具链和框架，这些工具链和框架具有高度可配置性，允许增加可扩展性和优化。
 一些这样的工具链包括：
-
 
 Vite的React配置
 
-
-G">
+Gats">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -514,21 +511,16 @@ G">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="不同的构建方式">不同的构建方式</h2>
-<p>在你的项目中开始使用React有多种方式，从附加一组从CDN提供React的标签，到强大的工具链和框架，这些工具链和框架具有高度可配置性，允许增加可扩展性和优化。</p>
+                <h2 id="不同的构建方式"><a href="#不同的构建方式" class="headerlink" title="不同的构建方式"></a>不同的构建方式</h2><p>在你的项目中开始使用React有多种方式，从附加一组从CDN提供React的标签，到强大的工具链和框架，这些工具链和框架具有高度可配置性，允许增加可扩展性和优化。</p>
 <p>一些这样的工具链包括：</p>
 <ul>
-<li>
-<p>Vite的React配置</p>
+<li><p>Vite的React配置</p>
 </li>
-<li>
-<p>Gatsby</p>
+<li><p>Gatsby</p>
 </li>
-<li>
-<p>NextJS</p>
+<li><p>NextJS</p>
 </li>
-<li>
-<p>Create React App（已弃用）</p>
+<li><p>Create React App（已弃用）</p>
 <blockquote>
 <p>自 2016 年推出以来，Create React App 或 CRA 是搭建新 React 项目的官方方式。不幸的是，由于多种原因，<a target="_blank" rel="noopener" href="https://github.com/reactjs/react.dev/pull/5487#issuecomment-1409720741">CRA 在 2023 年初被弃用</a>。由于CRA的受欢迎程度，您会在许多教程和指南中看到它。但是，不再建议将其用于新项目。</p>
 </blockquote>
@@ -541,10 +533,8 @@ G">
 <li>编译（Babel）</li>
 <li>React本身</li>
 </ul>
-<h2 id="简化流程">简化流程</h2>
-<p>Vite 为开发人员构建前端工具，并利用最新技术提供出色的开发人员体验。幸运的是，它也迎合了 React 生态系统。我们将使用 Vite 的 CLI 快速创建一个模板 React 项目。</p>
-<h3 id="创建React应用">创建React应用</h3>
-<p>请确保您使用的是 <em>Node 的 LTS 版本</em>，否则可能会出现错误。启动一个终端实例，进入包含项目的文件夹，然后输入以下命令：<code>cd</code></p>
+<h2 id="简化流程"><a href="#简化流程" class="headerlink" title="简化流程"></a>简化流程</h2><p>Vite 为开发人员构建前端工具，并利用最新技术提供出色的开发人员体验。幸运的是，它也迎合了 React 生态系统。我们将使用 Vite 的 CLI 快速创建一个模板 React 项目。</p>
+<h3 id="创建React应用"><a href="#创建React应用" class="headerlink" title="创建React应用"></a>创建React应用</h3><p>请确保您使用的是 <em>Node 的 LTS 版本</em>，否则可能会出现错误。启动一个终端实例，进入包含项目的文件夹，然后输入以下命令：<code>cd</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> create vite@latest my-first-react-app -- <span class="token parameter variable">--template</span> react<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如果看到以下输出，请输入并按：<code>y</code>enter</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Need to <span class="token function">install</span> the following packages:
@@ -555,8 +545,7 @@ Ok to proceed? <span class="token punctuation">(</span>y<span class="token punct
 <span class="token function">npm</span> <span class="token function">install</span>
 <span class="token function">npm</span> run dev<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>如果一切都按计划进行，请前往 ，在那里您将看到以下页面：<code>localhost:5173</code></p>
-<h3 id="深入研究">深入研究</h3>
-<p>其中包含一些有用的信息，您现在应该花时间浏览一下。</p>
+<h3 id="深入研究"><a href="#深入研究" class="headerlink" title="深入研究"></a>深入研究</h3><p>其中包含一些有用的信息，您现在应该花时间浏览一下。</p>
 <ul>
 <li><code>package.json</code></li>
 <li><code>package-lock.json</code></li>
@@ -594,12 +583,10 @@ new Vue(&#123;
 <p>而在 React 中，你需要单独引入 <code>ReactDOM</code>，因为 React 和 ReactDOM 是分开的。</p>
 <blockquote>
 <p>React 主要关注组件和应用的逻辑，而 ReactDOM 则处理渲染和与 DOM 的交互。</p>
-<p>**这样做的好处是，React 可以用于更多的环境，而不仅仅是浏览器。**例如，React Native 使用 React 来创建组件，但是它有自己的渲染库来将这些组件渲染到原生应用中。</p>
+<p><strong>这样做的好处是，React 可以用于更多的环境，而不仅仅是浏览器。</strong>例如，React Native 使用 React 来创建组件，但是它有自己的渲染库来将这些组件渲染到原生应用中。</p>
 </blockquote>
-<h3 id="代码检查配置">代码检查配置</h3>
-<p>请务必同时设置 <a target="_blank" rel="noopener" href="https://github.com/prettier/eslint-config-prettier">eslint-config-prettier</a> 来帮助保持你的 React 代码尽可能干净。</p>
-<h3 id="开发人员工具">开发人员工具</h3>
-<p>随着 React 的进步，你的项目无疑会变得越来越大，包含越来越多的组件，功能级别也越来越高。</p>
+<h3 id="代码检查配置"><a href="#代码检查配置" class="headerlink" title="代码检查配置"></a>代码检查配置</h3><p>请务必同时设置 <a target="_blank" rel="noopener" href="https://github.com/prettier/eslint-config-prettier">eslint-config-prettier</a> 来帮助保持你的 React 代码尽可能干净。</p>
+<h3 id="开发人员工具"><a href="#开发人员工具" class="headerlink" title="开发人员工具"></a>开发人员工具</h3><p>随着 React 的进步，你的项目无疑会变得越来越大，包含越来越多的组件，功能级别也越来越高。</p>
 <p>发生这种情况时，能够跟踪应用内部的移动部件（并对其进行实时更改）以了解和调试代码非常有用。为此，我们可以使用一个名为 <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools 的</a> Chrome 扩展程序。</p>
 <p>我们建议尽早安装它并习惯使用它，因为它是有效 React 开发的宝贵工具。</p>
 

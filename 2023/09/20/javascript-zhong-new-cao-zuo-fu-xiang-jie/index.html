@@ -6,13 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="JavaScript中new操作符详解, QT-7274">
-    <meta name="description" content="概念
-在JavaScript中，new操作符用于创建一个给定构造函数的实例对象
+    <meta name="description" content="概念在JavaScript中，new操作符用于创建一个给定构造函数的实例对象
 例子
 function Person(name, age)&amp;#123;
     this.name = name;
     this.age = age;
-&amp;#">
+&amp;#1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -478,7 +477,7 @@ function Person(name, age)&amp;#123;
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    660
+                    659
                 </div>
                 
 
@@ -508,8 +507,7 @@ function Person(name, age)&amp;#123;
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="概念">概念</h2>
-<p>在<code>JavaScript</code>中，<code>new</code>操作符用于创建一个给定构造函数的实例对象</p>
+                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>在<code>JavaScript</code>中，<code>new</code>操作符用于创建一个给定构造函数的实例对象</p>
 <p>例子</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token parameter">name<span class="token punctuation">,</span> age</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
@@ -544,8 +542,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token comment">// &#123; age: 26 &#125;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token comment">// 'undefined'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>从上面可以发现，构造函数如果返回值为一个对象，那么这个返回值会被正常使用</p>
-<h2 id="流程">流程</h2>
-<p>从上面介绍中，我们可以看到<code>new</code>关键字主要做了以下的工作：</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>从上面介绍中，我们可以看到<code>new</code>关键字主要做了以下的工作：</p>
 <ul>
 <li>创建一个新的对象<code>obj</code></li>
 <li>将对象与构建函数通过原型链连接起来</li>
@@ -562,8 +559,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 t<span class="token punctuation">.</span><span class="token function">sayName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 'Tom'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>流程图如下：</p>
 <p><img src="/medias/images/loading.gif" data-original="b429b990-7a39-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
-<h2 id="手写new操作符">手写new操作符</h2>
-<p>现在我们已经清楚地掌握了<code>new</code>的执行过程</p>
+<h2 id="手写new操作符"><a href="#手写new操作符" class="headerlink" title="手写new操作符"></a>手写new操作符</h2><p>现在我们已经清楚地掌握了<code>new</code>的执行过程</p>
 <p>那么我们就动手来实现一下<code>new</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">mynew</span><span class="token punctuation">(</span><span class="token parameter">Func<span class="token punctuation">,</span> <span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 1.创建一个新对象</span>

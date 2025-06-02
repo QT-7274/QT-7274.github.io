@@ -498,8 +498,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="算法复杂性">算法复杂性</h2>
-<blockquote>
+                <h2 id="算法复杂性"><a href="#算法复杂性" class="headerlink" title="算法复杂性"></a>算法复杂性</h2><blockquote>
 <p>算法是指对特定问题求解步骤的一种描述。</p>
 </blockquote>
 <p>算法具有以下特性：</p>
@@ -509,8 +508,7 @@
 <li><strong>可行性</strong>：算法在当前环境条件下可以通过有限次运算实现。</li>
 <li><strong>输入输出</strong>：有零个或多个输入，一个或多个输出。</li>
 </ul>
-<h3 id="时间复杂度：">时间复杂度：</h3>
-<blockquote>
+<h3 id="时间复杂度："><a href="#时间复杂度：" class="headerlink" title="时间复杂度："></a>时间复杂度：</h3><blockquote>
 <p>算法运行需要的时间，一般将<strong>算法的执行次数</strong>作为时间复杂度的度量标准。</p>
 </blockquote>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//算法 1-3</span>
@@ -522,28 +520,22 @@ total<span class="token operator">=</span><span class="token number">0</span><sp
   <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>j<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token comment">//运行n*(n+1)次</span>
 	total<span class="token operator">=</span>total<span class="token operator">+</span>i<span class="token punctuation">;</span><span class="token comment">//运行n*n次</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>把算法的所有语句的运行次数加起来：1+1+<em>n</em>+1+<em>n</em>+<em>n</em>×(<em>n</em>+1)+<em>n</em>×<em>n</em>，可以用一个函数T(n)表达：<br>
-$$<br>
-T(n)=2n^2+3n+3<br>
-$$<br>
-当n足够大时,我们可以看到算法运行时间主要取决于第一项，后面的甚至可以忽略不计。<br>
-用极限表示为：<br>
-$$<br>
-\lim_{n\rightarrow\infty}\frac{T(n)}{f(n)}=C≠0，C为不等于0的常数<br>
-$$<br>
-如果用<strong>时间复杂度的渐近上界</strong>表示，如图1-1所示。</p>
+<p>把算法的所有语句的运行次数加起来：1+1+<em>n</em>+1+<em>n</em>+<em>n</em>×(<em>n</em>+1)+<em>n</em>×<em>n</em>，可以用一个函数T(n)表达：</p>
+<script type="math/tex; mode=display">
+T(n)=2n^2+3n+3</script><p>当n足够大时,我们可以看到算法运行时间主要取决于第一项，后面的甚至可以忽略不计。
+用极限表示为：</p>
+<script type="math/tex; mode=display">
+\lim_{n\rightarrow\infty}\frac{T(n)}{f(n)}=C≠0，C为不等于0的常数</script><p>如果用<strong>时间复杂度的渐近上界</strong>表示，如图1-1所示。</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20220830204543034.png" alt="image-20220830204543034"></p>
-<p>从图1-1中可以看出，当n≥n0时，T(m)≤Cf(n)，当n足够大时，T(n)和f(n)近似相等。因此，我们用O(f(n))来表示时间复杂度渐近上界，通常用这种表示法衡量算法时间复杂度。算法1-3的时间复杂度渐近上界为O(f(n))=O(n^2)，用极限表示为：<br>
-$$<br>
-\lim_{n\rightarrow\infty}\frac{T(n)}{f(n)}=\frac{2n^2+3n+3}{n^2}=2≠0<br>
-$$<br>
-还有<strong>渐近下界</strong>符号Ω(T(n)≥Cf(n))，如图1-2所示。</p>
+<p>从图1-1中可以看出，当n≥n0时，T(m)≤Cf(n)，当n足够大时，T(n)和f(n)近似相等。因此，我们用O(f(n))来表示时间复杂度渐近上界，通常用这种表示法衡量算法时间复杂度。算法1-3的时间复杂度渐近上界为O(f(n))=O(n^2)，用极限表示为：</p>
+<script type="math/tex; mode=display">
+\lim_{n\rightarrow\infty}\frac{T(n)}{f(n)}=\frac{2n^2+3n+3}{n^2}=2≠0</script><p>还有<strong>渐近下界</strong>符号Ω(T(n)≥Cf(n))，如图1-2所示。</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20220830205123640.png" alt="image-20220830205123640"></p>
-<p>从图1-2可以看出，当n≥n0时，T(n)≥Cf(n)，当n足够大时，T(n)和f(n)近似相等，因此，我们用Ω(f(n))来表示时间复杂度渐近下界。<br>
+<p>从图1-2可以看出，当n≥n0时，T(n)≥Cf(n)，当n足够大时，T(n)和f(n)近似相等，因此，我们用Ω(f(n))来表示时间复杂度渐近下界。
 <strong>渐近精确界</strong>符号Θ(C1f(n)≤T(n)≤C2f(n))，如图1-3所示。</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20220830210210688.png" alt="image-20220830210210688"></p>
-<p>从图1-3中可以看出，当n≥n0时，C1f(n)≤T(n)≤C2f(n)，当n足够大时，T(n)和f(n)近似相等。这种两边逼近的方式，更加精确近似，因此，用<br>
-Θ(f(n))来表示时间复杂度渐近精确界。<br>
+<p>从图1-3中可以看出，当n≥n0时，C1f(n)≤T(n)≤C2f(n)，当n足够大时，T(n)和f(n)近似相等。这种两边逼近的方式，更加精确近似，因此，用
+Θ(f(n))来表示时间复杂度渐近精确界。
 我们通常使用<strong>时间复杂度渐近上界</strong>O(f(n))来表示时间复杂度。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//算法1-4</span>
 i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">//运行1次</span>
@@ -556,8 +548,7 @@ i<span class="token operator">=</span><span class="token number">1</span><span c
 <p>注意：不是每个算法都能直接计算运行次数</p>
 </blockquote>
 <p>有些算法，如排序、查找、插入等算法，可以分为<strong>最好</strong>、<strong>最坏</strong>和<strong>平均</strong>情况分别求算法渐近复杂度，但我们考查一个算法通常考查最坏的情况，而不是考查最好的情况，<strong>最坏情况对衡量算法的好坏具有实际的意义</strong>。</p>
-<h3 id="空间复杂度：">空间复杂度：</h3>
-<blockquote>
+<h3 id="空间复杂度："><a href="#空间复杂度：" class="headerlink" title="空间复杂度："></a>空间复杂度：</h3><blockquote>
 <p>算法占用的空间大小。一般将算法的<strong>辅助空间</strong>作为衡量空间复杂度的标准。</p>
 </blockquote>
 <p>空间复杂度的本意是指算法在运行过程中占用了多少存储空间。算法占用的存储空间包括：</p>
@@ -592,8 +583,7 @@ i<span class="token operator">=</span><span class="token number">1</span><span c
 		<span class="token keyword">else</span>
 			<span class="token keyword">return</span> n<span class="token operator">*</span><span class="token function">fac</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="斐波那契数列：">斐波那契数列：</h2>
-<p>根据斐波那契数列的定义，直接设计一个递归算法：</p>
+<h2 id="斐波那契数列："><a href="#斐波那契数列：" class="headerlink" title="斐波那契数列："></a>斐波那契数列：</h2><p>根据斐波那契数列的定义，直接设计一个递归算法：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">Fib1</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">&lt;</span><span class="token number">1</span><span class="token punctuation">)</span>

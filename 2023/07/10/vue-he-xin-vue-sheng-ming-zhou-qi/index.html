@@ -7,16 +7,13 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Vue核心 Vue生命周期, QT-7274">
     <meta name="description" content="更新记录
-
 2023-09-13：新增生命周期具体分析，新增“数据请求在created和mouted的区别”章节。
 
 Vue生命周期
-
-总结
-常用的生命周期钩子：
+总结常用的生命周期钩子：
 
 
-mounted发送ajax请求、启动定时器、绑定自定义事件、订阅消息等初">
+mounted发送ajax请求、启动定时器、绑定自定义事件、订阅消息等初始化操">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -512,14 +509,11 @@ mounted发送ajax请求、启动定时器、绑定自定义事件、订阅消息
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="font-color-3498db-更新记录-font"><font color='#3498db'>更新记录</font></h3>
-<ul>
+                <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a><font color='#3498db'>更新记录</font></h3><ul>
 <li>2023-09-13：新增生命周期具体分析，新增“数据请求在created和mouted的区别”章节。</li>
 </ul>
-<h2 id="Vue生命周期">Vue生命周期</h2>
-<p><img src="/medias/images/loading.gif" data-original="image-20230710223707518.png" alt="image-20230710223707518"></p>
-<h2 id="总结">总结</h2>
-<p>常用的生命周期钩子：</p>
+<h2 id="Vue生命周期"><a href="#Vue生命周期" class="headerlink" title="Vue生命周期"></a>Vue生命周期</h2><p><img src="/medias/images/loading.gif" data-original="image-20230710223707518.png" alt="image-20230710223707518"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>常用的生命周期钩子：</p>
 <blockquote>
 <ul>
 <li><code>mounted</code>发送<code>ajax</code>请求、启动定时器、绑定自定义事件、订阅消息等初始化操作。</li>
@@ -534,8 +528,7 @@ mounted发送ajax请求、启动定时器、绑定自定义事件、订阅消息
 <li>beforeCreate和created指的并不是vm创建之前和创建之后，指的是数据监测、数据代理之前和之后。</li>
 </ul>
 </blockquote>
-<h2 id="具体分析">具体分析</h2>
-<p><strong>beforeCreate -&gt; created</strong></p>
+<h2 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h2><p><strong>beforeCreate -&gt; created</strong></p>
 <ul>
 <li>初始化<code>vue</code>实例，进行数据观测</li>
 </ul>
@@ -585,6 +578,7 @@ mounted发送ajax请求、启动定时器、绑定自定义事件、订阅消息
 <li>并不能清除DOM，仅仅销毁实例</li>
 </ul>
 <p><strong>使用场景分析</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -627,8 +621,8 @@ mounted发送ajax请求、启动定时器、绑定自定义事件、订阅消息
 </tr>
 </tbody>
 </table>
-<h2 id="数据请求在created和mouted的区别">数据请求在created和mouted的区别</h2>
-<p>两者的相同点：都能拿到实例对象的属性和方法。</p>
+</div>
+<h2 id="数据请求在created和mouted的区别"><a href="#数据请求在created和mouted的区别" class="headerlink" title="数据请求在created和mouted的区别"></a>数据请求在created和mouted的区别</h2><p>两者的相同点：都能拿到实例对象的属性和方法。</p>
 <p>两者的不同点：触发时机不同，<code>created</code>是在组件实例一旦创建完成的时候立刻调用，这时候页面<code>dom</code>节点并未生成；<code>mounted</code>是在页面<code>dom</code>节点渲染完毕之后就立刻执行的。触发时机上<code>created</code>是比<code>mounted</code>要更早的。</p>
 <p>放在<code>mounted</code>中的请求有可能导致页面闪动（因为此时页面<code>dom</code>结构已经生成），但如果在页面加载前完成请求，则不会出现此情况。建议对页面内容的改动放在<code>created</code>生命周期当中。</p>
 

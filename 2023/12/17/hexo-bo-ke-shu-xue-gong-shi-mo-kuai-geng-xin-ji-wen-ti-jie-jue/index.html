@@ -6,14 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Hexo博客数学公式模块更新及问题解决, QT-7274">
-    <meta name="description" content="数学公式解码失败
-博客中涉及到数学公式的文章遇到这样一个问题——数学公式的字体解码失败：
+    <meta name="description" content="数学公式解码失败博客中涉及到数学公式的文章遇到这样一个问题——数学公式的字体解码失败：
 
 F12报错为：
 
 我之前以为是渲染引擎出现了问题，于是选择更换数学公式渲染引擎：
 
-参考：MakerGYT/markdown-it-latex2im">
+参考：MakerGYT/markdown-it-latex2img">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -505,8 +504,7 @@ F12报错为：
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="数学公式解码失败">数学公式解码失败</h2>
-<p>博客中涉及到数学公式的文章遇到这样一个问题——数学公式的字体解码失败：</p>
+                <h2 id="数学公式解码失败"><a href="#数学公式解码失败" class="headerlink" title="数学公式解码失败"></a>数学公式解码失败</h2><p>博客中涉及到数学公式的文章遇到这样一个问题——数学公式的字体解码失败：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20231217210439042.png" alt="image-20231217210439042"></p>
 <p>F12报错为：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20231217210459701.png" alt="image-20231217210459701"></p>
@@ -516,12 +514,10 @@ F12报错为：
 </blockquote>
 <p>但是如果要使用这个新的数学公式渲染引擎，我们需要先卸载之前的渲染引擎，并采用另一种更先进，功能更多的渲染引擎 <code>WARNING: No front-end scripts and other Math plugins are required. Remove them ALL before using this plugin.Please use official plugin hexo-renderer-markdown-it(plus) as Renderer.</code>：</p>
 <ul>
-<li>
-<p>卸载之前的渲染引擎：</p>
+<li><p>卸载之前的渲染引擎：</p>
 <p><code>npm uninstall hexo-renderer-marked --save</code></p>
 </li>
-<li>
-<p>然后，你可以安装 <code>hexo-renderer-markdown-it(plus)</code>。你可以使用以下命令来安装它：</p>
+<li><p>然后，你可以安装 <code>hexo-renderer-markdown-it(plus)</code>。你可以使用以下命令来安装它：</p>
 <p><code>npm i @upupming/hexo-renderer-markdown-it-plus --save</code></p>
 </li>
 </ul>
@@ -529,21 +525,18 @@ F12报错为：
 <p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36667170/article/details/105846999">hexo 更换 markdown渲染器 @upupming/hexo-renderer-markdown-it-plus_markdown-it-katex-CSDN博客</a></p>
 </blockquote>
 <p>虽然更新了渲染引擎，但是并没有解决我们的问题，依然无法解码数学公式。</p>
-<h3 id="解决方案">解决方案</h3>
-<p>突然意识到可能是配置文件的问题：</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>突然意识到可能是配置文件的问题：</p>
 <ul>
-<li>
-<p>首先找到 <code>.config.yml</code> 文件，例如我的路径是：<code>hexo/themes/blinkfox/config.yml</code></p>
+<li><p>首先找到 <code>.config.yml</code> 文件，例如我的路径是：<code>hexo/themes/blinkfox/config.yml</code></p>
 </li>
-<li>
-<p>修改mathjax：</p>
+<li><p>修改mathjax：</p>
 <pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">mathjax</span><span class="token punctuation">:</span>
   <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
   <span class="token comment"># cdn: https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML # 这是原来的</span>
   <span class="token key atrule">cdn</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js<span class="token punctuation">?</span>config=TeX<span class="token punctuation">-</span>AMS<span class="token punctuation">-</span>MML_HTMLorMML<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>成功解决问题！</p>
 </li>
 </ul>
-<p>成功解决问题！</p>
 <blockquote>
 <p>感谢New Bing的问题回答，省去了很多查找资料的时间。</p>
 </blockquote>

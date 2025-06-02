@@ -6,9 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="《深度学习图解》关于边与角的神经学习, QT-7274">
-    <meta name="description" content="在多个位置复用权重
-如果需要在多个位置检测相同的特征，请使用相同的权重。
-过拟合的产生通常是由于当前网络参数的数量多于学习特定数据集所需要的参数数量——这种情况下，网络有足够多的参数，以至于它可以记住训练训练集中的每一个细节，而不是对高层次">
+    <meta name="description" content="在多个位置复用权重如果需要在多个位置检测相同的特征，请使用相同的权重。
+过拟合的产生通常是由于当前网络参数的数量多于学习特定数据集所需要的参数数量——这种情况下，网络有足够多的参数，以至于它可以记住训练训练集中的每一个细节，而不是对高层次的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -504,8 +503,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="在多个位置复用权重">在多个位置复用权重</h3>
-<p><strong>如果需要在多个位置检测相同的特征，请使用相同的权重。</strong></p>
+                <h3 id="在多个位置复用权重"><a href="#在多个位置复用权重" class="headerlink" title="在多个位置复用权重"></a>在多个位置复用权重</h3><p><strong>如果需要在多个位置检测相同的特征，请使用相同的权重。</strong></p>
 <p>过拟合的产生通常是由于当前网络参数的数量多于学习特定数据集所需要的参数数量——这种情况下，网络有足够多的参数，以至于它可以记住训练训练集中的每一个细节，而不是对高层次的抽象进行学习。当神经网络有很多参数，但并没有很多训练样例时，过拟合是很难避免的。</p>
 <p>之前说过的正则化并不是防止过拟合的唯一技术，甚至不是最理想的技术。</p>
 <p>模型中权重的数量与学习这些权重的数据点的数量之比，和过拟合高度相关。因此，有一个更好的防止过拟合的方法——<strong>使用松散定义的模型或者说网络结构。</strong></p>
@@ -515,8 +513,7 @@
 <p>这可以显著地减少过拟合，并导致模型的精度更高，因为它降低了权重数量与数据量的比例。</p>
 <p>尽管删除参数通常来说会降低模型的表达能力（或者说降低对模式的学习能力），但是如果能够巧妙地重用权重，那么模型的表现力可以是相同的，但对过拟合的鲁棒性会更强一些——这种技术也趋向于使模型更小（因为要存储的实际参数更少）。</p>
 <p>在神经网络中，最著名且最广泛使用的网络结构叫作卷积，当作为一层使用时叫作卷积层。</p>
-<h3 id="卷积层">卷积层</h3>
-<p><strong>化整为零，将许多小线性神经元层在各处重用。</strong></p>
+<h3 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h3><p><strong>化整为零，将许多小线性神经元层在各处重用。</strong></p>
 <p>卷积层背后的核心思想是，它不是一个大的、稠密的线性神经元层，在其中从每个输入到每个输出都有连接。而是由很多非常小的线性层构成，每个线性层通常拥有小于25个输入和一个输出，我们可以在任意输入位置使用它。</p>
 <p>每个小神经元层都被称为卷积核，但它实际上只是一个很小的线性层，接受少量的输入并作为单一输出：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20231204172403129.png" alt="image-20231204172403129"></p>
@@ -535,8 +532,7 @@
 </blockquote>
 <p>更重要的是，网络的训练过程允许每个卷积核学习特定的模式，然后在图像的某个地方寻找该模式的存在。一个简单小巧的权重集合可以学习更大的一组训练实例，因为即使数据集没有改变，每个小巧的卷积核也都在多组数据上进行了多次前向传播，从而改变了权重数量与训练这些权重的数据量的比例。</p>
 <p>这对网络产生了显著影响，极大地降低了神经网络对训练数据的过拟合现象，提高了网络的泛化能力。</p>
-<h4 id="基于Numpy的简单实现">基于Numpy的简单实现</h4>
-<p>从正向传播开始。下面的代码展示了如何在用NumPy表示的一批图像中选择子区域。注意，它为整批图像选择相同的子区域：</p>
+<h4 id="基于Numpy的简单实现"><a href="#基于Numpy的简单实现" class="headerlink" title="基于Numpy的简单实现"></a>基于Numpy的简单实现</h4><p>从正向传播开始。下面的代码展示了如何在用NumPy表示的一批图像中选择子区域。注意，它为整批图像选择相同的子区域：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">get_image_section</span><span class="token punctuation">(</span>layer<span class="token punctuation">,</span>row_from<span class="token punctuation">,</span> row_to<span class="token punctuation">,</span> col_from<span class="token punctuation">,</span> col_to<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># 图像层 起始行 终止行 起始列 终止列</span>
     section <span class="token operator">=</span> layer<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span>row_from<span class="token punctuation">:</span>row_to<span class="token punctuation">,</span>col_from<span class="token punctuation">:</span>col_to<span class="token punctuation">]</span> <span class="token comment"># 在函数内部，使用切片操作符从图像层中提取了一个特定的图像区域</span>
     <span class="token keyword">return</span> section<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span>row_to<span class="token operator">-</span>row_from<span class="token punctuation">,</span> col_to<span class="token operator">-</span>col_from<span class="token punctuation">)</span> <span class="token comment"># 返回图像的新形状</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>

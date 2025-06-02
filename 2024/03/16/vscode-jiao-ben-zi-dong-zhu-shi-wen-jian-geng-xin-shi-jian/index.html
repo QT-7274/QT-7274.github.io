@@ -498,13 +498,11 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="需求">需求</h3>
-<ol>
+                <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ol>
 <li>每次打开Vscode编辑器执行任务。</li>
 <li>只有打开指定的文件夹后脚本的实际内容才会被真正执行。</li>
 <li>在指定的文件夹下创建JavaScript文件后，会在文件开头生成更新此文件的时间，精确到秒。</li>
-<li>每次保存后：
-<ul>
+<li>每次保存后：<ul>
 <li>如果当前时间距离上一次更新时间 &gt; 24小时，则另起一行生成新的时间注释。</li>
 <li>如果当前时间距离上一次更新时间 &lt; 24小时，则覆盖之前的时间注释。</li>
 </ul>
@@ -512,10 +510,9 @@
 </ol>
 <p>成果展示：</p>
 <p><img src="/medias/images/loading.gif" data-original="image-20240316110834527.png" alt="image-20240316110834527"></p>
-<h3 id="设置任务">设置任务</h3>
-<ol>
-<li>在 VS Code 中，打开命令面板（<code>Ctrl+Shift+P</code>），然后输入 “Tasks: Configure Task” 并选择它。</li>
-<li>在弹出的菜单中，选择 “Create tasks.json file from template”，然后选择 “Others”。</li>
+<h3 id="设置任务"><a href="#设置任务" class="headerlink" title="设置任务"></a>设置任务</h3><ol>
+<li>在 VS Code 中，打开命令面板（<code>Ctrl+Shift+P</code>），然后输入 &quot;Tasks: Configure Task&quot; 并选择它。</li>
+<li>在弹出的菜单中，选择 &quot;Create tasks.json file from template&quot;，然后选择 &quot;Others&quot;。</li>
 <li>这将会在你的工作区的 <code>.vscode</code> 文件夹中创建一个 <code>tasks.json</code> 文件。在这个文件中，你可以定义你的任务。</li>
 <li>在 <code>tasks.json</code> 文件中，你可以设置你的任务的 <code>label</code>（标签），<code>type</code>（类型），<code>command</code>（命令）和 <code>args</code>（参数）。<code>command</code> 应该是你的脚本的路径，<code>args</code> 应该是你想要处理的文件夹的路径。</li>
 <li>你还可以设置 <code>presentation</code> 属性来控制任务的输出和运行方式。例如，你可以设置 <code>reveal</code> 为 <code>always</code> 来总是在输出面板中显示任务的输出。</li>
@@ -539,8 +536,7 @@
         &#125;
     ]
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="代码展示">代码展示</h3>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<h3 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> folderPath <span class="token operator">=</span> <span class="token string">'./self_practice/每日练习'</span><span class="token punctuation">;</span> <span class="token comment">// 你的文件夹路径</span>
@@ -634,19 +630,15 @@
 
 <span class="token comment">// 开始监视文件</span>
 <span class="token function">startWatching</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="BUG解决方案">BUG解决方案</h3>
-<ul>
-<li>
-<p><strong>保存操作频率过快</strong>导致文件写入操作产生&quot;竞态条件&quot;（Race Condition）的问题，即如果你的代码正在尝试读取或者写入文件，而你又在同一时间保存文件，那么你的代码可能会读取到一个旧的文件版本，或者你的保存操作可能会覆盖你的代码的修改。</p>
+<h3 id="BUG解决方案"><a href="#BUG解决方案" class="headerlink" title="BUG解决方案"></a>BUG解决方案</h3><ul>
+<li><p><strong>保存操作频率过快</strong>导致文件写入操作产生&quot;竞态条件&quot;（Race Condition）的问题，即如果你的代码正在尝试读取或者写入文件，而你又在同一时间保存文件，那么你的代码可能会读取到一个旧的文件版本，或者你的保存操作可能会覆盖你的代码的修改。</p>
 </li>
-<li>
-<p>保存一次，监视文件修改的函数<strong>会被执行几百次</strong>，性能非常差。</p>
+<li><p>保存一次，监视文件修改的函数<strong>会被执行几百次</strong>，性能非常差。</p>
 <blockquote>
 <p>引入防抖函数！限制操作的频率，同时将多次操作保存为一次！</p>
 </blockquote>
 </li>
-<li>
-<p>引入防抖函数导致的<strong>循环</strong>：当脚本修改文件时（覆盖注释）—— <code>fs.watch</code> 触发change事件——脚本再次修改文件（覆盖注释）——…</p>
+<li><p>引入防抖函数导致的<strong>循环</strong>：当脚本修改文件时（覆盖注释）—— <code>fs.watch</code> 触发change事件——脚本再次修改文件（覆盖注释）——...</p>
 <blockquote>
 <ol>
 <li>在修改文件之前，先停止监视文件。</li>
