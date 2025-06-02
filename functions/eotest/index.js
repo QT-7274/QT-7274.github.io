@@ -9,6 +9,6 @@ export async function onRequest({ request }) {
   //   }
 
   //   const response = await fetch(request, option);
-  const response = await fetch(request);
+  const response = await fetch('http://drogbaqu.qcdntest.cn/drogbaqu/img/drogba.jpg');
   return response;
 }
