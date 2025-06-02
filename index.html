@@ -1489,6 +1489,21 @@ $(function () {
 <!-- 地理位置信息获取脚本 -->
 <script>
 // 获取地理位置信息
+// {
+//   "geo": {
+//     "asn": 0,
+//     "countryName": "China",
+//     "countryCodeAlpha2": "CN",
+//     "countryCodeAlpha3": "CHN",
+//     "countryCodeNumeric": "156",
+//     "regionName": "Guangdong",
+//     "regionCode": "CN-GD",
+//     "cityName": "shen zhen",
+//     "latitude": 22.547001,
+//     "longitude": 114.085945,
+//     "cisp": "Unknown"
+//   }
+// }
 function loadGeoInfo() {
     const geoTextElement = document.getElementById('geoText');
 
@@ -1501,14 +1516,14 @@ function loadGeoInfo() {
                 let locationText = '';
 
                 // 构建位置文本
-                if (geo.country) {
-                    locationText += geo.country;
+                if (geo.countryName) {
+                    locationText += geo.countryName;
                 }
-                if (geo.region && geo.region !== geo.country) {
-                    locationText += (locationText ? ' · ' : '') + geo.region;
+                if (geo.regionName && geo.regionName !== geo.countryName) {
+                    locationText += (locationText ? ' · ' : '') + geo.regionName;
                 }
-                if (geo.city && geo.city !== geo.region) {
-                    locationText += (locationText ? ' · ' : '') + geo.city;
+                if (geo.cityName && geo.cityName !== geo.regionName) {
+                    locationText += (locationText ? ' · ' : '') + geo.cityName;
                 }
 
                 // 如果没有获取到任何位置信息，显示默认文本
