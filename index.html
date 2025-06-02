@@ -1493,7 +1493,7 @@ function loadGeoInfo() {
     const geoTextElement = document.getElementById('geoText');
 
     // 发送请求到 EdgeOne Functions API
-    fetch('/api/index')
+    fetch('/api')
         .then(response => response.json())
         .then(data => {
             if (data && data.geo) {
